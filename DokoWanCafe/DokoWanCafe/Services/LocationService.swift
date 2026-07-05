@@ -24,6 +24,7 @@ struct ManualArea: Identifiable, Equatable, Sendable {
 
     /// v1（東京）の主要エリアプリセット
     static let tokyoPresets: [ManualArea] = [
+        ManualArea(id: "tennoz", name: "天王洲アイル", latitude: 35.6229, longitude: 139.7496),
         ManualArea(id: "tokyo-station", name: "東京駅周辺", latitude: 35.6812, longitude: 139.7671),
         ManualArea(id: "shibuya", name: "渋谷", latitude: 35.6580, longitude: 139.7016),
         ManualArea(id: "shinjuku", name: "新宿", latitude: 35.6896, longitude: 139.7006),

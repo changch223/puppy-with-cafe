@@ -1,0 +1,6 @@
+cafe_id,type,reference,claimed_status,claimed_condition,verified_at,provenance
+beef0000-0000-4000-8000-000000000001,blog,https://www.gowithdog.org/tennoz_ile_whatcafe/,allowed,,2026-07-05,aggregated
+beef0000-0000-4000-8000-000000000002,blog,https://www.gowithdog.org/tennoz_tyharbor/,conditional,テラス席のみ犬同伴可（店内は不可）,2026-07-05,aggregated
+beef0000-0000-4000-8000-000000000003,blog,https://wankonowa.com/column/communication/vol-51/,conditional,屋外席（テラス・ドームテント・コタツ席）のみ犬OK（店内不可）,2026-07-05,aggregated
+beef0000-0000-4000-8000-000000000004,tabelog,https://tabelog.com/tokyo/A1314/A131404/rstLst/cond10-01-00/cafe/,conditional,テラス席のみペット同伴可,2026-07-05,aggregated
+beef0000-0000-4000-8000-000000000005,other,https://www.hotpepper.jp/SA11/Y025/XA2H/1190010/U030/,conditional,テラス席はペット同伴可（店内は未確認）,2026-07-05,aggregated

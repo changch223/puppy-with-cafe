@@ -57,11 +57,25 @@ struct CafeDetailView: View {
     private var headerSection: some View {
         Section {
             VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text(viewModel.cafe.name)
-                        .font(.title3.bold())
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(viewModel.cafe.name)
+                            .font(.title3.bold())
+                        if let subArea = viewModel.cafe.subArea {
+                            Label(subArea, systemImage: "mappin")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
                     Spacer()
                     StatusBadge(status: viewModel.cafe.dogPolicyStatus, prominent: true)
+                }
+
+                // 店舗紹介（002/FR-107）
+                if let description = viewModel.cafe.description {
+                    Text(description)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                 }
 
                 // 条件付きの条件は必ず読める形で提示（FR-007）
@@ -121,6 +135,16 @@ struct CafeDetailView: View {
                 }
                 .padding(.vertical, 4)
             }
+            // サイズ制限（002/FR-107。例: 小型・中型のみ、抱っこ・カート推奨）
+            if let sizeLimit = viewModel.cafe.dogSizeLimit {
+                LabeledContent {
+                    Text(sizeLimit)
+                        .multilineTextAlignment(.trailing)
+                } label: {
+                    Text("サイズ")
+                }
+                .font(.footnote)
+            }
             if let note = viewModel.cafe.dogNote {
                 Label(note, systemImage: "pawprint")
                     .font(.footnote)
@@ -152,6 +176,16 @@ struct CafeDetailView: View {
             if let text = viewModel.cafe.hoursText {
                 Text(text)
                     .font(.callout)
+            }
+            // 定休日メモ（002/FR-107。例: 不定休・展示入替で休館あり）
+            if let holidayNote = viewModel.cafe.holidayNote {
+                LabeledContent {
+                    Text(holidayNote)
+                        .multilineTextAlignment(.trailing)
+                } label: {
+                    Text("定休日")
+                }
+                .font(.callout)
             }
         } header: {
             Text("営業時間")

@@ -30,8 +30,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-DEFAULT_CAFES_CSV = ROOT / "tools" / "sheet_template" / "cafes.csv"
-DEFAULT_SOURCES_CSV = ROOT / "tools" / "sheet_template" / "sources.csv"
+# 既定はマスターCSV（実データ）。テンプレートから試すときは --cafes/--sources で指定
+DEFAULT_CAFES_CSV = ROOT / "data" / "master" / "cafes.csv"
+DEFAULT_SOURCES_CSV = ROOT / "data" / "master" / "sources.csv"
 DEFAULT_OUT = ROOT / "data" / "cafes.json"
 DEFAULT_CHANGELOG = ROOT / "data" / "CHANGELOG.md"
 DEFAULT_APP_COPY = ROOT / "DokoWanCafe" / "DokoWanCafe" / "Resources" / "cafes.json"
@@ -88,10 +89,20 @@ def parse_bool(value):
     return str(value).strip().lower() in {"1", "true", "yes", "y"}
 
 
+#: 「不明」を表す入力（すべて空扱い。FR-104: 不明を✕/なしと混同しない）
+UNKNOWN_WORDS = {"", "unknown", "不明", "-", "—", "?"}
+
+
+def clean_text(value):
+    """前後空白を除去し、不明ワードは None にする"""
+    v = str(value or "").strip()
+    return None if v.lower() in UNKNOWN_WORDS else v
+
+
 def parse_tristate(value, label, column, errors):
-    """true / false / 空=不明(None)（FR-104: 不明を✕と混同しない）"""
+    """true / false / 空・unknown=不明(None)（FR-104: 不明を✕と混同しない）"""
     v = str(value or "").strip().lower()
-    if v == "":
+    if v in UNKNOWN_WORDS:
         return None
     if v in {"true", "1", "yes", "y", "○", "◯"}:
         return True
@@ -141,8 +152,15 @@ def parse_hours_cell(value, label, column, errors):
 
 
 def parse_url(value, label, column, errors):
-    v = str(value or "").strip()
-    if v == "":
+    v = clean_text(value)
+    if v is None:
+        return None
+    # Instagram は @ハンドル / ハンドルのみ でも受け付けて URL に正規化
+    if column == "link_instagram" and not v.startswith("http"):
+        handle = v.lstrip("@").strip("/")
+        if _re.fullmatch(r"[A-Za-z0-9._]{1,30}", handle):
+            return f"https://www.instagram.com/{handle}/"
+        errors.append(f"{label}: {column} は URL または @ハンドル で入力してください: {v!r}")
         return None
     if not (v.startswith("http://") or v.startswith("https://")):
         errors.append(f"{label}: {column} は http(s):// で始まるURLにしてください: {v!r}")
@@ -151,18 +169,22 @@ def parse_url(value, label, column, errors):
 
 
 def load_extras(row, label, errors):
-    """002-cafe-rich-info の追加情報（すべて任意・後方互換, FR-101/105）"""
+    """002-cafe-rich-info の追加情報（すべて任意・後方互換, FR-101/105/107）"""
     extras = {}
 
-    phone = (row.get("phone") or "").strip()
-    if phone:
-        extras["phone"] = phone
-    reservation = (row.get("reservation") or "").strip()
-    if reservation:
-        extras["reservation"] = reservation
-    hours_text = (row.get("hours_text") or "").strip()
-    if hours_text:
-        extras["hours_text"] = hours_text
+    # 単純なテキスト項目（unknown/不明 は空扱い）
+    for column, key in [
+        ("phone", "phone"),
+        ("reservation", "reservation"),
+        ("hours_text", "hours_text"),
+        ("sub_area", "sub_area"),          # 表示用の地区名（例: 天王洲アイル）
+        ("description", "description"),    # 店舗紹介（例: アートギャラリー併設）
+        ("dog_size_limit", "dog_size_limit"),  # サイズ制限メモ（例: 小型・中型のみ）
+        ("holiday_note", "holiday_note"),  # 定休日メモ（例: 不定休・展示入替で休館あり）
+    ]:
+        value = clean_text(row.get(column))
+        if value:
+            extras[key] = value
 
     # 構造化営業時間: 入力のあった曜日のみキーを含める（キー欠落=不明, FR-102）
     hours = {}
@@ -190,7 +212,7 @@ def load_extras(row, label, errors):
     if amenities:
         extras["dog_amenities"] = amenities
 
-    dog_note = (row.get("dog_note") or "").strip()
+    dog_note = clean_text(row.get("dog_note"))
     if dog_note:
         extras["dog_note"] = dog_note
 
@@ -199,7 +221,7 @@ def load_extras(row, label, errors):
         extras["info_verified"] = info_verified.isoformat()
 
     # 運営転記メモ: 確認日必須（FR-103。無ければ配信拒否）
-    insta_note = (row.get("insta_note") or "").strip()
+    insta_note = clean_text(row.get("insta_note")) or ""
     insta_note_date = parse_date(row.get("insta_note_date"), f"{label}: insta_note_date", errors)
     if insta_note:
         if not insta_note_date:

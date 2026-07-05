@@ -13,8 +13,9 @@ final class StaticCafeRepositoryTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        // remoteURL なし → バンドル版のみ（ネットワーク非依存で決定論）
-        repository = StaticCafeRepository(remoteURL: nil)
+        // remoteURL なし → 固定フィクスチャ（テストバンドル同梱の架空サンプル7件）で決定論的に検証。
+        // アプリ本体のバンドル cafes.json は実データに置き換わったため、テストは凍結フィクスチャを使う。
+        repository = StaticCafeRepository(remoteURL: nil, bundle: Bundle(for: StaticCafeRepositoryTests.self))
     }
 
     func test_バンドルデータが読み込まれメタ情報を持つ() {

@@ -30,3 +30,12 @@ description: "Task list for 002-cafe-rich-info（カフェ詳細の充実）"
 ## Phase 4: 検証
 
 - [ ] T112 全ユニットテスト緑＋シミュレータでの表示確認 ※テスト49件全緑・ビルドOK。**残り: 実機/シミュレータでの詳細画面の目視確認（ユーザー）**
+
+## Phase 5: 実データ対応（2026-07-05 追補: 天王洲CSVとの突き合わせ, FR-107）
+
+- [x] T113 スキーマ追加4列（sub_area/description/dog_size_limit/holiday_note）＋ unknown/不明の空欄正規化＋Instagram @ハンドル→URL 変換 in `tools/export_cafes.py`
+- [x] T114 実データマスター作成: 天王洲アイルの実在カフェ5件（WHAT CAFE / T.Y.HARBOR / RIDE / breadworks / Le Calin）を新スキーマへ移行 in `data/master/cafes.csv`, `data/master/sources.csv` ※出典は集約サイト由来のため provenance=aggregated・確認日2026-07-05
+- [x] T115 テンプレート更新（新4列を含む全35列）in `tools/sheet_template/cafes.csv`
+- [x] T116 アプリ対応: Cafe モデル4フィールド追加＋詳細画面表示（地区名・紹介文・サイズ制限・定休日）＋手動エリアに「天王洲アイル」追加 in `DokoWanCafe/DokoWanCafe/`
+- [x] T117 テストのフィクスチャ分離（アプリバンドル=実データ化に伴い、テストは凍結サンプル7件を使用）in `DokoWanCafe/DokoWanCafeTests/Fixtures/cafes.json`
+- [ ] T118 **座標の実測確認（ユーザー/運営作業）**: 5件の緯度経度は概算。Google Maps で各店をピン→座標コピペで `data/master/cafes.csv` を修正 → `python3 tools/export_cafes.py` で再出力

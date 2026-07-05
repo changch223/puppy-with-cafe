@@ -18,13 +18,17 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
     var isClosed: Bool
     var area: String
 
-    // 002-cafe-rich-info: 追加情報（すべて任意・後方互換, FR-101）
+    // 002-cafe-rich-info: 追加情報（すべて任意・後方互換, FR-101/107）
+    var subArea: String?
+    var description: String?
     var phone: String?
     var reservation: String?
     var hoursText: String?
+    var holidayNote: String?
     var hours: OpeningHours?
     var links: [CafeLink]?
     var dogAmenities: DogAmenities?
+    var dogSizeLimit: String?
     var dogNote: String?
     var infoVerified: Date?
     var operatorNote: OperatorNote?
@@ -44,12 +48,16 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
         case hasConflict = "has_conflict"
         case isClosed = "is_closed"
         case area
+        case subArea = "sub_area"
+        case description
         case phone
         case reservation
         case hoursText = "hours_text"
+        case holidayNote = "holiday_note"
         case hours
         case links
         case dogAmenities = "dog_amenities"
+        case dogSizeLimit = "dog_size_limit"
         case dogNote = "dog_note"
         case infoVerified = "info_verified"
         case operatorNote = "operator_note"

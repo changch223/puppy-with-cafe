@@ -1,336 +1,220 @@
 {
   "cafes": [
     {
-      "address": "東京都中央区八重洲1-0-0（架空）",
+      "address": "東京都品川区東品川2-1-6",
       "area": "tokyo",
       "contact": null,
+      "description": "天王洲アイルのペット可カフェ。",
       "dog_amenities": {
-        "dog_menu": false,
+        "terrace": true
+      },
+      "dog_policy_condition": "テラス席はペット同伴可（店内は未確認）",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours_text": "ランチ・ディナー営業（詳細はホットペッパーで要確認）",
+      "id": "beef0000-0000-4000-8000-000000000005",
+      "info_verified": "2026-07-05",
+      "is_closed": false,
+      "last_verified": "2026-07-05",
+      "latitude": 35.6241,
+      "longitude": 139.746,
+      "name": "Le Calin（ルカラン）",
+      "place_id": null,
+      "representative_source_id": "03afa1aa-ed26-5482-9df2-a2a5d51e779d",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000005",
+          "claimed_status": "conditional",
+          "id": "03afa1aa-ed26-5482-9df2-a2a5d51e779d",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/SA11/Y025/XA2H/1190010/U030/",
+          "type": "other",
+          "verified_at": "2026-07-05"
+        }
+      ],
+      "sub_area": "天王洲アイル"
+    },
+    {
+      "address": "東京都品川区東品川2-1-3",
+      "area": "tokyo",
+      "contact": null,
+      "description": "運河沿いのブルワリーレストラン。テラス席で犬同伴可。",
+      "dog_amenities": {
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "テラス席のみ犬同伴可（架空の条件）",
+      "dog_policy_condition": "テラス席のみ犬同伴可（店内は不可）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
-      "hours_text": "9:30〜19:00（不定休・架空）",
-      "id": "c0000000-0000-4000-8000-000000000002",
-      "info_verified": "2026-05-21",
+      "holiday_note": "年中無休",
+      "hours_text": "ランチ 11:30〜15:00 / ディナー 17:30〜23:00 など",
+      "id": "beef0000-0000-4000-8000-000000000002",
+      "info_verified": "2026-07-05",
       "is_closed": false,
-      "last_verified": "2026-05-21",
-      "latitude": 35.68,
+      "last_verified": "2026-07-05",
+      "latitude": 35.625,
       "links": [
         {
-          "type": "instagram",
-          "url": "https://example.com/ig/yaesu"
-        }
-      ],
-      "longitude": 139.771,
-      "name": "サンプルカフェ 八重洲テラス",
-      "place_id": "sample-place-2",
-      "representative_source_id": "402e8998-606f-5373-95d1-6648e3b2913d",
-      "reservation": "予約不可（架空）",
-      "sources": [
-        {
-          "cafe_id": "c0000000-0000-4000-8000-000000000002",
-          "claimed_status": "conditional",
-          "id": "402e8998-606f-5373-95d1-6648e3b2913d",
-          "provenance": "operator_verified",
-          "reference": "https://example.com/yaesu",
-          "type": "official_hp",
-          "verified_at": "2026-05-21"
+          "type": "website",
+          "url": "https://www.tyharborbrewing.co.jp/tyharbor/"
         },
         {
-          "cafe_id": "c0000000-0000-4000-8000-000000000002",
+          "type": "instagram",
+          "url": "https://www.instagram.com/tyharbor_brewery/"
+        }
+      ],
+      "longitude": 139.7452,
+      "name": "T.Y.HARBOR",
+      "place_id": null,
+      "representative_source_id": "4adde41f-775d-53b3-85d9-7c257bff0284",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000002",
           "claimed_status": "conditional",
-          "id": "84e4b562-fa74-51af-948b-0cfff4b87d1b",
+          "id": "4adde41f-775d-53b3-85d9-7c257bff0284",
           "provenance": "aggregated",
-          "reference": "https://example.com/yaesu-tabelog",
-          "type": "tabelog",
-          "verified_at": "2026-04-06"
+          "reference": "https://www.gowithdog.org/tennoz_tyharbor/",
+          "type": "blog",
+          "verified_at": "2026-07-05"
         }
-      ]
+      ],
+      "sub_area": "天王洲アイル"
     },
     {
-      "address": "東京都千代田区有楽町1-0-0（架空）",
+      "address": "東京都品川区東品川2-1-11",
       "area": "tokyo",
       "contact": null,
-      "dog_policy_condition": null,
-      "dog_policy_status": "not_allowed",
-      "has_conflict": false,
-      "id": "c0000000-0000-4000-8000-000000000007",
-      "is_closed": false,
-      "last_verified": "2026-05-06",
-      "latitude": 35.675,
-      "longitude": 139.763,
-      "name": "サンプルティールーム 有楽町",
-      "place_id": "sample-place-7",
-      "representative_source_id": "892b7c26-08a0-51a1-83bc-dbccf7d3c1dd",
-      "sources": [
-        {
-          "cafe_id": "c0000000-0000-4000-8000-000000000007",
-          "claimed_status": "not_allowed",
-          "id": "892b7c26-08a0-51a1-83bc-dbccf7d3c1dd",
-          "provenance": "human_verified",
-          "reference": "https://example.com/yurakucho",
-          "type": "google_map",
-          "verified_at": "2026-05-06"
-        }
-      ]
-    },
-    {
-      "address": "東京都中央区京橋2-0-0（架空）",
-      "area": "tokyo",
-      "contact": null,
-      "dog_policy_condition": null,
-      "dog_policy_status": "allowed",
-      "has_conflict": false,
-      "hours_text": "7:30〜16:00（架空）",
-      "id": "c0000000-0000-4000-8000-000000000005",
-      "is_closed": false,
-      "last_verified": "2026-06-05",
-      "latitude": 35.677,
-      "longitude": 139.77,
-      "name": "サンプルベーカリー 京橋",
-      "place_id": "sample-place-5",
-      "representative_source_id": "966e8902-8dd2-56e8-97e7-2de56dd58e97",
-      "sources": [
-        {
-          "cafe_id": "c0000000-0000-4000-8000-000000000005",
-          "claimed_status": "allowed",
-          "id": "966e8902-8dd2-56e8-97e7-2de56dd58e97",
-          "provenance": "ai_inferred",
-          "reference": null,
-          "type": "other",
-          "verified_at": "2026-06-05"
-        }
-      ]
-    },
-    {
-      "address": "東京都千代田区丸の内1-0-0（架空）",
-      "area": "tokyo",
-      "contact": "https://example.com/marunouchi",
+      "description": "アートギャラリー併設のカフェ。店内・テラスともペット同伴可。",
       "dog_amenities": {
-        "dog_menu": true,
         "indoor": true,
-        "large_dogs": true,
+        "large_dogs": false,
         "terrace": true
       },
-      "dog_note": "ワクチン接種証明の提示をお願いする場合があります（架空）",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
+      "dog_size_limit": "小型・中型（抱っこ・カート推奨）",
       "has_conflict": false,
-      "hours": {
-        "fri": [
-          {
-            "close": "18:00",
-            "open": "09:00"
-          }
-        ],
-        "mon": [
-          {
-            "close": "18:00",
-            "open": "09:00"
-          }
-        ],
-        "sat": [
-          {
-            "close": "12:00",
-            "open": "09:00"
-          },
-          {
-            "close": "18:00",
-            "open": "13:00"
-          }
-        ],
-        "sun": [
-          {
-            "close": "17:00",
-            "open": "09:00"
-          }
-        ],
-        "thu": [
-          {
-            "close": "18:00",
-            "open": "09:00"
-          }
-        ],
-        "tue": [],
-        "wed": [
-          {
-            "close": "18:00",
-            "open": "09:00"
-          }
-        ]
-      },
-      "id": "c0000000-0000-4000-8000-000000000001",
-      "info_verified": "2026-06-15",
+      "holiday_note": "不定休（展示入れ替え・貸切で休館あり）",
+      "hours_text": "11:00〜18:00（カフェL.O.17:30程度）",
+      "id": "beef0000-0000-4000-8000-000000000001",
+      "info_verified": "2026-07-05",
       "is_closed": false,
-      "last_verified": "2026-06-15",
-      "latitude": 35.682,
+      "last_verified": "2026-07-05",
+      "latitude": 35.6222,
       "links": [
         {
           "type": "website",
-          "url": "https://example.com/marunouchi"
+          "url": "https://cafe.warehouseofart.org/"
         },
         {
           "type": "instagram",
-          "url": "https://example.com/ig/marunouchi"
-        },
-        {
-          "type": "tabelog",
-          "url": "https://example.com/tabelog/marunouchi"
+          "url": "https://www.instagram.com/whatcafe_terrada/"
         }
       ],
-      "longitude": 139.765,
-      "name": "サンプル・ドッグテラス丸の内",
-      "operator_note": {
-        "source": "instagram",
-        "text": "テラス席は雨天クローズです（架空）",
-        "verified_at": "2026-06-20"
-      },
-      "phone": "03-0000-0001",
-      "place_id": "sample-place-1",
-      "representative_source_id": "63aa8e36-cd09-50df-997d-cc1c43e98dbb",
-      "reservation": "予約可（電話・当日可／架空）",
+      "longitude": 139.7504,
+      "name": "WHAT CAFE",
+      "place_id": null,
+      "representative_source_id": "4f326884-cf40-504a-b3e3-5386475d750a",
       "sources": [
         {
-          "cafe_id": "c0000000-0000-4000-8000-000000000001",
+          "cafe_id": "beef0000-0000-4000-8000-000000000001",
           "claimed_status": "allowed",
-          "id": "63aa8e36-cd09-50df-997d-cc1c43e98dbb",
-          "provenance": "operator_verified",
-          "reference": "https://example.com/marunouchi",
-          "type": "official_hp",
-          "verified_at": "2026-06-15"
+          "id": "4f326884-cf40-504a-b3e3-5386475d750a",
+          "provenance": "aggregated",
+          "reference": "https://www.gowithdog.org/tennoz_ile_whatcafe/",
+          "type": "blog",
+          "verified_at": "2026-07-05"
         }
-      ]
+      ],
+      "sub_area": "天王洲アイル"
     },
     {
-      "address": "東京都中央区銀座4-0-0（架空）",
+      "address": "東京都品川区東品川2-1-6",
       "area": "tokyo",
       "contact": null,
-      "dog_policy_condition": null,
-      "dog_policy_status": "allowed",
-      "has_conflict": false,
-      "id": "c0000000-0000-4000-8000-000000000004",
-      "is_closed": false,
-      "last_verified": "2025-02-21",
-      "latitude": 35.6717,
-      "longitude": 139.765,
-      "name": "サンプル・レトロ喫茶 銀座",
-      "place_id": "sample-place-4",
-      "representative_source_id": "a3e781c4-628f-52b5-aa55-7433a73e746b",
-      "sources": [
-        {
-          "cafe_id": "c0000000-0000-4000-8000-000000000004",
-          "claimed_status": "allowed",
-          "id": "a3e781c4-628f-52b5-aa55-7433a73e746b",
-          "provenance": "human_verified",
-          "reference": "https://example.com/ginza-sns",
-          "type": "sns",
-          "verified_at": "2025-02-21"
-        }
-      ]
-    },
-    {
-      "address": "東京都千代田区神田1-0-0（架空）",
-      "area": "tokyo",
-      "contact": null,
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
-      "has_conflict": false,
-      "id": "c0000000-0000-4000-8000-000000000006",
-      "is_closed": false,
-      "last_verified": null,
-      "latitude": 35.691,
-      "longitude": 139.77,
-      "name": "サンプル喫茶 神田",
-      "place_id": "sample-place-6",
-      "representative_source_id": null,
-      "sources": []
-    },
-    {
-      "address": "東京都中央区日本橋1-0-0（架空）",
-      "area": "tokyo",
-      "contact": null,
+      "description": "運河沿いのベーカリーカフェ。テラス席ペット同伴可。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": false,
+        "terrace": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "allowed",
-      "has_conflict": true,
-      "hours": {
-        "fri": [
-          {
-            "close": "17:00",
-            "open": "08:00"
-          }
-        ],
-        "mon": [
-          {
-            "close": "17:00",
-            "open": "08:00"
-          }
-        ],
-        "sat": [],
-        "sun": [],
-        "thu": [
-          {
-            "close": "17:00",
-            "open": "08:00"
-          }
-        ],
-        "tue": [
-          {
-            "close": "17:00",
-            "open": "08:00"
-          }
-        ],
-        "wed": [
-          {
-            "close": "17:00",
-            "open": "08:00"
-          }
-        ]
-      },
-      "id": "c0000000-0000-4000-8000-000000000003",
-      "info_verified": "2026-06-25",
+      "dog_policy_condition": "テラス席のみペット同伴可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "不定休（施設営業日に準ずる）",
+      "hours_text": "10:00〜22:00程度（要公式確認）",
+      "id": "beef0000-0000-4000-8000-000000000004",
+      "info_verified": "2026-07-05",
       "is_closed": false,
-      "last_verified": "2026-06-25",
-      "latitude": 35.684,
+      "last_verified": "2026-07-05",
+      "latitude": 35.6243,
       "links": [
         {
           "type": "website",
-          "url": "https://example.com/nihonbashi"
+          "url": "https://www.tyharborbrewing.co.jp/breadworks/"
         }
       ],
-      "longitude": 139.774,
-      "name": "サンプル珈琲 日本橋",
-      "phone": "03-0000-0003",
-      "place_id": "sample-place-3",
-      "representative_source_id": "dd09b3d5-c63e-502d-b783-82f477ed57c1",
+      "longitude": 139.7455,
+      "name": "breadworks 天王洲",
+      "place_id": null,
+      "representative_source_id": "7a6733d1-24c5-5f10-9d10-bd3eb9b99f7c",
       "sources": [
         {
-          "cafe_id": "c0000000-0000-4000-8000-000000000003",
-          "claimed_status": "allowed",
-          "id": "dd09b3d5-c63e-502d-b783-82f477ed57c1",
-          "provenance": "operator_verified",
-          "reference": "https://example.com/nihonbashi",
-          "type": "official_hp",
-          "verified_at": "2026-06-25"
-        },
-        {
-          "cafe_id": "c0000000-0000-4000-8000-000000000003",
-          "claimed_status": "not_allowed",
-          "id": "1a095a11-a7e8-549a-9d4f-be5baf816bef",
+          "cafe_id": "beef0000-0000-4000-8000-000000000004",
+          "claimed_status": "conditional",
+          "id": "7a6733d1-24c5-5f10-9d10-bd3eb9b99f7c",
           "provenance": "aggregated",
-          "reference": "https://example.com/nihonbashi-blog",
-          "type": "blog",
-          "verified_at": "2025-12-17"
+          "reference": "https://tabelog.com/tokyo/A1314/A131404/rstLst/cond10-01-00/cafe/",
+          "type": "tabelog",
+          "verified_at": "2026-07-05"
         }
-      ]
+      ],
+      "sub_area": "天王洲アイル"
+    },
+    {
+      "address": "東京都品川区東品川2-2-24 天王洲セントラルタワーキャナルガーデン1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "広いテラス・ドームテント・コタツ席のあるレストラン。屋外席は全て犬OK。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_policy_condition": "屋外席（テラス・ドームテント・コタツ席）のみ犬OK（店内不可）",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "年中無休（ビル営業日に準ずる想定）",
+      "hours_text": "ランチ・ディナー営業（詳細は公式サイトで要確認）",
+      "id": "beef0000-0000-4000-8000-000000000003",
+      "info_verified": "2026-07-05",
+      "is_closed": false,
+      "last_verified": "2026-07-05",
+      "latitude": 35.6262,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://ride-tennoz.com/"
+        }
+      ],
+      "longitude": 139.7457,
+      "name": "炭火×薪火×レストラン RIDE 品川 天王洲店",
+      "place_id": null,
+      "representative_source_id": "086088dd-00ba-51f7-b778-20f56b21b3e6",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000003",
+          "claimed_status": "conditional",
+          "id": "086088dd-00ba-51f7-b778-20f56b21b3e6",
+          "provenance": "aggregated",
+          "reference": "https://wankonowa.com/column/communication/vol-51/",
+          "type": "blog",
+          "verified_at": "2026-07-05"
+        }
+      ],
+      "sub_area": "天王洲アイル"
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-07-05T06:34:38Z",
-  "is_sample_data": true
+  "generated_at": "2026-07-05T07:01:35Z",
+  "is_sample_data": false
 }

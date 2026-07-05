@@ -16,3 +16,17 @@
 - ✏️ 変更: サンプルベーカリー 京橋（hours_text）
 - ✏️ 変更: サンプル・ドッグテラス丸の内（phone, reservation, hours, links, dog_amenities, dog_note, info_verified, operator_note）
 - ✏️ 変更: サンプル珈琲 日本橋（phone, hours, links, dog_amenities, info_verified）
+
+## 2026-07-05 16:01 — 追加 5 / 変更 0 / 削除 7
+- ➕ 追加: Le Calin（ルカラン）
+- ➕ 追加: T.Y.HARBOR
+- ➕ 追加: WHAT CAFE
+- ➕ 追加: breadworks 天王洲
+- ➕ 追加: 炭火×薪火×レストラン RIDE 品川 天王洲店
+- ➖ 削除: サンプルカフェ 八重洲テラス
+- ➖ 削除: サンプルティールーム 有楽町
+- ➖ 削除: サンプルベーカリー 京橋
+- ➖ 削除: サンプル・ドッグテラス丸の内
+- ➖ 削除: サンプル・レトロ喫茶 銀座
+- ➖ 削除: サンプル喫茶 神田
+- ➖ 削除: サンプル珈琲 日本橋
