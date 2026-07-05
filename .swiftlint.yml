@@ -1,0 +1,26 @@
+# DokoWanCafe SwiftLint 設定（憲章V: シンプルさ重視）
+included:
+  - DokoWanCafe/DokoWanCafe
+  - DokoWanCafe/DokoWanCafeTests
+
+disabled_rules:
+  - trailing_whitespace   # エディタ差異による揺れを許容
+  - todo                  # 段階導入メモを許容
+
+line_length:
+  warning: 140
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+identifier_name:
+  min_length: 2
+  excluded: [id, x, y]
+
+type_body_length:
+  warning: 300
+  error: 500
+
+file_length:
+  warning: 500
+  error: 800

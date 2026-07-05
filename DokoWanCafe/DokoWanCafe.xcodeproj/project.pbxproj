@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		D0C0FFEE0000000000000031 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0C0FFEE0000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0C0FFEE0000000000000010;
+			remoteInfo = DokoWanCafe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D0C0FFEE0000000000000002 /* DokoWanCafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DokoWanCafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0C0FFEE0000000000000003 /* DokoWanCafeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DokoWanCafeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0C0FFEE0000000000000004 /* DokoWanCafe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DokoWanCafe.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D0C0FFEE0000000000000005 /* DokoWanCafe */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DokoWanCafe;
+			sourceTree = "<group>";
+		};
+		D0C0FFEE0000000000000006 /* DokoWanCafeTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = DokoWanCafeTests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D0C0FFEE000000000000000B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0C0FFEE000000000000000C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D0C0FFEE0000000000000007 = {
+			isa = PBXGroup;
+			children = (
+				D0C0FFEE0000000000000005 /* DokoWanCafe */,
+				D0C0FFEE0000000000000006 /* DokoWanCafeTests */,
+				D0C0FFEE0000000000000004 /* DokoWanCafe.entitlements */,
+				D0C0FFEE0000000000000008 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0C0FFEE0000000000000008 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0C0FFEE0000000000000002 /* DokoWanCafe.app */,
+				D0C0FFEE0000000000000003 /* DokoWanCafeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D0C0FFEE0000000000000010 /* DokoWanCafe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0C0FFEE0000000000000020 /* Build configuration list for PBXNativeTarget "DokoWanCafe" */;
+			buildPhases = (
+				D0C0FFEE0000000000000009 /* Sources */,
+				D0C0FFEE000000000000000B /* Frameworks */,
+				D0C0FFEE000000000000000D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D0C0FFEE0000000000000005 /* DokoWanCafe */,
+			);
+			name = DokoWanCafe;
+			packageProductDependencies = (
+			);
+			productName = DokoWanCafe;
+			productReference = D0C0FFEE0000000000000002 /* DokoWanCafe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D0C0FFEE0000000000000011 /* DokoWanCafeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0C0FFEE0000000000000021 /* Build configuration list for PBXNativeTarget "DokoWanCafeTests" */;
+			buildPhases = (
+				D0C0FFEE000000000000000A /* Sources */,
+				D0C0FFEE000000000000000C /* Frameworks */,
+				D0C0FFEE000000000000000E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0C0FFEE0000000000000032 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D0C0FFEE0000000000000006 /* DokoWanCafeTests */,
+			);
+			name = DokoWanCafeTests;
+			packageProductDependencies = (
+			);
+			productName = DokoWanCafeTests;
+			productReference = D0C0FFEE0000000000000003 /* DokoWanCafeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0C0FFEE0000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					D0C0FFEE0000000000000010 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					D0C0FFEE0000000000000011 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = D0C0FFEE0000000000000010;
+					};
+				};
+			};
+			buildConfigurationList = D0C0FFEE000000000000001F /* Build configuration list for PBXProject "DokoWanCafe" */;
+			developmentRegion = ja;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				ja,
+				en,
+				Base,
+			);
+			mainGroup = D0C0FFEE0000000000000007;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D0C0FFEE0000000000000008 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D0C0FFEE0000000000000010 /* DokoWanCafe */,
+				D0C0FFEE0000000000000011 /* DokoWanCafeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0C0FFEE000000000000000D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0C0FFEE000000000000000E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D0C0FFEE0000000000000009 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0C0FFEE000000000000000A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0C0FFEE0000000000000032 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0C0FFEE0000000000000010 /* DokoWanCafe */;
+			targetProxy = D0C0FFEE0000000000000031 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D0C0FFEE0000000000000022 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D0C0FFEE0000000000000023 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D0C0FFEE0000000000000024 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DokoWanCafe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MY8WU4892D;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Puppy With Cafe";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "周辺の犬同伴OKカフェを現在地から探すために位置情報を使用します。位置情報は端末内で利用され、保存されません。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dokowancafe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D0C0FFEE0000000000000025 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DokoWanCafe.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MY8WU4892D;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Puppy With Cafe";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "周辺の犬同伴OKカフェを現在地から探すために位置情報を使用します。位置情報は端末内で利用され、保存されません。";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dokowancafe.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D0C0FFEE0000000000000026 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dokowancafe.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DokoWanCafe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DokoWanCafe";
+			};
+			name = Debug;
+		};
+		D0C0FFEE0000000000000027 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dokowancafe.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DokoWanCafe.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DokoWanCafe";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D0C0FFEE000000000000001F /* Build configuration list for PBXProject "DokoWanCafe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0C0FFEE0000000000000022 /* Debug */,
+				D0C0FFEE0000000000000023 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0C0FFEE0000000000000020 /* Build configuration list for PBXNativeTarget "DokoWanCafe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0C0FFEE0000000000000024 /* Debug */,
+				D0C0FFEE0000000000000025 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0C0FFEE0000000000000021 /* Build configuration list for PBXNativeTarget "DokoWanCafeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0C0FFEE0000000000000026 /* Debug */,
+				D0C0FFEE0000000000000027 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D0C0FFEE0000000000000001 /* Project object */;
+}
