@@ -411,6 +411,7 @@ def main():
     ap.add_argument("--app-copy", type=Path, default=DEFAULT_APP_COPY)
     ap.add_argument("--changelog", type=Path, default=DEFAULT_CHANGELOG)
     ap.add_argument("--sample", action="store_true", help="架空サンプルデータとしてマーク（アプリにバナー表示）")
+    ap.add_argument("--check", action="store_true", help="検証と差分表示のみ（ファイルを書き込まない）")
     args = ap.parse_args()
 
     errors = []
@@ -451,6 +452,19 @@ def main():
         except (json.JSONDecodeError, OSError):
             print("⚠️ 既存 cafes.json を読めなかったため、差分は全件追加扱いになります", file=sys.stderr)
     added, removed, changed = compute_diff(old_cafes, out_cafes)
+
+    # --check: 検証と差分の提示のみ（調査エージェントの作業ループ用）
+    if args.check:
+        print(f"✅ 検証OK（--check・書き込みなし）: カフェ {len(out_cafes)}件 / "
+              f"出典 {sum(len(c['sources']) for c in out_cafes)}件")
+        print(f"   反映した場合の差分: 追加 {len(added)} / 変更 {len(changed)} / 削除 {len(removed)}")
+        for n in sorted(added):
+            print(f"     ➕ {n}")
+        for n, f_ in sorted(changed):
+            print(f"     ✏️ {n}（{', '.join(f_)}）")
+        for n in sorted(removed):
+            print(f"     ➖ {n}")
+        return
 
     payload = {
         "format_version": 1,

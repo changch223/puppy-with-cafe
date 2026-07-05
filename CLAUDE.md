@@ -4,6 +4,11 @@
 
 **製品名（表示名）: 「Puppy With Cafe」**（2026-07-05 決定）。リポジトリ・Xcodeターゲット等のコードネームは DokoWanCafe のまま（表示名は `INFOPLIST_KEY_CFBundleDisplayName` で設定）。
 
+## データ調査（database構築）
+- カフェ調査の引き継ぎブリーフ: **`research-agent/README.md`**（収集項目・絶対ルール・手順のすべて）＋ `research-agent/progress.md`（エリア別進捗）
+- 専用エージェント定義: `.claude/agents/cafe-researcher.md` —「cafe-researcher で代官山エリアを調査して」のように依頼する
+- 調査エージェントは**コミットしない**。差分（CHANGELOG・git diff）を運営がレビューして反映＝承認（FR-024 の運営承認と同じ構図）
+
 ## 進め方
 - ワークフロー: `/speckit-constitution` → `/speckit-specify` → `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks` → `/speckit-implement`
 - 憲章: `.specify/memory/constitution.md`（**最優先。特に 原則I 信頼できるデータ / 原則III プライバシー は必須ゲート**）
