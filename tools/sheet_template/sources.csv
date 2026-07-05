@@ -1,0 +1,9 @@
+cafe_id,type,reference,claimed_status,claimed_condition,verified_at,provenance
+c0000000-0000-4000-8000-000000000001,official_hp,https://example.com/marunouchi,allowed,,2026-06-15,operator_verified
+c0000000-0000-4000-8000-000000000002,official_hp,https://example.com/yaesu,conditional,テラス席のみ犬同伴可（架空の条件）,2026-05-21,operator_verified
+c0000000-0000-4000-8000-000000000002,tabelog,https://example.com/yaesu-tabelog,conditional,テラス席のみ（架空）,2026-04-06,aggregated
+c0000000-0000-4000-8000-000000000003,official_hp,https://example.com/nihonbashi,allowed,,2026-06-25,operator_verified
+c0000000-0000-4000-8000-000000000003,blog,https://example.com/nihonbashi-blog,not_allowed,,2025-12-17,aggregated
+c0000000-0000-4000-8000-000000000004,sns,https://example.com/ginza-sns,allowed,,2025-02-21,human_verified
+c0000000-0000-4000-8000-000000000005,other,,allowed,,2026-06-05,ai_inferred
+c0000000-0000-4000-8000-000000000007,google_map,https://example.com/yurakucho,not_allowed,,2026-05-06,human_verified

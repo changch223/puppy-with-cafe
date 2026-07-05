@@ -114,9 +114,16 @@ struct RootView: View {
     private var banners: some View {
         if dependencies.isSampleMode {
             NoticeBanner(
-                text: String(localized: "サンプルデータ表示中（バックエンド未設定・架空の店舗情報です）"),
+                text: String(localized: "サンプルデータ表示中（架空の店舗情報です）"),
                 systemImage: "exclamationmark.triangle.fill",
                 tint: .orange
+            )
+        } else if let generatedAt = dependencies.dataGeneratedAt {
+            // FR-032: データの生成日時（鮮度）を提示
+            NoticeBanner(
+                text: String(localized: "データ更新: \(generatedAt.formatted(date: .abbreviated, time: .omitted)) 時点"),
+                systemImage: "arrow.triangle.2.circlepath",
+                tint: .gray
             )
         }
         if case .offline(let fetchedAt) = searchViewModel.phase {

@@ -16,9 +16,11 @@
 
 **Primary Dependencies**: SwiftUI, UIKit（MapKit橋渡し用）, MapKit, CoreLocation, AuthenticationServices（Appleでサインイン）。バックエンド接続は URLSession ベースの内製ゲートウェイ（`Services/SupabaseGateway.swift`。当初案の supabase-swift SDK から変更 — 必要操作が RPC/select/insert/Auth の4つのみで、憲章V の依存最小化に基づき外部SDK依存ゼロとした）
 
-**Storage**:
-- サーバ: Supabase（PostgreSQL + PostGIS）— カフェ/出典/修正提案/矛盾
-- 端末: 直近取得データのオフライン閲覧用の軽量ローカルキャッシュ（Codable スナップショットをディスク保存）／セッショントークンは Keychain
+**Storage**（2026-07-05 改訂 → research.md R11 / 構成B）:
+- マスター: **Google Sheet** → `tools/export_cafes.py`（検証・矛盾/代表算出・差分CHANGELOG）→ **`cafes.json`**
+- 配信: アプリにバンドル ＋ 静的URL（GitHub Pages 予定）から遠隔更新（バンドル/キャッシュへフォールバック）
+- 端末: バンドルJSON＋直近取得のディスクキャッシュ
+- （保管）旧A案: Supabase（PostgreSQL + PostGIS + Auth + RLS）— `supabase/` に SQL・`Services/Supabase*` にコード一式を保管。規模拡大時の移行先
 
 **Testing**: XCTest（コアロジックのユニットテスト中心）、主要フローの UI テスト（XCUITest）
 

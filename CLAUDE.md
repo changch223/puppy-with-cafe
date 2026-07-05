@@ -13,8 +13,9 @@
 - **Swift 5.9+ / iOS 16+**、UIは **SwiftUI 優先**、地図クラスタリング等のみ **MKMapView を UIViewRepresentable で橋渡し**
 - アーキテクチャ **MVVM**。純ロジック（距離/名寄せ/矛盾解決/フィルタ）は `Core/` に隔離し **XCTest 必須**
 - MapKit / CoreLocation（**WhenInUse**）/ AuthenticationServices（**Appleでサインイン**）
-- バックエンド **Supabase**（PostgreSQL + PostGIS / Auth / RLS）。自前サーバなし。オフラインは**直近取得の軽量ローカルキャッシュ**
-- Supabase 接続は **URLSession ベースの内製ゲートウェイ**（`Services/SupabaseGateway.swift`）。supabase-swift SDK は不使用（依存ゼロ）。接続情報はスキームの環境変数 `SUPABASE_URL`/`SUPABASE_ANON_KEY` で注入し、未設定時は**サンプルデータモード**（バナー明示）で起動
+- **バックエンド（2026-07-05 構成Bに改訂, research.md R11）**: サーバーレス。**Google Sheet（マスター）→ `tools/export_cafes.py`（検証・矛盾/代表導出・差分CHANGELOG）→ `cafes.json`** をアプリにバンドル＋静的URL（GitHub Pages 予定）から遠隔更新（`Services/StaticCafeRepository.swift`）。検索・距離計算は端末内完結（位置情報を送信しない）
+- 誤り報告は **Google フォーム**（プリフィル。`AppConfig.defaultReportFormTemplate` に設定）。**サインインなし**（FR-028改訂）。運営がマスター反映＝承認
+- 旧A案（Supabase: `supabase/` の SQL・`Services/Supabase*`/`AuthService` 等）は**保管**。規模拡大時の移行先。v1では配線しない
 - 依存管理は **SwiftPM**。文字列は **String Catalog（日本語第一）**
 
 ## 重要な設計判断

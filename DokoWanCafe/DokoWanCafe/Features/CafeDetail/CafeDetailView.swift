@@ -34,7 +34,8 @@ struct CafeDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task { await viewModel.load() }
         .sheet(isPresented: $showReport) {
-            ReportView(cafe: viewModel.cafe, dependencies: dependencies)
+            ReportView(cafe: viewModel.cafe)
+                .presentationDetents([.medium, .large])
         }
     }
 

@@ -33,7 +33,7 @@ description: "Task list for DokoWanCafe — 犬同伴OKカフェの地図検索"
 - [x] T004 [P] SwiftLint/SwiftFormat 設定 in `.swiftlint.yml`
 - [x] T005 [P] String Catalog（日本語第一）作成 in `DokoWanCafe/DokoWanCafe/Resources/Localizable.xcstrings`
 - [x] T006 [P] Privacy Manifest と位置情報用途文言 in `DokoWanCafe/DokoWanCafe/Resources/PrivacyInfo.xcprivacy` および `Info.plist`（`NSLocationWhenInUseUsageDescription`）
-- [ ] T007 Supabase プロジェクト作成と接続設定（URL/anon key を安全注入、機密はリポジトリに含めない）in `DokoWanCafe/DokoWanCafe/App/AppConfig.swift` ※クライアント側は実装済み（環境変数 SUPABASE_URL/SUPABASE_ANON_KEY をスキームで注入・未設定時はサンプルモード）。**残り: あなたの Supabase アカウントでプロジェクト作成＋migrations/seed 適用＋Apple サインイン有効化**（quickstart.md 手順1〜2）
+- [x] T007 Supabase プロジェクト作成と接続設定 ※**SKIP（2026-07-05 構成Bへのピボットにより不要**, research.md R11）。クライアント側の接続実装・SQL一式は A案再採用時のために保管済み
 
 ---
 
@@ -44,7 +44,7 @@ description: "Task list for DokoWanCafe — 犬同伴OKカフェの地図検索"
 - [x] T008 Supabase migration: PostGIS有効化＋`cafes`/`sources`/`corrections` テーブルと制約 in `supabase/migrations/0001_init.sql`（`contracts/db-schema.md` 準拠）
 - [x] T009 Supabase migration: `cafe_conflicts` ビューと `nearby_cafes` RPC in `supabase/migrations/0002_rpc_views.sql`
 - [x] T010 Supabase migration: RLS ポリシー（閲覧公開／`corrections` は認証insert／更新は運営）in `supabase/migrations/0003_rls.sql`
-- [ ] T011 東京の種データを手動整備（数十件。`conditional`・出典矛盾・`ai_inferred` を各1件以上含む）in `supabase/seed/tokyo_seed.sql` ※開発検証用の**架空サンプル7件**（全検証パターン含む）は作成済み。**残り: 実在カフェの手動確認・整備（運営作業。憲章 原則I: 出典・確認日必須）**
+- [ ] T011 東京の種データを手動整備（数十件。`conditional`・出典矛盾・`ai_inferred` を各1件以上含む）※2026-07-05 構成B移行: 整備先は **Google Sheet**（`tools/sheet_template/` をインポート）。架空サンプル7件（全検証パターン含む）は整備済み。**残り: 実在カフェの手動確認・整備（運営作業。初期データの取り方は別途検討中）**
 - [x] T012 [P] 列挙型（DogPolicyStatus/SourceType/Provenance/CorrectionStatus/SubmitterType）in `DokoWanCafe/DokoWanCafe/Models/Enums.swift`
 - [x] T013 [P] Codable ドメインモデル（Cafe/Source/Conflict/Correction）in `DokoWanCafe/DokoWanCafe/Models/`
 - [x] T014 SupabaseGateway（クライアント初期化・セッション保持）in `DokoWanCafe/DokoWanCafe/Services/SupabaseGateway.swift`
@@ -157,7 +157,7 @@ description: "Task list for DokoWanCafe — 犬同伴OKカフェの地図検索"
 - [x] T054 [P] パフォーマンス調整（位置許可→表示5秒以内・地図60fps・クラスタリング, SC-001）
 - [x] T055 [P] ローカライズ総点検（ハードコード無し・日付/距離のロケール表示, FR-019）
 - [ ] T056 [Spike] 外部集約の取得手段（公式API候補・利用規約/著作権適合）を決定し `specs/001-dog-cafe-map/research.md` の R8 に追記 ※**未決定（意図的保留）**: 利用規約・コスト・法務の確認を伴うユーザー判断事項。MVP は手動種データで成立するためブロッカーではない
-- [ ] T057 quickstart.md の検証シナリオ実行（US1〜US5＋横断）in `specs/001-dog-cafe-map/quickstart.md` ※**部分完了**: ユニットテスト34件全緑＋シミュレータ（iPhone 17・東京駅・サンプルモード）で US1 の地図/ピン/クラスタリング/バナー表示を実機確認済み。**残り: Supabase 設定後（T007）の実データ・US3 サインイン〜承認フローのエンドツーエンド検証**
+- [ ] T057 quickstart.md の検証シナリオ実行（US1〜US5＋横断）in `specs/001-dog-cafe-map/quickstart.md` ※**ほぼ完了**: ユニットテスト41件全緑＋シミュレータ＋**ユーザー実機テストOK（2026-07-05）**。構成Bによりサーバー不要。**残り: フォーム作成後（T071）の報告フロー確認と、Pages 配信後（T070）の遠隔更新確認**（quickstart.md の旧A案手順は R11 が優先）
 - [x] T058 [P] AI自動スクリーニング（第2段階）Edge Function の設計メモ in `supabase/functions/ai-screen/README.md`
 
 ---
@@ -220,3 +220,22 @@ T018 CafeDeduplicator + T019 test
 - 各タスク完了ごとにコミット推奨
 - 機密（Supabase URL/key）はコミットしない
 - **T056（外部集約の取得手段）** は MVP を止めない（手動種DBで US1〜US5 は検証可能）。実データ拡大の前に決定する
+
+---
+
+## Phase 9: アーキテクチャ改訂（2026-07-05 構成B: research.md R11）
+
+**Purpose**: サーバーレス軽量構成へのピボット（Sheet マスター → 検証済み cafes.json → バンドル＋静的URL配信、報告は Google フォーム、サインイン廃止）
+
+- [x] T062 エクスポート/検証/差分スクリプト（enum・条件・確認日・名寄せ検証、FR-013 と同一の代表可否/矛盾導出、差分→CHANGELOG, FR-032/033）in `tools/export_cafes.py`
+- [x] T063 [P] Google Sheet テンプレート（cafes / sources の2タブ・サンプル7件入り）in `tools/sheet_template/`
+- [x] T064 [P] データ運用手順書（Sheet→export→diff→commit→Pages 配信、列仕様、フォーム/Pages 設定手順）in `tools/README.md`
+- [x] T065 `data/cafes.json` 生成＋アプリへバンドル（`data/CHANGELOG.md` 初版含む）
+- [x] T066 StaticCafeRepository（バンドル→キャッシュ→静的URLの優先ロード・15分スロットル遠隔更新・端末内検索, FR-029/032）in `DokoWanCafe/DokoWanCafe/Services/StaticCafeRepository.swift`
+- [x] T067 ReportView をフォーム起動型に刷新（プリフィルURL・未設定時は準備中表示）＋サインイン要件の撤去（entitlements 除去, FR-028改訂）in `DokoWanCafe/DokoWanCafe/Features/Report/ReportView.swift`
+- [x] T068 AppDependencies の配線変更＋データ生成日時/サンプルフラグのバナー表示（FR-032）in `DokoWanCafe/DokoWanCafe/App/`
+- [x] T069 [P] StaticCafeRepository ユニットテスト（契約: 半径/可否/距離昇順/出典/矛盾/メタ）in `DokoWanCafe/DokoWanCafeTests/StaticCafeRepositoryTests.swift`
+- [ ] T070 GitHub リポジトリ作成＋Pages 有効化 → 配信URLを `AppConfig.defaultCafesDataURL` に設定（**ユーザー作業を含む**。tools/README.md 手順3）
+- [ ] T071 Google フォーム作成（回答→Sheet 集約）→ プリフィルURLを `AppConfig.defaultReportFormTemplate` に設定（**ユーザー作業を含む**。tools/README.md 手順2）
+
+**Checkpoint**: 全41ユニットテスト緑・シミュレータで新構成の動作確認済み。旧A案（Supabase）のコード・SQLは削除せず保管。

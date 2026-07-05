@@ -2,6 +2,8 @@
 
 技術上の未確定点と選定を、決定・根拠・代替案の形で整理する。すべて憲章（SwiftUI優先＋UIKit橋渡し / iOS 16+ / MVVM / 信頼性・プライバシー）に整合。
 
+> **⚠️ 2026-07-05 改訂**: バックエンド構成を R11（軽量構成B）へピボット。R1（Supabase）・R4（Appleサインイン）・R9（Supabaseダッシュボード審査）は **v1 では不採用（将来オプションとして保管）**。実装済みの Supabase 関連コード・SQL は削除せずリポジトリに保管する。
+
 ## R1. バックエンド基盤
 
 - **Decision**: マネージドBaaS の **Supabase**（PostgreSQL + PostGIS、Auth、Row-Level Security、自動REST）を採用。自前サーバは持たない。
@@ -70,3 +72,22 @@
 - **Decision**: `Core/`（距離・名寄せ・矛盾解決・フィルタ）と ViewModel のロジックを **XCTest でユニット必須**。ネットワーク/DBは Repository をプロトコル化しモックで検証。UIは主要フロー（現在地→一覧→詳細→報告）を **XCUITest** で最小限。
 - **Rationale**: データ正確性に直結する部分を確実に自動検証（費用対効果重視）。
 - **Alternatives considered**: 全面TDD（速度低下、憲章で不採用）／テストなし（データ品質リスク）。
+
+## R11. アーキテクチャ改訂（2026-07-05）: サーバーレス軽量構成（構成B）
+
+- **Decision**: v1 はサーバーDBを持たず、**Google Sheet（マスター）→ 検証スクリプト → `cafes.json`（バンドル＋静的URL配信）** の構成とする。誤り報告は **Google フォーム**（店舗情報プリフィル）で受け付け、運営がマスター Sheet を修正して JSON を再出力した時点で反映する。データ変更は**エクスポート時の差分検出＋CHANGELOG＋git 履歴**で追跡・共有する。
+- **Rationale**:
+  - データ規模が小さい（東京の対象店舗は数千件以下・JSON 約2MB以下）ため、周辺検索・フィルタは**クライアント内で完結**する（SampleDataRepository で実証済み。`CafeRepository` プロトコルの差し替えのみで移行可能）。
+  - 費用ゼロ・運用最小・**アプリ内認証が不要**になる（サインイン目的の Apple Developer Program 加入も不要に）。
+  - 静的URL配信により、**誤情報の修正を App Store 審査を待たずに即日反映**できる（憲章 原則I の要請）。
+  - 位置情報を**どこにも送信しない**構成になり、憲章 原則III がさらに強く担保される。
+  - DB の CHECK 制約で担保していたデータ整合（条件付き⇒条件必須・確認日必須 等）は、**エクスポートスクリプトの検証ゲート**で同等に担保する。
+- **Alternatives considered**:
+  - Supabase 継続（A案）: 即時性・アプリ内投稿・アカウント基盤は最強だが、v1 の規模には過剰。設計/実装/SQL は保管し、規模拡大時の移行先とする。
+  - バンドルのみ（C案）: 最小だが誤情報修正が App Store 審査（数日）に律速され、信頼性の要請に反するため不採用。
+  - Google Cloud（Cloud SQL / Firestore）: Supabase と同型のサーバー構成であり、同じ理由で v1 では過剰。静的配信先として GCS を使う選択肢はあり。
+- **構成要素**:
+  - マスター: Google Sheet（2タブ: cafes / sources。列仕様は `tools/README.md`）
+  - 変換: `tools/export_cafes.py` — 検証（enum/条件/確認日/重複=名寄せ）・矛盾検出・代表可否算出（FR-013 と同一規則）・差分検出（追加/変更/削除→ `data/CHANGELOG.md`）・`data/cafes.json` 生成＋アプリへコピー
+  - 配信: アプリにバンドル＋静的URL（GitHub Pages 予定）から取得（バンドル/取得キャッシュへフォールバック, FR-029/032）
+  - 報告: Google フォーム（プリフィルURL。`AppConfig` に設定）
