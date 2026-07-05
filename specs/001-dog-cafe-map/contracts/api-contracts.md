@@ -1,3 +1,5 @@
+> **📦 保管（旧A案）**: 2026-07-05 の構成Bピボット（research.md R11）により v1 では未使用。現行のデータ契約は [cafes-json-schema.md](./cafes-json-schema.md)。
+
 # Contract: Client ↔ Backend Operations
 
 iOS クライアントが Supabase に対して行う操作の契約（入出力の形）。トランスポートは Supabase SDK（PostgREST / RPC / Auth）。UIは MVVM の Service 層からのみ呼ぶ。

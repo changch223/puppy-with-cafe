@@ -1,3 +1,5 @@
+> **📦 保管（旧A案）**: 2026-07-05 の構成Bピボット（research.md R11）により v1 では未使用。現行のデータ契約は [cafes-json-schema.md](./cafes-json-schema.md)。
+
 # Contract: Backend DB Schema (Supabase / PostgreSQL + PostGIS)
 
 クライアントが依存するサーバ側スキーマの契約。実装は `supabase/migrations/` の SQL として版管理する。ここでは形（テーブル・制約・RLS）を規定する。
