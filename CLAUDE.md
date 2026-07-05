@@ -7,7 +7,7 @@
 ## 進め方
 - ワークフロー: `/speckit-constitution` → `/speckit-specify` → `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks` → `/speckit-implement`
 - 憲章: `.specify/memory/constitution.md`（**最優先。特に 原則I 信頼できるデータ / 原則III プライバシー は必須ゲート**）
-- 現在のフィーチャー: `specs/001-dog-cafe-map/`（spec / plan / research / data-model / contracts / quickstart）
+- フィーチャー: `specs/001-dog-cafe-map/`（中核: 発見・信頼・報告。contracts/ にデータ契約）、`specs/002-cafe-rich-info/`（詳細充実: 営業時間+営業中バッジ・電話/予約・公式リンク・犬向け設備4項目・運営転記メモ）
 
 ## 技術スタック（plan.md 準拠）
 - **Swift 5.9+ / iOS 16+**、UIは **SwiftUI 優先**、地図クラスタリング等のみ **MKMapView を UIViewRepresentable で橋渡し**

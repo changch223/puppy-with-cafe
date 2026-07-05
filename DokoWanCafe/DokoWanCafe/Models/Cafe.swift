@@ -18,6 +18,17 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
     var isClosed: Bool
     var area: String
 
+    // 002-cafe-rich-info: 追加情報（すべて任意・後方互換, FR-101）
+    var phone: String?
+    var reservation: String?
+    var hoursText: String?
+    var hours: OpeningHours?
+    var links: [CafeLink]?
+    var dogAmenities: DogAmenities?
+    var dogNote: String?
+    var infoVerified: Date?
+    var operatorNote: OperatorNote?
+
     enum CodingKeys: String, CodingKey {
         case id
         case placeID = "place_id"
@@ -33,6 +44,15 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
         case hasConflict = "has_conflict"
         case isClosed = "is_closed"
         case area
+        case phone
+        case reservation
+        case hoursText = "hours_text"
+        case hours
+        case links
+        case dogAmenities = "dog_amenities"
+        case dogNote = "dog_note"
+        case infoVerified = "info_verified"
+        case operatorNote = "operator_note"
     }
 
     func hash(into hasher: inout Hasher) {

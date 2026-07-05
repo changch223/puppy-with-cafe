@@ -88,6 +88,131 @@ def parse_bool(value):
     return str(value).strip().lower() in {"1", "true", "yes", "y"}
 
 
+def parse_tristate(value, label, column, errors):
+    """true / false / 空=不明(None)（FR-104: 不明を✕と混同しない）"""
+    v = str(value or "").strip().lower()
+    if v == "":
+        return None
+    if v in {"true", "1", "yes", "y", "○", "◯"}:
+        return True
+    if v in {"false", "0", "no", "n", "×", "✕"}:
+        return False
+    errors.append(f"{label}: {column} は true / false / 空欄 のいずれかにしてください（入力値: {value!r}）")
+    return None
+
+
+import re as _re
+_TIME_RANGE_RE = _re.compile(r"^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$")
+_CLOSED_WORDS = {"定休", "休", "closed", "close", "定休日"}
+
+DAY_COLUMNS = ["hours_mon", "hours_tue", "hours_wed", "hours_thu", "hours_fri", "hours_sat", "hours_sun"]
+DAY_KEYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+
+LINK_COLUMNS = {
+    "link_website": "website",
+    "link_instagram": "instagram",
+    "link_x": "x",
+    "link_tabelog": "tabelog",
+}
+
+
+def parse_hours_cell(value, label, column, errors):
+    """'9:00-18:00[,13:00-18:00]' / '定休' / 空=不明(None)。日跨ぎ(close<=open)はエラー（FR-102/105）"""
+    v = str(value or "").strip()
+    if v == "":
+        return None
+    if v in _CLOSED_WORDS:
+        return []  # 定休
+    ranges = []
+    for part in v.split(","):
+        m = _TIME_RANGE_RE.match(part.strip())
+        if not m:
+            errors.append(f"{label}: {column} の形式が不正です（例: 9:00-18:00 / 定休 / 空欄）: {part.strip()!r}")
+            return None
+        h1, m1, h2, m2 = (int(x) for x in m.groups())
+        if not (0 <= h1 <= 23 and 0 <= h2 <= 23 and 0 <= m1 <= 59 and 0 <= m2 <= 59):
+            errors.append(f"{label}: {column} の時刻が範囲外です: {part.strip()!r}")
+            return None
+        if (h1, m1) >= (h2, m2):
+            errors.append(f"{label}: {column} は開店<閉店にしてください（日跨ぎ営業は hours_text で表現）: {part.strip()!r}")
+            return None
+        ranges.append({"open": f"{h1:02d}:{m1:02d}", "close": f"{h2:02d}:{m2:02d}"})
+    return ranges
+
+
+def parse_url(value, label, column, errors):
+    v = str(value or "").strip()
+    if v == "":
+        return None
+    if not (v.startswith("http://") or v.startswith("https://")):
+        errors.append(f"{label}: {column} は http(s):// で始まるURLにしてください: {v!r}")
+        return None
+    return v
+
+
+def load_extras(row, label, errors):
+    """002-cafe-rich-info の追加情報（すべて任意・後方互換, FR-101/105）"""
+    extras = {}
+
+    phone = (row.get("phone") or "").strip()
+    if phone:
+        extras["phone"] = phone
+    reservation = (row.get("reservation") or "").strip()
+    if reservation:
+        extras["reservation"] = reservation
+    hours_text = (row.get("hours_text") or "").strip()
+    if hours_text:
+        extras["hours_text"] = hours_text
+
+    # 構造化営業時間: 入力のあった曜日のみキーを含める（キー欠落=不明, FR-102）
+    hours = {}
+    for column, key in zip(DAY_COLUMNS, DAY_KEYS):
+        parsed = parse_hours_cell(row.get(column), label, column, errors)
+        if parsed is not None:
+            hours[key] = parsed
+    if hours:
+        extras["hours"] = hours
+
+    links = []
+    for column, link_type in LINK_COLUMNS.items():
+        url = parse_url(row.get(column), label, column, errors)
+        if url:
+            links.append({"type": link_type, "url": url})
+    if links:
+        extras["links"] = links
+
+    amenities = {}
+    for column, key in [("dog_indoor", "indoor"), ("dog_terrace", "terrace"),
+                        ("dog_large", "large_dogs"), ("dog_menu", "dog_menu")]:
+        value = parse_tristate(row.get(column), label, column, errors)
+        if value is not None:
+            amenities[key] = value
+    if amenities:
+        extras["dog_amenities"] = amenities
+
+    dog_note = (row.get("dog_note") or "").strip()
+    if dog_note:
+        extras["dog_note"] = dog_note
+
+    info_verified = parse_date(row.get("info_verified"), f"{label}: info_verified", errors)
+    if info_verified:
+        extras["info_verified"] = info_verified.isoformat()
+
+    # 運営転記メモ: 確認日必須（FR-103。無ければ配信拒否）
+    insta_note = (row.get("insta_note") or "").strip()
+    insta_note_date = parse_date(row.get("insta_note_date"), f"{label}: insta_note_date", errors)
+    if insta_note:
+        if not insta_note_date:
+            errors.append(f"{label}: insta_note には insta_note_date（確認日）が必須です（憲章 原則I / FR-103）")
+        else:
+            extras["operator_note"] = {
+                "text": insta_note,
+                "source": "instagram",
+                "verified_at": insta_note_date.isoformat(),
+            }
+    return extras
+
+
 def stable_uuid(*parts):
     return str(uuid.uuid5(UUID_NAMESPACE, "|".join(p or "" for p in parts)))
 
@@ -128,7 +253,7 @@ def load_cafes(path, errors):
                 continue
 
             area = (row.get("area") or "").strip() or "tokyo"
-            cafes[cafe_id] = {
+            cafe = {
                 "id": cafe_id,
                 "place_id": place_id,
                 "name": name,
@@ -139,6 +264,8 @@ def load_cafes(path, errors):
                 "is_closed": parse_bool(row.get("is_closed")),
                 "area": area,
             }
+            cafe.update(load_extras(row, label, errors))
+            cafes[cafe_id] = cafe
     return cafes
 
 

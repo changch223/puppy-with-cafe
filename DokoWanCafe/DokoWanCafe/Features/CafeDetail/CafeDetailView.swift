@@ -18,6 +18,14 @@ struct CafeDetailView: View {
         List {
             headerSection
 
+            if viewModel.cafe.dogAmenities != nil || viewModel.cafe.dogNote != nil {
+                amenitiesSection
+            }
+
+            if viewModel.cafe.hours?.hasAnyDay == true || viewModel.cafe.hoursText != nil {
+                hoursSection
+            }
+
             if viewModel.hasConflict {
                 conflictSection
             }
@@ -27,6 +35,11 @@ struct CafeDetailView: View {
             }
 
             infoSection
+
+            if viewModel.cafe.links?.isEmpty == false || viewModel.cafe.operatorNote != nil {
+                linksSection
+            }
+
             actionSection
         }
         .listStyle(.insetGrouped)
@@ -95,6 +108,67 @@ struct CafeDetailView: View {
         }
     }
 
+    // MARK: - 犬向け設備（002/FR-101/104, T108）
+
+    private var amenitiesSection: some View {
+        Section {
+            if let amenities = viewModel.cafe.dogAmenities {
+                HStack(spacing: 8) {
+                    AmenityBadge(label: String(localized: "店内OK"), value: amenities.indoor)
+                    AmenityBadge(label: String(localized: "テラスOK"), value: amenities.terrace)
+                    AmenityBadge(label: String(localized: "大型犬OK"), value: amenities.largeDogs)
+                    AmenityBadge(label: String(localized: "犬メニュー"), value: amenities.dogMenu)
+                }
+                .padding(.vertical, 4)
+            }
+            if let note = viewModel.cafe.dogNote {
+                Label(note, systemImage: "pawprint")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("わんちゃん向け情報")
+        }
+    }
+
+    // MARK: - 営業時間（002/FR-102, T109）
+
+    private var hoursSection: some View {
+        Section {
+            if let hours = viewModel.cafe.hours, hours.hasAnyDay {
+                OpenStateBadge(state: OpeningHoursEvaluator.state(hours: hours))
+                    .font(.subheadline)
+                ForEach(Weekday.allCases, id: \.rawValue) { day in
+                    if let ranges = hours.ranges(for: day) {
+                        LabeledContent {
+                            Text(hoursText(for: ranges))
+                                .font(.callout.monospacedDigit())
+                        } label: {
+                            Text(day.displayName)
+                        }
+                    }
+                }
+            }
+            if let text = viewModel.cafe.hoursText {
+                Text(text)
+                    .font(.callout)
+            }
+        } header: {
+            Text("営業時間")
+        } footer: {
+            if let verified = viewModel.cafe.infoVerified {
+                Text("基本情報の確認日: \(verified.formatted(date: .abbreviated, time: .omitted))。最新の営業情報は公式でご確認ください。")
+            } else {
+                Text("最新の営業情報は公式でご確認ください。")
+            }
+        }
+    }
+
+    private func hoursText(for ranges: [TimeRange]) -> String {
+        if ranges.isEmpty { return String(localized: "定休日") }
+        return ranges.map { "\($0.open)〜\($0.close)" }.joined(separator: ", ")
+    }
+
     // MARK: - 矛盾提示（US4/FR-011/T046）
 
     private var conflictSection: some View {
@@ -151,6 +225,29 @@ struct CafeDetailView: View {
                     Text("住所")
                 }
             }
+            // 電話（タップで発信, 002/FR-106）
+            if let phone = viewModel.cafe.phone,
+               let telURL = URL(string: "tel://" + phone.filter { $0.isNumber || $0 == "+" }) {
+                Link(destination: telURL) {
+                    LabeledContent {
+                        Text(phone)
+                            .foregroundStyle(.tint)
+                    } label: {
+                        Label(String(localized: "電話"), systemImage: "phone")
+                            .labelStyle(.titleOnly)
+                    }
+                }
+                .accessibilityLabel(Text("電話をかける: \(phone)"))
+            }
+            // 予約情報（002/FR-101）
+            if let reservation = viewModel.cafe.reservation {
+                LabeledContent {
+                    Text(reservation)
+                        .multilineTextAlignment(.trailing)
+                } label: {
+                    Text("予約")
+                }
+            }
             if let contact = viewModel.cafe.contact {
                 if let url = URL(string: contact), url.scheme?.hasPrefix("http") == true {
                     Link(destination: url) {
@@ -178,6 +275,44 @@ struct CafeDetailView: View {
                     }
                     .font(.footnote)
                 }
+            }
+        }
+    }
+
+    // MARK: - 公式リンク・運営メモ（002/FR-103/106, T110）
+
+    private var linksSection: some View {
+        Section {
+            if let links = viewModel.cafe.links, !links.isEmpty {
+                ForEach(links) { link in
+                    if let url = link.resolvedURL {
+                        Link(destination: url) {
+                            Label(link.type.displayName, systemImage: link.type.systemImage)
+                        }
+                    }
+                }
+            }
+            if let note = viewModel.cafe.operatorNote {
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "text.quote")
+                        Text("運営メモ（\(note.sourceDisplayName)より・\(note.verifiedAt.formatted(date: .abbreviated, time: .omitted))確認）")
+                            .font(.caption.bold())
+                    }
+                    .foregroundStyle(.teal)
+                    Text(note.text)
+                        .font(.footnote)
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(RoundedRectangle(cornerRadius: 8).fill(Color.teal.opacity(0.10)))
+                .accessibilityElement(children: .combine)
+            }
+        } header: {
+            Text("公式情報・SNS")
+        } footer: {
+            if viewModel.cafe.operatorNote != nil {
+                Text("運営メモは公式SNS等で運営が確認した内容の転記であり、公式の一次情報そのものではありません。")
             }
         }
     }

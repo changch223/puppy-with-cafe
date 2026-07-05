@@ -4,17 +4,31 @@
       "address": "東京都中央区八重洲1-0-0（架空）",
       "area": "tokyo",
       "contact": null,
+      "dog_amenities": {
+        "dog_menu": false,
+        "indoor": false,
+        "terrace": true
+      },
       "dog_policy_condition": "テラス席のみ犬同伴可（架空の条件）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "hours_text": "9:30〜19:00（不定休・架空）",
       "id": "c0000000-0000-4000-8000-000000000002",
+      "info_verified": "2026-05-21",
       "is_closed": false,
       "last_verified": "2026-05-21",
       "latitude": 35.68,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://example.com/ig/yaesu"
+        }
+      ],
       "longitude": 139.771,
       "name": "サンプルカフェ 八重洲テラス",
       "place_id": "sample-place-2",
       "representative_source_id": "402e8998-606f-5373-95d1-6648e3b2913d",
+      "reservation": "予約不可（架空）",
       "sources": [
         {
           "cafe_id": "c0000000-0000-4000-8000-000000000002",
@@ -70,6 +84,7 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "hours_text": "7:30〜16:00（架空）",
       "id": "c0000000-0000-4000-8000-000000000005",
       "is_closed": false,
       "last_verified": "2026-06-05",
@@ -94,17 +109,89 @@
       "address": "東京都千代田区丸の内1-0-0（架空）",
       "area": "tokyo",
       "contact": "https://example.com/marunouchi",
+      "dog_amenities": {
+        "dog_menu": true,
+        "indoor": true,
+        "large_dogs": true,
+        "terrace": true
+      },
+      "dog_note": "ワクチン接種証明の提示をお願いする場合があります（架空）",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "hours": {
+        "fri": [
+          {
+            "close": "18:00",
+            "open": "09:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "18:00",
+            "open": "09:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "12:00",
+            "open": "09:00"
+          },
+          {
+            "close": "18:00",
+            "open": "13:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "17:00",
+            "open": "09:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "18:00",
+            "open": "09:00"
+          }
+        ],
+        "tue": [],
+        "wed": [
+          {
+            "close": "18:00",
+            "open": "09:00"
+          }
+        ]
+      },
       "id": "c0000000-0000-4000-8000-000000000001",
+      "info_verified": "2026-06-15",
       "is_closed": false,
       "last_verified": "2026-06-15",
       "latitude": 35.682,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://example.com/marunouchi"
+        },
+        {
+          "type": "instagram",
+          "url": "https://example.com/ig/marunouchi"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://example.com/tabelog/marunouchi"
+        }
+      ],
       "longitude": 139.765,
       "name": "サンプル・ドッグテラス丸の内",
+      "operator_note": {
+        "source": "instagram",
+        "text": "テラス席は雨天クローズです（架空）",
+        "verified_at": "2026-06-20"
+      },
+      "phone": "03-0000-0001",
       "place_id": "sample-place-1",
       "representative_source_id": "63aa8e36-cd09-50df-997d-cc1c43e98dbb",
+      "reservation": "予約可（電話・当日可／架空）",
       "sources": [
         {
           "cafe_id": "c0000000-0000-4000-8000-000000000001",
@@ -165,15 +252,60 @@
       "address": "東京都中央区日本橋1-0-0（架空）",
       "area": "tokyo",
       "contact": null,
+      "dog_amenities": {
+        "indoor": true
+      },
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
+      "hours": {
+        "fri": [
+          {
+            "close": "17:00",
+            "open": "08:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "17:00",
+            "open": "08:00"
+          }
+        ],
+        "sat": [],
+        "sun": [],
+        "thu": [
+          {
+            "close": "17:00",
+            "open": "08:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "17:00",
+            "open": "08:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "17:00",
+            "open": "08:00"
+          }
+        ]
+      },
       "id": "c0000000-0000-4000-8000-000000000003",
+      "info_verified": "2026-06-25",
       "is_closed": false,
       "last_verified": "2026-06-25",
       "latitude": 35.684,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://example.com/nihonbashi"
+        }
+      ],
       "longitude": 139.774,
       "name": "サンプル珈琲 日本橋",
+      "phone": "03-0000-0003",
       "place_id": "sample-place-3",
       "representative_source_id": "dd09b3d5-c63e-502d-b783-82f477ed57c1",
       "sources": [
@@ -199,6 +331,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-07-05T02:41:10Z",
+  "generated_at": "2026-07-05T06:34:38Z",
   "is_sample_data": true
 }

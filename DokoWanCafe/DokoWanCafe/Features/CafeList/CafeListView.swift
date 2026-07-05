@@ -33,6 +33,8 @@ struct CafeRowView: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
+                // 営業状態（構造化営業時間のある店のみ, FR-102）
+                OpenStateBadge(state: OpeningHoursEvaluator.state(hours: item.cafe.hours))
             }
             Spacer(minLength: 8)
             VStack(alignment: .trailing, spacing: 4) {

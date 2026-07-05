@@ -10,3 +10,9 @@
 - ➕ 追加: サンプル・レトロ喫茶 銀座
 - ➕ 追加: サンプル喫茶 神田
 - ➕ 追加: サンプル珈琲 日本橋
+
+## 2026-07-05 15:34 — 追加 0 / 変更 4 / 削除 0（サンプルデータ）
+- ✏️ 変更: サンプルカフェ 八重洲テラス（reservation, hours_text, links, dog_amenities, info_verified）
+- ✏️ 変更: サンプルベーカリー 京橋（hours_text）
+- ✏️ 変更: サンプル・ドッグテラス丸の内（phone, reservation, hours, links, dog_amenities, dog_note, info_verified, operator_note）
+- ✏️ 変更: サンプル珈琲 日本橋（phone, hours, links, dog_amenities, info_verified）
