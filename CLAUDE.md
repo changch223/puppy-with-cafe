@@ -4,6 +4,8 @@
 
 **製品名（表示名）: 「Puppy With Cafe」**（2026-07-05 決定）。リポジトリ・Xcodeターゲット等のコードネームは DokoWanCafe のまま（表示名は `INFOPLIST_KEY_CFBundleDisplayName` で設定）。
 
+**GitHub**: https://github.com/changch223/puppy-with-cafe （public）。**データ配信**: GitHub Pages `https://changch223.github.io/puppy-with-cafe/data/cafes.json`（`AppConfig.defaultCafesDataURL` に設定済み・E2E確認済み）。プライバシーポリシー: 同 `docs/privacy.html`。データ反映＝`export_cafes.py` 実行 → commit → **push**（pushで配信される）。
+
 ## データ調査（database構築）
 - カフェ調査の引き継ぎブリーフ: **`research-agent/README.md`**（収集項目・絶対ルール・手順のすべて）＋ `research-agent/progress.md`（エリア別進捗）
 - 専用エージェント定義: `.claude/agents/cafe-researcher.md` —「cafe-researcher で代官山エリアを調査して」のように依頼する

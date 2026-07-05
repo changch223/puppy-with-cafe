@@ -235,7 +235,7 @@ T018 CafeDeduplicator + T019 test
 - [x] T067 ReportView をフォーム起動型に刷新（プリフィルURL・未設定時は準備中表示）＋サインイン要件の撤去（entitlements 除去, FR-028改訂）in `DokoWanCafe/DokoWanCafe/Features/Report/ReportView.swift`
 - [x] T068 AppDependencies の配線変更＋データ生成日時/サンプルフラグのバナー表示（FR-032）in `DokoWanCafe/DokoWanCafe/App/`
 - [x] T069 [P] StaticCafeRepository ユニットテスト（契約: 半径/可否/距離昇順/出典/矛盾/メタ）in `DokoWanCafe/DokoWanCafeTests/StaticCafeRepositoryTests.swift`
-- [ ] T070 GitHub リポジトリ作成＋Pages 有効化 → 配信URLを `AppConfig.defaultCafesDataURL` に設定（**ユーザー作業を含む**。tools/README.md 手順3）
+- [x] T070 GitHub リポジトリ作成＋Pages 有効化 → 配信URL設定 ※完了（2026-07-05）: https://github.com/changch223/puppy-with-cafe （public）+ Pages 配信中。アプリの遠隔取得E2E確認済み（cafes-remote.json キャッシュ生成を確認）
 - [ ] T071 Google フォーム作成（回答→Sheet 集約）→ プリフィルURLを `AppConfig.defaultReportFormTemplate` に設定（**ユーザー作業を含む**。tools/README.md 手順2）
 
 **Checkpoint**: 全41ユニットテスト緑・シミュレータで新構成の動作確認済み。旧A案（Supabase）のコード・SQLは削除せず保管。
