@@ -2,9 +2,9 @@ import Foundation
 
 /// アプリの構成値（構成B: research.md R11）。
 enum AppEnvironment {
-    /// カフェデータの静的配信URL（GitHub Pages 等）。
-    /// 配信開始後に設定する（tools/README.md 手順3）。未設定ならバンドル版のみで動作。
-    static let defaultCafesDataURL: String? = nil
+    /// カフェデータの静的配信URL（GitHub Pages）。
+    /// バンドル版をフォールバックに、起動時にここから最新データを取得する（FR-032）。
+    static let defaultCafesDataURL: String? = "https://changch223.github.io/puppy-with-cafe/data/cafes.json"
 
     /// 誤り報告の Google フォームURLテンプレート。`{cafe_name}` `{cafe_id}` が置換される。
     /// フォーム作成後に設定する（tools/README.md 手順2）。未設定なら報告は「準備中」表示。

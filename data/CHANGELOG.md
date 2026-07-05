@@ -30,3 +30,10 @@
 - ➖ 削除: サンプル・レトロ喫茶 銀座
 - ➖ 削除: サンプル喫茶 神田
 - ➖ 削除: サンプル珈琲 日本橋
+
+## 2026-07-05 17:31 — 追加 0 / 変更 5 / 削除 0
+- ✏️ 変更: Le Calin（ルカラン）（latitude, longitude）
+- ✏️ 変更: T.Y.HARBOR（latitude, longitude）
+- ✏️ 変更: WHAT CAFE（latitude, longitude）
+- ✏️ 変更: breadworks 天王洲（latitude, longitude）
+- ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（latitude, longitude）

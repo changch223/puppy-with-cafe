@@ -17,8 +17,8 @@
       "info_verified": "2026-07-05",
       "is_closed": false,
       "last_verified": "2026-07-05",
-      "latitude": 35.6241,
-      "longitude": 139.746,
+      "latitude": 35.6222,
+      "longitude": 139.748,
       "name": "Le Calin（ルカラン）",
       "place_id": null,
       "representative_source_id": "03afa1aa-ed26-5482-9df2-a2a5d51e779d",
@@ -53,7 +53,7 @@
       "info_verified": "2026-07-05",
       "is_closed": false,
       "last_verified": "2026-07-05",
-      "latitude": 35.625,
+      "latitude": 35.62291,
       "links": [
         {
           "type": "website",
@@ -64,7 +64,7 @@
           "url": "https://www.instagram.com/tyharbor_brewery/"
         }
       ],
-      "longitude": 139.7452,
+      "longitude": 139.74731,
       "name": "T.Y.HARBOR",
       "place_id": null,
       "representative_source_id": "4adde41f-775d-53b3-85d9-7c257bff0284",
@@ -101,7 +101,7 @@
       "info_verified": "2026-07-05",
       "is_closed": false,
       "last_verified": "2026-07-05",
-      "latitude": 35.6222,
+      "latitude": 35.6216,
       "links": [
         {
           "type": "website",
@@ -112,7 +112,7 @@
           "url": "https://www.instagram.com/whatcafe_terrada/"
         }
       ],
-      "longitude": 139.7504,
+      "longitude": 139.7492,
       "name": "WHAT CAFE",
       "place_id": null,
       "representative_source_id": "4f326884-cf40-504a-b3e3-5386475d750a",
@@ -147,14 +147,14 @@
       "info_verified": "2026-07-05",
       "is_closed": false,
       "last_verified": "2026-07-05",
-      "latitude": 35.6243,
+      "latitude": 35.6224,
       "links": [
         {
           "type": "website",
           "url": "https://www.tyharborbrewing.co.jp/breadworks/"
         }
       ],
-      "longitude": 139.7455,
+      "longitude": 139.7479,
       "name": "breadworks 天王洲",
       "place_id": null,
       "representative_source_id": "7a6733d1-24c5-5f10-9d10-bd3eb9b99f7c",
@@ -189,14 +189,14 @@
       "info_verified": "2026-07-05",
       "is_closed": false,
       "last_verified": "2026-07-05",
-      "latitude": 35.6262,
+      "latitude": 35.62263,
       "links": [
         {
           "type": "website",
           "url": "https://ride-tennoz.com/"
         }
       ],
-      "longitude": 139.7457,
+      "longitude": 139.74878,
       "name": "炭火×薪火×レストラン RIDE 品川 天王洲店",
       "place_id": null,
       "representative_source_id": "086088dd-00ba-51f7-b778-20f56b21b3e6",
@@ -215,6 +215,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-07-05T07:01:35Z",
+  "generated_at": "2026-07-05T08:31:45Z",
   "is_sample_data": false
 }
