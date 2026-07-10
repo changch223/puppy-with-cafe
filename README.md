@@ -10,6 +10,8 @@
 |---|
 | <img src="docs/screenshots/map_tennoz.png" width="260" alt="Map" /> |
 
+> 🤝 **開発を引き継ぐ人（別PC・別AIセッション）へ**: まず [`HANDOFF.md`](HANDOFF.md) を読んでください。現状・環境セットアップ・次の作業がまとまっています。
+
 ## なぜ作ったか
 
 犬同伴OKの情報は 公式HP・Instagram・食べログ・ブログに**散乱**していて、どれが最新で正しいのか分からない。生成AIに聞くと「実際は犬OKなのに不可」と**誤答**されることさえある。
@@ -54,16 +56,28 @@ python3 tools/export_cafes.py           # 本出力
 
 - 仕様・設計: [`specs/`](specs/)（Spec-Driven Development / [Spec Kit](https://github.com/github/spec-kit)）
 - データ列仕様・運用: [`tools/README.md`](tools/README.md)
-- カフェ調査への参加（調査エージェント向けブリーフ）: [`research-agent/README.md`](research-agent/README.md)
 - データ変更履歴: [`data/CHANGELOG.md`](data/CHANGELOG.md)
 - プライバシーポリシー: [`docs/privacy.html`](docs/privacy.html)
 
 ## データについて
 
-- 対象エリア: **東京**（順次拡大。現在: 天王洲アイル）
+- 対象エリア: **東京**（順次拡大。現在: 天王洲アイル 5件）
 - 掲載情報は収集時点のものです。**お出かけ前に店舗の公式情報をご確認ください。**
 - 誤りを見つけた場合は報告フォーム（アプリ内）または Issue でお知らせください。
 
+## データ収集に参加する
+
+東京の犬同伴可カフェを増やす調査に協力できます。
+
+- 調査エージェント向けブリーフ（そのまま渡せば作業開始できる）: [`research-agent/README.md`](research-agent/README.md)
+- エリア別の進捗・優先度: [`research-agent/progress.md`](research-agent/progress.md)
+- 鉄則: **推測で「犬OK」と書かない**。出典URLと確認日を必ず添える（[憲章](.specify/memory/constitution.md) 原則I）。
+
+## 開発を引き継ぐ・別環境で再開する
+
+[`HANDOFF.md`](HANDOFF.md) に、現状・環境セットアップ・次の作業の優先度がまとまっています。
+
 ## License
 
-Code: MIT（予定） / カフェデータ: 出典の権利は各出典元に帰属します。
+- コード: [MIT License](LICENSE)
+- カフェデータ（`data/`）: 出典の権利は各出典元に帰属します。データの再配布時は出典を明示してください。
