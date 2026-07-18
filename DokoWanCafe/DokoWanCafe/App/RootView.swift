@@ -45,7 +45,6 @@ struct RootView: View {
                         CafeMapView(
                             items: searchViewModel.displayedResults,
                             center: searchViewModel.searchCenter,
-                            radiusMeters: searchViewModel.radiusMeters,
                             onSelect: { cafe in path.append(cafe) }
                         )
                     case .list:

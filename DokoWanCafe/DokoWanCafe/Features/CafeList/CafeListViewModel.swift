@@ -33,8 +33,11 @@ final class CafeListViewModel: ObservableObject {
         case error(String)
     }
 
-    static let defaultRadiusMeters = 3_000
-    static let expandedRadiusMeters = 10_000
+    /// データ取得用の安全上限（UI向けの意味は持たない）。
+    /// データはローカル（StaticCafeRepository）に全件保持されており、絞り込みコストは実質ゼロのため、
+    /// 事実上「東京都内は無制限」とみなせる大きな値を使う（実測: 全268件の最大ペア間距離 約52.4km）。
+    /// 地図の初期表示ズームは別途 `MapViewModel.initialCameraRegion` が距離分布から算出する。
+    private static let fetchSafetyRadiusMeters = 60_000
 
     @Published private(set) var phase: Phase = .idle
     @Published private(set) var allResults: [CafeWithDistance] = []
@@ -42,7 +45,6 @@ final class CafeListViewModel: ObservableObject {
     @Published var statusFilter: Set<DogPolicyStatus> = [.allowed, .conditional]
     @Published var origin: SearchOrigin = .currentLocation
     @Published private(set) var searchCenter: CLLocationCoordinate2D?
-    @Published private(set) var radiusMeters: Int = CafeListViewModel.defaultRadiusMeters
 
     private let repository: any CafeRepository
     private let locationService: LocationService
@@ -59,8 +61,6 @@ final class CafeListViewModel: ObservableObject {
         CafeFilter.apply(statusFilter, to: allResults)
             .sorted { $0.distanceMeters < $1.distanceMeters }
     }
-
-    var canExpandRadius: Bool { radiusMeters < Self.expandedRadiusMeters }
 
     /// 周辺検索を実行（contracts/api-contracts.md #1 の利用側）
     func refresh() async {
@@ -99,7 +99,7 @@ final class CafeListViewModel: ObservableObject {
             let results = try await repository.nearbyCafes(
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude,
-                radiusMeters: radiusMeters,
+                radiusMeters: Self.fetchSafetyRadiusMeters,
                 onlyDogOK: false
             )
             allResults = results
@@ -115,16 +115,9 @@ final class CafeListViewModel: ObservableObject {
         }
     }
 
-    /// 検索範囲を広げて再検索（FR-020: 0件時の導線）
-    func expandRadius() async {
-        radiusMeters = Self.expandedRadiusMeters
-        await refresh()
-    }
-
     /// 地域を変更して再検索
     func changeOrigin(_ newOrigin: SearchOrigin) async {
         origin = newOrigin
-        radiusMeters = Self.defaultRadiusMeters
         await refresh()
     }
 }
