@@ -1,22 +1,38 @@
 import SwiftUI
+import UIKit
+
+/// SafariView(sheet) 提示用の識別可能なURLラッパー（写真・雰囲気機能: OGP写真カード・地図案内・
+/// 出典URL・公式リンク等のアプリ内ブラウザ表示を `.sheet(item:)` で一元管理する）。
+private struct SafariItem: Identifiable {
+    let id = UUID()
+    let url: URL
+}
 
 /// カフェ詳細画面（T032/T035/T046/T047/T048/T050）。
 /// 可否・条件・出典・最終確認日を提示し（US2）、矛盾と AI 推測を明示区別する（US4）。
 struct CafeDetailView: View {
     @StateObject private var viewModel: CafeDetailViewModel
     private let dependencies: AppDependencies
+    @Environment(\.openURL) private var openURL
     @State private var showReport = false
+    @State private var safariItem: SafariItem?
+    // 写真・雰囲気セクションの表示チェーン現在地（IG埋め込み失敗→OGP写真カード失敗→地図案内、の順に遷移）
+    @State private var photoTier: PhotoTier?
+    @State private var instagramEmbedHeight: CGFloat = OGPPhotoCardView.cardHeight
 
     init(cafe: Cafe, dependencies: AppDependencies) {
         self.dependencies = dependencies
         _viewModel = StateObject(
             wrappedValue: CafeDetailViewModel(cafe: cafe, repository: dependencies.repository)
         )
+        _photoTier = State(initialValue: Self.initialPhotoTier(for: cafe))
     }
 
     var body: some View {
         List {
             headerSection
+
+            photoSection
 
             if viewModel.cafe.dogAmenities != nil || viewModel.cafe.dogNote != nil {
                 amenitiesSection
@@ -49,6 +65,9 @@ struct CafeDetailView: View {
         .sheet(isPresented: $showReport) {
             ReportView(cafe: viewModel.cafe)
                 .presentationDetents([.medium, .large])
+        }
+        .sheet(item: $safariItem) { item in
+            SafariView(url: item.url)
         }
     }
 
@@ -119,6 +138,79 @@ struct CafeDetailView: View {
             }
             .padding(.vertical, 4)
             .accessibilityElement(children: .combine)
+        }
+    }
+
+    // MARK: - 写真・雰囲気（写真プレビュー機能: IG投稿埋め込み→OGP写真カード→地図案内の3段フォールバック）
+
+    /// 表示チェーンの現在の段。IG埋め込み・OGP画像取得の失敗時に次段へ遷移する。
+    private enum PhotoTier {
+        case instagramEmbed(html: String)
+        case ogpCard(url: URL, sourceLabel: String, linkType: CafeLinkType)
+        case mapsFallback(url: URL)
+    }
+
+    /// 初期表示段を決定する: IG代表投稿URLが有効ならそれを優先し、無ければフォールバック段から選ぶ。
+    private static func initialPhotoTier(for cafe: Cafe) -> PhotoTier? {
+        if let postURL = cafe.instagramPostURL,
+           let html = PhotoSourceResolver.instagramEmbedHTML(postURL: postURL) {
+            return .instagramEmbed(html: html)
+        }
+        return fallbackPhotoTier(for: cafe)
+    }
+
+    /// IG埋め込み失敗時のフォールバック先（OGP写真カード優先、候補が無ければ地図案内）
+    private static func fallbackPhotoTier(for cafe: Cafe) -> PhotoTier? {
+        if let url = PhotoSourceResolver.previewSourceURL(for: cafe) {
+            let link = cafe.links?.first(where: { $0.resolvedURL == url })
+            let label = link?.type.displayName ?? String(localized: "リンク")
+            return .ogpCard(url: url, sourceLabel: label, linkType: link?.type ?? .other)
+        }
+        return mapsOnlyTier(for: cafe)
+    }
+
+    /// OGP写真カード取得失敗時のフォールバック先（地図案内のみ）
+    private static func mapsOnlyTier(for cafe: Cafe) -> PhotoTier? {
+        PhotoSourceResolver.mapsPhotoSearchURL(name: cafe.name, address: cafe.address).map { .mapsFallback(url: $0) }
+    }
+
+    private var photoSection: some View {
+        Group {
+            if let photoTier {
+                Section {
+                    photoCard(for: photoTier)
+                        .padding(.vertical, 4)
+                } header: {
+                    Text("写真・雰囲気")
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func photoCard(for tier: PhotoTier) -> some View {
+        switch tier {
+        case .instagramEmbed(let html):
+            InstagramPostEmbedView(html: html, height: $instagramEmbedHeight) {
+                photoTier = Self.fallbackPhotoTier(for: viewModel.cafe)
+            }
+            .frame(height: instagramEmbedHeight)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        case .ogpCard(let url, let sourceLabel, let linkType):
+            OGPPhotoCardView(url: url, sourceLabel: sourceLabel) {
+                // instagram は外部で開く（リンク一覧と同じ原則）。website/tabelog はアプリ内ブラウザのまま。
+                if linkType == .instagram {
+                    openURL(url)
+                } else {
+                    safariItem = SafariItem(url: url)
+                }
+            } onFail: {
+                photoTier = Self.mapsOnlyTier(for: viewModel.cafe)
+            }
+        case .mapsFallback(let url):
+            MapsPhotoFallbackCardView {
+                safariItem = SafariItem(url: url)
+            }
         }
     }
 
@@ -215,7 +307,8 @@ struct CafeDetailView: View {
             ForEach(viewModel.sources) { source in
                 SourceRow(
                     source: source,
-                    isRepresentative: source.id == viewModel.representativeSource?.id
+                    isRepresentative: source.id == viewModel.representativeSource?.id,
+                    onOpenURL: { url in safariItem = SafariItem(url: url) }
                 )
             }
         } header: {
@@ -236,7 +329,8 @@ struct CafeDetailView: View {
                 ForEach(viewModel.sources) { source in
                     SourceRow(
                         source: source,
-                        isRepresentative: source.id == viewModel.representativeSource?.id
+                        isRepresentative: source.id == viewModel.representativeSource?.id,
+                        onOpenURL: { url in safariItem = SafariItem(url: url) }
                     )
                 }
             }
@@ -284,9 +378,13 @@ struct CafeDetailView: View {
             }
             if let contact = viewModel.cafe.contact {
                 if let url = URL(string: contact), url.scheme?.hasPrefix("http") == true {
-                    Link(destination: url) {
+                    // アプリ内ブラウザで開く（写真・雰囲気機能）
+                    Button {
+                        safariItem = SafariItem(url: url)
+                    } label: {
                         LabeledContent(String(localized: "連絡先・サイト"), value: contact)
                     }
+                    .foregroundStyle(.tint)
                 } else {
                     LabeledContent(String(localized: "連絡先"), value: contact)
                 }
@@ -320,8 +418,20 @@ struct CafeDetailView: View {
             if let links = viewModel.cafe.links, !links.isEmpty {
                 ForEach(links) { link in
                     if let url = link.resolvedURL {
-                        Link(destination: url) {
-                            Label(link.type.displayName, systemImage: link.type.systemImage)
+                        switch link.type {
+                        case .website, .tabelog, .other:
+                            // アプリ内ブラウザで開く（写真・雰囲気機能: 閉じて即アプリへ復帰できるUX）
+                            Button {
+                                safariItem = SafariItem(url: url)
+                            } label: {
+                                Label(link.type.displayName, systemImage: link.type.systemImage)
+                            }
+                            .foregroundStyle(.tint)
+                        default:
+                            // instagram/x/google_map は従来通り外部（ユニバーサルリンクでアプリが開く方がUX良）
+                            Link(destination: url) {
+                                Label(link.type.displayName, systemImage: link.type.systemImage)
+                            }
                         }
                     }
                 }
@@ -390,6 +500,8 @@ struct CafeDetailView: View {
 struct SourceRow: View {
     let source: Source
     let isRepresentative: Bool
+    /// 出典URLのアプリ内ブラウザ起動（写真・雰囲気機能: SafariView sheet を呼び出し側が一元管理する）
+    let onOpenURL: (URL) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -416,11 +528,14 @@ struct SourceRow: View {
                 }
             }
             if let url = source.referenceURL {
-                Link(destination: url) {
+                Button {
+                    onOpenURL(url)
+                } label: {
                     Text(url.absoluteString)
                         .font(.caption)
                         .lineLimit(1)
                 }
+                .foregroundStyle(.tint)
             }
         }
         .padding(.vertical, 2)
@@ -454,5 +569,97 @@ struct ProvenanceChip: View {
 
     private var color: Color {
         provenance.isAIInferred ? .purple : .teal
+    }
+}
+
+/// OGP写真カード（写真プレビュー機能・表示チェーン2段目）。
+/// リンク先ページの画像を `LinkPreviewService`（`LPMetadataProvider`）で端末側が直接取得して表示する
+/// （画像の転載・再ホストはしない）。取得中はプレースホルダを表示し、取得失敗（画像なし含む）時は
+/// `onFail` を呼んで、呼び出し側が「地図で写真を見る」カードへフォールバックする。タップで取得元URLを開く。
+struct OGPPhotoCardView: View {
+    let url: URL
+    let sourceLabel: String
+    let onTap: () -> Void
+    let onFail: () -> Void
+
+    @State private var image: UIImage?
+    @State private var isLoading = true
+
+    /// 写真・雰囲気セクションの各カード共通の高さ
+    static let cardHeight: CGFloat = 190
+
+    var body: some View {
+        Button(action: onTap) {
+            ZStack(alignment: .bottomLeading) {
+                if let image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Rectangle()
+                        .fill(Color(.secondarySystemBackground))
+                        .overlay {
+                            if isLoading {
+                                ProgressView()
+                            } else {
+                                Image(systemName: "photo")
+                                    .font(.largeTitle)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                }
+
+                if image != nil {
+                    Text("取得元: \(sourceLabel)")
+                        .font(.caption2.bold())
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(.black.opacity(0.45), in: Capsule())
+                        .foregroundStyle(.white)
+                        .padding(10)
+                }
+            }
+            .frame(maxWidth: .infinity, minHeight: Self.cardHeight, maxHeight: Self.cardHeight)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text("\(sourceLabel)の写真"))
+        .accessibilityHint(Text("タップして\(sourceLabel)を開きます"))
+        .task(id: url) {
+            let preview = await LinkPreviewService.shared.preview(for: url)
+            isLoading = false
+            if let fetchedImage = preview?.image {
+                image = fetchedImage
+            } else {
+                onFail()
+            }
+        }
+    }
+}
+
+/// 「地図で写真を見る」フォールバックカード（写真プレビュー機能・表示チェーン3段目）。
+/// IG投稿埋め込み・OGP写真カードのいずれも使えない場合に、店名・住所からのGoogleマップ検索結果へ案内する。
+struct MapsPhotoFallbackCardView: View {
+    let onTap: () -> Void
+
+    var body: some View {
+        Button(action: onTap) {
+            VStack(spacing: 8) {
+                Image(systemName: "map")
+                    .font(.largeTitle)
+                    .foregroundStyle(.tint)
+                Text("地図で写真を見る")
+                    .font(.subheadline.bold())
+                Text("Googleマップで周辺の写真を確認できます")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, minHeight: OGPPhotoCardView.cardHeight, maxHeight: OGPPhotoCardView.cardHeight)
+            .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(.primary)
+        .accessibilityElement(children: .combine)
     }
 }
