@@ -33,6 +33,9 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
     var infoVerified: Date?
     var operatorNote: OperatorNote?
 
+    // 写真・雰囲気機能: IG投稿埋め込み用の代表投稿URL（任意・後方互換）
+    var instagramPostURL: String?
+
     enum CodingKeys: String, CodingKey {
         case id
         case placeID = "place_id"
@@ -61,6 +64,7 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
         case dogNote = "dog_note"
         case infoVerified = "info_verified"
         case operatorNote = "operator_note"
+        case instagramPostURL = "instagram_post_url"
     }
 
     func hash(into hasher: inout Hasher) {

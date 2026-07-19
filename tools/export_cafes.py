@@ -126,6 +126,11 @@ LINK_COLUMNS = {
     "link_tabelog": "tabelog",
 }
 
+#: IG投稿/リールURLのみ許可（ユーザー名付きは正規化）。例: https://www.instagram.com/shop/p/Cxxxxxxxxx/
+_INSTAGRAM_POST_RE = _re.compile(
+    r"^https://www\.instagram\.com/(?:[A-Za-z0-9._]{1,30}/)?(?P<kind>p|reel)/(?P<code>[A-Za-z0-9_-]+)/?$"
+)
+
 
 def parse_hours_cell(value, label, column, errors):
     """'9:00-18:00[,13:00-18:00]' / '定休' / 空=不明(None)。日跨ぎ(close<=open)はエラー（FR-102/105）"""
@@ -168,6 +173,20 @@ def parse_url(value, label, column, errors):
     return v
 
 
+def parse_instagram_post_url(value, label, column, errors):
+    """IG投稿/リールのURLのみ許可。ユーザー名付きは https://www.instagram.com/p(またはreel)/<code>/ へ正規化"""
+    v = clean_text(value)
+    if v is None:
+        return None
+    m = _INSTAGRAM_POST_RE.match(v)
+    if not m:
+        errors.append(
+            f"{label}: {column} は https://www.instagram.com/(ユーザー名/)p または reel/<コード>/ の形式で入力してください: {v!r}"
+        )
+        return None
+    return f"https://www.instagram.com/{m.group('kind')}/{m.group('code')}/"
+
+
 def load_extras(row, label, errors):
     """002-cafe-rich-info の追加情報（すべて任意・後方互換, FR-101/105/107）"""
     extras = {}
@@ -202,6 +221,10 @@ def load_extras(row, label, errors):
             links.append({"type": link_type, "url": url})
     if links:
         extras["links"] = links
+
+    instagram_post_url = parse_instagram_post_url(row.get("link_instagram_post"), label, "link_instagram_post", errors)
+    if instagram_post_url:
+        extras["instagram_post_url"] = instagram_post_url
 
     amenities = {}
     for column, key in [("dog_indoor", "indoor"), ("dog_terrace", "terrace"),
