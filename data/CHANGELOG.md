@@ -37,3 +37,312 @@
 - ✏️ 変更: WHAT CAFE（latitude, longitude）
 - ✏️ 変更: breadworks 天王洲（latitude, longitude）
 - ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（latitude, longitude）
+
+## 2026-07-17 21:57 — 追加 79 / 変更 0 / 削除 0
+- ➕ 追加: & OIMO TOKYO CAFE 中目黒店
+- ➕ 追加: ANEA CAFE Toyosu
+- ➕ 追加: Areverie TERRACE Ebisu(アレヴェリー テラス エビス)
+- ➕ 追加: BLACK TERRACE
+- ➕ 追加: BONDI CAFE Nakameguro
+- ➕ 追加: BONDI CAFE 広尾店(ボンダイカフェ広尾店)
+- ➕ 追加: BONTA ITALIA(ボンタイタリア)
+- ➕ 追加: Bleue Blanche（ブルーブランシュ）
+- ➕ 追加: CAFE TANTON（カフェタントン）
+- ➕ 追加: CHICHICAFE
+- ➕ 追加: CIRTY CAFE(サーティーカフェ)
+- ➕ 追加: CLANN BY THE RIVER（旧PITMANS）
+- ➕ 追加: Cafe Lisette 二子玉川店
+- ➕ 追加: Cafe Madu 青山店
+- ➕ 追加: Café Kitsuné Aoyama
+- ➕ 追加: DOG DEPT + CAFE 浅草隅田川テラス店
+- ➕ 追加: DOG DEPT+CAFE お台場東京ビーチ店
+- ➕ 追加: ERIC ROSE
+- ➕ 追加: EZO DELI
+- ➕ 追加: Eggs 'n Things お台場店
+- ➕ 追加: FUGLEN ASAKUSA
+- ➕ 追加: GENTLE Dining
+- ➕ 追加: Huit(ユイット)
+- ➕ 追加: IL LUPINO PRIME
+- ➕ 追加: IVY PLACE
+- ➕ 追加: JIYUGAOKA BURGER(自由が丘バーガー)
+- ➕ 追加: LATTE GRAPHIC 自由が丘店
+- ➕ 追加: La VASARA CAFE&GRILL
+- ➕ 追加: Le Maghreb（ル・マグレブ）
+- ➕ 追加: Les deux Bleue ららぽーと豊洲店
+- ➕ 追加: MID TREE 代官山
+- ➕ 追加: Mallorca（マヨルカ）二子玉川
+- ➕ 追加: Monsoon Cafe 代官山
+- ➕ 追加: Onigily Cafe(オニギリーカフェ)
+- ➕ 追加: PIZZERIA PICCHI（ピッツェリア ピッキ）
+- ➕ 追加: Paradise Poke蔵前
+- ➕ 追加: Pizzeria&Trattoria GONZO 吉祥寺店
+- ➕ 追加: Plus veganique(プラスヴィーガニック自由が丘)
+- ➕ 追加: Pretty Good - coffee & donut
+- ➕ 追加: RIGOLETTO spice market
+- ➕ 追加: ROJU NAKAMEGURO
+- ➕ 追加: Ralph's Coffee Omotesando
+- ➕ 追加: Ron Herman Cafe 二子玉川店
+- ➕ 追加: SHUTTERS 自由が丘
+- ➕ 追加: SUNNY's cafe＆surf（サニーズカフェ）
+- ➕ 追加: SYUNA & BANI（シュナ＆バニ）
+- ➕ 追加: THE OPEN BAKERY
+- ➕ 追加: TRATTORIA Mocco
+- ➕ 追加: The House of Hounds by fäfä
+- ➕ 追加: Trattoria Pizzeria LOGIC お台場
+- ➕ 追加: anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）
+- ➕ 追加: bills お台場
+- ➕ 追加: bills 二子玉川
+- ➕ 追加: crisscross
+- ➕ 追加: evergreen cafe restaurant EBISU(エヴァーグリーン カフェ レストラン エビス)
+- ➕ 追加: i2 cafe
+- ➕ 追加: iki Roastery & Eatery
+- ➕ 追加: marble
+- ➕ 追加: nakameguro SLOW TABLE
+- ➕ 追加: tonkatsu.jp表参道
+- ➕ 追加: vegewest Cafe & WineBar(代官山vegewest)
+- ➕ 追加: まるごとVeganダイニング浅草
+- ➕ 追加: カフェ・ドゥ・リエーヴル うさぎ館
+- ➕ 追加: カフェ・ミケランジェロ
+- ➕ 追加: シャテール（chatiere）
+- ➕ 追加: セガフレード・ザネッティ・エスプレッソ 広尾店
+- ➕ 追加: バーガーマニア 広尾店
+- ➕ 追加: バーガーマニア 恵比寿店
+- ➕ 追加: ピッツェリア ダ ボッカ
+- ➕ 追加: ブルーボトルコーヒー 代官山カフェ
+- ➕ 追加: プラスアルファキッチン（ラムと豪州ジビエバル）
+- ➕ 追加: ラ・ベファーナ 吉祥寺
+- ➕ 追加: 八十八夜 吉祥寺店
+- ➕ 追加: 天現寺カフェ
+- ➕ 追加: 氷屋ぴぃす
+- ➕ 追加: 自由が丘 カスタネット
+- ➕ 追加: 薬膳&米粉カフェ やまのひつじ
+- ➕ 追加: 青山川上庵
+- ➕ 追加: 食堂101
+
+## 2026-07-18 20:48 — 追加 184 / 変更 0 / 削除 0
+- ➕ 追加: 5感 小皿イタリアン&ワイン 赤羽店
+- ➕ 追加: AINA CAFE(アイナカフェ)
+- ➕ 追加: ARMWOOD COTTAGE(アームウッドコテージ)
+- ➕ 追加: AUX BACCHANALES 銀座
+- ➕ 追加: BARCA(バルカ)
+- ➕ 追加: BOWLS cafe(ボウルズカフェ)
+- ➕ 追加: Balcony by 6th
+- ➕ 追加: Besties Tokyo
+- ➕ 追加: CAFE花と海
+- ➕ 追加: CANTERA（カンテラ）立川店
+- ➕ 追加: CIRCULO(シルクロ)
+- ➕ 追加: COFFEE STAND .OTTEN
+- ➕ 追加: Cafe PREGO(カフェプレゴ)
+- ➕ 追加: Cafe Restaurant+Dog Grandir(グランディール)
+- ➕ 追加: Cafe de Cuore(カフェ・ド・クオーレ)
+- ➕ 追加: Cafe du Riche(カフェドリッチェ)
+- ➕ 追加: Cafe さんぽ道
+- ➕ 追加: Cafe&Diner KHB
+- ➕ 追加: Cafe' Roju
+- ➕ 追加: Chanoma(チャノマ)
+- ➕ 追加: DELIGHT(ディライト)
+- ➕ 追加: Deco's Dog Cafe 田園茶房
+- ➕ 追加: District ブラッスリー・バー・ラウンジ
+- ➕ 追加: Dog Arts and Cafe インディハウス
+- ➕ 追加: Dog Cafe & Bar Deco et Deco(デコデコ)
+- ➕ 追加: Dog Cafe Aloha ilio(アロハイーリオ)
+- ➕ 追加: Dog Cafe Uru(ドッグカフェ ウル)
+- ➕ 追加: Dog Café Bee
+- ➕ 追加: Dog Salon & Cafe Karin堂
+- ➕ 追加: Dogberry(ドッグベリー)
+- ➕ 追加: ENRICH
+- ➕ 追加: EVERYONEs CAFE
+- ➕ 追加: FAUCHON LE CAFE
+- ➕ 追加: FRIEND MONSTER(フレンドモンスター)
+- ➕ 追加: FUNGO 三宿本店
+- ➕ 追加: Farmacy-Deli&BAR 日本橋1ppon
+- ➕ 追加: GOOD MORNING CAFE 中野セントラルパーク
+- ➕ 追加: GRAPHY NEZU CAFE&LOUNGE
+- ➕ 追加: GREEN BROTHERS 麻布十番店
+- ➕ 追加: GRIP(グリップ)
+- ➕ 追加: HAGI CAFE
+- ➕ 追加: IL BACARO ALMA（イル バーカロ アルマ）
+- ➕ 追加: In the Garden 135(イン・ザ・ガーデン135)
+- ➕ 追加: JUICE BAR ROCKET(ジュースバーロケット)
+- ➕ 追加: Jugar cafe(フガールカフェ)
+- ➕ 追加: KZ House(ケージーハウス)
+- ➕ 追加: LARGO SENGAWA
+- ➕ 追加: LOU
+- ➕ 追加: LUSH COFFEE ROASTER&LABORATORY
+- ➕ 追加: Le quattro stagioni
+- ➕ 追加: Los Angeles BALCONY Terrace Restaurant & Moon Bar
+- ➕ 追加: MEAT×WINE BISTRO DOMANNAKA
+- ➕ 追加: MERRY and BRIGHT
+- ➕ 追加: MILLS COFFEE(ミルズコーヒー)
+- ➕ 追加: MOTHERS ORIENTAL
+- ➕ 追加: Maison Landemaine 麻布台
+- ➕ 追加: Mon-TERCERO（テルセーロ）
+- ➕ 追加: MozekSol(モゼクソール)
+- ➕ 追加: NATURE&MEAT GROVE PARK VIEW
+- ➕ 追加: Nagi
+- ➕ 追加: Nim's Pizza
+- ➕ 追加: Osteria Capanna(オステリアカパンナ)
+- ➕ 追加: Osteria IL VIAGGIO
+- ➕ 追加: P.C.M. パブ・カーディナル・マルノウチ
+- ➕ 追加: PACE ITALIAN LOUNGE
+- ➕ 追加: PENNY LANE ソラマチ店
+- ➕ 追加: Park Side Cafe BASEL
+- ➕ 追加: Paston（パストン）
+- ➕ 追加: Pcm's Cafe
+- ➕ 追加: Pizzeria & Trattoria アダッキオ(AD'ACCHIO)
+- ➕ 追加: RAD BROS CAFE
+- ➕ 追加: ROSSO CAFE
+- ➕ 追加: Restaurant Bar BORNE
+- ➕ 追加: Rojiura Curry SAMURAI. 立川店
+- ➕ 追加: SHARK COFFEE
+- ➕ 追加: Sestina（セスティーナ）
+- ➕ 追加: Snow Peak Cafe&Dining 南町田グランベリーパーク
+- ➕ 追加: S・E・C GREEN SPRINGS
+- ➕ 追加: TAMAGAWA DINER(多摩川ダイナー)
+- ➕ 追加: THE CITY BAKERY 南町田グランベリーパーク
+- ➕ 追加: THE LINKING
+- ➕ 追加: TOKYO KAKI STAND 東京ドームシティ店
+- ➕ 追加: TOMBOY 十条本店
+- ➕ 追加: TRATTORIA Elmo Cielo(トラットリア エルモチェーロ)
+- ➕ 追加: Takuru(タクる)
+- ➕ 追加: Terrie's Dog Cafe そら〜ず
+- ➕ 追加: The Jones Café | Bar
+- ➕ 追加: Tokyo Kenkyo
+- ➕ 追加: VERVE COFFEE ROASTERS 六本木店
+- ➕ 追加: VILLAGE MARCHE(ヴィレッジマルシェ)
+- ➕ 追加: VIRON 丸の内店
+- ➕ 追加: Vegeater
+- ➕ 追加: WIRED KITCHEN 南町田グランベリーパーク
+- ➕ 追加: WOODBERRY COFFEE 荻窪店
+- ➕ 追加: Waffle cafe ORANGE(ワッフルカフェ・オランジ)
+- ➕ 追加: Whitely Cafe
+- ➕ 追加: a-bridge 三軒茶屋店
+- ➕ 追加: anea cafe 中野新橋店
+- ➕ 追加: atelier BASEL
+- ➕ 追加: cafe arica
+- ➕ 追加: cafe garage Dogberry(ドッグベリー)下北沢
+- ➕ 追加: dog cafe petitchien(プティシアン)
+- ➕ 追加: good fellas
+- ➕ 追加: gufo(グーフォ)
+- ➕ 追加: leafis cafe ASAGAYA(リーフィスカフェ阿佐ヶ谷)
+- ➕ 追加: les joues de bébé
+- ➕ 追加: mum coffee
+- ➕ 追加: nico 赤羽店
+- ➕ 追加: tag cafe(タグカフェ)
+- ➕ 追加: いづも 池袋店
+- ➕ 追加: かざみどり南池袋
+- ➕ 追加: さくらガーデン ドッグカフェ&ダイニングバー
+- ➕ 追加: ひぐらしベーカリー
+- ➕ 追加: ひつじのショーンビレッジ ショップ&カフェ 南町田グランベリーパーク
+- ➕ 追加: わん!リトルガーデン
+- ➕ 追加: わんこのしっぽ
+- ➕ 追加: アナム本格インド料理 銀座店
+- ➕ 追加: イル ピッツァイオーロ(il Pizzaiolo)
+- ➕ 追加: オカン焼肉 紅ちゃん 本店
+- ➕ 追加: オルオルアイナ(Oluolu Aina)
+- ➕ 追加: オーバカナル 高輪店
+- ➕ 追加: オービカ モッツァレラバー 高輪店
+- ➕ 追加: カキノキテラス
+- ➕ 追加: カフェ ハルテラス(Cafe HARU terrace)
+- ➕ 追加: カフェ フェリーチェ(cafe Felice)
+- ➕ 追加: カフェダイニングバー セントバーナード
+- ➕ 追加: サクラカフェ&レストラン日暮里(SAKURA CAFE)
+- ➕ 追加: サクラカフェ&レストラン池袋
+- ➕ 追加: サッカバッカ(SaccaBacca)
+- ➕ 追加: シアン ア ラ モード(Chien a la mode)
+- ➕ 追加: ジェラテリア エルバ
+- ➕ 追加: ジェラート ピケ カフェ クレープリー ルミネ池袋
+- ➕ 追加: ジャンピングパンダ(丸の内テラス)
+- ➕ 追加: スターバックスコーヒー上野恩賜公園店
+- ➕ 追加: スパイスと創作料理 この一杯のために。
+- ➕ 追加: スパイスバル317(サンイチナナ)
+- ➕ 追加: スワン銀座（SWAN GINZA）
+- ➕ 追加: タマネギヘッドバッド
+- ➕ 追加: デルコス八王子本店
+- ➕ 追加: デ・ラ・ナチュール(DE LA NATURE)
+- ➕ 追加: トラットリア トラム ロカーレ
+- ➕ 追加: ドッグカフェ&BAR Petit Leon
+- ➕ 追加: ドッグラン&カフェバー ノンノバドール
+- ➕ 追加: ハーベステラス 品川店
+- ➕ 追加: ハーベステラス 昭島アウトドアヴィレッジ店
+- ➕ 追加: パンとcafé えだおね
+- ➕ 追加: パンとビストロ 高円寺FLAT(フラット)
+- ➕ 追加: ファーマーズキッチン 南町田グランベリーパーク
+- ➕ 追加: フランス料理 銀座みかわや
+- ➕ 追加: ブラッスリー セント・ベルナルデュス 神田(St.Bernardus)
+- ➕ 追加: ブリコラージュ ブレッド アンド カンパニー
+- ➕ 追加: プティ パルク
+- ➕ 追加: マイクロカフェ 調布深大寺店
+- ➕ 追加: マキネスティコーヒー 緑本店
+- ➕ 追加: ミタスカフェ（Mitasu Cafe）
+- ➕ 追加: ミヤマ珈琲 練馬春日町店
+- ➕ 追加: ミルリトンカフェ(Mirliton Cafe)
+- ➕ 追加: ヨガカフェ
+- ➕ 追加: ランゾウ
+- ➕ 追加: ワン茶房
+- ➕ 追加: 上島珈琲店 護国寺店
+- ➕ 追加: 君のハンバーグを食べたい渋谷店
+- ➕ 追加: 和むすびや＆わんこのまるっと
+- ➕ 追加: 土鍋炊きご飯 おこめとおかず
+- ➕ 追加: 木曜館
+- ➕ 追加: 江戸前 松栄寿司
+- ➕ 追加: 洋食屋クリスマス亭
+- ➕ 追加: 深大寺水神苑
+- ➕ 追加: 焼肉 炙りな 北千住店
+- ➕ 追加: 犬茶屋本舗
+- ➕ 追加: 田園調布倶楽部
+- ➕ 追加: 石濱茶寮 楽
+- ➕ 追加: 窯焼きバルカフェ らんぷ+k
+- ➕ 追加: 織部 下北沢店(オリベ)
+- ➕ 追加: 肉と牡蠣CARTA 池袋店
+- ➕ 追加: 肉ビストロ&クラフトビール ランプラント(l'Empreinte)
+- ➕ 追加: 蒲田カフェ
+- ➕ 追加: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ
+- ➕ 追加: 酒呑中華コテツ
+- ➕ 追加: 野菜倶楽部 oto no ha Café(オトノハカフェ)
+- ➕ 追加: 食事とナチュラルワイン AOLA(アオラ)
+- ➕ 追加: 高倉町珈琲 八王子店
+- ➕ 追加: 高輪バール・デルソーレ
+- ➕ 追加: 麻布 川上庵
+
+## 2026-07-19 11:11 — 追加 0 / 変更 40 / 削除 0
+- ✏️ 変更: AINA CAFE(アイナカフェ)（instagram_post_url）
+- ✏️ 変更: ANEA CAFE Toyosu（instagram_post_url）
+- ✏️ 変更: Areverie TERRACE Ebisu(アレヴェリー テラス エビス)（instagram_post_url）
+- ✏️ 変更: BLACK TERRACE（instagram_post_url）
+- ✏️ 変更: BONDI CAFE Nakameguro（instagram_post_url）
+- ✏️ 変更: CAFE TANTON（カフェタントン）（instagram_post_url）
+- ✏️ 変更: CLANN BY THE RIVER（旧PITMANS）（instagram_post_url）
+- ✏️ 変更: DELIGHT(ディライト)（instagram_post_url）
+- ✏️ 変更: Deco's Dog Cafe 田園茶房（instagram_post_url）
+- ✏️ 変更: Dog Cafe Uru(ドッグカフェ ウル)（instagram_post_url）
+- ✏️ 変更: FRIEND MONSTER(フレンドモンスター)（instagram_post_url）
+- ✏️ 変更: FUNGO 三宿本店（instagram_post_url）
+- ✏️ 変更: Huit(ユイット)（instagram_post_url）
+- ✏️ 変更: JUICE BAR ROCKET(ジュースバーロケット)（instagram_post_url）
+- ✏️ 変更: Park Side Cafe BASEL（instagram_post_url）
+- ✏️ 変更: Pizzeria&Trattoria GONZO 吉祥寺店（instagram_post_url）
+- ✏️ 変更: ROJU NAKAMEGURO（instagram_post_url）
+- ✏️ 変更: ROSSO CAFE（instagram_post_url）
+- ✏️ 変更: Restaurant Bar BORNE（instagram_post_url）
+- ✏️ 変更: SHARK COFFEE（instagram_post_url）
+- ✏️ 変更: T.Y.HARBOR（instagram_post_url）
+- ✏️ 変更: TAMAGAWA DINER(多摩川ダイナー)（instagram_post_url）
+- ✏️ 変更: THE LINKING（instagram_post_url）
+- ✏️ 変更: VILLAGE MARCHE(ヴィレッジマルシェ)（instagram_post_url）
+- ✏️ 変更: VIRON 丸の内店（instagram_post_url）
+- ✏️ 変更: WHAT CAFE（instagram_post_url）
+- ✏️ 変更: Waffle cafe ORANGE(ワッフルカフェ・オランジ)（instagram_post_url）
+- ✏️ 変更: Whitely Cafe（instagram_post_url）
+- ✏️ 変更: a-bridge 三軒茶屋店（instagram_post_url）
+- ✏️ 変更: anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）（instagram_post_url）
+- ✏️ 変更: atelier BASEL（instagram_post_url）
+- ✏️ 変更: iki Roastery & Eatery（instagram_post_url）
+- ✏️ 変更: tag cafe(タグカフェ)（instagram_post_url）
+- ✏️ 変更: わんこのしっぽ（instagram_post_url）
+- ✏️ 変更: カキノキテラス（instagram_post_url）
+- ✏️ 変更: サッカバッカ(SaccaBacca)（instagram_post_url）
+- ✏️ 変更: スパイスバル317(サンイチナナ)（instagram_post_url）
+- ✏️ 変更: ドッグカフェ&BAR Petit Leon（instagram_post_url）
+- ✏️ 変更: 石濱茶寮 楽（instagram_post_url）
+- ✏️ 変更: 肉と牡蠣CARTA 池袋店（instagram_post_url）

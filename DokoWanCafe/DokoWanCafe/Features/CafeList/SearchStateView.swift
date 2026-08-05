@@ -15,19 +15,13 @@ struct SearchStateView: View {
                 ProgressView(String(localized: "周辺のカフェを検索中…"))
 
             case .empty:
+                // 全カフェを絞り込みなしで取得しているため、通常発生するのは
+                // 「可否フィルタの組合せで該当が0件」というケースのみ（FR-020）。
                 stateContent(
                     systemImage: "cup.and.saucer",
-                    title: String(localized: "周辺に犬同伴OKのカフェが見つかりませんでした"),
-                    message: String(localized: "検索範囲を広げるか、別の地域で探してみてください。")
+                    title: String(localized: "条件に合う犬同伴OKのカフェが見つかりませんでした"),
+                    message: String(localized: "絞り込み条件を変えるか、別の地域で探してみてください。")
                 ) {
-                    if viewModel.canExpandRadius {
-                        Button {
-                            Task { await viewModel.expandRadius() }
-                        } label: {
-                            Label(String(localized: "検索範囲を広げる"), systemImage: "plus.magnifyingglass")
-                        }
-                        .buttonStyle(.borderedProminent)
-                    }
                     changeAreaButton
                 }
 

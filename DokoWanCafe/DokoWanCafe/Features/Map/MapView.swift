@@ -10,7 +10,6 @@ import SwiftUI
 struct CafeMapView: UIViewRepresentable {
     let items: [CafeWithDistance]
     let center: CLLocationCoordinate2D?
-    let radiusMeters: Int
     let onSelect: (Cafe) -> Void
 
     private static let cafeReuseID = "cafe"
@@ -39,12 +38,21 @@ struct CafeMapView: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: Context) {
         context.coordinator.onSelect = onSelect
 
-        // 検索の起点・半径が変わったときだけ表示領域を再設定（ユーザーのパン操作を尊重）
+        // 検索の起点が変わった時、またはその起点で初めて実データが揃った時だけ
+        // 表示領域を再設定する（ユーザーのパン操作を尊重）。
+        // 座標は丸めて比較し、GPSの微小な揺れで毎回カメラがリセットされないようにする。
+        // 「items の有無」もキーに含めることで、起点確定直後(items未取得)のフォールバック表示から、
+        // 実データが揃った時点の適切なズームへ1回だけ更新されるようにする（以降は再設定しない）。
         if let center {
-            let regionKey = "\(center.latitude),\(center.longitude),\(radiusMeters)"
+            let roundedLat = (center.latitude * 10_000).rounded() / 10_000
+            let roundedLng = (center.longitude * 10_000).rounded() / 10_000
+            let regionKey = "\(roundedLat),\(roundedLng),\(items.isEmpty ? "0" : "1")"
             if context.coordinator.lastRegionKey != regionKey {
                 context.coordinator.lastRegionKey = regionKey
-                mapView.setRegion(MapViewModel.region(center: center, radiusMeters: radiusMeters), animated: true)
+                mapView.setRegion(
+                    MapViewModel.initialCameraRegion(center: center, items: items),
+                    animated: true
+                )
             }
         }
 
