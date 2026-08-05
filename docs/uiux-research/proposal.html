@@ -1,0 +1,361 @@
+<title>Puppy With Cafe UI/UX ブラッシュアップ提案</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --surface: #ffffff;
+    --surface-alt: #f9fafb;
+    --text: #1b1f24;
+    --text-muted: #5b6470;
+    --border: #e2e5ea;
+    --accent: #e8672a;
+    --accent-soft: #ffe4d1;
+    --p0: #d64545;
+    --p0-soft: #fbdede;
+    --p1: #2f6fce;
+    --p1-soft: #dde9fb;
+    --p2: #6b7280;
+    --p2-soft: #e7e9ec;
+    --ok: #2e9e58;
+    --warn: #c47f00;
+    --danger: #d64545;
+    --unknown: #8a8f98;
+    --mock-bg: #eef0f3;
+    --mock-frame: #cfd4db;
+    --shadow: 0 1px 3px rgba(20, 20, 25, 0.10);
+  }
+  :root[data-theme="dark"] {
+    --bg: #131519; --surface: #1c1f24; --surface-alt: #20242a; --text: #edf0f3;
+    --text-muted: #a2aab5; --border: #2b2f36; --accent: #ff8b4d; --accent-soft: #4a2c18;
+    --p0-soft: #4a2222; --p1-soft: #1c3050; --p2-soft: #2a2d32; --mock-bg: #242830;
+    --mock-frame: #3c414a; --shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131519; --surface: #1c1f24; --surface-alt: #20242a; --text: #edf0f3;
+      --text-muted: #a2aab5; --border: #2b2f36; --accent: #ff8b4d; --accent-soft: #4a2c18;
+      --p0-soft: #4a2222; --p1-soft: #1c3050; --p2-soft: #2a2d32; --mock-bg: #242830;
+      --mock-frame: #3c414a; --shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f5f7; --surface: #ffffff; --surface-alt: #f9fafb; --text: #1b1f24;
+    --text-muted: #5b6470; --border: #e2e5ea; --accent: #e8672a; --accent-soft: #ffe4d1;
+    --p0-soft: #fbdede; --p1-soft: #dde9fb; --p2-soft: #e7e9ec; --mock-bg: #eef0f3;
+    --mock-frame: #cfd4db; --shadow: 0 1px 3px rgba(20, 20, 25, 0.10);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+  header.page { padding: 8px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+  header.page h1 { font-size: 1.6rem; margin: 0 0 8px; }
+  header.page p { color: var(--text-muted); margin: 4px 0; font-size: 0.92rem; }
+  h2 { font-size: 1.25rem; margin: 40px 0 12px; padding-top: 8px; border-top: 1px solid var(--border); }
+  h2:first-of-type { border-top: none; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  .lead { color: var(--text-muted); font-size: 0.95rem; }
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+  .badge-p0 { background: var(--p0-soft); color: var(--p0); }
+  .badge-p1 { background: var(--p1-soft); color: var(--p1); }
+  .badge-p2 { background: var(--p2-soft); color: var(--p2); }
+  .badge-size { background: var(--surface-alt); color: var(--text-muted); border: 1px solid var(--border); }
+
+  /* サマリーカード */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 16px 0 8px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .card h4 { margin: 8px 0 6px; font-size: 0.98rem; }
+  .card p { margin: 0; color: var(--text-muted); font-size: 0.85rem; }
+  .card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+
+  /* P0 詳細セクション */
+  section.p0-detail { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; margin: 16px 0 28px; box-shadow: var(--shadow); }
+  section.p0-detail .meta-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 14px; }
+  section.p0-detail dl { margin: 12px 0 0; }
+  section.p0-detail dt { font-weight: 600; margin-top: 10px; font-size: 0.88rem; color: var(--text-muted); }
+  section.p0-detail dd { margin: 4px 0 0; font-size: 0.92rem; }
+
+  /* Before/After モックアップ */
+  .mockup-row { display: flex; gap: 18px; flex-wrap: wrap; margin: 14px 0 6px; }
+  .mockup-col { flex: 1 1 230px; }
+  .mockup-label { font-weight: 700; font-size: 0.82rem; margin-bottom: 8px; text-align: center; }
+  .mockup-label.before { color: var(--danger); }
+  .mockup-label.after { color: var(--ok); }
+  .phone { max-width: 220px; margin: 0 auto; border: 2px solid var(--mock-frame); border-radius: 20px; background: var(--mock-bg); padding: 10px; }
+  .phone-screen { display: flex; flex-direction: column; gap: 5px; }
+  .phone-viewport { height: 168px; overflow: hidden; position: relative; display: flex; flex-direction: column; gap: 5px; }
+  .bar { border-radius: 5px; background: var(--surface); border: 1px solid var(--border); font-size: 0.62rem; padding: 5px 6px; color: var(--text-muted); }
+  .bar.h-header { background: var(--accent-soft); color: var(--text); font-weight: 700; height: 26px; }
+  .bar.h-photo { height: 40px; }
+  .bar.h-block { height: 20px; }
+  .bar.h-cta { height: 26px; background: var(--accent); color: #fff; font-weight: 700; text-align: center; opacity: 1; }
+  .bar.faded { opacity: 0.3; }
+  .fixed-cta { margin-top: 4px; border-radius: 5px; background: var(--accent); color: #fff; font-weight: 700; text-align: center; font-size: 0.65rem; padding: 7px 6px; border: 2px solid var(--accent); }
+  .caption { text-align: center; font-size: 0.7rem; color: var(--text-muted); margin-top: 6px; }
+  .chip-row { display: flex; gap: 4px; flex-wrap: wrap; }
+  .chip { font-size: 0.6rem; padding: 3px 7px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); }
+  .chip.new { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); font-weight: 700; }
+  .footnote-chip { font-size: 0.58rem; color: var(--text-muted); }
+  .badge-chip { display: inline-flex; align-items: center; gap: 3px; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 9px; font-size: 0.66rem; font-weight: 700; }
+  .map-box { height: 118px; background: var(--mock-bg); border: 1px solid var(--mock-frame); border-radius: 8px; position: relative; overflow: hidden; }
+  .pin { position: absolute; top: 40px; left: 45%; width: 10px; height: 10px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 0 3px var(--surface); }
+  .callout { position: absolute; top: 8px; left: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px; font-size: 0.58rem; box-shadow: var(--shadow); }
+  .legend { position: absolute; right: 6px; bottom: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 4px 6px; font-size: 0.55rem; display: flex; flex-direction: column; gap: 2px; }
+  .legend span.dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 3px; }
+
+  /* テーブル */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; background: var(--surface); font-size: 0.87rem; }
+  caption { caption-side: top; text-align: left; font-weight: 700; padding: 10px 12px; background: var(--surface-alt); border-bottom: 1px solid var(--border); }
+  th, td { border-bottom: 1px solid var(--border); padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-alt); font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+  tr:last-child td { border-bottom: none; }
+
+  .callout-box { background: var(--p1-soft); border: 1px solid var(--p1); border-radius: 10px; padding: 14px 16px; margin: 14px 0; font-size: 0.88rem; }
+  .callout-box h4 { margin: 0 0 8px; color: var(--p1); }
+  .callout-box ul { margin: 0; padding-left: 20px; }
+  .callout-box li { margin-bottom: 8px; }
+  footer.page { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+  a { color: var(--accent); }
+</style>
+
+<div class="wrap">
+
+<header class="page">
+  <h1>Puppy With Cafe UI/UX ブラッシュアップ提案</h1>
+  <p>調査日: 2026-08-05 ／ 日本の類似アプリ10本（グルメ発見系5・ペット特化系5）の横断調査をもとにした改善提案</p>
+  <p class="lead">制約前提: サーバーレス（静的JSON・268件）／位置情報を送らない／SwiftUI優先／日本語第一／犬可否は出典・確認日必須（憲章 原則I・III）。全提案はこの制約内に収まる。</p>
+</header>
+
+<h2 id="summary">サマリー: P0提案一覧（次にやるべき）</h2>
+<p class="lead">効果/規模比の推奨着手順は P0-3 → P0-1 → P0-4 → P0-2。詳細は各セクション参照。</p>
+<div class="card-grid">
+  <div class="card">
+    <span class="badge badge-p0">P0-1</span>
+    <h4>詳細画面CTAを下部固定バーに</h4>
+    <p>経路案内・電話を常時1タップ圏に。長いスクロールを解消。</p>
+    <div class="tags"><span class="badge badge-size">規模: S〜M</span></div>
+  </div>
+  <div class="card">
+    <span class="badge badge-p0">P0-2</span>
+    <h4>犬向け設備で絞り込み</h4>
+    <p>店内OK/テラスOK/大型犬OK/犬メニューを検索フィルタ軸に追加。</p>
+    <div class="tags"><span class="badge badge-size">規模: M</span></div>
+  </div>
+  <div class="card">
+    <span class="badge badge-p0">P0-3</span>
+    <h4>確認日バッジを格上げ</h4>
+    <p>全競合が持たない「確認日明示」を差別化点として視覚的に前面化。</p>
+    <div class="tags"><span class="badge badge-size">規模: S</span></div>
+  </div>
+  <div class="card">
+    <span class="badge badge-p0">P0-4</span>
+    <h4>地図の簡易カード＋凡例</h4>
+    <p>ピンのcalloutに可否/距離/営業中を表示し、色の凡例を追加。</p>
+    <div class="tags"><span class="badge badge-size">規模: M</span></div>
+  </div>
+</div>
+
+<h2 id="p0-1">P0-1. 詳細画面の主要CTAを下部固定バーに引き上げる</h2>
+<section class="p0-detail">
+  <div class="meta-row"><span class="badge badge-p0">優先度 P0</span><span class="badge badge-size">実装規模 S〜M</span></div>
+  <div class="mockup-row">
+    <div class="mockup-col">
+      <div class="mockup-label before">Before（末尾までスクロール必須）</div>
+      <div class="phone"><div class="phone-viewport">
+        <div class="bar h-header">店名 / 可否バッジ</div>
+        <div class="bar h-photo">写真セクション</div>
+        <div class="bar h-block">犬向け設備</div>
+        <div class="bar h-block">営業時間</div>
+        <div class="bar h-block">出典・確認日</div>
+        <div class="bar h-block">店舗情報</div>
+        <div class="bar h-cta faded">経路案内 ／ 報告</div>
+      </div></div>
+      <p class="caption">↓ 何度もスクロールしないとCTAに届かない</p>
+    </div>
+    <div class="mockup-col">
+      <div class="mockup-label after">After（常時到達可能）</div>
+      <div class="phone"><div class="phone-viewport" style="height:140px;">
+        <div class="bar h-header">店名 / 可否バッジ</div>
+        <div class="bar h-photo">写真セクション</div>
+        <div class="bar h-block">犬向け設備</div>
+        <div class="bar h-block">営業時間</div>
+      </div>
+      <div class="fixed-cta">📍 経路案内　／　📞 電話（常時表示）</div>
+      </div>
+      <p class="caption">safeAreaInset(edge: .bottom) で固定</p>
+    </div>
+  </div>
+  <dl>
+    <dt>内容（UI変更）</dt>
+    <dd><code>CafeDetailView</code> の <code>List</code> に <code>.safeAreaInset(edge: .bottom)</code> で固定アクションバーを追加し、「経路案内（マップで開く）」と「電話」（<code>cafe.phone</code> がある店のみ）を常時表示する。既存 <code>viewModel.openInMaps()</code> と <code>tel://</code> リンクを再利用。電話が無い店では経路案内を全幅ボタンにする。</dd>
+    <dt>根拠</dt>
+    <dd>食べログ「地図ページに予約ボタンを追加し探す→行動を最短化」、グルメアプリ共通の「フッター固定CTA」、Retty「電話重視CTA」、GoogleマップのCompactカードから即経路。</dd>
+    <dt>期待効果</dt>
+    <dd>経路案内という本アプリのコア動機に直結する行動を1タップ圏に引き上げる。</dd>
+    <dt>憲章整合</dt>
+    <dd>経路はMapKitで端末内完結・位置送信なし、電話はtelスキームで整合。新規依存なし。</dd>
+  </dl>
+</section>
+
+<h2 id="p0-2">P0-2. 「犬向け設備」を絞り込み軸に追加</h2>
+<section class="p0-detail">
+  <div class="meta-row"><span class="badge badge-p0">優先度 P0</span><span class="badge badge-size">実装規模 M</span></div>
+  <div class="mockup-row">
+    <div class="mockup-col">
+      <div class="mockup-label before">Before（可否のみ）</div>
+      <div class="phone"><div class="phone-screen">
+        <div class="bar h-header">フィルタ</div>
+        <div class="chip-row" style="padding:6px;">
+          <span class="chip">可</span><span class="chip">条件付</span><span class="chip">不可</span><span class="chip">未確認</span>
+        </div>
+      </div></div>
+      <p class="caption">可否ステータス4値のみ</p>
+    </div>
+    <div class="mockup-col">
+      <div class="mockup-label after">After（設備軸を追加）</div>
+      <div class="phone"><div class="phone-screen">
+        <div class="bar h-header">フィルタ <span style="float:right;background:#fff;color:var(--accent);border-radius:999px;padding:0 5px;">2</span></div>
+        <div class="chip-row" style="padding:6px;">
+          <span class="chip">可</span><span class="chip">条件付</span><span class="chip">不可</span><span class="chip">未確認</span>
+        </div>
+        <div class="chip-row" style="padding:0 6px 6px;">
+          <span class="chip new">店内OK</span><span class="chip new">テラスOK</span><span class="chip new">大型犬OK</span><span class="chip new">犬メニュー</span>
+        </div>
+      </div></div>
+      <p class="caption">設備トグル＋適用件数バッジ</p>
+    </div>
+  </div>
+  <dl>
+    <dt>内容（UI変更）</dt>
+    <dd><code>RootView.filterMenu</code> に設備トグルのSection（店内OK・テラスOK・大型犬OK・犬メニュー）を追加。<code>CafeListViewModel</code> に <code>amenityFilter</code> を新設し絞り込みに組み込む。<code>dogAmenities</code> が <code>nil</code> の店は「不明」として、設備条件選択時は結果から除外する（憶測で満たさない）。フィルタ適用中はツールバーのアイコンにバッジ（適用件数）を表示。</dd>
+    <dt>根拠</dt>
+    <dd>おでかけわんこ部「店内OK/大型犬可/テラス席あり」、itsumo dog「中型/大型犬OK/店内OK」、Wan!Pass「犬種・体格連動フィルタ」、サウナイキタイ「細分化フィルタ」。</dd>
+    <dt>期待効果</dt>
+    <dd>既存データ（<code>dogAmenities</code>）を検索資産に転換し、市場標準に追いつく。</dd>
+    <dt>憲章整合</dt>
+    <dd>既存データ項目の範囲内で推測補完をしない（<code>nil</code>=不明を満たさない扱い）ため原則Iを損なわない。データ送信なし。</dd>
+  </dl>
+</section>
+
+<h2 id="p0-3">P0-3. 確認日・出典バッジを差別化点として格上げ表示</h2>
+<section class="p0-detail">
+  <div class="meta-row"><span class="badge badge-p0">優先度 P0</span><span class="badge badge-size">実装規模 S</span></div>
+  <div class="mockup-row">
+    <div class="mockup-col">
+      <div class="mockup-label before">Before（footnoteで控えめ）</div>
+      <div class="phone"><div class="phone-screen">
+        <div class="bar h-header">店名</div>
+        <div class="chip-row" style="padding:6px;"><span class="chip">可</span></div>
+        <p class="footnote-chip" style="padding:0 6px;">最終確認日: 2026-07-01・出典: 公式サイト</p>
+      </div></div>
+      <p class="caption">小さな footnote テキストのみ</p>
+    </div>
+    <div class="mockup-col">
+      <div class="mockup-label after">After（確認済みチップに昇格）</div>
+      <div class="phone"><div class="phone-screen">
+        <div class="bar h-header">店名</div>
+        <div class="chip-row" style="padding:6px; align-items:center;">
+          <span class="chip">可</span>
+          <span class="badge-chip">✓ 運営確認 2026-07-01</span>
+        </div>
+      </div></div>
+      <p class="caption">primaryサイズのCapsuleチップ</p>
+    </div>
+  </div>
+  <dl>
+    <dt>内容（UI変更）</dt>
+    <dd><code>CafeDetailView.headerSection</code> の「最終確認日＋出典」を、可否バッジ近傍の視認性の高い「確認済みチップ」に昇格（例: <code>checkmark.seal.fill</code>＋確認日をprimaryサイズのCapsuleで）。<code>未確認</code>・<code>1年以上経過</code>の警告は色・アイコンを維持。一覧行（<code>CafeRowView</code>）にも古い/未確認時のみ小アイコンを添える。</dd>
+    <dt>根拠</dt>
+    <dd>全競合（食べログ/Google/ホットペッパー/BringFido）が「確認日」を明示しない市場の空白。この空白こそ本アプリ唯一の構造的優位。</dd>
+    <dt>期待効果</dt>
+    <dd>「いつ確認したかが分かる」差別化をUIで前面化し、信頼とリテンションに寄与。</dd>
+    <dt>憲章整合</dt>
+    <dd>原則I（由来提示）を直接強化。既存フィールド（<code>lastVerified</code>/<code>representativeSource</code>）の見せ方変更のみ。</dd>
+  </dl>
+</section>
+
+<h2 id="p0-4">P0-4. 地図の簡易カード強化＋色の凡例追加</h2>
+<section class="p0-detail">
+  <div class="meta-row"><span class="badge badge-p0">優先度 P0</span><span class="badge badge-size">実装規模 M</span></div>
+  <div class="mockup-row">
+    <div class="mockup-col">
+      <div class="mockup-label before">Before（店名のみ・凡例なし）</div>
+      <div class="phone"><div class="map-box">
+        <div class="pin"></div>
+        <div class="callout" style="top:36px; left:38%;">店名のみ</div>
+      </div></div>
+      <p class="caption">色の意味・可否・距離が不明</p>
+    </div>
+    <div class="mockup-col">
+      <div class="mockup-label after">After（可否・距離・営業中＋凡例）</div>
+      <div class="phone"><div class="map-box">
+        <div class="pin" style="background:var(--ok);"></div>
+        <div class="callout" style="top:16px; left:32%;">可 ・ 320m ・ 営業中</div>
+        <div class="legend">
+          <span><span class="dot" style="background:var(--ok);"></span>可</span>
+          <span><span class="dot" style="background:var(--warn);"></span>条件付</span>
+          <span><span class="dot" style="background:var(--danger);"></span>不可</span>
+          <span><span class="dot" style="background:var(--unknown);"></span>未確認</span>
+        </div>
+      </div></div>
+      <p class="caption">callout強化＋右下に凡例カード</p>
+    </div>
+  </div>
+  <dl>
+    <dt>内容（UI変更）</dt>
+    <dd>(a) <code>CafeMapView</code> のマーカーcalloutにsubtitleを付与し「可否＋距離＋営業中/営業時間外」を表示。(b) <code>RootView</code> の地図に小さな凡例オーバーレイ（緑=可/橙=条件付き/赤=不可/灰=未確認）を重畳し、<code>markerTintColor</code> の意味を明示。凡例は <code>.regularMaterial</code> 背景の小カードで邪魔にならない大きさに。</dd>
+    <dt>根拠</dt>
+    <dd>GoogleマップのCompact/Full2段階開示、Retty/食べログの「ピン→簡易カード→詳細」、ホットペッパー「即時性を地図で視覚化」、ドッグパークJPの2色凡例。</dd>
+    <dt>期待効果</dt>
+    <dd>詳細を開かずとも「入れる・近い・今営業中」が地図上で判断でき、地図起点アプリの強みを最大化。</dd>
+    <dt>憲章整合</dt>
+    <dd>表示のみ。位置送信なし・データ契約変更なし。</dd>
+  </dl>
+</section>
+
+<h2 id="p1">P1（効果大）</h2>
+<div class="table-wrap">
+<table>
+<caption>P1: 次フェーズで効果が大きい提案</caption>
+<thead><tr><th>提案</th><th>内容</th><th>根拠</th><th>規模</th></tr></thead>
+<tbody>
+<tr><td><span class="badge badge-p1">P1-1</span> ローカルお気に入り</td><td>端末ローカル保存（サインインなし）。詳細にトグル、一覧に保存フィルタ、地図でマーカー区別し保存を地図と統合。</td><td>Googleマップ/Retty/食べログの保存機能、BringFidoの「地図統合」要望</td><td>M〜L</td></tr>
+<tr><td><span class="badge badge-p1">P1-2</span> 「入れるか」と「マナー」分離</td><td>可否・設備バッジと <code>dogPolicyCondition</code>/<code>dogSizeLimit</code>/<code>dogNote</code> を別ブロック「来店時の条件・マナー」に整理。</td><td>itsumo dog（同伴バッジと利用マナー11項目を別ブロック化）</td><td>S〜M</td></tr>
+<tr><td><span class="badge badge-p1">P1-3</span> 詳細セクション順の最適化</td><td>写真セクションより設備・営業時間を先に配置し、客観データ最優先→UGC/雰囲気後段の順に並び替え検討。</td><td>サウナイキタイの詳細順序（数値→設備→UGC→周辺）</td><td>S</td></tr>
+<tr><td><span class="badge badge-p1">P1-4</span> 並び替え・空状態・あいまい検索</td><td>確認日順/営業中優先ソート追加、0件時に「条件を緩める」導線、将来検索での表記ゆれ対応。</td><td>サウナイキタイの多軸ソート、ホットペッパーの絞り込み往復導線</td><td>M</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="p2">P2（将来）</h2>
+<div class="table-wrap">
+<table>
+<caption>P2: 将来検討（要オーケストレーター判断）</caption>
+<thead><tr><th>提案</th><th>内容</th><th>根拠</th><th>規模</th></tr></thead>
+<tbody>
+<tr><td><span class="badge badge-p2">P2-1</span> 基礎情報とUGCの二層設計</td><td>運営確認済み可否情報と、利用者の任意写真・体験を分離。投稿は運営承認フローと整合。</td><td>Wan!Pass（二層構造）、BringFido/おでかけわんこ部（UGC写真）</td><td>L</td></tr>
+<tr><td><span class="badge badge-p2">P2-2</span> 承認後インセンティブ</td><td>承認済みの誤り報告のみ軽量な謝辞バッジ等を付与（承認前は付与しない）。</td><td>サウナイキタイのトントゥ（ゲーミフィケーション）</td><td>M〜L</td></tr>
+<tr><td><span class="badge badge-p2">P2-3</span> 周辺レイヤー（動物病院等）</td><td>近隣の動物病院など周辺情報レイヤーの要否を将来検討。</td><td>おでかけわんこ部（夜間動物病院・同行避難所）</td><td>L</td></tr>
+<tr><td><span class="badge badge-p2">P2-4</span> ブランド固有ビジュアル言語</td><td>評価/保存UIに犬テーマの独自モチーフ（肉球）を検討。</td><td>BringFido（骨マーク評価）</td><td>M</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout-box">
+  <h4>未決点（オーケストレーター判断を仰ぐ点）</h4>
+  <ul>
+    <li><strong>P0の実装順:</strong> 4件とも独立着手可能。推奨は P0-3 → P0-1 → P0-4 → P0-2。P0を3件に絞るなら P0-4 をP1へ降格しても可。</li>
+    <li><strong>P0-2の <code>nil</code>（設備不明）店の既定挙動 → 実データで解消済み（2026-08-05 実測）:</strong> <code>dog_amenities</code> 保有 263/268件。判明数は 店内OK 227・テラスOK 193・犬メニュー 55・<strong>大型犬OK 0件</strong>。店内OK/テラスOKは「不明店を除外」方式で成立。犬メニューは補助扱い。<strong>大型犬OKはデータ0のためフィルタ化不可</strong>（先にデータ収集が必要）。</li>
+    <li><strong>調査上の注記:</strong> 詳細画面のスクリーンショットは指定パスに存在せず参照できなかった。詳細・一覧の提案は実装コードのセクション構成に基づく（地図画面のみ実機スクショで確認済み）。写真セクションのフォールバック挙動に関する追加のUI改善余地は、実機スクショ入手後に再評価するのが望ましい。</li>
+  </ul>
+</div>
+
+<footer class="page">
+  <p>関連資料: benchmark.md（横断比較・10箇条）／ improvement-proposals.md（提案の全文）／ apps/*.md（アプリ別調査、10本）</p>
+</footer>
+
+</div>
