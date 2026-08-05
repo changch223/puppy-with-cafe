@@ -2,6 +2,8 @@
 
 犬同伴OKカフェを現在地から地図で探す iOS アプリ。Spec-Driven Development（Spec Kit）で開発。
 
+> 🤝 **引き継ぎ・別PCで再開する場合は [`HANDOFF.md`](HANDOFF.md) を最初に読むこと**（現状・環境構築・次の作業・注意点の全体像）。
+
 **製品名（表示名）: 「Puppy With Cafe」**（2026-07-05 決定）。リポジトリ・Xcodeターゲット等のコードネームは DokoWanCafe のまま（表示名は `INFOPLIST_KEY_CFBundleDisplayName` で設定）。
 
 **GitHub**: https://github.com/changch223/puppy-with-cafe （public）。**データ配信**: GitHub Pages `https://changch223.github.io/puppy-with-cafe/data/cafes.json`（`AppConfig.defaultCafesDataURL` に設定済み・E2E確認済み）。プライバシーポリシー: 同 `docs/privacy.html`。データ反映＝`export_cafes.py` 実行 → commit → **push**（pushで配信される）。
