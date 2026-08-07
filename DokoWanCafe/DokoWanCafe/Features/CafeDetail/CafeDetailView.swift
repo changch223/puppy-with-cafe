@@ -19,6 +19,8 @@ struct CafeDetailView: View {
     // 写真・雰囲気セクションの表示チェーン現在地（IG埋め込み失敗→OGP写真カード失敗→地図案内、の順に遷移）
     @State private var photoTier: PhotoTier?
     @State private var instagramEmbedHeight: CGFloat = OGPPhotoCardView.cardHeight
+    // お気に入り（端末ローカル）。地図・一覧と同一インスタンスを共有する（UI/UXブラッシュアップ設計書1c/3）。
+    @ObservedObject private var favoritesStore: FavoritesStore
 
     init(cafe: Cafe, dependencies: AppDependencies) {
         self.dependencies = dependencies
@@ -26,20 +28,29 @@ struct CafeDetailView: View {
             wrappedValue: CafeDetailViewModel(cafe: cafe, repository: dependencies.repository)
         )
         _photoTier = State(initialValue: Self.initialPhotoTier(for: cafe))
+        _favoritesStore = ObservedObject(wrappedValue: dependencies.favoritesStore)
     }
 
     var body: some View {
         List {
             headerSection
 
-            photoSection
-
-            if viewModel.cafe.dogAmenities != nil || viewModel.cafe.dogNote != nil {
+            if viewModel.cafe.dogAmenities != nil {
                 amenitiesSection
+            }
+
+            if hasConditionInfo {
+                conditionSection
             }
 
             if viewModel.cafe.hours?.hasAnyDay == true || viewModel.cafe.hoursText != nil {
                 hoursSection
+            }
+
+            photoSection
+
+            if viewModel.cafe.links?.isEmpty == false || viewModel.cafe.operatorNote != nil {
+                linksSection
             }
 
             if viewModel.hasConflict {
@@ -52,16 +63,15 @@ struct CafeDetailView: View {
 
             infoSection
 
-            if viewModel.cafe.links?.isEmpty == false || viewModel.cafe.operatorNote != nil {
-                linksSection
-            }
-
             actionSection
         }
         .listStyle(.insetGrouped)
         .navigationTitle(viewModel.cafe.name)
         .navigationBarTitleDisplayMode(.inline)
         .task { await viewModel.load() }
+        .safeAreaInset(edge: .bottom) {
+            ctaBar
+        }
         .sheet(isPresented: $showReport) {
             ReportView(cafe: viewModel.cafe)
                 .presentationDetents([.medium, .large])
@@ -70,6 +80,16 @@ struct CafeDetailView: View {
             SafariView(url: item.url)
         }
     }
+
+    /// 「来店時の条件・マナー」セクションを出すか（条件文・サイズ制限・運営メモのいずれかがある時, P1-2）
+    private var hasConditionInfo: Bool {
+        viewModel.cafe.dogPolicyCondition != nil
+            || viewModel.cafe.dogSizeLimit != nil
+            || viewModel.cafe.dogNote != nil
+    }
+
+    /// 犬目線ピン分類（一覧・地図と共通の判定, UI/UXブラッシュアップ設計書1a）
+    private var mapPinCategory: MapPinCategory { MapPinCategory.category(for: viewModel.cafe) }
 
     // MARK: - 可否・鮮度（US2）
 
@@ -87,7 +107,20 @@ struct CafeDetailView: View {
                         }
                     }
                     Spacer()
-                    StatusBadge(status: viewModel.cafe.dogPolicyStatus, prominent: true)
+                    favoriteToggleButton
+                    VStack(alignment: .trailing, spacing: 6) {
+                        // 犬目線チップを先に見せる（「条件付き」単独より「テラスOK」等が先に見えること, P1-3）
+                        MapPinCategoryBadge(category: mapPinCategory)
+                        StatusBadge(status: viewModel.cafe.dogPolicyStatus)
+                    }
+                }
+
+                // 運営確認日チップ（P0-3: footnoteの文字列表示からCapsuleチップへ格上げ）。
+                // status==unverified の場合は「運営確認」と矛盾するため出さない
+                // （未確認であることは下の warningBox が担う, QA指摘）。
+                if let lastVerified = viewModel.cafe.lastVerified,
+                   viewModel.cafe.dogPolicyStatus != .unverified {
+                    verifiedDateChip(lastVerified)
                 }
 
                 // 店舗紹介（002/FR-107）
@@ -97,25 +130,15 @@ struct CafeDetailView: View {
                         .foregroundStyle(.secondary)
                 }
 
-                // 条件付きの条件は必ず読める形で提示（FR-007）
+                // 条件付きの1行要約（詳細は「来店時の条件・マナー」セクションへ, P1-2）
                 if viewModel.cafe.dogPolicyStatus == .conditional,
-                   let condition = viewModel.cafe.dogPolicyCondition {
-                    Label(condition, systemImage: "info.circle")
-                        .font(.subheadline)
-                        .foregroundStyle(.orange)
-                }
-
-                // 出典・最終確認日の併記（FR-008）
-                if let lastVerified = viewModel.cafe.lastVerified {
-                    HStack(spacing: 4) {
-                        Image(systemName: "checkmark.seal")
-                        Text("最終確認日: \(lastVerified.formatted(date: .abbreviated, time: .omitted))")
-                        if let representative = viewModel.representativeSource {
-                            Text("（出典: \(representative.type.displayName)）")
-                        }
-                    }
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                   viewModel.cafe.dogPolicyCondition != nil {
+                    Label(
+                        String(localized: "来店に条件があります（詳細は下記「来店時の条件・マナー」）"),
+                        systemImage: "info.circle"
+                    )
+                    .font(.subheadline)
+                    .foregroundStyle(.orange)
                 }
 
                 // 未確認情報の明示区別（FR-009/T035）
@@ -139,6 +162,101 @@ struct CafeDetailView: View {
             .padding(.vertical, 4)
             .accessibilityElement(children: .combine)
         }
+    }
+
+    /// お気に入りトグル（肉球, P1-1/P2-4）。ON=塗り肉球。
+    private var favoriteToggleButton: some View {
+        let isFavorite = favoritesStore.contains(viewModel.cafe.id)
+        return Button {
+            favoritesStore.toggle(viewModel.cafe.id)
+        } label: {
+            Image(systemName: isFavorite ? "pawprint.fill" : "pawprint")
+                .font(.title3)
+                .foregroundStyle(isFavorite ? Color.orange : Color.secondary)
+        }
+        .accessibilityLabel(Text(isFavorite ? "お気に入りから外す" : "お気に入りに追加"))
+    }
+
+    /// 運営確認日のCapsuleチップ（P0-3）。未確認/1年超は既存の警告色を反映する。
+    private func verifiedDateChip(_ date: Date) -> some View {
+        Label {
+            Text("運営確認 \(date.formatted(date: .abbreviated, time: .omitted))")
+        } icon: {
+            Image(systemName: "checkmark.seal.fill")
+        }
+        .font(.footnote.bold())
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
+        .background(Capsule().fill(verifiedDateChipColor.opacity(0.15)))
+        .foregroundStyle(verifiedDateChipColor)
+    }
+
+    private var verifiedDateChipColor: Color {
+        if viewModel.isUnverified { return .gray }
+        if viewModel.isStale { return .orange }
+        return .blue
+    }
+
+    // MARK: - 来店時の条件・マナー（P1-2: dogPolicyCondition/dogSizeLimit/dogNoteを集約）
+
+    private var conditionSection: some View {
+        Section {
+            if let condition = viewModel.cafe.dogPolicyCondition {
+                Label(condition, systemImage: "info.circle")
+                    .font(.subheadline)
+                    .foregroundStyle(.orange)
+            }
+            // サイズ制限（002/FR-107。例: 小型・中型のみ、抱っこ・カート推奨）
+            if let sizeLimit = viewModel.cafe.dogSizeLimit {
+                LabeledContent {
+                    Text(sizeLimit)
+                        .multilineTextAlignment(.trailing)
+                } label: {
+                    Text("サイズ")
+                }
+                .font(.footnote)
+            }
+            if let note = viewModel.cafe.dogNote {
+                Label(note, systemImage: "pawprint")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("来店時の条件・マナー")
+        }
+    }
+
+    // MARK: - CTA固定バー（P0-1: 経路案内・電話, safeAreaInset）
+
+    private var ctaBar: some View {
+        VStack(spacing: 0) {
+            Divider()
+            HStack(spacing: 10) {
+                Button {
+                    viewModel.openInMaps()
+                } label: {
+                    Label(String(localized: "経路案内"), systemImage: "arrow.triangle.turn.up.right.diamond")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+
+                // 電話がある店のみ併記。無い店は経路案内が全幅になる（P0-1）。
+                if let phone = viewModel.cafe.phone,
+                   let telURL = URL(string: "tel://" + phone.filter { $0.isNumber || $0 == "+" }) {
+                    Button {
+                        openURL(telURL)
+                    } label: {
+                        Label(String(localized: "電話"), systemImage: "phone.fill")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
+            .controlSize(.large)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+        }
+        .background(.regularMaterial)
     }
 
     // MARK: - 写真・雰囲気（写真プレビュー機能: IG投稿埋め込み→OGP写真カード→地図案内の3段フォールバック）
@@ -226,21 +344,6 @@ struct CafeDetailView: View {
                     AmenityBadge(label: String(localized: "犬メニュー"), value: amenities.dogMenu)
                 }
                 .padding(.vertical, 4)
-            }
-            // サイズ制限（002/FR-107。例: 小型・中型のみ、抱っこ・カート推奨）
-            if let sizeLimit = viewModel.cafe.dogSizeLimit {
-                LabeledContent {
-                    Text(sizeLimit)
-                        .multilineTextAlignment(.trailing)
-                } label: {
-                    Text("サイズ")
-                }
-                .font(.footnote)
-            }
-            if let note = viewModel.cafe.dogNote {
-                Label(note, systemImage: "pawprint")
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
             }
         } header: {
             Text("わんちゃん向け情報")
@@ -461,16 +564,10 @@ struct CafeDetailView: View {
         }
     }
 
-    // MARK: - アクション（US5/T049, US3/T038）
+    // MARK: - アクション（US5/T049, US3/T038。経路案内はCTA固定バーへ移動, P0-1）
 
     private var actionSection: some View {
         Section {
-            Button {
-                viewModel.openInMaps()
-            } label: {
-                Label(String(localized: "経路案内（マップで開く）"), systemImage: "arrow.triangle.turn.up.right.diamond")
-            }
-
             Button {
                 showReport = true
             } label: {

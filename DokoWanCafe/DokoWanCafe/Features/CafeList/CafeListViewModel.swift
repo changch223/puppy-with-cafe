@@ -41,25 +41,65 @@ final class CafeListViewModel: ObservableObject {
 
     @Published private(set) var phase: Phase = .idle
     @Published private(set) var allResults: [CafeWithDistance] = []
-    /// 可否ステータスの絞り込み（FR-004）。既定は「可・条件付き」
-    @Published var statusFilter: Set<DogPolicyStatus> = [.allowed, .conditional]
+    /// 犬向け条件の絞り込み（店内OK/テラスOK/犬メニュー, AND結合, 既定は絞り込みなし。UI/UXブラッシュアップ設計書1b/4）
+    @Published var amenityFilter = AmenityFilter()
+    /// 未確認ステータスの店も表示するか（既定false。原則I: 未確認を可と主張しない, 設計書1b/4）
+    @Published var includeUnverified = false
+    /// お気に入りのみ表示するか（既定false, 設計書1c/4）
+    @Published var favoritesOnly = false
+    /// 一覧・地図の並び順（既定は距離昇順, 設計書1b/4）
+    @Published var sortOrder: CafeSortOrder = .distance
     @Published var origin: SearchOrigin = .currentLocation
     @Published private(set) var searchCenter: CLLocationCoordinate2D?
 
     private let repository: any CafeRepository
     private let locationService: LocationService
     private let cacheStore: CacheStore
+    private let favoritesStore: FavoritesStore
 
-    init(repository: any CafeRepository, locationService: LocationService, cacheStore: CacheStore) {
+    init(
+        repository: any CafeRepository,
+        locationService: LocationService,
+        cacheStore: CacheStore,
+        favoritesStore: FavoritesStore
+    ) {
         self.repository = repository
         self.locationService = locationService
         self.cacheStore = cacheStore
+        self.favoritesStore = favoritesStore
     }
 
-    /// 一覧・地図で共有する表示用の結果（絞り込み＋距離昇順, FR-004/005）
+    /// 一覧・地図で共有する表示用の結果（犬向け条件・未確認・お気に入り絞り込み＋並び替え, FR-004/005, 設計書4）
     var displayedResults: [CafeWithDistance] {
-        CafeFilter.apply(statusFilter, to: allResults)
-            .sorted { $0.distanceMeters < $1.distanceMeters }
+        var results = CafeFilter.apply(amenities: amenityFilter, includeUnverified: includeUnverified, to: allResults)
+        if favoritesOnly {
+            results = results.filter { favoritesStore.contains($0.cafe.id) }
+        }
+        return CafeFilter.sorted(results, by: sortOrder)
+    }
+
+    /// 現在適用中の絞り込み条件の数（犬向け条件3種＋未確認表示＋お気に入りのみ）。
+    /// ツールバーのフィルタアイコンにバッジ表示するために使う（設計書4）。
+    var activeFilterCount: Int {
+        [
+            amenityFilter.indoorOnly,
+            amenityFilter.terraceOnly,
+            amenityFilter.dogMenuOnly,
+            includeUnverified,
+            favoritesOnly,
+        ].filter { $0 }.count
+    }
+
+    /// 取得自体は成功しているが、絞り込み条件によって表示結果が0件になっているか（FR-020, 設計書4）
+    var isEmptyDueToFilter: Bool {
+        phase == .loaded && displayedResults.isEmpty
+    }
+
+    /// 犬向け条件・未確認・お気に入りの絞り込みを初期状態に戻す（空状態の「条件をリセット」から使用, 設計書4）
+    func resetFilters() {
+        amenityFilter = AmenityFilter()
+        includeUnverified = false
+        favoritesOnly = false
     }
 
     /// 周辺検索を実行（contracts/api-contracts.md #1 の利用側）

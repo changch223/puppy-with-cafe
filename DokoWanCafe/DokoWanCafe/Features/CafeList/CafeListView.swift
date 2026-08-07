@@ -2,14 +2,16 @@ import MapKit
 import SwiftUI
 import UIKit
 
-/// 一覧画面（T025）: 距離順・可否バッジ・距離表示（FR-002/005, SC-002）。
+/// 一覧画面（T025）: 距離順・犬目線バッジ・距離表示（FR-002/005, SC-002, 設計書4で可否4値バッジから刷新）。
 struct CafeListView: View {
     @ObservedObject var viewModel: CafeListViewModel
+    /// お気に入り店の肉球表示に使う（設計書4。地図側と同様に呼び出し元から明示的に渡す）
+    let favoriteIDs: Set<UUID>
 
     var body: some View {
         List(viewModel.displayedResults) { item in
             NavigationLink(value: item.cafe) {
-                CafeRowView(item: item)
+                CafeRowView(item: item, isFavorite: favoriteIDs.contains(item.cafe.id))
             }
         }
         .listStyle(.plain)
@@ -17,17 +19,34 @@ struct CafeListView: View {
     }
 }
 
-/// 一覧の1行: 詳細を開かなくても「可否」と「距離」が判別できる（SC-002）
+/// 一覧の1行: 詳細を開かなくても「犬目線の可否」と「距離」が判別できる（SC-002, 設計書4）
 struct CafeRowView: View {
     let item: CafeWithDistance
+    let isFavorite: Bool
+
+    private var category: MapPinCategory { MapPinCategory.category(for: item.cafe) }
+
+    /// 未確認 or 最終確認から1年超の店に鮮度警告アイコンを出す（設計書4）
+    private var showsFreshnessWarning: Bool {
+        item.cafe.dogPolicyStatus == .unverified
+            || FreshnessEvaluator.isStale(lastVerified: item.cafe.lastVerified)
+    }
 
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             CafeRowThumbnailView(cafe: item.cafe)
             VStack(alignment: .leading, spacing: 4) {
-                Text(item.cafe.name)
-                    .font(.headline)
-                    .lineLimit(2)
+                HStack(spacing: 4) {
+                    Text(item.cafe.name)
+                        .font(.headline)
+                        .lineLimit(2)
+                    if isFavorite {
+                        FavoritePawIcon()
+                    }
+                    if showsFreshnessWarning {
+                        FreshnessWarningIcon()
+                    }
+                }
                 if let condition = item.cafe.dogPolicyCondition,
                    item.cafe.dogPolicyStatus == .conditional {
                     Text(condition)
@@ -40,7 +59,7 @@ struct CafeRowView: View {
             }
             Spacer(minLength: 8)
             VStack(alignment: .trailing, spacing: 4) {
-                StatusBadge(status: item.cafe.dogPolicyStatus)
+                MapPinCategoryBadge(category: category)
                 Text(MapViewModel.distanceText(meters: item.distanceMeters))
                     .font(.subheadline.monospacedDigit())
                     .foregroundStyle(.secondary)
@@ -49,7 +68,7 @@ struct CafeRowView: View {
         .padding(.vertical, 4)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(Text(
-            "\(item.cafe.name)、\(item.cafe.dogPolicyStatus.displayName)、\(MapViewModel.distanceText(meters: item.distanceMeters))"
+            "\(item.cafe.name)、\(category.displayName)、\(MapViewModel.distanceText(meters: item.distanceMeters))"
         ))
     }
 }

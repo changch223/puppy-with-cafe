@@ -89,4 +89,33 @@ final class OpeningHoursEvaluatorTests: XCTestCase {
             .outsideHours
         )
     }
+
+    // MARK: - closingTimeIfOpen（地図の下部コンパクトカード「営業中・〜HH:mm」表示, UI/UXブラッシュアップ設計書2）
+
+    func test_営業中なら閉店時刻を返す() {
+        XCTAssertEqual(
+            OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: tokyoDate(hour: 10, minute: 30)),
+            "18:00"
+        )
+    }
+
+    func test_複数時間帯でも該当する枠の閉店時刻を返す() {
+        // 2026-07-09 は木曜日（9-12, 13-18）
+        XCTAssertEqual(
+            OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: tokyoDate(day: 9, hour: 11, minute: 0)),
+            "12:00"
+        )
+        XCTAssertEqual(
+            OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: tokyoDate(day: 9, hour: 13, minute: 0)),
+            "18:00"
+        )
+    }
+
+    func test_営業中でなければnil() {
+        // 時間外・定休・未登録曜日・構造化データなしのいずれも nil（判定不能な店で嘘をつかない）
+        XCTAssertNil(OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: tokyoDate(hour: 8, minute: 59)))
+        XCTAssertNil(OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: tokyoDate(day: 7, hour: 10, minute: 0)))
+        XCTAssertNil(OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: tokyoDate(day: 8, hour: 10, minute: 0)))
+        XCTAssertNil(OpeningHoursEvaluator.closingTimeIfOpen(hours: nil, at: tokyoDate(hour: 10, minute: 0)))
+    }
 }

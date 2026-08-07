@@ -10,9 +10,13 @@ struct RootView: View {
 
     let dependencies: AppDependencies
     @StateObject private var searchViewModel: CafeListViewModel
+    @ObservedObject private var favoritesStore: FavoritesStore
     @State private var mode: DisplayMode = .map
     @State private var path = NavigationPath()
     @State private var showAreaPicker = false
+    // 地図: ピン選択（下部コンパクトカード）・現在地ボタンの再センタリング要求（UI/UXブラッシュアップ設計書2）
+    @State private var selectedMapItem: CafeWithDistance?
+    @State private var recenterRequestID = 0
 
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
@@ -20,9 +24,11 @@ struct RootView: View {
             wrappedValue: CafeListViewModel(
                 repository: dependencies.repository,
                 locationService: dependencies.locationService,
-                cacheStore: dependencies.cacheStore
+                cacheStore: dependencies.cacheStore,
+                favoritesStore: dependencies.favoritesStore
             )
         )
+        _favoritesStore = ObservedObject(wrappedValue: dependencies.favoritesStore)
     }
 
     var body: some View {
@@ -38,17 +44,18 @@ struct RootView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 8)
                 .accessibilityLabel(Text("表示切り替え"))
+                // 表示モード切替時に下部カードを残さない（QA指摘: 地図→一覧で古い選択が残留）
+                // iOS 16対応のため単一引数版のonChangeを使う
+                .onChange(of: mode) { _ in
+                    selectedMapItem = nil
+                }
 
                 ZStack {
                     switch mode {
                     case .map:
-                        CafeMapView(
-                            items: searchViewModel.displayedResults,
-                            center: searchViewModel.searchCenter,
-                            onSelect: { cafe in path.append(cafe) }
-                        )
+                        mapContent
                     case .list:
-                        CafeListView(viewModel: searchViewModel)
+                        CafeListView(viewModel: searchViewModel, favoriteIDs: favoritesStore.favoriteIDs)
                     }
 
                     if showsStateOverlay {
@@ -76,7 +83,12 @@ struct RootView: View {
                     filterMenu
                 }
                 ToolbarItem(placement: .topBarTrailing) {
+                    sortMenu
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
+                        // 再読み込み（refresh経路）でも現在エリアに無い古い選択カードを残さない（QA指摘）
+                        selectedMapItem = nil
                         Task { await searchViewModel.refresh() }
                     } label: {
                         Image(systemName: "arrow.clockwise")
@@ -89,6 +101,8 @@ struct RootView: View {
             }
             .sheet(isPresented: $showAreaPicker) {
                 AreaPickerView { origin in
+                    // エリア変更で古い選択カードを残さない（QA指摘: 別エリアの店のカードが残留）
+                    selectedMapItem = nil
                     searchViewModel.origin = origin
                     Task { await searchViewModel.refresh() }
                 }
@@ -99,14 +113,70 @@ struct RootView: View {
         }
     }
 
-    /// 状態オーバーレイを出すフェーズ（オフラインはバナーのみで結果は表示する）
+    /// 状態オーバーレイを出すフェーズ（オフラインはバナーのみで結果は表示する）。
+    /// `.loaded` はフィルタ起因の0件（`isEmptyDueToFilter`）の時のみオーバーレイを出す（設計書4）。
     private var showsStateOverlay: Bool {
         switch searchViewModel.phase {
         case .idle, .loading, .empty, .outOfArea, .locationDenied, .error:
             return true
-        case .loaded, .offline:
+        case .loaded:
+            return searchViewModel.isEmptyDueToFilter
+        case .offline:
             return false
         }
+    }
+
+    // MARK: - 地図タブ（数字クラスタ廃止・下部コンパクトカード・凡例・現在地ボタン, UI/UXブラッシュアップ設計書2）
+
+    private var mapContent: some View {
+        ZStack(alignment: .bottom) {
+            CafeMapView(
+                items: searchViewModel.displayedResults,
+                center: searchViewModel.searchCenter,
+                favoriteIDs: favoritesStore.favoriteIDs,
+                selectedItem: $selectedMapItem,
+                recenterRequestID: recenterRequestID
+            )
+
+            if selectedMapItem == nil {
+                HStack {
+                    Spacer()
+                    VStack(alignment: .trailing, spacing: 12) {
+                        MapLegendView(showsUnverified: hasUnverifiedResult)
+                        CurrentLocationButton {
+                            recenterRequestID += 1
+                        }
+                    }
+                }
+                .padding(.trailing, 12)
+                .padding(.bottom, 12)
+            }
+
+            if let selectedMapItem {
+                MapPlaceCardView(
+                    item: selectedMapItem,
+                    onShowDetail: {
+                        self.selectedMapItem = nil
+                        path.append(selectedMapItem.cafe)
+                    },
+                    onOpenRoute: {
+                        MapViewModel.openInMaps(cafe: selectedMapItem.cafe)
+                    },
+                    onClose: {
+                        self.selectedMapItem = nil
+                    }
+                )
+                .padding(.horizontal, 12)
+                .padding(.bottom, 12)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .animation(.easeInOut(duration: 0.2), value: selectedMapItem)
+    }
+
+    /// 現在の表示結果に未確認ピン（灰）が含まれるか（凡例に灰エントリを足すかの判定に使う）
+    private var hasUnverifiedResult: Bool {
+        searchViewModel.displayedResults.contains { MapPinCategory.category(for: $0.cafe) == .unverified }
     }
 
     @ViewBuilder
@@ -134,28 +204,52 @@ struct RootView: View {
         }
     }
 
+    /// フィルタメニュー（可否4値ではなく犬向け条件＋表示設定, 設計書4）。
+    /// 適用中の条件数をアイコンにバッジ表示する。
     private var filterMenu: some View {
         Menu {
-            ForEach(DogPolicyStatus.allCases) { status in
-                Button {
-                    if searchViewModel.statusFilter.contains(status) {
-                        searchViewModel.statusFilter.remove(status)
-                    } else {
-                        searchViewModel.statusFilter.insert(status)
-                    }
-                } label: {
-                    Label(
-                        status.displayName,
-                        systemImage: searchViewModel.statusFilter.contains(status)
-                            ? "checkmark.circle.fill"
-                            : "circle"
-                    )
-                }
+            Section(String(localized: "犬向け条件")) {
+                Toggle(String(localized: "店内OK"), isOn: $searchViewModel.amenityFilter.indoorOnly)
+                Toggle(String(localized: "テラスOK"), isOn: $searchViewModel.amenityFilter.terraceOnly)
+                Toggle(String(localized: "犬メニューあり"), isOn: $searchViewModel.amenityFilter.dogMenuOnly)
+            }
+            Section(String(localized: "表示")) {
+                Toggle(String(localized: "未確認の店も表示"), isOn: $searchViewModel.includeUnverified)
+                Toggle(String(localized: "お気に入りのみ"), isOn: $searchViewModel.favoritesOnly)
             }
         } label: {
-            Image(systemName: "line.3.horizontal.decrease.circle")
+            ZStack(alignment: .topTrailing) {
+                Image(systemName: searchViewModel.activeFilterCount > 0
+                    ? "line.3.horizontal.decrease.circle.fill"
+                    : "line.3.horizontal.decrease.circle")
+                if searchViewModel.activeFilterCount > 0 {
+                    Text("\(searchViewModel.activeFilterCount)")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(3)
+                        .background(Circle().fill(Color.red))
+                        .offset(x: 10, y: -8)
+                }
+            }
         }
-        .accessibilityLabel(Text("犬同伴可否で絞り込み"))
+        .accessibilityLabel(Text(
+            searchViewModel.activeFilterCount > 0
+                ? "犬向け条件で絞り込み、\(searchViewModel.activeFilterCount)件適用中"
+                : "犬向け条件で絞り込み"
+        ))
+    }
+
+    /// 並び替えメニュー（距離順/確認日が新しい順, 設計書4）
+    private var sortMenu: some View {
+        Menu {
+            Picker(String(localized: "並び替え"), selection: $searchViewModel.sortOrder) {
+                Text("距離順").tag(CafeSortOrder.distance)
+                Text("確認日が新しい順").tag(CafeSortOrder.recentlyVerified)
+            }
+        } label: {
+            Image(systemName: "arrow.up.arrow.down.circle")
+        }
+        .accessibilityLabel(Text("並び替え"))
     }
 }
 
