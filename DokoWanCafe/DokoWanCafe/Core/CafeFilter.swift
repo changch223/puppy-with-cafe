@@ -16,10 +16,11 @@ enum CafeFilter {
 struct AmenityFilter: Equatable, Sendable {
     var indoorOnly = false
     var terraceOnly = false
+    var largeDogOnly = false
     var dogMenuOnly = false
 
     /// いずれのトグルもオフ（絞り込みなし）
-    var isEmpty: Bool { !indoorOnly && !terraceOnly && !dogMenuOnly }
+    var isEmpty: Bool { !indoorOnly && !terraceOnly && !largeDogOnly && !dogMenuOnly }
 }
 
 /// 一覧・地図の並び順（UI/UXブラッシュアップ設計書 1b）
@@ -33,7 +34,7 @@ enum CafeSortOrder: Equatable, Sendable {
 extension CafeFilter {
     /// 犬向け条件＋未確認の表示可否で絞り込む（UI/UXブラッシュアップ設計書 1b, FR-004改訂）。
     /// - Parameters:
-    ///   - amenities: 店内OK/テラスOK/犬メニューのトグル（AND結合）
+    ///   - amenities: 店内OK/テラスOK/大型犬OK/犬メニューのトグル（AND結合）
     ///   - includeUnverified: `false`（既定）なら未確認ステータスの店を除外する
     static func apply(
         amenities: AmenityFilter,
@@ -55,6 +56,9 @@ extension CafeFilter {
                 return false
             }
             if amenities.terraceOnly && item.cafe.dogAmenities?.terrace != true {
+                return false
+            }
+            if amenities.largeDogOnly && item.cafe.dogAmenities?.largeDogs != true {
                 return false
             }
             if amenities.dogMenuOnly && item.cafe.dogAmenities?.dogMenu != true {

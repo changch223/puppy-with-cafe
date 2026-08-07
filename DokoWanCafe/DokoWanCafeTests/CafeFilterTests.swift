@@ -102,6 +102,21 @@ final class CafeFilterTests: XCTestCase {
         XCTAssertEqual(result.first?.cafe.dogPolicyStatus, .unverified)
     }
 
+    func test_largeDogOnlyはlargeDogsがtrueの店のみ通す() {
+        let items = amenityItems + [
+            makeItem(.allowed, amenities: DogAmenities(indoor: false, terrace: false, largeDogs: true, dogMenu: nil)),
+            makeItem(.allowed, amenities: DogAmenities(indoor: false, terrace: false, largeDogs: false, dogMenu: nil))
+        ]
+        let result = CafeFilter.apply(
+            amenities: AmenityFilter(largeDogOnly: true),
+            includeUnverified: true,
+            to: items
+        )
+        // largeDogs が true の店は1件のみ（amenityItemsは全てlargeDogs: nilのため不通過）
+        XCTAssertEqual(result.count, 1)
+        XCTAssertTrue(result.allSatisfy { $0.cafe.dogAmenities?.largeDogs == true })
+    }
+
     func test_dogMenuOnlyはamenity不明nilの店を通さない() {
         let result = CafeFilter.apply(
             amenities: AmenityFilter(dogMenuOnly: true),
