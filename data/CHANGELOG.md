@@ -346,3 +346,169 @@
 - ✏️ 変更: ドッグカフェ&BAR Petit Leon（instagram_post_url）
 - ✏️ 変更: 石濱茶寮 楽（instagram_post_url）
 - ✏️ 変更: 肉と牡蠣CARTA 池袋店（instagram_post_url）
+
+## 2026-08-07 13:57 — 追加 164 / 変更 0 / 削除 0
+- ➕ 追加: 44APARTMENT 多摩センター店
+- ➕ 追加: 8dori 大門店
+- ➕ 追加: AFFIDAMENTO BAGEL
+- ➕ 追加: ANDog（アンドッグ）
+- ➕ 追加: ARBOL（アルボール神楽坂）
+- ➕ 追加: Aloha Table 大崎店
+- ➕ 追加: Aoi Coffee Stand
+- ➕ 追加: BAGUS BAR Shibaura Island
+- ➕ 追加: BESIDE SEASIDE
+- ➕ 追加: BON Cafe（ボンカフェ）
+- ➕ 追加: BURG HOLIC(バーグホリック)
+- ➕ 追加: Bistrot a la Demande
+- ➕ 追加: Bowery Kitchen
+- ➕ 追加: CAFE CHOU CHOU(シュシュ)
+- ➕ 追加: CAFE TORA(カフェトラ)
+- ➕ 追加: CAFE UNITE（カフェユニテ）
+- ➕ 追加: CANAL CAFE（カナルカフェ）
+- ➕ 追加: CHUM APARTMENT
+- ➕ 追加: CORNO BiANCO(コルノビアンコ)
+- ➕ 追加: Cafe Restaurant AUREOLE(カフェレストラン オリオール)
+- ➕ 追加: Cafe Rose&M（カフェ ローズアンドエム）
+- ➕ 追加: Cafe Sadiiq（カフェ サディーク）
+- ➕ 追加: Cafe and Dining Paco
+- ➕ 追加: Cafe&Bistro Shelty
+- ➕ 追加: Cafe&Restaurant CENTRALE（セントラーレ）
+- ➕ 追加: Cafe＆Gallery Roomer
+- ➕ 追加: Connect Kitchen
+- ➕ 追加: EARTH CAFE 五反田店（アースカフェ）
+- ➕ 追加: Egoland Cafe Akihabara
+- ➕ 追加: F*GICCO by F.gohan(エフジッコ バイ エフゴハン)
+- ➕ 追加: FITZROY
+- ➕ 追加: Family Restaurant POT 大泉町店
+- ➕ 追加: Farm to table De Salita(ファーム トゥー テーブル デ サリータ)
+- ➕ 追加: HANAKADO(ハナカド)
+- ➕ 追加: HIGHBURY -THE HOME OF BEER-(ハイバリー)
+- ➕ 追加: Italian Dining Lui
+- ➕ 追加: Italian Kitchen VANSAN 大泉学園店
+- ➕ 追加: Italian Kitchen VANSAN 祖師ヶ谷大蔵店
+- ➕ 追加: JADE'R TOKYO(ジャデルトウキョウ)
+- ➕ 追加: Jaho Coffee Roaster & Wine Bar 田町店
+- ➕ 追加: KITCHEN BAR 新目黒茶屋
+- ➕ 追加: KOMAZAWA PARK CAFE
+- ➕ 追加: KOSO 芝本店
+- ➕ 追加: LATTE GRAPHIC 聖蹟桜ヶ丘店
+- ➕ 追加: LE PARISIEN（ル・パリジャン）
+- ➕ 追加: LODA 三田店
+- ➕ 追加: La Prosciutteria（ラ・プロシュッテリア）
+- ➕ 追加: Le Coquillage（ル コキヤージュ）
+- ➕ 追加: Le Pain Quotidien 芝公園店
+- ➕ 追加: Luccollina（ルッコリーナ）
+- ➕ 追加: MAISON KAYSER 五反田店
+- ➕ 追加: MIO
+- ➕ 追加: MOCMO sandwiches
+- ➕ 追加: MR.HIPPO COFFEE 市ヶ谷店
+- ➕ 追加: Mi Tiempo
+- ➕ 追加: Mr.FARMER 駒沢オリンピック公園店
+- ➕ 追加: Mt.TAKAO BASE CAMP CAFE&BAR
+- ➕ 追加: NISHIann cafe(西庵カフェ)
+- ➕ 追加: O.GARDEN CAFE
+- ➕ 追加: PASTA＆PIZZA WINE BAR YOLO
+- ➕ 追加: PERFECT BEER KITCHEN 四ツ谷
+- ➕ 追加: PIZZA SALVATORE CUOMO 四谷
+- ➕ 追加: PIZZERIA & BAR NOHGA（NOHGA HOTEL AKIHABARA TOKYO内）
+- ➕ 追加: PIZZERIA&BAR PAGLIACCIO
+- ➕ 追加: RESTAURANT 1899 OCHANOMIZU
+- ➕ 追加: RITUEL 等々力店(リチュエル)
+- ➕ 追加: Restaurant Perfumes（レストランパフューム）
+- ➕ 追加: SAUCE UP BURGER
+- ➕ 追加: SHAPLA-INDIA
+- ➕ 追加: Sammy331(サミーサミー)
+- ➕ 追加: SeTaBi Cafe(セタビカフェ)
+- ➕ 追加: Set Lip 成城店(セットリップ)
+- ➕ 追加: THE BARBA TOKYO MEAT MEET
+- ➕ 追加: TRATTORIA ARIETTA（トラットリア アリエッタ）
+- ➕ 追加: TRATTORIA GRAN BOCCA（トラットリア グランボッカ）
+- ➕ 追加: Trattoria Monolito(トラットリア モノリート)
+- ➕ 追加: UN BESITO(ウン・ベシート)永山店
+- ➕ 追加: Wande Shiba
+- ➕ 追加: YELLOW KOMAZAWA KOEN
+- ➕ 追加: YOUR SIDE COFFEE（ユアサイドコーヒー）
+- ➕ 追加: as is to be{ART and CAFE}
+- ➕ 追加: biotable.
+- ➕ 追加: cafe Crumpets
+- ➕ 追加: cafe de Fleurus 27
+- ➕ 追加: cure(キュア) 千歳船橋店
+- ➕ 追加: essence dining
+- ➕ 追加: haluuu(ハルー)
+- ➕ 追加: inu to hito
+- ➕ 追加: passage coffee
+- ➕ 追加: pepacafe FOREST（ペパカフェ・フォレスト）
+- ➕ 追加: rice cafe
+- ➕ 追加: sibafu
+- ➕ 追加: いろりの里 高尾山名主 ごん助
+- ➕ 追加: さみしがりや酒房ささ
+- ➕ 追加: もんじゃ ことぶきや
+- ➕ 追加: やきとり荒木山 四谷店
+- ➕ 追加: やまびこ茶屋
+- ➕ 追加: わんすたCafe＆酒場
+- ➕ 追加: アッサムダイニングカフェ永山店
+- ➕ 追加: イタリアン リゾート ペルティカ 大泉学園店
+- ➕ 追加: ウニ専門レストラン unico-co(ウニココ)
+- ➕ 追加: エメ(Eme)
+- ➕ 追加: カフェ テラス ヴェルト（Cafe Terrasse Verte）
+- ➕ 追加: カフェ海猫山猫
+- ➕ 追加: カボスオジサン
+- ➕ 追加: カーサ ディ カミーノ
+- ➕ 追加: クリスプ・サラダワークス駒沢公園店
+- ➕ 追加: グリル&ダイニング用賀倶楽部
+- ➕ 追加: グリルハーベスター 大崎ブライトコア店
+- ➕ 追加: サザンダイニング用賀店
+- ➕ 追加: シェアーズ
+- ➕ 追加: シェリーズバーガーカフェ
+- ➕ 追加: スターバックス コーヒー 国立店
+- ➕ 追加: ステーキハウス ニューテキサス
+- ➕ 追加: タカオネ
+- ➕ 追加: タパス&タパス 用賀店
+- ➕ 追加: チキンカントリー
+- ➕ 追加: バンコク食堂 ポーモンコン
+- ➕ 追加: ビストロ＆スペイン古民家バル chab
+- ➕ 追加: ピエトロ 国立店
+- ➕ 追加: ピッツェリア ジターリア ダ フィリッポ(PIZZERIA GTALIA DA FILIPPO)
+- ➕ 追加: ピッツェリア マルデナポリ大泉学園店(MAR-DE NAPOLI)
+- ➕ 追加: フランツクラブ 浜松町店
+- ➕ 追加: ブッチャーズテーブル 石神井公園店
+- ➕ 追加: ブレッド マチエール
+- ➕ 追加: プリティシングス
+- ➕ 追加: マグロ卸のフィッシャリーズテラス
+- ➕ 追加: マホラ食堂
+- ➕ 追加: マルゴ四谷(MARUGO YOTSUYA)
+- ➕ 追加: メゾン・ド・ラ・ブルゴーニュ（Maison de la Bourgogne）
+- ➕ 追加: リキマルカフェ
+- ➕ 追加: リゴレッティーノ
+- ➕ 追加: リバゴーシュ
+- ➕ 追加: レストラン・ヴェール
+- ➕ 追加: ヴィータアットスタイル（Vita@stile）
+- ➕ 追加: 串カツ田中 東五反田店
+- ➕ 追加: 串カツ田中 経堂店
+- ➕ 追加: 北出食堂
+- ➕ 追加: 史跡の駅 おたカフェ
+- ➕ 追加: 和風ジェラート おかじ Tokyo
+- ➕ 追加: 地鶏専門店三岳 田町×三田店
+- ➕ 追加: 場外焼肉 榮登庵 多摩センター店
+- ➕ 追加: 大衆イタリアン酒場 煙-kemuri-
+- ➕ 追加: 威南記海南鶏飯 日本本店
+- ➕ 追加: 庭cafe443 in Todoroki
+- ➕ 追加: 文流 国立店
+- ➕ 追加: 栄茶屋本店
+- ➕ 追加: 淡路島バーガー 国立谷保店
+- ➕ 追加: 焼肉本家Ponga
+- ➕ 追加: 熊祥(くまよし)
+- ➕ 追加: 祖師谷バル haracucci(ハラクッチ)
+- ➕ 追加: 神楽坂 ラクレット&フォンデュ フロマティック（Fromatique）
+- ➕ 追加: 神楽坂ワインスタンド et du vin（エデュヴァン）
+- ➕ 追加: 肉とワイン bonanza
+- ➕ 追加: 蕎麦と杜々
+- ➕ 追加: 豊島屋
+- ➕ 追加: 迎賓楼
+- ➕ 追加: 銀蕎麦 國定 勝どき店
+- ➕ 追加: 雪月花
+- ➕ 追加: 駒沢食堂george
+- ➕ 追加: 高尾山FuMotoYA
+- ➕ 追加: 魚がし どまん中 神楽坂店
+- ➕ 追加: 麦酒堂 KASUGAI
+- ➕ 追加: 麺恋処 爆龍
