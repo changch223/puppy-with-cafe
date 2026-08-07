@@ -25,6 +25,26 @@ struct StatusBadge: View {
     }
 }
 
+/// 鮮度警告アイコン（未確認 or 最終確認から1年超, 一覧行の犬目線化で使用, UI/UXブラッシュアップ設計書4）
+struct FreshnessWarningIcon: View {
+    var body: some View {
+        Image(systemName: "exclamationmark.triangle.fill")
+            .font(.caption2)
+            .foregroundStyle(.orange)
+            .accessibilityLabel(Text("情報が古い可能性があります"))
+    }
+}
+
+/// お気に入りを示す小さな肉球アイコン（一覧行で使用, UI/UXブラッシュアップ設計書4）
+struct FavoritePawIcon: View {
+    var body: some View {
+        Image(systemName: "pawprint.fill")
+            .font(.caption2)
+            .foregroundStyle(.pink)
+            .accessibilityLabel(Text("お気に入り"))
+    }
+}
+
 /// 営業状態バッジ（FR-102）。構造化営業時間のある店のみ表示（unknown は何も出さない）。
 struct OpenStateBadge: View {
     let state: OpenState

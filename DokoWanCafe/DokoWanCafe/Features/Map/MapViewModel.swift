@@ -4,34 +4,39 @@ import UIKit
 /// 地図用アノテーション。一覧と同一の `CafeWithDistance` を保持する（FR-003）。
 final class CafeAnnotation: NSObject, MKAnnotation {
     let item: CafeWithDistance
+    /// 数字クラスタの代わりにMapKitの衝突間引きへ渡す表示優先度（近い店ほど高い, UI/UXブラッシュアップ設計書2）
+    let displayPriority: MKFeatureDisplayPriority
 
-    init(item: CafeWithDistance) {
+    init(item: CafeWithDistance, displayPriority: MKFeatureDisplayPriority) {
         self.item = item
+        self.displayPriority = displayPriority
     }
 
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: item.cafe.latitude, longitude: item.cafe.longitude)
     }
 
+    /// `titleVisibility = .adaptive` で低ズーム時は隠れ、ズームインすると店名ラベルとして表示される
     var title: String? { item.cafe.name }
-
-    var subtitle: String? {
-        let status = item.cafe.dogPolicyStatus.displayName
-        let distance = MapViewModel.distanceText(meters: item.distanceMeters)
-        return "\(status)・\(distance)"
-    }
 }
 
-/// 地図表示の純粋なプレゼンテーションロジック（T027）。
+/// 地図表示の純粋なプレゼンテーションロジック（T027 / UI/UXブラッシュアップ設計書2）。
 /// 一覧側と同じ `displayedResults` からアノテーションを構築することで乖離を防ぐ。
 enum MapViewModel {
     static func annotations(for items: [CafeWithDistance]) -> [CafeAnnotation] {
-        items.map(CafeAnnotation.init(item:))
+        let priorityByID = displayPriorities(for: items)
+        return items.map { item in
+            CafeAnnotation(item: item, displayPriority: priorityByID[item.cafe.id] ?? .defaultLow)
+        }
     }
 
-    /// アノテーション集合の同一性キー（不要な再描画を避ける）
-    static func signature(of items: [CafeWithDistance]) -> Set<String> {
-        Set(items.map { "\($0.cafe.id.uuidString)-\($0.cafe.dogPolicyStatus.rawValue)" })
+    /// アノテーション集合の同一性キー（ピン色・お気に入り区別に関わる情報が変わった時だけ再描画する）
+    static func signature(of items: [CafeWithDistance], favoriteIDs: Set<UUID>) -> Set<String> {
+        Set(items.map { item in
+            let category = MapPinCategory.category(for: item.cafe)
+            let isFavorite = favoriteIDs.contains(item.cafe.id)
+            return "\(item.cafe.id.uuidString)-\(category)-\(isFavorite)"
+        })
     }
 
     static func region(center: CLLocationCoordinate2D, radiusMeters: Int) -> MKCoordinateRegion {
@@ -69,14 +74,49 @@ enum MapViewModel {
         region(center: center, radiusMeters: Int(initialCameraSpanMeters(items: items)))
     }
 
-    /// 可否ステータスに応じたピン色（一覧の StatusBadge と対応）
-    static func markerTintColor(for status: DogPolicyStatus) -> UIColor {
-        switch status {
-        case .allowed: return .systemGreen
-        case .conditional: return .systemOrange
-        case .notAllowed: return .systemRed
+    /// 数字クラスタ廃止の代替（UI/UXブラッシュアップ設計書2）: 距離順の上位何件目までを
+    /// 各段（必ず表示=required／中距離=defaultHigh）とするかの境界ランク。
+    /// これ以降（遠い店）は defaultLow とし、MapKit標準の衝突間引きに委ねることで、
+    /// Googleマップ同様「ズームインすると増える」挙動を実現する。
+    static let requiredPinRank = 5
+    static let highPriorityPinRank = 15
+
+    /// 距離順ランク（0=最寄り）から displayPriority を段階設定する純ロジック。
+    static func displayPriority(rank: Int) -> MKFeatureDisplayPriority {
+        if rank < requiredPinRank { return .required }
+        if rank < highPriorityPinRank { return .defaultHigh }
+        return .defaultLow
+    }
+
+    /// 距離昇順にランク付けし、各カフェIDへ displayPriority を割り当てる。
+    static func displayPriorities(for items: [CafeWithDistance]) -> [UUID: MKFeatureDisplayPriority] {
+        let sortedByDistance = items.sorted { $0.distanceMeters < $1.distanceMeters }
+        var result: [UUID: MKFeatureDisplayPriority] = [:]
+        for (rank, item) in sortedByDistance.enumerated() {
+            result[item.cafe.id] = displayPriority(rank: rank)
+        }
+        return result
+    }
+
+    /// 犬目線ピン分類に応じたマーカー色（旧 `markerTintColor(for: DogPolicyStatus)` を置換,
+    /// UI/UXブラッシュアップ設計書1a/2）。「不可(赤)」は廃止（実データ0件・UI廃止方針）。
+    static func markerTintColor(for category: MapPinCategory) -> UIColor {
+        switch category {
+        case .indoorOK: return .systemGreen
+        case .terraceOnly: return .systemTeal
+        case .checkDetail: return .systemOrange
         case .unverified: return .systemGray
         }
+    }
+
+    /// 経路案内で外部地図アプリを開く（地図の下部コンパクトカード「経路」ボタン, UI/UXブラッシュアップ設計書2）。
+    static func openInMaps(cafe: Cafe) {
+        let placemark = MKPlacemark(
+            coordinate: CLLocationCoordinate2D(latitude: cafe.latitude, longitude: cafe.longitude)
+        )
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = cafe.name
+        mapItem.openInMaps(launchOptions: nil)
     }
 
     static func distanceText(meters: Double) -> String {

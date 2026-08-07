@@ -15,8 +15,9 @@ struct SearchStateView: View {
                 ProgressView(String(localized: "周辺のカフェを検索中…"))
 
             case .empty:
-                // 全カフェを絞り込みなしで取得しているため、通常発生するのは
-                // 「可否フィルタの組合せで該当が0件」というケースのみ（FR-020）。
+                // 全カフェを絞り込みなしで取得しているため、このケースは検索エリア内に
+                // カフェが1件も存在しない（データ欠落等）稀な場合のみ発生する（FR-020）。
+                // フィルタ起因の0件（`isEmptyDueToFilter`）は下の `.loaded` 分岐で扱う（設計書4）。
                 stateContent(
                     systemImage: "cup.and.saucer",
                     title: String(localized: "条件に合う犬同伴OKのカフェが見つかりませんでした"),
@@ -67,11 +68,34 @@ struct SearchStateView: View {
                     .buttonStyle(.borderedProminent)
                 }
 
-            case .loaded, .offline:
+            case .loaded:
+                // フィルタ（犬向け条件・未確認・お気に入り）が原因で0件の場合のみ案内する（設計書4）
+                if viewModel.isEmptyDueToFilter {
+                    stateContent(
+                        systemImage: "line.3.horizontal.decrease.circle",
+                        title: String(localized: "条件に合う犬同伴OKのカフェが見つかりませんでした"),
+                        message: String(localized: "絞り込み条件を変えるか、条件をリセットしてみてください。")
+                    ) {
+                        resetFilterButton
+                    }
+                } else {
+                    EmptyView()
+                }
+
+            case .offline:
                 EmptyView()
             }
         }
         .padding(24)
+    }
+
+    private var resetFilterButton: some View {
+        Button {
+            viewModel.resetFilters()
+        } label: {
+            Label(String(localized: "条件をリセット"), systemImage: "arrow.counterclockwise")
+        }
+        .buttonStyle(.borderedProminent)
     }
 
     private var changeAreaButton: some View {

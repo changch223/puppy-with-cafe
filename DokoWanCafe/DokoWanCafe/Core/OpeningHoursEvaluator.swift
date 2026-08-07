@@ -53,4 +53,30 @@ enum OpeningHoursEvaluator {
         }
         return .outsideHours
     }
+
+    /// 現在「営業中」なら閉店時刻（"HH:mm"）を返す。営業中でなければ nil
+    /// （地図の下部コンパクトカードの「営業中・〜HH:mm」表示にのみ使う。判定不能な店で嘘をつかない, UI/UXブラッシュアップ設計書2）。
+    static func closingTimeIfOpen(
+        hours: OpeningHours?,
+        at date: Date = Date(),
+        timeZone: TimeZone = tokyoTimeZone
+    ) -> String? {
+        guard let hours, hours.hasAnyDay else { return nil }
+
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = timeZone
+
+        guard let weekday = Weekday.from(calendarWeekday: calendar.component(.weekday, from: date)),
+              let ranges = hours.ranges(for: weekday), !ranges.isEmpty
+        else { return nil }
+
+        let minutes = calendar.component(.hour, from: date) * 60 + calendar.component(.minute, from: date)
+        for range in ranges {
+            guard let open = range.openMinutes, let close = range.closeMinutes else { continue }
+            if minutes >= open && minutes < close {
+                return range.close
+            }
+        }
+        return nil
+    }
 }

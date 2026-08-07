@@ -38,22 +38,41 @@ final class CafeListViewModelTests: XCTestCase {
         }
     }
 
-    private func makeCafe(name: String, latitude: Double, longitude: Double) -> Cafe {
+    private func makeCafe(
+        name: String,
+        latitude: Double,
+        longitude: Double,
+        dogPolicyStatus: DogPolicyStatus = .allowed,
+        dogAmenities: DogAmenities? = nil,
+        lastVerified: Date? = nil
+    ) -> Cafe {
         Cafe(
             id: UUID(), placeID: nil, name: name,
             latitude: latitude, longitude: longitude,
             address: nil, contact: nil,
-            dogPolicyStatus: .allowed, dogPolicyCondition: nil,
-            lastVerified: nil, representativeSourceID: nil,
-            hasConflict: false, isClosed: false, area: "tokyo"
+            dogPolicyStatus: dogPolicyStatus, dogPolicyCondition: nil,
+            lastVerified: lastVerified, representativeSourceID: nil,
+            hasConflict: false, isClosed: false, area: "tokyo",
+            dogAmenities: dogAmenities
         )
     }
 
-    private func makeViewModel(cafes: [Cafe]) -> CafeListViewModel {
+    /// テストごとに専用の UserDefaults suite を注入し、他テスト・実データと隔離する（FavoritesStoreTests と同様の方針）。
+    private func makeFavoritesStore() -> FavoritesStore {
+        let suiteName = "CafeListViewModelTests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        addTeardownBlock {
+            defaults.removePersistentDomain(forName: suiteName)
+        }
+        return FavoritesStore(defaults: defaults)
+    }
+
+    private func makeViewModel(cafes: [Cafe], favoritesStore: FavoritesStore? = nil) -> CafeListViewModel {
         CafeListViewModel(
             repository: DistanceFilteringMockRepository(cafes: cafes),
             locationService: LocationService(),
-            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json")
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: favoritesStore ?? makeFavoritesStore()
         )
     }
 
@@ -89,18 +108,116 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["近い", "遠い"])
     }
 
-    func test_可否フィルタの組合せで該当がなければdisplayedResultsは空() async {
-        let origin = ManualArea(id: "test-shinjuku", name: "テスト:新宿", latitude: 35.6896, longitude: 139.7006)
-        let cafe = makeCafe(name: "犬OKカフェ", latitude: 35.6897, longitude: 139.7007)
+    // MARK: - amenityFilter / includeUnverified / favoritesOnly / sortOrder（UI/UXブラッシュアップ設計書4）
 
-        let viewModel = makeViewModel(cafes: [cafe])
-        viewModel.origin = .manual(origin)
+    private func makeOrigin() -> ManualArea {
+        ManualArea(id: "test-shinjuku", name: "テスト:新宿", latitude: 35.6896, longitude: 139.7006)
+    }
+
+    func test_未確認は既定でdisplayedResultsに出ないがincludeUnverifiedをtrueにすると出る() async {
+        let unverified = makeCafe(
+            name: "未確認カフェ", latitude: 35.6897, longitude: 139.7007,
+            dogPolicyStatus: .unverified
+        )
+        let viewModel = makeViewModel(cafes: [unverified])
+        viewModel.origin = .manual(makeOrigin())
         await viewModel.refresh()
-        XCTAssertEqual(viewModel.phase, .loaded)
-        XCTAssertFalse(viewModel.displayedResults.isEmpty)
 
-        // 「犬OK」以外だけを選ぶと、唯一のカフェ(allowed)が絞り込みで除外される（FR-004）
-        viewModel.statusFilter = [.notAllowed]
+        XCTAssertTrue(viewModel.displayedResults.isEmpty, "未確認は既定で非表示（原則I: 未確認を可と主張しない）")
+
+        viewModel.includeUnverified = true
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["未確認カフェ"])
+    }
+
+    func test_amenityFilterで店内OKの店だけに絞り込める() async {
+        let indoorCafe = makeCafe(
+            name: "店内OKカフェ", latitude: 35.6897, longitude: 139.7007,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        let terraceOnlyCafe = makeCafe(
+            name: "テラスのみカフェ", latitude: 35.6898, longitude: 139.7008,
+            dogAmenities: DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil)
+        )
+        let viewModel = makeViewModel(cafes: [indoorCafe, terraceOnlyCafe])
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        XCTAssertEqual(viewModel.displayedResults.count, 2)
+
+        viewModel.amenityFilter.indoorOnly = true
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["店内OKカフェ"])
+    }
+
+    func test_favoritesOnlyでお気に入りの店だけに絞り込める() async {
+        let favoriteCafe = makeCafe(name: "お気に入りカフェ", latitude: 35.6897, longitude: 139.7007)
+        let otherCafe = makeCafe(name: "他のカフェ", latitude: 35.6898, longitude: 139.7008)
+        let favoritesStore = makeFavoritesStore()
+        favoritesStore.toggle(favoriteCafe.id)
+
+        let viewModel = makeViewModel(cafes: [favoriteCafe, otherCafe], favoritesStore: favoritesStore)
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        XCTAssertEqual(viewModel.displayedResults.count, 2)
+
+        viewModel.favoritesOnly = true
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["お気に入りカフェ"])
+    }
+
+    func test_sortOrderをrecentlyVerifiedにすると確認日が新しい順になる() async {
+        let newer = Date(timeIntervalSince1970: 1_700_000_000)
+        let older = Date(timeIntervalSince1970: 1_600_000_000)
+        let newCafe = makeCafe(name: "新しい確認", latitude: 35.70, longitude: 139.80, lastVerified: newer)
+        let oldCafe = makeCafe(name: "古い確認", latitude: 35.6897, longitude: 139.7007, lastVerified: older)
+
+        let viewModel = makeViewModel(cafes: [newCafe, oldCafe])
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        // 既定（距離順）では近い「古い確認」が先
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["古い確認", "新しい確認"])
+
+        viewModel.sortOrder = .recentlyVerified
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["新しい確認", "古い確認"])
+    }
+
+    func test_resetFiltersでamenityFilterとincludeUnverifiedとfavoritesOnlyが初期化される() {
+        let viewModel = makeViewModel(cafes: [])
+        viewModel.amenityFilter = AmenityFilter(indoorOnly: true, terraceOnly: true, dogMenuOnly: true)
+        viewModel.includeUnverified = true
+        viewModel.favoritesOnly = true
+
+        viewModel.resetFilters()
+
+        XCTAssertEqual(viewModel.amenityFilter, AmenityFilter())
+        XCTAssertFalse(viewModel.includeUnverified)
+        XCTAssertFalse(viewModel.favoritesOnly)
+    }
+
+    func test_activeFilterCountは適用中のトグル数() {
+        let viewModel = makeViewModel(cafes: [])
+        XCTAssertEqual(viewModel.activeFilterCount, 0)
+
+        viewModel.amenityFilter.indoorOnly = true
+        viewModel.includeUnverified = true
+        XCTAssertEqual(viewModel.activeFilterCount, 2)
+
+        viewModel.favoritesOnly = true
+        XCTAssertEqual(viewModel.activeFilterCount, 3)
+    }
+
+    func test_フィルタ起因の0件はisEmptyDueToFilterがtrueになる() async {
+        let cafe = makeCafe(name: "犬OKカフェ", latitude: 35.6897, longitude: 139.7007)
+        let viewModel = makeViewModel(cafes: [cafe])
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        XCTAssertEqual(viewModel.phase, .loaded)
+        XCTAssertFalse(viewModel.isEmptyDueToFilter)
+
+        // 唯一のカフェが店内OKを持たないため、店内OKで絞り込むと0件になる
+        viewModel.amenityFilter.indoorOnly = true
         XCTAssertTrue(viewModel.displayedResults.isEmpty)
+        XCTAssertTrue(viewModel.isEmptyDueToFilter, "取得自体は成功しているため phase は .loaded のまま、フィルタ起因の0件と判定される")
     }
 }

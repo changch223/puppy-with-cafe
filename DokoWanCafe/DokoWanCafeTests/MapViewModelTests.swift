@@ -1,4 +1,6 @@
 import CoreLocation
+import MapKit
+import UIKit
 import XCTest
 @testable import DokoWanCafe
 
@@ -59,5 +61,43 @@ final class MapViewModelTests: XCTestCase {
         let region = MapViewModel.initialCameraRegion(center: center, items: [])
         XCTAssertEqual(region.center.latitude, center.latitude, accuracy: 0.0001)
         XCTAssertEqual(region.center.longitude, center.longitude, accuracy: 0.0001)
+    }
+
+    // MARK: - displayPriority（数字クラスタ廃止の代替, UI/UXブラッシュアップ設計書2）
+
+    func test_近い順位はrequired中間はdefaultHigh遠い順位はdefaultLow() {
+        XCTAssertEqual(MapViewModel.displayPriority(rank: 0), .required)
+        XCTAssertEqual(MapViewModel.displayPriority(rank: MapViewModel.requiredPinRank - 1), .required)
+        XCTAssertEqual(MapViewModel.displayPriority(rank: MapViewModel.requiredPinRank), .defaultHigh)
+        XCTAssertEqual(MapViewModel.displayPriority(rank: MapViewModel.highPriorityPinRank - 1), .defaultHigh)
+        XCTAssertEqual(MapViewModel.displayPriority(rank: MapViewModel.highPriorityPinRank), .defaultLow)
+    }
+
+    func test_displayPrioritiesは距離昇順のランクで割り当てる() {
+        // 距離順ではなく元の並びを崩した入力でも、距離順にランク付けされることを確認
+        let far = makeItem(distanceMeters: 9_000)
+        let near = makeItem(distanceMeters: 100)
+        let priorities = MapViewModel.displayPriorities(for: [far, near])
+        XCTAssertEqual(priorities[near.cafe.id], .required)
+        XCTAssertEqual(priorities[far.cafe.id], .required) // 2件のみなら両方 requiredPinRank 未満
+    }
+
+    // MARK: - markerTintColor（旧 markerTintColor(for: DogPolicyStatus) を置換, 設計書1a/2）
+
+    func test_MapPinCategoryごとのマーカー色() {
+        // UIColor は Equatable ではないため isEqual(_:) で比較する
+        XCTAssertTrue(MapViewModel.markerTintColor(for: .indoorOK).isEqual(UIColor.systemGreen))
+        XCTAssertTrue(MapViewModel.markerTintColor(for: .terraceOnly).isEqual(UIColor.systemTeal))
+        XCTAssertTrue(MapViewModel.markerTintColor(for: .checkDetail).isEqual(UIColor.systemOrange))
+        XCTAssertTrue(MapViewModel.markerTintColor(for: .unverified).isEqual(UIColor.systemGray))
+    }
+
+    // MARK: - signature（お気に入り・分類の変化を再描画のトリガーに含める, 設計書2）
+
+    func test_signatureはお気に入りの変化で異なる値になる() {
+        let item = makeItem(distanceMeters: 100)
+        let withoutFavorite = MapViewModel.signature(of: [item], favoriteIDs: [])
+        let withFavorite = MapViewModel.signature(of: [item], favoriteIDs: [item.cafe.id])
+        XCTAssertNotEqual(withoutFavorite, withFavorite)
     }
 }
