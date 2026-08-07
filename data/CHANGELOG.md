@@ -512,3 +512,113 @@
 - ➕ 追加: 魚がし どまん中 神楽坂店
 - ➕ 追加: 麦酒堂 KASUGAI
 - ➕ 追加: 麺恋処 爆龍
+
+## 2026-08-07 14:24 — 追加 0 / 変更 103 / 削除 0
+- ✏️ 変更: & OIMO TOKYO CAFE 中目黒店（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: AFFIDAMENTO BAGEL（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: ARMWOOD COTTAGE(アームウッドコテージ)（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: Aoi Coffee Stand（dog_amenities, dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: Areverie TERRACE Ebisu(アレヴェリー テラス エビス)（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: BON Cafe（ボンカフェ）（instagram_post_url）
+- ✏️ 変更: BONDI CAFE Nakameguro（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: BURG HOLIC(バーグホリック)（instagram_post_url）
+- ✏️ 変更: Bowery Kitchen（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: CAFE CHOU CHOU(シュシュ)（instagram_post_url）
+- ✏️ 変更: Cafe Sadiiq（カフェ サディーク）（instagram_post_url）
+- ✏️ 変更: Cafe&Bistro Shelty（instagram_post_url）
+- ✏️ 変更: Cafe&Diner KHB（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: DOG DEPT + CAFE 浅草隅田川テラス店（dog_amenities, dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: ENRICH（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: Egoland Cafe Akihabara（instagram_post_url）
+- ✏️ 変更: FRIEND MONSTER(フレンドモンスター)（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: FUNGO 三宿本店（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: Family Restaurant POT 大泉町店（instagram_post_url）
+- ✏️ 変更: Farm to table De Salita(ファーム トゥー テーブル デ サリータ)（instagram_post_url）
+- ✏️ 変更: GOOD MORNING CAFE 中野セントラルパーク（instagram_post_url）
+- ✏️ 変更: GREEN BROTHERS 麻布十番店（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: HANAKADO(ハナカド)（instagram_post_url）
+- ✏️ 変更: HIGHBURY -THE HOME OF BEER-(ハイバリー)（instagram_post_url）
+- ✏️ 変更: Italian Kitchen VANSAN 祖師ヶ谷大蔵店（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: JIYUGAOKA BURGER(自由が丘バーガー)（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: KOMAZAWA PARK CAFE（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: KZ House(ケージーハウス)（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: LUSH COFFEE ROASTER&LABORATORY（instagram_post_url, dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: Le Coquillage（ル コキヤージュ）（instagram_post_url）
+- ✏️ 変更: Les deux Bleue ららぽーと豊洲店（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: MEAT×WINE BISTRO DOMANNAKA（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: MERRY and BRIGHT（instagram_post_url）
+- ✏️ 変更: MILLS COFFEE(ミルズコーヒー)（dog_amenities, dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: MIO（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: MR.HIPPO COFFEE 市ヶ谷店（instagram_post_url）
+- ✏️ 変更: MozekSol(モゼクソール)（instagram_post_url）
+- ✏️ 変更: Mt.TAKAO BASE CAMP CAFE&BAR（instagram_post_url）
+- ✏️ 変更: NISHIann cafe(西庵カフェ)（instagram_post_url）
+- ✏️ 変更: Onigily Cafe(オニギリーカフェ)（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: PACE ITALIAN LOUNGE（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: PENNY LANE ソラマチ店（instagram_post_url）
+- ✏️ 変更: PERFECT BEER KITCHEN 四ツ谷（instagram_post_url）
+- ✏️ 変更: PIZZERIA & BAR NOHGA（NOHGA HOTEL AKIHABARA TOKYO内）（instagram_post_url）
+- ✏️ 変更: Paradise Poke蔵前（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: Pcm's Cafe（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: RESTAURANT 1899 OCHANOMIZU（instagram_post_url, sources）
+- ✏️ 変更: ROJU NAKAMEGURO（dog_amenities, dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: Restaurant Bar BORNE（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: SHARK COFFEE（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: SUNNY's cafe＆surf（サニーズカフェ）（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: SYUNA & BANI（シュナ＆バニ）（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: Set Lip 成城店(セットリップ)（instagram_post_url）
+- ✏️ 変更: TAMAGAWA DINER(多摩川ダイナー)（dog_amenities, dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: THE BARBA TOKYO MEAT MEET（instagram_post_url）
+- ✏️ 変更: THE LINKING（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: Takuru(タクる)（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: The House of Hounds by fäfä（instagram_post_url, dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: Tokyo Kenkyo（instagram_post_url）
+- ✏️ 変更: Trattoria Monolito(トラットリア モノリート)（instagram_post_url）
+- ✏️ 変更: Whitely Cafe（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: YELLOW KOMAZAWA KOEN（instagram_post_url）
+- ✏️ 変更: anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: anea cafe 中野新橋店（instagram_post_url）
+- ✏️ 変更: bills お台場（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: bills 二子玉川（dog_amenities, dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: cafe garage Dogberry(ドッグベリー)下北沢（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: dog cafe petitchien(プティシアン)（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: good fellas（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: gufo(グーフォ)（instagram_post_url）
+- ✏️ 変更: haluuu(ハルー)（instagram_post_url）
+- ✏️ 変更: inu to hito（instagram_post_url）
+- ✏️ 変更: mum coffee（instagram_post_url）
+- ✏️ 変更: nakameguro SLOW TABLE（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: pepacafe FOREST（ペパカフェ・フォレスト）（instagram_post_url）
+- ✏️ 変更: さくらガーデン ドッグカフェ&ダイニングバー（instagram_post_url）
+- ✏️ 変更: わん!リトルガーデン（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: わんすたCafe＆酒場（instagram_post_url）
+- ✏️ 変更: アナム本格インド料理 銀座店（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: イル ピッツァイオーロ(il Pizzaiolo)（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: ウニ専門レストラン unico-co(ウニココ)（instagram_post_url）
+- ✏️ 変更: エメ(Eme)（instagram_post_url）
+- ✏️ 変更: カフェ海猫山猫（instagram_post_url）
+- ✏️ 変更: サクラカフェ&レストラン日暮里(SAKURA CAFE)（sources）
+- ✏️ 変更: シェリーズバーガーカフェ（instagram_post_url）
+- ✏️ 変更: シャテール（chatiere）（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: ステーキハウス ニューテキサス（instagram_post_url, dog_amenities, dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: タカオネ（instagram_post_url）
+- ✏️ 変更: タパス&タパス 用賀店（instagram_post_url）
+- ✏️ 変更: バンコク食堂 ポーモンコン（instagram_post_url）
+- ✏️ 変更: ブラッスリー セント・ベルナルデュス 神田(St.Bernardus)（dog_amenities, dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: プリティシングス（instagram_post_url）
+- ✏️ 変更: リキマルカフェ（sources）
+- ✏️ 変更: 八十八夜 吉祥寺店（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: 君のハンバーグを食べたい渋谷店（instagram_post_url）
+- ✏️ 変更: 土鍋炊きご飯 おこめとおかず（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: 場外焼肉 榮登庵 多摩センター店（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: 焼肉 炙りな 北千住店（dog_policy_status, last_verified, representative_source_id, sources）
+- ✏️ 変更: 犬茶屋本舗（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: 神楽坂 ラクレット&フォンデュ フロマティック（Fromatique）（instagram_post_url）
+- ✏️ 変更: 神楽坂ワインスタンド et du vin（エデュヴァン）（instagram_post_url）
+- ✏️ 変更: 自由が丘 カスタネット（dog_policy_status, dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: 雪月花（dog_policy_status, last_verified, representative_source_id, sources）
+
+## 2026-08-07 14:40 — 追加 0 / 変更 3 / 削除 0
+- ✏️ 変更: CAFE CHOU CHOU(シュシュ)（instagram_post_url）
+- ✏️ 変更: プリティシングス（instagram_post_url）
+- ✏️ 変更: 神楽坂 ラクレット&フォンデュ フロマティック（Fromatique）（instagram_post_url）
