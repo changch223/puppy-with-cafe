@@ -47,3 +47,7 @@ fastlane/test_output
 # 認証情報・ローカル設定はコミットしない（スキル/テンプレートは追跡する）
 .claude/settings.local.json
 .specify/feature.json
+
+# --- Python ---
+__pycache__/
+*.pyc
