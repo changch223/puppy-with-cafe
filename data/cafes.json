@@ -10,15 +10,15 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "店内は窓側3席のみ犬同伴可、テラス席は全席犬同伴可（小型〜大型犬いずれも可、要予約推奨）",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "店内は入口付近の一部席のみ(要予約推奨)",
       "has_conflict": true,
       "hours_text": "平日9:00〜18:00・土日祝9:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000062",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6432,
       "links": [
         {
@@ -33,7 +33,7 @@
       "longitude": 139.6958,
       "name": "& OIMO TOKYO CAFE 中目黒店",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "3012913e-4b0d-5dbd-910e-02874f8e02e1",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000062",
@@ -70,6 +70,15 @@
           "reference": "https://www.urimaru.blog/%E4%B8%AD%E7%9B%AE%E9%BB%92%E3%81%AE%E3%83%9A%E3%83%83%E3%83%88%E5%8F%AF%E3%82%AB%E3%83%95%E3%82%A7%EF%BC%81%EF%BC%86-oimo-tokyo-cafe/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000062",
+          "claimed_status": "conditional",
+          "id": "3012913e-4b0d-5dbd-910e-02874f8e02e1",
+          "provenance": "aggregated",
+          "reference": "https://inumag.jp/13744",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "中目黒"
@@ -273,14 +282,14 @@
       },
       "dog_note": "リード着用またはキャリー・カート等の使用が必須(専門サイトの案内)。",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "月〜金・祝日定休",
       "hours_text": "土日9:00〜17:00(L.O.16:30)",
       "id": "beef0000-0000-4000-8000-000000000804",
       "info_verified": "2026-08-06",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6205,
       "links": [
         {
@@ -292,7 +301,7 @@
       "name": "AFFIDAMENTO BAGEL",
       "phone": "03-6820-5325",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "0eb3dcae-d0c7-562d-a055-46b3adb9ff0d",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000804",
@@ -320,6 +329,15 @@
           "reference": "https://tabelog.com/tokyo/A1327/A132702/13195449/",
           "type": "tabelog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000804",
+          "claimed_status": "allowed",
+          "id": "0eb3dcae-d0c7-562d-a055-46b3adb9ff0d",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1327/A132702/13195449/",
+          "type": "tabelog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "聖蹟桜ヶ丘・多摩センター"
@@ -564,12 +582,12 @@
       },
       "dog_note": "大型犬可否は出典間で対立(あるブログは「不可」、別のブログ2件は「可」と紹介)のため空欄とした。同伴希望は予約時に備考欄への記載が必要(食べログ店舗情報)。平日は喫煙可・土日は禁煙との紹介あり(出典記載)。",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "id": "beef0000-0000-4000-8000-000000000263",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6885,
       "links": [
         {
@@ -580,7 +598,7 @@
       "longitude": 139.7108,
       "name": "ARMWOOD COTTAGE(アームウッドコテージ)",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "d0d6efb0-376d-57d1-a9a4-9d4129b10d0f",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000263",
@@ -626,6 +644,15 @@
           "reference": "https://tabelog.com/tokyo/A1304/A130402/13041657/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000263",
+          "claimed_status": "allowed",
+          "id": "d0d6efb0-376d-57d1-a9a4-9d4129b10d0f",
+          "provenance": "aggregated",
+          "reference": "https://withwan.life/listing/5997/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "新宿"
@@ -729,18 +756,19 @@
       "contact": "090-1819-4830",
       "description": "五反田駅西口すぐ、ホテル内にある隠れ家的なコーヒースタンド。ドッグカフェとして展開してはいないが、犬同伴での利用ができる。",
       "dog_amenities": {
+        "indoor": true,
         "terrace": true
       },
       "dog_note": "店内可否・大型犬可否の記載が出典間で分かれる(itsumo.dogは店内OK・大型犬OKと明記、doghuggyの五反田紹介記事はテラス席のみ可と記載)。要個別確認。※itsumo.dog出典は2年以上未更新の可能性（要現地再確認）",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "日・祝定休",
       "hours_text": "平日18:00〜(ラストオーダーまで)",
       "id": "beef0000-0000-4000-8000-000000000840",
       "info_verified": "2026-08-06",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.62471,
       "links": [
         {
@@ -752,7 +780,7 @@
       "name": "Aoi Coffee Stand",
       "phone": "090-1819-4830",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "4f38d162-6539-554c-a627-5958f129af4e",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000840",
@@ -771,6 +799,15 @@
           "reference": "https://doghuggy.petgo.jp/media/4262",
           "type": "blog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000840",
+          "claimed_status": "allowed",
+          "id": "4f38d162-6539-554c-a627-5958f129af4e",
+          "provenance": "aggregated",
+          "reference": "https://www.inutome.jp/spots/1856",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "五反田・大崎"
@@ -787,14 +824,14 @@
       },
       "dog_note": "大型犬可否は出典間で記載に差あり(公式サイト・petokotoは犬種を限定せず同伴可、doghuggyは小型犬の店内利用のみ記載)。要個別確認",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "hours_text": "月〜木・日・祝11:30〜22:00・金土11:30〜翌0:00",
       "id": "beef0000-0000-4000-8000-000000000102",
       "info_verified": "2026-07-17",
       "instagram_post_url": "https://www.instagram.com/reel/DGH40Qdz22y/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.65,
       "links": [
         {
@@ -810,7 +847,7 @@
       "name": "Areverie TERRACE Ebisu(アレヴェリー テラス エビス)",
       "phone": "03-5464-3721",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "c2240a1d-f14f-5a7c-8001-0847fbed3f54",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000102",
@@ -847,6 +884,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/2732",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000102",
+          "claimed_status": "allowed",
+          "id": "c2240a1d-f14f-5a7c-8001-0847fbed3f54",
+          "provenance": "aggregated",
+          "reference": "https://doghuggy.petgo.jp/dogmap/spot/2732",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "恵比寿・広尾"
@@ -1095,6 +1141,7 @@
       "hours_text": "平日11:00〜18:00(金曜のみ〜22:00)",
       "id": "beef0000-0000-4000-8000-000000000847",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/CouL2hjPJSY/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.61641,
@@ -1141,7 +1188,7 @@
       },
       "dog_note": "入店時は椅子に店側貸出のマットを使用",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "無休",
       "hours_text": "8:00〜22:00",
@@ -1149,7 +1196,7 @@
       "info_verified": "2026-07-17",
       "instagram_post_url": "https://www.instagram.com/p/DEJEEqSTL7n/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6447,
       "links": [
         {
@@ -1164,7 +1211,7 @@
       "longitude": 139.6976,
       "name": "BONDI CAFE Nakameguro",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "a8c38897-ff8e-545c-9980-0dab1e2e15f7",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000064",
@@ -1192,6 +1239,15 @@
           "reference": "https://note.com/hayaf3/n/n6c739fed420c",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000064",
+          "claimed_status": "allowed",
+          "id": "a8c38897-ff8e-545c-9980-0dab1e2e15f7",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131701/13301076/",
+          "type": "tabelog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "中目黒"
@@ -1404,6 +1460,7 @@
       "hours_text": "火〜金11:00〜15:00・17:00〜23:00／土日祝11:00〜16:00・17:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000920",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/CzGJvRYypYo/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.68827,
@@ -1635,13 +1692,13 @@
       },
       "dog_note": "店内は一部の席のみ犬同伴可",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "hours_text": "月〜金11:00〜23:00・土日祝10:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000643",
       "info_verified": "2026-08-05",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6265,
       "links": [
         {
@@ -1652,7 +1709,7 @@
       "longitude": 139.659,
       "name": "Bowery Kitchen",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "c01fedf8-5ab9-59c0-a3cd-f8480c509b81",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000643",
@@ -1680,6 +1737,15 @@
           "reference": "https://petokoto.com/articles/1425",
           "type": "blog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000643",
+          "claimed_status": "allowed",
+          "id": "c01fedf8-5ab9-59c0-a3cd-f8480c509b81",
+          "provenance": "aggregated",
+          "reference": "https://www.gowithdog.org/komazawa-park-bowery-kitchen-restrant/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -1700,6 +1766,7 @@
       "hours_text": "土日11:00〜17:00頃(近年は営業日・時間短縮の情報あり・要最新確認)",
       "id": "beef0000-0000-4000-8000-000000000827",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DaV2cvTTEXM/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.63,
@@ -2774,6 +2841,7 @@
       "hours_text": "平日9:00〜20:00・土日祝8:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000747",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/reel/DElk_X5Tyxx/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.681,
@@ -3023,6 +3091,7 @@
       "hours_text": "月・水〜金11:30〜15:00・18:00〜22:00 / 土11:30〜22:00 / 日祝11:30〜18:00",
       "id": "beef0000-0000-4000-8000-000000000904",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DCOiYXLSgOQ/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.7003,
@@ -3067,15 +3136,15 @@
         "indoor": true
       },
       "dog_note": "ペット同伴の場合は予約推奨(座席数の制限に関する記載はなし)",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "窓側のソファ席のみ犬同伴可（要予約推奨）",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "火曜定休・不定休あり",
       "hours_text": "11:30〜23:30(L.O.フード23:00・ドリンク23:00)※ランチタイム〜15:00",
       "id": "beef0000-0000-4000-8000-000000000540",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7503,
       "links": [
         {
@@ -3087,7 +3156,7 @@
       "name": "Cafe&Diner KHB",
       "phone": "03-3888-3266",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "52c643c4-6572-5ccf-816d-acbde1c8864c",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000540",
@@ -3115,6 +3184,15 @@
           "reference": "https://tonarinoleo.com/2023/02/08/tokyofoodadachileodog/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000540",
+          "claimed_status": "conditional",
+          "id": "52c643c4-6572-5ccf-816d-acbde1c8864c",
+          "provenance": "aggregated",
+          "reference": "https://kitasenjunin.com/khb",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "北千住"
@@ -3473,17 +3551,18 @@
       "description": "隅田川沿い・スカイツリー方面を望むドッグウェアブランド運営のカフェ。店内での犬同伴可能な席がある。",
       "dog_amenities": {
         "dog_menu": true,
-        "indoor": true
+        "indoor": true,
+        "terrace": true
       },
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "火曜定休",
       "hours_text": "平日12:00〜16:00・17:00〜21:00／土11:00〜21:00／日祝11:00〜20:00",
       "id": "beef0000-0000-4000-8000-000000000160",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7086,
       "links": [
         {
@@ -3495,7 +3574,7 @@
       "name": "DOG DEPT + CAFE 浅草隅田川テラス店",
       "phone": "03-5828-3936",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "6cdeb8fc-501e-5210-a45f-1c3ac60411f4",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000160",
@@ -3532,6 +3611,15 @@
           "reference": "https://www.dogdept.com/shoplist/area03_21.html",
           "type": "official_hp",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000160",
+          "claimed_status": "allowed",
+          "id": "6cdeb8fc-501e-5210-a45f-1c3ac60411f4",
+          "provenance": "aggregated",
+          "reference": "https://www.dogdept.com/shoplist/area03_21.html",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -4155,8 +4243,8 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "小型犬・中型犬のみ同伴可（大型犬不可）、ペット用マット持参必須、1組最大4頭まで",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "小型〜中型犬まで",
       "has_conflict": true,
       "holiday_note": "不定休",
@@ -4164,7 +4252,7 @@
       "id": "beef0000-0000-4000-8000-000000000481",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7113,
       "links": [
         {
@@ -4176,7 +4264,7 @@
       "name": "ENRICH",
       "phone": "03-6456-1621",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "6fe0407a-d5fe-5102-a1eb-cf9e0e627e1b",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000481",
@@ -4204,6 +4292,15 @@
           "reference": "https://www.hotpepper.jp/strJ003916545/",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000481",
+          "claimed_status": "conditional",
+          "id": "6fe0407a-d5fe-5102-a1eb-cf9e0e627e1b",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1312/A131203/13299616/",
+          "type": "tabelog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "押上・錦糸町"
@@ -4446,6 +4543,7 @@
       "hours_text": "8:00〜24:00(L.O.23:30)・年中無休",
       "id": "beef0000-0000-4000-8000-000000000942",
       "info_verified": "2026-08-07",
+      "instagram_post_url": "https://www.instagram.com/p/CzQU1IQBiK4/",
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.69746,
@@ -4640,8 +4738,8 @@
         "indoor": true
       },
       "dog_note": "マナーベルト着用またはカート・かばん内での利用で入店可・室内ドッグラン併設",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "店内奥に犬用スペース（ドッグラン）があり、そこで犬同伴可。犬用メニュー「わんバーグ」等あり。テラス席の有無は情報源に記載なし。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "月・火曜定休(不定休あり)",
       "hours_text": "水木18:00〜24:00(L.O.23:00)・金11:00〜15:00(L.O.14:00)/18:00〜24:00(L.O.23:00)・土日祝11:00〜16:00(L.O.15:00)/18:00〜24:00(L.O.23:00)",
@@ -4649,7 +4747,7 @@
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/C6z-n7Tvht8/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.57358,
       "links": [
         {
@@ -4664,7 +4762,7 @@
       "longitude": 139.7062,
       "name": "FRIEND MONSTER(フレンドモンスター)",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "b6661b89-38f7-5221-aea8-f27fd56f5fdb",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000365",
@@ -4683,6 +4781,15 @@
           "reference": "https://otakushoren.com/gourmet/139511",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000365",
+          "claimed_status": "conditional",
+          "id": "b6661b89-38f7-5221-aea8-f27fd56f5fdb",
+          "provenance": "aggregated",
+          "reference": "https://otakushoren.com/gourmet/139511",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "蒲田・田園調布"
@@ -4749,8 +4856,8 @@
         "terrace": true
       },
       "dog_note": "大型犬もテラス席なら同伴可(店内は不可)",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席（7卓16席）のみ犬同伴可、全犬種・サイズ制限なしだがリード必須。店内席は不可。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "年末年始休業",
       "hours_text": "10:00〜21:00(L.O.20:00)",
@@ -4758,7 +4865,7 @@
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/C9oJOJqTDsB/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.64176,
       "links": [
         {
@@ -4774,7 +4881,7 @@
       "name": "FUNGO 三宿本店",
       "phone": "03-3795-1144",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "845b9d23-95e7-5f14-9ea9-4441729ddb64",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000201",
@@ -4793,6 +4900,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/52",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000201",
+          "claimed_status": "conditional",
+          "id": "845b9d23-95e7-5f14-9ea9-4441729ddb64",
+          "provenance": "aggregated",
+          "reference": "https://www.honda.co.jp/dog/travel/data/shop-fungo/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "三軒茶屋・下北沢"
@@ -4811,6 +4927,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000965",
       "info_verified": "2026-08-07",
+      "instagram_post_url": "https://www.instagram.com/p/Ca_EPALPdwy/",
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.75894,
@@ -4862,6 +4979,7 @@
       "hours_text": "月〜土・祝前日 11:00〜14:59／15:00〜23:00（料理L.O.22:00）・日祝 11:00〜14:59／15:00〜22:00（料理L.O.21:00）",
       "id": "beef0000-0000-4000-8000-000000000762",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/reel/CXxv8Znl1-A/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.7013,
@@ -5004,6 +5122,7 @@
       "hours_text": "平日11:00〜22:00(料理L.O.20:30・ドリンクL.O.21:00)・土日祝8:30〜22:00(同L.O.)",
       "id": "beef0000-0000-4000-8000-000000000462",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DbuKMRQk7X8/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7095,
@@ -5099,20 +5218,20 @@
         "large_dogs": true
       },
       "dog_note": "リード必須・直接座席に乗せない・犬が食べられる食材はチキン/レタス/卵黄のみ(店舗案内として紹介記事に記載)。",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "店内同伴可。リード着用必須・犬を座席に直接乗せるのは不可。小型犬向けとされ、中型犬は要相談、大型犬は不可との目安あり。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "月〜金10:30〜21:30(L.O.21:30)・土日祝10:30〜20:30(L.O.20:30)",
       "id": "beef0000-0000-4000-8000-000000000184",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.655,
       "longitude": 139.7382,
       "name": "GREEN BROTHERS 麻布十番店",
       "phone": "03-6459-2529",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "fa09d18a-f9be-5f46-aad4-eaf9ca18e040",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000184",
@@ -5131,6 +5250,15 @@
           "reference": "https://wankonowa.com/column/2470/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000184",
+          "claimed_status": "conditional",
+          "id": "fa09d18a-f9be-5f46-aad4-eaf9ca18e040",
+          "provenance": "aggregated",
+          "reference": "https://www.innuis.com/dog/introduce/%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%96%E3%83%A9%E3%82%B6%E3%83%BC%E3%82%BA%E9%BA%BB%E5%B8%83%E5%8D%81%E7%95%AA%E5%BA%97%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "麻布・六本木"
@@ -5252,6 +5380,7 @@
       "hours_text": "8:00〜18:00",
       "id": "beef0000-0000-4000-8000-000000000701",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/DbaFUYwD0hw/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.6035,
@@ -5308,6 +5437,7 @@
       "hours_text": "月〜金17:00〜23:00・土日祝13:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000923",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DIaHskxymtA/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.68925,
@@ -5729,14 +5859,14 @@
         "terrace": true
       },
       "dog_note": "公式店舗ページは設備欄に「ペット同伴可」とのみ記載(店内・テラスの区分の明記なし)。外部の犬お出かけ紹介サイトはテラス席限定での犬同伴を案内。",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "公式店舗ページの設備・サービス欄に「テラス席」「ペット同伴可」が並記されており、テラス席での犬同伴とみられる（店内可否の明記なし）。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "11:00〜23:00(ランチ11:00〜15:00)",
       "id": "beef0000-0000-4000-8000-000000000664",
       "info_verified": "2026-08-05",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.64342,
       "links": [
         {
@@ -5752,7 +5882,7 @@
       "name": "Italian Kitchen VANSAN 祖師ヶ谷大蔵店",
       "phone": "03-5429-2073",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "8ab08447-a033-5a9c-aa80-805f4dc4f1fe",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000664",
@@ -5771,6 +5901,15 @@
           "reference": "https://petodekake.com/withdog/seijou-dog-odekake/",
           "type": "blog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000664",
+          "claimed_status": "conditional",
+          "id": "8ab08447-a033-5a9c-aa80-805f4dc4f1fe",
+          "provenance": "aggregated",
+          "reference": "https://vansan-ltd.jp/vansan/vansan-soshigayaookura/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "成城・祖師ヶ谷大蔵"
@@ -5829,14 +5968,14 @@
         "terrace": true
       },
       "dog_note": "屋上テラス席のみ犬同伴可・店内不可(公式は詳細は問合せ要とのみ案内)",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "公式サイトに「ペット同伴OK」と記載。ブログではテラス席での犬同伴の実例が紹介されている。詳細な制限は要問合せとの案内。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "月〜金11:00〜21:00(L.O.20:30)・土日祝10:00〜21:00(L.O.20:30)",
       "id": "beef0000-0000-4000-8000-000000000015",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6078,
       "links": [
         {
@@ -5848,7 +5987,7 @@
       "name": "JIYUGAOKA BURGER(自由が丘バーガー)",
       "phone": "050-5485-3534",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "58b1406d-75c3-58a4-a7a7-b52c7e916c32",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000015",
@@ -5876,6 +6015,15 @@
           "reference": "https://petokoto.com/articles/1102",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000015",
+          "claimed_status": "conditional",
+          "id": "58b1406d-75c3-58a4-a7a7-b52c7e916c32",
+          "provenance": "aggregated",
+          "reference": "https://ghzt100.gorp.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "自由が丘"
@@ -6108,19 +6256,19 @@
         "large_dogs": true
       },
       "dog_note": "店内は窓側の席のみ犬同伴可・カフェマット持参必須・ペットへのおやつ提供は禁止(水提供あり)",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "2024年10月時点の記事では、大型犬も同伴可・店内は窓側席のみ利用可とされる。2025年12月更新の別メディア記事でも「ペット同伴：可」と記載（詳細条件の記載なし）。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "平日8:00〜18:00・土日祝8:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000642",
       "info_verified": "2026-08-05",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6203,
       "longitude": 139.6628,
       "name": "KOMAZAWA PARK CAFE",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "ec822354-c4b5-51e7-8133-9931bd5b1169",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000642",
@@ -6157,6 +6305,15 @@
           "reference": "https://magazine.cainz.com/wanqol/articles/komazawacafe_selection",
           "type": "blog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000642",
+          "claimed_status": "conditional",
+          "id": "ec822354-c4b5-51e7-8133-9931bd5b1169",
+          "provenance": "aggregated",
+          "reference": "https://wankonowa.com/column/1682/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -6218,20 +6375,20 @@
       },
       "dog_note": "トイレのしつけ・予防接種・無駄吠えのしつけ必須・ヒート中不可・リード使用/カフェマット持参必須(貸出あり)",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "不定休",
       "hours_text": "7:00〜21:00",
       "id": "beef0000-0000-4000-8000-000000000565",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.66288,
       "longitude": 139.879,
       "name": "KZ House(ケージーハウス)",
       "phone": "03-3689-1855",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "d14a999d-8f90-5dcd-966c-40017da43b5f",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000565",
@@ -6250,6 +6407,15 @@
           "reference": "https://www.ekiten.jp/shop_33196203/",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000565",
+          "claimed_status": "allowed",
+          "id": "d14a999d-8f90-5dcd-966c-40017da43b5f",
+          "provenance": "aggregated",
+          "reference": "https://itsumo.dog/kzhouse/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "葛飾・江戸川"
@@ -6562,14 +6728,15 @@
       },
       "dog_note": "店内奥はガラス扉で仕切られた犬同伴専用スペース・外壁沿いに小さなテラス席あり(混雑時は入店できない場合あり)",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "年中無休",
       "hours_text": "9:00〜20:00(L.O.料理18:00)",
       "id": "beef0000-0000-4000-8000-000000000541",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DbiBTZuvc0P/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7505,
       "links": [
         {
@@ -6585,7 +6752,7 @@
       "name": "LUSH COFFEE ROASTER&LABORATORY",
       "phone": "03-3881-3558",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "9b16d294-64fc-579a-8cd2-0213fec65799",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000541",
@@ -6604,6 +6771,15 @@
           "reference": "https://tabelog.com/tokyo/A1324/A132402/13263965/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000541",
+          "claimed_status": "allowed",
+          "id": "9b16d294-64fc-579a-8cd2-0213fec65799",
+          "provenance": "aggregated",
+          "reference": "https://inuyume.com/lush-coffee-kitasenjyu/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "北千住"
@@ -6750,6 +6926,7 @@
       "hours_text": "平日ランチ11:30〜15:00(LO14:00) / 土日祝ランチ11:30〜16:00(LO14:30) / ディナー18:00〜22:00(LO20:00)",
       "id": "beef0000-0000-4000-8000-000000000908",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/Cv508kYSGE-/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.70128,
@@ -6955,14 +7132,14 @@
       },
       "dog_note": "店内は犬のみペット同伴可(猫等の他ペットは不可)・テラスでの可否は出典に記載なし",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "不定休(ららぽーとに準ずる)",
       "hours_text": "11:00〜22:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000145",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.65627,
       "links": [
         {
@@ -6974,7 +7151,7 @@
       "name": "Les deux Bleue ららぽーと豊洲店",
       "phone": "03-3536-8326",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "12aa9c55-8a27-51b4-a2f8-21adc582e9a1",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000145",
@@ -7002,6 +7179,15 @@
           "reference": "https://mitsui-shopping-park.com/lalaport/toyosu/shopguide/700329.html",
           "type": "official_hp",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000145",
+          "claimed_status": "allowed",
+          "id": "12aa9c55-8a27-51b4-a2f8-21adc582e9a1",
+          "provenance": "aggregated",
+          "reference": "https://www.ccinc-love.com/lesdeuxbleue/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "お台場・豊洲"
@@ -7146,20 +7332,20 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "小型犬・中型犬は基本的に店内同伴可、大型犬は応相談。利用前に必ず事前相談が必要。飼い主の膝の上・床・椅子など自由なスタイルで同伴可。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "日曜・祝日定休",
       "hours_text": "平日11:30〜14:30・17:00〜23:00／土15:00〜23:00／日祝休業",
       "id": "beef0000-0000-4000-8000-000000000300",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7095,
       "longitude": 139.7785,
       "name": "MEAT×WINE BISTRO DOMANNAKA",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "bba46747-493f-529b-8811-f1d581246d17",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000300",
@@ -7178,6 +7364,15 @@
           "reference": "https://petlife.asia/petcafe/33/",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000300",
+          "claimed_status": "conditional",
+          "id": "bba46747-493f-529b-8811-f1d581246d17",
+          "provenance": "aggregated",
+          "reference": "https://petlife.asia/petcafe/33/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "上野・谷根千"
@@ -7199,6 +7394,7 @@
       "hours_text": "11:00〜18:00(当面の間)",
       "id": "beef0000-0000-4000-8000-000000000621",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DbqKa4qgeRr/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6398,
@@ -7311,16 +7507,17 @@
       "contact": null,
       "description": "千住大橋駅徒歩3分ほどのベーカリーカフェ。テラス席でペット同伴が可能で、店内は木曜のみ同伴可能との情報がある。",
       "dog_amenities": {
+        "indoor": true,
         "terrace": true
       },
       "dog_note": "店内同伴は木曜のみとの専門サイト情報あり(要確認)。犬用フックなど店内外の設備の案内も別出典にあり",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席は犬同伴可。店内同伴は木曜日のみ限定。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "id": "beef0000-0000-4000-8000-000000000547",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7432,
       "links": [
         {
@@ -7331,7 +7528,7 @@
       "longitude": 139.7968,
       "name": "MILLS COFFEE(ミルズコーヒー)",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "7a9614d7-8c15-5a60-a50a-4fbba1249406",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000547",
@@ -7359,6 +7556,15 @@
           "reference": "https://tabelog.com/tokyo/A1324/A132402/13261990/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000547",
+          "claimed_status": "conditional",
+          "id": "7a9614d7-8c15-5a60-a50a-4fbba1249406",
+          "provenance": "aggregated",
+          "reference": "https://life.one-me.jp/shop/1102",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "北千住"
@@ -7375,13 +7581,13 @@
       },
       "dog_note": "カートでの入店も可能だが混雑時は犬の頭数・カートの有無により入店を断られる場合があるため予約時の事前確認を推奨",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "hours_text": "月〜日11:30〜15:00(L.O.14:15)・18:00〜22:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000644",
       "info_verified": "2026-08-05",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.63,
       "links": [
         {
@@ -7393,7 +7599,7 @@
       "name": "MIO",
       "phone": "03-6326-2989",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "49d06b28-0f40-5f34-89e8-827df17f4597",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000644",
@@ -7430,6 +7636,15 @@
           "reference": "https://tabelog.com/tokyo/A1317/A131707/13161648/",
           "type": "tabelog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000644",
+          "claimed_status": "allowed",
+          "id": "49d06b28-0f40-5f34-89e8-827df17f4597",
+          "provenance": "aggregated",
+          "reference": "https://www.go-with-pet.com/news_tfJyGemDj.html",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -7535,6 +7750,7 @@
       "hours_text": "平日8:00〜20:00・土日祝10:00〜20:00",
       "id": "beef0000-0000-4000-8000-000000000930",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DVWD_z5E7BB/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.69146,
@@ -7816,6 +8032,7 @@
       "hours_text": "火〜金11:00〜19:00・土12:00〜21:00・日祝12:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000624",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DbQZCMRTTIs/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.665,
@@ -7957,6 +8174,7 @@
       "hours_text": "平日8:00〜20:00・土日祝7:00〜20:00",
       "id": "beef0000-0000-4000-8000-000000000821",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DbpbTi_CDNT/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.6275,
@@ -8059,6 +8277,7 @@
       "hours_text": "11:00〜18:00(売り切れ次第終了)",
       "id": "beef0000-0000-4000-8000-000000000683",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/DbdOs4Uzv8w/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.625,
@@ -8250,14 +8469,14 @@
       },
       "dog_note": "カート利用は入口付近の席のみ・犬用メニュー/お水サービスなし",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "不定休",
       "hours_text": "8:00〜16:00",
       "id": "beef0000-0000-4000-8000-000000000061",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6479,
       "links": [
         {
@@ -8273,7 +8492,7 @@
       "name": "Onigily Cafe(オニギリーカフェ)",
       "phone": "03-5708-5342",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "9bcbb3a6-cf39-51de-9c08-26260a2a592b",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000061",
@@ -8292,6 +8511,15 @@
           "reference": "https://wankonowa.com/column/1858/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000061",
+          "claimed_status": "allowed",
+          "id": "9bcbb3a6-cf39-51de-9c08-26260a2a592b",
+          "provenance": "aggregated",
+          "reference": "https://wankonowa.com/column/1858/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "中目黒"
@@ -8463,14 +8691,14 @@
       },
       "dog_note": "ドッグメニュー・おやつ・お水・ブランケット貸出あり(専門サイト記載)。犬用トイレ設備はないため来店前の排泄推奨。",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "無休(専門サイト記載)",
       "hours_text": "17:00〜翌5:00(専門サイト記載)",
       "id": "beef0000-0000-4000-8000-000000000185",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6518,
       "links": [
         {
@@ -8482,7 +8710,7 @@
       "name": "PACE ITALIAN LOUNGE",
       "phone": "03-6459-4551",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "e22e759d-45b2-51b8-b5ad-124b5f7d4190",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000185",
@@ -8510,6 +8738,15 @@
           "reference": "https://itsumo.dog/tokyo/st/9930123/cafe/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000185",
+          "claimed_status": "allowed",
+          "id": "e22e759d-45b2-51b8-b5ad-124b5f7d4190",
+          "provenance": "aggregated",
+          "reference": "https://itsumo.dog/9029/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "麻布・六本木"
@@ -8583,6 +8820,7 @@
       "hours_text": "ベーカリー9:00〜21:00・パブリック17:00〜22:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000482",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DaUAsWJBjjo/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7101,
@@ -8639,6 +8877,7 @@
       "hours_text": "月〜金17:00〜23:00・土日祝15:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000928",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/CykwT-Mv2jL/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.68651,
@@ -8735,6 +8974,7 @@
       "hours_text": "朝食7:00〜10:00(L.O.9:30)・ランチ11:30〜15:00(L.O.15:00)・カフェ14:30〜17:00・ディナー17:30〜23:00(L.O.22:00、日曜は〜22:00・L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000941",
       "info_verified": "2026-08-07",
+      "instagram_post_url": "https://www.instagram.com/p/C9hQko3yH6t/",
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.70089,
@@ -8885,18 +9125,18 @@
       },
       "dog_note": "混雑状況により店内同伴に制限がある場合がある（出典記載）",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "id": "beef0000-0000-4000-8000-000000000163",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.704,
       "longitude": 139.79,
       "name": "Paradise Poke蔵前",
       "phone": "050-5571-0519",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "071dd88e-2acc-55ff-acb9-a6993dcaf141",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000163",
@@ -8924,6 +9164,15 @@
           "reference": "https://wankonowa.com/column/dogcafe/1645/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000163",
+          "claimed_status": "allowed",
+          "id": "071dd88e-2acc-55ff-acb9-a6993dcaf141",
+          "provenance": "aggregated",
+          "reference": "https://www.go-with-pet.com/news_b2Dy4CHiok_109.html",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -9044,7 +9293,7 @@
       },
       "dog_note": "いぬちず(doghuggy)では店内対応犬種を小型犬と紹介(他出典は制限記載なし)。手作りドッグメニューあり。",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "火曜・水曜・木曜定休",
       "hours": {
@@ -9080,7 +9329,7 @@
       "id": "beef0000-0000-4000-8000-000000000500",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.77746,
       "links": [
         {
@@ -9092,7 +9341,7 @@
       "name": "Pcm's Cafe",
       "phone": "03-3598-1355",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "4f892c5b-fcdb-5aeb-90f7-91eccb50e4af",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000500",
@@ -9120,6 +9369,15 @@
           "reference": "https://tabelog.com/tokyo/A1323/A132305/13126936/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000500",
+          "claimed_status": "allowed",
+          "id": "4f892c5b-fcdb-5aeb-90f7-91eccb50e4af",
+          "provenance": "aggregated",
+          "reference": "https://www.honda.co.jp/dog/travel/data/pcms/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "赤羽・王子"
@@ -9389,6 +9647,7 @@
       "hours_text": "ランチ11:00〜14:00(L.O.13:30)・カフェ14:00〜17:30(L.O.17:00)・ディナー17:00〜22:00(L.O.21:30)",
       "id": "beef0000-0000-4000-8000-000000000940",
       "info_verified": "2026-08-07",
+      "instagram_post_url": "https://www.instagram.com/p/DbuRgrsj9VM/",
       "is_closed": false,
       "last_verified": null,
       "latitude": 35.69637,
@@ -9429,6 +9688,15 @@
           "provenance": "aggregated",
           "reference": "https://tabelog.com/tokyo/A1310/A131002/13170863/",
           "type": "tabelog",
+          "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000940",
+          "claimed_status": "conditional",
+          "id": "a3114d1f-c21d-5eec-97ec-360f8a55bb80",
+          "provenance": "aggregated",
+          "reference": "https://1899.jp/ochanomizu/dog.html",
+          "type": "official_hp",
           "verified_at": "2026-08-07"
         }
       ],
@@ -9535,11 +9803,12 @@
       "contact": null,
       "description": "築33年の倉庫をリノベーションした天井高4.2mのカフェ&レンタルスペース。",
       "dog_amenities": {
+        "indoor": true,
         "terrace": true
       },
       "dog_note": "店内同伴可否は出典間で相違: wankonowa・odekake・imakoappは店内可、いぬなび(inunavi)はテラス席のみ・店内不可と明記。要一次確認",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "小型犬は店内・テラス同伴可。大型犬はテラスのみ。イスの上への着座不可。",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "イスの上はNG・犬種は要問い合わせ",
       "has_conflict": true,
       "hours_text": "10:00〜20:00",
@@ -9547,7 +9816,7 @@
       "info_verified": "2026-07-17",
       "instagram_post_url": "https://www.instagram.com/reel/DDjSaVpPX8n/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6452,
       "links": [
         {
@@ -9562,7 +9831,7 @@
       "longitude": 139.6971,
       "name": "ROJU NAKAMEGURO",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "1e9b5486-fa25-5c7c-bce6-173635fc89dd",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000063",
@@ -9599,6 +9868,15 @@
           "reference": "https://inunavi.plan-b.co.jp/inucafe_nakameguro/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000063",
+          "claimed_status": "conditional",
+          "id": "1e9b5486-fa25-5c7c-bce6-173635fc89dd",
+          "provenance": "aggregated",
+          "reference": "https://wankonowa.com/column/1858/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "中目黒"
@@ -9722,15 +10000,15 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席のみペット同伴可。店内は不可。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "月木日18:00〜23:30(L.O.22:30)・金土18:00〜24:00(L.O.23:00)・火〜金ランチ12:00〜14:30(L.O.14:00)",
       "id": "beef0000-0000-4000-8000-000000000328",
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/reel/Cp7TkS4gh0k/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6565,
       "links": [
         {
@@ -9746,7 +10024,7 @@
       "name": "Restaurant Bar BORNE",
       "phone": "050-5488-6529",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "bc33df8d-9809-557b-9bf7-ac2b07a250a1",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000328",
@@ -9765,6 +10043,15 @@
           "reference": "https://www.hotpepper.jp/strJ001009030/appearance/",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000328",
+          "claimed_status": "conditional",
+          "id": "bc33df8d-9809-557b-9bf7-ac2b07a250a1",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ001009030/appearance/",
+          "type": "other",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "渋谷駅周辺"
@@ -10031,8 +10318,8 @@
         "terrace": true
       },
       "dog_note": "ソファー席は犬同伴不可・ワンちゃん用マット貸出とお水の用意あり",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "ソファ席以外は犬同伴可（ソファ席は不可）。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "無休",
       "hours_text": "9:00〜19:00(L.O.18:30)",
@@ -10040,7 +10327,7 @@
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/reel/Ctq3JKsJAa0/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6635,
       "links": [
         {
@@ -10059,7 +10346,7 @@
       "longitude": 139.6982,
       "name": "SHARK COFFEE",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "68666ca3-91e9-5c6c-9fbb-9aff9fd756c2",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000320",
@@ -10087,6 +10374,15 @@
           "reference": "https://www.hirorocafe.com/entry/2023/04/14/%E6%B8%8B%E8%B0%B7%E3%80%8CSHARK_COFFEE%EF%BC%88%E3%82%B7%E3%83%A3%E3%83%BC%E3%82%AF%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%EF%BC%89%E3%80%8D%E3%80%9C%E7%8A%AC%E5%90%8C%E4%BC%B4OK%E3%81%AA%E3%83%B4%E3%82%A3",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000320",
+          "claimed_status": "conditional",
+          "id": "68666ca3-91e9-5c6c-9fbb-9aff9fd756c2",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1303/A130301/13283725/",
+          "type": "tabelog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "渋谷駅周辺"
@@ -10152,8 +10448,8 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "小型犬・中型犬は店内・テラス共に同伴可。大型犬は来店前の電話相談が必要",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "大型犬は要相談(来店前に電話確認を店舗が案内)",
       "has_conflict": true,
       "holiday_note": "月曜定休",
@@ -10161,7 +10457,7 @@
       "id": "beef0000-0000-4000-8000-000000000122",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.682,
       "links": [
         {
@@ -10173,7 +10469,7 @@
       "name": "SUNNY's cafe＆surf（サニーズカフェ）",
       "phone": "03-5875-9558",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "bccad2cd-c9cc-5c53-ad0a-cbfd25cc15b9",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000122",
@@ -10192,6 +10488,15 @@
           "reference": "https://tabelog.com/tokyo/A1313/A131303/13251582/",
           "type": "tabelog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000122",
+          "claimed_status": "conditional",
+          "id": "bccad2cd-c9cc-5c53-ad0a-cbfd25cc15b9",
+          "provenance": "aggregated",
+          "reference": "https://petlife.asia/petcafe/531/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "清澄白河・門前仲町"
@@ -10206,15 +10511,15 @@
         "indoor": true
       },
       "dog_note": "出典により「大型犬OK」「入店範囲は小型犬」の記載に相違があり要確認",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "ドッググッズショップ併設のドッグカフェとして店内犬同伴可。小型犬中心とする情報源が多いが、大型犬可否は情報源により記載が分かれる（要事前確認）",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "火曜定休",
       "hours_text": "11:00〜19:00(L.O.18:30)",
       "id": "beef0000-0000-4000-8000-000000000046",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7008,
       "links": [
         {
@@ -10226,7 +10531,7 @@
       "name": "SYUNA & BANI（シュナ＆バニ）",
       "phone": "0422-49-0790",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "aa7a79da-1f75-54d4-a222-f33612fb0ac6",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000046",
@@ -10254,6 +10559,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/291",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000046",
+          "claimed_status": "conditional",
+          "id": "aa7a79da-1f75-54d4-a222-f33612fb0ac6",
+          "provenance": "aggregated",
+          "reference": "https://doghuggy.petgo.jp/dogmap/spot/291",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "吉祥寺"
@@ -10427,6 +10741,7 @@
       "hours_text": "11:00〜15:00・17:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000662",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/DaE9bOJBvB5/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.64093,
@@ -10619,10 +10934,11 @@
       "contact": null,
       "description": "多摩川沿いのロケーションが魅力のダイナー。テラス席でペット同伴が可能。",
       "dog_amenities": {
+        "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席のみ犬同伴可（店内不可）",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "月曜定休(不定休あり)",
       "hours_text": "火〜日11:30〜23:00(L.O.22:00)・祝11:30〜21:00(L.O.20:00)",
@@ -10630,7 +10946,7 @@
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/CyCnKwxPPJk/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.58735,
       "links": [
         {
@@ -10650,7 +10966,7 @@
       "name": "TAMAGAWA DINER(多摩川ダイナー)",
       "phone": "03-5483-0770",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "8d70a146-3ec7-5c80-b298-22a40956971c",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000367",
@@ -10669,6 +10985,15 @@
           "reference": "https://tabelog.com/tokyo/A1317/A131704/13156072/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000367",
+          "claimed_status": "conditional",
+          "id": "8d70a146-3ec7-5c80-b298-22a40956971c",
+          "provenance": "aggregated",
+          "reference": "https://tamagawa-diner.com/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "蒲田・田園調布"
@@ -10689,6 +11014,7 @@
       "hours_text": "平日10:00〜20:30・土日10:00〜19:00・年中無休",
       "id": "beef0000-0000-4000-8000-000000000944",
       "info_verified": "2026-08-07",
+      "instagram_post_url": "https://www.instagram.com/p/DbsR5vimPez/",
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.69531,
@@ -10795,7 +11121,7 @@
       },
       "dog_note": "大型犬可否は出典間で一致せず(詳細は出典参照)・犬種条件は要問合せ",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "水曜定休",
       "hours_text": "月・火・木・金17:00〜23:00・土日祝11:00〜23:00",
@@ -10803,7 +11129,7 @@
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/C4S2ApByzHn/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6614,
       "links": [
         {
@@ -10819,7 +11145,7 @@
       "name": "THE LINKING",
       "phone": "03-6416-5882",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "26b5c953-37be-57d8-b9d8-ddc25a512bfb",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000321",
@@ -10838,6 +11164,15 @@
           "reference": "https://wankonowa.com/column/dogcafe/1351/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000321",
+          "claimed_status": "allowed",
+          "id": "26b5c953-37be-57d8-b9d8-ddc25a512bfb",
+          "provenance": "aggregated",
+          "reference": "https://wanico.jp/spots/d/97",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "渋谷駅周辺"
@@ -11259,14 +11594,14 @@
       },
       "dog_note": "1階の座席でペット入店可能と紹介(2階については記載なし)",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "月曜定休・不定休あり",
       "hours_text": "11:00〜17:00(L.O.16:30)",
       "id": "beef0000-0000-4000-8000-000000000542",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7478,
       "links": [
         {
@@ -11278,7 +11613,7 @@
       "name": "Takuru(タクる)",
       "phone": "03-6812-0641",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "d5ab0153-6a4a-521c-a50d-7839ee017c5c",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000542",
@@ -11297,6 +11632,15 @@
           "reference": "https://pet-restaurant.com/tokyo-kitasenju/",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000542",
+          "claimed_status": "allowed",
+          "id": "d5ab0153-6a4a-521c-a50d-7839ee017c5c",
+          "provenance": "aggregated",
+          "reference": "https://kitasenjunin.com/takuru",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "北千住"
@@ -11373,15 +11717,16 @@
         "terrace": true
       },
       "dog_note": "ワクチン接種済みの犬のみ・ヒート中の犬は同伴不可(専門サイト記載)",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "店内・テラス共に犬同伴可。ワクチン接種済み・無駄吠えなし・リード着用（抱っこ/テラスは不要）等の条件あり",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "大型犬はテラス・屋上席のみ(専門サイト記載)",
       "has_conflict": true,
       "hours_text": "9:00〜18:00",
       "id": "beef0000-0000-4000-8000-000000000041",
       "info_verified": "2026-07-17",
+      "instagram_post_url": "https://www.instagram.com/p/DaXiMc2KTKm/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7014,
       "links": [
         {
@@ -11393,7 +11738,7 @@
       "name": "The House of Hounds by fäfä",
       "phone": "070-6489-2020",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "c3886dc6-64c2-551f-8012-0fff75620acf",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000041",
@@ -11421,6 +11766,15 @@
           "reference": "https://pet-restaurant.com/report-thehouseofhoundsbyfafa/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000041",
+          "claimed_status": "conditional",
+          "id": "c3886dc6-64c2-551f-8012-0fff75620acf",
+          "provenance": "aggregated",
+          "reference": "https://pet-restaurant.com/report-thehouseofhoundsbyfafa/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "吉祥寺"
@@ -11503,6 +11857,7 @@
       "hours_text": "火〜土8:00〜17:00",
       "id": "beef0000-0000-4000-8000-000000000327",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DbmbInXE8Oi/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6525,
@@ -11558,6 +11913,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000665",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/Dbe-PU8Tr1D/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.643151,
@@ -12202,15 +12558,15 @@
         "indoor": true,
         "large_dogs": false
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "店内全席で犬同伴可。小型犬のみ対応、来店はInstagram DMでの完全予約制",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "CAFE 10:30〜18:00・BAR 18:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000322",
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/DIoJrNWzpTg/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.665,
       "links": [
         {
@@ -12221,7 +12577,7 @@
       "longitude": 139.6965,
       "name": "Whitely Cafe",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "f1623c0c-9de1-5564-99ed-2874a0d05bb7",
       "reservation": "完全予約制(Instagram DMのみ)",
       "sources": [
         {
@@ -12241,6 +12597,15 @@
           "reference": "https://popdish.jp/column/%E8%8A%B8%E8%83%BD%E4%BA%BA%E3%82%82%E9%80%9A%E3%81%86%E5%AE%8C%E5%85%A8%E4%BA%88%E7%B4%84%E5%88%B6%E3%81%AE%E3%81%8A%E3%81%97%E3%82%83%E3%82%8C%E3%82%AB%E3%83%95%E3%82%A7whitely-cafe%EF%BC%88/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000322",
+          "claimed_status": "conditional",
+          "id": "f1623c0c-9de1-5564-99ed-2874a0d05bb7",
+          "provenance": "aggregated",
+          "reference": "https://wankonowa.com/column/dogcafe/1351/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "渋谷駅周辺"
@@ -12262,6 +12627,7 @@
       "hours_text": "8:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000647",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/DaASN56viq_/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.6268,
@@ -12415,8 +12781,8 @@
         "terrace": true
       },
       "dog_note": "大型犬の受入れ度合いは出典により評価が分かれる(要個別確認)",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "店内・テラス共に犬同伴可（リードフック・犬用カフェマット・お水サービスあり）。サイズ・犬種の制限詳細は店舗へ要確認（小型犬向けとの記載あり）",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "年末年始のみ休業",
       "hours_text": "11:30〜22:00(フードL.O.21:00・ドリンクL.O.21:30)",
@@ -12424,7 +12790,7 @@
       "info_verified": "2026-07-17",
       "instagram_post_url": "https://www.instagram.com/p/DEHkfmLTyAF/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6715,
       "links": [
         {
@@ -12436,7 +12802,7 @@
       "name": "anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）",
       "phone": "03-6458-5527",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "b61364b9-3764-5953-9176-3bf92eaf8e42",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000123",
@@ -12455,6 +12821,15 @@
           "reference": "https://note.com/loyal_flax3251/n/nc17396730bee",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000123",
+          "claimed_status": "conditional",
+          "id": "b61364b9-3764-5953-9176-3bf92eaf8e42",
+          "provenance": "aggregated",
+          "reference": "https://www.innuis.com/dog/introduce/%E3%82%A2%E3%83%8D%E3%82%AB%E3%83%95%E3%82%A7%E3%83%A2%E3%83%B3%E3%83%8A%E3%82%AB%E3%83%B4%E3%82%A3%E3%83%AC%E3%83%83%E3%82%B8%E6%B1%9F%E6%9D%B1%E5%8C%BA%E5%AF%8C%E5%B2%A1",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "清澄白河・門前仲町"
@@ -12478,6 +12853,7 @@
       "hours_text": "11:30〜26:00",
       "id": "beef0000-0000-4000-8000-000000000461",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DTM_go4k8ap/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6905,
@@ -12651,14 +13027,14 @@
         "terrace": true
       },
       "dog_note": "店内利用時はペットゲージまたはペットカートの使用が必須(デックス公式)・テラス席は終日同伴可",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席は犬同伴可。店内は2025年11月の改装以降、ペットカート使用時のみ同伴可",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "平日9:00〜22:00・土日祝8:00〜22:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000141",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.62916,
       "links": [
         {
@@ -12670,7 +13046,7 @@
       "name": "bills お台場",
       "phone": "03-3599-2100",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "8ae4574b-0962-528d-ba69-03019f88caa1",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000141",
@@ -12689,6 +13065,15 @@
           "reference": "https://www.odaiba-decks.com/shop/detail/13052000?tenant_cd=13052000",
           "type": "official_hp",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000141",
+          "claimed_status": "conditional",
+          "id": "8ae4574b-0962-528d-ba69-03019f88caa1",
+          "provenance": "aggregated",
+          "reference": "https://www.billsjapan.com/en/locations/odaiba",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "お台場・豊洲"
@@ -12698,15 +13083,19 @@
       "area": "tokyo",
       "contact": null,
       "description": "玉川高島屋内にあるオーストラリア発のカフェ&レストラン。国内bills屈指の広さのテラス席が特徴で、犬同伴可否については出典によって案内が分かれている。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
       "dog_note": "出典間で情報が対立: 公式サイト・「ペット可まとめ」等はテラス席でのペット同伴可(補助犬以外は要問合せ)と案内する一方、一休.comの店舗情報欄は「同伴不可」と明記。運営側での実地確認を推奨(単独の否定情報のため未登録のまま可否欄は空欄とした)。",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "補助犬以外のペットはテラス席のみ同伴可（店内不可）",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "8:30〜21:00(フードL.O.20:00・ドリンクL.O.20:30)",
       "id": "beef0000-0000-4000-8000-000000000020",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6127,
       "links": [
         {
@@ -12718,7 +13107,7 @@
       "name": "bills 二子玉川",
       "phone": "03-3708-3377",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "aca7f6fb-649f-5fe2-a6a8-40e7eef2b13b",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000020",
@@ -12755,6 +13144,15 @@
           "reference": "https://restaurant.ikyu.com/105380",
           "type": "other",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000020",
+          "claimed_status": "conditional",
+          "id": "aca7f6fb-649f-5fe2-a6a8-40e7eef2b13b",
+          "provenance": "aggregated",
+          "reference": "https://www.billsjapan.com/en/locations/futakotamagawa",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "二子玉川"
@@ -13000,14 +13398,14 @@
       },
       "dog_note": "ドッグカフェではないため犬用メニュー等の特別サービスは無し(詳細は要問合せ)。大型犬は要問合せ(petokoto)",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "無休",
       "hours_text": "モーニング9:00〜11:00・ランチ11:00〜17:30・ディナー17:30〜24:00",
       "id": "beef0000-0000-4000-8000-000000000204",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.66313,
       "links": [
         {
@@ -13019,7 +13417,7 @@
       "name": "cafe garage Dogberry(ドッグベリー)下北沢",
       "phone": "050-5488-2500",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "976c148b-0cd7-5ee0-b65b-b0579fe71519",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000204",
@@ -13056,6 +13454,15 @@
           "reference": "https://pet-platform.jp/2021/03/31/20210331/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000204",
+          "claimed_status": "allowed",
+          "id": "976c148b-0cd7-5ee0-b65b-b0579fe71519",
+          "provenance": "aggregated",
+          "reference": "https://ggs6200.gorp.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "三軒茶屋・下北沢"
@@ -13191,14 +13598,14 @@
       },
       "dog_note": "テラス席・ロフト席は各6頭まで(店内は頭数の明記なし)。店内ではリードを手に持つか席の脚等に固定・マーキング癖がある犬はマナーベルト着用・排泄物は持ち帰り必須(すべて公式サイト)。",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "月曜定休(変更あり)",
       "hours_text": "11:30〜17:00(L.O.16:00)",
       "id": "beef0000-0000-4000-8000-000000000401",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.5575,
       "links": [
         {
@@ -13210,7 +13617,7 @@
       "name": "dog cafe petitchien(プティシアン)",
       "phone": "042-725-0919",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "69e2fbf1-e696-51c8-9d3d-083858a00057",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000401",
@@ -13238,6 +13645,15 @@
           "reference": "https://petokoto.com/articles/1631",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000401",
+          "claimed_status": "allowed",
+          "id": "69e2fbf1-e696-51c8-9d3d-083858a00057",
+          "provenance": "aggregated",
+          "reference": "https://dogcafe-petitchien.com/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "町田"
@@ -13357,14 +13773,14 @@
       },
       "dog_note": "3階のため小型犬はカート等での来店が望ましい",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "日曜定休",
       "hours_text": "月〜土12:00〜16:00・18:00〜翌5:00",
       "id": "beef0000-0000-4000-8000-000000000323",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6559,
       "links": [
         {
@@ -13376,7 +13792,7 @@
       "name": "good fellas",
       "phone": "03-6277-5543",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "0292b4e2-e18c-54e9-88d5-c3c8b6759a10",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000323",
@@ -13395,6 +13811,15 @@
           "reference": "https://tabelog.com/en/tokyo/A1303/A130301/13156028/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000323",
+          "claimed_status": "allowed",
+          "id": "0292b4e2-e18c-54e9-88d5-c3c8b6759a10",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/en/tokyo/A1303/A130301/13156028/",
+          "type": "tabelog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "渋谷駅周辺"
@@ -13418,6 +13843,7 @@
       "hours_text": "10:30〜19:00",
       "id": "beef0000-0000-4000-8000-000000000463",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/Da9ZM_YEh7O/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7185,
@@ -13477,6 +13903,7 @@
       "hours_text": "平日7:30〜16:30(水曜のみ10:30〜)・土日祝7:30〜18:00",
       "id": "beef0000-0000-4000-8000-000000000703",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/reel/DVat1CNE9xZ/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.6055,
@@ -13672,6 +14099,7 @@
       "hours_text": "月・火・金 15:00〜20:00(L.O.19:00)／土・日 11:00〜20:00(L.O.19:00)",
       "id": "beef0000-0000-4000-8000-000000000982",
       "info_verified": "2026-08-07",
+      "instagram_post_url": "https://www.instagram.com/p/DMzhZO3RQgQ/",
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.6646,
@@ -13865,6 +14293,7 @@
       "hours_text": "平日8:30〜18:00・土日11:00〜18:00",
       "id": "beef0000-0000-4000-8000-000000000325",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DbfZRgFBwZ7/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6549,
@@ -13909,14 +14338,14 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席は全席犬同伴可。店内は犬同伴可の席が1席のみ（ソファ席）で要事前予約",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "ランチ11:00〜17:00・ディナー17:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000065",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6456,
       "links": [
         {
@@ -13927,7 +14356,7 @@
       "longitude": 139.6996,
       "name": "nakameguro SLOW TABLE",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "52400bb3-6788-53b9-a971-541d425db463",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000065",
@@ -13946,6 +14375,15 @@
           "reference": "https://www.advance-real.co.jp/blog/petcafe-nakameguro/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000065",
+          "claimed_status": "conditional",
+          "id": "52400bb3-6788-53b9-a971-541d425db463",
+          "provenance": "aggregated",
+          "reference": "https://good-life-with-dog.com/20181129_001/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "中目黒"
@@ -14102,6 +14540,7 @@
       "hours_text": "月〜金12:00〜22:00・土日祝11:30〜22:00",
       "id": "beef0000-0000-4000-8000-000000000742",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DM6rHarTGXC/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.6975,
@@ -14618,6 +15057,7 @@
       "hours_text": "月〜水11:00〜19:00・金土12:00〜23:00・日祝11:00〜16:00",
       "id": "beef0000-0000-4000-8000-000000000360",
       "info_verified": "2026-07-18",
+      "instagram_post_url": "https://www.instagram.com/p/DbdCjXlvLTW/",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.56097,
@@ -15079,14 +15519,14 @@
       },
       "dog_note": "室内ドッグラン併設(利用無料)・リード必須(散歩エリアの一部除く。大型犬は常にリード必須)",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "holiday_note": "年末年始休業",
       "hours_text": "月〜金11:00〜15:00(L.O.14:00)/土日祝11:00〜21:00(L.O.20:00)",
       "id": "beef0000-0000-4000-8000-000000000566",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.71119,
       "links": [
         {
@@ -15098,7 +15538,7 @@
       "name": "わん!リトルガーデン",
       "phone": "03-5661-5652",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "a075e74f-c54b-5ee9-81fa-637b5641a7a7",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000566",
@@ -15117,6 +15557,15 @@
           "reference": "https://edogawa.goguynet.jp/2024/01/26/wanlittle-garden/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000566",
+          "claimed_status": "allowed",
+          "id": "a075e74f-c54b-5ee9-81fa-637b5641a7a7",
+          "provenance": "aggregated",
+          "reference": "https://one-littlegarden.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "葛飾・江戸川"
@@ -15195,6 +15644,7 @@
       "hours_text": "月〜金12:00〜23:00・土日祝10:00〜23:00(L.O.22:30)",
       "id": "beef0000-0000-4000-8000-000000000741",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/reel/CzDfu7yhpo2/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.702,
@@ -15307,13 +15757,13 @@
       },
       "dog_note": "個室での案内が基本（予約時に犬同伴の旨を伝える必要あり）",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "hours_text": "11:00〜翌3:00（ランチ11:00〜16:59・ディナー17:00〜）",
       "id": "beef0000-0000-4000-8000-000000000245",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6678,
       "links": [
         {
@@ -15325,7 +15775,7 @@
       "name": "アナム本格インド料理 銀座店",
       "phone": "03-6280-6708",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "4f322dd2-7c6b-54ce-b518-c604e906b60e",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000245",
@@ -15353,6 +15803,15 @@
           "reference": "https://mrs.living.jp/tokyo/town_gourmet/reporter/4638166",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000245",
+          "claimed_status": "allowed",
+          "id": "4f322dd2-7c6b-54ce-b518-c604e906b60e",
+          "provenance": "aggregated",
+          "reference": "https://annam-indian-restaurannt.owst.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -15408,15 +15867,15 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席のみペット同伴可（店内不可）",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "月曜定休(他不定休あり)",
       "hours_text": "火〜土11:30〜15:00・18:00〜22:30/日11:30〜15:00・18:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000202",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.64451,
       "links": [
         {
@@ -15436,7 +15895,7 @@
       "name": "イル ピッツァイオーロ(il Pizzaiolo)",
       "phone": "03-3411-5556",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "4a55c987-9d65-5a49-ba6d-492d0901ba47",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000202",
@@ -15455,6 +15914,15 @@
           "reference": "https://pet-restaurant.com/tokyo-sangendyaya/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000202",
+          "claimed_status": "conditional",
+          "id": "4a55c987-9d65-5a49-ba6d-492d0901ba47",
+          "provenance": "aggregated",
+          "reference": "https://pet-restaurant.com/tokyo-sangendyaya/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "三軒茶屋・下北沢"
@@ -15475,6 +15943,7 @@
       "hours_text": "平日11:30〜14:30・17:00〜22:30／土日祝11:30〜14:30・17:00〜21:00",
       "id": "beef0000-0000-4000-8000-000000000924",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DC_IKEIzhtc/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.68683,
@@ -15527,6 +15996,7 @@
       "hours_text": "ランチ12:00〜15:00(L.O.13:30)・ディナー18:00〜23:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000889",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DbSC9ixpxF2/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.6199,
@@ -16167,6 +16637,7 @@
       "hours_text": "火・水・金7:30〜16:00(モーニング〜ランチ)・土・日11:30〜18:00※月・木定休",
       "id": "beef0000-0000-4000-8000-000000000740",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/C_MlCV4Ssq6/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.6908,
@@ -16508,6 +16979,24 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/478",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000307",
+          "claimed_status": "allowed",
+          "id": "c379b8d7-0cce-51a5-8c85-40b7a8a34a6c",
+          "provenance": "aggregated",
+          "reference": "https://sakuracafe-nippori.gorp.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000307",
+          "claimed_status": "conditional",
+          "id": "e4bd85f8-d8bf-5d89-b1e1-042f4a9bab80",
+          "provenance": "aggregated",
+          "reference": "https://doghuggy.petgo.jp/dogmap/spot/478",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "上野・谷根千"
@@ -16801,6 +17290,7 @@
       "hours_text": "ランチ11:30〜15:00(L.O.14:30)・ディナー18:00〜21:00(L.O.20:30)、日曜はランチタイムのみ",
       "id": "beef0000-0000-4000-8000-000000000890",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DPkTBnJkzND/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.62013,
@@ -16851,8 +17341,8 @@
         "indoor": true
       },
       "dog_note": "ドッグフレンチ(犬種・年齢に応じた専用コース¥4500〜)は同伴時必ず注文",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "ペットはカートに入れて入店可。専用「ドッグフレンチ」コース（¥4,500〜、犬種・年齢に応じて）の注文が必須",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "入店にはペットカートが必要",
       "has_conflict": true,
       "holiday_note": "定休日なし(夏季・年末年始休あり)",
@@ -16860,7 +17350,7 @@
       "id": "beef0000-0000-4000-8000-000000000125",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6715,
       "links": [
         {
@@ -16876,7 +17366,7 @@
       "name": "シャテール（chatiere）",
       "phone": "03-3642-8672",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "5dc0d48e-8684-5b5e-aa69-41fdcd0dccd9",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000125",
@@ -16895,6 +17385,15 @@
           "reference": "https://tabelog.com/tokyo/A1313/A131303/13008017/dtlrvwlst/B36979403/",
           "type": "tabelog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000125",
+          "claimed_status": "conditional",
+          "id": "5dc0d48e-8684-5b5e-aa69-41fdcd0dccd9",
+          "provenance": "aggregated",
+          "reference": "https://chatiere-tokyo.com/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "清澄白河・門前仲町"
@@ -17177,19 +17676,21 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "terrace": false
       },
       "dog_note": "ワンちゃん用のお肉サービスあり",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "dog_size_limit": "大型犬は要事前確認",
       "has_conflict": true,
       "holiday_note": "火曜定休",
       "hours_text": "月・水〜日17:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000646",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/DZzBBK1FBgh/",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6305,
       "links": [
         {
@@ -17204,7 +17705,7 @@
       "longitude": 139.6608,
       "name": "ステーキハウス ニューテキサス",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "0d508969-c388-5ef7-89a9-8df3fc830ded",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000646",
@@ -17241,6 +17742,15 @@
           "reference": "https://tabelog.com/tokyo/A1317/A131707/13042378/",
           "type": "tabelog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000646",
+          "claimed_status": "allowed",
+          "id": "0d508969-c388-5ef7-89a9-8df3fc830ded",
+          "provenance": "aggregated",
+          "reference": "https://serorino-hitorigoto.com/komazawa-steakhouse-newtexas/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -17442,6 +17952,7 @@
       "hours_text": "ランチ11:30〜15:00・ディナー17:00〜21:00(曜日により変動)",
       "id": "beef0000-0000-4000-8000-000000000820",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DapnhssE_C2/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.626,
@@ -17498,6 +18009,7 @@
       "hours_text": "11:30〜15:00(L.O.14:30)・17:00〜22:00(L.O.21:30)",
       "id": "beef0000-0000-4000-8000-000000000685",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/DYrtlUdGbsG/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.643,
@@ -18088,6 +18600,7 @@
       "hours_text": "月水〜日11:30〜15:00(L.O.14:30)・17:00〜22:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000850",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DBKttn_STd9/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.62241,
@@ -18774,18 +19287,19 @@
       "contact": null,
       "description": "神田駅そばのベルギービール醸造所の名を冠したブラッスリー。ペット同伴可(専門サイトの案内ではテラス席限定)。",
       "dog_amenities": {
+        "indoor": false,
         "terrace": true
       },
       "dog_note": "公式は無限定の「ペット同伴OK(詳細は問い合わせ)」、pet-restaurant.comはテラス限定と記載。店内可否は要確認",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席のみペット(犬)同伴可、店内は不可。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "不定休・年末年始休業",
       "hours_text": "月〜金 昼11:30〜15:00(L.O.14:30)・夜17:00〜23:00(L.O.22:30)/土日祝11:30〜23:00(L.O.22:30)",
       "id": "beef0000-0000-4000-8000-000000000285",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.69058,
       "links": [
         {
@@ -18797,7 +19311,7 @@
       "name": "ブラッスリー セント・ベルナルデュス 神田(St.Bernardus)",
       "phone": "050-5487-9569",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "a76e2f3a-3c0e-54af-913c-7b33cde84314",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000285",
@@ -18816,6 +19330,15 @@
           "reference": "https://pet-restaurant.com/tokyo-kanda-ochanomizu/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000285",
+          "claimed_status": "conditional",
+          "id": "a76e2f3a-3c0e-54af-913c-7b33cde84314",
+          "provenance": "aggregated",
+          "reference": "https://pet-restaurant.com/tokyo-kanda-ochanomizu/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "丸の内・神田"
@@ -19108,6 +19631,7 @@
       "hours_text": "9:00〜21:00",
       "id": "beef0000-0000-4000-8000-000000000648",
       "info_verified": "2026-08-05",
+      "instagram_post_url": "https://www.instagram.com/p/Da2BXyMSCzw/",
       "is_closed": false,
       "last_verified": "2026-08-05",
       "latitude": 35.6258,
@@ -19788,6 +20312,15 @@
           "reference": "https://www.toutouservice.com/magazine/cafe-tsukishima/",
           "type": "other",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000980",
+          "claimed_status": "allowed",
+          "id": "4df8490e-d1bd-508a-80ab-4ad87ef5656a",
+          "provenance": "aggregated",
+          "reference": "https://rikimarucafe.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "勝どき・月島・晴海・豊海"
@@ -20205,8 +20738,8 @@
         "terrace": true
       },
       "dog_note": "出典間で「店内も同伴可」とする専門サイトの記載もあり、公式サイトの現行案内(テラス限定)と相違があるため要確認",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "中型犬までは店内同伴可、大型犬はテラス席のみ可(テーブルに犬を乗せない等のマナールールあり)。",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "テラス席のみ犬同伴可(店内不可・公式サイト記載)。大型犬もテラスなら可との専門サイト記載あり",
       "has_conflict": true,
       "holiday_note": "年末年始(12/31〜1/3)休業",
@@ -20214,7 +20747,7 @@
       "id": "beef0000-0000-4000-8000-000000000040",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7018,
       "links": [
         {
@@ -20226,7 +20759,7 @@
       "name": "八十八夜 吉祥寺店",
       "phone": "0422-24-9490",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "6ffe10f0-3969-5036-9a79-17d3cd8e8042",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000040",
@@ -20272,6 +20805,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/286",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000040",
+          "claimed_status": "conditional",
+          "id": "6ffe10f0-3969-5036-9a79-17d3cd8e8042",
+          "provenance": "aggregated",
+          "reference": "https://www.honda.co.jp/dog/travel/data/hachijuhachiya/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "吉祥寺"
@@ -20575,14 +21117,14 @@
         "large_dogs": false
       },
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "dog_size_limit": "小型犬のみ",
       "has_conflict": true,
       "hours_text": "月〜土・祝前日 11:30〜23:00 / 日・祝 11:30〜22:00",
       "id": "beef0000-0000-4000-8000-000000000246",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6743,
       "links": [
         {
@@ -20594,7 +21136,7 @@
       "name": "土鍋炊きご飯 おこめとおかず",
       "phone": "03-3564-3031",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "6340acab-be19-5df6-9d94-67b1d93e0b34",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000246",
@@ -20613,6 +21155,15 @@
           "reference": "https://okometookazu.owst.jp/",
           "type": "official_hp",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000246",
+          "claimed_status": "allowed",
+          "id": "6340acab-be19-5df6-9d94-67b1d93e0b34",
+          "provenance": "aggregated",
+          "reference": "https://okometookazu.owst.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -20662,13 +21213,13 @@
       },
       "dog_note": "テラス限定(専門サイト案内)。食べログのペット可表示には条件の具体的な記載がなく、来店前の事前確認を推奨。",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "hours_text": "月〜日17:00〜翌5:00(L.O.翌4:00)",
       "id": "beef0000-0000-4000-8000-000000000807",
       "info_verified": "2026-08-06",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.623,
       "links": [
         {
@@ -20680,7 +21231,7 @@
       "name": "場外焼肉 榮登庵 多摩センター店",
       "phone": "042-313-7829",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "fe63b150-3087-5b38-946d-d100a7adc36a",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000807",
@@ -20699,6 +21250,15 @@
           "reference": "https://tabelog.com/tokyo/A1327/A132702/13254349/",
           "type": "tabelog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000807",
+          "claimed_status": "allowed",
+          "id": "fe63b150-3087-5b38-946d-d100a7adc36a",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1327/A132702/13254349/",
+          "type": "tabelog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "聖蹟桜ヶ丘・多摩センター"
@@ -21377,14 +21937,14 @@
         "indoor": true
       },
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "dog_size_limit": "小型犬のみ(専門サイト情報)",
       "has_conflict": true,
       "hours_text": "月〜土17:00〜翌2:00(L.O.1:30)・日祝17:00〜24:00(L.O.23:30)",
       "id": "beef0000-0000-4000-8000-000000000546",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.7508,
       "links": [
         {
@@ -21396,7 +21956,7 @@
       "name": "焼肉 炙りな 北千住店",
       "phone": "03-3870-8729",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "0f57e1be-fdb7-532d-8f04-34f1d8f8ed41",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000546",
@@ -21415,6 +21975,15 @@
           "reference": "https://aburina.gorp.jp/",
           "type": "official_hp",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000546",
+          "claimed_status": "allowed",
+          "id": "0f57e1be-fdb7-532d-8f04-34f1d8f8ed41",
+          "provenance": "aggregated",
+          "reference": "https://aburina.gorp.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "北千住"
@@ -21546,8 +22115,8 @@
         "terrace": true
       },
       "dog_note": "トイレのしつけ必須・予防接種必須・無駄吠えのしつけ必須・ヒート(発情中)の利用不可・リード使用必須・店内はペット可席と一般席に分かれている",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "店内(入口付近テーブル席)・テラス席とも同伴可だが、リード使用必須・予防接種必須・トイレ/無駄吠えのしつけ必須・発情中利用不可などの条件あり(中大型犬可)。",
+      "dog_policy_status": "conditional",
       "dog_size_limit": "中・大型犬もOK",
       "has_conflict": true,
       "holiday_note": "木曜定休",
@@ -21555,7 +22124,7 @@
       "id": "beef0000-0000-4000-8000-000000000483",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6935,
       "links": [
         {
@@ -21567,7 +22136,7 @@
       "name": "犬茶屋本舗",
       "phone": "03-6413-0035",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "aeffd9b6-c5c1-5951-98a0-137931056f2c",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000483",
@@ -21586,6 +22155,15 @@
           "reference": "https://www.go-with-pet.com/news_bZcAT2XN.html",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000483",
+          "claimed_status": "conditional",
+          "id": "aeffd9b6-c5c1-5951-98a0-137931056f2c",
+          "provenance": "aggregated",
+          "reference": "https://wanwanmedia.com/tokyo-inujyaya/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "押上・錦糸町"
@@ -21772,6 +22350,7 @@
       "hours_text": "ランチ11:30〜15:00(LO14:00) / ディナー17:30〜22:00(LO21:00) / カフェ13:00〜17:30(土日祝のみ)",
       "id": "beef0000-0000-4000-8000-000000000903",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/C3aB4hMycAo/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.70128,
@@ -21830,6 +22409,7 @@
       "hours_text": "平日17:00〜22:00 / 土15:00〜21:00 / 日祝13:00〜18:00",
       "id": "beef0000-0000-4000-8000-000000000900",
       "info_verified": "2026-08-06",
+      "instagram_post_url": "https://www.instagram.com/p/DHCxUCuTwjO/",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.70525,
@@ -22161,14 +22741,14 @@
         "terrace": true
       },
       "dog_note": "公式は「テラスだけでなく店内一部わんちゃんOK」と案内(口コミでは店内全エリアOKとする紹介もあり・要現地確認)",
-      "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_condition": "テラス席は全面ペット可、店内は一部エリアのみペット可。",
+      "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours_text": "11:00〜23:30",
       "id": "beef0000-0000-4000-8000-000000000014",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.6055,
       "links": [
         {
@@ -22184,7 +22764,7 @@
       "name": "自由が丘 カスタネット",
       "phone": "03-3723-9239",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "2af906c0-1578-59de-bf1a-7a66ca318f0d",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000014",
@@ -22212,6 +22792,15 @@
           "reference": "https://good-life-with-dog.com/20181207_001/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000014",
+          "claimed_status": "conditional",
+          "id": "2af906c0-1578-59de-bf1a-7a66ca318f0d",
+          "provenance": "aggregated",
+          "reference": "https://jiyugaoka-castanet.favy.jp/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "自由が丘"
@@ -22657,13 +23246,13 @@
       },
       "dog_note": "食べログのサービス欄に「ペット可」の記載あり(テラス席限定)",
       "dog_policy_condition": null,
-      "dog_policy_status": "unverified",
+      "dog_policy_status": "allowed",
       "has_conflict": true,
       "hours_text": "平日11:00〜16:00・土日祝10:30〜16:00(L.O.15:30)。冬季(12月第3月曜〜3月中旬)は土日祝のみ営業",
       "id": "beef0000-0000-4000-8000-000000000704",
       "info_verified": "2026-08-05",
       "is_closed": false,
-      "last_verified": null,
+      "last_verified": "2026-08-07",
       "latitude": 35.601,
       "links": [
         {
@@ -22675,7 +23264,7 @@
       "name": "雪月花",
       "phone": "03-3705-8137",
       "place_id": null,
-      "representative_source_id": null,
+      "representative_source_id": "598babe9-236b-5f1e-bcbf-bf9bc3389c18",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000704",
@@ -22694,6 +23283,15 @@
           "reference": "https://smile-blog.net/todoroki-valley-cafe/",
           "type": "blog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000704",
+          "claimed_status": "allowed",
+          "id": "598babe9-236b-5f1e-bcbf-bf9bc3389c18",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131715/13050154/",
+          "type": "tabelog",
+          "verified_at": "2026-08-07"
         }
       ],
       "sub_area": "等々力・尾山台"
@@ -23267,6 +23865,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-08-07T04:57:26Z",
+  "generated_at": "2026-08-07T05:40:30Z",
   "is_sample_data": false
 }
