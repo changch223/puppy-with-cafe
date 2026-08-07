@@ -211,6 +211,7 @@ struct RootView: View {
             Section(String(localized: "犬向け条件")) {
                 Toggle(String(localized: "店内OK"), isOn: $searchViewModel.amenityFilter.indoorOnly)
                 Toggle(String(localized: "テラスOK"), isOn: $searchViewModel.amenityFilter.terraceOnly)
+                Toggle(String(localized: "大型犬OK"), isOn: $searchViewModel.amenityFilter.largeDogOnly)
                 Toggle(String(localized: "犬メニューあり"), isOn: $searchViewModel.amenityFilter.dogMenuOnly)
             }
             Section(String(localized: "表示")) {

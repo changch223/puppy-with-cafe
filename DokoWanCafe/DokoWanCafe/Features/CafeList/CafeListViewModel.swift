@@ -41,7 +41,7 @@ final class CafeListViewModel: ObservableObject {
 
     @Published private(set) var phase: Phase = .idle
     @Published private(set) var allResults: [CafeWithDistance] = []
-    /// 犬向け条件の絞り込み（店内OK/テラスOK/犬メニュー, AND結合, 既定は絞り込みなし。UI/UXブラッシュアップ設計書1b/4）
+    /// 犬向け条件の絞り込み（店内OK/テラスOK/大型犬OK/犬メニュー, AND結合, 既定は絞り込みなし。UI/UXブラッシュアップ設計書1b/4）
     @Published var amenityFilter = AmenityFilter()
     /// 未確認ステータスの店も表示するか（既定false。原則I: 未確認を可と主張しない, 設計書1b/4）
     @Published var includeUnverified = false
@@ -78,12 +78,13 @@ final class CafeListViewModel: ObservableObject {
         return CafeFilter.sorted(results, by: sortOrder)
     }
 
-    /// 現在適用中の絞り込み条件の数（犬向け条件3種＋未確認表示＋お気に入りのみ）。
+    /// 現在適用中の絞り込み条件の数（犬向け条件4種＋未確認表示＋お気に入りのみ）。
     /// ツールバーのフィルタアイコンにバッジ表示するために使う（設計書4）。
     var activeFilterCount: Int {
         [
             amenityFilter.indoorOnly,
             amenityFilter.terraceOnly,
+            amenityFilter.largeDogOnly,
             amenityFilter.dogMenuOnly,
             includeUnverified,
             favoritesOnly,
