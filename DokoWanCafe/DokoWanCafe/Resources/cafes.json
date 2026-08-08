@@ -8219,12 +8219,6 @@
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.62531,
-      "links": [
-        {
-          "type": "website",
-          "url": "https://maisonkayser.jp/brands/bakery/167/"
-        }
-      ],
       "longitude": 139.72693,
       "name": "MAISON KAYSER 五反田店",
       "phone": "03-6450-3705",
@@ -12018,10 +12012,6 @@
       "latitude": 35.62291,
       "links": [
         {
-          "type": "website",
-          "url": "https://www.tyharborbrewing.co.jp/tyharbor/"
-        },
-        {
           "type": "instagram",
           "url": "https://www.instagram.com/tyharbor_brewery/"
         }
@@ -14373,12 +14363,6 @@
       "is_closed": false,
       "last_verified": "2026-07-05",
       "latitude": 35.6224,
-      "links": [
-        {
-          "type": "website",
-          "url": "https://www.tyharborbrewing.co.jp/breadworks/"
-        }
-      ],
       "longitude": 139.7479,
       "name": "breadworks 天王洲",
       "place_id": null,
@@ -15777,12 +15761,6 @@
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.6456,
-      "links": [
-        {
-          "type": "website",
-          "url": "https://yoyaku.toreta.in/slowtable"
-        }
-      ],
       "longitude": 139.6996,
       "name": "nakameguro SLOW TABLE",
       "place_id": null,
@@ -20923,12 +20901,6 @@
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.71664,
-      "links": [
-        {
-          "type": "website",
-          "url": "https://store.montbell.jp/harvesterrace/"
-        }
-      ],
       "longitude": 139.36165,
       "name": "ハーベステラス 昭島アウトドアヴィレッジ店",
       "phone": "042-549-0535",
@@ -25089,12 +25061,6 @@
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6565,
-      "links": [
-        {
-          "type": "website",
-          "url": "https://christmas-tei.com/"
-        }
-      ],
       "longitude": 139.5298,
       "name": "洋食屋クリスマス亭",
       "phone": "042-485-1014",
@@ -25345,12 +25311,6 @@
       "is_closed": false,
       "last_verified": "2026-07-05",
       "latitude": 35.62263,
-      "links": [
-        {
-          "type": "website",
-          "url": "https://ride-tennoz.com/"
-        }
-      ],
       "longitude": 139.74878,
       "name": "炭火×薪火×レストラン RIDE 品川 天王洲店",
       "place_id": null,
@@ -27412,6 +27372,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-08-07T06:53:55Z",
+  "generated_at": "2026-08-08T01:07:17Z",
   "is_sample_data": false
 }

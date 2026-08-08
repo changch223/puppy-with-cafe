@@ -418,7 +418,10 @@ def compute_diff(old_cafes, new_cafes):
     changed = []
     for cid in new_by_id.keys() & old_by_id.keys():
         o, n = old_by_id[cid], new_by_id[cid]
-        fields = [k for k in n if k != "sources" and o.get(k) != n.get(k)]
+        # 新旧両方のキーの和集合を走査する。新レコード側のキーだけを見ると、
+        # フィールドが丸ごと空になってキー自体が消える変更（例: 死リンク掃除で links が消える）を
+        # 差分検出から取りこぼすため（compute_diff のバグ修正・2026-08）。
+        fields = [k for k in (o.keys() | n.keys()) if k != "sources" and o.get(k) != n.get(k)]
         if o.get("sources") != n.get("sources"):
             fields.append("sources")
         if fields:
