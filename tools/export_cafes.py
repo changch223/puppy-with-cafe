@@ -133,7 +133,9 @@ _INSTAGRAM_POST_RE = _re.compile(
 
 
 def parse_hours_cell(value, label, column, errors):
-    """'9:00-18:00[,13:00-18:00]' / '定休' / 空=不明(None)。日跨ぎ(close<=open)はエラー（FR-102/105）"""
+    """'9:00-18:00[,13:00-18:00]' / '定休' / 空=不明(None)。
+    24:00 は当日終端（翌0:00）として許可し、開店>=閉店（例 18:00-2:00）は日跨ぎ営業として許可する（S4, FR-102/105）。
+    """
     v = str(value or "").strip()
     if v == "":
         return None
@@ -146,12 +148,27 @@ def parse_hours_cell(value, label, column, errors):
             errors.append(f"{label}: {column} の形式が不正です（例: 9:00-18:00 / 定休 / 空欄）: {part.strip()!r}")
             return None
         h1, m1, h2, m2 = (int(x) for x in m.groups())
-        if not (0 <= h1 <= 23 and 0 <= h2 <= 23 and 0 <= m1 <= 59 and 0 <= m2 <= 59):
-            errors.append(f"{label}: {column} の時刻が範囲外です: {part.strip()!r}")
+        if not (0 <= h1 <= 23 and 0 <= m1 <= 59):
+            errors.append(f"{label}: {column} の開店時刻が範囲外です: {part.strip()!r}")
             return None
-        if (h1, m1) >= (h2, m2):
-            errors.append(f"{label}: {column} は開店<閉店にしてください（日跨ぎ営業は hours_text で表現）: {part.strip()!r}")
+        if not (0 <= m2 <= 59):
+            errors.append(f"{label}: {column} の閉店時刻が範囲外です: {part.strip()!r}")
             return None
+        # 閉店は 24:00（当日終端＝翌0:00）まで許可。それ以外の時は 0-23 時
+        if not ((0 <= h2 <= 23) or (h2 == 24 and m2 == 0)):
+            errors.append(f"{label}: {column} の閉店時刻が範囲外です（24:00までにしてください）: {part.strip()!r}")
+            return None
+        # 開店==閉店はタイプミスの疑いが強く24時間営業と誤判定されるため拒否する（S4関連QA指摘）。
+        # 真の24時間営業は 00:00-24:00 のように明示的に表記する。
+        open_minutes = h1 * 60 + m1
+        close_minutes = 1440 if (h2 == 24 and m2 == 0) else h2 * 60 + m2
+        if open_minutes == close_minutes:
+            errors.append(
+                f"{label}: {column} の開店時刻と閉店時刻が同じです（{part.strip()!r}）。"
+                "24時間営業は 00:00-24:00 のように明示して入力してください"
+            )
+            return None
+        # 開店>=閉店（例 18:00-2:00）は日跨ぎ営業として許容する（従来はエラーにしていた）
         ranges.append({"open": f"{h1:02d}:{m1:02d}", "close": f"{h2:02d}:{m2:02d}"})
     return ranges
 

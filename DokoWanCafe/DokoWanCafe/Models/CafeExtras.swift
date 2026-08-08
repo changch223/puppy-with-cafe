@@ -51,10 +51,11 @@ struct TimeRange: Codable, Equatable, Sendable {
     let close: String
 
     /// "HH:mm" → 0時からの分。パース不能は nil
+    /// "24:00"（当日終端＝翌0:00）は 1440分として許可する（S4, 日跨ぎ対応）。
     static func minutes(of time: String) -> Int? {
         let parts = time.split(separator: ":")
         guard parts.count == 2, let h = Int(parts[0]), let m = Int(parts[1]),
-              (0...23).contains(h), (0...59).contains(m) else { return nil }
+              (0...59).contains(m), (0...24).contains(h), h < 24 || m == 0 else { return nil }
         return h * 60 + m
     }
 

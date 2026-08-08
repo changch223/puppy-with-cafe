@@ -81,7 +81,7 @@ cafes タブに以下を追加（**すべて任意**。空欄＝不明として�
 | phone | 文字列 | 03-1234-5678（詳細でタップ発信） |
 | reservation | 文字列 | 予約可（電話・当日可） |
 | hours_text | 文字列 | 9:00〜18:00（不定休あり）※構造化が難しい店向け |
-| hours_mon 〜 hours_sun | `9:00-18:00`（複数帯は `,` 区切り）/ `定休` / 空=不明 | `9:00-12:00,13:00-18:00` |
+| hours_mon 〜 hours_sun | `9:00-18:00`（複数帯は `,` 区切り）/ `定休` / 空=不明。閉店は `24:00` まで可、開店>=閉店（例 `18:00-2:00`）は日跨ぎ営業として構造化可 | `9:00-12:00,13:00-18:00` / `18:00-2:00` |
 | link_website / link_instagram / link_x / link_tabelog | URL | https://... |
 | link_instagram_post | URL | https://www.instagram.com/p/Cxxxxxxxxxxx/（IG投稿/リールのURLのみ許可。ユーザー名付き `https://www.instagram.com/店アカウント/p/...` も可・自動正規化） |
 | dog_indoor / dog_terrace / dog_large / dog_menu | true / false / 空=不明 | true |
@@ -91,7 +91,7 @@ cafes タブに以下を追加（**すべて任意**。空欄＝不明として�
 | insta_note_date | YYYY-MM-DD | **insta_note がある場合は必須**（無いと配信エラー） |
 
 - 曜日別（hours_mon〜sun）を1曜日でも入れると、アプリに「🟢営業中／営業時間外／本日定休」バッジが出る（入れない店はバッジなし＝推測しない）
-- 日跨ぎ営業（例: 22:00-2:00）は構造化不可 → `hours_text` で表現する
+- 日跨ぎ営業（例: `22:00-2:00`）・24:00終端（例: `17:00-24:00`）は構造化して入れられる（S4）。判定は `OpeningHoursEvaluator` が日跨ぎ対応
 
 ## 実データ対応の追加列（FR-107・2026-07-05）
 
