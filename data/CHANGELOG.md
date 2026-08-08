@@ -691,3 +691,109 @@
 - ✏️ 変更: ハーベステラス 昭島アウトドアヴィレッジ店（links）
 - ✏️ 変更: 洋食屋クリスマス亭（links）
 - ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（links）
+
+## 2026-08-08 10:24 — 追加 104 / 変更 0 / 削除 0
+- ➕ 追加: AJIANA 烏山店
+- ➕ 追加: AKIGAWA BASE
+- ➕ 追加: Apricus Cafe（アプリカス カフェ）
+- ➕ 追加: BASEL 豊田店
+- ➕ 追加: Barry's Café（バリーズカフェ）
+- ➕ 追加: CAFE MOJAVE（カフェモハベ）
+- ➕ 追加: CREPE by SIDER
+- ➕ 追加: CRYSTAL CAFE(クリスタルカフェ)
+- ➕ 追加: Cafe Hana
+- ➕ 追加: Cafeどす
+- ➕ 追加: Cafe茶楽
+- ➕ 追加: Cheese'n Tokyo
+- ➕ 追加: Dining Bar Sir Lie underground（サライアンダーグラウンド）
+- ➕ 追加: EMPORIO cafe&dining
+- ➕ 追加: Embassy Cafe & Dining
+- ➕ 追加: GOOD CHEESE GOOD BAKE
+- ➕ 追加: Green Witch Tea House
+- ➕ 追加: HOMELAND OME
+- ➕ 追加: Hamadayama VIVACE
+- ➕ 追加: Italian Kitchen VANSAN 光が丘IMA店
+- ➕ 追加: Jaune Brillant（ジョンブリアン）
+- ➕ 追加: Kinone coffee & flower
+- ➕ 追加: L.A.GARAGE3
+- ➕ 追加: La Fougasse（ラ・フーガス）
+- ➕ 追加: NEWシクロCafe 蒼きパパイヤの香り
+- ➕ 追加: OVERWHELM HAMBURGER & BAR STAND
+- ➕ 追加: P.S. COFFEE
+- ➕ 追加: PARKLIFE CAFE & RESTAURANT(パークライフ)
+- ➕ 追加: Pizzeria CERVO
+- ➕ 追加: Porky's kitchen 新小岩
+- ➕ 追加: RENOBELA（リノビラ）
+- ➕ 追加: SALTY Oyster House（ソルティー オイスター ハウス）
+- ➕ 追加: TAIZUSHI(寿司・創作料理)
+- ➕ 追加: Tavernetta Salvatore 仙川
+- ➕ 追加: Tweedles
+- ➕ 追加: VAMOS TAPAS&PIZZA新小岩
+- ➕ 追加: WANKOIWA DOG Caffe（ワンコイワドッグカフェ）
+- ➕ 追加: Wine & Mexican Cosi Cosi
+- ➕ 追加: YOUR BIG FAMILY
+- ➕ 追加: cafe de la vie（カフェデラビィ）
+- ➕ 追加: cookee NARIMASU
+- ➕ 追加: filament self cafe(カフェ filament)
+- ➕ 追加: marble
+- ➕ 追加: uyamuya
+- ➕ 追加: あばら大根 西葛西店
+- ➕ 追加: ごちそうや ぽっ蔵
+- ➕ 追加: つつじテラス（22j TERRACE）
+- ➕ 追加: ひーじゃー
+- ➕ 追加: まんまる庵
+- ➕ 追加: みんなdeイタリアン Cuore(クォーレ)
+- ➕ 追加: やきとり家すみれ 西葛西店
+- ➕ 追加: わいん＆野菜食堂 Cafeえにわん 新小岩
+- ➕ 追加: アキッチョデシカ 方南町
+- ➕ 追加: イタリアンダイニング Satoru 秋津店
+- ➕ 追加: イチローさんのきまぐれcafe
+- ➕ 追加: ウラニワ 仙川店
+- ➕ 追加: カフェ ポテリ
+- ➕ 追加: カフェレストランJeudi（ジューディ）
+- ➕ 追加: キサキ（KISAKI）
+- ➕ 追加: クレアホーム&ガーデン
+- ➕ 追加: コーヒーロースト ビバーチェ
+- ➕ 追加: ザ スロップショップ
+- ➕ 追加: ジロー珈琲 羽村店
+- ➕ 追加: ジンギスカン福ひつじ 永福町店
+- ➕ 追加: スターバックス コーヒー 芦花公園店
+- ➕ 追加: スパイスカレーリコード 本店
+- ➕ 追加: スルエシー（SURYASHI）
+- ➕ 追加: デモデヘブン 福生店
+- ➕ 追加: ハバカーる
+- ➕ 追加: バー ライフ
+- ➕ 追加: パティスリー ディンゴ
+- ➕ 追加: パークス光が丘
+- ➕ 追加: ペラゾカフェ（Perrazo Cafe）
+- ➕ 追加: マイケルロック168
+- ➕ 追加: マリノステリア 葛西店
+- ➕ 追加: ミンナノミ(鮮魚×もつ鍋 居酒屋)
+- ➕ 追加: 串カツ田中 つつじヶ丘店
+- ➕ 追加: 串カツ田中 千歳烏山店
+- ➕ 追加: 串カツ田中 新小岩店
+- ➕ 追加: 串カツ田中 秋津店
+- ➕ 追加: 串カツ田中 西葛西店
+- ➕ 追加: 仙川食堂ジョージ
+- ➕ 追加: 和牛EN yasaka.arakawa
+- ➕ 追加: 喫茶 ならの木
+- ➕ 追加: 図書喫茶 カンタカ
+- ➕ 追加: 小籠包bar HASHIYA（箸や）
+- ➕ 追加: 居酒屋こころ
+- ➕ 追加: 島ごはん 西葛西
+- ➕ 追加: 彩雨珈琲店
+- ➕ 追加: 方南カフェ
+- ➕ 追加: 森のCafe アイビー
+- ➕ 追加: 永福スタンド SOU
+- ➕ 追加: 洪記餃子
+- ➕ 追加: 炎丸酒場 新小岩北口店
+- ➕ 追加: 炭火焼肉＆韓国家庭料理 故郷
+- ➕ 追加: 焼き鳥もつ鍋だるま 久米川店
+- ➕ 追加: 米沢牛ステーキハウス un（アン） ドッグカフェ
+- ➕ 追加: 美容室・喫茶 どっくwどっぐ
+- ➕ 追加: 葛西ホルモン市場
+- ➕ 追加: 蒸し料理とワインの店 味風
+- ➕ 追加: 酒と肴と子ども食堂あら川
+- ➕ 追加: 酒処 雅
+- ➕ 追加: 高幡不動 肉流通センター
+- ➕ 追加: 高幡不動 肉流通センター はなれ
