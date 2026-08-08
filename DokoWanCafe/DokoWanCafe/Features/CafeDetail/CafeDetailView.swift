@@ -35,32 +35,29 @@ struct CafeDetailView: View {
 
     var body: some View {
         List {
+            // セクション順（S3: 営業時間はヘッダーに統合済みのため独立セクションなし）
             headerSection
 
             if viewModel.cafe.dogAmenities != nil {
                 amenitiesSection
             }
 
-            if hasConditionInfo {
-                conditionSection
-            }
-
-            if viewModel.cafe.hours?.hasAnyDay == true || viewModel.cafe.hoursText != nil {
-                hoursSection
-            }
-
             photoSection
+
+            if !viewModel.sources.isEmpty {
+                sourcesSection
+            }
 
             if viewModel.cafe.links?.isEmpty == false || viewModel.cafe.operatorNote != nil {
                 linksSection
             }
 
-            if viewModel.hasConflict {
-                conflictSection
+            if hasConditionInfo {
+                conditionSection
             }
 
-            if !viewModel.sources.isEmpty {
-                sourcesSection
+            if viewModel.hasConflict {
+                conflictSection
             }
 
             infoSection
@@ -117,13 +114,29 @@ struct CafeDetailView: View {
                     }
                 }
 
-                // 運営確認日チップ（P0-3: footnoteの文字列表示からCapsuleチップへ格上げ）。
-                // status==unverified の場合は「運営確認」と矛盾するため出さない
-                // （未確認であることは下の warningBox が担う, QA指摘）。
-                if let lastVerified = viewModel.cafe.lastVerified,
-                   viewModel.cafe.dogPolicyStatus != .unverified {
-                    verifiedDateChip(lastVerified)
+                // 営業時間をヘッダーに統合（S3: 独立hoursSectionは廃止し、
+                // 営業中/営業時間外バッジ＋当日の時間 or hours_text をコンパクト表示する）
+                if viewModel.cafe.hours?.hasAnyDay == true || viewModel.cafe.hoursText != nil {
+                    HStack(spacing: 6) {
+                        OpenStateBadge(state: OpeningHoursEvaluator.state(hours: viewModel.cafe.hours))
+                        if let todayHours = todayHoursCompactText {
+                            Text(todayHours)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    // 営業時間の確認日・免責（旧hoursSectionのfooterを踏襲, QA指摘: 独立セクション廃止で
+                    // 確認日と「最新の営業情報は公式でご確認ください」の免責が消えないようにする）
+                    hoursConfirmationCaption
                 }
+
+                // 運営確認日チップ（P0-3: footnoteの文字列表示からCapsuleチップへ格上げ）は一旦非表示（S3）。
+                // ロジック・データ（verifiedDateChip/verifiedDateChipColor）は復元しやすいよう残す
+                // （未確認であることは下の warningBox が担う, QA指摘）。
+                // if let lastVerified = viewModel.cafe.lastVerified,
+                //    viewModel.cafe.dogPolicyStatus != .unverified {
+                //     verifiedDateChip(lastVerified)
+                // }
 
                 // 店舗紹介（002/FR-107）
                 if let description = viewModel.cafe.description {
@@ -139,8 +152,8 @@ struct CafeDetailView: View {
                         String(localized: "来店に条件があります（詳細は下記「来店時の条件・マナー」）"),
                         systemImage: "info.circle"
                     )
-                    .font(.subheadline)
-                    .foregroundStyle(.orange)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 }
 
                 // 未確認情報の明示区別（FR-009/T035）
@@ -365,52 +378,39 @@ struct CafeDetailView: View {
         }
     }
 
-    // MARK: - 営業時間（002/FR-102, T109）
+    // MARK: - 営業時間（002/FR-102, T109。S3: 独立セクションは廃止しヘッダーへコンパクト統合）
 
-    private var hoursSection: some View {
-        Section {
-            if let hours = viewModel.cafe.hours, hours.hasAnyDay {
-                OpenStateBadge(state: OpeningHoursEvaluator.state(hours: hours))
-                    .font(.subheadline)
-                ForEach(Weekday.allCases, id: \.rawValue) { day in
-                    if let ranges = hours.ranges(for: day) {
-                        LabeledContent {
-                            Text(hoursText(for: ranges))
-                                .font(.callout.monospacedDigit())
-                        } label: {
-                            Text(day.displayName)
-                        }
-                    }
-                }
-            }
-            if let text = viewModel.cafe.hoursText {
-                Text(text)
-                    .font(.callout)
-            }
-            // 定休日メモ（002/FR-107。例: 不定休・展示入替で休館あり）
-            if let holidayNote = viewModel.cafe.holidayNote {
-                LabeledContent {
-                    Text(holidayNote)
-                        .multilineTextAlignment(.trailing)
-                } label: {
-                    Text("定休日")
-                }
-                .font(.callout)
-            }
-        } header: {
-            Text("営業時間")
-        } footer: {
+    /// ヘッダーに出す「当日の時間」テキスト。構造化営業時間があれば当日分のみ、
+    /// なければ `hoursText`（自由記述）にフォールバックする（コンパクト表示, S3）。
+    /// 本日定休の場合はバッジ側の「本日定休」と重複するため nil（QA指摘: 二重表示の解消）。
+    private var todayHoursCompactText: String? {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = OpeningHoursEvaluator.tokyoTimeZone
+        if let hours = viewModel.cafe.hours, hours.hasAnyDay,
+           let weekday = Weekday.from(calendarWeekday: calendar.component(.weekday, from: Date())),
+           let ranges = hours.ranges(for: weekday) {
+            return ranges.isEmpty ? nil : hoursText(for: ranges)
+        }
+        return viewModel.cafe.hoursText
+    }
+
+    private func hoursText(for ranges: [TimeRange]) -> String {
+        if ranges.isEmpty { return String(localized: "定休日") }
+        return ranges.map { "\($0.open)〜\($0.close)" }.joined(separator: ", ")
+    }
+
+    /// 営業時間の確認日・免責キャプション（旧hoursSectionのfooterを踏襲, QA指摘）。
+    /// 独立セクションを廃止しても、営業時間が二次情報から推定された鮮度を利用者に伝え続ける。
+    private var hoursConfirmationCaption: some View {
+        Group {
             if let verified = viewModel.cafe.infoVerified {
                 Text("基本情報の確認日: \(verified.formatted(date: .abbreviated, time: .omitted))。最新の営業情報は公式でご確認ください。")
             } else {
                 Text("最新の営業情報は公式でご確認ください。")
             }
         }
-    }
-
-    private func hoursText(for ranges: [TimeRange]) -> String {
-        if ranges.isEmpty { return String(localized: "定休日") }
-        return ranges.map { "\($0.open)〜\($0.close)" }.joined(separator: ", ")
+        .font(.caption2)
+        .foregroundStyle(.secondary)
     }
 
     // MARK: - 矛盾提示（US4/FR-011/T046）
@@ -512,6 +512,40 @@ struct CafeDetailView: View {
                         .multilineTextAlignment(.trailing)
                 } label: {
                     Text("予約")
+                }
+            }
+            // 営業時間（詳細）（QA指摘: ヘッダーのコンパクト表示（営業中バッジ＋当日の時間）とは別に、
+            // 構造化hoursの週間表とhours_text（L.O.・曜日別の但し書き等）を店舗情報に残す。
+            // S3で独立hoursSectionを廃止した際に表示先を失ったため、ここに集約する）。
+            if viewModel.cafe.hours?.hasAnyDay == true || viewModel.cafe.hoursText != nil {
+                Text("営業時間（詳細）")
+                    .font(.footnote.bold())
+                    .foregroundStyle(.secondary)
+                if let hours = viewModel.cafe.hours, hours.hasAnyDay {
+                    ForEach(Weekday.allCases, id: \.rawValue) { day in
+                        if let ranges = hours.ranges(for: day) {
+                            LabeledContent {
+                                Text(hoursText(for: ranges))
+                                    .font(.callout.monospacedDigit())
+                            } label: {
+                                Text(day.displayName)
+                            }
+                        }
+                    }
+                }
+                if let text = viewModel.cafe.hoursText {
+                    Text(text)
+                        .font(.callout)
+                }
+            }
+            // 定休日メモ（002/FR-107。例: 不定休・展示入替で休館あり）。
+            // S3で独立hoursSectionを廃止したため、店舗情報側に維持する（データを欠落させない）。
+            if let holidayNote = viewModel.cafe.holidayNote {
+                LabeledContent {
+                    Text(holidayNote)
+                        .multilineTextAlignment(.trailing)
+                } label: {
+                    Text("定休日")
                 }
             }
             if let contact = viewModel.cafe.contact {

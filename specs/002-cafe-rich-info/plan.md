@@ -11,7 +11,7 @@
 - **データ**: `tools/sheet_template/cafes.csv` に列追加 → `tools/export_cafes.py` で検証・正規化 → cafes.json（format_version は 1 のまま。アプリは未知キー無視＋Optional 追加で後方互換）
 - **新規純ロジック**: `Core/OpeningHoursEvaluator`（Asia/Tokyo 固定で 営業中/時間外/本日定休 を判定。ユニットテスト必須＝憲章IV）
 - **UI**: `CafeDetailView` に4セクション追加（犬向け設備／営業時間／基本情報拡張／公式リンク・転記メモ）、`CafeRowView` に営業バッジ
-- **タイムゾーン**: Asia/Tokyo 固定（v1 東京のみ）。日跨ぎ営業はエクスポート時エラー（フリーテキストで表現）
+- **タイムゾーン**: Asia/Tokyo 固定（v1 東京のみ）。日跨ぎ営業（開店≧閉店。例 22:00-2:00）・24:00終端は構造化して登録可（2026-08-08改訂。従来はエクスポート時エラーとしフリーテキストで表現させていた。詳細は spec.md Session 2026-08-08）
 
 ## Constitution Check
 
@@ -63,4 +63,4 @@
 
 ## スコープ外（v2 候補）
 
-写真／Instagram 投稿のアプリ内埋め込み／「営業中のみ」「店内OKのみ」フィルタ／日跨ぎ営業の構造化
+写真／Instagram 投稿のアプリ内埋め込み／「営業中のみ」「店内OKのみ」フィルタ（日跨ぎ営業の構造化は2026-08-08に対応済み、spec.md参照）

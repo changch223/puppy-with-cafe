@@ -1,36 +1,40 @@
 import SwiftUI
 
-/// 下部引き出し一覧シートの3段階の高さ（S3設計書: peek/medium/large, Googleマップ流）。
+/// 下部引き出し一覧シートの2段階の高さ（S1設計書: peek/expanded, medium段は操作性のため廃止）。
 /// 高さ計算・最近傍段の判定は UI 非依存の純ロジックとして分離し、XCTest で検証する（憲章 原則IV）。
 enum CafeSheetDetent: CaseIterable, Equatable {
     /// グラバー＋ヘッダー＋先頭1〜2行が覗く最小段
     case peek
-    /// 画面の約半分
-    case medium
-    /// ナビバー下までの約9割
-    case large
+    /// ナビバー下までの約85%（旧largeに相当）
+    case expanded
 
     /// peekの固定高さ（凡例・現在地ボタンをこの少し上に配置するためにも参照する）
     static let peekHeight: CGFloat = 150
-    private static let mediumRatio: CGFloat = 0.5
-    private static let largeRatio: CGFloat = 0.9
+    private static let expandedRatio: CGFloat = 0.85
 
     /// 地図表示領域（コンテナ）の高さに対する各段の実際の高さ。
     func height(containerHeight: CGFloat) -> CGFloat {
         switch self {
         case .peek: return Self.peekHeight
-        case .medium: return containerHeight * Self.mediumRatio
-        case .large: return containerHeight * Self.largeRatio
+        case .expanded: return containerHeight * Self.expandedRatio
         }
     }
 
     /// ドラッグ終了時点の高さから最も近い段を求める純関数。
-    /// グラバー/ヘッダーのドラッグを離した時に、この段へスプリングスナップする（S3設計書）。
+    /// グラバー/ヘッダーのドラッグを離した時に、この段へスプリングスナップする（S1設計書）。
     static func nearest(toHeight height: CGFloat, containerHeight: CGFloat) -> CafeSheetDetent {
         allCases.min { lhs, rhs in
             abs(lhs.height(containerHeight: containerHeight) - height)
                 < abs(rhs.height(containerHeight: containerHeight) - height)
         } ?? .peek
+    }
+
+    /// もう一方の段を返す純関数（グラバー/ヘッダータップでの2段トグルに使う, S1設計書）。
+    func toggled() -> CafeSheetDetent {
+        switch self {
+        case .peek: return .expanded
+        case .expanded: return .peek
+        }
     }
 }
 
@@ -38,7 +42,7 @@ enum CafeSheetDetent: CaseIterable, Equatable {
 /// system の `.sheet` は使わない（単一の `NavigationStack` を保ち、行タップの詳細遷移とピンカードを両立させるため）。
 /// 中身は `CafeListViewModel.displayedResults` をそのまま流用し、地図・一覧で表示結果を乖離させない（FR-003）。
 struct CafeBottomSheet: View {
-    /// 地図表示領域（親のZStack）の高さ。medium/largeの割合計算に使う。
+    /// 地図表示領域（親のZStack）の高さ。expandedの割合計算に使う。
     let containerHeight: CGFloat
     @Binding var detent: CafeSheetDetent
     let items: [CafeWithDistance]
@@ -57,7 +61,7 @@ struct CafeBottomSheet: View {
     private var currentHeight: CGFloat {
         let proposed = baseHeight - dragTranslation
         let minHeight = CafeSheetDetent.peek.height(containerHeight: containerHeight)
-        let maxHeight = CafeSheetDetent.large.height(containerHeight: containerHeight)
+        let maxHeight = CafeSheetDetent.expanded.height(containerHeight: containerHeight)
         return min(max(proposed, minHeight), maxHeight)
     }
 
@@ -73,7 +77,8 @@ struct CafeBottomSheet: View {
         .shadow(color: .black.opacity(0.15), radius: 8, y: -2)
     }
 
-    /// グラバー＋ヘッダー（ドラッグでdetentを切り替える領域。一覧本体のスクロールとは独立させる）
+    /// グラバー＋ヘッダー（ドラッグでdetentを切り替える領域。一覧本体のスクロールとは独立させる）。
+    /// タップでも2段（peek/expanded）をトグルできる（ドラッグが苦手でも切替できるように, S1設計書）。
     private var dragHandle: some View {
         VStack(spacing: 6) {
             Capsule()
@@ -96,12 +101,19 @@ struct CafeBottomSheet: View {
         }
         .contentShape(Rectangle())
         .gesture(dragGesture)
+        .onTapGesture {
+            withAnimation(.interactiveSpring(response: 0.35, dampingFraction: 0.86)) {
+                detent = detent.toggled()
+            }
+        }
         .accessibilityElement(children: .combine)
-        .accessibilityHint(Text("ドラッグして一覧の高さを変更できます"))
+        .accessibilityHint(Text("タップまたはドラッグして一覧の高さを切り替えられます"))
     }
 
     private var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 2)
+        // タップとの取りこぼしを避けるため、指が数pt動いただけではドラッグ扱いにしない
+        // （旧minimumDistance:2は敏感すぎてonTapGestureが発火しにくかった, QA指摘）。
+        DragGesture(minimumDistance: 10)
             .onChanged { value in
                 dragTranslation = value.translation.height
             }

@@ -77,11 +77,11 @@ cafe 要素に以下の**任意**フィールドが追加される（キー欠�
 | phone | string? | 電話番号（タップ発信, FR-106） |
 | reservation | string? | 予約情報テキスト |
 | hours_text | string? | 営業時間フリーテキスト |
-| hours | object? | 曜日別構造化 `{"mon":[{"open":"09:00","close":"18:00"}], "tue":[], ...}`。キー欠落=不明・空配列=定休。1曜日以上あればアプリが営業中バッジを表示（FR-102） |
+| hours | object? | 曜日別構造化 `{"mon":[{"open":"09:00","close":"18:00"}], "tue":[], ...}`。キー欠落=不明・空配列=定休。1曜日以上あればアプリが営業中バッジを表示（FR-102）。close は `24:00`（当日終端＝翌0:00）まで許容し、open >= close（例: `{"open":"18:00","close":"02:00"}`）は日跨ぎ営業として扱う（S4, 2026-08-08） |
 | links | array? | `[{"type":"website\|instagram\|x\|tabelog\|google_map\|other","url":"https://..."}]` |
 | dog_amenities | object? | `{"indoor":bool?,"terrace":bool?,"large_dogs":bool?,"dog_menu":bool?}`（キー欠落=不明の三値） |
 | dog_note | string? | 犬向け条件の自由記述 |
 | info_verified | date? | 基本情報（営業時間等）の確認日 |
 | operator_note | object? | `{"text","source","verified_at"}`。運営が公式SNS等で確認した転記メモ。**verified_at 必須**（FR-103。無ければ配信拒否） |
 
-追加の検証（エクスポートが拒否）: 時刻形式不正／開店≧閉店（日跨ぎは hours_text で）／URL形式不正／三値以外の値／確認日なしの転記メモ。
+追加の検証（エクスポートが拒否）: 時刻形式不正（0-23時・0-59分の範囲外、close は 24:00 のみ例外）／URL形式不正／三値以外の値／確認日なしの転記メモ。開店≧閉店（例 `18:00-2:00`）は**日跨ぎ営業として許可**する（2026-08-08改訂。従来はエラーとし hours_text で表現させていた, S4）。

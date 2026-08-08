@@ -1,5 +1,12 @@
 import SwiftUI
 
+/// `RootView` の `NavigationStack(path:)` に積む値ベースの遷移先（S1修正）。
+/// `navigationDestination(for: Cafe.self)` と同じ path 上に乗せることで、
+/// `navigationDestination(isPresented:)` との混在（SwiftUI既知の競合でお気に入りタップが効かなくなる不具合）を解消する。
+enum AppRoute: Hashable {
+    case favorites
+}
+
 /// ルート画面（T021/T028）: 地図を常時ベース表示し、下部引き出しシートで一覧を併存させる
 /// （Googleマップ流、S3設計書: 上部の地図/一覧セグメントは廃止）。
 /// 地図とシート内一覧は同一の ViewModel（同一データ）を共有し、乖離させない（FR-003）。
@@ -14,10 +21,8 @@ struct RootView: View {
     @State private var recenterRequestID = 0
     // 経路チューザー（S1）: 「経路」タップ時にAppleマップ/Googleマップを選ばせる対象
     @State private var routeTarget: Cafe?
-    // 下部引き出し一覧シート（S3）: 現在の段（peek/medium/large）。ピンカードを閉じるとpeekへ復帰する。
+    // 下部引き出し一覧シート（S3）: 現在の段（peek/expanded）。ピンカードを閉じるとpeekへ復帰する。
     @State private var sheetDetent: CafeSheetDetent = .peek
-    // お気に入り専用画面（S4）: ツールバーの肉球ボタンから全画面push
-    @State private var showFavorites = false
 
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
@@ -63,7 +68,8 @@ struct RootView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        showFavorites = true
+                        // お気に入り遷移も path（値ベース）に統一する（S1修正）
+                        path.append(AppRoute.favorites)
                     } label: {
                         Image(systemName: "pawprint.fill")
                     }
@@ -89,8 +95,11 @@ struct RootView: View {
             .navigationDestination(for: Cafe.self) { cafe in
                 CafeDetailView(cafe: cafe, dependencies: dependencies)
             }
-            .navigationDestination(isPresented: $showFavorites) {
-                FavoritesView(viewModel: searchViewModel, favoritesStore: favoritesStore)
+            .navigationDestination(for: AppRoute.self) { route in
+                switch route {
+                case .favorites:
+                    FavoritesView(viewModel: searchViewModel, favoritesStore: favoritesStore)
+                }
             }
             .sheet(isPresented: $showAreaPicker) {
                 AreaPickerView { origin in
