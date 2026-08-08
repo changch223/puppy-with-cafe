@@ -64,8 +64,12 @@ final class StaticCafeRepository: CafeRepository, @unchecked Sendable {
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         self.cacheFileURL = directory.appendingPathComponent("cafes-remote.json")
 
-        // 1) 直近のリモート取得キャッシュ → 2) バンドル版 の順で初期ロード
-        if let cached = try? Data(contentsOf: cacheFileURL), apply(data: cached) {
+        // 1) 直近のリモート取得キャッシュ → 2) バンドル版 の順で初期ロード。
+        // ただしリモートURLが未設定（nil）の場合はリモートキャッシュを信頼せずバンドルを読む。
+        // リモートを配線しない構成（テスト・凍結フィクスチャ利用時）で、実アプリ起動が
+        // 共有の applicationSupport に書いたキャッシュを誤って拾わないための独立性ガード。
+        if remoteURL != nil,
+           let cached = try? Data(contentsOf: cacheFileURL), apply(data: cached) {
             return
         }
         if let url = bundle.url(forResource: "cafes", withExtension: "json"),
@@ -116,6 +120,17 @@ final class StaticCafeRepository: CafeRepository, @unchecked Sendable {
         lock.unlock()
         guard let found else { throw SupabaseError.emptyResponse }
         return found
+    }
+
+    /// お気に入り専用画面向け（機能4）: 検索エリア・半径に関わらず、ロード済みの全カフェ（閉店除く）を返す。
+    func allCafes() async throws -> [Cafe] {
+        await refreshFromRemoteIfNeeded()
+
+        lock.lock()
+        let snapshot = details
+        lock.unlock()
+
+        return snapshot.map(\.cafe).filter { !$0.isClosed }
     }
 
     // MARK: - Remote refresh（FR-032: 静的URLから最新データを取得）

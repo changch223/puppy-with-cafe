@@ -109,16 +109,6 @@ enum MapViewModel {
         }
     }
 
-    /// 経路案内で外部地図アプリを開く（地図の下部コンパクトカード「経路」ボタン, UI/UXブラッシュアップ設計書2）。
-    static func openInMaps(cafe: Cafe) {
-        let placemark = MKPlacemark(
-            coordinate: CLLocationCoordinate2D(latitude: cafe.latitude, longitude: cafe.longitude)
-        )
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = cafe.name
-        mapItem.openInMaps(launchOptions: nil)
-    }
-
     static func distanceText(meters: Double) -> String {
         let formatter = MKDistanceFormatter()
         formatter.unitStyle = .abbreviated

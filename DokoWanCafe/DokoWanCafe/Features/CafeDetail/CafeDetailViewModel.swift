@@ -1,5 +1,4 @@
 import Foundation
-import MapKit
 
 /// カフェ詳細の ViewModel（T031）。
 /// 出典（sources）を取得し、矛盾解決（ConflictResolver）・鮮度（FreshnessEvaluator）を適用する。
@@ -68,15 +67,5 @@ final class CafeDetailViewModel: ObservableObject {
         } catch {
             phase = .error(error.localizedDescription)
         }
-    }
-
-    /// 外部地図アプリで経路案内（FR-015/T049）
-    func openInMaps() {
-        let placemark = MKPlacemark(
-            coordinate: CLLocationCoordinate2D(latitude: cafe.latitude, longitude: cafe.longitude)
-        )
-        let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = cafe.name
-        mapItem.openInMaps(launchOptions: nil)
     }
 }

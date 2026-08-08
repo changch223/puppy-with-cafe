@@ -2,23 +2,6 @@ import MapKit
 import SwiftUI
 import UIKit
 
-/// 一覧画面（T025）: 距離順・犬目線バッジ・距離表示（FR-002/005, SC-002, 設計書4で可否4値バッジから刷新）。
-struct CafeListView: View {
-    @ObservedObject var viewModel: CafeListViewModel
-    /// お気に入り店の肉球表示に使う（設計書4。地図側と同様に呼び出し元から明示的に渡す）
-    let favoriteIDs: Set<UUID>
-
-    var body: some View {
-        List(viewModel.displayedResults) { item in
-            NavigationLink(value: item.cafe) {
-                CafeRowView(item: item, isFavorite: favoriteIDs.contains(item.cafe.id))
-            }
-        }
-        .listStyle(.plain)
-        .accessibilityLabel(Text("周辺の犬同伴OKカフェ一覧（近い順）"))
-    }
-}
-
 /// 一覧の1行: 詳細を開かなくても「犬目線の可否」と「距離」が判別できる（SC-002, 設計書4）
 struct CafeRowView: View {
     let item: CafeWithDistance

@@ -22,9 +22,22 @@
 		D0C0FFEE0000000000000004 /* DokoWanCafe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DokoWanCafe.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D0C0FFEE0000000000000040 /* Exceptions for "DokoWanCafe" folder in "DokoWanCafe" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				App/Info.plist,
+			);
+			target = D0C0FFEE0000000000000010 /* DokoWanCafe */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D0C0FFEE0000000000000005 /* DokoWanCafe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D0C0FFEE0000000000000040 /* Exceptions for "DokoWanCafe" folder in "DokoWanCafe" target */,
+			);
 			path = DokoWanCafe;
 			sourceTree = "<group>";
 		};
@@ -268,6 +281,7 @@
 				DEVELOPMENT_TEAM = MY8WU4892D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DokoWanCafe/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Puppy With Cafe";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "周辺の犬同伴OKカフェを現在地から探すために位置情報を使用します。位置情報は端末内で利用され、保存されません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -296,6 +310,7 @@
 				DEVELOPMENT_TEAM = MY8WU4892D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DokoWanCafe/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Puppy With Cafe";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "周辺の犬同伴OKカフェを現在地から探すために位置情報を使用します。位置情報は端末内で利用され、保存されません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

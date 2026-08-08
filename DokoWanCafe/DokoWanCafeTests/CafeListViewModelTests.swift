@@ -36,6 +36,10 @@ final class CafeListViewModelTests: XCTestCase {
             guard let cafe = cafes.first(where: { $0.id == id }) else { throw SupabaseError.emptyResponse }
             return CafeDetail(cafe: cafe, sources: [])
         }
+
+        func allCafes() async throws -> [Cafe] {
+            cafes.filter { !$0.isClosed }
+        }
     }
 
     private func makeCafe(
@@ -164,6 +168,24 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["お気に入りカフェ"])
     }
 
+    func test_favoriteCafesは対象エリア外を検索中でも保存済みお気に入りを返す() async {
+        // お気に入り画面は現在の検索エリアに依存しない（QA #1 の回帰防止）。
+        let favoriteCafe = makeCafe(name: "保存済みカフェ", latitude: 35.6897, longitude: 139.7007)
+        let otherCafe = makeCafe(name: "非お気に入り", latitude: 35.6898, longitude: 139.7008)
+        let favoritesStore = makeFavoritesStore()
+        favoritesStore.toggle(favoriteCafe.id)
+
+        let viewModel = makeViewModel(cafes: [favoriteCafe, otherCafe], favoritesStore: favoritesStore)
+        // 対象エリア外（大阪付近）を手動検索 → allResults は空・phase は outOfArea になる
+        viewModel.origin = .manual(ManualArea(id: "osaka", name: "大阪", latitude: 34.7, longitude: 135.5))
+        await viewModel.refresh()
+
+        XCTAssertEqual(viewModel.phase, .outOfArea)
+        XCTAssertTrue(viewModel.allResults.isEmpty)
+        // それでもお気に入りは全ロード済みカフェから解決され、保存済みの店が出る
+        XCTAssertEqual(viewModel.favoriteCafes.map(\.cafe.name), ["保存済みカフェ"])
+    }
+
     func test_sortOrderをrecentlyVerifiedにすると確認日が新しい順になる() async {
         let newer = Date(timeIntervalSince1970: 1_700_000_000)
         let older = Date(timeIntervalSince1970: 1_600_000_000)
@@ -204,6 +226,48 @@ final class CafeListViewModelTests: XCTestCase {
 
         viewModel.favoritesOnly = true
         XCTAssertEqual(viewModel.activeFilterCount, 3)
+    }
+
+    // MARK: - favoriteCafes（お気に入り専用画面, S4設計書）
+
+    func test_favoriteCafesは犬向け条件や未確認フィルタを無視して距離順に返す() async {
+        let favoriteUnverified = makeCafe(
+            name: "未確認だがお気に入り", latitude: 35.70, longitude: 139.80,
+            dogPolicyStatus: .unverified
+        )
+        let favoriteNear = makeCafe(name: "近いお気に入り", latitude: 35.6897, longitude: 139.7007)
+        let notFavorite = makeCafe(name: "お気に入りでない", latitude: 35.6898, longitude: 139.7008)
+        let favoritesStore = makeFavoritesStore()
+        favoritesStore.toggle(favoriteUnverified.id)
+        favoritesStore.toggle(favoriteNear.id)
+
+        let viewModel = makeViewModel(
+            cafes: [favoriteUnverified, favoriteNear, notFavorite],
+            favoritesStore: favoritesStore
+        )
+        viewModel.origin = .manual(makeOrigin())
+        // displayedResults向けの絞り込みを掛けても favoriteCafes には影響しないことを確認（設計書S4: フィルタ無視）
+        viewModel.amenityFilter.indoorOnly = true
+        await viewModel.refresh()
+
+        XCTAssertTrue(
+            viewModel.displayedResults.isEmpty,
+            "前提: amenityFilter.indoorOnlyによりdisplayedResultsは0件（いずれもindoor情報なし・未確認）"
+        )
+        XCTAssertEqual(
+            viewModel.favoriteCafes.map(\.cafe.name),
+            ["近いお気に入り", "未確認だがお気に入り"],
+            "距離昇順・amenity/未確認フィルタを無視して両方のお気に入りが含まれる"
+        )
+    }
+
+    func test_favoriteCafesはお気に入りが空なら空配列() async {
+        let cafe = makeCafe(name: "カフェ", latitude: 35.6897, longitude: 139.7007)
+        let viewModel = makeViewModel(cafes: [cafe])
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        XCTAssertTrue(viewModel.favoriteCafes.isEmpty)
     }
 
     func test_フィルタ起因の0件はisEmptyDueToFilterがtrueになる() async {

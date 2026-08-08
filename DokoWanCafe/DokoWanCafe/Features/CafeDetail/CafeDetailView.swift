@@ -16,6 +16,8 @@ struct CafeDetailView: View {
     @Environment(\.openURL) private var openURL
     @State private var showReport = false
     @State private var safariItem: SafariItem?
+    // 経路チューザー（S1）: 「経路案内」タップ時にAppleマップ/Googleマップを選ばせる
+    @State private var showRouteChooser = false
     // 写真・雰囲気セクションの表示チェーン現在地（IG埋め込み失敗→OGP写真カード失敗→地図案内、の順に遷移）
     @State private var photoTier: PhotoTier?
     @State private var instagramEmbedHeight: CGFloat = OGPPhotoCardView.cardHeight
@@ -144,7 +146,7 @@ struct CafeDetailView: View {
                 // 未確認情報の明示区別（FR-009/T035）
                 if viewModel.isUnverified {
                     warningBox(
-                        text: String(localized: "この情報は未確認です。出典・確認日のある確定情報ではありません。ご来店前に店舗へ直接ご確認ください。"),
+                        text: String(localized: "この情報は未確認です。参考記事・確認日のある確定情報ではありません。ご来店前に店舗へ直接ご確認ください。"),
                         systemImage: "questionmark.circle",
                         color: .gray
                     )
@@ -233,12 +235,25 @@ struct CafeDetailView: View {
             Divider()
             HStack(spacing: 10) {
                 Button {
-                    viewModel.openInMaps()
+                    showRouteChooser = true
                 } label: {
                     Label(String(localized: "経路案内"), systemImage: "arrow.triangle.turn.up.right.diamond")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
+                .confirmationDialog(
+                    String(localized: "経路を開くアプリを選択"),
+                    isPresented: $showRouteChooser,
+                    titleVisibility: .visible
+                ) {
+                    Button(String(localized: "Apple マップ")) {
+                        RouteLauncher.open(cafe: viewModel.cafe, using: .apple)
+                    }
+                    Button(String(localized: "Google マップ")) {
+                        RouteLauncher.open(cafe: viewModel.cafe, using: .google)
+                    }
+                    Button(String(localized: "キャンセル"), role: .cancel) {}
+                }
 
                 // 電話がある店のみ併記。無い店は経路案内が全幅になる（P0-1）。
                 if let phone = viewModel.cafe.phone,
@@ -403,7 +418,7 @@ struct CafeDetailView: View {
     private var conflictSection: some View {
         Section {
             warningBox(
-                text: String(localized: "出典によって犬同伴可否の情報が食い違っています。各出典の内容と確認日をご確認ください。"),
+                text: String(localized: "参考記事によって犬同伴可否の情報が食い違っています。各記事の内容と確認日をご確認ください。"),
                 systemImage: "exclamationmark.triangle.fill",
                 color: .yellow
             )
@@ -415,13 +430,17 @@ struct CafeDetailView: View {
                 )
             }
         } header: {
-            Text("出典間の食い違い")
+            Text("参考記事間の食い違い")
         } footer: {
-            Text("代表表示は「確認日が新しい出典 → 由来の信頼順」で決定しています。確定できない場合は「未確認」になります。")
+            Text("代表表示は「確認日が新しい参考記事 → 由来の信頼順」で決定しています。確定できない場合は「未確認」になります。")
         }
     }
 
-    // MARK: - 出典一覧（US2/FR-008/T032）
+    // MARK: - 参考記事（US2/FR-008/T032, S1: 出典→参考記事の記事カード化）
+
+    /// OGP代表画像を取得しにいく件数の上限（先頭何件目まで, 設計書S1）。
+    /// これ以降はテキストカード（アイコン＋タイトル）のまま、ネットワーク取得を試みない。
+    private static let articlePreviewFetchLimit = 5
 
     private var sourcesSection: some View {
         Section {
@@ -429,18 +448,34 @@ struct CafeDetailView: View {
                 // 矛盾セクションで既に全出典を表示済み
                 EmptyView()
             } else {
-                ForEach(viewModel.sources) { source in
-                    SourceRow(
+                ForEach(Array(viewModel.sources.enumerated()), id: \.element.id) { index, source in
+                    ArticleCardView(
                         source: source,
                         isRepresentative: source.id == viewModel.representativeSource?.id,
-                        onOpenURL: { url in safariItem = SafariItem(url: url) }
+                        fetchesPreview: index < Self.articlePreviewFetchLimit,
+                        onOpenURL: openSourceURL
                     )
                 }
             }
         } header: {
             if !viewModel.hasConflict {
-                Text("出典")
+                Text("参考記事")
             }
+        } footer: {
+            if !viewModel.hasConflict {
+                Text("参考記事の代表画像・要約は各記事からの引用であり、詳細は元記事をご確認ください。")
+            }
+        }
+    }
+
+    /// 参考記事リンクの開き方（写真・雰囲気機能のリンク開示ルールを踏襲）:
+    /// http(s)はアプリ内ブラウザ、instagram/xは外部アプリ（ユニバーサルリンクでアプリが開く方がUX良）。
+    private func openSourceURL(_ url: URL) {
+        if let host = url.host?.lowercased(),
+           host.contains("instagram.com") || host.contains("x.com") || host.contains("twitter.com") {
+            openURL(url)
+        } else {
+            safariItem = SafariItem(url: url)
         }
     }
 
@@ -495,14 +530,14 @@ struct CafeDetailView: View {
             if case .loading = viewModel.phase {
                 HStack {
                     ProgressView()
-                    Text("出典情報を読み込み中…")
+                    Text("参考記事を読み込み中…")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }
             if case .error(let message) = viewModel.phase {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("出典情報を取得できませんでした: \(message)")
+                    Text("参考記事を取得できませんでした: \(message)")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     Button(String(localized: "再試行")) {
@@ -637,6 +672,124 @@ struct SourceRow: View {
         }
         .padding(.vertical, 2)
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// 参考記事1件の記事カード（S1: 出典→参考記事の記事カード化）。
+/// クリックせずに写真＋要点が分かるよう、OGP代表画像（`LinkPreviewService` で端末側取得。
+/// 画像の転載・再ホストはしない）＋記事タイトル＋運営要約（claimed情報・確認日・採用根拠バッジ）を
+/// インライン表示する。OGP取得に失敗/対象外の場合はアイコン＋タイトルのテキストカードにフォールバックする。
+struct ArticleCardView: View {
+    let source: Source
+    let isRepresentative: Bool
+    /// OGP画像取得を試みるか（先頭何件までに絞るパフォーマンス上限, 設計書S1）
+    let fetchesPreview: Bool
+    let onOpenURL: (URL) -> Void
+
+    @State private var image: UIImage?
+    @State private var previewTitle: String?
+    @State private var isLoading: Bool
+
+    private static let thumbnailSize: CGFloat = 64
+
+    init(source: Source, isRepresentative: Bool, fetchesPreview: Bool, onOpenURL: @escaping (URL) -> Void) {
+        self.source = source
+        self.isRepresentative = isRepresentative
+        self.fetchesPreview = fetchesPreview
+        self.onOpenURL = onOpenURL
+        _isLoading = State(initialValue: fetchesPreview && source.referenceURL != nil)
+    }
+
+    /// 記事タイトル（OGPタイトル or 出典種別名, 設計書S1）
+    private var title: String { previewTitle ?? source.type.displayName }
+
+    var body: some View {
+        Button {
+            if let url = source.referenceURL {
+                onOpenURL(url)
+            }
+        } label: {
+            HStack(alignment: .top, spacing: 12) {
+                thumbnail
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(alignment: .top, spacing: 6) {
+                        Text(title)
+                            .font(.subheadline.bold())
+                            .foregroundStyle(.primary)
+                            .lineLimit(2)
+                        if isRepresentative {
+                            Text("採用根拠")
+                                .font(.caption2.bold())
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(Capsule().fill(Color.blue.opacity(0.15)))
+                                .foregroundStyle(.blue)
+                        }
+                    }
+                    HStack(spacing: 6) {
+                        ProvenanceChip(provenance: source.provenance)
+                        StatusBadge(status: source.claimedStatus)
+                    }
+                    HStack(spacing: 4) {
+                        Text(source.type.displayName)
+                        if let verifiedAt = source.verifiedAt {
+                            Text("・確認日: \(verifiedAt.formatted(date: .abbreviated, time: .omitted))")
+                        }
+                    }
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+        .disabled(source.referenceURL == nil)
+        .accessibilityElement(children: .combine)
+        .task(id: source.id) {
+            guard fetchesPreview, let url = source.referenceURL else {
+                isLoading = false
+                return
+            }
+            let preview = await LinkPreviewService.shared.preview(for: url)
+            isLoading = false
+            image = preview?.image
+            previewTitle = preview?.title
+        }
+    }
+
+    @ViewBuilder
+    private var thumbnail: some View {
+        Group {
+            if let image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color(.secondarySystemBackground))
+                    .overlay {
+                        if isLoading {
+                            ProgressView()
+                        } else {
+                            Image(systemName: Self.icon(for: source.type))
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+            }
+        }
+        .frame(width: Self.thumbnailSize, height: Self.thumbnailSize)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    /// 出典種別ごとのフォールバックアイコン（`CafeLinkType.systemImage` と対応を揃える）
+    private static func icon(for type: SourceType) -> String {
+        switch type {
+        case .officialHP: return "globe"
+        case .sns: return "at"
+        case .googleMap: return "map"
+        case .tabelog: return "fork.knife"
+        case .blog: return "text.bubble"
+        case .other: return "link"
+        }
     }
 }
 

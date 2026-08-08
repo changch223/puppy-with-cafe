@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Googleマップアプリの有無を canOpenURL で判定するために必要（経路チューザー機能）。
+	     GENERATE_INFOPLIST_FILE=YES と INFOPLIST_FILE を併用すると、
+	     このファイルの内容が自動生成Info.plistへマージされる（配列はINFOPLIST_KEY_では表現不可のため）。 -->
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+	</array>
+</dict>
+</plist>

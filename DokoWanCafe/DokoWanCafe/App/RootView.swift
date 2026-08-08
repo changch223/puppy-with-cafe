@@ -1,22 +1,23 @@
 import SwiftUI
 
-/// ルート画面（T021/T028）: 現在地起点の地図＋一覧を切り替え・連動表示する。
-/// 地図と一覧は同一の ViewModel（同一データ）を共有し、乖離させない（FR-003）。
+/// ルート画面（T021/T028）: 地図を常時ベース表示し、下部引き出しシートで一覧を併存させる
+/// （Googleマップ流、S3設計書: 上部の地図/一覧セグメントは廃止）。
+/// 地図とシート内一覧は同一の ViewModel（同一データ）を共有し、乖離させない（FR-003）。
 struct RootView: View {
-    private enum DisplayMode: Hashable {
-        case map
-        case list
-    }
-
     let dependencies: AppDependencies
     @StateObject private var searchViewModel: CafeListViewModel
     @ObservedObject private var favoritesStore: FavoritesStore
-    @State private var mode: DisplayMode = .map
     @State private var path = NavigationPath()
     @State private var showAreaPicker = false
     // 地図: ピン選択（下部コンパクトカード）・現在地ボタンの再センタリング要求（UI/UXブラッシュアップ設計書2）
     @State private var selectedMapItem: CafeWithDistance?
     @State private var recenterRequestID = 0
+    // 経路チューザー（S1）: 「経路」タップ時にAppleマップ/Googleマップを選ばせる対象
+    @State private var routeTarget: Cafe?
+    // 下部引き出し一覧シート（S3）: 現在の段（peek/medium/large）。ピンカードを閉じるとpeekへ復帰する。
+    @State private var sheetDetent: CafeSheetDetent = .peek
+    // お気に入り専用画面（S4）: ツールバーの肉球ボタンから全画面push
+    @State private var showFavorites = false
 
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
@@ -36,27 +37,8 @@ struct RootView: View {
             VStack(spacing: 0) {
                 banners
 
-                Picker(String(localized: "表示"), selection: $mode) {
-                    Text("地図").tag(DisplayMode.map)
-                    Text("一覧").tag(DisplayMode.list)
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                .padding(.vertical, 8)
-                .accessibilityLabel(Text("表示切り替え"))
-                // 表示モード切替時に下部カードを残さない（QA指摘: 地図→一覧で古い選択が残留）
-                // iOS 16対応のため単一引数版のonChangeを使う
-                .onChange(of: mode) { _ in
-                    selectedMapItem = nil
-                }
-
                 ZStack {
-                    switch mode {
-                    case .map:
-                        mapContent
-                    case .list:
-                        CafeListView(viewModel: searchViewModel, favoriteIDs: favoritesStore.favoriteIDs)
-                    }
+                    mapContent
 
                     if showsStateOverlay {
                         SearchStateView(viewModel: searchViewModel) {
@@ -80,6 +62,14 @@ struct RootView: View {
                     .accessibilityLabel(Text("検索する地域を変更"))
                 }
                 ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showFavorites = true
+                    } label: {
+                        Image(systemName: "pawprint.fill")
+                    }
+                    .accessibilityLabel(Text("お気に入り一覧を開く"))
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     filterMenu
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -99,6 +89,9 @@ struct RootView: View {
             .navigationDestination(for: Cafe.self) { cafe in
                 CafeDetailView(cafe: cafe, dependencies: dependencies)
             }
+            .navigationDestination(isPresented: $showFavorites) {
+                FavoritesView(viewModel: searchViewModel, favoritesStore: favoritesStore)
+            }
             .sheet(isPresented: $showAreaPicker) {
                 AreaPickerView { origin in
                     // エリア変更で古い選択カードを残さない（QA指摘: 別エリアの店のカードが残留）
@@ -107,8 +100,40 @@ struct RootView: View {
                     Task { await searchViewModel.refresh() }
                 }
             }
+            .confirmationDialog(
+                String(localized: "経路を開くアプリを選択"),
+                isPresented: Binding(
+                    get: { routeTarget != nil },
+                    set: { isPresented in if !isPresented { routeTarget = nil } }
+                ),
+                titleVisibility: .visible
+            ) {
+                if let routeTarget {
+                    Button(String(localized: "Apple マップ")) {
+                        RouteLauncher.open(cafe: routeTarget, using: .apple)
+                    }
+                    Button(String(localized: "Google マップ")) {
+                        RouteLauncher.open(cafe: routeTarget, using: .google)
+                    }
+                }
+                Button(String(localized: "キャンセル"), role: .cancel) {}
+            }
             .task {
                 await searchViewModel.refresh()
+            }
+            // ピンカードを閉じたら下部シートをpeekへ復帰させる（S3設計書:「カード閉じでpeek復帰」）
+            // iOS 16対応のため単一引数版のonChangeを使う
+            .onChange(of: selectedMapItem) { newValue in
+                if newValue == nil {
+                    sheetDetent = .peek
+                }
+            }
+            // フィルタ変更（amenityFilter/includeUnverified/favoritesOnly）で選択中の店が
+            // displayedResults から外れたらカードを残さない（QA指摘#2）
+            .onChange(of: searchViewModel.displayedResults) { newResults in
+                if let selectedMapItem, !newResults.contains(where: { $0.cafe.id == selectedMapItem.cafe.id }) {
+                    self.selectedMapItem = nil
+                }
             }
         }
     }
@@ -126,52 +151,68 @@ struct RootView: View {
         }
     }
 
-    // MARK: - 地図タブ（数字クラスタ廃止・下部コンパクトカード・凡例・現在地ボタン, UI/UXブラッシュアップ設計書2）
+    // MARK: - 地図（数字クラスタ廃止・下部コンパクトカード・凡例・現在地ボタン・下部引き出し一覧シート, S3設計書）
 
     private var mapContent: some View {
-        ZStack(alignment: .bottom) {
-            CafeMapView(
-                items: searchViewModel.displayedResults,
-                center: searchViewModel.searchCenter,
-                favoriteIDs: favoritesStore.favoriteIDs,
-                selectedItem: $selectedMapItem,
-                recenterRequestID: recenterRequestID
-            )
+        GeometryReader { proxy in
+            ZStack(alignment: .bottom) {
+                CafeMapView(
+                    items: searchViewModel.displayedResults,
+                    center: searchViewModel.searchCenter,
+                    favoriteIDs: favoritesStore.favoriteIDs,
+                    selectedItem: $selectedMapItem,
+                    recenterRequestID: recenterRequestID
+                )
 
-            if selectedMapItem == nil {
-                HStack {
-                    Spacer()
-                    VStack(alignment: .trailing, spacing: 12) {
-                        MapLegendView(showsUnverified: hasUnverifiedResult)
-                        CurrentLocationButton {
-                            recenterRequestID += 1
+                if selectedMapItem == nil {
+                    HStack {
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 12) {
+                            MapLegendView(showsUnverified: hasUnverifiedResult)
+                            CurrentLocationButton {
+                                recenterRequestID += 1
+                            }
                         }
                     }
+                    .padding(.trailing, 12)
+                    // 右下・peek高さの少し上に配置（シート展開時は覆われてよい, S3設計書）
+                    .padding(.bottom, CafeSheetDetent.peekHeight + 12)
                 }
-                .padding(.trailing, 12)
-                .padding(.bottom, 12)
-            }
 
-            if let selectedMapItem {
-                MapPlaceCardView(
-                    item: selectedMapItem,
-                    onShowDetail: {
-                        self.selectedMapItem = nil
-                        path.append(selectedMapItem.cafe)
-                    },
-                    onOpenRoute: {
-                        MapViewModel.openInMaps(cafe: selectedMapItem.cafe)
-                    },
-                    onClose: {
-                        self.selectedMapItem = nil
-                    }
-                )
-                .padding(.horizontal, 12)
-                .padding(.bottom, 12)
-                .transition(.move(edge: .bottom).combined(with: .opacity))
+                // ピンタップ時は下部シートを下げて隠し、ピンのコンパクトカードを表示する
+                // （下部要素を同時に2つ出さない, S3設計書）
+                if let selectedMapItem {
+                    MapPlaceCardView(
+                        item: selectedMapItem,
+                        onShowDetail: {
+                            self.selectedMapItem = nil
+                            path.append(selectedMapItem.cafe)
+                        },
+                        onOpenRoute: {
+                            routeTarget = selectedMapItem.cafe
+                        },
+                        onClose: {
+                            self.selectedMapItem = nil
+                        }
+                    )
+                    .padding(.horizontal, 12)
+                    .padding(.bottom, 12)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                } else {
+                    CafeBottomSheet(
+                        containerHeight: proxy.size.height,
+                        detent: $sheetDetent,
+                        items: searchViewModel.displayedResults,
+                        originName: searchViewModel.origin.displayName,
+                        favoriteIDs: favoritesStore.favoriteIDs,
+                        isEmptyDueToFilter: searchViewModel.isEmptyDueToFilter,
+                        onResetFilters: { searchViewModel.resetFilters() }
+                    )
+                    .transition(.move(edge: .bottom))
+                }
             }
+            .animation(.easeInOut(duration: 0.2), value: selectedMapItem)
         }
-        .animation(.easeInOut(duration: 0.2), value: selectedMapItem)
     }
 
     /// 現在の表示結果に未確認ピン（灰）が含まれるか（凡例に灰エントリを足すかの判定に使う）

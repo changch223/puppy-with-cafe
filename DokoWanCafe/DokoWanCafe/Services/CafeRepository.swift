@@ -13,6 +13,11 @@ protocol CafeRepository: Sendable {
 
     /// カフェ詳細＋出典（contracts/api-contracts.md #2）
     func cafeDetail(id: UUID) async throws -> CafeDetail
+
+    /// 全カフェ取得（お気に入り専用画面向け, 機能4）。
+    /// `nearbyCafes` と異なり検索エリア・半径に関わらず、ロード済みの全カフェ（閉店除く）を返す。
+    /// お気に入りは現在の検索エリアと無関係に解決するため（QA指摘: エリア外検索中の誤表示防止）。
+    func allCafes() async throws -> [Cafe]
 }
 
 // MARK: - Supabase 実装
@@ -56,6 +61,16 @@ struct SupabaseCafeRepository: CafeRepository {
         )
         guard let detail = rows.first else { throw SupabaseError.emptyResponse }
         return detail
+    }
+
+    func allCafes() async throws -> [Cafe] {
+        try await gateway.select(
+            "cafes",
+            query: [
+                URLQueryItem(name: "select", value: "*"),
+                URLQueryItem(name: "is_closed", value: "eq.false"),
+            ]
+        )
     }
 }
 
@@ -216,5 +231,9 @@ struct SampleDataRepository: CafeRepository {
             throw SupabaseError.emptyResponse
         }
         return CafeDetail(cafe: cafe, sources: Self.sources[id] ?? [])
+    }
+
+    func allCafes() async throws -> [Cafe] {
+        Self.cafes.filter { !$0.isClosed }
     }
 }
