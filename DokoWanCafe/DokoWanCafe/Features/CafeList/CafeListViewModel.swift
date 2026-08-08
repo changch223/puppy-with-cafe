@@ -1,15 +1,18 @@
 import CoreLocation
 import Foundation
 
-/// 検索の起点（現在地 or 手動指定エリア, FR-017）
+/// 検索の起点（現在地 or 手動指定エリア or 住所・駅名検索, FR-017）
 enum SearchOrigin: Equatable {
     case currentLocation
     case manual(ManualArea)
+    /// 住所・駅名・エリア名の検索結果による起点（機能2: 住所・駅名検索、`GeocodingService` 経由）
+    case searched(name: String, latitude: Double, longitude: Double)
 
     var displayName: String {
         switch self {
         case .currentLocation: return String(localized: "現在地")
         case .manual(let area): return area.name
+        case .searched(let name, _, _): return name
         }
     }
 }
@@ -41,6 +44,9 @@ final class CafeListViewModel: ObservableObject {
 
     @Published private(set) var phase: Phase = .idle
     @Published private(set) var allResults: [CafeWithDistance] = []
+    /// お気に入り専用画面（機能4）用の全ロード済みカフェ。現在の検索エリア（allResults）に依存せず、
+    /// 対象エリア外を検索中でも保存済みのお気に入りを解決できるよう、リポジトリから全件を一度だけ取得して保持する。
+    @Published private(set) var allLoadedCafes: [Cafe] = []
     /// 犬向け条件の絞り込み（店内OK/テラスOK/大型犬OK/犬メニュー, AND結合, 既定は絞り込みなし。UI/UXブラッシュアップ設計書1b/4）
     @Published var amenityFilter = AmenityFilter()
     /// 未確認ステータスの店も表示するか（既定false。原則I: 未確認を可と主張しない, 設計書1b/4）
@@ -78,6 +84,26 @@ final class CafeListViewModel: ObservableObject {
         return CafeFilter.sorted(results, by: sortOrder)
     }
 
+    /// お気に入り専用画面（機能4）向け: 全ロード済みカフェ ∩ お気に入りIDを距離順で返す。
+    /// 犬向け条件・未確認フィルタは無視し、かつ現在の検索エリア（allResults）にも依存しない
+    /// （対象エリア外を検索中でも保存済みのお気に入りが消えないよう `allLoadedCafes` から解決する, S4設計書）。
+    var favoriteCafes: [CafeWithDistance] {
+        let center = searchCenter
+        let withDistance = allLoadedCafes.map { cafe -> CafeWithDistance in
+            let distance: Double
+            if let center {
+                distance = DistanceCalculator.distanceMeters(
+                    fromLatitude: center.latitude, fromLongitude: center.longitude,
+                    toLatitude: cafe.latitude, toLongitude: cafe.longitude
+                )
+            } else {
+                distance = 0
+            }
+            return CafeWithDistance(cafe: cafe, distanceMeters: distance)
+        }
+        return CafeFilter.favorites(from: withDistance, favoriteIDs: favoritesStore.favoriteIDs)
+    }
+
     /// 現在適用中の絞り込み条件の数（犬向け条件4種＋未確認表示＋お気に入りのみ）。
     /// ツールバーのフィルタアイコンにバッジ表示するために使う（設計書4）。
     var activeFilterCount: Int {
@@ -107,6 +133,12 @@ final class CafeListViewModel: ObservableObject {
     func refresh() async {
         phase = .loading
 
+        // 0) お気に入り解決用に全カフェを一度だけ取得（対象エリア外の早期returnより前に行う）。
+        //    データは静的なので初回ロードのみ。失敗時は次回 refresh で再試行する。
+        if allLoadedCafes.isEmpty {
+            allLoadedCafes = (try? await repository.allCafes()) ?? []
+        }
+
         // 1) 起点を解決（現在地 or 手動エリア）
         let coordinate: CLLocationCoordinate2D
         switch origin {
@@ -122,6 +154,8 @@ final class CafeListViewModel: ObservableObject {
             }
         case .manual(let area):
             coordinate = CLLocationCoordinate2D(latitude: area.latitude, longitude: area.longitude)
+        case .searched(_, let latitude, let longitude):
+            coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
         searchCenter = coordinate
 

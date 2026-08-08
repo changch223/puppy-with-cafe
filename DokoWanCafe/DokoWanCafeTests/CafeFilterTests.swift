@@ -151,4 +151,35 @@ final class CafeFilterTests: XCTestCase {
         let sorted = CafeFilter.sorted(items, by: .recentlyVerified)
         XCTAssertEqual(sorted.map(\.cafe.lastVerified), [newer, older, nil])
     }
+
+    // MARK: - favorites（お気に入り専用画面, S4設計書）
+
+    func test_favoritesはfavoriteIDsに含まれる店だけを距離順で返す() {
+        let far = makeItem(.allowed, distance: 300)
+        let near = makeItem(.allowed, distance: 100)
+        let notFavorite = makeItem(.allowed, distance: 50)
+        let favoriteIDs: Set<UUID> = [far.cafe.id, near.cafe.id]
+
+        let result = CafeFilter.favorites(from: [far, near, notFavorite], favoriteIDs: favoriteIDs)
+
+        XCTAssertEqual(result.map(\.cafe.id), [near.cafe.id, far.cafe.id], "favoriteIDsに含まれる店のみ、距離昇順で返る")
+    }
+
+    /// お気に入りは犬向け条件（amenity）や未確認ステータスによる絞り込みを無視し、常に全部見せる（S4設計書）
+    func test_favoritesは未確認ステータスの店もamenityフィルタも無視して含める() {
+        let unverified = makeItem(.unverified, distance: 200, amenities: nil)
+        let favoriteIDs: Set<UUID> = [unverified.cafe.id]
+
+        let result = CafeFilter.favorites(from: [unverified], favoriteIDs: favoriteIDs)
+
+        XCTAssertEqual(result.map(\.cafe.id), [unverified.cafe.id])
+    }
+
+    func test_favoritesはfavoriteIDsが空なら空配列を返す() {
+        let items = [makeItem(.allowed), makeItem(.conditional)]
+
+        let result = CafeFilter.favorites(from: items, favoriteIDs: [])
+
+        XCTAssertTrue(result.isEmpty)
+    }
 }

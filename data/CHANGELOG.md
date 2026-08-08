@@ -682,3 +682,12 @@
 - ➕ 追加: 海外天
 - ➕ 追加: 焼肉 ぼんぼり
 - ➕ 追加: 麺酒場 さかのうえ
+
+## 2026-08-08 10:07 — 追加 0 / 変更 7 / 削除 0
+- ✏️ 変更: MAISON KAYSER 五反田店（links）
+- ✏️ 変更: T.Y.HARBOR（links）
+- ✏️ 変更: breadworks 天王洲（links）
+- ✏️ 変更: nakameguro SLOW TABLE（links）
+- ✏️ 変更: ハーベステラス 昭島アウトドアヴィレッジ店（links）
+- ✏️ 変更: 洋食屋クリスマス亭（links）
+- ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（links）

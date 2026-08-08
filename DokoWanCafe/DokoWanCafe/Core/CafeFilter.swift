@@ -68,6 +68,12 @@ extension CafeFilter {
         }
     }
 
+    /// お気に入り専用画面向け: 全ロード済みカフェ ∩ お気に入りIDを距離順で返す（機能4, S4設計書）。
+    /// 犬向け条件・未確認フィルタは無視する（お気に入りは常に全部見せる）。
+    static func favorites(from cafes: [CafeWithDistance], favoriteIDs: Set<UUID>) -> [CafeWithDistance] {
+        sorted(cafes.filter { favoriteIDs.contains($0.cafe.id) }, by: .distance)
+    }
+
     /// 指定した並び順でソートする（UI/UXブラッシュアップ設計書 1b）。
     static func sorted(_ cafes: [CafeWithDistance], by order: CafeSortOrder) -> [CafeWithDistance] {
         switch order {
