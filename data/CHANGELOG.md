@@ -847,3 +847,108 @@
 - ✏️ 変更: 祖師谷バル haracucci(ハラクッチ)（instagram_post_url）
 - ✏️ 変更: 高尾山FuMotoYA（instagram_post_url）
 - ✏️ 変更: 高幡不動 肉流通センター はなれ（instagram_post_url）
+
+## 2026-10-06 22:44 — 追加 0 / 変更 103 / 削除 0
+- ✏️ 変更: 44APARTMENT 多摩センター店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: AINA CAFE(アイナカフェ)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Aoi Coffee Stand（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, dog_note, sources）
+- ✏️ 変更: BARCA(バルカ)（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: BONDI CAFE Nakameguro（last_verified, representative_source_id, dog_amenities, sources）
+- ✏️ 変更: BONDI CAFE 広尾店(ボンダイカフェ広尾店)（last_verified, representative_source_id, dog_amenities, sources）
+- ✏️ 変更: BURG HOLIC(バーグホリック)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Bleue Blanche（ブルーブランシュ）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: CAFE CHOU CHOU(シュシュ)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: CANAL CAFE（カナルカフェ）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: CANTERA（カンテラ）立川店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: CHICHICAFE（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Cafe Lisette 二子玉川店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Cafe and Dining Paco（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: Cafe du Riche(カフェドリッチェ)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, dog_note, sources）
+- ✏️ 変更: Cafe&Diner KHB（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Cafe&Restaurant CENTRALE（セントラーレ）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Cafe' Roju（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Café Kitsuné Aoyama（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: DOG DEPT + CAFE 浅草隅田川テラス店（last_verified, representative_source_id, dog_amenities, sources）
+- ✏️ 変更: District ブラッスリー・バー・ラウンジ（last_verified, representative_source_id, dog_amenities, dog_policy_condition, dog_note, sources）
+- ✏️ 変更: Dog Café Bee（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: Dogberry(ドッグベリー)（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: ENRICH（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: ERIC ROSE（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: EVERYONEs CAFE（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Egoland Cafe Akihabara（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: F*GICCO by F.gohan(エフジッコ バイ エフゴハン)（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, dog_note, sources）
+- ✏️ 変更: HANAKADO(ハナカド)（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: IVY PLACE（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: In the Garden 135(イン・ザ・ガーデン135)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, dog_note, sources）
+- ✏️ 変更: Italian Kitchen VANSAN 祖師ヶ谷大蔵店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: KITCHEN BAR 新目黒茶屋（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: LATTE GRAPHIC 聖蹟桜ヶ丘店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: LATTE GRAPHIC 自由が丘店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: LUSH COFFEE ROASTER&LABORATORY（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Le Calin（ルカラン）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Le Maghreb（ル・マグレブ）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Les deux Bleue ららぽーと豊洲店（last_verified, representative_source_id, dog_amenities, sources）
+- ✏️ 変更: MEAT×WINE BISTRO DOMANNAKA（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: MID TREE 代官山（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: MOTHERS ORIENTAL（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: O.GARDEN CAFE（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: P.C.M. パブ・カーディナル・マルノウチ（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: PENNY LANE ソラマチ店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Park Side Cafe BASEL（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Pcm's Cafe（last_verified, representative_source_id, sources）
+- ✏️ 変更: Pizzeria&Trattoria GONZO 吉祥寺店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Plus veganique(プラスヴィーガニック自由が丘)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: RAD BROS CAFE（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: RIGOLETTO spice market（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Ron Herman Cafe 二子玉川店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: SYUNA & BANI（シュナ＆バニ）（last_verified, representative_source_id, dog_policy_condition, sources）
+- ✏️ 変更: SeTaBi Cafe(セタビカフェ)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Sestina（セスティーナ）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: T.Y.HARBOR（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: THE LINKING（last_verified, representative_source_id, dog_policy_status, dog_policy_condition, sources）
+- ✏️ 変更: Takuru(タクる)（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: WIRED KITCHEN 南町田グランベリーパーク（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: Wande Shiba（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: a-bridge 三軒茶屋店（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）（last_verified, representative_source_id, dog_policy_status, dog_policy_condition, sources）
+- ✏️ 変更: atelier BASEL（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: biotable.（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: marble（last_verified, representative_source_id, dog_policy_condition, sources）
+- ✏️ 変更: nakameguro SLOW TABLE（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: pepacafe FOREST（ペパカフェ・フォレスト）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, dog_note, sources）
+- ✏️ 変更: sibafu（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: いろりの里 高尾山名主 ごん助（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: ひぐらしベーカリー（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: もんじゃ ことぶきや（last_verified, representative_source_id, dog_amenities, has_conflict, sources）
+- ✏️ 変更: やまびこ茶屋（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: わんすたCafe＆酒場（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, dog_note, sources）
+- ✏️ 変更: エメ(Eme)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: カキノキテラス（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: スワン銀座（SWAN GINZA）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: デルコス八王子本店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: ハーベステラス 品川店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: バーガーマニア 広尾店（last_verified, representative_source_id, dog_amenities, sources）
+- ✏️ 変更: ピッツェリア ジターリア ダ フィリッポ(PIZZERIA GTALIA DA FILIPPO)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: フランツクラブ 浜松町店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: ブルーボトルコーヒー 代官山カフェ（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: マキネスティコーヒー 緑本店（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+- ✏️ 変更: ミヤマ珈琲 練馬春日町店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: ミルリトンカフェ(Mirliton Cafe)（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: ラ・ベファーナ 吉祥寺（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: リキマルカフェ（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 串カツ田中 経堂店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 和むすびや＆わんこのまるっと（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 庭cafe443 in Todoroki（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 栄茶屋本店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 田園調布倶楽部（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 石濱茶寮 楽（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 神楽坂 ラクレット&フォンデュ フロマティック（Fromatique）（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 窯焼きバルカフェ らんぷ+k（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 肉とワイン bonanza（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 自由が丘 カスタネット（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 迎賓楼（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 銀蕎麦 國定 勝どき店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 高倉町珈琲 八王子店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 高輪バール・デルソーレ（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: 魚がし どまん中 神楽坂店（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
