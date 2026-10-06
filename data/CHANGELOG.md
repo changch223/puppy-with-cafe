@@ -952,3 +952,18 @@
 - ✏️ 変更: 高倉町珈琲 八王子店（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
 - ✏️ 変更: 高輪バール・デルソーレ（last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
 - ✏️ 変更: 魚がし どまん中 神楽坂店（last_verified, representative_source_id, dog_policy_status, dog_amenities, dog_policy_condition, has_conflict, sources）
+
+## 2026-10-06 23:32 — 追加 0 / 変更 13 / 削除 0
+- ✏️ 変更: & OIMO TOKYO CAFE 中目黒店（dog_amenities, dog_policy_condition, representative_source_id, last_verified, sources）
+- ✏️ 変更: GOOD MORNING CAFE 中野セントラルパーク（dog_amenities, dog_note, dog_policy_condition, representative_source_id, last_verified, sources）
+- ✏️ 変更: IL BACARO ALMA（イル バーカロ アルマ）（dog_amenities, dog_policy_condition, dog_size_limit, representative_source_id, last_verified, sources）
+- ✏️ 変更: Pretty Good - coffee & donut（dog_amenities, dog_policy_condition, dog_size_limit, representative_source_id, last_verified, sources）
+- ✏️ 変更: ROJU NAKAMEGURO（dog_amenities, dog_policy_condition, representative_source_id, last_verified, dog_size_limit, sources）
+- ✏️ 変更: TRATTORIA Elmo Cielo(トラットリア エルモチェーロ)（dog_amenities, dog_policy_condition, representative_source_id, last_verified, sources）
+- ✏️ 変更: bills お台場（dog_amenities, dog_policy_condition, dog_size_limit, representative_source_id, last_verified, sources）
+- ✏️ 変更: cafe garage Dogberry(ドッグベリー)下北沢（dog_amenities, dog_note, representative_source_id, last_verified, sources）
+- ✏️ 変更: ブラッスリー セント・ベルナルデュス 神田(St.Bernardus)（dog_amenities, dog_policy_condition, representative_source_id, last_verified, sources）
+- ✏️ 変更: 君のハンバーグを食べたい渋谷店（dog_amenities, dog_note, dog_policy_condition, representative_source_id, last_verified, sources）
+- ✏️ 変更: 大衆イタリアン酒場 煙-kemuri-（dog_amenities, dog_policy_condition, representative_source_id, last_verified, sources）
+- ✏️ 変更: 焼肉 炙りな 北千住店（dog_amenities, representative_source_id, last_verified, sources）
+- ✏️ 変更: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ（dog_amenities, dog_policy_condition, dog_size_limit, representative_source_id, last_verified, sources）

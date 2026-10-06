@@ -8,9 +8,10 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "large_dogs": true,
         "terrace": true
       },
-      "dog_policy_condition": "店内は窓側3席のみ犬同伴可、テラス席は全席犬同伴可（小型〜大型犬いずれも可、要予約推奨）",
+      "dog_policy_condition": "店内は入口付近の一部席のみ・テラスは全席可。大型犬も可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "店内は入口付近の一部席のみ(要予約推奨)",
       "has_conflict": true,
@@ -18,7 +19,7 @@
       "id": "beef0000-0000-4000-8000-000000000062",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": "2026-08-07",
+      "last_verified": "2026-10-06",
       "latitude": 35.6432,
       "links": [
         {
@@ -33,16 +34,16 @@
       "longitude": 139.6958,
       "name": "& OIMO TOKYO CAFE 中目黒店",
       "place_id": null,
-      "representative_source_id": "3012913e-4b0d-5dbd-910e-02874f8e02e1",
+      "representative_source_id": "15353481-b425-5cdc-a6c8-3fc7782360d6",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000062",
           "claimed_status": "conditional",
-          "id": "9c01a61d-2a8c-5b38-983a-ebc6d280548f",
+          "id": "15353481-b425-5cdc-a6c8-3fc7782360d6",
           "provenance": "aggregated",
           "reference": "https://wankonowa.com/column/1858/",
           "type": "blog",
-          "verified_at": "2026-07-17"
+          "verified_at": "2026-10-06"
         },
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000062",
@@ -7282,10 +7283,11 @@
       "description": "中野四季の森公園に面したイタリアン&バルスタイルのカフェ。開放的なテラス席で緑を眺めながら朝食からディナーまで楽しめる。",
       "dog_amenities": {
         "indoor": false,
+        "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "テラス席のみ犬同伴可(店内不可)。大型犬可否・頭数上限の記載なし。",
-      "dog_policy_condition": "テラス席のみペット同伴可(店内不可)",
+      "dog_note": "テラス席のみ犬同伴可(店内不可)。大型犬もテラス席で同伴可。",
+      "dog_policy_condition": "テラス席のみ犬同伴可・お水サービスあり（小型〜大型犬）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "平日11:00〜22:00(料理L.O.20:30・ドリンクL.O.21:00)・土日祝8:30〜22:00(同L.O.)",
@@ -7293,7 +7295,7 @@
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/DbuKMRQk7X8/",
       "is_closed": false,
-      "last_verified": "2026-07-18",
+      "last_verified": "2026-10-06",
       "latitude": 35.7095,
       "links": [
         {
@@ -7313,7 +7315,7 @@
       "name": "GOOD MORNING CAFE 中野セントラルパーク",
       "phone": "050-5488-4492",
       "place_id": null,
-      "representative_source_id": "d8ec12da-f7c4-5f77-9b73-b86fd6cb9075",
+      "representative_source_id": "52acf310-d548-5f0e-8e55-236487d15abe",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000462",
@@ -7332,6 +7334,15 @@
           "reference": "https://www.dogrun-dogcafe.com/dogcafe_report/2377",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000462",
+          "claimed_status": "conditional",
+          "id": "52acf310-d548-5f0e-8e55-236487d15abe",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/aerz5dng0000/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "中野"
@@ -8053,16 +8064,18 @@
       "description": "コレド室町3内のヴェネツィア風イタリアンバール。桜並木沿いのテラス席で犬同伴可能。",
       "dog_amenities": {
         "indoor": false,
+        "large_dogs": true,
         "terrace": true
       },
-      "dog_policy_condition": "テラス席のみ同伴可",
+      "dog_policy_condition": "テラス席のみ同伴可（小型・中型・大型犬とも可）",
       "dog_policy_status": "conditional",
+      "dog_size_limit": "小型〜大型犬までテラス席で可",
       "has_conflict": false,
       "hours_text": "月〜金 ランチ11:00〜14:00・カフェ14:00〜17:00・ディナー17:00〜23:00(L.O.22:30) / 土日祝 ランチ・カフェ11:00〜17:00・ディナー17:00〜23:00(L.O.22:30)",
       "id": "beef0000-0000-4000-8000-000000000243",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": "2026-07-18",
+      "last_verified": "2026-10-06",
       "latitude": 35.6862,
       "links": [
         {
@@ -8074,7 +8087,7 @@
       "name": "IL BACARO ALMA（イル バーカロ アルマ）",
       "phone": "03-6262-3178",
       "place_id": null,
-      "representative_source_id": "8f8530be-0559-538e-8ccf-02a9628426f8",
+      "representative_source_id": "33981788-08f7-57c3-b4c6-5a6ad4075554",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000243",
@@ -8093,6 +8106,15 @@
           "reference": "https://don-don-dog.com/il-bacaro-alma",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000243",
+          "claimed_status": "conditional",
+          "id": "33981788-08f7-57c3-b4c6-5a6ad4075554",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/9p7ae3ap0000/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -13117,17 +13139,19 @@
       "dog_amenities": {
         "dog_menu": false,
         "indoor": true,
+        "large_dogs": true,
         "terrace": true
       },
       "dog_note": "店内は入口付近の一部席のみ犬同伴可",
-      "dog_policy_condition": "入口付近の席のみペット同伴可(店内は一部限定)",
+      "dog_policy_condition": "店内は一部席のみ・テラス席は同伴可。大型犬はテラス席のみ",
       "dog_policy_status": "conditional",
+      "dog_size_limit": "大型犬はテラス席のみ",
       "has_conflict": false,
       "hours_text": "9:00〜18:00",
       "id": "beef0000-0000-4000-8000-000000000166",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": "2026-07-17",
+      "last_verified": "2026-10-06",
       "latitude": 35.6975,
       "links": [
         {
@@ -13139,7 +13163,7 @@
       "name": "Pretty Good - coffee & donut",
       "phone": "03-5829-6470",
       "place_id": null,
-      "representative_source_id": "12dc8f24-28fa-5200-9c4c-5cb2b76c81f2",
+      "representative_source_id": "1934ea92-cd75-5c47-bfc7-035253b3c3d0",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000166",
@@ -13153,11 +13177,11 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000166",
           "claimed_status": "conditional",
-          "id": "fed861f8-df61-5f85-9364-ac272329660f",
+          "id": "1934ea92-cd75-5c47-bfc7-035253b3c3d0",
           "provenance": "aggregated",
           "reference": "https://wankonowa.com/column/dogcafe/1645/",
           "type": "blog",
-          "verified_at": "2026-07-17"
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -13567,19 +13591,20 @@
       "description": "築33年の倉庫をリノベーションした天井高4.2mのカフェ&レンタルスペース。",
       "dog_amenities": {
         "indoor": true,
+        "large_dogs": true,
         "terrace": true
       },
       "dog_note": "店内同伴可否は出典間で相違: wankonowa・odekake・imakoappは店内可、いぬなび(inunavi)はテラス席のみ・店内不可と明記。要一次確認",
-      "dog_policy_condition": "小型犬は店内・テラス同伴可。大型犬はテラスのみ。イスの上への着座不可。",
+      "dog_policy_condition": "小型犬は店内・テラス可。大型犬はテラス席のみ。イスの上は不可",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "イスの上はNG・犬種は要問い合わせ",
+      "dog_size_limit": "大型犬はテラス席のみ・イスの上はNG・犬種は要問い合わせ",
       "has_conflict": true,
       "hours_text": "10:00〜20:00",
       "id": "beef0000-0000-4000-8000-000000000063",
       "info_verified": "2026-07-17",
       "instagram_post_url": "https://www.instagram.com/reel/DDjSaVpPX8n/",
       "is_closed": false,
-      "last_verified": "2026-08-07",
+      "last_verified": "2026-10-06",
       "latitude": 35.6452,
       "links": [
         {
@@ -13594,7 +13619,7 @@
       "longitude": 139.6971,
       "name": "ROJU NAKAMEGURO",
       "place_id": null,
-      "representative_source_id": "1e9b5486-fa25-5c7c-bce6-173635fc89dd",
+      "representative_source_id": "d8def688-926b-57f2-aee0-34d3a88ccd7d",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000063",
@@ -13635,11 +13660,11 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000063",
           "claimed_status": "conditional",
-          "id": "1e9b5486-fa25-5c7c-bce6-173635fc89dd",
+          "id": "d8def688-926b-57f2-aee0-34d3a88ccd7d",
           "provenance": "aggregated",
           "reference": "https://wankonowa.com/column/1858/",
           "type": "blog",
-          "verified_at": "2026-08-07"
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "中目黒"
@@ -15447,16 +15472,17 @@
       "contact": null,
       "description": "荻窪駅近くのナポリピッツァが自慢のイタリアンレストラン。屋根付きのテラス席で犬同伴が可能。",
       "dog_amenities": {
+        "large_dogs": true,
         "terrace": true
       },
       "dog_note": "ペットOKのテラス席あり(出典記載)・店内同伴可否の明記なし",
-      "dog_policy_condition": "ペットOKのテラス席ありと明記・店内の同伴可否の記載なし",
+      "dog_policy_condition": "テラス席の一部のみ犬同伴可(席はスタッフに確認)。トイレのしつけ・予防接種済が条件、リード・食器・マット等持参（小型〜大型犬）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000445",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": "2026-07-18",
+      "last_verified": "2026-10-06",
       "latitude": 35.703,
       "links": [
         {
@@ -15468,7 +15494,7 @@
       "name": "TRATTORIA Elmo Cielo(トラットリア エルモチェーロ)",
       "phone": "03-6276-9560",
       "place_id": null,
-      "representative_source_id": "29b09e0c-e127-56e8-b4ea-f2ef2731f3dd",
+      "representative_source_id": "9896ca59-d9a8-57cd-9754-ae9db2697070",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000445",
@@ -15487,6 +15513,15 @@
           "reference": "https://petoria-tokyo.jp/feature/ogikubo-lunch/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000445",
+          "claimed_status": "conditional",
+          "id": "9896ca59-d9a8-57cd-9754-ae9db2697070",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/g638704/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "高円寺・荻窪"
@@ -17529,17 +17564,19 @@
       "description": "デックス東京ビーチ3階のシドニー発オールデイダイニング。パンケーキが有名で200席超の広い店内とテラス席を持つ。",
       "dog_amenities": {
         "indoor": true,
+        "large_dogs": true,
         "terrace": true
       },
       "dog_note": "店内利用時はペットゲージまたはペットカートの使用が必須(デックス公式)・テラス席は終日同伴可",
-      "dog_policy_condition": "テラス席は犬同伴可。店内は2025年11月の改装以降、ペットカート使用時のみ同伴可",
+      "dog_policy_condition": "テラス席は同伴可。店内はペットケージ・カート使用時のみ同伴可。小・中型犬は1組3頭まで、大型犬は1組1頭まで",
       "dog_policy_status": "conditional",
+      "dog_size_limit": "小・中型犬は1組3頭まで・大型犬は1組1頭まで(店内はケージ・カート必須)",
       "has_conflict": true,
       "hours_text": "平日9:00〜22:00・土日祝8:00〜22:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000141",
       "info_verified": "2026-07-17",
       "is_closed": false,
-      "last_verified": "2026-08-07",
+      "last_verified": "2026-10-06",
       "latitude": 35.62916,
       "links": [
         {
@@ -17551,7 +17588,7 @@
       "name": "bills お台場",
       "phone": "03-3599-2100",
       "place_id": null,
-      "representative_source_id": "8ae4574b-0962-528d-ba69-03019f88caa1",
+      "representative_source_id": "e831462d-45a4-5308-b9bd-adb8f4d73f6e",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000141",
@@ -17579,6 +17616,15 @@
           "reference": "https://www.billsjapan.com/en/locations/odaiba",
           "type": "official_hp",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000141",
+          "claimed_status": "conditional",
+          "id": "e831462d-45a4-5308-b9bd-adb8f4d73f6e",
+          "provenance": "aggregated",
+          "reference": "https://petokoto.com/articles/115",
+          "type": "blog",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "お台場・豊洲"
@@ -18004,9 +18050,10 @@
       "description": "アメリカンガレージ風の内装が特徴のカフェ&ダイニングバー。店内・テラス席とも犬同伴可能。",
       "dog_amenities": {
         "indoor": true,
+        "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "ドッグカフェではないため犬用メニュー等の特別サービスは無し(詳細は要問合せ)。大型犬は要問合せ(petokoto)",
+      "dog_note": "ドッグカフェではないが、ペット1頭につきドッグフード付きセットチャージ550円（ぐるなび）(詳細は要問合せ)。大型犬も店内・テラスとも同伴可",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
@@ -18015,7 +18062,7 @@
       "id": "beef0000-0000-4000-8000-000000000204",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": "2026-08-07",
+      "last_verified": "2026-10-06",
       "latitude": 35.66313,
       "links": [
         {
@@ -18027,7 +18074,7 @@
       "name": "cafe garage Dogberry(ドッグベリー)下北沢",
       "phone": "050-5488-2500",
       "place_id": null,
-      "representative_source_id": "976c148b-0cd7-5ee0-b65b-b0579fe71519",
+      "representative_source_id": "2f401871-cc60-5941-865f-775a080c2e15",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000204",
@@ -18073,6 +18120,15 @@
           "reference": "https://ggs6200.gorp.jp/",
           "type": "official_hp",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000204",
+          "claimed_status": "allowed",
+          "id": "2f401871-cc60-5941-865f-775a080c2e15",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/jcxvrrr70000/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "三軒茶屋・下北沢"
@@ -27510,10 +27566,11 @@
       "description": "神田駅そばのベルギービール醸造所の名を冠したブラッスリー。ペット同伴可(専門サイトの案内ではテラス席限定)。",
       "dog_amenities": {
         "indoor": false,
+        "large_dogs": true,
         "terrace": true
       },
       "dog_note": "公式は無限定の「ペット同伴OK(詳細は問い合わせ)」、pet-restaurant.comはテラス限定と記載。店内可否は要確認",
-      "dog_policy_condition": "テラス席のみペット(犬)同伴可、店内は不可。",
+      "dog_policy_condition": "テラス席のみ犬同伴可（小型〜大型犬）",
       "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "不定休・年末年始休業",
@@ -27521,7 +27578,7 @@
       "id": "beef0000-0000-4000-8000-000000000285",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": "2026-08-07",
+      "last_verified": "2026-10-06",
       "latitude": 35.69058,
       "links": [
         {
@@ -27533,7 +27590,7 @@
       "name": "ブラッスリー セント・ベルナルデュス 神田(St.Bernardus)",
       "phone": "050-5487-9569",
       "place_id": null,
-      "representative_source_id": "a76e2f3a-3c0e-54af-913c-7b33cde84314",
+      "representative_source_id": "e0d43fa7-dd81-5964-8cdc-2702290c7cb7",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000285",
@@ -27561,6 +27618,15 @@
           "reference": "https://pet-restaurant.com/tokyo-kanda-ochanomizu/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000285",
+          "claimed_status": "conditional",
+          "id": "e0d43fa7-dd81-5964-8cdc-2702290c7cb7",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/gt29x0te0000/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "丸の内・神田"
@@ -30330,10 +30396,11 @@
       "description": "宇田川町にあるハンバーグ専門店。精米から手がける自家製ライスが自慢で、テラス席は犬同伴可能。",
       "dog_amenities": {
         "indoor": false,
+        "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "大型犬の可否は要確認",
-      "dog_policy_condition": "テラス席のみ犬同伴可・大型犬は要確認",
+      "dog_note": "テラス席は屋根あり",
+      "dog_policy_condition": "テラス席のみ（屋根あり）・小型〜大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "11:00〜22:00(L.O.21:00)",
@@ -30341,7 +30408,7 @@
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/DbicoXGo1Q2/",
       "is_closed": false,
-      "last_verified": "2026-07-18",
+      "last_verified": "2026-10-06",
       "latitude": 35.6625,
       "links": [
         {
@@ -30357,7 +30424,7 @@
       "name": "君のハンバーグを食べたい渋谷店",
       "phone": "050-5456-6964",
       "place_id": null,
-      "representative_source_id": "975db0dd-03c4-53b2-97ad-b0a8d2274407",
+      "representative_source_id": "bf0aa7e4-7e11-5f16-a2e6-5783a3f37a35",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000326",
@@ -30376,6 +30443,15 @@
           "reference": "https://www.instagram.com/p/DHmowu0TZgV/",
           "type": "sns",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000326",
+          "claimed_status": "conditional",
+          "id": "bf0aa7e4-7e11-5f16-a2e6-5783a3f37a35",
+          "provenance": "aggregated",
+          "reference": "https://wanico.jp/spots/d/106",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "渋谷駅周辺"
@@ -31008,17 +31084,18 @@
       "contact": null,
       "description": "経堂の路地裏にある大衆イタリアン酒場。テラス席で犬と食事を楽しめると紹介されている。",
       "dog_amenities": {
+        "large_dogs": true,
         "terrace": true
       },
       "dog_note": "テラス席は犬同伴可と店の公式ページに記載(店内の可否は明記なし・詳細は要問合せ)",
-      "dog_policy_condition": "「ペット同伴OK」「ペットと一緒に食事できるテラス席も◎」と記載。店内可否・大型犬・頭数の記載なし(詳細は要問合せ)",
+      "dog_policy_condition": "テラス席で同伴可（小型〜大型犬）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "月〜金17:00〜24:00(L.O.23:00)・土12:00〜24:00(L.O.23:00)・日12:00〜23:00(L.O.22:00)※祝前日は17:00〜23:00・祝日は12:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000720",
       "info_verified": "2026-08-05",
       "is_closed": false,
-      "last_verified": "2026-08-05",
+      "last_verified": "2026-10-06",
       "latitude": 35.6488,
       "links": [
         {
@@ -31034,7 +31111,7 @@
       "name": "大衆イタリアン酒場 煙-kemuri-",
       "phone": "03-5451-8800",
       "place_id": null,
-      "representative_source_id": "0467867a-1f70-5190-b7c1-aea112ad01a3",
+      "representative_source_id": "cd80c8fc-d903-50f6-956c-2fc793b0e834",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000720",
@@ -31044,6 +31121,15 @@
           "reference": "https://gg7z310.gorp.jp/",
           "type": "official_hp",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000720",
+          "claimed_status": "conditional",
+          "id": "cd80c8fc-d903-50f6-956c-2fc793b0e834",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/gg7z310/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "経堂・千歳船橋"
@@ -32641,7 +32727,8 @@
       "contact": null,
       "description": "北千住駅西口徒歩5分の韓国料理・焼肉の店。店内でのペット同伴が可能だが小型犬に限られるとの紹介がある。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "large_dogs": false
       },
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
@@ -32651,7 +32738,7 @@
       "id": "beef0000-0000-4000-8000-000000000546",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": "2026-08-07",
+      "last_verified": "2026-10-06",
       "latitude": 35.7508,
       "links": [
         {
@@ -32663,7 +32750,7 @@
       "name": "焼肉 炙りな 北千住店",
       "phone": "03-3870-8729",
       "place_id": null,
-      "representative_source_id": "0f57e1be-fdb7-532d-8f04-34f1d8f8ed41",
+      "representative_source_id": "dd490c64-9b5b-5261-9808-e60ec2e79d61",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000546",
@@ -32691,6 +32778,15 @@
           "reference": "https://aburina.gorp.jp/",
           "type": "official_hp",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000546",
+          "claimed_status": "allowed",
+          "id": "dd490c64-9b5b-5261-9808-e60ec2e79d61",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/gav4500/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "北千住"
@@ -34101,23 +34197,25 @@
       "description": "赤羽駅から徒歩4分、備長炭焼き鳥が名物の大衆酒場。テラス席はペット同伴可と紹介されている。",
       "dog_amenities": {
         "indoor": false,
+        "large_dogs": false,
         "terrace": true
       },
       "dog_note": "専門サイト(pet-restaurant.com)の一覧では「テラス席のみ」と明記。ホットペッパーは「ペット同伴可」とのみ記載し店内/テラスの区別は明記なし(両出典をsourcesに記録)。",
-      "dog_policy_condition": "テラス席のみペット同伴可(店内不可)と一覧に明記",
+      "dog_policy_condition": "テラス席のみ・小型犬と中型犬まで(トイレのしつけ済み・無駄吠えしない・発情中不可)",
       "dog_policy_status": "conditional",
+      "dog_size_limit": "小型犬・中型犬まで(テラス席)",
       "has_conflict": false,
       "holiday_note": "不定休",
       "hours_text": "月火12:00〜翌0:30・水木15:00〜翌0:30・金(祝前日)12:00〜翌2:00・土11:00〜翌2:00・日祝11:00〜翌0:30",
       "id": "beef0000-0000-4000-8000-000000000505",
       "info_verified": "2026-07-18",
       "is_closed": false,
-      "last_verified": "2026-07-18",
+      "last_verified": "2026-10-06",
       "latitude": 35.77988,
       "longitude": 139.72025,
       "name": "赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ",
       "place_id": null,
-      "representative_source_id": "bd58c208-aa89-5348-8778-db840982aa84",
+      "representative_source_id": "0f7d79de-1fec-5147-b3f4-a1acab12a748",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000505",
@@ -34136,6 +34234,15 @@
           "reference": "https://www.hotpepper.jp/strJ001259317/",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000505",
+          "claimed_status": "conditional",
+          "id": "0f7d79de-1fec-5147-b3f4-a1acab12a748",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/ggcc401/",
+          "type": "other",
+          "verified_at": "2026-10-06"
         }
       ],
       "sub_area": "赤羽・王子"
@@ -35357,6 +35464,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-06T13:44:30Z",
+  "generated_at": "2026-10-06T14:32:24Z",
   "is_sample_data": false
 }
