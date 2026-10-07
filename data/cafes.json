@@ -749,7 +749,7 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_note": "犬同伴可能な席は入口付近のカウンター席・テラス席の一部のみ（出典により1〜2席と記載に幅あり）。お水・おやつのサービスあり。混雑時は電話での順番待ち登録可。",
+      "dog_note": "犬同伴可能な席は入口付近のカウンター席・テラス席の一部のみ（案内により1〜2席と幅あり）。お水・おやつのサービスあり。混雑時は電話での順番待ち登録可。",
       "dog_policy_condition": "店内1席・テラス1席の犬同伴可能席あり",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -1124,7 +1124,7 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_note": "大型犬可否は出典間で対立(あるブログは「不可」、別のブログ2件は「可」と紹介)のため空欄とした。同伴希望は予約時に備考欄への記載が必要(食べログ店舗情報)。平日は喫煙可・土日は禁煙との紹介あり(出典記載)。",
+      "dog_note": "同伴希望は予約時に備考欄への記載が必要。平日は喫煙可・土日は禁煙との紹介あり。大型犬可否は情報により異なる(可とする情報が多いが、不可とする情報もある)。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
@@ -1368,14 +1368,11 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "店内可否は紹介記事により記載が分かれる(店内・テラスともOKとするものと、テラス席のみ可とするものがある)。大型犬まで同伴可との記載あり(itsumo.dog・おでかけワンコ部, 2026-08確認)。営業状況は来店前に要確認。",
+      "dog_note": "店内可否は情報により異なる(店内・テラスともOKとする情報と、テラス席のみ可とする情報がある)。大型犬まで同伴可との記載あり。営業状況は来店前に要確認。",
       "dog_policy_condition": "大型犬まで同伴可・店内/テラスOK（営業要確認）",
       "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "日・祝定休",
-      "hours": {
-        "sun": []
-      },
       "hours_text": "平日18:00〜(ラストオーダーまで)",
       "id": "beef0000-0000-4000-8000-000000000840",
       "info_verified": "2026-08-06",
@@ -1536,7 +1533,7 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_note": "大型犬可否は出典間で記載に差あり(公式サイト・petokotoは犬種を限定せず同伴可、doghuggyは小型犬の店内利用のみ記載)。要個別確認",
+      "dog_note": "大型犬の可否は情報により異なる(公式サイトでは犬種を限定せず同伴可とされているが、小型犬の店内利用のみとする情報もある)。来店前に要確認",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
@@ -2959,7 +2956,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "店内同伴可能日は毎月1日・11日・21日(出典により31日も)。トイレのしつけ・ワクチン証明・無駄吠えのしつけ・リード使用・カフェマット持参が条件(出典による)。それ以外の日はテラス席のみ同伴可。テラス席の犬サイズ制限の明記なし。",
+      "dog_note": "店内同伴可能日は毎月1日・11日・21日(31日も対象とする情報もある)。トイレのしつけ・ワクチン証明・無駄吠えのしつけ・リード使用・カフェマット持参が条件（条件は情報により異なる）。それ以外の日はテラス席のみ同伴可。テラス席の犬サイズ制限は不明。",
       "dog_policy_condition": "通常時テラス席は大型犬も同伴可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "「わんちゃんデー」の店内同伴は小型犬のみ(中型犬・大型犬・ヒート中は不可)",
@@ -3874,7 +3871,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "出典間で差異あり: 1件は「テラス席(12〜2月は店内も利用可)・大型犬も対応」と紹介する一方、他の2件はテラス席限定とのみ案内(季節限定の店内可否・大型犬対応は未確認)。",
+      "dog_note": "「テラス席(12〜2月は店内も利用可)・大型犬も対応」とする情報と、テラス席限定とする情報がある(季節限定の店内可否・大型犬対応は未確認)。",
       "dog_policy_condition": "大型犬同伴可能（テラス席）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -4908,7 +4905,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "単独出典(食べログ英語版のペット可表示)のみでの確認のため、要重点検証。",
+      "dog_note": "同伴条件の詳細は未確認のため、来店前に確認推奨",
       "dog_policy_condition": "大型犬同伴可能（テラス席）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -4998,7 +4995,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "店内一部同伴可とする出典とテラスのみとする出典があり記載が分かれる・テラス席は小型〜大型犬まで対応可能(出典記載)・来店前に要確認",
+      "dog_note": "店内一部同伴可とする情報とテラスのみとする情報がある・テラス席は小型〜大型犬まで対応可能・来店前に要確認",
       "dog_policy_condition": "テラス・オープンエアのみ犬同伴可(小型〜大型犬まで対応可能)と明記",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -5117,7 +5114,7 @@
       "dog_note": "予防接種(狂犬病・混合5種以上)証明が必要。噛み癖や攻撃的な犬は利用不可",
       "dog_policy_condition": "店内OK・大型犬は12kgまで",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "出典により相違(体重12kgまでとする情報と大型犬可とする情報あり)",
+      "dog_size_limit": "体重12kgまでとする情報と、大型犬可とする情報がある",
       "has_conflict": false,
       "hours_text": "不定(要問い合わせ)",
       "id": "beef0000-0000-4000-8000-000000000343",
@@ -5507,7 +5504,7 @@
       "area": "tokyo",
       "contact": null,
       "description": "三鷹駅南口徒歩12分の紅茶とケーキの店。ペット同伴可とされているが、店内・テラスいずれの利用可否かの明記はない。",
-      "dog_note": "食べログ「サービス」欄・ホットペッパー「ペット同伴：可」の2出典で確認したが、いずれも店内/テラスの区別・大型犬可否・条件の記載がない。オープンテラス席の存在は別途確認できたが、それが犬同伴可能な席かは出典に明記なし。",
+      "dog_note": "「ペット同伴可」だが、店内/テラスの区別・大型犬可否・条件は不明。オープンテラス席はあるが、犬同伴可能な席かは不明。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -8311,7 +8308,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "リード必須。出典により小型犬限定との記載もあり、中大型犬の可否は要確認",
+      "dog_note": "リード必須。小型犬限定とする情報もあり、中大型犬の可否は要確認",
       "dog_policy_condition": "店内可(小型犬の同伴として記載。中大型犬への言及なし)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -8407,7 +8404,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "1階店内とテラス席で犬同伴可(全犬種OK・犬用の水も提供)。2階の同伴可否は出典に明記なし。※itsumo.dogは「テラス・オープンエアのみ可」と記載しており他出典(店内1階もOKと明記)と相違あり・要現地確認",
+      "dog_note": "1階店内とテラス席で犬同伴可(全犬種OK・犬用の水も提供)。2階の同伴可否は不明。※「テラス・オープンエアのみ可」とする情報もあり、情報が分かれる(来店前に要確認)",
       "dog_policy_condition": "店内・テラス席ともにOKと明記(EMPORIO cafe&diningの一覧内)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -9493,7 +9490,7 @@
         "indoor": true
       },
       "dog_note": "マナーベルト着用またはカート・かばん内での利用で入店可・室内ドッグラン併設",
-      "dog_policy_condition": "店内奥に犬用スペース（ドッグラン）があり、そこで犬同伴可。犬用メニュー「わんバーグ」等あり。テラス席の有無は情報源に記載なし。",
+      "dog_policy_condition": "店内奥に犬用スペース（ドッグラン）があり、そこで犬同伴可。犬用メニュー「わんバーグ」等あり。テラス席の有無は不明。",
       "dog_policy_status": "conditional",
       "has_conflict": true,
       "holiday_note": "月・火曜定休(不定休あり)",
@@ -10173,12 +10170,12 @@
       "address": "東京都渋谷区神宮前5-47-6",
       "area": "tokyo",
       "contact": null,
-      "description": "地中海料理と鮨処が一体となったダイニング。ガーデンテラス席で犬同伴可能(単独出典のため要確認)。",
+      "description": "地中海料理と鮨処が一体となったダイニング。ガーデンテラス席で犬同伴可能(来店前に確認推奨)。",
       "dog_amenities": {
         "terrace": true
       },
-      "dog_note": "ガーデンテラス席で犬同伴可・カフェマット持参推奨(出典記載)・単独出典のため要重点確認",
-      "dog_policy_condition": "ガーデンテラス席で犬同伴可・カフェマット持参推奨と明記(単独出典)",
+      "dog_note": "ガーデンテラス席で犬同伴可・カフェマット持参推奨",
+      "dog_policy_condition": "ガーデンテラス席で犬同伴可・カフェマット持参推奨",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休(祝日の場合は翌火曜日)",
@@ -11035,7 +11032,7 @@
       "dog_amenities": {
         "dog_menu": true
       },
-      "dog_note": "店内犬同伴の明示出典なし・室内ドッグラン併設ドッグカフェという施設種別からの推認・要確認。ワンコ用ご褒美メニュー・デザートメニュー・おやつあり。ドッグラン(有料)・セルフドッグスパは別サービス。",
+      "dog_note": "店内での犬同伴の明示的な案内は確認できていないため要確認。ワンコ用ご褒美メニュー・デザートメニュー・おやつあり。ドッグラン(有料)・セルフドッグスパは別サービス。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -12332,7 +12329,7 @@
       },
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
-      "dog_size_limit": "大型犬可否について出典により記載が分かれる(要確認とする情報とOKとする情報)",
+      "dog_size_limit": "大型犬可否は情報により異なる(要確認とする情報とOKとする情報がある)",
       "has_conflict": false,
       "holiday_note": "無休",
       "hours": {
@@ -12450,65 +12447,75 @@
       "address": "東京都品川区上大崎2-13-22 シーアイマンション白金ビル1F",
       "area": "tokyo",
       "contact": null,
-      "description": "目黒駅近くの創作イタリアン。小型犬なら店内で同伴利用ができる。",
+      "description": "目黒駅近くの創作イタリアン。公式ページに「ペット同伴OK」の記載があり（サイズの記載なし）、小型犬は店内で同伴できるとの情報もある。",
       "dog_amenities": {
-        "indoor": true,
-        "large_dogs": false
+        "indoor": true
       },
-      "dog_policy_condition": "入店範囲は小型犬",
-      "dog_policy_status": "conditional",
-      "dog_size_limit": "小型犬のみ(出典に明記)",
-      "has_conflict": false,
-      "holiday_note": "不定休",
+      "dog_policy_condition": null,
+      "dog_policy_status": "allowed",
+      "dog_size_limit": "小型犬の同伴可と記載あり（中型・大型犬は記載なし）",
+      "has_conflict": true,
+      "holiday_note": "月曜定休",
       "hours": {
         "fri": [
           {
-            "close": "23:00",
+            "close": "15:00",
             "open": "11:30"
-          }
-        ],
-        "mon": [
+          },
           {
-            "close": "23:00",
-            "open": "11:30"
+            "close": "22:00",
+            "open": "17:30"
           }
         ],
+        "mon": [],
         "sat": [
-          {
-            "close": "23:00",
-            "open": "11:30"
-          }
-        ],
-        "sun": [
           {
             "close": "22:00",
             "open": "11:30"
           }
         ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "11:30"
+          }
+        ],
         "thu": [
           {
-            "close": "23:00",
+            "close": "15:00",
             "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
           }
         ],
         "tue": [
           {
-            "close": "23:00",
+            "close": "15:00",
             "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
           }
         ],
         "wed": [
           {
-            "close": "23:00",
+            "close": "15:00",
             "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
           }
         ]
       },
-      "hours_text": "11:30〜23:00(日祝は22:00閉店)",
+      "hours_text": "火〜金11:30〜15:00・17:30〜22:00/土11:30〜22:00/日祝11:30〜21:00",
       "id": "beef0000-0000-4000-8000-000000000887",
-      "info_verified": "2026-08-06",
+      "info_verified": "2026-10-07",
       "is_closed": false,
-      "last_verified": "2026-08-09",
+      "last_verified": "2026-10-07",
       "latitude": 35.63497,
       "links": [
         {
@@ -12518,9 +12525,9 @@
       ],
       "longitude": 139.71905,
       "name": "KITCHEN BAR 新目黒茶屋",
-      "phone": "050-5593-4653",
+      "phone": "050-5485-0590",
       "place_id": null,
-      "representative_source_id": "68334be0-c1fd-5ab3-9073-ee0d1d9a87ac",
+      "representative_source_id": "cdad7e4a-e484-5c1c-b918-17af50731762",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000887",
@@ -12548,6 +12555,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/542",
           "type": "other",
           "verified_at": "2026-08-09"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000887",
+          "claimed_status": "allowed",
+          "id": "cdad7e4a-e484-5c1c-b918-17af50731762",
+          "provenance": "aggregated",
+          "reference": "https://b979901.gorp.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "目黒"
@@ -12562,7 +12578,7 @@
         "large_dogs": true
       },
       "dog_note": "店内は窓側の席のみ犬同伴可・カフェマット持参必須・ペットへのおやつ提供は禁止(水提供あり)",
-      "dog_policy_condition": "2024年10月時点の記事では、大型犬も同伴可・店内は窓側席のみ利用可とされる。2025年12月更新の別メディア記事でも「ペット同伴：可」と記載（詳細条件の記載なし）。",
+      "dog_policy_condition": "2024年10月時点の情報では、大型犬も同伴可・店内は窓側席のみ利用可。2025年12月更新の情報でも「ペット同伴：可」(詳細条件は不明)。",
       "dog_policy_status": "conditional",
       "has_conflict": true,
       "hours": {
@@ -13705,9 +13721,15 @@
       "hours_text": "11:30〜23:00",
       "id": "beef0000-0000-4000-8000-000000000161",
       "info_verified": "2026-07-17",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-17",
       "latitude": 35.7146,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1311/A131102/13195543/"
+        }
+      ],
       "longitude": 139.7938,
       "name": "La VASARA CAFE&GRILL",
       "phone": "03-6231-7838",
@@ -13740,6 +13762,15 @@
           "reference": "https://wankonowa.com/column/dogcafe/1645/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000161",
+          "claimed_status": "unverified",
+          "id": "5bd5aa7d-aaf4-5ad4-9f63-bbe3b28c2261",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1311/A131102/13195543/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -13928,7 +13959,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "出典間で差異あり: 2件はテラス席限定と案内する一方、食べログ英語版は「店内の一部・テラスともペット同伴可」と紹介。店内可否の詳細は未確認。",
+      "dog_note": "テラス席限定とする情報と、店内の一部・テラスともペット同伴可とする情報がある。店内可否の詳細は未確認。",
       "dog_policy_condition": "大型犬同伴可能（テラス席）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -14413,7 +14444,7 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_note": "店先のオープンテラスでの同伴に関する記載のみ(店内可否は出典に記載なし)。単独出典のため要重点検証",
+      "dog_note": "店先のオープンテラスでの同伴可(店内可否は不明)",
       "dog_policy_condition": "店先のオープンテラスで愛犬とイートイン可能(店内可否は記載なし)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -14834,7 +14865,7 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_note": "店内同伴は木曜のみとの専門サイト情報あり(要確認)。犬用フックなど店内外の設備の案内も別出典にあり",
+      "dog_note": "店内同伴は木曜のみとする情報あり(要確認)。犬用フックなど店内外の設備があるとの案内もある",
       "dog_policy_condition": "テラス席は犬同伴可。店内同伴は木曜日のみ限定。",
       "dog_policy_status": "conditional",
       "has_conflict": true,
@@ -15926,7 +15957,7 @@
       "area": "tokyo",
       "contact": null,
       "description": "浜田山駅前で「ドッグカフェ」を掲げるベトナム料理店。わんちゃん用メニューもある人気店だが、公式サイトとの間でペット可否の記載に食い違いがある。公式ページ自体が店名に「＆ドッグカフェ」を掲げており、構造化フィールドの「ペット不可」はテンプレ既定値の疑いが強い。食べログは全席同伴可を具体的に明記。可否は運営の電話確認後に確定予定。",
-      "dog_note": "出典間で犬同伴可否の記載が矛盾。食べログは「小型犬〜大型犬まで全席同伴可・わんちゃん用メニューあり」と明記する一方、公式サイトの店舗情報欄は「ペット同伴：不可」と明記。両出典を記録し可否は空欄とした。要運営確認。",
+      "dog_note": "犬同伴可否は情報が食い違っている(「小型犬〜大型犬まで全席同伴可・わんちゃん用メニューあり」とする情報がある一方、公式サイトの店舗情報欄では「ペット同伴：不可」とされている)。来店前に要確認。",
       "dog_policy_condition": null,
       "dog_policy_status": "unverified",
       "has_conflict": true,
@@ -16663,7 +16694,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "テラス席(屋根付き・全6席中2卓)限定で犬同伴可・大型犬まで対応可(専門サイト記載)。単独出典のため要重点確認。",
+      "dog_note": "テラス席(屋根付き・全6席中2卓)限定で犬同伴可・大型犬まで対応可",
       "dog_policy_condition": "テラス席(屋根付き・全6席中2卓)限定で犬同伴可。小型犬OK/中型犬OK/大型犬OK。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -18008,7 +18039,7 @@
         "dog_menu": true,
         "indoor": true
       },
-      "dog_note": "いぬちず(doghuggy)では店内対応犬種を小型犬と紹介(他出典は制限記載なし)。手作りドッグメニューあり。",
+      "dog_note": "店内の対応犬種を小型犬とする情報がある(他の情報には制限の言及なし)。手作りドッグメニューあり。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
@@ -18337,7 +18368,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "ペットはテラス席のみ可。単独出典のため要重点確認。",
+      "dog_note": "ペットはテラス席のみ可",
       "dog_policy_condition": "ペットはテラス席のみ可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -18531,7 +18562,7 @@
         "indoor": true,
         "large_dogs": false
       },
-      "dog_note": "該当席は1席のみのため要予約推奨。犬同伴席の階は出典間で相違あり(dog-eats=上階寄り/hachidory=1階)・要現地確認",
+      "dog_note": "該当席は1席のみのため要予約推奨。犬同伴席の階は情報により異なる(上階寄りとする情報と1階とする情報がある)・来店前に要確認",
       "dog_policy_condition": "1階ソファ席1卓のみ・小型犬のみ入店可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型犬のみ(ソファ席1席限定)",
@@ -19208,7 +19239,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "店内同伴可否は出典間で相違: wankonowa・odekake・imakoappは店内可、いぬなび(inunavi)はテラス席のみ・店内不可と明記。要一次確認",
+      "dog_note": "店内同伴可否は情報により異なる(店内可とする情報と、テラス席のみ・店内不可とする情報がある)。来店前に要確認",
       "dog_policy_condition": "小型犬は店内・テラス可。大型犬はテラス席のみ。イスの上は不可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "大型犬はテラス席のみ・イスの上はNG・犬種は要問い合わせ",
@@ -20264,7 +20295,7 @@
         "dog_menu": true,
         "indoor": true
       },
-      "dog_note": "出典により「大型犬OK」「入店範囲は小型犬」の記載に相違があり要確認",
+      "dog_note": "「大型犬OK」とする情報と「入店範囲は小型犬」とする情報がある。来店前に要確認",
       "dog_policy_condition": "小型・中型・大型犬OK・店内可・リード着用必須",
       "dog_policy_status": "conditional",
       "has_conflict": true,
@@ -20847,7 +20878,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "犬用フードメニュー(ビーフ・チキンの2種×S/M/Lサイズ)あり。",
+      "dog_note": "犬用フードメニュー(ビーフ・チキンの2種×S/Mサイズ)あり。",
       "dog_policy_condition": "テラス席のみペット同伴可(店内不可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -20864,7 +20895,7 @@
         }
       ],
       "longitude": 139.4485,
-      "name": "Snow Peak Cafe&Dining 南町田グランベリーパーク",
+      "name": "Snow Peak Cafe 南町田グランベリーパーク",
       "place_id": null,
       "representative_source_id": "2e2431c6-09a9-57c5-85db-af81e633e82b",
       "sources": [
@@ -20894,6 +20925,15 @@
           "reference": "https://www.inutome.jp/c/column_2-601-41256.html",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000406",
+          "claimed_status": "unverified",
+          "id": "4ad785f4-b97c-55b6-9e72-d00ca9b65192",
+          "provenance": "aggregated",
+          "reference": "https://www.snowpeak.co.jp/news/p20250117/",
+          "type": "official_hp",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "町田"
@@ -21448,7 +21488,7 @@
         "indoor": true,
         "terrace": false
       },
-      "dog_note": "大型犬可否は出典間で一致せず(詳細は出典参照)・犬種条件は要問合せ",
+      "dog_note": "大型犬可否は情報により異なる・犬種条件は要問合せ",
       "dog_policy_condition": "小型・中型・大型犬・ネコとも店内OK（しつけ・接種済・無駄吠えなし・発情中不可）",
       "dog_policy_status": "conditional",
       "has_conflict": true,
@@ -22751,7 +22791,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "リード着用の上テラス席のみ犬同伴可(店内不可・デックス公式)。運営元公式サイトには場所を限定しない「ペット同伴OK」の記載もあり座席条件の粒度に差がある",
+      "dog_note": "デックス東京ビーチ公式ではリード着用の上テラス席のみ犬同伴可(店内不可)とされている。一方、運営元の公式サイトには場所を限定しない「ペット同伴OK」の記載もあり、座席条件の案内に差がある",
       "dog_policy_condition": "リードに繋いでいればテラス席のみペット同伴可(店内不可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -23197,11 +23237,11 @@
       "address": "東京都港区六本木5-16-7",
       "area": "tokyo",
       "contact": null,
-      "description": "カリフォルニア発のコーヒーロースタリー六本木店。テラス席で犬同伴が可能(店内の可否は出典間で相違)。",
+      "description": "カリフォルニア発のコーヒーロースタリー六本木店。テラス席で犬同伴が可能(店内の可否は情報により異なる)。",
       "dog_amenities": {
         "terrace": true
       },
-      "dog_note": "店内同伴可否は出典間で相違(公式ニュース記事は「テラス席・店内一部がペット同伴可」と紹介する一方、専門サイトwankonowaは「テラスのみ」と紹介)。大型犬可否もwankonowaのみの言及で裏付けが取れていない。要個別確認。",
+      "dog_note": "店内同伴可否は情報により異なる(公式ニュースでは「テラス席・店内一部がペット同伴可」とされているが、「テラスのみ」とする情報もある)。大型犬可否は確認が取れていない。来店前に要確認。",
       "dog_policy_condition": "六本木店(テラス席・店内一部がペット同伴可)。ペット用クッキー「mellowbear」販売中。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -24406,7 +24446,7 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_note": "大型犬の受入れ度合いは出典により評価が分かれる(要個別確認)",
+      "dog_note": "大型犬の受入れ度合いは情報により評価が分かれる(来店前に要確認)",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
@@ -24647,7 +24687,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "店内に愛犬を連れて入店可能と紹介記事に記載(階の区分は出典に明記なし・単独出典)。大型犬・テラスに関する記載はなし。",
+      "dog_note": "店内に愛犬を連れて入店可能(階の区分は不明)。大型犬・テラスの可否は不明。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -24918,7 +24958,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "出典間で情報が対立: 公式サイト・「ペット可まとめ」等はテラス席でのペット同伴可(補助犬以外は要問合せ)と案内する一方、一休.comの店舗情報欄は「同伴不可」と明記。運営側での実地確認を推奨(単独の否定情報のため未登録のまま可否欄は空欄とした)。",
+      "dog_note": "公式サイトではテラス席でのペット同伴可(補助犬以外は要問合せ)と案内されているが、同伴不可とする情報もある。来店前の確認を推奨。",
       "dog_policy_condition": "補助犬以外のペットはテラス席のみ同伴可（店内不可）",
       "dog_policy_status": "conditional",
       "has_conflict": true,
@@ -25078,7 +25118,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "犬用メニューの有無は出典間で記載が食い違うため未記載(空欄)",
+      "dog_note": "犬用メニューの有無は情報により異なる",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -27263,7 +27303,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "店内犬同伴可(サイズ制限・ドッグメニュー等の詳細記載なし)。BODEGAと同じ建物内。単独系統出典のため要重点検証。",
+      "dog_note": "店内犬同伴可(サイズ制限・ドッグメニュー等の詳細は不明)。BODEGAと同じ建物内。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -27883,14 +27923,13 @@
       "address": "東京都目黒区下目黒1-7-5 バーナードハウス1F",
       "area": "tokyo",
       "contact": null,
-      "description": "下目黒の古民家を改装したダイニングバー。小型犬同伴で店内利用ができる人気店。",
+      "description": "下目黒の古民家を改装したダイニングバー。人気店で、小型犬の店内同伴可との情報あり（中・大型犬は記載なし）。",
       "dog_amenities": {
-        "indoor": true,
-        "large_dogs": false
+        "indoor": true
       },
       "dog_policy_condition": "入店範囲は小型犬・要連絡予約",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "小型犬のみ",
+      "dog_size_limit": "小型犬の同伴可と記載あり（中型・大型犬は記載なし）",
       "has_conflict": false,
       "holiday_note": "無休(年末年始を除く)",
       "hours": {
@@ -28356,7 +28395,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "テラス席は小動物〜大型犬まで対応・お水のサービスあり(犬連れ紹介ブログ、2018年公開・要最新確認)。ぐるなび店舗情報も「同伴可」と記載(区分の明記なし)。",
+      "dog_note": "テラス席は小動物〜大型犬まで対応・お水のサービスあり(2018年時点の情報・要最新確認)。店内/テラスの区分は不明で「同伴可」とのみ案内する情報もある。",
       "dog_policy_condition": null,
       "dog_policy_status": "unverified",
       "has_conflict": true,
@@ -28456,7 +28495,7 @@
       "dog_note": "トイレのしつけ・無駄吠えしないことが条件。発情中は不可(キャリーバッグ使用可・膝上での利用を推奨)",
       "dog_policy_condition": "店内OK(小型犬のみ)・大型犬は不可",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "出典により相違(小型犬のみとする情報と中型犬まで店内可とする情報あり)。大型犬は不可",
+      "dog_size_limit": "小型犬のみとする情報と、中型犬まで店内可とする情報がある。大型犬は不可",
       "has_conflict": false,
       "holiday_note": "無休",
       "hours": {
@@ -28668,7 +28707,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "カウンター席でのイートイン利用時に犬同伴可。店内/席の区別は出典に明記なし（カウンターのみの店構成からの推定）。",
+      "dog_note": "イートイン利用時に犬同伴可。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -29130,7 +29169,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "ドッグメニューあり(良質ささみの無塩ボイル)。リード必須。単独出典のため要重点検証",
+      "dog_note": "ドッグメニューあり(良質ささみの無塩ボイル)。リード必須",
       "dog_policy_condition": "わんちゃんとは外席での利用が可能(店内不可)。良質ささみの無塩ボイルのドッグメニューあり",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -29284,7 +29323,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "テラス席は3テーブル程で屋根はあるが、雨天時の利用は難しいとの来店記録あり",
+      "dog_note": "テラス席は3テーブル程で屋根はあるが、雨天時の利用は難しいとの来店者の声あり",
       "dog_policy_condition": "小型・中型・大型犬OK・屋外テラスのみ・リード必須",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -29429,7 +29468,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "単独出典（食べログ「ペット可」タグのみ、場所指定なし）のため要重点確認。",
+      "dog_note": "同伴条件の詳細は未確認のため、来店前に確認推奨",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -30247,7 +30286,7 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_note": "犬連れ紹介ブログ(2018年公開・要最新確認)は「テラス席であれば小動物〜中型犬まで可能」と紹介。ぐるなび店舗情報は区分の明記なく「同伴可」とのみ記載。",
+      "dog_note": "テラス席であれば小動物〜中型犬まで可能とする情報(2018年公開・最新情報は要確認)がある。店内/テラスの区分は不明で「同伴可」とのみ案内する情報もある。",
       "dog_policy_condition": null,
       "dog_policy_status": "unverified",
       "dog_size_limit": "テラス席は小動物〜中型犬までとする出典あり",
@@ -30448,7 +30487,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "店内可否は出典間で対立するため空欄(1出典は店内のペット同伴席案内ありと記載、他3出典はテラス限定と記載)",
+      "dog_note": "店内可否は情報により異なる(店内にペット同伴席があるとする情報と、テラス限定とする情報がある)",
       "dog_policy_condition": "テラス席同伴可・大型/中型/小型",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -31269,7 +31308,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "専門紹介サイトはテラス席限定と明記。食べログは場所を特定せず「ペット可」とのみ記載（要現地確認）。テラス席は4〜10月末のみの季節営業。",
+      "dog_note": "テラス席限定とする情報と、場所を特定せず「ペット可」とのみする情報がある(来店前に要確認)。テラス席は4〜10月末のみの季節営業。",
       "dog_policy_condition": null,
       "dog_policy_status": "unverified",
       "has_conflict": true,
@@ -31920,7 +31959,7 @@
         "indoor": true,
         "large_dogs": true
       },
-      "dog_note": "単独出典(公式サイト・Instagramでは犬同伴の明記なし)のため要現地再確認",
+      "dog_note": "犬同伴席は店内1席のみで、事前予約が必須。公式サイト・Instagramには犬同伴の案内が見当たらないため、来店前に確認推奨。",
       "dog_policy_condition": "店内同伴OK・大型犬OK・多頭OK（犬同伴席は店内1席のみ・要予約）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -32620,7 +32659,7 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_note": "テラス席でペット可(店内可否は出典に記載なし)。出典は2020年頃の食べログ口コミ1件のみ・低確度・要現地確認。",
+      "dog_note": "テラス席でペット可(2020年頃の情報・要最新確認。店内可否は不明)。",
       "dog_policy_condition": "テラス席でペット可(店内可否は出典に記載なし)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -34417,7 +34456,7 @@
       },
       "dog_policy_condition": "小・中型犬は店内も可能・大型犬はテラス席のみ",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "出典により幅あり(小型犬までとする情報と、小・中型犬は店内可・大型犬はテラスのみとする情報の両方あり)",
+      "dog_size_limit": "小型犬までとする情報と、小・中型犬は店内可・大型犬はテラスのみとする情報がある",
       "has_conflict": false,
       "holiday_note": "月曜定休",
       "hours": {
@@ -34698,7 +34737,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "テラス席のみ犬同伴可(単独出典・要追加確認)。",
+      "dog_note": "テラス席のみ犬同伴可。",
       "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -34981,7 +35020,7 @@
       "area": "tokyo",
       "contact": null,
       "description": "都電荒川線・荒川一中前駅近くにあるジェラート専門店。",
-      "dog_note": "犬同伴可との来店ブログ記録が複数あるが、店内・テラス等の場所の詳細な記載はなし",
+      "dog_note": "来店者のブログによると犬同伴可との記録が複数あるが、店内・テラス等の場所は不明",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -35067,7 +35106,7 @@
       },
       "dog_policy_condition": "テラス席で犬同伴可(店内の記載なし)・大型犬は要確認",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "大型犬可否について出典により記載が分かれる(要確認とする情報とOKとする情報)",
+      "dog_size_limit": "大型犬可否は情報により異なる(要確認とする情報とOKとする情報がある)",
       "has_conflict": false,
       "holiday_note": "ルミネ池袋に準ずる",
       "hours": {
@@ -35614,7 +35653,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "テラス席にリードを結べるポールとペット用クッションを設置(ドッグメニュー・お水サービスはなし)。大型犬可否は出典対立(wankonowaは可・doghuggyは小型犬のみ)・要確認",
+      "dog_note": "テラス席にリードを結べるポールとペット用クッションを設置(ドッグメニュー・お水サービスはなし)。大型犬可否は情報により異なる(可とする情報と小型犬のみとする情報がある)・要確認",
       "dog_policy_condition": "テラス席で大型犬も同伴可(店内可否は本記事に明記なし)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -36407,7 +36446,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "店内犬同伴可(単独系統2出典・要追加確認)。",
+      "dog_note": "店内犬同伴可。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -37129,7 +37168,7 @@
       "dog_note": "ドッグラン利用は1年以内の混合ワクチン証明書・狂犬病予防注射証明書の提示が必須(利用規約への署名も必要)。マーキングする犬はマナーパンツ着用必須。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
-      "dog_size_limit": "室内ドッグランスペースは限定的(5kg以上の犬が走り回るには手狭との来店記録あり)",
+      "dog_size_limit": "室内ドッグランスペースは限定的(5kg以上の犬が走り回るには手狭との来店者の声あり)",
       "has_conflict": false,
       "holiday_note": "月・火・水定休",
       "hours": {
@@ -37463,7 +37502,7 @@
         "indoor": true,
         "terrace": true
       },
-      "dog_note": "店内同伴可能だが座席は一部に限定。単独出典のため要重点検証",
+      "dog_note": "店内同伴可能だが座席は一部に限定",
       "dog_policy_condition": "店内同伴可・テラス席あり(座席は一部に限定)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -38077,8 +38116,8 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_note": "売店(テイクアウト中心)前のテラス席(約10席)で犬同伴可。週末は混雑して座れないこともある。出典gowithdog.orgは店名「パークス光が丘」を明記しておらず(「園内のパン屋さん」と呼称)、光が丘公園内唯一のパン屋である点からhikari-no-oka.comの情報と合わせて同定した集約判断。",
-      "dog_policy_condition": "「お店の前にはテラス席が１０席ほど。愛犬と食事をすることができます。」と明記(出典は店名「パークス光が丘」を明記せず「園内のパン屋さん」と呼称。光が丘公園内唯一のパン屋である点からhikari-no-oka.comの情報と併せて同定した集約判断)",
+      "dog_note": "売店(テイクアウト中心)前のテラス席(約10席)で犬同伴可。週末は混雑して座れないこともある。",
+      "dog_policy_condition": "お店の前にテラス席が10席ほどあり、愛犬と食事ができる",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "9:00〜17:00",
@@ -38209,7 +38248,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "テラス席は全犬種同伴可。2階貸切での「わんこ会」利用にも対応。※Yahoo!ロコでは木曜定休との情報あり・要確認。",
+      "dog_note": "テラス席は全犬種同伴可。2階貸切での「わんこ会」利用にも対応。※木曜定休とする情報もあり・要確認。",
       "dog_policy_condition": "テラス席のみ犬同伴可(全犬種対応)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -38492,7 +38531,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "テラス席のみ犬同伴可(店内不可)。出典はブログ1件のみ（食べログにペット可タグなし）・要追加確認。",
+      "dog_note": "テラス席のみ犬同伴可(店内不可)。",
       "dog_policy_condition": "ペットはテラス席のみ同伴が可能",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -40009,7 +40048,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "単独出典（食べログ「ペット可」タグのみ、場所指定なし）のため要重点確認。",
+      "dog_note": "同伴条件の詳細は未確認のため、来店前に確認推奨",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -40095,7 +40134,7 @@
       "dog_amenities": {
         "large_dogs": true
       },
-      "dog_note": "店内可否は2018年の個人ブログ体験談1件のみが根拠で店の公式方針の明記ではない。同店には「緑本店」と「テルミナ店」があり、出典はいずれも「緑本店」を名指ししておらず住所からの推定。要現地確認(公式サイトにペット記載なし)",
+      "dog_note": "店内での同伴可否は確認できていない(2018年の個人ブログの体験談のみ)。同店には「緑本店」と「テルミナ店」があり、情報がどちらの店舗のものか確定していない。来店前に要確認",
       "dog_policy_condition": "店内・テラスとも小型/中型/大型OK",
       "dog_policy_status": "conditional",
       "has_conflict": true,
@@ -41013,7 +41052,7 @@
         "dog_menu": false,
         "indoor": true
       },
-      "dog_note": "公式サイトには犬同伴の記載はなく、犬お出かけ専門サイトの情報でのみ確認できた。",
+      "dog_note": "犬同伴可の情報は店舗の公式案内では確認できていない。来店前に要確認。",
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
@@ -41973,7 +42012,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "テラス席限定で犬同伴可(店内不可)。単独出典(petoria-tokyo.jp)のため要重点確認。",
+      "dog_note": "テラス席限定で犬同伴可(店内不可)",
       "dog_policy_condition": "テラス席のみOKと明記。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -42435,7 +42474,7 @@
         "dog_menu": false,
         "indoor": true
       },
-      "dog_note": "服の着用が条件で店内同伴可。おやつの持ち込みは可(食事の持ち込み不可)。詳細ルールは公式サイト要確認。単独出典のため要重点検証",
+      "dog_note": "服の着用が条件で店内同伴可。おやつの持ち込みは可(食事の持ち込み不可)。詳細ルールは公式サイト要確認",
       "dog_policy_condition": "服着用であれば店内に同伴OK(わんちゃんメニューはないがおやつ持込可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -42665,7 +42704,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "洋服の着用必須(毛・ふけ飛散防止)。おやつ持込可・ご飯持込不可。ヒート中(生理中)は入店不可。1名につき最大2匹まで。ペット同伴可のテーブルは数に限りがあるため事前予約推奨。旧い犬連れ紹介ブログ(2018年公開)には「屋外席のみ」との記載もあり、現行の店内可という情報と相違(要重点検証)。",
+      "dog_note": "洋服の着用必須(毛・ふけ飛散防止)。おやつ持込可・ご飯持込不可。ヒート中(生理中)は入店不可。1名につき最大2匹まで。ペット同伴可のテーブルは数に限りがあるため事前予約推奨。2018年の古い情報には「屋外席のみ」とするものもあり、現行の店内可という情報と異なるため来店前に要確認。",
       "dog_policy_condition": null,
       "dog_policy_status": "unverified",
       "has_conflict": true,
@@ -42958,7 +42997,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "ガーデンエリアのみペット同伴可(店内は不可)。単独出典(itsumo.dog、2020年更新)のため要重点検証。",
+      "dog_note": "ガーデンエリアのみペット同伴可(店内は不可。2020年頃の情報・要最新確認)",
       "dog_policy_condition": "ガーデンエリアのみペット同伴OK(店内不可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -43130,7 +43169,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "出典間で「店内も同伴可」とする専門サイトの記載もあり、公式サイトの現行案内(テラス限定)と相違があるため要確認",
+      "dog_note": "店内も同伴可とする情報もあるが、公式サイトの現行案内ではテラス限定のため来店前に要確認",
       "dog_policy_condition": "中型犬までは店内同伴可、大型犬はテラス席のみ可(テーブルに犬を乗せない等のマナールールあり)。",
       "dog_policy_status": "conditional",
       "dog_size_limit": "テラス席のみ犬同伴可(店内不可・公式サイト記載)。大型犬もテラスなら可との専門サイト記載あり",
@@ -43603,7 +43642,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_note": "犬同伴時は完全個室の利用が条件。単独出典のため要重点確認。",
+      "dog_note": "犬同伴時は完全個室の利用が条件",
       "dog_policy_condition": "完全個室限定・カートまたはキャリーバッグでの入場必須",
       "dog_policy_status": "conditional",
       "dog_size_limit": "カートまたはキャリーバッグでの入場必須",
@@ -45272,7 +45311,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "テラス席はペット可。単独出典のため要重点確認。",
+      "dog_note": "テラス席はペット可",
       "dog_policy_condition": "テラス席はペット可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -46313,7 +46352,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_note": "ペット同伴可の屋根付きテラス席を完備。単独出典のため要重点確認。",
+      "dog_note": "ペット同伴可の屋根付きテラス席を完備",
       "dog_policy_condition": "ペットはテラス席のみ可（屋根付き）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -48200,7 +48239,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_note": "公式は「テラスだけでなく店内一部わんちゃんOK」と案内(口コミでは店内全エリアOKとする紹介もあり・要現地確認)",
+      "dog_note": "公式の案内では「テラスだけでなく店内一部わんちゃんOK」(店内全エリアOKとする情報もあり・来店前に要確認)",
       "dog_policy_condition": "テラス席に加え店内の一部エリアで犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": true,
@@ -48785,7 +48824,7 @@
         "large_dogs": false,
         "terrace": true
       },
-      "dog_note": "専門サイト(pet-restaurant.com)の一覧では「テラス席のみ」と明記。ホットペッパーは「ペット同伴可」とのみ記載し店内/テラスの区別は明記なし(両出典をsourcesに記録)。",
+      "dog_note": "テラス席のみとする情報と、「ペット同伴可」とのみで店内/テラスの区別が不明な情報がある。",
       "dog_policy_condition": "テラス席のみ・小型犬と中型犬まで(トイレのしつけ済み・無駄吠えしない・発情中不可)",
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型犬・中型犬まで(テラス席)",
@@ -48880,15 +48919,14 @@
       "address": "東京都目黒区目黒1-6-15",
       "area": "tokyo",
       "contact": null,
-      "description": "目黒駅近くの一軒家中華料理店。小型犬なら店内同伴で食事を楽しめる。",
+      "description": "目黒駅近くの一軒家中華料理店。小型犬の店内同伴可との情報あり（中・大型犬は記載なし）。",
       "dog_amenities": {
-        "indoor": true,
-        "large_dogs": false
+        "indoor": true
       },
       "dog_note": "要事前確認推奨(電話03-3490-6590)",
       "dog_policy_condition": "入店範囲は小型犬",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "小型犬のみ(出典に明記)",
+      "dog_size_limit": "小型犬の同伴可と記載あり（中型・大型犬は記載なし）",
       "has_conflict": false,
       "holiday_note": "年中無休",
       "hours_text": "月〜土11:00〜15:00(休憩あり)・17:30〜25:00(L.O.)/日17:30〜25:00(L.O.)",
@@ -49705,7 +49743,7 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_note": "食事利用者は足湯を無料で利用可(単独出典のため要重点検証)",
+      "dog_note": "食事利用者は足湯を無料で利用可",
       "dog_policy_condition": "店外のテラス席はペット同伴OK。食事利用者は足湯も無料で利用可能。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
@@ -50460,6 +50498,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-07T09:07:17Z",
+  "generated_at": "2026-10-07T09:36:32Z",
   "is_sample_data": false
 }

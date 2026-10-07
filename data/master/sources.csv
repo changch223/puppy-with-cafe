@@ -147,7 +147,7 @@ beef0000-0000-4000-8000-000000000062,blog,https://www.urimaru.blog/%E4%B8%AD%E7%
 beef0000-0000-4000-8000-000000000063,blog,https://wankonowa.com/column/1858/,conditional,店内・テラスともOKだが大型犬はテラスのみと明記,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000063,blog,https://odekake-wanko-bu.com/spot/roju-cafe/,conditional,店内OK・テラスOK・イスの上はNG・犬種は要問い合わせ,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000063,blog,https://media.imakoapp.com/meguro-river-pet-friendly-cafe/,allowed,,2026-07-17,aggregated
-beef0000-0000-4000-8000-000000000063,blog,https://inunavi.plan-b.co.jp/inucafe_nakameguro/,conditional,テラス席のみ犬同伴OKで店内は不可と明記(他3出典と相違・要注意),2026-07-17,aggregated
+beef0000-0000-4000-8000-000000000063,blog,https://inunavi.plan-b.co.jp/inucafe_nakameguro/,conditional,テラス席のみ犬同伴OK・店内は不可(情報により異なるため来店前に要確認),2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000064,blog,https://wankonowa.com/column/1858/,allowed,,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000064,blog,https://hina-diary.amebaownd.com/posts/22071132/,conditional,ワンコエリアは店内及びテラス・椅子には店が貸し出すマットを敷いて利用,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000064,blog,https://note.com/hayaf3/n/n6c739fed420c,allowed,,2026-07-17,aggregated
@@ -206,11 +206,11 @@ beef0000-0000-4000-8000-000000000085,blog,https://iinami.co.jp/pets/kawakamian-a
 beef0000-0000-4000-8000-000000000085,blog,https://wankonowa.com/column/3810/,conditional,テラスのみ犬同伴可・大型犬も可と一覧表に明記,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000086,blog,https://tsutsujilog.net/minamiaoyama-2/,conditional,入口テラスカウンター席のみ犬同伴可(わんこOK)と明記,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000086,blog,https://wankonowa.com/column/2473/,conditional,テラスのみ犬同伴可・大型犬も可と一覧表に明記,2026-07-17,aggregated
-beef0000-0000-4000-8000-000000000087,blog,https://tsutsujilog.net/ericrose/,conditional,テラス席のみ犬同伴可(店内は不可と推定される記述)と明記,2026-07-17,aggregated
+beef0000-0000-4000-8000-000000000087,blog,https://tsutsujilog.net/ericrose/,conditional,テラス席のみ犬同伴可,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000087,blog,https://m-lifeblog.com/archives/3058,conditional,テラス席のみ犬同伴可(屋内は入店不可)・ヒーターやパラソル、ペット用飲用水の用意はなしと明記,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000088,blog,https://www.dog-ful.com/places/1211,conditional,テラス席のみペットOKと明記,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000088,blog,https://omotesando-blog.com/ralphs-coffee-omotesando/,conditional,テラス席は犬OK・大型犬も可・ペットカートでの来店も可と明記,2026-07-17,aggregated
-beef0000-0000-4000-8000-000000000089,blog,https://odekake-wanko-bu.com/spot/gentle-dining/,conditional,ガーデンテラス席で犬同伴可・カフェマット持参推奨と明記(単独出典),2026-07-17,aggregated
+beef0000-0000-4000-8000-000000000089,blog,https://odekake-wanko-bu.com/spot/gentle-dining/,conditional,ガーデンテラス席で犬同伴可・カフェマット持参推奨,2026-07-17,aggregated
 beef0000-0000-4000-8000-000000000500,other,https://doghuggy.petgo.jp/dogmap/spot/503,conditional,店内は小型犬対応と明記(ドッグメニューあり),2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000500,blog,https://shiba-inu.life/column/64118,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000500,tabelog,https://tabelog.com/tokyo/A1323/A132305/13126936/,allowed,,2026-07-18,aggregated
@@ -292,7 +292,7 @@ beef0000-0000-4000-8000-000000000242,blog,https://withwan.life/listing/5016/,con
 beef0000-0000-4000-8000-000000000243,blog,https://petoria-tokyo.jp/feature/nihonbashi-lunch/,conditional,テラス席のみ同伴可,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000243,blog,https://don-don-dog.com/il-bacaro-alma,conditional,テラス席がペット同伴可能（店内可否の記載なし）,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000244,official_hp,https://1ppon.owst.jp/,conditional,ペット同伴は1階テラス席のみ（店内不可は"のみ"からの解釈）,2026-07-18,aggregated
-beef0000-0000-4000-8000-000000000244,blog,https://petoria-tokyo.jp/feature/nihonbashi-lunch/,conditional,2階・1階のテラス席で犬同伴可能と紹介（公式サイトは1階テラス限定と明記しており階数の記載に差異あり）,2026-07-18,aggregated
+beef0000-0000-4000-8000-000000000244,blog,https://petoria-tokyo.jp/feature/nihonbashi-lunch/,conditional,2階・1階のテラス席で犬同伴可能とする情報がある(公式サイトでは1階テラス限定とされており、階数は来店前に要確認),2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000245,official_hp,https://annam-indian-restaurannt.owst.jp/,conditional,ペット同伴可（詳細条件の記載なし）,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000245,blog,https://www.tabiwan.com/entry/trip-ginza-cafe,conditional,個室でわんちゃん同伴可能・予約時に申告要,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000245,blog,https://mrs.living.jp/tokyo/town_gourmet/reporter/4638166,allowed,,2026-07-18,aggregated
@@ -538,14 +538,14 @@ beef0000-0000-4000-8000-000000000320,official_hp,https://sharkcoffee.store/pages
 beef0000-0000-4000-8000-000000000320,blog,https://wankonowa.com/column/dogcafe/1351/,conditional,店内・テラスのソファー席以外は犬同伴可・大型犬は不可,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000320,blog,https://www.hirorocafe.com/entry/2023/04/14/%E6%B8%8B%E8%B0%B7%E3%80%8CSHARK_COFFEE%EF%BC%88%E3%82%B7%E3%83%A3%E3%83%BC%E3%82%AF%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%EF%BC%89%E3%80%8D%E3%80%9C%E7%8A%AC%E5%90%8C%E4%BC%B4OK%E3%81%AA%E3%83%B4%E3%82%A3,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000321,blog,https://odekake-wanko-bu.com/spot/zarinkinguamerikandaina/,allowed,,2026-07-18,aggregated
-beef0000-0000-4000-8000-000000000321,blog,https://wankonowa.com/column/dogcafe/1351/,conditional,店内のみ(テラス言及なし)・大型犬不可(odekake-wanko-buは大型犬もOKと記載しており対立),2026-07-18,aggregated
+beef0000-0000-4000-8000-000000000321,blog,https://wankonowa.com/column/dogcafe/1351/,conditional,店内のみ(テラスは不明)・大型犬不可(大型犬もOKとする情報もあり、来店前に要確認),2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000322,blog,https://wankonowa.com/column/dogcafe/1351/,conditional,店内全席OK・大型犬不可・予約はインスタのみ,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000322,blog,https://popdish.jp/column/%E8%8A%B8%E8%83%BD%E4%BA%BA%E3%82%82%E9%80%9A%E3%81%86%E5%AE%8C%E5%85%A8%E4%BA%88%E7%B4%84%E5%88%B6%E3%81%AE%E3%81%8A%E3%81%97%E3%82%83%E3%82%8C%E3%82%AB%E3%83%95%E3%82%A7whitely-cafe%EF%BC%88/,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000323,blog,https://wankonowa.com/column/dogcafe/1351/,conditional,店内のみ(3階)・大型犬不可,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000323,tabelog,https://tabelog.com/en/tokyo/A1303/A130301/13156028/,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000324,blog,https://wankonowa.com/column/dogcafe/1351/,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000324,blog,https://itsumo.dog/6379/,allowed,,2026-07-18,aggregated
-beef0000-0000-4000-8000-000000000324,blog,https://www.tesseland.jp/news/2938,allowed,Dogサロン併設カフェとして紹介(住所表記は桜丘町16-15で他出典の7-13と相違あり・要確認),2026-07-18,aggregated
+beef0000-0000-4000-8000-000000000324,blog,https://www.tesseland.jp/news/2938,allowed,Dogサロン併設カフェ(住所表記は桜丘町16-15と7-13の2通りあり・要確認),2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000325,blog,https://wankonowa.com/column/dogcafe/1351/,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000325,blog,https://shibuyaku2shin.com/archives/23579935.html,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000326,blog,https://wankonowa.com/column/dogcafe/1351/,conditional,テラス席のみ犬同伴可・大型犬は要確認,2026-07-18,aggregated
@@ -579,9 +579,9 @@ beef0000-0000-4000-8000-000000000228,official_hp,http://www.oimachi-tracks.com/e
 beef0000-0000-4000-8000-000000000228,blog,https://k-protopia.com/5357-2/,conditional,施設内店舗の内訳紹介で「3F les joues de bébé：テラス席のみ」と記載,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000260,official_hp,https://www.kimptonshinjuku.com/tokyo-restaurants/the-jones/,conditional,"公式サイトに「At District – Brasserie, Bar, Lounge and The Jones Café | Bar, we welcome up to 4 pets maximum per reservation.」と明記(1予約4頭まで)。テラス限定の記載はなし。",2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000260,blog,https://odekake-wanko-bu.com/spot/the-jones-cafe-%EF%BC%86-bar/,conditional,店内でワンちゃん同伴可・大型犬まで対応・1組4頭まで・カフェマット持参が必要,2026-07-18,aggregated
-beef0000-0000-4000-8000-000000000260,blog,https://wankonowa.com/column/dogcafe/1361/,conditional,店内のみ犬同伴可・大型犬OK・1組最大4匹・愛犬用メニューありと紹介(公式は正式メニューはなくボーンクッキーのみと案内しており記載に差がある),2026-07-18,aggregated
+beef0000-0000-4000-8000-000000000260,blog,https://wankonowa.com/column/dogcafe/1361/,conditional,店内のみ犬同伴可・大型犬OK・1組最大4匹・愛犬用メニューあり(公式の案内では正式メニューはなくボーンクッキーのみとされている),2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000261,official_hp,https://www.kimptonshinjuku.com/tokyo-restaurants/%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%E3%83%AA%E3%82%AF%E3%83%88-%E3%83%96%E3%83%A9%E3%83%83%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%BB%E3%83%A9%E3%82%A6%E3%83%B3%E3%82%B8-%E6%9D%B1%E4%BA%AC/,conditional,公式サイトに「we welcome your pets to our terrace and lounge area」「up to 4 pets maximum per reservation」と明記。犬同伴はテラス+ラウンジエリアに限定。,2026-07-18,aggregated
-beef0000-0000-4000-8000-000000000261,blog,https://petokoto.com/articles/845,conditional,店内・テラス席で同伴可能・大型犬も同伴可と紹介(公式のラウンジ限定という条件より広い書き方で、記載に差がある),2026-07-18,aggregated
+beef0000-0000-4000-8000-000000000261,blog,https://petokoto.com/articles/845,conditional,店内・テラス席で同伴可能・大型犬も同伴可(公式ではテラスとラウンジに限定されており、来店前に要確認),2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000262,blog,https://wankonowa.com/column/dogcafe/1361/,conditional,店内・テラス可、大型犬OK、カフェマットを敷けば椅子やソファーに乗せても大丈夫,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000262,blog,https://inunavi.plan-b.co.jp/inucafe_shinjuku/,conditional,店内席で同伴可能,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000262,blog,https://petokoto.com/articles/845,conditional,店内席で可能、大型犬も同伴可,2026-07-18,aggregated
@@ -594,7 +594,7 @@ beef0000-0000-4000-8000-000000000263,tabelog,https://tabelog.com/tokyo/A1304/A13
 beef0000-0000-4000-8000-000000000264,blog,https://wankonowa.com/column/dogcafe/1361/,conditional,店内一階席のみ利用可能,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000264,tabelog,https://tabelog.com/en/tokyo/A1304/A130402/13203391/,conditional,"""Pet friendly (Good for pets)""、備考欄に""Pets are allowed on the first floor only""と明記",2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000265,blog,https://petoria-tokyo.jp/feature/shin-okubo-lunch/,conditional,「ペット同伴は、開放的なテラス席で可能です」と明記。テラス席は間隔が広くカート利用もしやすいと紹介。大型犬可否の明記なし。,2026-07-18,aggregated
-beef0000-0000-4000-8000-000000000266,blog,https://petokoto.com/articles/845,conditional,テラス席のみ、大型犬も同伴可(単独出典・公式サイトでは犬同伴に関する記載を確認できず),2026-07-18,aggregated
+beef0000-0000-4000-8000-000000000266,blog,https://petokoto.com/articles/845,conditional,テラス席のみ、大型犬も同伴可,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000267,official_hp,https://decoetdeco.p-kit.com/,conditional,「ペットとご一緒にくつろげるアットホームな空間を目指しています」と明記。トイプードルの看板犬「デコポン」店長が在籍。大型犬可否の明記なし。,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000267,blog,https://petokoto.com/articles/845,conditional,店内席で同伴可能、犬用メニューあり、大型犬は要確認と紹介,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000380,blog,https://petoria-tokyo.jp/feature/showakinenpark-lunch/,conditional,テラス席のみペット同伴可(店内不可)・GREEN SPRINGSの緑と芝生に囲まれた開放感ある屋外空間,2026-07-18,aggregated
@@ -824,7 +824,7 @@ beef0000-0000-4000-8000-000000000825,blog,https://inunavi.plan-b.co.jp/inucafe_h
 beef0000-0000-4000-8000-000000000826,blog,https://petoria-tokyo.jp/feature/takaosan-lunch/,conditional,テラス席(屋外席)にて犬同伴可,2026-08-06,aggregated
 beef0000-0000-4000-8000-000000000826,blog,https://www.tabiwan.com/entry/trip-takaosan-cafe,conditional,森林が見えるテラス席が犬OK,2026-08-06,aggregated
 beef0000-0000-4000-8000-000000000826,blog,https://www.gowithdog.org/mt_takao_with_dog/,conditional,犬同伴の専用席あり(山頂),2026-08-06,aggregated
-beef0000-0000-4000-8000-000000000826,blog,https://sawabro.com/diary/1236/,conditional,ペット連れの客は『ペット同伴席』に案内されるがほぼ店内、との記述あり(他3出典のテラス限定という記述と対立),2026-08-06,aggregated
+beef0000-0000-4000-8000-000000000826,blog,https://sawabro.com/diary/1236/,conditional,ペット連れの客は『ペット同伴席』に案内されるがほぼ店内(テラス限定とする情報もあり、来店前に要確認),2026-08-06,aggregated
 beef0000-0000-4000-8000-000000000827,blog,https://8dabe.com/2023/02/14/cafe-chouchou-2/,conditional,テラスもありテラス席はペット同伴OKだそうです,2026-08-06,aggregated
 beef0000-0000-4000-8000-000000000827,blog,https://takao-fumoto.com/meibo_cafe-chouchou/,conditional,テラス席はペットOK。家族の一員としてお水も出してくれる。,2026-08-06,aggregated
 beef0000-0000-4000-8000-000000000827,blog,https://inunavi.plan-b.co.jp/inucafe_hachiouji/,conditional,テラス席可,2026-08-06,aggregated
@@ -937,12 +937,12 @@ beef0000-0000-4000-8000-000000000643,blog,https://www.gowithdog.org/komazawa-par
 beef0000-0000-4000-8000-000000000540,blog,https://kitasenjunin.com/khb,conditional,窓側のソファ席のみ犬同伴可（要予約推奨）,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000160,official_hp,https://www.dogdept.com/shoplist/area03_21.html,allowed,,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000481,tabelog,https://tabelog.com/tokyo/A1312/A131203/13299616/,conditional,小型犬・中型犬のみ同伴可（大型犬不可）、ペット用マット持参必須、1組最大4頭まで,2026-08-07,aggregated
-beef0000-0000-4000-8000-000000000365,blog,https://otakushoren.com/gourmet/139511,conditional,店内奥に犬用スペース（ドッグラン）があり、そこで犬同伴可。犬用メニュー「わんバーグ」等あり。テラス席の有無は情報源に記載なし。,2026-08-07,aggregated
+beef0000-0000-4000-8000-000000000365,blog,https://otakushoren.com/gourmet/139511,conditional,店内奥に犬用スペース（ドッグラン）があり、そこで犬同伴可。犬用メニュー「わんバーグ」等あり。テラス席の有無は不明。,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000201,blog,https://www.honda.co.jp/dog/travel/data/shop-fungo/,conditional,テラス席（7卓16席）のみ犬同伴可、全犬種・サイズ制限なしだがリード必須。店内席は不可。,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000184,blog,https://www.innuis.com/dog/introduce/%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%96%E3%83%A9%E3%82%B6%E3%83%BC%E3%82%BA%E9%BA%BB%E5%B8%83%E5%8D%81%E7%95%AA%E5%BA%97%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA,conditional,店内同伴可。リード着用必須・犬を座席に直接乗せるのは不可。小型犬向けとされ、中型犬は要相談、大型犬は不可との目安あり。,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000664,official_hp,https://vansan-ltd.jp/vansan/vansan-soshigayaookura/,conditional,公式店舗ページの設備・サービス欄に「テラス席」「ペット同伴可」が並記されており、テラス席での犬同伴とみられる（店内可否の明記なし）。,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000015,official_hp,https://ghzt100.gorp.jp/,conditional,公式サイトに「ペット同伴OK」と記載。ブログではテラス席での犬同伴の実例が紹介されている。詳細な制限は要問合せとの案内。,2026-08-07,aggregated
-beef0000-0000-4000-8000-000000000642,blog,https://wankonowa.com/column/1682/,conditional,2024年10月時点の記事では、大型犬も同伴可・店内は窓側席のみ利用可とされる。2025年12月更新の別メディア記事でも「ペット同伴：可」と記載（詳細条件の記載なし）。,2026-08-07,aggregated
+beef0000-0000-4000-8000-000000000642,blog,https://wankonowa.com/column/1682/,conditional,2024年10月時点の情報では、大型犬も同伴可・店内は窓側席のみ利用可。2025年12月更新の情報でも「ペット同伴：可」(詳細条件は不明)。,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000565,blog,https://itsumo.dog/kzhouse/,allowed,,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000541,blog,https://inuyume.com/lush-coffee-kitasenjyu/,allowed,,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000145,official_hp,https://www.ccinc-love.com/lesdeuxbleue/,allowed,,2026-08-07,aggregated
@@ -958,7 +958,7 @@ beef0000-0000-4000-8000-000000000063,blog,https://wankonowa.com/column/1858/,con
 beef0000-0000-4000-8000-000000000328,other,https://www.hotpepper.jp/strJ001009030/appearance/,conditional,テラス席のみペット同伴可。店内は不可。,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000320,tabelog,https://tabelog.com/tokyo/A1303/A130301/13283725/,conditional,ソファ席以外は犬同伴可（ソファ席は不可）。,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000122,blog,https://petlife.asia/petcafe/531/,conditional,小型犬・中型犬は店内・テラス共に同伴可。大型犬は来店前の電話相談が必要,2026-08-07,aggregated
-beef0000-0000-4000-8000-000000000046,blog,https://doghuggy.petgo.jp/dogmap/spot/291,conditional,ドッググッズショップ併設のドッグカフェとして店内犬同伴可。小型犬中心とする情報源が多いが、大型犬可否は情報源により記載が分かれる（要事前確認）,2026-08-07,aggregated
+beef0000-0000-4000-8000-000000000046,blog,https://doghuggy.petgo.jp/dogmap/spot/291,conditional,ドッググッズショップ併設のドッグカフェとして店内犬同伴可。小型犬中心とする情報が多いが、大型犬可否は情報により分かれる（要事前確認）,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000367,official_hp,https://tamagawa-diner.com/,conditional,テラス席のみ犬同伴可（店内不可）,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000321,blog,https://wanico.jp/spots/d/97,allowed,,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000542,blog,https://kitasenjunin.com/takuru,allowed,,2026-08-07,aggregated
@@ -975,7 +975,7 @@ beef0000-0000-4000-8000-000000000566,official_hp,https://one-littlegarden.jp/,al
 beef0000-0000-4000-8000-000000000245,official_hp,https://annam-indian-restaurannt.owst.jp/,allowed,,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000202,blog,https://pet-restaurant.com/tokyo-sangendyaya/,conditional,テラス席のみペット同伴可（店内不可）,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000307,official_hp,https://sakuracafe-nippori.gorp.jp/,allowed,,2026-08-07,aggregated
-beef0000-0000-4000-8000-000000000307,blog,https://doghuggy.petgo.jp/dogmap/spot/478,conditional,テラス席のみ同伴可との記載あり（公式サイトの「店内可」情報と矛盾）,2026-08-07,aggregated
+beef0000-0000-4000-8000-000000000307,blog,https://doghuggy.petgo.jp/dogmap/spot/478,conditional,テラス席のみ同伴可(公式サイトでは店内可とされており、来店前に要確認),2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000125,official_hp,https://chatiere-tokyo.com/,conditional,"ペットはカートに入れて入店可。専用「ドッグフレンチ」コース（¥4,500〜、犬種・年齢に応じて）の注文が必須",2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000646,blog,https://serorino-hitorigoto.com/komazawa-steakhouse-newtexas/,allowed,,2026-08-07,aggregated
 beef0000-0000-4000-8000-000000000285,blog,https://pet-restaurant.com/tokyo-kanda-ochanomizu/,conditional,テラス席のみペット(犬)同伴可、店内は不可。,2026-08-07,aggregated
@@ -1109,7 +1109,7 @@ beef0000-0000-4000-8000-000000001289,blog,https://withmywanko.com/lafougasse-aki
 beef0000-0000-4000-8000-000000001290,other,https://wanico.jp/spots/d/8158,allowed,,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001120,blog,https://petoria-tokyo.jp/feature/gakugeidaigaku-lunch/,conditional,店内・テラス席ともにOKと明記(EMPORIO cafe&diningの一覧内),2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001120,blog,https://www.innuis.com/dog/introduce/%E3%82%A8%E3%83%B3%E3%83%9D%E3%83%AA%E3%82%AA%E6%9D%B1%E4%BA%AC%E9%83%BD-%E7%9B%AE%E9%BB%92%E5%8C%BAemporio,conditional,店内1階とテラス席でOK・小型〜大型犬まで対応可と明記,2026-08-08,aggregated
-beef0000-0000-4000-8000-000000001120,other,https://itsumo.dog/tokyo/st/2600105/cafe/,conditional,テラス・オープンエアのみOKと記載(店内不可)。他出典と相違あり,2026-08-08,aggregated
+beef0000-0000-4000-8000-000000001120,other,https://itsumo.dog/tokyo/st/2600105/cafe/,conditional,テラス・オープンエアのみOK(店内不可)。情報により異なるため来店前に要確認,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001121,blog,https://petoria-tokyo.jp/feature/gakugeidaigaku-lunch/,conditional,店内OK(ソファ席は不可)と明記,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001122,blog,https://petoria-tokyo.jp/feature/gakugeidaigaku-lunch/,conditional,テラス席のみOK(店内不可)と明記,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001123,blog,https://petoria-tokyo.jp/feature/gakugeidaigaku-lunch/,conditional,店内・テラス席ともにOK。リード着用・短めに保持、椅子に乗せる場合は抱っこかカフェマット使用と明記,2026-08-08,aggregated
@@ -1189,7 +1189,7 @@ beef0000-0000-4000-8000-000000001103,blog,https://nishi-kasai.com/6534/,conditio
 beef0000-0000-4000-8000-000000001104,tabelog,https://tabelog.com/tokyo/A1313/A131305/13149320/,conditional,洋服は必ず着用させてください(毛・ふけ等飛散防止のため)。おやつの持ち込みOK、ごはんは不可。ヒート中(生理中)は入店不可。1名様に対して最大2匹までわんちゃんOK,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001104,official_hp,https://restaurant.kushi-tanaka.com/detail/1009/,allowed,,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001104,blog,https://odekake-wanko-bu.com/spot/kushikatsu_tanaka/,conditional,店内OK。必ずリード・洋服着用で利用しましょう(カートもOK),2026-08-08,aggregated
-beef0000-0000-4000-8000-000000001104,blog,https://nishi-kasai.com/6534/,conditional,店前の屋外席であれば、ペット同伴可能(2018年時点の記載。現行の店内可情報と相違),2026-08-08,aggregated
+beef0000-0000-4000-8000-000000001104,blog,https://nishi-kasai.com/6534/,conditional,店前の屋外席であればペット同伴可能(2018年時点の情報・現行の店内可情報と異なるため来店前に要確認),2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001105,blog,https://wagtravel.jp/spots/filament-self-cafe-firamentoserufukafe-edogawaku,conditional,ペット同伴はテラス席のみ可能です,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001105,other,https://r.gnavi.co.jp/area/aream2237/kods00074/rs/,allowed,,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001106,other,https://r.gnavi.co.jp/p396300/,conditional,小型犬 テラスOK/中型犬 テラスOK/大型犬 テラスOK,2026-08-08,aggregated
@@ -1236,7 +1236,7 @@ beef0000-0000-4000-8000-000000001260,tabelog,https://tabelog.com/tokyo/A1322/A13
 beef0000-0000-4000-8000-000000001260,sns,https://www.instagram.com/cookee_official/,conditional,プロフィールに「テラス席わんこOK」と明記,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001261,official_hp,https://vansan-ltd.jp/vansan/vansan-hikarigaoka/,allowed,,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001261,tabelog,https://tabelog.com/tokyo/A1321/A132102/13252970/,allowed,,2026-08-08,aggregated
-beef0000-0000-4000-8000-000000001262,blog,https://www.gowithdog.org/nerima-hikarigaoka-park/,conditional,「お店の前にはテラス席が１０席ほど。愛犬と食事をすることができます。」と明記(出典は店名「パークス光が丘」を明記せず「園内のパン屋さん」と呼称。光が丘公園内唯一のパン屋である点からhikari-no-oka.comの情報と併せて同定した集約判断),2026-08-08,aggregated
+beef0000-0000-4000-8000-000000001262,blog,https://www.gowithdog.org/nerima-hikarigaoka-park/,conditional,お店の前にテラス席が10席ほどあり、愛犬と食事ができる,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000001262,blog,https://hikari-no-oka.com/parkpan/,unverified,,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000000002,other,https://wanico.jp/spots/d/1359,conditional,テラス席のみ・小型〜大型犬OK（大型犬も歓迎）,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000000003,other,https://doghuggy.petgo.jp/dogmap/spot/2715,conditional,小型・中型・大型犬ともテラス席のみ可,2026-08-08,aggregated
@@ -1354,3 +1354,6 @@ beef0000-0000-4000-8000-000000000462,other,https://r.gnavi.co.jp/aerz5dng0000/,c
 beef0000-0000-4000-8000-000000000204,other,https://r.gnavi.co.jp/jcxvrrr70000/,allowed,店内利用はペット1頭につきフード付きセットチャージ550円。店内ソファーに乗せる場合はキャリーバッグ使用（小型〜大型犬）,2026-10-06,aggregated
 beef0000-0000-4000-8000-000000000326,other,https://wanico.jp/spots/d/106,conditional,テラス席のみ（屋根あり）・小型〜大型犬OK,2026-10-06,aggregated
 beef0000-0000-4000-8000-000000000720,other,https://r.gnavi.co.jp/gg7z310/,conditional,テラス席で同伴可（小型〜大型犬）,2026-10-06,aggregated
+beef0000-0000-4000-8000-000000000161,tabelog,https://tabelog.com/tokyo/A1311/A131102/13195543/,unverified,,2026-10-07,aggregated
+beef0000-0000-4000-8000-000000000887,official_hp,https://b979901.gorp.jp/,allowed,,2026-10-07,aggregated
+beef0000-0000-4000-8000-000000000406,official_hp,https://www.snowpeak.co.jp/news/p20250117/,unverified,店名をSnow Peak Cafeに変更・犬用フードはS/Mサイズと告知,2026-10-07,aggregated
