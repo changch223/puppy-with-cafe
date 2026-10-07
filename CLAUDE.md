@@ -12,7 +12,10 @@
 - カフェ調査の引き継ぎブリーフ: **`research-agent/README.md`**（収集項目・絶対ルール・手順のすべて）＋ `research-agent/progress.md`（エリア別進捗）
 - 専用エージェント定義: `.claude/agents/cafe-researcher.md` —「cafe-researcher で代官山エリアを調査して」のように依頼する
 - 調査エージェントは**コミットしない**。差分（CHANGELOG・git diff）を運営がレビューして反映＝承認（FR-024 の運営承認と同じ構図）
-- 姉妹リポジトリ **CafeResearchAgent**（`../CafeResearchAgent/`）が spec-kit で独立運用する調査基盤。手動調査バッチを `staging/<日付>-<エリア>/` に納品し、本リポジトリへは運営レビュー後に `export_cafes.py --check` 通過を確認して反映する。**2026-07-18 に東京34エリア全て（計268件）を反映完了**（詳細: 同リポジトリ `HANDOFF.md` / `agent/progress.md`）。座標は全件概算のため今後の実測課題
+- 姉妹リポジトリ **CafeResearchAgent**（`../CafeResearchAgent/`）が spec-kit で独立運用する調査基盤。手動調査バッチを `staging/<日付>-<エリア>/` に納品し、本リポジトリへは運営レビュー後に `export_cafes.py --check` 通過を確認して反映する。2026-07-18 に初期34エリア268件を反映し、その後 2026-08 の wave2〜4 等で **594件**（2026-10 時点）まで拡大（詳細: 同リポジトリ `HANDOFF.md` / `agent/progress.md`）。座標は多くが概算のため今後の実測課題
+
+## データ反映の運用（2026-08〜10・cc-crew）
+- 調査は CSV に直接書かず **JSON で納品 → 1体が集約して CSV 反映 → qa-reviewer が原文突き合わせ QA → PR → 運営がマージ（＝承認＝Pages 配信）**。営業時間の構造化は二重独立変換で一致分のみ採用。手順・ルールの詳細は `HANDOFF.md` §5 と `research-agent/gap-handover-2026-08.md`。
 
 ## 進め方
 - ワークフロー: `/speckit-constitution` → `/speckit-specify` → `/speckit-clarify` → `/speckit-plan` → `/speckit-tasks` → `/speckit-implement`
@@ -23,7 +26,7 @@
 - **Swift 5.9+ / iOS 16+**、UIは **SwiftUI 優先**、地図クラスタリング等のみ **MKMapView を UIViewRepresentable で橋渡し**
 - アーキテクチャ **MVVM**。純ロジック（距離/名寄せ/矛盾解決/フィルタ）は `Core/` に隔離し **XCTest 必須**
 - MapKit / CoreLocation（**WhenInUse**）/ AuthenticationServices（**Appleでサインイン**）
-- **バックエンド（2026-07-05 構成Bに改訂, research.md R11）**: サーバーレス。**マスターCSV `data/master/*.csv`（Google Sheet 移行まで）→ `tools/export_cafes.py`（検証・矛盾/代表導出・差分CHANGELOG）→ `cafes.json`** をアプリにバンドル＋静的URL（GitHub Pages 予定）から遠隔更新（`Services/StaticCafeRepository.swift`）。検索・距離計算は端末内完結（位置情報を送信しない）。実データ: **268件・東京34エリア全域**（天王洲アイル5＋姉妹リポジトリ `../CafeResearchAgent/` の手動調査33エリア263件を2026-07-17/18反映。座標は概算・要実測）。テストは凍結フィクスチャ（`DokoWanCafeTests/Fixtures/`）を使用
+- **バックエンド（2026-07-05 構成Bに改訂, research.md R11）**: サーバーレス。**マスターCSV `data/master/*.csv`（Google Sheet 移行まで）→ `tools/export_cafes.py`（検証・矛盾/代表導出・差分CHANGELOG）→ `cafes.json`** をアプリにバンドル＋静的URL（GitHub Pages 予定）から遠隔更新（`Services/StaticCafeRepository.swift`）。検索・距離計算は端末内完結（位置情報を送信しない）。実データ: **594件・東京都内**（出典約1355件。初期268件＝天王洲アイル5＋姉妹リポジトリ `../CafeResearchAgent/` の手動調査263件に、2026-08 の wave2〜4 で追加。大型犬可否 約257件・曜日別営業時間 約405件を構造化済み。座標は多くが概算・要実測。2026-10-07 時点）。テストは凍結フィクスチャ（`DokoWanCafeTests/Fixtures/`）を使用
 - 誤り報告は **Google フォーム**（プリフィル。`AppConfig.defaultReportFormTemplate` に設定）。**サインインなし**（FR-028改訂）。運営がマスター反映＝承認
 - 旧A案（Supabase: `supabase/` の SQL・`Services/Supabase*`/`AuthService` 等）は**保管**。規模拡大時の移行先。v1では配線しない
 - 依存管理は **SwiftPM**。文字列は **String Catalog（日本語第一）**
