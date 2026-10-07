@@ -44,7 +44,7 @@ Google Sheet / data/master/*.csv（マスター）
 ## 開発
 
 ```bash
-# ビルド & テスト（49 tests）
+# ビルド & テスト（XCTest。Core の純ロジック中心）
 cd DokoWanCafe
 xcodebuild test -project DokoWanCafe.xcodeproj -scheme DokoWanCafe \
   -destination 'platform=iOS Simulator,name=iPhone 17'
@@ -61,7 +61,7 @@ python3 tools/export_cafes.py           # 本出力
 
 ## データについて
 
-- 対象エリア: **東京都内34エリア・268件**（2026-07-18時点。他府県への拡大や座標実測は今後の課題）
+- 対象エリア: **東京都内・594件**（出典約1355件、2026-10時点。他府県への拡大や座標実測は今後の課題。座標は多くが概算）
 - 掲載情報は収集時点のものです。**お出かけ前に店舗の公式情報をご確認ください。**
 - 誤りを見つけた場合は報告フォーム（アプリ内）または Issue でお知らせください。
 
