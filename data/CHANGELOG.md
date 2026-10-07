@@ -1377,3 +1377,71 @@
 - ✏️ 変更: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ（dog_note）
 - ✏️ 変更: 迎賓楼（dog_amenities, dog_size_limit, description）
 - ✏️ 変更: 高尾山FuMotoYA（dog_note）
+
+## 2026-10-08 00:00 — 追加 0 / 変更 66 / 削除 0
+- ✏️ 変更: 8dori 大門店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: ARMWOOD COTTAGE(アームウッドコテージ)（holiday_note, hours, hours_text）
+- ✏️ 変更: AUX BACCHANALES 銀座（hours, hours_text）
+- ✏️ 変更: BAGUS BAR Shibaura Island（holiday_note, hours, hours_text）
+- ✏️ 変更: BESIDE SEASIDE（holiday_note, hours, hours_text）
+- ✏️ 変更: Bistrot a la Demande（holiday_note, links, hours_text）
+- ✏️ 変更: CAFE UNITE（カフェユニテ）（holiday_note, hours, hours_text）
+- ✏️ 変更: CANAL CAFE（カナルカフェ）（holiday_note, hours, hours_text）
+- ✏️ 変更: COFFEE STAND .OTTEN（holiday_note, hours, hours_text）
+- ✏️ 変更: Cafe さんぽ道（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Cafe&Restaurant CENTRALE（セントラーレ）（holiday_note, hours, hours_text）
+- ✏️ 変更: Cheese'n Tokyo（holiday_note, hours, hours_text）
+- ✏️ 変更: Dogberry(ドッグベリー)（holiday_note, links, hours_text）
+- ✏️ 変更: EZO DELI（holiday_note, hours, links, hours_text）
+- ✏️ 変更: FAUCHON LE CAFE（is_closed, sources）
+- ✏️ 変更: Family Restaurant POT 大泉町店（holiday_note, hours, hours_text）
+- ✏️ 変更: GRIP(グリップ)（holiday_note, hours, hours_text）
+- ✏️ 変更: Italian Dining Lui（holiday_note, hours, hours_text）
+- ✏️ 変更: Jaho Coffee Roaster & Wine Bar 田町店（holiday_note, hours_text）
+- ✏️ 変更: KOSO 芝本店（is_closed, sources）
+- ✏️ 変更: LODA 三田店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Le Pain Quotidien 芝公園店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Los Angeles BALCONY Terrace Restaurant & Moon Bar（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Mi Tiempo（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Mon-TERCERO（テルセーロ）（holiday_note, hours, links, hours_text）
+- ✏️ 変更: NATURE&MEAT GROVE PARK VIEW（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Paradise Poke蔵前（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Park Side Cafe BASEL（holiday_note, hours, links, hours_text）
+- ✏️ 変更: RAD BROS CAFE（is_closed, sources）
+- ✏️ 変更: SHUTTERS 自由が丘（holiday_note, hours, hours_text）
+- ✏️ 変更: TRATTORIA Elmo Cielo(トラットリア エルモチェーロ)（holiday_note, hours, hours_text）
+- ✏️ 変更: TRATTORIA GRAN BOCCA（トラットリア グランボッカ）（hours_text）
+- ✏️ 変更: Trattoria Monolito(トラットリア モノリート)（holiday_note, hours, hours_text）
+- ✏️ 変更: WOODBERRY COFFEE 荻窪店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: Wande Shiba（holiday_note, hours, links, hours_text）
+- ✏️ 変更: atelier BASEL（holiday_note, hours, links, hours_text）
+- ✏️ 変更: biotable.（holiday_note, hours, links, hours_text）
+- ✏️ 変更: leafis cafe ASAGAYA(リーフィスカフェ阿佐ヶ谷)（is_closed, sources）
+- ✏️ 変更: les joues de bébé（holiday_note, hours, links, hours_text）
+- ✏️ 変更: passage coffee（holiday_note, hours, hours_text）
+- ✏️ 変更: イチローさんのきまぐれcafe（holiday_note, hours, links, hours_text）
+- ✏️ 変更: オカン焼肉 紅ちゃん 本店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: カフェ フェリーチェ(cafe Felice)（holiday_note, hours_text）
+- ✏️ 変更: グリルハーベスター 大崎ブライトコア店（holiday_note, hours, hours_text）
+- ✏️ 変更: スターバックス コーヒー 芦花公園店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: スパイスと創作料理 この一杯のために。（holiday_note, hours, links, hours_text）
+- ✏️ 変更: スワン銀座（SWAN GINZA）（holiday_note, hours, links, hours_text）
+- ✏️ 変更: タマネギヘッドバッド（is_closed, sources）
+- ✏️ 変更: チキンカントリー（holiday_note, hours, links, hours_text）
+- ✏️ 変更: ハーベステラス 品川店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: パンとcafé えだおね（holiday_note, hours, links, hours_text）
+- ✏️ 変更: パンとビストロ 高円寺FLAT(フラット)（holiday_note, hours, hours_text）
+- ✏️ 変更: ビストロ＆スペイン古民家バル chab（holiday_note, hours, links, hours_text）
+- ✏️ 変更: フランス料理 銀座みかわや（holiday_note, hours, links, hours_text）
+- ✏️ 変更: フランツクラブ 浜松町店（holiday_note, hours, hours_text）
+- ✏️ 変更: マグロ卸のフィッシャリーズテラス（is_closed, sources）
+- ✏️ 変更: ミタスカフェ（Mitasu Cafe）（holiday_note, hours, links, hours_text）
+- ✏️ 変更: ミヤマ珈琲 練馬春日町店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: リキマルカフェ（holiday_note, links）
+- ✏️ 変更: 串カツ田中 東五反田店（is_closed, sources）
+- ✏️ 変更: 地鶏専門店三岳 田町×三田店（is_closed, sources）
+- ✏️ 変更: 威南記海南鶏飯 日本本店（holiday_note, hours, links, hours_text）
+- ✏️ 変更: 木曜館（hours, links, hours_text）
+- ✏️ 変更: 炎丸酒場 新小岩北口店（holiday_note, hours, hours_text）
+- ✏️ 変更: 肉とワイン bonanza（holiday_note, hours, links, hours_text）
+- ✏️ 変更: 食事とナチュラルワイン AOLA(アオラ)（holiday_note, hours, hours_text）
