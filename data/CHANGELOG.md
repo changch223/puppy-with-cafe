@@ -1299,3 +1299,81 @@
 - ✏️ 変更: 魚がし どまん中 神楽坂店（hours）
 - ✏️ 変更: 麦酒堂 KASUGAI（hours）
 - ✏️ 変更: 麺酒場 さかのうえ（hours）
+
+## 2026-10-07 18:36 — 追加 0 / 変更 76 / 削除 0
+- ✏️ 変更: AMBER PLACE（アンバープレイス）（dog_note）
+- ✏️ 変更: ARMWOOD COTTAGE(アームウッドコテージ)（dog_note）
+- ✏️ 変更: Aoi Coffee Stand（hours, dog_note）
+- ✏️ 変更: Areverie TERRACE Ebisu(アレヴェリー テラス エビス)（dog_note）
+- ✏️ 変更: Bleue Blanche（ブルーブランシュ）（dog_note）
+- ✏️ 変更: CHICHICAFE（dog_note）
+- ✏️ 変更: Cafe Lisette 二子玉川店（dog_note）
+- ✏️ 変更: Cafe Madu 青山店（dog_note）
+- ✏️ 変更: Cafe PREGO(カフェプレゴ)（dog_size_limit）
+- ✏️ 変更: Cafe Rose&M（カフェ ローズアンドエム）（dog_note）
+- ✏️ 変更: EARTH CAFE 五反田店（アースカフェ）（dog_note）
+- ✏️ 変更: EMPORIO cafe&dining（dog_note）
+- ✏️ 変更: FRIEND MONSTER(フレンドモンスター)（dog_policy_condition）
+- ✏️ 変更: GENTLE Dining（dog_policy_condition, dog_note, description）
+- ✏️ 変更: HOMELAND OME（dog_note）
+- ✏️ 変更: Jugar cafe(フガールカフェ)（dog_size_limit）
+- ✏️ 変更: KITCHEN BAR 新目黒茶屋（dog_amenities, dog_policy_condition, dog_size_limit, last_verified, dog_policy_status, holiday_note, has_conflict, info_verified, hours, phone, representative_source_id, description, hours_text, sources）
+- ✏️ 変更: KOMAZAWA PARK CAFE（dog_policy_condition）
+- ✏️ 変更: La VASARA CAFE&GRILL（is_closed, links, sources）
+- ✏️ 変更: Le Maghreb（ル・マグレブ）（dog_note）
+- ✏️ 変更: MAISON KAYSER 五反田店（dog_note）
+- ✏️ 変更: MILLS COFFEE(ミルズコーヒー)（dog_note）
+- ✏️ 変更: NEWシクロCafe 蒼きパパイヤの香り（dog_note）
+- ✏️ 変更: Osteria Capanna(オステリアカパンナ)（dog_note）
+- ✏️ 変更: Pcm's Cafe（dog_note）
+- ✏️ 変更: Pizzeria CERVO（dog_note）
+- ✏️ 変更: Plus veganique(プラスヴィーガニック自由が丘)（dog_note）
+- ✏️ 変更: ROJU NAKAMEGURO（dog_note）
+- ✏️ 変更: SYUNA & BANI（シュナ＆バニ）（dog_note）
+- ✏️ 変更: Snow Peak Cafe 南町田グランベリーパーク（name, dog_note, sources）
+- ✏️ 変更: THE LINKING（dog_note）
+- ✏️ 変更: Trattoria Pizzeria LOGIC お台場（dog_note）
+- ✏️ 変更: VERVE COFFEE ROASTERS 六本木店（dog_note, description）
+- ✏️ 変更: anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）（dog_note）
+- ✏️ 変更: as is to be{ART and CAFE}（dog_note）
+- ✏️ 変更: bills 二子玉川（dog_note）
+- ✏️ 変更: cafe Crumpets（dog_note）
+- ✏️ 変更: match box（マッチ ボックス）（dog_note）
+- ✏️ 変更: sibafu（dog_amenities, dog_size_limit, description）
+- ✏️ 変更: あばら大根 西葛西店（dog_note）
+- ✏️ 変更: いづも 池袋店（dog_size_limit）
+- ✏️ 変更: おにりき with awake（dog_note）
+- ✏️ 変更: さみしがりや酒房ささ（dog_note）
+- ✏️ 変更: ひぐらしベーカリー（dog_note）
+- ✏️ 変更: ひーじゃー（dog_note）
+- ✏️ 変更: やきとり家すみれ 西葛西店（dog_note）
+- ✏️ 変更: やまびこ茶屋（dog_note）
+- ✏️ 変更: イタリアンダイニング Satoru 秋津店（dog_note）
+- ✏️ 変更: エメ(Eme)（dog_note）
+- ✏️ 変更: カフェ エナジャイズ（dog_note）
+- ✏️ 変更: サッカバッカ(SaccaBacca)（dog_size_limit）
+- ✏️ 変更: シェアーズ（dog_note）
+- ✏️ 変更: ジェラテリア エルバ（dog_note）
+- ✏️ 変更: ジェラート ピケ カフェ クレープリー ルミネ池袋（dog_size_limit）
+- ✏️ 変更: スターバックスコーヒー上野恩賜公園店（dog_note）
+- ✏️ 変更: チキンカントリー（dog_note）
+- ✏️ 変更: ドッグラン&カフェバー ノンノバドール（dog_size_limit）
+- ✏️ 変更: バンコク食堂 ポーモンコン（dog_note）
+- ✏️ 変更: パークス光が丘（dog_policy_condition, dog_note）
+- ✏️ 変更: ピザとハイボール UN COEUR(アンクール) 東中野店（dog_note）
+- ✏️ 変更: ピッツェリア チーロ 東中野店（dog_note）
+- ✏️ 変更: マイケルロック168（dog_note）
+- ✏️ 変更: マキネスティコーヒー 緑本店（dog_note）
+- ✏️ 変更: ヨネイチ（YONEICHI）（dog_note）
+- ✏️ 変更: 上島珈琲店 護国寺店（dog_note）
+- ✏️ 変更: 串カツ田中 東五反田店（dog_note）
+- ✏️ 変更: 串カツ田中 西葛西店（dog_note）
+- ✏️ 変更: 仙六屋（dog_note）
+- ✏️ 変更: 八十八夜 吉祥寺店（dog_note）
+- ✏️ 変更: 和牛EN yasaka.arakawa（dog_note）
+- ✏️ 変更: 森のCafe アイビー（dog_note）
+- ✏️ 変更: 焼き鳥もつ鍋だるま 久米川店（dog_note）
+- ✏️ 変更: 自由が丘 カスタネット（dog_note）
+- ✏️ 変更: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ（dog_note）
+- ✏️ 変更: 迎賓楼（dog_amenities, dog_size_limit, description）
+- ✏️ 変更: 高尾山FuMotoYA（dog_note）
