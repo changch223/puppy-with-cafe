@@ -967,3 +967,335 @@
 - ✏️ 変更: 大衆イタリアン酒場 煙-kemuri-（dog_amenities, dog_policy_condition, representative_source_id, last_verified, sources）
 - ✏️ 変更: 焼肉 炙りな 北千住店（dog_amenities, representative_source_id, last_verified, sources）
 - ✏️ 変更: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ（dog_amenities, dog_policy_condition, dog_size_limit, representative_source_id, last_verified, sources）
+
+## 2026-10-07 18:07 — 追加 0 / 変更 330 / 削除 0
+- ✏️ 変更: & OIMO TOKYO CAFE 中目黒店（hours）
+- ✏️ 変更: 5感 小皿イタリアン&ワイン 赤羽店（hours）
+- ✏️ 変更: AFFIDAMENTO BAGEL（hours）
+- ✏️ 変更: AINA CAFE(アイナカフェ)（hours）
+- ✏️ 変更: AJIANA 烏山店（hours）
+- ✏️ 変更: ANDog（アンドッグ）（hours）
+- ✏️ 変更: ANEA CAFE Toyosu（hours）
+- ✏️ 変更: ARBOL（アルボール神楽坂）（hours）
+- ✏️ 変更: Aloha Table 大崎店（hours）
+- ✏️ 変更: Aoi Coffee Stand（hours）
+- ✏️ 変更: Areverie TERRACE Ebisu(アレヴェリー テラス エビス)（hours）
+- ✏️ 変更: BARCA(バルカ)（hours）
+- ✏️ 変更: BLACK TERRACE（hours）
+- ✏️ 変更: BON Cafe（ボンカフェ）（hours）
+- ✏️ 変更: BONDI CAFE Nakameguro（hours）
+- ✏️ 変更: BONTA ITALIA(ボンタイタリア)（hours）
+- ✏️ 変更: BURG HOLIC(バーグホリック)（hours）
+- ✏️ 変更: Bleue Blanche（ブルーブランシュ）（hours）
+- ✏️ 変更: Bowery Kitchen（hours）
+- ✏️ 変更: CAFE TANTON（カフェタントン）（hours）
+- ✏️ 変更: CAFE TORA(カフェトラ)（hours）
+- ✏️ 変更: CAFE花と海（hours）
+- ✏️ 変更: CANTERA（カンテラ）立川店（hours）
+- ✏️ 変更: CHICHICAFE（hours）
+- ✏️ 変更: CHUM APARTMENT（hours）
+- ✏️ 変更: CIRCULO(シルクロ)（hours）
+- ✏️ 変更: CLANN BY THE RIVER（旧PITMANS）（hours）
+- ✏️ 変更: CORNO BiANCO(コルノビアンコ)（hours）
+- ✏️ 変更: COZY STYLE COFFEE（hours）
+- ✏️ 変更: Cafe Lisette 二子玉川店（hours）
+- ✏️ 変更: Cafe Madu 青山店（hours）
+- ✏️ 変更: Cafe Restaurant AUREOLE(カフェレストラン オリオール)（hours）
+- ✏️ 変更: Cafe Restaurant+Dog Grandir(グランディール)（hours）
+- ✏️ 変更: Cafe Rose&M（カフェ ローズアンドエム）（hours）
+- ✏️ 変更: Cafe Sadiiq（カフェ サディーク）（hours）
+- ✏️ 変更: Cafe and Dining Paco（hours）
+- ✏️ 変更: Cafe&Bistro Shelty（hours）
+- ✏️ 変更: Cafe&Diner KHB（hours）
+- ✏️ 変更: Connect Kitchen（hours）
+- ✏️ 変更: Copan（hours）
+- ✏️ 変更: Cyan coffee（hours）
+- ✏️ 変更: DELIGHT(ディライト)（hours）
+- ✏️ 変更: DOG DEPT + CAFE 浅草隅田川テラス店（hours）
+- ✏️ 変更: DOG DEPT+CAFE お台場東京ビーチ店（hours）
+- ✏️ 変更: Deco's Dog Cafe 田園茶房（hours）
+- ✏️ 変更: Dining Bar Sir Lie underground（サライアンダーグラウンド）（hours）
+- ✏️ 変更: Dining kitchen VENT MARCHE 大森店（hours）
+- ✏️ 変更: Dog Arts and Cafe インディハウス（hours）
+- ✏️ 変更: Dog Cafe & Bar Deco et Deco(デコデコ)（hours）
+- ✏️ 変更: Dog Cafe Aloha ilio(アロハイーリオ)（hours）
+- ✏️ 変更: Dog Cafe Uru(ドッグカフェ ウル)（hours）
+- ✏️ 変更: Dog Café Bee（hours）
+- ✏️ 変更: Dog Salon & Cafe Karin堂（hours）
+- ✏️ 変更: EARTH CAFE 五反田店（アースカフェ）（hours）
+- ✏️ 変更: EMPORIO cafe&dining（hours）
+- ✏️ 変更: ENRICH（hours）
+- ✏️ 変更: EVERYONEs CAFE（hours）
+- ✏️ 変更: Eggs 'n Things お台場店（hours）
+- ✏️ 変更: Egoland Cafe Akihabara（hours）
+- ✏️ 変更: Embassy Cafe & Dining（hours）
+- ✏️ 変更: F*GICCO by F.gohan(エフジッコ バイ エフゴハン)（hours）
+- ✏️ 変更: FITZROY（hours）
+- ✏️ 変更: FRIEND MONSTER(フレンドモンスター)（hours）
+- ✏️ 変更: FUGLEN ASAKUSA（hours）
+- ✏️ 変更: FUNGO 三宿本店（hours）
+- ✏️ 変更: Faifo（hours）
+- ✏️ 変更: Farm to table De Salita(ファーム トゥー テーブル デ サリータ)（hours）
+- ✏️ 変更: Farmacy-Deli&BAR 日本橋1ppon（hours）
+- ✏️ 変更: GENTLE Dining（hours）
+- ✏️ 変更: GOOD CHEESE GOOD BAKE（hours）
+- ✏️ 変更: GOOD MORNING CAFE 中野セントラルパーク（hours）
+- ✏️ 変更: GRAPHY NEZU CAFE&LOUNGE（hours）
+- ✏️ 変更: GREEN BROTHERS 麻布十番店（hours）
+- ✏️ 変更: Green Witch Tea House（hours）
+- ✏️ 変更: HANAKADO(ハナカド)（hours）
+- ✏️ 変更: HIGHBURY -THE HOME OF BEER-(ハイバリー)（hours）
+- ✏️ 変更: IL BACARO ALMA（イル バーカロ アルマ）（hours）
+- ✏️ 変更: JADE'R TOKYO(ジャデルトウキョウ)（hours）
+- ✏️ 変更: JIYUGAOKA BURGER(自由が丘バーガー)（hours）
+- ✏️ 変更: JUICE BAR ROCKET(ジュースバーロケット)（hours）
+- ✏️ 変更: Jugar cafe(フガールカフェ)（hours）
+- ✏️ 変更: KITCHEN BAR 新目黒茶屋（hours）
+- ✏️ 変更: KOMAZAWA PARK CAFE（hours）
+- ✏️ 変更: KUMA CANTINA（hours）
+- ✏️ 変更: KZ House(ケージーハウス)（hours）
+- ✏️ 変更: L.A.GARAGE3（hours）
+- ✏️ 変更: LUSH COFFEE ROASTER&LABORATORY（hours）
+- ✏️ 変更: La Prosciutteria（ラ・プロシュッテリア）（hours）
+- ✏️ 変更: La VASARA CAFE&GRILL（hours）
+- ✏️ 変更: Le Coquillage（ル コキヤージュ）（hours）
+- ✏️ 変更: Le quattro stagioni（hours）
+- ✏️ 変更: Les deux Bleue ららぽーと豊洲店（hours）
+- ✏️ 変更: Luccollina（ルッコリーナ）（hours）
+- ✏️ 変更: MAISON KAYSER 五反田店（hours）
+- ✏️ 変更: MEAT×WINE BISTRO DOMANNAKA（hours）
+- ✏️ 変更: MERRY and BRIGHT（hours）
+- ✏️ 変更: MID TREE 代官山（hours）
+- ✏️ 変更: MIO（hours）
+- ✏️ 変更: MOCMO sandwiches（hours）
+- ✏️ 変更: MOTHERS ORIENTAL（hours）
+- ✏️ 変更: MR.HIPPO COFFEE 市ヶ谷店（hours）
+- ✏️ 変更: Maison Landemaine 麻布台（hours）
+- ✏️ 変更: MozekSol(モゼクソール)（hours）
+- ✏️ 変更: Mt.TAKAO BASE CAMP CAFE&BAR（hours）
+- ✏️ 変更: NICO BAGEL（hours）
+- ✏️ 変更: NISHIann cafe(西庵カフェ)（hours）
+- ✏️ 変更: Nagi（hours）
+- ✏️ 変更: Nim's Pizza（hours）
+- ✏️ 変更: OVERWHELM HAMBURGER & BAR STAND（hours）
+- ✏️ 変更: Onigily Cafe(オニギリーカフェ)（hours）
+- ✏️ 変更: Osteria Capanna(オステリアカパンナ)（hours）
+- ✏️ 変更: Osteria IL VIAGGIO（hours）
+- ✏️ 変更: P.C.M. パブ・カーディナル・マルノウチ（hours）
+- ✏️ 変更: PACE ITALIAN LOUNGE（hours）
+- ✏️ 変更: PASTA＆PIZZA WINE BAR YOLO（hours）
+- ✏️ 変更: PENNY LANE ソラマチ店（hours）
+- ✏️ 変更: PERFECT BEER KITCHEN 四ツ谷（hours）
+- ✏️ 変更: PIZZA SALVATORE CUOMO 四谷（hours）
+- ✏️ 変更: PIZZERIA PICCHI（ピッツェリア ピッキ）（hours）
+- ✏️ 変更: PIZZERIA&BAR PAGLIACCIO（hours）
+- ✏️ 変更: Paston（パストン）（hours）
+- ✏️ 変更: PinoLand（ピノランド）（hours）
+- ✏️ 変更: Pizzeria & Trattoria アダッキオ(AD'ACCHIO)（hours）
+- ✏️ 変更: Pizzeria&Trattoria GONZO 吉祥寺店（hours）
+- ✏️ 変更: RAMONEBURGER（ラモーンバーガー）（hours）
+- ✏️ 変更: RESTAURANT 1899 OCHANOMIZU（hours）
+- ✏️ 変更: RITUEL 等々力店(リチュエル)（hours）
+- ✏️ 変更: Ralph's Coffee Omotesando（hours）
+- ✏️ 変更: Restaurant Bar BORNE（hours）
+- ✏️ 変更: Restaurant Perfumes（レストランパフューム）（hours）
+- ✏️ 変更: SHAPLA-INDIA（hours）
+- ✏️ 変更: SHARK COFFEE（hours）
+- ✏️ 変更: SUNNY's cafe＆surf（サニーズカフェ）（hours）
+- ✏️ 変更: SYUNA & BANI（シュナ＆バニ）（hours）
+- ✏️ 変更: SeTaBi Cafe(セタビカフェ)（hours）
+- ✏️ 変更: Sestina（セスティーナ）（hours）
+- ✏️ 変更: Set Lip 成城店(セットリップ)（hours）
+- ✏️ 変更: SmB CAFE（hours）
+- ✏️ 変更: S・E・C GREEN SPRINGS（hours）
+- ✏️ 変更: TAIZUSHI(寿司・創作料理)（hours）
+- ✏️ 変更: TAMAGAWA DINER(多摩川ダイナー)（hours）
+- ✏️ 変更: THE BARBA TOKYO MEAT MEET（hours）
+- ✏️ 変更: THE LINKING（hours）
+- ✏️ 変更: THE OPEN BAKERY（hours）
+- ✏️ 変更: TOKYO KAKI STAND 東京ドームシティ店（hours）
+- ✏️ 変更: TRATTORIA ARIETTA（トラットリア アリエッタ）（hours）
+- ✏️ 変更: TRATTORIA Mocco（hours）
+- ✏️ 変更: Takuru(タクる)（hours）
+- ✏️ 変更: Tavernetta Salvatore 仙川（hours）
+- ✏️ 変更: Tokyo Kenkyo（hours）
+- ✏️ 変更: Trattoria Pizzeria LOGIC お台場（hours）
+- ✏️ 変更: Trattoria Santa Teresa（hours）
+- ✏️ 変更: Tweedles（hours）
+- ✏️ 変更: VERVE COFFEE ROASTERS 六本木店（hours）
+- ✏️ 変更: WHAT CAFE（hours）
+- ✏️ 変更: Waffle cafe ORANGE(ワッフルカフェ・オランジ)（hours）
+- ✏️ 変更: Wine & Mexican Cosi Cosi（hours）
+- ✏️ 変更: YELLOW KOMAZAWA KOEN（hours）
+- ✏️ 変更: a-bridge 三軒茶屋店（hours）
+- ✏️ 変更: anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）（hours）
+- ✏️ 変更: anea cafe 中野新橋店（hours）
+- ✏️ 変更: as is to be{ART and CAFE}（hours）
+- ✏️ 変更: bills お台場（hours）
+- ✏️ 変更: cafe Crumpets（hours）
+- ✏️ 変更: cafe arica（hours）
+- ✏️ 変更: cafe de Fleurus 27（hours）
+- ✏️ 変更: cafe garage Dogberry(ドッグベリー)下北沢（hours）
+- ✏️ 変更: cure(キュア) 千歳船橋店（hours）
+- ✏️ 変更: essence dining（hours）
+- ✏️ 変更: filament self cafe(カフェ filament)（hours）
+- ✏️ 変更: god dog（hours）
+- ✏️ 変更: good fellas（hours）
+- ✏️ 変更: haluuu(ハルー)（hours）
+- ✏️ 変更: i2 cafe（hours）
+- ✏️ 変更: marble（hours）
+- ✏️ 変更: marble（hours）
+- ✏️ 変更: match box（マッチ ボックス）（hours）
+- ✏️ 変更: mum coffee（hours）
+- ✏️ 変更: pepacafe FOREST（ペパカフェ・フォレスト）（hours）
+- ✏️ 変更: rice cafe（hours）
+- ✏️ 変更: sibafu（hours）
+- ✏️ 変更: tag cafe(タグカフェ)（hours）
+- ✏️ 変更: tonkatsu.jp表参道（hours）
+- ✏️ 変更: uyamuya（hours）
+- ✏️ 変更: あばら大根 西葛西店（hours）
+- ✏️ 変更: いづも 池袋店（hours）
+- ✏️ 変更: いろりの里 高尾山名主 ごん助（hours）
+- ✏️ 変更: おにりき with awake（hours）
+- ✏️ 変更: かざみどり南池袋（hours）
+- ✏️ 変更: けむっ亭（hours）
+- ✏️ 変更: ごちそうや ぽっ蔵（hours）
+- ✏️ 変更: さくらガーデン ドッグカフェ&ダイニングバー（hours）
+- ✏️ 変更: さみしがりや酒房ささ（hours）
+- ✏️ 変更: ひぐらしベーカリー（hours）
+- ✏️ 変更: ひーじゃー（hours）
+- ✏️ 変更: ふるはまレストラン（hours）
+- ✏️ 変更: まるごとVeganダイニング浅草（hours）
+- ✏️ 変更: みんなdeイタリアン Cuore(クォーレ)（hours）
+- ✏️ 変更: めいちゃん家（hours）
+- ✏️ 変更: やきとり家 すみれ 綾瀬店（hours）
+- ✏️ 変更: やきとり家すみれ 西葛西店（hours）
+- ✏️ 変更: やきとり荒木山 四谷店（hours）
+- ✏️ 変更: ゆんたく酒場 増富商店（hours）
+- ✏️ 変更: わん!リトルガーデン（hours）
+- ✏️ 変更: わんこのしっぽ（hours）
+- ✏️ 変更: イエ ヘアーボタニカルコーヒー（hours）
+- ✏️ 変更: イタリアンレストラン Vivo 足立（hours）
+- ✏️ 変更: イル ピッツァイオーロ(il Pizzaiolo)（hours）
+- ✏️ 変更: ウニ専門レストラン unico-co(ウニココ)（hours）
+- ✏️ 変更: ウラニワ 仙川店（hours）
+- ✏️ 変更: エメ(Eme)（hours）
+- ✏️ 変更: オルオルアイナ(Oluolu Aina)（hours）
+- ✏️ 変更: オーバカナル 高輪店（hours）
+- ✏️ 変更: カキノキテラス（hours）
+- ✏️ 変更: カクウチカフェ Okayoshi(岡芳商店)（hours）
+- ✏️ 変更: カフェ エナジャイズ（hours）
+- ✏️ 変更: カフェ テラス ヴェルト（Cafe Terrasse Verte）（hours）
+- ✏️ 変更: カフェダイニングバー セントバーナード（hours）
+- ✏️ 変更: カフェ・ドゥ・リエーヴル うさぎ館（hours）
+- ✏️ 変更: カフェ・ミケランジェロ（hours）
+- ✏️ 変更: カフェ海猫山猫（hours）
+- ✏️ 変更: カラオケ処Bar めめ（hours）
+- ✏️ 変更: カーサ ディ カミーノ（hours）
+- ✏️ 変更: クリスプ・サラダワークス駒沢公園店（hours）
+- ✏️ 変更: グリル&ダイニング用賀倶楽部（hours）
+- ✏️ 変更: コーヒーロースト ビバーチェ（hours）
+- ✏️ 変更: サクラカフェ&レストラン池袋（hours）
+- ✏️ 変更: サッカバッカ(SaccaBacca)（hours）
+- ✏️ 変更: ザ スロップショップ（hours）
+- ✏️ 変更: シアン ア ラ モード(Chien a la mode)（hours）
+- ✏️ 変更: シェアーズ（hours）
+- ✏️ 変更: シャテール（chatiere）（hours）
+- ✏️ 変更: ジェラテリア エルバ（hours）
+- ✏️ 変更: ジェラート ピケ カフェ クレープリー ルミネ池袋（hours）
+- ✏️ 変更: ジャンピングパンダ(丸の内テラス)（hours）
+- ✏️ 変更: ジンギスカン福ひつじ 永福町店（hours）
+- ✏️ 変更: スターバックス コーヒー 国立店（hours）
+- ✏️ 変更: ステーキハウス ニューテキサス（hours）
+- ✏️ 変更: スパイスカレーリコード 本店（hours）
+- ✏️ 変更: スパイスバル317(サンイチナナ)（hours）
+- ✏️ 変更: デルコス八王子本店（hours）
+- ✏️ 変更: デ・ラ・ナチュール(DE LA NATURE)（hours）
+- ✏️ 変更: トラットリア トラム ロカーレ（hours）
+- ✏️ 変更: ドッグカフェ&BAR Petit Leon（hours）
+- ✏️ 変更: ハーベステラス 昭島アウトドアヴィレッジ店（hours）
+- ✏️ 変更: バンコク食堂 ポーモンコン（hours）
+- ✏️ 変更: バーガーマニア 広尾店（hours）
+- ✏️ 変更: バーガーマニア 恵比寿店（hours）
+- ✏️ 変更: パステリカ（Pastelika）（hours）
+- ✏️ 変更: ピザとハイボール UN COEUR(アンクール) 東中野店（hours）
+- ✏️ 変更: ピッツェリア ダ ボッカ（hours）
+- ✏️ 変更: ピッツェリア チーロ 東中野店（hours）
+- ✏️ 変更: フォーヴァビアホイ（hours）
+- ✏️ 変更: ブッチャーズテーブル 石神井公園店（hours）
+- ✏️ 変更: ブラッスリー セント・ベルナルデュス 神田(St.Bernardus)（hours）
+- ✏️ 変更: ブルーボトルコーヒー 代官山カフェ（hours）
+- ✏️ 変更: ブレッド マチエール（hours）
+- ✏️ 変更: プティ パルク（hours）
+- ✏️ 変更: プラスアルファキッチン（ラムと豪州ジビエバル）（hours）
+- ✏️ 変更: プリティシングス（hours）
+- ✏️ 変更: ボンマルシェ ボンテ 竹の塚店（hours）
+- ✏️ 変更: マイクロカフェ 調布深大寺店（hours）
+- ✏️ 変更: マイケルロック168（hours）
+- ✏️ 変更: マキネスティコーヒー 緑本店（hours）
+- ✏️ 変更: マホラ食堂（hours）
+- ✏️ 変更: マリノステリア 葛西店（hours）
+- ✏️ 変更: マルゴ四谷(MARUGO YOTSUYA)（hours）
+- ✏️ 変更: ミンナノミ(鮮魚×もつ鍋 居酒屋)（hours）
+- ✏️ 変更: メゾン・ド・ラ・ブルゴーニュ（Maison de la Bourgogne）（hours）
+- ✏️ 変更: ヨガカフェ（hours）
+- ✏️ 変更: ランゾウ（hours）
+- ✏️ 変更: リズ（hours）
+- ✏️ 変更: リバゴーシュ（hours）
+- ✏️ 変更: レストラン・ヴェール（hours）
+- ✏️ 変更: ワインとアテ bikini（hours）
+- ✏️ 変更: ワン茶房（hours）
+- ✏️ 変更: 上島珈琲店 護国寺店（hours）
+- ✏️ 変更: 中国料理 菜香園（hours）
+- ✏️ 変更: 串カツ田中 つつじヶ丘店（hours）
+- ✏️ 変更: 串カツ田中 千歳烏山店（hours）
+- ✏️ 変更: 串カツ田中 新小岩店（hours）
+- ✏️ 変更: 串カツ田中 秋津店（hours）
+- ✏️ 変更: 串カツ田中 経堂店（hours）
+- ✏️ 変更: 串カツ田中 西葛西店（hours）
+- ✏️ 変更: 串焼き 大地 綾瀬店（hours）
+- ✏️ 変更: 仙六屋（hours）
+- ✏️ 変更: 仙川食堂ジョージ（hours）
+- ✏️ 変更: 千串屋 東中野店（hours）
+- ✏️ 変更: 史跡の駅 おたカフェ（hours）
+- ✏️ 変更: 和風ジェラート おかじ Tokyo（hours）
+- ✏️ 変更: 土鍋炊きご飯 おこめとおかず（hours）
+- ✏️ 変更: 場外焼肉 榮登庵 多摩センター店（hours）
+- ✏️ 変更: 大衆イタリアン酒場 煙-kemuri-（hours）
+- ✏️ 変更: 天現寺カフェ（hours）
+- ✏️ 変更: 島ごはん 西葛西（hours）
+- ✏️ 変更: 文流 国立店（hours）
+- ✏️ 変更: 氷屋ぴぃす（hours）
+- ✏️ 変更: 江戸前 松栄寿司（hours）
+- ✏️ 変更: 洋食屋クリスマス亭（hours）
+- ✏️ 変更: 洪記餃子（hours）
+- ✏️ 変更: 淡路島バーガー 国立谷保店（hours）
+- ✏️ 変更: 深大寺水神苑（hours）
+- ✏️ 変更: 焼き鳥もつ鍋だるま 久米川店（hours）
+- ✏️ 変更: 焼肉 ぼんぼり（hours）
+- ✏️ 変更: 焼肉 炙りな 北千住店（hours）
+- ✏️ 変更: 焼肉本家Ponga（hours）
+- ✏️ 変更: 熊祥(くまよし)（hours）
+- ✏️ 変更: 田園調布倶楽部（hours）
+- ✏️ 変更: 石濱茶寮 楽（hours）
+- ✏️ 変更: 祖師谷バル haracucci(ハラクッチ)（hours）
+- ✏️ 変更: 神楽坂 ラクレット&フォンデュ フロマティック（Fromatique）（hours）
+- ✏️ 変更: 神楽坂ワインスタンド et du vin（エデュヴァン）（hours）
+- ✏️ 変更: 窯焼きバルカフェ らんぷ+k（hours）
+- ✏️ 変更: 織部 下北沢店(オリベ)（hours）
+- ✏️ 変更: 美容室・喫茶 どっくwどっぐ（hours）
+- ✏️ 変更: 肉と牡蠣CARTA 池袋店（hours）
+- ✏️ 変更: 肉ビストロ&クラフトビール ランプラント(l'Empreinte)（hours）
+- ✏️ 変更: 葛西ホルモン市場（hours）
+- ✏️ 変更: 蒲田カフェ（hours）
+- ✏️ 変更: 蕎麦と杜々（hours）
+- ✏️ 変更: 薬膳&米粉カフェ やまのひつじ（hours）
+- ✏️ 変更: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ（hours）
+- ✏️ 変更: 酒呑中華コテツ（hours）
+- ✏️ 変更: 銀蕎麦 國定 勝どき店（hours）
+- ✏️ 変更: 駒沢食堂george（hours）
+- ✏️ 変更: 高尾山FuMotoYA（hours）
+- ✏️ 変更: 高輪バール・デルソーレ（hours）
+- ✏️ 変更: 魚がし どまん中 神楽坂店（hours）
+- ✏️ 変更: 麦酒堂 KASUGAI（hours）
+- ✏️ 変更: 麺酒場 さかのうえ（hours）
