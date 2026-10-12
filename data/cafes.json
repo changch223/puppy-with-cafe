@@ -349,11 +349,72 @@
       "dog_policy_condition": "テラスのみOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "日曜・祝日定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [],
+        "thu": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜14:00 / 17:00〜22:00（火〜金は23:00まで）、土 17:00〜22:00（土曜の営業日は要確認）",
       "id": "beef0000-0000-4000-8000-000000000869",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.65711,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131401/13259307/"
+        }
+      ],
       "longitude": 139.75581,
       "name": "8dori 大門店",
       "place_id": null,
@@ -1128,6 +1189,46 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
+      "holiday_note": "年中無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "11:00〜19:00（フードL.O.18:00）（18:00閉店の日がある場合あり）",
       "id": "beef0000-0000-4000-8000-000000000263",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -1214,6 +1315,51 @@
       "dog_policy_condition": "テラス席のみ同伴可・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "hours": {
+        "fri": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:00",
+            "open": "10:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "カフェ・バー 月〜金 11:00〜23:00（L.O.22:00）、土 10:00〜23:00（L.O.22:00）、日・祝 10:00〜22:00（L.O.21:00）／ブーランジェリー 9:00〜20:00",
       "id": "beef0000-0000-4000-8000-000000000240",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -1665,6 +1811,52 @@
       "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年中無休（メンテナンス等で臨時休業あり）",
+      "hours": {
+        "fri": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ]
+      },
+      "hours_text": "毎日 11:30〜23:00（ランチ11:30〜／カフェ14:00〜／バー17:00〜）",
       "id": "beef0000-0000-4000-8000-000000000866",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -1918,6 +2110,52 @@
       "dog_policy_condition": "テラスのみOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜22:00、土 11:00〜22:00、日祝 11:00〜21:00",
       "id": "beef0000-0000-4000-8000-000000000868",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -2924,11 +3162,19 @@
       "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "月曜定休（祝日も休み）",
+      "hours_text": "火〜金 8:00〜10:30 / 11:30〜15:00 / 17:30〜23:00、土日祝 8:30〜11:00 / 12:00〜15:30 / 17:30〜23:00（予約状況により変更の場合あり）",
       "id": "beef0000-0000-4000-8000-000000000865",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.64456,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131402/13108513/"
+        }
+      ],
       "longitude": 139.75217,
       "name": "Bistrot a la Demande",
       "place_id": null,
@@ -3570,6 +3816,42 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "holiday_note": "火・水曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "19:00",
+            "open": "12:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "19:00",
+            "open": "12:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "19:00",
+            "open": "10:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "19:00",
+            "open": "10:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "19:00",
+            "open": "12:00"
+          }
+        ],
+        "tue": [],
+        "wed": []
+      },
+      "hours_text": "月・木・金 12:00〜19:00／土・日・祝 10:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000983",
       "info_verified": "2026-08-07",
       "is_closed": false,
@@ -3698,6 +3980,46 @@
       "dog_policy_condition": "犬種条件「大型犬まで」・デッキ/テラスのみ",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "第1・第3月曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:30",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ]
+      },
+      "hours_text": "月〜土 11:30〜22:00 / 日・祝 11:30〜21:30",
       "id": "beef0000-0000-4000-8000-000000000901",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -4358,6 +4680,42 @@
       "dog_policy_condition": "「店内：不可／テラス：大型犬・中型犬・小型犬いずれも同伴可」と明記",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "土日祝休（不定休あり）",
+      "hours": {
+        "fri": [
+          {
+            "close": "19:30",
+            "open": "08:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "19:30",
+            "open": "08:30"
+          }
+        ],
+        "sat": [],
+        "sun": [],
+        "thu": [
+          {
+            "close": "19:30",
+            "open": "08:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "19:30",
+            "open": "08:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "19:30",
+            "open": "08:30"
+          }
+        ]
+      },
+      "hours_text": "平日 8:30〜19:30",
       "id": "beef0000-0000-4000-8000-000000000224",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -5926,11 +6284,58 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "holiday_note": "月曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "21:00",
+            "open": "11:30"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "21:00",
+            "open": "10:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "10:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:00",
+            "open": "11:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "18:00",
+            "open": "11:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "18:00",
+            "open": "11:30"
+          }
+        ]
+      },
+      "hours_text": "火・水 11:30〜18:00／木・金 11:30〜21:00／土日祝 10:30〜21:00（L.O.は閉店の30分前）",
       "id": "beef0000-0000-4000-8000-000000000447",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7022,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1319/A131906/13303719/"
+        }
+      ],
       "longitude": 139.6212,
       "name": "Cafe さんぽ道",
       "place_id": null,
@@ -6286,6 +6691,52 @@
       "dog_policy_condition": "テラス席のみ・小型/中型/大型OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "無休（施設休館日に準ずる）",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "22:00",
+            "open": "10:00"
+          }
+        ]
+      },
+      "hours_text": "10:00〜22:00（ランチ11:30〜15:00／ディナー17:30〜22:00、L.O.21:00）",
       "id": "beef0000-0000-4000-8000-000000000988",
       "info_verified": "2026-08-07",
       "is_closed": false,
@@ -6671,6 +7122,58 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "holiday_note": "月・水曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:30",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "14:30",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "19:00",
+            "open": "12:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "14:30",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:30",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": []
+      },
+      "hours_text": "火・木・金・土 12:00〜14:30、17:00〜22:00／日 12:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000001298",
       "info_verified": "2026-08-08",
       "is_closed": false,
@@ -8260,11 +8763,19 @@
       "dog_policy_condition": "大型・中型・小型犬は店内利用可（一部席）",
       "dog_policy_status": "conditional",
       "has_conflict": true,
+      "holiday_note": "年中無休",
+      "hours_text": "11:30〜深夜（閉店時刻は要確認）",
       "id": "beef0000-0000-4000-8000-000000000441",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-08-08",
       "latitude": 35.7078,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1319/A131904/13000730/"
+        }
+      ],
       "longitude": 139.6493,
       "name": "Dogberry(ドッグベリー)",
       "place_id": null,
@@ -8838,11 +9349,63 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "holiday_note": "年中無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "18:00",
+            "open": "06:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "18:00",
+            "open": "06:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "18:00",
+            "open": "06:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "18:00",
+            "open": "06:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "18:00",
+            "open": "06:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "18:00",
+            "open": "06:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "18:00",
+            "open": "06:30"
+          }
+        ]
+      },
+      "hours_text": "6:30〜18:00（フード L.O.17:00／ドリンク L.O.17:30）",
       "id": "beef0000-0000-4000-8000-000000000167",
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-07-17",
       "latitude": 35.6975,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1311/A131103/13268121/"
+        }
+      ],
       "longitude": 139.7885,
       "name": "EZO DELI",
       "place_id": null,
@@ -9367,7 +9930,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000242",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-18",
       "latitude": 35.6835,
       "longitude": 139.7745,
@@ -9392,6 +9955,15 @@
           "reference": "https://withwan.life/listing/5016/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000242",
+          "claimed_status": "unverified",
+          "id": "57ee578f-9c9e-5a9f-8e60-024ca6f3bf77",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1302/A130202/13226469/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -9923,6 +10495,80 @@
       "dog_policy_condition": "公式Instagramで「わんちゃん可能なテラス席」と明記。店内可否の記載なし。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "定休日なし（月1回清掃のため休業あり）",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "11:30〜15:00、17:00〜22:30（L.O.昼14:30・夜22:00）",
       "id": "beef0000-0000-4000-8000-000000000965",
       "info_verified": "2026-08-07",
       "instagram_post_url": "https://www.instagram.com/p/Ca_EPALPdwy/",
@@ -10655,6 +11301,80 @@
       "dog_policy_condition": "テラス席で犬同伴可(店内の記載なし)・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年末年始休業",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ]
+      },
+      "hours_text": "ランチ 11:30〜15:30（L.O.15:00）、ディナー 17:30〜22:00（L.O.21:00）",
       "id": "beef0000-0000-4000-8000-000000000340",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -11673,6 +12393,80 @@
       "dog_policy_condition": "「ペット連れのお客様に関しては、予約時にお問合せ下さい」と明記",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ]
+      },
+      "hours_text": "平日 11:00〜15:00 / 18:00〜23:00、土日祝 12:00〜15:00 / 18:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000891",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -12199,6 +12993,8 @@
       "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours_text": "7:30〜（土日祝は8:00〜）。閉店時刻は日により異なる（目安: 平日〜21:00、土日〜20:00）",
       "id": "beef0000-0000-4000-8000-000000000860",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -12700,7 +13496,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000873",
       "info_verified": "2026-08-06",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-06",
       "latitude": 35.65965,
       "longitude": 139.75151,
@@ -12725,6 +13521,15 @@
           "reference": "https://itsumo.dog/tokyo/st/9930208/cafe/",
           "type": "blog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000873",
+          "claimed_status": "unverified",
+          "id": "10f454bc-32d7-501a-b89e-75cfa2112b7d",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1314/A131401/13045898/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "田町・三田・浜松町"
@@ -13305,11 +14110,82 @@
       "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "日曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "14:00",
+            "open": "12:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "sun": [],
+        "thu": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜14:00 / 17:30〜23:00、土 12:00〜14:00 / 17:30〜23:00",
       "id": "beef0000-0000-4000-8000-000000000862",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.64751,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131402/13287350/"
+        }
+      ],
       "longitude": 139.7459,
       "name": "LODA 三田店",
       "place_id": null,
@@ -14027,11 +14903,63 @@
       "dog_policy_condition": "ウッドテラス席で同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年中無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "21:00",
+            "open": "07:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:00",
+            "open": "07:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "21:00",
+            "open": "07:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "07:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:00",
+            "open": "07:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:00",
+            "open": "07:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:00",
+            "open": "07:30"
+          }
+        ]
+      },
+      "hours_text": "毎日 7:30〜21:00（L.O.20:00）",
       "id": "beef0000-0000-4000-8000-000000000872",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.65889,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131401/13120999/"
+        }
+      ],
       "longitude": 139.7488,
       "name": "Le Pain Quotidien 芝公園店",
       "place_id": null,
@@ -14298,6 +15226,80 @@
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型〜中型犬のみ可（ランチタイムのテラス席限定）",
       "has_conflict": false,
+      "holiday_note": "無休（土日祝は貸切の場合あり）",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:30"
+          }
+        ]
+      },
+      "hours_text": "ランチ 月〜金 11:30〜14:30／土日祝 11:30〜15:30、ディナー 月・火・土・日 17:30〜22:00／水〜金 17:30〜22:30",
       "id": "beef0000-0000-4000-8000-000000000226",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -14307,6 +15309,10 @@
         {
           "type": "website",
           "url": "https://www.los-angeles-balcony.com/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131403/13179814/"
         }
       ],
       "longitude": 139.7415,
@@ -15500,11 +16506,58 @@
       "dog_policy_condition": "テラスのみOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "月曜定休・年末年始休",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ]
+      },
+      "hours_text": "火〜日 11:30〜22:00",
       "id": "beef0000-0000-4000-8000-000000000867",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.64591,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131402/13257501/"
+        }
+      ],
       "longitude": 139.75545,
       "name": "Mi Tiempo",
       "place_id": null,
@@ -15543,11 +16596,91 @@
       "dog_policy_condition": "犬連れランチスポット一覧で「テラス席のみOK」と明記（住所確認済み）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "月2回程度の不定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "21:30",
+            "open": "17:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "21:30",
+            "open": "17:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜14:30／17:30〜22:00、土日祝 11:30〜14:30／17:00〜21:30",
       "id": "beef0000-0000-4000-8000-000000000225",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.625,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131403/13118520/"
+        }
+      ],
       "longitude": 139.742,
       "name": "Mon-TERCERO（テルセーロ）",
       "place_id": null,
@@ -15921,11 +17054,63 @@
       "dog_policy_condition": "施設公式ページに「緑に囲まれた開放的なテラス席は、ペット同伴も可能です」と明記（2F NATURE&MEAT GROVE PARK VIEW）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "ビル施設の休業日に準ずる",
+      "hours": {
+        "fri": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:00",
+            "open": "08:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ]
+      },
+      "hours_text": "月〜土 8:30〜23:00／日 8:30〜22:00",
       "id": "beef0000-0000-4000-8000-000000000227",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6055,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1315/A131501/13317935/"
+        }
+      ],
       "longitude": 139.7315,
       "name": "NATURE&MEAT GROVE PARK VIEW",
       "place_id": null,
@@ -17831,11 +19016,74 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": true,
+      "holiday_note": "月曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:30",
+            "open": "11:00"
+          },
+          {
+            "close": "21:30",
+            "open": "17:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "20:30",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:30",
+            "open": "11:00"
+          },
+          {
+            "close": "21:30",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:30",
+            "open": "11:00"
+          },
+          {
+            "close": "21:30",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:30",
+            "open": "11:00"
+          },
+          {
+            "close": "21:30",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "火〜金 11:00〜15:30・17:00〜21:30、土 11:00〜21:30、日・祝 11:00〜20:30",
       "id": "beef0000-0000-4000-8000-000000000163",
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.704,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1311/A131103/13261635/"
+        }
+      ],
       "longitude": 139.79,
       "name": "Paradise Poke蔵前",
       "phone": "050-5571-0519",
@@ -17894,6 +19142,52 @@
       "dog_policy_condition": "テラス席のみ・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年中無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "20:00",
+            "open": "09:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "20:00",
+            "open": "09:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "20:00",
+            "open": "09:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "20:00",
+            "open": "09:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "20:00",
+            "open": "09:00"
+          }
+        ]
+      },
+      "hours_text": "平日 9:00〜20:00、土日祝 8:00〜20:00（モーニングL.O.10:45／カフェL.O.19:30）",
       "id": "beef0000-0000-4000-8000-000000000622",
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/CtRGRmppbjx/",
@@ -17902,8 +19196,16 @@
       "latitude": 35.6385,
       "links": [
         {
+          "type": "website",
+          "url": "https://basel.co.jp/"
+        },
+        {
           "type": "instagram",
           "url": "https://www.instagram.com/basel_depuis1967/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1329/A132904/13100288/"
         }
       ],
       "longitude": 139.3225,
@@ -18725,7 +20027,7 @@
       "has_conflict": true,
       "id": "beef0000-0000-4000-8000-000000000440",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-08",
       "latitude": 35.7091,
       "longitude": 139.6489,
@@ -18759,6 +20061,24 @@
           "reference": "https://wanico.jp/spots/d/6276",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000440",
+          "claimed_status": "unverified",
+          "id": "503cc0ab-7b52-5f7c-9d21-e38c6f2d06da",
+          "provenance": "aggregated",
+          "reference": "https://prtimes.jp/main/html/rd/p/000000003.000132718.html",
+          "type": "other",
+          "verified_at": "2026-10-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000440",
+          "claimed_status": "unverified",
+          "id": "6f93e692-666c-54df-a9c2-99e8b74e4794",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1319/A131904/13261159/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "高円寺・荻窪"
@@ -20147,6 +21467,52 @@
       "dog_policy_condition": "テラス席のみ・全犬種OK(4テーブル8席限定)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年中無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:30",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "11:00〜21:30（L.O.21:00）",
       "id": "beef0000-0000-4000-8000-000000000016",
       "info_verified": "2026-07-17",
       "is_closed": false,
@@ -22021,6 +23387,61 @@
       "dog_policy_condition": "テラス席の一部のみ犬同伴可(席はスタッフに確認)。トイレのしつけ・予防接種済が条件、リード・食器・マット等持参（小型〜大型犬）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "毎週水曜定休・火曜不定休・年末年始休",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": []
+      },
+      "hours_text": "ランチ 11:00〜15:00（L.O.14:00）／ディナー 17:00〜23:00（L.O.22:00）",
       "id": "beef0000-0000-4000-8000-000000000445",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -22081,6 +23502,7 @@
       "dog_policy_condition": "テラス席限定（雨天・強風時は利用不可）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "hours_text": "月〜土・祝前日 11:30〜14:30 / 17:00〜22:30、日曜 11:30〜14:30 / 17:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000906",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -22735,6 +24157,61 @@
       "dog_policy_status": "conditional",
       "dog_size_limit": "室内テラスのみ(4名掛け1卓+2名掛け2卓)",
       "has_conflict": false,
+      "holiday_note": "月曜定休・隔週木曜休",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "18:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "18:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "18:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "18:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "18:00"
+          }
+        ]
+      },
+      "hours_text": "火 12:00〜15:00／18:00〜22:00、水〜日 11:00〜15:00／18:00〜22:00（L.O.14:00/21:00）",
       "id": "beef0000-0000-4000-8000-000000000665",
       "info_verified": "2026-08-05",
       "instagram_post_url": "https://www.instagram.com/p/Dbe-PU8Tr1D/",
@@ -23779,11 +25256,63 @@
       "dog_policy_status": "conditional",
       "dog_size_limit": "1階のみ(出典記載)",
       "has_conflict": false,
+      "holiday_note": "無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "19:00",
+            "open": "08:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "19:00",
+            "open": "08:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "19:00",
+            "open": "08:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "19:00",
+            "open": "08:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "19:00",
+            "open": "08:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "19:00",
+            "open": "08:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "19:00",
+            "open": "08:30"
+          }
+        ]
+      },
+      "hours_text": "毎日 8:30〜19:00（L.O.フード18:00／ドリンク18:30）",
       "id": "beef0000-0000-4000-8000-000000000446",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7095,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://www.woodberrycoffee.com/"
+        }
+      ],
       "longitude": 139.6145,
       "name": "WOODBERRY COFFEE 荻窪店",
       "place_id": null,
@@ -23926,11 +25455,119 @@
       "dog_policy_condition": "店内OK・大型犬まで",
       "dog_policy_status": "conditional",
       "has_conflict": true,
+      "holiday_note": "年末年始休業",
+      "hours": {
+        "fri": [
+          {
+            "close": "10:30",
+            "open": "07:00"
+          },
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "10:30",
+            "open": "07:00"
+          },
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "10:30",
+            "open": "07:00"
+          },
+          {
+            "close": "16:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "10:30",
+            "open": "07:00"
+          },
+          {
+            "close": "16:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "10:30",
+            "open": "07:00"
+          },
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "10:30",
+            "open": "07:00"
+          },
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "10:30",
+            "open": "07:00"
+          },
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 7:00〜10:30 / 11:30〜15:00 / 17:00〜22:00、土日祝 7:00〜10:30 / 11:30〜16:00 / 17:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000871",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-09",
       "latitude": 35.65862,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131401/13269012/"
+        }
+      ],
       "longitude": 139.75234,
       "name": "Wande Shiba",
       "place_id": null,
@@ -24777,6 +26414,52 @@
       "dog_policy_condition": "テラス席(サンルーム)・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年中無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "20:00",
+            "open": "09:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "20:00",
+            "open": "09:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "20:00",
+            "open": "09:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "20:00",
+            "open": "09:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "20:00",
+            "open": "09:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "20:00",
+            "open": "09:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "20:00",
+            "open": "09:30"
+          }
+        ]
+      },
+      "hours_text": "9:30〜20:00（カフェ L.O.19:30／ランチ L.O.16:00）",
       "id": "beef0000-0000-4000-8000-000000000623",
       "info_verified": "2026-07-18",
       "instagram_post_url": "https://www.instagram.com/p/CtRGRmppbjx/",
@@ -24784,6 +26467,10 @@
       "last_verified": "2026-08-08",
       "latitude": 35.621,
       "links": [
+        {
+          "type": "website",
+          "url": "https://basel.co.jp/shops/%e3%82%a2%e3%83%88%e3%83%aa%e3%82%a8%e3%80%80%e3%83%90%e3%83%bc%e3%82%bc%e3%83%ab/"
+        },
         {
           "type": "instagram",
           "url": "https://www.instagram.com/basel_depuis1967/"
@@ -25041,11 +26728,73 @@
       "dog_policy_condition": "テラス席は小型犬まで同伴OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "日・月曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "火〜土 11:00〜15:00 / 17:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000864",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-09",
       "latitude": 35.64156,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131402/13259518/"
+        }
+      ],
       "longitude": 139.74933,
       "name": "biotable.",
       "place_id": null,
@@ -26999,7 +28748,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000449",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-18",
       "latitude": 35.7108,
       "longitude": 139.63,
@@ -27024,6 +28773,15 @@
           "reference": "https://ameblo.jp/meg0831hana/entry-12834435004.html",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000449",
+          "claimed_status": "unverified",
+          "id": "8aa85008-93ec-579c-bddd-dce2174708fc",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1319/A131905/13291903/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "高円寺・荻窪"
@@ -27040,11 +28798,63 @@
       "dog_policy_condition": "施設公式ページに「ペットと一緒にテラスでお楽しみいただけます」と明記（3F les joues de bébé）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "OIMACHI TRACKSの休館日に準ずる",
+      "hours": {
+        "fri": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "20:00",
+            "open": "08:00"
+          }
+        ]
+      },
+      "hours_text": "毎日 8:00〜20:00（L.O.19:30）※テイクアウトは平日9:00〜",
       "id": "beef0000-0000-4000-8000-000000000228",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6055,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1315/A131501/13318782/"
+        }
+      ],
       "longitude": 139.7315,
       "name": "les joues de bébé",
       "place_id": null,
@@ -27672,6 +29482,52 @@
       "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "18:00",
+            "open": "07:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "18:00",
+            "open": "07:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "18:00",
+            "open": "09:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "18:00",
+            "open": "09:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "18:00",
+            "open": "07:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "18:00",
+            "open": "07:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "18:00",
+            "open": "07:30"
+          }
+        ]
+      },
+      "hours_text": "月〜金 7:30〜18:00 / 土日祝 9:00〜18:00",
       "id": "beef0000-0000-4000-8000-000000000861",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -31530,11 +33386,48 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "holiday_note": "水・木・金曜定休",
+      "hours": {
+        "fri": [],
+        "mon": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [],
+        "tue": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": []
+      },
+      "hours_text": "11:00〜18:00（L.O.17:00）",
       "id": "beef0000-0000-4000-8000-000000001283",
       "info_verified": "2026-08-08",
       "is_closed": false,
       "last_verified": "2026-08-08",
       "latitude": 35.77308,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1330/A133002/13125794/"
+        }
+      ],
       "longitude": 139.29349,
       "name": "イチローさんのきまぐれcafe",
       "place_id": null,
@@ -32083,11 +33976,63 @@
       "dog_policy_condition": "テラス席はペット同伴もOKと紹介(店内可否の記載なし)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "定休日なし",
+      "hours": {
+        "fri": [
+          {
+            "close": "05:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "03:00",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "05:00",
+            "open": "12:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "03:00",
+            "open": "12:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "03:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月・火 17:00〜翌3:00、水・木 17:00〜24:00、金 17:00〜翌5:00、土 12:00〜翌5:00、日・祝 12:00〜翌3:00",
       "id": "beef0000-0000-4000-8000-000000000545",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7485,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1324/A132402/13134463/"
+        }
+      ],
       "longitude": 139.8095,
       "name": "オカン焼肉 紅ちゃん 本店",
       "place_id": null,
@@ -32852,6 +34797,8 @@
       "dog_policy_condition": "テラス席のみ犬同伴可(店内不可)。ドッグカフェではない旨明記。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "木曜定休（木曜が祝日の場合は営業）",
+      "hours_text": "9:00〜18:30（時短営業中・変更の可能性あり）",
       "id": "beef0000-0000-4000-8000-000000000526",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -34110,6 +36057,62 @@
       "dog_policy_condition": "ペット同伴はテラス席に限定",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "土日祝定休・年末年始休",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "sat": [],
+        "sun": [],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 ランチ11:00〜15:00 / ディナー17:00〜22:00（L.O.21:00）",
       "id": "beef0000-0000-4000-8000-000000000848",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -35613,11 +37616,63 @@
       "dog_policy_condition": "口コミに「テラス席はペット同伴可能。リードをつなげておくところもあった」と記載(店内の記載なし)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:30",
+            "open": "07:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "22:30",
+            "open": "07:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:30",
+            "open": "07:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:30",
+            "open": "07:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "22:30",
+            "open": "07:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "22:30",
+            "open": "07:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "22:30",
+            "open": "07:00"
+          }
+        ]
+      },
+      "hours_text": "7:00〜22:30",
       "id": "beef0000-0000-4000-8000-000000001141",
       "info_verified": "2026-08-08",
       "is_closed": false,
       "last_verified": "2026-08-08",
       "latitude": 35.66792,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://store.starbucks.co.jp/detail-1102/"
+        }
+      ],
       "longitude": 139.61325,
       "name": "スターバックス コーヒー 芦花公園店",
       "place_id": null,
@@ -35843,11 +37898,63 @@
       "dog_policy_condition": "テラス席のみペット(犬)同伴可能と明記・店内の同伴可否の記載なし",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "24:00",
+            "open": "12:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "23:00",
+            "open": "12:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "24:00",
+            "open": "12:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "23:00",
+            "open": "12:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "23:00",
+            "open": "12:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "23:00",
+            "open": "12:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "23:00",
+            "open": "12:00"
+          }
+        ]
+      },
+      "hours_text": "月〜木・日・祝 12:00〜23:00／金・土 12:00〜24:00",
       "id": "beef0000-0000-4000-8000-000000000442",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7048,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1319/A131904/13283229/"
+        }
+      ],
       "longitude": 139.6493,
       "name": "スパイスと創作料理 この一杯のために。",
       "place_id": null,
@@ -36194,11 +38301,53 @@
       "dog_policy_condition": "小型・中型・大型犬OK・屋外のみ・リード着用",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "土日祝定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "21:30",
+            "open": "08:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:30",
+            "open": "08:00"
+          }
+        ],
+        "sat": [],
+        "sun": [],
+        "thu": [
+          {
+            "close": "21:30",
+            "open": "08:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:30",
+            "open": "08:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:30",
+            "open": "08:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 8:00〜21:30（L.O.21:00）／土・日・祝 定休",
       "id": "beef0000-0000-4000-8000-000000000247",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-08-08",
       "latitude": 35.6728,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1301/A130101/13305523/"
+        }
+      ],
       "longitude": 139.7668,
       "name": "スワン銀座（SWAN GINZA）",
       "place_id": null,
@@ -36400,7 +38549,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000344",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-18",
       "latitude": 35.7323,
       "longitude": 139.6974,
@@ -36434,6 +38583,15 @@
           "reference": "https://ikebukuro-life.com/ikebukuro-dog-friendly-spots-2025/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000344",
+          "claimed_status": "unverified",
+          "id": "76c65e7c-f03b-5a94-9091-f92d64926d75",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1322/A132202/13269356/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "池袋"
@@ -36450,11 +38608,46 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "holiday_note": "火曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "24:00",
+            "open": "15:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "24:00",
+            "open": "15:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "24:00",
+            "open": "15:00"
+          }
+        ],
+        "tue": [],
+        "wed": [
+          {
+            "close": "24:00",
+            "open": "15:00"
+          }
+        ]
+      },
+      "hours_text": "15:00〜24:00（L.O.23:00）※土日は開店時刻が異なる場合あり",
       "id": "beef0000-0000-4000-8000-000000000991",
       "info_verified": "2026-08-07",
       "is_closed": false,
       "last_verified": "2026-08-07",
       "latitude": 35.66456,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1313/A131302/13239146/"
+        }
+      ],
       "longitude": 139.78178,
       "name": "チキンカントリー",
       "place_id": null,
@@ -37357,11 +39550,63 @@
       "dog_policy_condition": "小型〜超大型犬ともテラス席のみ可・マナーウェア着用が条件",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "不定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "毎日 11:00〜21:00（L.O.20:00）",
       "id": "beef0000-0000-4000-8000-000000000220",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-08-08",
       "latitude": 35.625,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131403/13160175/"
+        }
+      ],
       "longitude": 139.738,
       "name": "ハーベステラス 品川店",
       "place_id": null,
@@ -38028,11 +40273,47 @@
       "dog_policy_condition": "テラス席はペット同伴可能と明記・店内の同伴可否の記載なし",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "火曜・水曜定休（木曜は営業日が情報により異なる）",
+      "hours": {
+        "fri": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [],
+        "wed": []
+      },
+      "hours_text": "11:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000444",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.7027,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1319/A131906/13161794/"
+        }
+      ],
       "longitude": 139.6207,
       "name": "パンとcafé えだおね",
       "place_id": null,
@@ -38071,6 +40352,46 @@
       "dog_policy_condition": "テラス席ペット可と明記(こだわり条件)・室内の同伴可否の記載なし",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "毎月第2月曜（月曜祝日の場合は翌日）・年末年始休",
+      "hours": {
+        "fri": [
+          {
+            "close": "23:00",
+            "open": "09:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "23:00",
+            "open": "08:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "23:00",
+            "open": "09:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "23:00",
+            "open": "09:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "23:00",
+            "open": "09:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 9:00〜23:00（L.O.22:30）／土日祝 8:30〜23:00（L.O.22:30）",
       "id": "beef0000-0000-4000-8000-000000000443",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -38165,11 +40486,82 @@
       "dog_policy_condition": "1組限定テラス席で同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "日曜・祝日定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [],
+        "thu": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "11:30〜14:00、17:00〜23:00（L.O.昼13:30・夜22:00）",
       "id": "beef0000-0000-4000-8000-000000000874",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.64817,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131402/13158507/"
+        }
+      ],
       "longitude": 139.74533,
       "name": "ビストロ＆スペイン古民家バル chab",
       "place_id": null,
@@ -38846,11 +41238,63 @@
       "dog_policy_condition": "2テーブルほどのテラス席のみ同伴可能・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年末年始のみ休業",
+      "hours": {
+        "fri": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "11:00〜21:00（L.O.20:00）",
       "id": "beef0000-0000-4000-8000-000000000248",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6714,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://ginza-mikawaya.com/"
+        }
+      ],
       "longitude": 139.7658,
       "name": "フランス料理 銀座みかわや",
       "place_id": null,
@@ -38891,6 +41335,72 @@
       "dog_policy_condition": "テラス席のみ・大型犬OK（店内不可）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "ビル休館日に準ずる（12/31〜1/1休）",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:00",
+            "open": "11:30"
+          },
+          {
+            "close": "23:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜14:00 / 17:00〜23:00、土 11:00〜23:00、日祝 11:00〜21:00",
       "id": "beef0000-0000-4000-8000-000000000870",
       "info_verified": "2026-08-06",
       "is_closed": false,
@@ -40240,7 +42750,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000990",
       "info_verified": "2026-08-07",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.65273,
       "longitude": 139.77106,
@@ -40274,6 +42784,24 @@
           "reference": "https://harumira.com/report40/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000990",
+          "claimed_status": "unverified",
+          "id": "381c3059-2839-52cd-8ead-4e90dcea03f6",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1313/A131302/13187723/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000990",
+          "claimed_status": "unverified",
+          "id": "bf5c1f60-9160-51bd-ba37-edd6b4784b1e",
+          "provenance": "aggregated",
+          "reference": "http://suzuyoshi.info/maguro/",
+          "type": "official_hp",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "勝どき・月島・晴海・豊海"
@@ -40588,11 +43116,63 @@
       "dog_policy_condition": "テラス席のみ同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年末年始・夏季に休業期間あり",
+      "hours": {
+        "fri": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:30",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "23:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:00〜23:00、土 11:00〜22:30、日・祝 11:00〜18:00",
       "id": "beef0000-0000-4000-8000-000000000241",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.6746,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1301/A130101/13139325/"
+        }
+      ],
       "longitude": 139.7665,
       "name": "ミタスカフェ（Mitasu Cafe）",
       "place_id": null,
@@ -40633,6 +43213,52 @@
       "dog_policy_status": "conditional",
       "dog_size_limit": "中型犬まで(テラス席のみ・雨天時は利用不可)",
       "has_conflict": false,
+      "holiday_note": "年中無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:00",
+            "open": "07:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "22:00",
+            "open": "07:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:00",
+            "open": "07:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:00",
+            "open": "07:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "22:00",
+            "open": "07:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "22:00",
+            "open": "07:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "22:00",
+            "open": "07:00"
+          }
+        ]
+      },
+      "hours_text": "7:00〜22:00（L.O. 料理21:30／ドリンク21:45）",
       "id": "beef0000-0000-4000-8000-000000000527",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -40642,6 +43268,10 @@
         {
           "type": "website",
           "url": "https://miyama-coffee.com/outdoorseat/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1321/A132102/13168008/"
         }
       ],
       "longitude": 139.651,
@@ -41290,11 +43920,22 @@
       "dog_policy_condition": "店内可・大型犬OK・体重/頭数制限なし",
       "dog_policy_status": "conditional",
       "has_conflict": true,
+      "holiday_note": "不定期休業あり（営業日・時間は公式カレンダーで確認）",
       "id": "beef0000-0000-4000-8000-000000000980",
       "info_verified": "2026-08-07",
       "is_closed": false,
       "last_verified": "2026-08-09",
       "latitude": 35.66214,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://rikimarucafe.jp/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/riki.maru.cafe/"
+        }
+      ],
       "longitude": 139.78021,
       "name": "リキマルカフェ",
       "phone": "03-6910-1994",
@@ -42480,7 +45121,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000845",
       "info_verified": "2026-08-06",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-06",
       "latitude": 35.62656,
       "longitude": 139.72739,
@@ -42496,6 +45137,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/555",
           "type": "other",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000845",
+          "claimed_status": "unverified",
+          "id": "cae1a08b-082e-5fce-83c4-a1346ea98081",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131603/13216143/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "五反田・大崎"
@@ -44160,7 +46810,7 @@
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000875",
       "info_verified": "2026-08-06",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-06",
       "latitude": 35.64864,
       "longitude": 139.74616,
@@ -44176,6 +46826,15 @@
           "reference": "https://doghuggy.petgo.jp/media/4221",
           "type": "blog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000875",
+          "claimed_status": "unverified",
+          "id": "eb4b9470-2019-5900-a274-d6308ce30d85",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/en/tokyo/A1314/A131402/13195362/",
+          "type": "tabelog",
+          "verified_at": "2026-10-07"
         }
       ],
       "sub_area": "田町・三田・浜松町"
@@ -44493,11 +47152,91 @@
       "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
+      "holiday_note": "年中無休（年末年始・ビル法定点検日を除く）",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "21:00",
+            "open": "17:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "21:00",
+            "open": "17:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:00",
+            "open": "17:30"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜14:30 / 17:30〜22:00、土日祝 11:00〜15:00 / 17:30〜21:00",
       "id": "beef0000-0000-4000-8000-000000000863",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
       "latitude": 35.64346,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131402/13183816/"
+        }
+      ],
       "longitude": 139.74605,
       "name": "威南記海南鶏飯 日本本店",
       "place_id": null,
@@ -45108,11 +47847,90 @@
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
       "has_conflict": false,
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "19:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "19:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "19:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "22:00",
+            "open": "19:30"
+          }
+        ]
+      },
+      "hours_text": "月・火・水・金 12:00〜15:00／19:30〜22:00、木・土・日 12:00〜15:00／17:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000521",
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
       "latitude": 35.769,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1322/A132203/13151876/"
+        }
+      ],
       "longitude": 139.682,
       "name": "木曜館",
       "phone": "03-3956-1082",
@@ -46155,6 +48973,47 @@
       "dog_policy_condition": null,
       "dog_policy_status": "unverified",
       "has_conflict": true,
+      "holiday_note": "水曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "24:00",
+            "open": "16:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "24:00",
+            "open": "16:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "24:00",
+            "open": "12:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "23:00",
+            "open": "12:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "24:00",
+            "open": "16:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "24:00",
+            "open": "16:00"
+          }
+        ],
+        "wed": []
+      },
+      "hours_text": "月・火・木・金 16:00〜翌0:00／土 12:00〜翌0:00／日・祝 12:00〜23:00（L.O.あり）",
       "id": "beef0000-0000-4000-8000-000000001295",
       "info_verified": "2026-08-08",
       "is_closed": false,
@@ -47916,11 +50775,78 @@
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型犬のみ(土曜・店内利用時)",
       "has_conflict": false,
+      "holiday_note": "日曜・祝日定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "13:30",
+            "open": "11:30"
+          },
+          {
+            "close": "23:30",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "13:30",
+            "open": "11:30"
+          },
+          {
+            "close": "23:30",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:30",
+            "open": "17:00"
+          }
+        ],
+        "sun": [],
+        "thu": [
+          {
+            "close": "13:30",
+            "open": "11:30"
+          },
+          {
+            "close": "23:30",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "13:30",
+            "open": "11:30"
+          },
+          {
+            "close": "23:30",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "13:30",
+            "open": "11:30"
+          },
+          {
+            "close": "23:30",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜13:30、17:00〜23:30／土 17:00〜23:30（L.O.昼13:00・夜22:30）",
       "id": "beef0000-0000-4000-8000-000000000876",
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-09",
       "latitude": 35.65626,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1314/A131401/13143248/"
+        }
+      ],
       "longitude": 139.75385,
       "name": "肉とワイン bonanza",
       "place_id": null,
@@ -49461,6 +52387,63 @@
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型犬のみ・店内合計2頭まで(中型犬以上は不可)",
       "has_conflict": false,
+      "holiday_note": "木曜定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:00",
+            "open": "12:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:00",
+            "open": "12:00"
+          }
+        ],
+        "thu": [],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "12:00"
+          },
+          {
+            "close": "23:00",
+            "open": "18:00"
+          }
+        ]
+      },
+      "hours_text": "月・火・水・金 12:00〜15:00／18:00〜23:00、土・祝 12:00〜23:00、日 12:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000448",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -50498,6 +53481,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-07T09:36:32Z",
+  "generated_at": "2026-10-07T15:00:08Z",
   "is_sample_data": false
 }
