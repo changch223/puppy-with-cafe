@@ -23878,7 +23878,7 @@
       "hours_text": "平日16:00〜22:00・土日祝13:00〜22:00",
       "id": "beef0000-0000-4000-8000-000000000460",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-18",
       "latitude": 35.696,
       "links": [
@@ -34955,7 +34955,7 @@
       "hours_text": "ランチ11:00〜15:00(L.O.14:30)・カフェ11:00〜17:00・ディナー17:00〜22:00(L.O.21:30)",
       "id": "beef0000-0000-4000-8000-000000000421",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-18",
       "latitude": 35.6608,
       "longitude": 139.5836,
@@ -34989,6 +34989,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/2207",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000421",
+          "claimed_status": "unverified",
+          "id": "046b5dc9-657b-5a7d-953d-add8a93be7ee",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1326/A132601/13217865/",
+          "type": "tabelog",
+          "verified_at": "2026-10-12"
         }
       ],
       "sub_area": "調布・府中"
@@ -48511,7 +48520,7 @@
       "hours_text": "11:30〜23:00(L.O.22:30)",
       "id": "beef0000-0000-4000-8000-000000000422",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-18",
       "latitude": 35.6565,
       "longitude": 139.5298,
@@ -48546,6 +48555,15 @@
           "reference": "https://pet-restaurant.com/tokyo-chofu/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000422",
+          "claimed_status": "unverified",
+          "id": "b7b3b3ad-f743-5f96-bb5f-8189057ef48c",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1326/A132601/13010172/",
+          "type": "tabelog",
+          "verified_at": "2026-10-12"
         }
       ],
       "sub_area": "調布・府中"
@@ -53481,6 +53499,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-07T15:00:08Z",
+  "generated_at": "2026-10-13T05:17:31Z",
   "is_sample_data": false
 }

@@ -1445,3 +1445,8 @@
 - ✏️ 変更: 炎丸酒場 新小岩北口店（holiday_note, hours, hours_text）
 - ✏️ 変更: 肉とワイン bonanza（holiday_note, hours, links, hours_text）
 - ✏️ 変更: 食事とナチュラルワイン AOLA(アオラ)（holiday_note, hours, hours_text）
+
+## 2026-10-13 14:17 — 追加 0 / 変更 3 / 削除 0
+- ✏️ 変更: Terrie's Dog Cafe そら〜ず（is_closed）
+- ✏️ 変更: カフェダイニングバー セントバーナード（is_closed, sources）
+- ✏️ 変更: 洋食屋クリスマス亭（is_closed, sources）
