@@ -1731,7 +1731,7 @@
       "id": "beef0000-0000-4000-8000-000000000102",
       "info_verified": "2026-07-17",
       "instagram_post_url": "https://www.instagram.com/reel/DGH40Qdz22y/",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.65,
       "links": [
@@ -4925,7 +4925,7 @@
       "hours_text": "ランチ11:30〜15:00(L.O.14:30)・ディナー17:30〜23:00(L.O.22:00)",
       "id": "beef0000-0000-4000-8000-000000000963",
       "info_verified": "2026-08-07",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.74215,
       "longitude": 139.59802,
@@ -4942,6 +4942,15 @@
           "reference": "https://ameblo.jp/corno-bianco/entry-12438413705.html",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000963",
+          "claimed_status": "unverified",
+          "id": "76af45ba-deab-522b-b3d4-3a4ba64e8bd4",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/en/tokyo/A1321/A132103/13206824/",
+          "type": "tabelog",
+          "verified_at": "2026-10-13"
         }
       ],
       "sub_area": "石神井公園・大泉学園"
@@ -6419,7 +6428,7 @@
       "hours_text": "11:00〜20:00(L.O.19:00)",
       "id": "beef0000-0000-4000-8000-000000001042",
       "info_verified": "2026-08-07",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": null,
       "latitude": 35.69821,
       "longitude": 139.83676,
@@ -6446,6 +6455,15 @@
           "reference": "https://kotomise.jp/shops/cafe-%E3%82%80%E3%81%99%E3%81%B3/%E4%BA%80%E6%88%B8%E3%81%AE%E3%82%AB%E3%83%95%E3%82%A7%E3%81%A7%E3%81%8A%E6%B0%97%E8%BB%BD%E3%83%99%E3%82%B8%E3%82%BF%E3%83%AA%E3%82%A2%E3%83%B3/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001042",
+          "claimed_status": "unverified",
+          "id": "4733dbde-0c18-53b3-95e2-a39b0598538e",
+          "provenance": "aggregated",
+          "reference": "https://cafemusubi.com/",
+          "type": "official_hp",
+          "verified_at": "2026-10-13"
         }
       ],
       "sub_area": "亀戸・大島・東陽町・南砂"
@@ -9880,7 +9898,7 @@
       "id": "beef0000-0000-4000-8000-000000001060",
       "info_verified": "2026-08-07",
       "instagram_post_url": "https://www.instagram.com/p/DRUH1VvE94r/",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.76767,
       "links": [
@@ -9912,6 +9930,15 @@
           "reference": "https://www.ekiten.jp/shop_63973329/",
           "type": "other",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001060",
+          "claimed_status": "unverified",
+          "id": "cd1f8409-c48f-5da6-bb8c-12ef118a7fad",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/fastening_petsalon_cafe_t/",
+          "type": "sns",
+          "verified_at": "2026-10-13"
         }
       ],
       "sub_area": "綾瀬"
@@ -11250,7 +11277,7 @@
       "hours_text": "月〜金10:30〜21:30(L.O.21:30)・土日祝10:30〜20:30(L.O.20:30)",
       "id": "beef0000-0000-4000-8000-000000000184",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.655,
       "longitude": 139.7382,
@@ -11285,6 +11312,15 @@
           "reference": "https://www.innuis.com/dog/introduce/%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%96%E3%83%A9%E3%82%B6%E3%83%BC%E3%82%BA%E9%BA%BB%E5%B8%83%E5%8D%81%E7%95%AA%E5%BA%97%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000184",
+          "claimed_status": "unverified",
+          "id": "10afda44-888f-5f03-b8ab-03dbdfcde63d",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1307/A130702/13206023/",
+          "type": "tabelog",
+          "verified_at": "2026-10-13"
         }
       ],
       "sub_area": "麻布・六本木"
@@ -13424,7 +13460,7 @@
       "hours_text": "平日8:00〜18:00・土日祝8:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000642",
       "info_verified": "2026-08-05",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.6203,
       "longitude": 139.6628,
@@ -13476,6 +13512,15 @@
           "reference": "https://wankonowa.com/column/1682/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000642",
+          "claimed_status": "unverified",
+          "id": "c99b13fa-38e4-5ab9-9408-70dde2597d59",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131707/13180022/",
+          "type": "tabelog",
+          "verified_at": "2026-10-13"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -14517,7 +14562,7 @@
       "hours_text": "火〜金17:00〜23:00(LO22:00) / 土16:00〜23:00(LO22:00) / 日祝13:00〜22:00(LO21:00)",
       "id": "beef0000-0000-4000-8000-000000000911",
       "info_verified": "2026-08-06",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-06",
       "latitude": 35.70061,
       "longitude": 139.74181,
@@ -14534,6 +14579,15 @@
           "reference": "https://pet-restaurant.com/tokyo-iidabashi-kagurazaka/",
           "type": "other",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000911",
+          "claimed_status": "unverified",
+          "id": "2cc67015-767a-5b0f-b85f-ae36806c0a55",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1309/A130905/13164927/",
+          "type": "tabelog",
+          "verified_at": "2026-10-13"
         }
       ],
       "sub_area": "神楽坂・飯田橋"
@@ -53499,6 +53553,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-13T05:17:31Z",
+  "generated_at": "2026-10-13T21:06:34Z",
   "is_sample_data": false
 }

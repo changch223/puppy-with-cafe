@@ -1450,3 +1450,12 @@
 - ✏️ 変更: Terrie's Dog Cafe そら〜ず（is_closed）
 - ✏️ 変更: カフェダイニングバー セントバーナード（is_closed, sources）
 - ✏️ 変更: 洋食屋クリスマス亭（is_closed, sources）
+
+## 2026-10-14 06:06 — 追加 0 / 変更 7 / 削除 0
+- ✏️ 変更: Areverie TERRACE Ebisu(アレヴェリー テラス エビス)（is_closed）
+- ✏️ 変更: CORNO BiANCO(コルノビアンコ)（is_closed, sources）
+- ✏️ 変更: Cafe むすび 亀戸本店（is_closed, sources）
+- ✏️ 変更: FASTENING PETSALON&CAFE（is_closed, sources）
+- ✏️ 変更: GREEN BROTHERS 麻布十番店（is_closed, sources）
+- ✏️ 変更: KOMAZAWA PARK CAFE（is_closed, sources）
+- ✏️ 変更: La Prosciutteria（ラ・プロシュッテリア）（is_closed, sources）
