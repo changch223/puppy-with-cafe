@@ -3,7 +3,7 @@ beef0000-0000-4000-8000-000000000001,blog,https://www.gowithdog.org/tennoz_ile_w
 beef0000-0000-4000-8000-000000000002,blog,https://www.gowithdog.org/tennoz_tyharbor/,conditional,テラス席のみ犬同伴可（店内は不可）,2026-07-05,aggregated
 beef0000-0000-4000-8000-000000000003,blog,https://wankonowa.com/column/communication/vol-51/,conditional,屋外席（テラス・ドームテント・コタツ席）のみ犬OK（店内不可）,2026-07-05,aggregated
 beef0000-0000-4000-8000-000000000004,tabelog,https://tabelog.com/tokyo/A1314/A131404/rstLst/cond10-01-00/cafe/,conditional,テラス席のみペット同伴可,2026-07-05,aggregated
-beef0000-0000-4000-8000-000000000005,other,https://www.hotpepper.jp/SA11/Y025/XA2H/1190010/U030/,conditional,テラス席はペット同伴可（店内は未確認）,2026-07-05,aggregated
+beef0000-0000-4000-8000-000000000005,other,https://www.hotpepper.jp/strJ003474072/,conditional,テラス席はペット同伴可（店内は未確認）,2026-10-17,aggregated
 beef0000-0000-4000-8000-000000000006,blog,https://dog-eats.tokyo/monsoon-cafe/,conditional,店内は入口付近の一部席のみ犬同伴可(奥は不可)・テラス席(屋根なし)は同伴可,2026-07-16,aggregated
 beef0000-0000-4000-8000-000000000006,blog,https://wankonowa.com/column/2355/,conditional,店内・テラスとも犬同伴可・大型犬もOKと紹介(頭数制限の記載なし),2026-07-16,aggregated
 beef0000-0000-4000-8000-000000000007,blog,https://odekake-wanko-bu.com/midtree_daikanyama/,conditional,店内は犬同伴可(大型犬はテラス席のみ),2026-07-16,aggregated
@@ -1375,3 +1375,4 @@ beef0000-0000-4000-8000-000000000963,tabelog,https://tabelog.com/en/tokyo/A1321/
 beef0000-0000-4000-8000-000000000911,tabelog,https://tabelog.com/tokyo/A1309/A130905/13164927/,unverified,,2026-10-13,aggregated
 beef0000-0000-4000-8000-000000001042,official_hp,https://cafemusubi.com/,unverified,,2026-10-13,aggregated
 beef0000-0000-4000-8000-000000001060,sns,https://www.instagram.com/fastening_petsalon_cafe_t/,unverified,,2026-10-13,aggregated
+beef0000-0000-4000-8000-000000000883,other,https://www.ozmall.co.jp/restaurant/7968/,conditional,ランチタイムのみ愛犬と入店可（移転後の店舗）,2026-10-17,aggregated

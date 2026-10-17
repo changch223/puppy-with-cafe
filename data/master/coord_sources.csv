@@ -3,7 +3,7 @@ beef0000-0000-4000-8000-000000000001,WHAT CAFE,35.62187,139.74813,abr_geocoder,r
 beef0000-0000-4000-8000-000000000002,T.Y.HARBOR,35.62291,139.74731,legacy_estimate,residential_detail,東京都品川区東品川2丁目1-3,40.8,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
 beef0000-0000-4000-8000-000000000003,炭火×薪火×レストラン RIDE 品川 天王洲店,35.62263,139.74878,legacy_estimate,residential_detail,東京都品川区東品川2丁目2-24,128.7,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
 beef0000-0000-4000-8000-000000000004,breadworks 天王洲,35.62240,139.74790,legacy_estimate,residential_detail,東京都品川区東品川2丁目1-6,10.2,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
-beef0000-0000-4000-8000-000000000005,Le Calin（ルカラン）,35.62220,139.74800,legacy_estimate,residential_detail,東京都品川区東品川2丁目1-6,33.2,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
+beef0000-0000-4000-8000-000000000005,Le Calin（ルカラン）,35.62282,139.74786,address_correction,residential_detail,東京都品川区東品川2丁目2-43,69.6,0.4,fix,https://www.hotpepper.jp/strJ003474072/,2026-10-17,"住所を訂正（旧 東品川2-1-6）し座標を更新（旧 35.62220,139.74800）。公式Instagram・食べログも2-2-43"
 beef0000-0000-4000-8000-000000000006,Monsoon Cafe 代官山,35.65134,139.69603,abr_geocoder,residential_detail,東京都渋谷区鉢山町15-4,1062.6,0.4,fix,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,"座標を更新（旧 35.64700,139.70650）"
 beef0000-0000-4000-8000-000000000007,MID TREE 代官山,35.64866,139.70205,abr_geocoder,residential_detail,東京都渋谷区代官山町20-23,240.0,0.4,fix,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,"座標を更新（旧 35.65060,139.70320）"
 beef0000-0000-4000-8000-000000000008,カフェ・ミケランジェロ,35.64859,139.69948,abr_geocoder,residential_detail,東京都渋谷区猿楽町29-3,137.7,0.4,fix,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,"座標を更新（旧 35.64970,139.69880）"
@@ -330,7 +330,7 @@ beef0000-0000-4000-8000-000000000786,淡路島バーガー 国立谷保店,35.68
 beef0000-0000-4000-8000-000000000880,迎賓楼,35.63442,139.71170,legacy_estimate,residential_detail,東京都目黒区目黒1丁目6-15,0.7,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
 beef0000-0000-4000-8000-000000000881,FITZROY,35.63397,139.70824,legacy_estimate,residential_detail,東京都目黒区目黒2丁目11-3,0.4,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
 beef0000-0000-4000-8000-000000000882,sibafu,35.63281,139.71248,legacy_estimate,residential_detail,東京都目黒区下目黒1丁目7-5,0.7,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
-beef0000-0000-4000-8000-000000000883,CHUM APARTMENT,35.63113,139.71081,legacy_estimate,residential_detail,東京都目黒区下目黒2丁目23-3,1.0,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
+beef0000-0000-4000-8000-000000000883,CHUM APARTMENT,35.62490,139.69605,official_address_change,residential_detail,東京都目黒区目黒本町4丁目12-17,1503.2,0.4,fix,https://chum-apt.net/,2026-10-17,"移転（所在地変更）に伴い住所・座標を更新（旧 35.63113,139.71081 / 下目黒2-23-3）"
 beef0000-0000-4000-8000-000000000884,SHAPLA-INDIA,35.63243,139.71242,legacy_estimate,residential_detail,東京都目黒区下目黒1丁目7-9,0.1,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
 beef0000-0000-4000-8000-000000000885,焼肉本家Ponga,35.63544,139.71490,legacy_estimate,residential_detail,東京都品川区上大崎2丁目17-5,0.7,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
 beef0000-0000-4000-8000-000000000886,PIZZERIA&BAR PAGLIACCIO,35.63451,139.71866,legacy_estimate,residential_detail,東京都品川区上大崎2丁目13-28,0.4,,keep,abr-geocoder 2.3.1 / ABR データ 2026-10-16,2026-10-17,
