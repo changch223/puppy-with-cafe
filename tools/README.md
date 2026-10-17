@@ -143,6 +143,7 @@ python3 tools/export_cafes.py --check
 - fix 候補の関門: 旧座標の lat か lng が小数5桁以上（`--precise-decimals`、末尾の 0 は数えない。小数4桁以下は丸めた概算座標とみなして上書き対象）→ d≤300 keep・超→manual / 地番座標→manual / GSI と abrg の距離が150m以下のときだけ fix（超過・GSI 結果なしは manual）。
 - 精度クラスは abrg の `match_level` かつ `coordinate_level` で決める（地番一致でも地番位置データが無い地域は町字代表点＝C）。
 - 施設フラグ F は name / address（番地より前の町名部分と「〜通り」は除外）/ description から施設語（公園・モール・ヒルズ・グランベリー・ソラマチ・スカイツリー・タワー等）を検索。「タワー」は name/address のみ、「SC」は英字に挟まれない場合のみ。汎用語の「テラス」は「テラス席」で全店に当たるため施設語から外している（「テラス棟」「シーズンテラス」は対象）。
+- **警告**: `geocheck_coords.py apply --write` は coord_sources.csv 全体を書き直すため、`shop_pin` / `address_correction` / `official_address_change` 行が上書きされる。再実行するなら事前にそれらの行を退避し、あとで戻すこと。
 - `apply` は cafes.csv を読み書きしてバイト一致することを事前確認し、fix 行の latitude/longitude セルだけを小数5桁で置換する（CRLF 維持）。gsi_pending が残っていると中止する。
 - `export_cafes.py` は、座標が東京都本土範囲外・coord_sources.csv の cafe_id 不在/座標ずれ（1m超）を**警告のみ**で表示する（配信は止まらない）。
 
@@ -150,12 +151,14 @@ python3 tools/export_cafes.py --check
 `cafe_id,name,latitude,longitude,method,level,geocoded_address,distance_m,gsi_distance_m,decision,ref,verified_at,note`
 - `method`: fix 行＝`abr_geocoder`（座標を ABR 由来に更新した）、それ以外＝`legacy_estimate`（従来の概算座標のまま）。
   - 手動の住所更新で座標を取り直した行は別の値を使う: `official_address_change`（店舗の移転など公式の住所変更。ref=公式サイト）／`address_correction`（住所の誤りを複数出典で訂正。ref=その出典URL）。いずれも abrg + GSI で新住所を照合して採用し、decision=`fix`。
+  - `shop_pin`（level も `shop_pin`）: manual だった店を**店舗ページの座標（食べログ JSON-LD・ホットペッパー・公式サイト埋め込み・グルメサイト等の出典付き店舗ピン）**で更新した行。ref=採用ピンのURL、geocoded_address=そのページ記載の住所、gsi_distance_m は空、note に「2点目: <出典> <URL> <ペア距離>m」。採否ルール（2026-10-17・バッチF）: **A** 最近接ペア（pins[0],[1]）が両方 shop で距離 ≤100m → 食べログのピン（ペアに無ければ先頭）を採用 / **B** 施設内で出典間が >100m 食い違う場合（または2点目がモール代表点と同値）は、旧座標から全 shop ピンへの最小距離が 1000m 超のときだけ食べログのピンを採用（note に「施設内で出典間に最大◯m差」）、1000m 以下なら manual のまま据え置き / 施設の代表点（kind=facility）・OSM・目視推定は使わない。結果: 38店を fix、ERIC ROSE・パークス光が丘の2店を据え置き。
 - `latitude`/`longitude`: 現在 cafes.csv にある座標（fix は新座標）。
-- **`distance_m`: 旧座標（apply 前の cafes.csv の座標）と abrg 照合結果の距離（m）**。fix 行では「どれだけ動かしたか」、それ以外では「照合結果とどれだけ離れているか」。`level`/`geocoded_address` は照合に使った abrg 結果の精度（coordinate_level）と正規化住所で、`legacy_estimate` 行の座標自体の精度ではない。
+- **`distance_m`: 旧座標（apply 前の cafes.csv の座標）と abrg 照合結果の距離（m）**。fix 行では「どれだけ動かしたか」、それ以外では「照合結果とどれだけ離れているか」。`level`/`geocoded_address` は照合に使った abrg 結果の精度（coordinate_level）と正規化住所で、`legacy_estimate` 行の座標自体の精度ではない。`shop_pin` 行では旧座標→採用ピンの距離。
 - `gsi_distance_m`: abrg と GSI 住所検索の距離（m）。GSI 照合を行った fix 候補のみ記録。
 - `decision`: keep / fix / keep_coarse / manual / investigate。
 
 ### 実績（2026-10-17・初回適用）
 - 594行: keep 276 / **fix 167（cafes.csv の座標を更新）** / manual 40 / keep_coarse 92 / skip（closed）19 / investigate 0。
 - fix の移動距離: 中央値 366m、最大 3847m。abrg と GSI の距離は最大 2.4m。
-- 残りの概算座標は coord_sources.csv の `decision` が manual（施設内・地番座標・部分一致・QA 指定）/ keep_coarse（町字代表点止まり）の店。
+- 同日、manual 40店のうち38店を店舗ページのピン（`method=shop_pin`）で更新（fix 計207 / manual 残り2）。
+- 残りの概算座標は coord_sources.csv の `decision` が manual（ERIC ROSE・パークス光が丘の2店）/ keep_coarse（町字代表点止まり）の店。

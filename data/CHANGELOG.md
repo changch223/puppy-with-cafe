@@ -1632,3 +1632,43 @@
 ## 2026-10-17 18:43 — 追加 0 / 変更 2 / 削除 0
 - ✏️ 変更: CHUM APARTMENT（sub_area, reservation, hours, last_verified, info_verified, description, dog_size_limit, dog_policy_condition, latitude, phone, longitude, holiday_note, representative_source_id, hours_text, address, sources）
 - ✏️ 変更: Le Calin（ルカラン）（last_verified, info_verified, dog_policy_condition, latitude, longitude, representative_source_id, address, sources）
+
+## 2026-10-17 23:37 — 追加 0 / 変更 38 / 削除 0
+- ✏️ 変更: 44APARTMENT 多摩センター店（latitude, longitude）
+- ✏️ 変更: Bowery Kitchen（latitude, longitude）
+- ✏️ 変更: CAFE TORA(カフェトラ)（latitude, longitude）
+- ✏️ 変更: CRYSTAL CAFE(クリスタルカフェ)（latitude, longitude）
+- ✏️ 変更: Cafe' Roju（latitude, longitude）
+- ✏️ 変更: DOG DEPT+CAFE お台場東京ビーチ店（latitude, longitude）
+- ✏️ 変更: Deco's Dog Cafe 田園茶房（latitude, longitude）
+- ✏️ 変更: GOOD MORNING CAFE 中野セントラルパーク（latitude, longitude）
+- ✏️ 変更: IL LUPINO PRIME（latitude, longitude）
+- ✏️ 変更: LATTE GRAPHIC 聖蹟桜ヶ丘店（latitude, longitude）
+- ✏️ 変更: Le quattro stagioni（latitude, longitude）
+- ✏️ 変更: Los Angeles BALCONY Terrace Restaurant & Moon Bar（latitude, longitude）
+- ✏️ 変更: MIO（latitude, longitude）
+- ✏️ 変更: Mr.FARMER 駒沢オリンピック公園店（latitude, longitude）
+- ✏️ 変更: PARKLIFE CAFE & RESTAURANT(パークライフ)（latitude, longitude）
+- ✏️ 変更: PENNY LANE ソラマチ店（latitude, longitude）
+- ✏️ 変更: ROSSO CAFE（latitude, longitude）
+- ✏️ 変更: Ron Herman Cafe 二子玉川店（latitude, longitude）
+- ✏️ 変更: SeTaBi Cafe(セタビカフェ)（latitude, longitude）
+- ✏️ 変更: Snow Peak Cafe 南町田グランベリーパーク（latitude, longitude）
+- ✏️ 変更: THE CITY BAKERY 南町田グランベリーパーク（latitude, longitude）
+- ✏️ 変更: THE OPEN BAKERY（latitude, longitude）
+- ✏️ 変更: Trattoria Pizzeria LOGIC お台場（latitude, longitude）
+- ✏️ 変更: WIRED KITCHEN 南町田グランベリーパーク（latitude, longitude）
+- ✏️ 変更: Whitely Cafe（latitude, longitude）
+- ✏️ 変更: atelier BASEL（latitude, longitude）
+- ✏️ 変更: bills お台場（latitude, longitude）
+- ✏️ 変更: bills 二子玉川（latitude, longitude）
+- ✏️ 変更: cafe de Fleurus 27（latitude, longitude）
+- ✏️ 変更: ひつじのショーンビレッジ ショップ&カフェ 南町田グランベリーパーク（latitude, longitude）
+- ✏️ 変更: わんすたCafe＆酒場（latitude, longitude）
+- ✏️ 変更: アッサムダイニングカフェ永山店（latitude, longitude）
+- ✏️ 変更: カキノキテラス（latitude, longitude）
+- ✏️ 変更: シアン ア ラ モード(Chien a la mode)（latitude, longitude）
+- ✏️ 変更: デルコス八王子本店（latitude, longitude）
+- ✏️ 変更: ファーマーズキッチン 南町田グランベリーパーク（latitude, longitude）
+- ✏️ 変更: 青山川上庵（latitude, longitude）
+- ✏️ 変更: 高倉町珈琲 八王子店（latitude, longitude）
