@@ -192,14 +192,14 @@
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-09",
-      "latitude": 35.6195,
+      "latitude": 35.619692,
       "links": [
         {
           "type": "website",
           "url": "https://www.44apartment.com/"
         }
       ],
-      "longitude": 139.4215,
+      "longitude": 139.425068,
       "name": "44APARTMENT 多摩センター店",
       "phone": "042-401-9888",
       "place_id": null,
@@ -3355,14 +3355,14 @@
       "info_verified": "2026-08-05",
       "is_closed": false,
       "last_verified": "2026-08-07",
-      "latitude": 35.6265,
+      "latitude": 35.624189,
       "links": [
         {
           "type": "website",
           "url": "https://www.instagram.com/bowerykitchen_komazawa/"
         }
       ],
-      "longitude": 139.659,
+      "longitude": 139.655296,
       "name": "Bowery Kitchen",
       "place_id": null,
       "representative_source_id": "c01fedf8-5ab9-59c0-a3cd-f8480c509b81",
@@ -3780,14 +3780,14 @@
       "info_verified": "2026-08-05",
       "is_closed": false,
       "last_verified": "2026-08-05",
-      "latitude": 35.605,
+      "latitude": 35.604427,
       "links": [
         {
           "type": "website",
           "url": "https://www.kost.jp/tora/"
         }
       ],
-      "longitude": 139.66,
+      "longitude": 139.661473,
       "name": "CAFE TORA(カフェトラ)",
       "phone": "03-3701-3003",
       "place_id": null,
@@ -5071,14 +5071,14 @@
       "info_verified": "2026-08-08",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.640774,
+      "latitude": 35.640408,
       "links": [
         {
           "type": "website",
           "url": "https://crystalcafe.zetton.co.jp/"
         }
       ],
-      "longitude": 139.855331,
+      "longitude": 139.859908,
       "name": "CRYSTAL CAFE(クリスタルカフェ)",
       "phone": "03-5878-1327",
       "place_id": null,
@@ -6786,8 +6786,8 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-10-06",
-      "latitude": 35.643,
-      "longitude": 139.3275,
+      "latitude": 35.659961,
+      "longitude": 139.35928,
       "name": "Cafe' Roju",
       "place_id": null,
       "representative_source_id": "22350357-0c80-50e1-a951-941172f8663f",
@@ -7756,14 +7756,14 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-07-17",
-      "latitude": 35.62916,
+      "latitude": 35.629743,
       "links": [
         {
           "type": "website",
           "url": "https://www.dogdept.com/shoplist/area03_3.html"
         }
       ],
-      "longitude": 139.77584,
+      "longitude": 139.776308,
       "name": "DOG DEPT+CAFE お台場東京ビーチ店",
       "phone": "03-3599-5211",
       "place_id": null,
@@ -7873,7 +7873,7 @@
       "instagram_post_url": "https://www.instagram.com/p/DFEYLnBzQF4/",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.59842,
+      "latitude": 35.598419,
       "links": [
         {
           "type": "website",
@@ -7884,7 +7884,7 @@
           "url": "https://www.instagram.com/decosabou/"
         }
       ],
-      "longitude": 139.66728,
+      "longitude": 139.667293,
       "name": "Deco's Dog Cafe 田園茶房",
       "phone": "03-3722-5033",
       "place_id": null,
@@ -11048,7 +11048,7 @@
       "instagram_post_url": "https://www.instagram.com/p/DbuKMRQk7X8/",
       "is_closed": false,
       "last_verified": "2026-10-06",
-      "latitude": 35.7095,
+      "latitude": 35.707243,
       "links": [
         {
           "type": "website",
@@ -11063,7 +11063,7 @@
           "url": "https://tabelog.com/en/tokyo/A1319/A131902/13147583/"
         }
       ],
-      "longitude": 139.666,
+      "longitude": 139.662217,
       "name": "GOOD MORNING CAFE 中野セントラルパーク",
       "phone": "050-5488-4492",
       "place_id": null,
@@ -12223,14 +12223,14 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-07-17",
-      "latitude": 35.6716,
+      "latitude": 35.667876,
       "links": [
         {
           "type": "website",
           "url": "https://illupinojapan.jp/"
         }
       ],
-      "longitude": 139.7194,
+      "longitude": 139.71356,
       "name": "IL LUPINO PRIME",
       "phone": "03-6804-5661",
       "place_id": null,
@@ -13958,8 +13958,8 @@
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-09",
-      "latitude": 35.649,
-      "longitude": 139.444,
+      "latitude": 35.653062,
+      "longitude": 139.448078,
       "name": "LATTE GRAPHIC 聖蹟桜ヶ丘店",
       "place_id": null,
       "representative_source_id": "8a4af46c-80bb-590c-96ef-e8cf56025676",
@@ -15070,8 +15070,8 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.7175,
-      "longitude": 139.7735,
+      "latitude": 35.711788,
+      "longitude": 139.773653,
       "name": "Le quattro stagioni",
       "phone": "03-3824-0014",
       "place_id": null,
@@ -15325,7 +15325,7 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.627,
+      "latitude": 35.632582,
       "links": [
         {
           "type": "website",
@@ -15336,7 +15336,7 @@
           "url": "https://tabelog.com/tokyo/A1314/A131403/13179814/"
         }
       ],
-      "longitude": 139.7415,
+      "longitude": 139.742505,
       "name": "Los Angeles BALCONY Terrace Restaurant & Moon Bar",
       "phone": "03-6433-2455",
       "place_id": null,
@@ -16042,14 +16042,14 @@
       "info_verified": "2026-08-05",
       "is_closed": false,
       "last_verified": "2026-08-07",
-      "latitude": 35.63,
+      "latitude": 35.628007,
       "links": [
         {
           "type": "tabelog",
           "url": "https://tabelog.com/tokyo/A1317/A131707/13161648/"
         }
       ],
-      "longitude": 139.6605,
+      "longitude": 139.655995,
       "name": "MIO",
       "phone": "03-6326-2989",
       "place_id": null,
@@ -16906,14 +16906,14 @@
       "info_verified": "2026-08-05",
       "is_closed": false,
       "last_verified": "2026-08-05",
-      "latitude": 35.6213,
+      "latitude": 35.628201,
       "links": [
         {
           "type": "website",
           "url": "https://mr-farmer.jp/"
         }
       ],
-      "longitude": 139.6636,
+      "longitude": 139.656558,
       "name": "Mr.FARMER 駒沢オリンピック公園店",
       "phone": "03-5432-7062",
       "place_id": null,
@@ -18383,14 +18383,14 @@
       "info_verified": "2026-08-08",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.640774,
+      "latitude": 35.641887,
       "links": [
         {
           "type": "website",
           "url": "https://parklifecafe.zetton.co.jp/"
         }
       ],
-      "longitude": 139.855331,
+      "longitude": 139.860374,
       "name": "PARKLIFE CAFE & RESTAURANT(パークライフ)",
       "phone": "03-6808-0070",
       "place_id": null,
@@ -18569,7 +18569,7 @@
       "instagram_post_url": "https://www.instagram.com/p/DaUAsWJBjjo/",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.7101,
+      "latitude": 35.709992,
       "links": [
         {
           "type": "website",
@@ -18584,7 +18584,7 @@
           "url": "https://tabelog.com/tokyo/A1312/A131203/13271434/"
         }
       ],
-      "longitude": 139.8098,
+      "longitude": 139.811683,
       "name": "PENNY LANE ソラマチ店",
       "phone": "03-5608-1960",
       "place_id": null,
@@ -20674,14 +20674,14 @@
       "instagram_post_url": "https://www.instagram.com/p/DIfyZKpRrS1/",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.6595,
+      "latitude": 35.662881,
       "links": [
         {
           "type": "instagram",
           "url": "https://www.instagram.com/rossocafe_dog/"
         }
       ],
-      "longitude": 139.3382,
+      "longitude": 139.329493,
       "name": "ROSSO CAFE",
       "phone": "042-686-1237",
       "place_id": null,
@@ -21072,8 +21072,8 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.614,
-      "longitude": 139.6215,
+      "latitude": 35.615122,
+      "longitude": 139.627246,
       "name": "Ron Herman Cafe 二子玉川店",
       "phone": "050-5592-2657",
       "place_id": null,
@@ -21885,14 +21885,14 @@
       "info_verified": "2026-08-05",
       "is_closed": false,
       "last_verified": "2026-08-09",
-      "latitude": 35.634,
+      "latitude": 35.631722,
       "links": [
         {
           "type": "website",
           "url": "https://www.setagaya.co.jp/setabi/"
         }
       ],
-      "longitude": 139.618,
+      "longitude": 139.621987,
       "name": "SeTaBi Cafe(セタビカフェ)",
       "phone": "03-3416-2250",
       "place_id": null,
@@ -22274,14 +22274,14 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.529,
+      "latitude": 35.509099,
       "links": [
         {
           "type": "website",
           "url": "https://www.snowpeak.co.jp/news/p20230622/"
         }
       ],
-      "longitude": 139.4485,
+      "longitude": 139.470572,
       "name": "Snow Peak Cafe 南町田グランベリーパーク",
       "place_id": null,
       "representative_source_id": "2e2431c6-09a9-57c5-85db-af81e633e82b",
@@ -22832,14 +22832,14 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.529,
+      "latitude": 35.511048,
       "links": [
         {
           "type": "website",
           "url": "https://thecitybakery.jp/shop/minamimachida.html"
         }
       ],
-      "longitude": 139.448,
+      "longitude": 139.470862,
       "name": "THE CITY BAKERY 南町田グランベリーパーク",
       "phone": "042-850-7173",
       "place_id": null,
@@ -23038,14 +23038,14 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-07-17",
-      "latitude": 35.63101,
+      "latitude": 35.630891,
       "links": [
         {
           "type": "website",
           "url": "https://www.theopenbakery.jp/"
         }
       ],
-      "longitude": 139.77915,
+      "longitude": 139.779105,
       "name": "THE OPEN BAKERY",
       "phone": "03-6457-1991",
       "place_id": null,
@@ -24370,14 +24370,14 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-07-17",
-      "latitude": 35.62916,
+      "latitude": 35.629536,
       "links": [
         {
           "type": "website",
           "url": "https://logic-odaiba.gorp.jp/"
         }
       ],
-      "longitude": 139.77584,
+      "longitude": 139.776304,
       "name": "Trattoria Pizzeria LOGIC お台場",
       "phone": "03-5520-1577",
       "place_id": null,
@@ -25219,8 +25219,8 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.5288,
-      "longitude": 139.4482,
+      "latitude": 35.508892,
+      "longitude": 139.469711,
       "name": "WIRED KITCHEN 南町田グランベリーパーク",
       "place_id": null,
       "representative_source_id": "ab62796f-12b8-52d2-a05f-9de7114b0bbb",
@@ -25643,14 +25643,14 @@
       "instagram_post_url": "https://www.instagram.com/p/DIoJrNWzpTg/",
       "is_closed": false,
       "last_verified": "2026-08-07",
-      "latitude": 35.665,
+      "latitude": 35.664598,
       "links": [
         {
           "type": "instagram",
           "url": "https://www.instagram.com/whitely_cafe/"
         }
       ],
-      "longitude": 139.6965,
+      "longitude": 139.699763,
       "name": "Whitely Cafe",
       "place_id": null,
       "representative_source_id": "f1623c0c-9de1-5564-99ed-2874a0d05bb7",
@@ -26486,7 +26486,7 @@
       "instagram_post_url": "https://www.instagram.com/p/CtRGRmppbjx/",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.621,
+      "latitude": 35.62303,
       "links": [
         {
           "type": "website",
@@ -26497,7 +26497,7 @@
           "url": "https://www.instagram.com/basel_depuis1967/"
         }
       ],
-      "longitude": 139.3745,
+      "longitude": 139.376011,
       "name": "atelier BASEL",
       "place_id": null,
       "representative_source_id": "5642053f-960a-50ea-822c-24f5029078a2",
@@ -26605,14 +26605,14 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-10-06",
-      "latitude": 35.62916,
+      "latitude": 35.629592,
       "links": [
         {
           "type": "website",
           "url": "https://www.billsjapan.com/en/locations/odaiba"
         }
       ],
-      "longitude": 139.77584,
+      "longitude": 139.776522,
       "name": "bills お台場",
       "phone": "03-3599-2100",
       "place_id": null,
@@ -26675,14 +26675,14 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-08-07",
-      "latitude": 35.6127,
+      "latitude": 35.615277,
       "links": [
         {
           "type": "website",
           "url": "https://www.billsjapan.com/en/locations/futakotamagawa"
         }
       ],
-      "longitude": 139.625,
+      "longitude": 139.627998,
       "name": "bills 二子玉川",
       "phone": "03-3708-3377",
       "place_id": null,
@@ -27117,8 +27117,8 @@
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
-      "latitude": 35.646,
-      "longitude": 139.451,
+      "latitude": 35.647771,
+      "longitude": 139.452725,
       "name": "cafe de Fleurus 27",
       "phone": "050-5486-5708",
       "place_id": null,
@@ -31303,14 +31303,14 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.5289,
+      "latitude": 35.509919,
       "links": [
         {
           "type": "website",
           "url": "https://shaunvillage.jp/"
         }
       ],
-      "longitude": 139.4483,
+      "longitude": 139.469761,
       "name": "ひつじのショーンビレッジ ショップ&カフェ 南町田グランベリーパーク",
       "phone": "042-850-6940",
       "place_id": null,
@@ -32771,14 +32771,14 @@
       "instagram_post_url": "https://www.instagram.com/reel/CzDfu7yhpo2/",
       "is_closed": false,
       "last_verified": "2026-08-09",
-      "latitude": 35.702,
+      "latitude": 35.697013,
       "links": [
         {
           "type": "instagram",
           "url": "https://www.instagram.com/dogcafe_onesta/"
         }
       ],
-      "longitude": 139.5714,
+      "longitude": 139.582086,
       "name": "わんすたCafe＆酒場",
       "phone": "0422-24-9833",
       "place_id": null,
@@ -32958,8 +32958,8 @@
       "info_verified": "2026-08-06",
       "is_closed": false,
       "last_verified": "2026-08-06",
-      "latitude": 35.623,
-      "longitude": 139.449,
+      "latitude": 35.615073,
+      "longitude": 139.445227,
       "name": "アッサムダイニングカフェ永山店",
       "phone": "042-389-2340",
       "place_id": null,
@@ -34398,14 +34398,14 @@
       "instagram_post_url": "https://www.instagram.com/p/DB0BXxuzVAN/",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.6512,
+      "latitude": 35.665827,
       "links": [
         {
           "type": "instagram",
           "url": "https://www.instagram.com/kakinokiterasu/"
         }
       ],
-      "longitude": 139.3348,
+      "longitude": 139.335597,
       "name": "カキノキテラス",
       "phone": "050-5589-5050",
       "place_id": null,
@@ -36723,7 +36723,7 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.7555,
+      "latitude": 35.755254,
       "links": [
         {
           "type": "website",
@@ -36734,7 +36734,7 @@
           "url": "https://tabelog.com/tokyo/A1322/A132203/13138843/"
         }
       ],
-      "longitude": 139.6415,
+      "longitude": 139.669811,
       "name": "シアン ア ラ モード(Chien a la mode)",
       "phone": "03-3937-4054",
       "place_id": null,
@@ -38852,8 +38852,8 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.6648,
-      "longitude": 139.3128,
+      "latitude": 35.66555,
+      "longitude": 139.362593,
       "name": "デルコス八王子本店",
       "phone": "042-648-5227",
       "place_id": null,
@@ -41110,8 +41110,8 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-07-18",
-      "latitude": 35.5287,
-      "longitude": 139.4481,
+      "latitude": 35.50851,
+      "longitude": 139.472446,
       "name": "ファーマーズキッチン 南町田グランベリーパーク",
       "phone": "042-850-7231",
       "place_id": null,
@@ -52369,14 +52369,14 @@
       "info_verified": "2026-07-17",
       "is_closed": false,
       "last_verified": "2026-07-17",
-      "latitude": 35.6658,
+      "latitude": 35.665788,
       "links": [
         {
           "type": "website",
           "url": "https://www.kawakamian.com/shops/aoyama.php"
         }
       ],
-      "longitude": 139.7122,
+      "longitude": 139.714465,
       "name": "青山川上庵",
       "phone": "03-5411-7171",
       "place_id": null,
@@ -52696,14 +52696,14 @@
       "info_verified": "2026-07-18",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.6665,
+      "latitude": 35.665938,
       "links": [
         {
           "type": "website",
           "url": "https://takakuramachi-coffee.co.jp/shop/"
         }
       ],
-      "longitude": 139.3095,
+      "longitude": 139.363239,
       "name": "高倉町珈琲 八王子店",
       "phone": "042-649-2358",
       "place_id": null,
@@ -53520,6 +53520,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-17T09:43:33Z",
+  "generated_at": "2026-10-17T14:37:52Z",
   "is_sample_data": false
 }
