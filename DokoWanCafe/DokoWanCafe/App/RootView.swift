@@ -16,6 +16,7 @@ struct RootView: View {
     @ObservedObject private var favoritesStore: FavoritesStore
     @State private var path = NavigationPath()
     @State private var showAreaPicker = false
+    @State private var showAbout = false
     // 地図: ピン選択（下部コンパクトカード）・現在地ボタンの再センタリング要求（UI/UXブラッシュアップ設計書2）
     @State private var selectedMapItem: CafeWithDistance?
     @State private var recenterRequestID = 0
@@ -82,14 +83,7 @@ struct RootView: View {
                     sortMenu
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        // 再読み込み（refresh経路）でも現在エリアに無い古い選択カードを残さない（QA指摘）
-                        selectedMapItem = nil
-                        Task { await searchViewModel.refresh() }
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                    .accessibilityLabel(Text("再読み込み"))
+                    moreMenu
                 }
             }
             .navigationDestination(for: Cafe.self) { cafe in
@@ -108,6 +102,9 @@ struct RootView: View {
                     searchViewModel.origin = origin
                     Task { await searchViewModel.refresh() }
                 }
+            }
+            .sheet(isPresented: $showAbout) {
+                AboutView()
             }
             .confirmationDialog(
                 String(localized: "経路を開くアプリを選択"),
@@ -288,6 +285,27 @@ struct RootView: View {
                 ? "犬向け条件で絞り込み、\(searchViewModel.activeFilterCount)件適用中"
                 : "犬向け条件で絞り込み"
         ))
+    }
+
+    /// その他メニュー（再読み込み・このアプリについて）。ツールバーのアイコン数を増やさないため1つに集約する。
+    private var moreMenu: some View {
+        Menu {
+            Button {
+                // 再読み込み（refresh経路）でも現在エリアに無い古い選択カードを残さない（QA指摘）
+                selectedMapItem = nil
+                Task { await searchViewModel.refresh() }
+            } label: {
+                Label(String(localized: "再読み込み"), systemImage: "arrow.clockwise")
+            }
+            Button {
+                showAbout = true
+            } label: {
+                Label(String(localized: "このアプリについて"), systemImage: "info.circle")
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+        .accessibilityLabel(Text("その他"))
     }
 
     /// 並び替えメニュー（距離順/確認日が新しい順, 設計書4）

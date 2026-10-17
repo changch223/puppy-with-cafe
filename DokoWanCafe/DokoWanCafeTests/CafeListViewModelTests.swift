@@ -284,4 +284,64 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.displayedResults.isEmpty)
         XCTAssertTrue(viewModel.isEmptyDueToFilter, "取得自体は成功しているため phase は .loaded のまま、フィルタ起因の0件と判定される")
     }
+
+    // MARK: - オフラインキャッシュ（距離は保存せず表示時に計算）
+
+    private struct FailingRepository: CafeRepository {
+        let cafes: [Cafe]
+        func nearbyCafes(
+            latitude: Double, longitude: Double, radiusMeters: Int, onlyDogOK: Bool
+        ) async throws -> [CafeWithDistance] {
+            throw URLError(.notConnectedToInternet)
+        }
+        func cafeDetail(id: UUID) async throws -> CafeDetail { throw SupabaseError.emptyResponse }
+        func allCafes() async throws -> [Cafe] { cafes }
+    }
+
+    func test_取得失敗時はキャッシュの店データから距離を再計算して表示する() async {
+        let origin = makeOrigin()
+        let far = makeCafe(name: "遠い", latitude: 35.70, longitude: 139.80)
+        let near = makeCafe(name: "近い", latitude: 35.6897, longitude: 139.7007)
+        let cacheStore = CacheStore(filename: "test-cache-\(UUID().uuidString).json")
+        addTeardownBlock { cacheStore.clear() }
+        // キャッシュには店データのみ（距離なし）。順序はわざと遠い順
+        cacheStore.save([far, near])
+
+        let viewModel = CafeListViewModel(
+            repository: FailingRepository(cafes: [far, near]),
+            locationService: LocationService(),
+            cacheStore: cacheStore,
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(origin)
+        await viewModel.refresh()
+
+        guard case .offline = viewModel.phase else {
+            return XCTFail("通信失敗＋キャッシュありはオフライン表示のはず: \(viewModel.phase)")
+        }
+        XCTAssertEqual(viewModel.allResults.map(\.cafe.name), ["近い", "遠い"], "距離を再計算して昇順")
+        let expected = DistanceCalculator.distanceMeters(
+            fromLatitude: origin.latitude, fromLongitude: origin.longitude,
+            toLatitude: near.latitude, toLongitude: near.longitude
+        )
+        XCTAssertEqual(viewModel.allResults[0].distanceMeters, expected, accuracy: 0.001)
+    }
+
+    func test_取得成功時のキャッシュに距離は保存されない() async throws {
+        let cafe = makeCafe(name: "近い", latitude: 35.6897, longitude: 139.7007)
+        let cacheStore = CacheStore(filename: "test-cache-\(UUID().uuidString).json")
+        addTeardownBlock { cacheStore.clear() }
+        let viewModel = CafeListViewModel(
+            repository: DistanceFilteringMockRepository(cafes: [cafe]),
+            locationService: LocationService(),
+            cacheStore: cacheStore,
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        let raw = try String(contentsOf: cacheStore.fileURL, encoding: .utf8)
+        XCTAssertFalse(raw.contains("distance"))
+        XCTAssertEqual(cacheStore.load()?.cafes, [cafe])
+    }
 }

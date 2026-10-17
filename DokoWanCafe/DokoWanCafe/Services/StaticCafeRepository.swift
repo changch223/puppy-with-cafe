@@ -36,13 +36,29 @@ final class StaticCafeRepository: CafeRepository, @unchecked Sendable {
     private var _generatedAt: Date?
     private var _isSampleData = false
     private var lastRemoteFetch: Date?
+    /// 直近の取得失敗時刻（失敗直後の連続再取得を防ぐ）
+    private var lastRemoteFailure: Date?
 
     private let remoteURL: URL?
     private let session: URLSession
     private let cacheFileURL: URL
+    private let failureRetryInterval: TimeInterval
 
     /// リモート再取得の最小間隔
     private static let refreshInterval: TimeInterval = 15 * 60
+    /// 取得失敗後の再取得抑止時間（オフライン時に毎回待たされないため）
+    static let defaultFailureRetryInterval: TimeInterval = 5 * 60
+    /// リモート取得のタイムアウト（秒）
+    static let requestTimeout: TimeInterval = 15
+
+    /// リモート取得用の既定セッション（15秒タイムアウト・接続待機なし・Cookie不保持）。
+    static func makeDefaultSession() -> URLSession {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = requestTimeout
+        configuration.timeoutIntervalForResource = requestTimeout
+        configuration.waitsForConnectivity = false
+        return URLSession(configuration: configuration)
+    }
 
     var generatedAt: Date? {
         lock.lock(); defer { lock.unlock() }
@@ -54,13 +70,23 @@ final class StaticCafeRepository: CafeRepository, @unchecked Sendable {
         return _isSampleData
     }
 
-    init(remoteURL: URL?, bundle: Bundle = .main, session: URLSession = .shared) {
+    /// - Parameters:
+    ///   - cacheDirectory: リモート取得キャッシュの保存先（nil なら Application Support。テストで隔離する用途）
+    ///   - failureRetryInterval: 取得失敗後に再取得しない時間
+    init(
+        remoteURL: URL?,
+        bundle: Bundle = .main,
+        session: URLSession = StaticCafeRepository.makeDefaultSession(),
+        cacheDirectory: URL? = nil,
+        failureRetryInterval: TimeInterval = StaticCafeRepository.defaultFailureRetryInterval
+    ) {
         self.remoteURL = remoteURL
         self.session = session
+        self.failureRetryInterval = failureRetryInterval
 
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? FileManager.default.temporaryDirectory
-        let directory = base.appendingPathComponent("DokoWanCafe", isDirectory: true)
+        let directory = cacheDirectory ?? base.appendingPathComponent("DokoWanCafe", isDirectory: true)
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         self.cacheFileURL = directory.appendingPathComponent("cafes-remote.json")
 
@@ -139,23 +165,34 @@ final class StaticCafeRepository: CafeRepository, @unchecked Sendable {
         guard let remoteURL else { return }
         lock.lock()
         let last = lastRemoteFetch
+        let lastFailure = lastRemoteFailure
         lock.unlock()
         if let last, Date().timeIntervalSince(last) < Self.refreshInterval { return }
+        // 失敗直後は一定時間再取得しない（バンドル/キャッシュで即表示を維持）
+        if let lastFailure, Date().timeIntervalSince(lastFailure) < failureRetryInterval { return }
 
         do {
             let (data, response) = try await session.data(from: remoteURL)
-            guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
+            guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode),
+                  apply(data: data) else {
+                recordRemoteFailure()
                 return
             }
-            if apply(data: data) {
-                try? data.write(to: cacheFileURL, options: .atomic)
-                lock.lock()
-                lastRemoteFetch = Date()
-                lock.unlock()
-            }
+            try? data.write(to: cacheFileURL, options: .atomic)
+            lock.lock()
+            lastRemoteFetch = Date()
+            lastRemoteFailure = nil
+            lock.unlock()
         } catch {
             // 取得失敗はローカルデータ（キャッシュ/バンドル）で継続（FR-029）
+            recordRemoteFailure()
         }
+    }
+
+    private func recordRemoteFailure() {
+        lock.lock()
+        lastRemoteFailure = Date()
+        lock.unlock()
     }
 
     /// デコード・検証に成功した場合のみ差し替える（不正データで壊さない）

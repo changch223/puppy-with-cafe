@@ -5,6 +5,11 @@
 	<!-- Googleマップアプリの有無を canOpenURL で判定するために必要（経路チューザー機能）。
 	     GENERATE_INFOPLIST_FILE=YES と INFOPLIST_FILE を併用すると、
 	     このファイルの内容が自動生成Info.plistへマージされる（配列はINFOPLIST_KEY_では表現不可のため）。 -->
+	<!-- 対応言語は日本語のみ（App Store Connect の言語判定を明示。ja.lproj は String Catalog から生成される） -->
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>ja</string>
+	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>comgooglemaps</string>

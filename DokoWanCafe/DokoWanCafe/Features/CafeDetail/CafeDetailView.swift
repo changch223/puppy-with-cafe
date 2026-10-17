@@ -62,7 +62,10 @@ struct CafeDetailView: View {
 
             infoSection
 
-            actionSection
+            // 報告フォーム未設定のときは「準備中」画面を見せず、セクションごと出さない（App Store 審査対応）
+            if AppEnvironment.isReportFormConfigured() {
+                actionSection
+            }
         }
         .listStyle(.insetGrouped)
         .navigationTitle(viewModel.cafe.name)

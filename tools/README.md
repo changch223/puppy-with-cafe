@@ -68,9 +68,9 @@ Puppy With Cafe のカフェデータは **Google Sheet をマスター**とし�
 1. **Google Sheet 作成**: `tools/sheet_template/cafes.csv` / `sources.csv` を Google Sheets にインポート（タブ2つ）
 2. **Google フォーム作成**: 質問例「店名（自動入力）／正しい犬同伴可否／条件／根拠・気づいたこと」。
    回答先を上記 Sheet の新タブに設定。「事前入力したURLを取得」で店名の entry ID を確認し、
-   アプリの `AppConfig.reportFormURLTemplate` に `https://docs.google.com/forms/d/e/<FORM_ID>/viewform?usp=pp_url&entry.<ID>={cafe_name}` を設定
+   アプリの `AppEnvironment.defaultReportFormTemplate`（`App/AppConfig.swift`）に `https://docs.google.com/forms/d/e/<FORM_ID>/viewform?usp=pp_url&entry.<ID>={cafe_name}&entry.<ID>={cafe_id}` を設定（詳細手順: `docs/appstore/google-form-setup.md`）
 3. **GitHub Pages**: リポジトリを GitHub に push → Settings > Pages を有効化 →
-   `https://<user>.github.io/<repo>/data/cafes.json` を `AppConfig.defaultCafesDataURL` に設定
+   `https://<user>.github.io/<repo>/data/cafes.json` を `AppEnvironment.defaultCafesDataURL` に設定
 
 ## 追加列（002-cafe-rich-info: 営業時間・公式情報・犬向け設備）
 

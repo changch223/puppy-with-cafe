@@ -81,13 +81,18 @@ python3 tools/export_cafes.py --check
 - **進捗: 未確認**（本ドキュメント更新時点でリポジトリ上に記録なし。着手状況は本人に確認すること）。
 1. **Apple Developer Program 加入**（$99/年・審査1-2日）
 2. App Store Connect でアプリ登録（Bundle ID `com.dokowancafe.app` / 名前「Puppy With Cafe」の空き確認）
-3. ストア素材（スクショ・説明文・キーワード）※AIが下書き可
-4. App Privacy 申告（位置情報=機能目的のみ・追跡なし・リンクなし）※回答案はAIが用意可
-5. Xcode で Archive → アップロード → 審査提出
+3. ストア素材（スクショ・説明文・キーワード）→ 下書き: `docs/appstore/store-listing.md`
+4. App Privacy 申告 → **「データを収集していません」**（方針・根拠は `docs/appstore/app-privacy.md`。現在地は端末内のみで処理し送信・保存しない）
+5. Xcode で Archive → アップロード → 審査提出（審査メモ: `docs/appstore/review-notes.md`、全手順: `docs/appstore/submission-checklist.md`）
+
+**App Store 準備の現状（ブランチ `feat/appstore-readiness`）**
+- アプリ側で対応済み: 誤り報告フォーム未設定時は報告ボタンを非表示（「準備中」画面に到達しない）／「このアプリについて」画面（地図画面右上「…」メニュー内。バージョン・プライバシーポリシー・サポート・出典クレジット）／`PrivacyInfo.xcprivacy` を収集なしに是正／Instagram 埋め込みの WebView を非永続化／キャッシュに距離を保存しない／リモート取得のタイムアウト15秒＋失敗後5分は再取得しない／`MARKETING_VERSION=1.0.0`・`ITSAppUsesNonExemptEncryption=NO`／日本語のみ（`ja.lproj` 生成・`en` 廃止）。
+- 公開ページ・ストア文面は `docs/`（`privacy.html` / `support.html` / `appstore/`）に作成済み。
+- **残りはユーザー作業**: Apple Developer 加入・App Store Connect 登録、Google フォーム作成（下記 C）と URL 差し替え、スクリーンショット撮影、App Privacy 入力、Archive・提出。
 
 ### 🟡 C. Google フォーム作成（T071・ユーザー作業）
-- 誤り報告の受付。`tools/README.md` 手順2 に沿ってフォーム作成 → プリフィルURLを `AppConfig.defaultReportFormTemplate` に設定。
-- 設定状況は**未確認**（CLAUDE.md には設定済みとの記述あり。実際のフォームの稼働を要確認）。リリース前でなくてもよいが、あると報告ループが完成する。
+- 誤り報告の受付。**フォームは未作成**（CLAUDE.md にも未作成と明記）。手順書: `docs/appstore/google-form-setup.md`、全体の流れ: `docs/appstore/submission-checklist.md`（`tools/README.md` 手順2 も参照）。
+- 作成後、プリフィルURL（https）を `AppEnvironment.defaultReportFormTemplate`（`DokoWanCafe/DokoWanCafe/App/AppConfig.swift`）に設定。**未設定の間は店詳細の「情報の誤りを報告」ボタン自体が表示されない**（アプリは壊れない）。ただしストア説明文・support.html・privacy.html・審査メモはフォームがある前提なので、**App Store 提出前に設定必須**（`docs/appstore/submission-checklist.md` の最終ゲート。docs の `{{FORM_URL}}` 差し替えも同時に）。
 
 ### ⚪ D. v2候補（リリース後）
 AIスクリーニング（設計済: `supabase/functions/ai-screen/`）・エリア拡大・営業中/設備フィルタの拡充。

@@ -7,8 +7,36 @@ enum AppEnvironment {
     static let defaultCafesDataURL: String? = "https://changch223.github.io/puppy-with-cafe/data/cafes.json"
 
     /// 誤り報告の Google フォームURLテンプレート。`{cafe_name}` `{cafe_id}` が置換される。
-    /// フォーム作成後に設定する（tools/README.md 手順2）。未設定なら報告は「準備中」表示。
+    /// フォーム作成後に設定する（tools/README.md 手順2）。未設定なら店詳細の報告ボタンは表示しない。
     static let defaultReportFormTemplate: String? = nil
+
+    /// プライバシーポリシー（GitHub Pages）
+    static let privacyPolicyURL = URL(string: "https://changch223.github.io/puppy-with-cafe/docs/privacy.html")!
+
+    /// サポート（GitHub Pages）
+    static let supportURL = URL(string: "https://changch223.github.io/puppy-with-cafe/docs/support.html")!
+
+    /// デジタル庁「アドレス・ベース・レジストリ」の公共データ利用規約（出典クレジットのリンク先）
+    static let addressBaseRegistryTermsURL = URL(string: "https://www.digital.go.jp/policies/base_registry_address_tos")!
+
+    /// 表示名（Info.plist の CFBundleDisplayName と一致）
+    static let displayName = "Puppy With Cafe"
+
+    /// アプリのバージョン（CFBundleShortVersionString）。取得できない場合は "-"。
+    static func appVersion(bundle: Bundle = .main) -> String {
+        bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "-"
+    }
+
+    /// 誤り報告フォームが利用可能か（未設定・不正なら店詳細の報告ボタン自体を出さない）。
+    /// 実際に組み立てられるURLが https の場合のみ true（空白のみ・不正文字列・http は false）。
+    static func isReportFormConfigured(
+        _ environment: [String: String] = ProcessInfo.processInfo.environment
+    ) -> Bool {
+        guard let url = reportFormURL(cafeName: "x", cafeID: UUID(), environment: environment) else {
+            return false
+        }
+        return url.scheme?.lowercased() == "https"
+    }
 
     /// 開発時は環境変数 CAFES_DATA_URL で上書き可能
     static func cafesDataURL(
@@ -32,6 +60,9 @@ enum AppEnvironment {
         let filled = template
             .replacingOccurrences(of: "{cafe_name}", with: name)
             .replacingOccurrences(of: "{cafe_id}", with: cafeID.uuidString.lowercased())
+        // テンプレートの生の非ASCII文字は不正とみなす（iOS 16 は nil、17+ は自動エンコードで挙動が割れるため統一）。
+        // 店名は上で percent-encode 済みなので、ここで弾かれるのはテンプレート側の問題のみ。
+        guard filled.allSatisfy(\.isASCII) else { return nil }
         return URL(string: filled)
     }
 }
