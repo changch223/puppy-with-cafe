@@ -1628,3 +1628,7 @@
 - ✏️ 変更: 野菜倶楽部 oto no ha Café(オトノハカフェ)（longitude, latitude）
 - ✏️ 変更: 雪月花（longitude, latitude）
 - ✏️ 変更: 食事とナチュラルワイン AOLA(アオラ)（longitude, latitude）
+
+## 2026-10-17 18:43 — 追加 0 / 変更 2 / 削除 0
+- ✏️ 変更: CHUM APARTMENT（sub_area, reservation, hours, last_verified, info_verified, description, dog_size_limit, dog_policy_condition, latitude, phone, longitude, holiday_note, representative_source_id, hours_text, address, sources）
+- ✏️ 変更: Le Calin（ルカラン）（last_verified, info_verified, dog_policy_condition, latitude, longitude, representative_source_id, address, sources）

@@ -24,7 +24,8 @@
 - ✅ 2026-07〜10 の追加機能（PR #2/#4/#9/#13）: IG投稿埋め込み・OGP写真プレビュー、Google Maps流UI（下部シート2段）、住所・**駅名検索**、経路選択、お気に入り画面（遷移修正済み）、参考記事カード、詳細画面の再構成、営業時間の**日跨ぎ対応**、「大型犬OK」フィルタ
 - ✅ データ基盤（サーバーレス構成B）: `data/master/*.csv` → `tools/export_cafes.py`（検証・矛盾解決・差分CHANGELOG）→ `data/cafes.json`
 - ✅ **データ配信 本稼働**: GitHub Pages で `cafes.json` を配信。アプリが起動時に取得（アプリ審査なしで更新反映）
-- ✅ テスト: `Core/` の純ロジック中心の XCTest（2026-07 時点で49件全緑。以降の機能追加でテストも増えている（`func test` 約156件）が、**最新の実行件数・全緑は未確認**。引き継ぎ時に §3 の手順で再確認すること）
+- ✅ テスト: 2026-10-17 に XCTest 156件 全緑（Xcode 26.6、iPhone 17 シミュレータ）。`.xcodeproj` は `DokoWanCafe/` 配下。
+- ⚠️ 残課題: `StaticCafeRepository.swift` の NSLock 警告10件（Swift 6 言語モードでエラー化する）
 - ✅ 公開物: リポジトリ(public)・README・プライバシーポリシー
 
 ### 環境・URL
@@ -37,7 +38,7 @@
   - 大型犬可否 `dog_large` 記入済み **257件**（true 229 / false 28、空欄 337）
   - 曜日別営業時間（構造化）**405件**（D-1 で330件追加）。`hours_text` のみ116件、営業時間情報なし73件
   - Instagram 代表投稿URL 135件、リンク皆無 138件
-  - **座標**: 2026-10-17 に abr-geocoder（デジタル庁ABR）＋国土地理院住所検索でも同じ点を確認（同系統データのため独立検証ではない）して住所と突き合わせ、一致した167件を住所由来の座標に更新（残りは keep 276・manual 40・町字止まり keep_coarse 92）（出典台帳 `data/master/coord_sources.csv`）。更新しなかった店は `legacy_estimate`（照合で許容内・または manual/keep_coarse）。GPS実測ではない
+  - **座標**: 2026-10-17 に abr-geocoder（デジタル庁ABR）＋国土地理院住所検索でも同じ点を確認（同系統データのため独立検証ではない）して住所と突き合わせ、一致した167件を住所由来の座標に更新（台帳の内訳: fix 169＝abr_geocoder 167＋住所修正2、keep 274、manual 40、町字止まり keep_coarse 92）。住所修正2店は CHUM APARTMENT（移転、公式サイトで目黒本町4-12-17）と Le Calin（番地訂正 2-1-6→2-2-43、複数出典で確認）（出典台帳 `data/master/coord_sources.csv`）。更新しなかった店は `legacy_estimate`（照合で許容内・または manual/keep_coarse）。GPS実測ではない
 
 ## 3. 別PCでの環境セットアップ（新PCで最初にやること）
 

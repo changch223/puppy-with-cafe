@@ -4294,79 +4294,37 @@
       "sub_area": "二子玉川"
     },
     {
-      "address": "東京都目黒区下目黒2-23-3",
+      "address": "東京都目黒区目黒本町4-12-17",
       "area": "tokyo",
       "contact": null,
-      "description": "下目黒の異国情緒あるカフェダイニング。半個室のソファ席で小型犬と過ごせる。",
+      "description": "目黒本町（武蔵小山エリア）のカフェダイニング。ランチタイムのみ愛犬と一緒に入店できる。",
       "dog_amenities": {
         "indoor": true
       },
-      "dog_policy_condition": "記事内の目黒駅周辺リストで「店内OK」と紹介",
+      "dog_policy_condition": "ランチタイムのみ愛犬と入店可（移転後の店舗）",
       "dog_policy_status": "conditional",
-      "dog_size_limit": "小型犬のみ・半個室ソファ席限定",
       "has_conflict": false,
+      "holiday_note": "月曜定休（月曜祝日の場合は翌火曜休）",
       "hours": {
-        "fri": [
-          {
-            "close": "24:00",
-            "open": "12:00"
-          }
-        ],
-        "mon": [
-          {
-            "close": "24:00",
-            "open": "12:00"
-          }
-        ],
-        "sat": [
-          {
-            "close": "24:00",
-            "open": "12:00"
-          }
-        ],
-        "sun": [
-          {
-            "close": "18:00",
-            "open": "12:00"
-          }
-        ],
-        "thu": [
-          {
-            "close": "24:00",
-            "open": "12:00"
-          }
-        ],
-        "tue": [
-          {
-            "close": "24:00",
-            "open": "12:00"
-          }
-        ],
-        "wed": [
-          {
-            "close": "24:00",
-            "open": "12:00"
-          }
-        ]
+        "mon": []
       },
-      "hours_text": "月〜土12:00〜24:00・日12:00〜18:00",
+      "hours_text": "月曜定休。モーニング8:00〜（火・土・日のみ）／ランチ11:30〜／カフェ15:00〜／ディナー17:30〜23:00（L.O.22:30）",
       "id": "beef0000-0000-4000-8000-000000000883",
-      "info_verified": "2026-08-06",
+      "info_verified": "2026-10-17",
       "is_closed": false,
-      "last_verified": "2026-08-06",
-      "latitude": 35.63113,
+      "last_verified": "2026-10-17",
+      "latitude": 35.6249,
       "links": [
         {
           "type": "website",
           "url": "http://chum-apt.net/"
         }
       ],
-      "longitude": 139.71081,
+      "longitude": 139.69605,
       "name": "CHUM APARTMENT",
-      "phone": "050-5890-5978",
+      "phone": "03-6303-1861",
       "place_id": null,
-      "representative_source_id": "f1acd95b-dc83-5240-ab50-9485ceb21967",
-      "reservation": "犬同伴の半個室ソファ席は要予約",
+      "representative_source_id": "9838649b-29b6-5278-bdf6-6a65479eabf3",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000883",
@@ -4385,9 +4343,18 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/540",
           "type": "other",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000883",
+          "claimed_status": "conditional",
+          "id": "9838649b-29b6-5278-bdf6-6a65479eabf3",
+          "provenance": "aggregated",
+          "reference": "https://www.ozmall.co.jp/restaurant/7968/",
+          "type": "other",
+          "verified_at": "2026-10-17"
         }
       ],
-      "sub_area": "目黒"
+      "sub_area": "武蔵小山"
     },
     {
       "address": "東京都千代田区丸の内1-4-5 三菱UFJ信託銀行本店ビルB1F",
@@ -14706,7 +14673,7 @@
       "sub_area": "浅草・蔵前"
     },
     {
-      "address": "東京都品川区東品川2-1-6",
+      "address": "東京都品川区東品川2-2-43",
       "area": "tokyo",
       "contact": null,
       "description": "天王洲アイルのペット可カフェ。",
@@ -14714,29 +14681,29 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_policy_condition": "大型犬・中型犬・小型犬はテラス席を利用可",
+      "dog_policy_condition": "テラス席はペット同伴可（店内は未確認）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "不定休",
       "hours_text": "ランチ・ディナー営業（詳細はホットペッパーで要確認）",
       "id": "beef0000-0000-4000-8000-000000000005",
-      "info_verified": "2026-07-05",
+      "info_verified": "2026-10-17",
       "is_closed": false,
-      "last_verified": "2026-08-08",
-      "latitude": 35.6222,
-      "longitude": 139.748,
+      "last_verified": "2026-10-17",
+      "latitude": 35.62282,
+      "longitude": 139.74786,
       "name": "Le Calin（ルカラン）",
       "place_id": null,
-      "representative_source_id": "bd98263a-cae8-5e3a-9949-9b34f9fdf3ee",
+      "representative_source_id": "16fdd7de-d7f7-5b94-bff8-21234c294e75",
       "sources": [
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000005",
           "claimed_status": "conditional",
-          "id": "03afa1aa-ed26-5482-9df2-a2a5d51e779d",
+          "id": "16fdd7de-d7f7-5b94-bff8-21234c294e75",
           "provenance": "aggregated",
-          "reference": "https://www.hotpepper.jp/SA11/Y025/XA2H/1190010/U030/",
+          "reference": "https://www.hotpepper.jp/strJ003474072/",
           "type": "other",
-          "verified_at": "2026-07-05"
+          "verified_at": "2026-10-17"
         },
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000005",
@@ -53553,6 +53520,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-17T09:31:12Z",
+  "generated_at": "2026-10-17T09:43:33Z",
   "is_sample_data": false
 }

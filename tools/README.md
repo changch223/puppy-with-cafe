@@ -149,6 +149,7 @@ python3 tools/export_cafes.py --check
 ### coord_sources.csv の列
 `cafe_id,name,latitude,longitude,method,level,geocoded_address,distance_m,gsi_distance_m,decision,ref,verified_at,note`
 - `method`: fix 行＝`abr_geocoder`（座標を ABR 由来に更新した）、それ以外＝`legacy_estimate`（従来の概算座標のまま）。
+  - 手動の住所更新で座標を取り直した行は別の値を使う: `official_address_change`（店舗の移転など公式の住所変更。ref=公式サイト）／`address_correction`（住所の誤りを複数出典で訂正。ref=その出典URL）。いずれも abrg + GSI で新住所を照合して採用し、decision=`fix`。
 - `latitude`/`longitude`: 現在 cafes.csv にある座標（fix は新座標）。
 - **`distance_m`: 旧座標（apply 前の cafes.csv の座標）と abrg 照合結果の距離（m）**。fix 行では「どれだけ動かしたか」、それ以外では「照合結果とどれだけ離れているか」。`level`/`geocoded_address` は照合に使った abrg 結果の精度（coordinate_level）と正規化住所で、`legacy_estimate` 行の座標自体の精度ではない。
 - `gsi_distance_m`: abrg と GSI 住所検索の距離（m）。GSI 照合を行った fix 候補のみ記録。
