@@ -6,7 +6,7 @@
 
 **製品名（表示名）: 「Puppy With Cafe」**（2026-07-05 決定）。リポジトリ・Xcodeターゲット等のコードネームは DokoWanCafe のまま（表示名は `INFOPLIST_KEY_CFBundleDisplayName` で設定）。
 
-**GitHub**: https://github.com/changch223/puppy-with-cafe （public）。**データ配信**: GitHub Pages `https://changch223.github.io/puppy-with-cafe/data/cafes.json`（`AppConfig.defaultCafesDataURL` に設定済み・E2E確認済み）。プライバシーポリシー: 同 `docs/privacy.html`。データ反映＝`export_cafes.py` 実行 → commit → **push**（pushで配信される）。
+**GitHub**: https://github.com/changch223/puppy-with-cafe （public）。**データ配信**: GitHub Pages `https://changch223.github.io/puppy-with-cafe/data/cafes.json`（`AppEnvironment.defaultCafesDataURL` に設定済み・E2E確認済み）。プライバシーポリシー: 同 `docs/privacy.html`。データ反映＝`export_cafes.py` 実行 → commit → **push**（pushで配信される）。
 
 ## データ調査（database構築）
 - カフェ調査の引き継ぎブリーフ: **`research-agent/README.md`**（収集項目・絶対ルール・手順のすべて）＋ `research-agent/progress.md`（エリア別進捗）
@@ -27,7 +27,7 @@
 - アーキテクチャ **MVVM**。純ロジック（距離/名寄せ/矛盾解決/フィルタ）は `Core/` に隔離し **XCTest 必須**
 - MapKit / CoreLocation（**WhenInUse**）/ AuthenticationServices（**Appleでサインイン**）
 - **バックエンド（2026-07-05 構成Bに改訂, research.md R11）**: サーバーレス。**マスターCSV `data/master/*.csv`（Google Sheet 移行まで）→ `tools/export_cafes.py`（検証・矛盾/代表導出・差分CHANGELOG）→ `cafes.json`** をアプリにバンドル＋静的URL（GitHub Pages 予定）から遠隔更新（`Services/StaticCafeRepository.swift`）。検索・距離計算は端末内完結（位置情報を送信しない）。実データ: **594件・東京都内**（出典約1355件。初期268件＝天王洲アイル5＋姉妹リポジトリ `../CafeResearchAgent/` の手動調査263件に、2026-08 の wave2〜4 で追加。大型犬可否 約257件・曜日別営業時間 約405件を構造化済み。座標は 2026-10-17 の ABR/GSI 照合で167件＋住所修正2店を更新済み（台帳: fix 169・keep 274・manual 40・keep_coarse 92）。2026-10-07 時点の件数）。テストは凍結フィクスチャ（`DokoWanCafeTests/Fixtures/`）を使用
-- 誤り報告は **Google フォーム**（プリフィル。`AppConfig.defaultReportFormTemplate` に設定）。**サインインなし**（FR-028改訂）。運営がマスター反映＝承認
+- 誤り報告は **Google フォーム**（プリフィル。`AppEnvironment.defaultReportFormTemplate`（`App/AppConfig.swift`）に設定予定・**未作成**。手順は `docs/appstore/google-form-setup.md`）。**サインインなし**（FR-028改訂）。運営がマスター反映＝承認
 - 旧A案（Supabase: `supabase/` の SQL・`Services/Supabase*`/`AuthService` 等）は**保管**。規模拡大時の移行先。v1では配線しない
 - 依存管理は **SwiftPM**。文字列は **String Catalog（日本語第一）**
 

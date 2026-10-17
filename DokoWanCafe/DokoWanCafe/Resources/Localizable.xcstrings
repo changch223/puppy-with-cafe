@@ -11,7 +11,7 @@
       "localizations" : {
         "ja" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@、%2$@、%3$@"
           }
         }
@@ -21,7 +21,7 @@
       "localizations" : {
         "ja" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@: %2$@"
           }
         }
@@ -37,14 +37,7 @@
 
     },
     "AI推測" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI-inferred"
-          }
-        }
-      }
+
     },
     "AI確認済み" : {
 
@@ -170,15 +163,7 @@
 
     },
     "一覧" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "List"
-          }
-        }
-      }
+      "extractionState" : "stale"
     },
     "不明" : {
 
@@ -286,15 +271,7 @@
 
     },
     "地図" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Map"
-          }
-        }
-      }
+      "extractionState" : "stale"
     },
     "地図で写真を見る" : {
 
@@ -345,14 +322,7 @@
 
     },
     "情報の誤りを報告" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Report incorrect info"
-          }
-        }
-      }
+
     },
     "採用根拠" : {
 
@@ -367,14 +337,7 @@
 
     },
     "未確認" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unverified"
-          }
-        }
-      }
+
     },
     "未確認の店も表示" : {
 
@@ -389,14 +352,7 @@
 
     },
     "条件付き" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conditional"
-          }
-        }
-      }
+
     },
     "来店に条件があります（詳細は下記「来店時の条件・マナー」）" : {
 
@@ -420,14 +376,7 @@
 
     },
     "犬OK" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dogs OK"
-          }
-        }
-      }
+
     },
     "犬メニュー" : {
 
@@ -436,14 +385,7 @@
 
     },
     "犬不可" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No dogs"
-          }
-        }
-      }
+
     },
     "犬同伴: %@" : {
 
@@ -497,15 +439,7 @@
 
     },
     "経路案内（マップで開く）" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Directions (open in Maps)"
-          }
-        }
-      }
+      "extractionState" : "stale"
     },
     "絞り込み条件を変えるか、別の地域で探してみてください。" : {
 
@@ -547,7 +481,7 @@
       "localizations" : {
         "ja" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "通信エラー（%1$lld）: %2$@"
           }
         }
@@ -563,7 +497,7 @@
       "localizations" : {
         "ja" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "運営メモ（%1$@より・%2$@確認）"
           }
         }
@@ -595,6 +529,126 @@
     },
     "食べログ" : {
 
+    },
+    "このアプリについて" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このアプリについて"
+          }
+        }
+      }
+    },
+    "アプリ名" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アプリ名"
+          }
+        }
+      }
+    },
+    "バージョン" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "バージョン"
+          }
+        }
+      }
+    },
+    "プライバシーポリシー" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーポリシー"
+          }
+        }
+      }
+    },
+    "サポート" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サポート"
+          }
+        }
+      }
+    },
+    "データについて" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "データについて"
+          }
+        }
+      }
+    },
+    "出典" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "出典"
+          }
+        }
+      }
+    },
+    "犬同伴に関する情報は、出典URLと確認日をつけて運営が整備しています。条件や営業状況は変わることがあるため、ご来店前に必ず店舗へご確認ください。" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬同伴に関する情報は、出典URLと確認日をつけて運営が整備しています。条件や営業状況は変わることがあるため、ご来店前に必ず店舗へご確認ください。"
+          }
+        }
+      }
+    },
+    "位置情報の一部は、デジタル庁「アドレス・ベース・レジストリ」（公共データ利用規約（第1.0版））を Puppy With Cafe 運営が加工して作成しています。" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位置情報の一部は、デジタル庁「アドレス・ベース・レジストリ」（公共データ利用規約（第1.0版））を Puppy With Cafe 運営が加工して作成しています。"
+          }
+        }
+      }
+    },
+    "公共データ利用規約（第1.0版）" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "公共データ利用規約（第1.0版）"
+          }
+        }
+      }
+    },
+    "© 2026 Puppy With Cafe" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2026 Puppy With Cafe"
+          }
+        }
+      }
+    },
+    "その他" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "その他"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

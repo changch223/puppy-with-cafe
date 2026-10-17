@@ -178,16 +178,35 @@ final class CafeListViewModel: ObservableObject {
                 onlyDogOK: false
             )
             allResults = results
-            cacheStore.save(results)
+            // 距離（検索起点由来）は保存せず、店データのみキャッシュする
+            cacheStore.save(results.map(\.cafe))
             phase = results.isEmpty ? .empty : .loaded
         } catch {
             if let cached = cacheStore.load(), !cached.cafes.isEmpty {
-                allResults = cached.cafes
+                // 距離はキャッシュに無いため、今回の検索起点から表示時に計算する
+                allResults = Self.withDistances(cached.cafes, from: coordinate)
                 phase = .offline(fetchedAt: cached.fetchedAt)
             } else {
                 phase = .error(error.localizedDescription)
             }
         }
+    }
+
+    /// 店データに検索起点からの距離を付与し、安全半径内を距離昇順で返す（キャッシュ復元用）。
+    static func withDistances(_ cafes: [Cafe], from coordinate: CLLocationCoordinate2D) -> [CafeWithDistance] {
+        cafes
+            .filter { !$0.isClosed }
+            .map { cafe in
+                CafeWithDistance(
+                    cafe: cafe,
+                    distanceMeters: DistanceCalculator.distanceMeters(
+                        fromLatitude: coordinate.latitude, fromLongitude: coordinate.longitude,
+                        toLatitude: cafe.latitude, toLongitude: cafe.longitude
+                    )
+                )
+            }
+            .filter { $0.distanceMeters <= Double(fetchSafetyRadiusMeters) }
+            .sorted { $0.distanceMeters < $1.distanceMeters }
     }
 
     /// 地域を変更して再検索

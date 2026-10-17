@@ -157,7 +157,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				ja,
-				en,
 				Base,
 			);
 			mainGroup = D0C0FFEE0000000000000007;
@@ -283,6 +282,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DokoWanCafe/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Puppy With Cafe";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "周辺の犬同伴OKカフェを現在地から探すために位置情報を使用します。位置情報は端末内で利用され、保存されません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -292,7 +292,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dokowancafe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -312,6 +312,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DokoWanCafe/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Puppy With Cafe";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "周辺の犬同伴OKカフェを現在地から探すために位置情報を使用します。位置情報は端末内で利用され、保存されません。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -321,7 +322,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dokowancafe.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

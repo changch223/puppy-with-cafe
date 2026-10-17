@@ -77,4 +77,113 @@ final class StaticCafeRepositoryTests: XCTestCase {
             // expected
         }
     }
+
+    // MARK: - リモート取得（タイムアウト設定・失敗後の再取得抑止）
+
+    func test_既定セッションは15秒タイムアウト() {
+        let configuration = StaticCafeRepository.makeDefaultSession().configuration
+        XCTAssertEqual(configuration.timeoutIntervalForRequest, 15)
+        XCTAssertEqual(configuration.timeoutIntervalForResource, 15)
+        XCTAssertFalse(configuration.waitsForConnectivity)
+    }
+
+    private func makeRemoteRepository(
+        failureRetryInterval: TimeInterval
+    ) -> StaticCafeRepository {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [StubURLProtocol.self]
+        let cacheDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("repo-test-\(UUID().uuidString)", isDirectory: true)
+        try? FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
+        addTeardownBlock { try? FileManager.default.removeItem(at: cacheDirectory) }
+        return StaticCafeRepository(
+            remoteURL: URL(string: "https://example.invalid/cafes.json"),
+            bundle: Bundle(for: StaticCafeRepositoryTests.self),
+            session: URLSession(configuration: configuration),
+            cacheDirectory: cacheDirectory,
+            failureRetryInterval: failureRetryInterval
+        )
+    }
+
+    func test_取得失敗後は一定時間再取得せずバンドルで即表示を維持する() async throws {
+        StubURLProtocol.reset(.failure(URLError(.notConnectedToInternet)))
+        let repo = makeRemoteRepository(failureRetryInterval: 300)
+
+        for _ in 0..<3 {
+            let results = try await repo.nearbyCafes(
+                latitude: lat, longitude: lng, radiusMeters: 3_000, onlyDogOK: false
+            )
+            XCTAssertEqual(results.count, 7, "失敗してもバンドルデータで表示できる")
+        }
+        XCTAssertEqual(StubURLProtocol.requestCount, 1, "失敗後の5分間は再取得しない")
+    }
+
+    func test_再取得抑止の時間が過ぎれば再取得する() async throws {
+        StubURLProtocol.reset(.failure(URLError(.timedOut)))
+        let repo = makeRemoteRepository(failureRetryInterval: 0)
+
+        _ = try await repo.nearbyCafes(latitude: lat, longitude: lng, radiusMeters: 3_000, onlyDogOK: false)
+        _ = try await repo.nearbyCafes(latitude: lat, longitude: lng, radiusMeters: 3_000, onlyDogOK: false)
+        XCTAssertEqual(StubURLProtocol.requestCount, 2)
+    }
+
+    func test_HTTPエラーも失敗として扱い再取得を抑止する() async throws {
+        StubURLProtocol.reset(.status(503))
+        let repo = makeRemoteRepository(failureRetryInterval: 300)
+
+        _ = try await repo.nearbyCafes(latitude: lat, longitude: lng, radiusMeters: 3_000, onlyDogOK: false)
+        _ = try await repo.allCafes()
+        XCTAssertEqual(StubURLProtocol.requestCount, 1)
+    }
+
+    func test_取得成功後は通常間隔で再取得しない() async throws {
+        let url = try XCTUnwrap(Bundle(for: StaticCafeRepositoryTests.self).url(forResource: "cafes", withExtension: "json"))
+        StubURLProtocol.reset(.success(try Data(contentsOf: url)))
+        let repo = makeRemoteRepository(failureRetryInterval: 300)
+
+        let results = try await repo.nearbyCafes(latitude: lat, longitude: lng, radiusMeters: 3_000, onlyDogOK: false)
+        XCTAssertEqual(results.count, 7)
+        _ = try await repo.allCafes()
+        XCTAssertEqual(StubURLProtocol.requestCount, 1)
+    }
+}
+
+/// リモート取得テスト用のスタブ（ネットワークに出ない）。テストは直列実行のため static 状態を使う。
+final class StubURLProtocol: URLProtocol {
+    enum Behavior {
+        case failure(URLError)
+        case status(Int)
+        case success(Data)
+    }
+
+    nonisolated(unsafe) static var behavior: Behavior = .failure(URLError(.notConnectedToInternet))
+    nonisolated(unsafe) static var requestCount = 0
+
+    static func reset(_ behavior: Behavior) {
+        self.behavior = behavior
+        requestCount = 0
+    }
+
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+
+    override func startLoading() {
+        Self.requestCount += 1
+        let url = request.url!
+        switch Self.behavior {
+        case .failure(let error):
+            client?.urlProtocol(self, didFailWithError: error)
+        case .status(let code):
+            let response = HTTPURLResponse(url: url, statusCode: code, httpVersion: nil, headerFields: nil)!
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocolDidFinishLoading(self)
+        case .success(let data):
+            let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            client?.urlProtocol(self, didLoad: data)
+            client?.urlProtocolDidFinishLoading(self)
+        }
+    }
+
+    override func stopLoading() {}
 }

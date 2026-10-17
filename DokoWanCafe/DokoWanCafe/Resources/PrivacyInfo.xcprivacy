@@ -2,26 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- 憲章 原則III: プライバシー・バイ・デザイン。位置情報は周辺検索のみに使用し、保存・トラッキングしない -->
+	<!-- 憲章 原則III: プライバシー・バイ・デザイン。位置情報は端末内の周辺検索のみに使用し、端末外へ送信・保存・トラッキングしない（Apple 定義の「収集」に該当しない） -->
 	<key>NSPrivacyTracking</key>
 	<false/>
 	<key>NSPrivacyTrackingDomains</key>
 	<array/>
 	<key>NSPrivacyCollectedDataTypes</key>
-	<array>
-		<dict>
-			<key>NSPrivacyCollectedDataType</key>
-			<string>NSPrivacyCollectedDataTypePreciseLocation</string>
-			<key>NSPrivacyCollectedDataTypeLinked</key>
-			<false/>
-			<key>NSPrivacyCollectedDataTypeTracking</key>
-			<false/>
-			<key>NSPrivacyCollectedDataTypePurposes</key>
-			<array>
-				<string>NSPrivacyCollectedDataTypePurposeAppFunctionality</string>
-			</array>
-		</dict>
-	</array>
+	<array/>
 	<key>NSPrivacyAccessedAPITypes</key>
 	<array>
 		<dict>
@@ -30,14 +17,6 @@
 			<key>NSPrivacyAccessedAPITypeReasons</key>
 			<array>
 				<string>CA92.1</string>
-			</array>
-		</dict>
-		<dict>
-			<key>NSPrivacyAccessedAPIType</key>
-			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
-			<key>NSPrivacyAccessedAPITypeReasons</key>
-			<array>
-				<string>C617.1</string>
 			</array>
 		</dict>
 	</array>
