@@ -37,7 +37,7 @@
   - 大型犬可否 `dog_large` 記入済み **257件**（true 229 / false 28、空欄 337）
   - 曜日別営業時間（構造化）**405件**（D-1 で330件追加）。`hours_text` のみ116件、営業時間情報なし73件
   - Instagram 代表投稿URL 135件、リンク皆無 138件
-  - **座標は多くが概算**（GPS実測ではない）。実測は今後の課題
+  - **座標**: 2026-10-17 に abr-geocoder（デジタル庁ABR）＋国土地理院住所検索でも同じ点を確認（同系統データのため独立検証ではない）して住所と突き合わせ、一致した167件を住所由来の座標に更新（残りは keep 276・manual 40・町字止まり keep_coarse 92）（出典台帳 `data/master/coord_sources.csv`）。更新しなかった店は `legacy_estimate`（照合で許容内・または manual/keep_coarse）。GPS実測ではない
 
 ## 3. 別PCでの環境セットアップ（新PCで最初にやること）
 
@@ -71,7 +71,8 @@ python3 tools/export_cafes.py --check
 - **PR #17 のマージ判断**（運営）: 表示テキストの調査メモ除去・閉店/陳腐化データの是正。レビュー中。
 - **個別の確認事項**: Snow Peak Cafe の店内可否は**電話確認**／Aoi Coffee Stand の営業実態は**現地確認**。
 - **dog_large 空欄（337件）**: 収穫率が約13%と低いため**保留**（費用対効果で再開を判断）。
-- **座標の実測**: 多くが概算。Google Maps 等でピン→座標を `cafes.csv` に反映（旧 T118 の3件スポットチェックの拡大版）。
+- **座標の残課題**: abr-geocoder + GSI で突き合わせ済み（`tools/README.md` の「座標の突き合わせ」）。`coord_sources.csv` の `decision` が `keep_coarse`（町字止まり）・`manual`（施設内・既存ピン精密・GSI/部分一致など）の店は、必要なら Google Maps 等で手動確認。
+  - **manual の優先順（旧座標のずれが大きい順）**: 高倉町珈琲 八王子店 4.8km／デルコス八王子本店 4.5km／Cafe' Roju 4.0km（以上、八王子。地番由来のため自動更新せず）／南町田グランベリーパーク内5店 約3km（施設内）／シアン ア ラ モード 2.6km／わんすたCafe＆酒場 1.1km（井の頭公園近接）ほか公園・商業施設内の店。実座標は Google Maps 等で確認して `cafes.csv` を更新し、`coord_sources.csv` も合わせる。
 - **鉄則**: 推測禁止／出典URL+確認日必須／provenance=`aggregated`固定／矛盾は両方記録／**エージェントはcommitしない**（運営がdiffレビューして反映＝承認）。
 - 新規エリア・店の追加（wave）は随時。リリースは全網羅を待たなくてよい。
 
@@ -110,6 +111,7 @@ git add -A && git commit -m "data: <エリア> N件追加" && git push
 3. **反映は1体（builder）に集約**して `cafes.csv` / `sources.csv` に書き込み、`export_cafes.py --check` で 0エラーを確認。
 4. **qa-reviewer（builder とは別体）が原文突き合わせ QA**（出典URL・条件の要約・調査メモの混入など）。FAIL は builder に戻す。
 5. **PR を作成**（shipper）。**運営がレビューしてマージ ＝ 承認 ＝ Pages 配信**。調査エージェント・builder は main へ直接 push しない。
+- **座標の突き合わせ（abr-geocoder + GSI）**: `tools/geocheck_coords.py report` → `gsi` → `report --gsi-json` → `apply [--write]` → `export_cafes.py --check`。abrg は **Node 22 必須・`-c` に東京都62市区町村を個別指定・`-t 1`**（詳細は `tools/README.md`）。出典台帳は `data/master/coord_sources.csv`。地番由来の座標は使わない。
 - **営業時間の構造化（バッチD）**は**二重独立変換**: 同じ原文を2担当が独立に変換し、**7曜日が完全一致かつ1曜日以上が非空の店だけ採用**。不一致は不採用として一覧化。一致後も原文（`hours_text` / `holiday_note`）との突き合わせ QA を必須とする。変換ルールは `gap-handover-2026-08.md` のバッチD参照。
 - 新規出典が**代表可否（allowed/conditional 等）を動かす**場合は、運営レビュー対象として報告に明記する。
 

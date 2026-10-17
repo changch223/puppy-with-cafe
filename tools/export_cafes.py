@@ -33,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # 既定はマスターCSV（実データ）。テンプレートから試すときは --cafes/--sources で指定
 DEFAULT_CAFES_CSV = ROOT / "data" / "master" / "cafes.csv"
 DEFAULT_SOURCES_CSV = ROOT / "data" / "master" / "sources.csv"
+DEFAULT_COORD_SOURCES_CSV = ROOT / "data" / "master" / "coord_sources.csv"
 DEFAULT_OUT = ROOT / "data" / "cafes.json"
 DEFAULT_CHANGELOG = ROOT / "data" / "CHANGELOG.md"
 DEFAULT_APP_COPY = ROOT / "DokoWanCafe" / "DokoWanCafe" / "Resources" / "cafes.json"
@@ -51,6 +52,11 @@ PROVENANCES = {
 
 UUID_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_DNS, "puppywithcafe.dokowan")
 PROXIMITY_METERS = 50.0  # FR-030 / research.md R6
+
+# 座標の非ブロッキング警告用（配信は止めない。cafes.json の出力にも影響しない）
+TOKYO_MAINLAND_LAT = (35.48, 35.90)    # 東京都本土の緯度範囲（島しょ部は範囲外 = 警告対象）
+TOKYO_MAINLAND_LNG = (138.94, 139.93)  # 東京都本土の経度範囲
+COORD_DRIFT_METERS = 1.0               # coord_sources.csv と cafes.csv の座標許容ずれ
 
 
 def fail(errors):
@@ -427,6 +433,36 @@ def check_duplicates(cafes, errors):
                     errors.append(f"重複疑い: 「{a['name']}」と「{b['name']}」は同名かつ {d:.0f}m の近接です。1行に統合してください")
 
 
+def collect_warnings(cafes, coord_sources_path):
+    """非ブロッキング警告。座標が東京都本土の範囲外 / coord_sources.csv の整合（cafe_id 不在・座標ずれ）"""
+    warnings = []
+    for c in cafes.values():
+        lat, lng = c["latitude"], c["longitude"]
+        if not (TOKYO_MAINLAND_LAT[0] <= lat <= TOKYO_MAINLAND_LAT[1] and TOKYO_MAINLAND_LNG[0] <= lng <= TOKYO_MAINLAND_LNG[1]):
+            warnings.append(f"座標が東京都本土の範囲外: 「{c['name']}」({lat}, {lng})")
+    if coord_sources_path and Path(coord_sources_path).exists():
+        with open(coord_sources_path, newline="", encoding="utf-8-sig") as f:
+            for i, row in enumerate(csv.DictReader(f), start=2):
+                raw_id = (row.get("cafe_id") or "").strip()
+                try:
+                    cid = str(uuid.UUID(raw_id))
+                except ValueError:
+                    cid = raw_id
+                cafe = cafes.get(cid)
+                label = f"coord_sources.csv 行{i}（{row.get('name', '')}）"
+                if cafe is None:
+                    warnings.append(f"{label}: cafe_id {raw_id!r} が cafes.csv に存在しません")
+                    continue
+                try:
+                    d = haversine_m(cafe["latitude"], cafe["longitude"], float(row["latitude"]), float(row["longitude"]))
+                except (ValueError, KeyError, TypeError):
+                    warnings.append(f"{label}: latitude/longitude が数値ではありません")
+                    continue
+                if d > COORD_DRIFT_METERS:
+                    warnings.append(f"{label}: 座標が cafes.csv と {d:.1f}m ずれています（座標を手で変更した場合は coord_sources.csv も更新してください）")
+    return warnings
+
+
 def compute_diff(old_cafes, new_cafes):
     old_by_id = {c["id"]: c for c in old_cafes}
     new_by_id = {c["id"]: c for c in new_cafes}
@@ -453,6 +489,8 @@ def main():
     ap.add_argument("--out", type=Path, default=DEFAULT_OUT)
     ap.add_argument("--app-copy", type=Path, default=DEFAULT_APP_COPY)
     ap.add_argument("--changelog", type=Path, default=DEFAULT_CHANGELOG)
+    ap.add_argument("--coord-sources", type=Path, default=DEFAULT_COORD_SOURCES_CSV,
+                    help="座標の出典台帳（警告チェック専用。cafes.json には影響しない）")
     ap.add_argument("--sample", action="store_true", help="架空サンプルデータとしてマーク（アプリにバナー表示）")
     ap.add_argument("--check", action="store_true", help="検証と差分表示のみ（ファイルを書き込まない）")
     args = ap.parse_args()
@@ -466,6 +504,12 @@ def main():
     check_duplicates(cafes, errors)
     if errors:
         fail(errors)
+
+    warnings = collect_warnings(cafes, args.coord_sources)
+    if warnings:
+        print(f"\n⚠️ 警告 {len(warnings)}件（非ブロッキング・配信は止まりません）:", file=sys.stderr)
+        for w in warnings:
+            print(f"  - {w}", file=sys.stderr)
 
     out_cafes = []
     for cid, cafe in cafes.items():

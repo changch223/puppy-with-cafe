@@ -1459,3 +1459,172 @@
 - ✏️ 変更: GREEN BROTHERS 麻布十番店（is_closed, sources）
 - ✏️ 変更: KOMAZAWA PARK CAFE（is_closed, sources）
 - ✏️ 変更: La Prosciutteria（ラ・プロシュッテリア）（is_closed, sources）
+
+## 2026-10-17 18:31 — 追加 0 / 変更 167 / 削除 0
+- ✏️ 変更: & OIMO TOKYO CAFE 中目黒店（longitude, latitude）
+- ✏️ 変更: ARMWOOD COTTAGE(アームウッドコテージ)（longitude, latitude）
+- ✏️ 変更: AUX BACCHANALES 銀座（longitude, latitude）
+- ✏️ 変更: BLACK TERRACE（longitude, latitude）
+- ✏️ 変更: BONDI CAFE Nakameguro（longitude, latitude）
+- ✏️ 変更: BONTA ITALIA(ボンタイタリア)（longitude, latitude）
+- ✏️ 変更: BOWLS cafe(ボウルズカフェ)（longitude, latitude）
+- ✏️ 変更: Besties Tokyo（longitude, latitude）
+- ✏️ 変更: Bleue Blanche（ブルーブランシュ）（longitude, latitude）
+- ✏️ 変更: CAFE TANTON（カフェタントン）（longitude, latitude）
+- ✏️ 変更: CAFE花と海（longitude, latitude）
+- ✏️ 変更: CHICHICAFE（longitude, latitude）
+- ✏️ 変更: CIRTY CAFE(サーティーカフェ)（longitude, latitude）
+- ✏️ 変更: CLANN BY THE RIVER（旧PITMANS）（longitude, latitude）
+- ✏️ 変更: COFFEE STAND .OTTEN（longitude, latitude）
+- ✏️ 変更: Cafe Lisette 二子玉川店（longitude, latitude）
+- ✏️ 変更: Cafe Madu 青山店（longitude, latitude）
+- ✏️ 変更: Cafe PREGO(カフェプレゴ)（longitude, latitude）
+- ✏️ 変更: Cafe Restaurant+Dog Grandir(グランディール)（longitude, latitude）
+- ✏️ 変更: Cafe Rose&M（カフェ ローズアンドエム）（longitude, latitude）
+- ✏️ 変更: Cafe Sadiiq（カフェ サディーク）（longitude, latitude）
+- ✏️ 変更: Cafe and Dining Paco（longitude, latitude）
+- ✏️ 変更: Cafe de Cuore(カフェ・ド・クオーレ)（longitude, latitude）
+- ✏️ 変更: Cafe du Riche(カフェドリッチェ)（longitude, latitude）
+- ✏️ 変更: Cafe さんぽ道（longitude, latitude）
+- ✏️ 変更: Chanoma(チャノマ)（longitude, latitude）
+- ✏️ 変更: Connect Kitchen（longitude, latitude）
+- ✏️ 変更: District ブラッスリー・バー・ラウンジ（longitude, latitude）
+- ✏️ 変更: Dog Cafe & Bar Deco et Deco(デコデコ)（longitude, latitude）
+- ✏️ 変更: Dog Cafe Uru(ドッグカフェ ウル)（longitude, latitude）
+- ✏️ 変更: Dog Café Bee（longitude, latitude）
+- ✏️ 変更: Dog Salon & Cafe Karin堂（longitude, latitude）
+- ✏️ 変更: Dogberry(ドッグベリー)（longitude, latitude）
+- ✏️ 変更: ENRICH（longitude, latitude）
+- ✏️ 変更: EZO DELI（longitude, latitude）
+- ✏️ 変更: F*GICCO by F.gohan(エフジッコ バイ エフゴハン)（longitude, latitude）
+- ✏️ 変更: FUGLEN ASAKUSA（longitude, latitude）
+- ✏️ 変更: Farm to table De Salita(ファーム トゥー テーブル デ サリータ)（longitude, latitude）
+- ✏️ 変更: Farmacy-Deli&BAR 日本橋1ppon（longitude, latitude）
+- ✏️ 変更: GENTLE Dining（longitude, latitude）
+- ✏️ 変更: GRAPHY NEZU CAFE&LOUNGE（longitude, latitude）
+- ✏️ 変更: GRIP(グリップ)（longitude, latitude）
+- ✏️ 変更: HAGI CAFE（longitude, latitude）
+- ✏️ 変更: HANAKADO(ハナカド)（longitude, latitude）
+- ✏️ 変更: Huit(ユイット)（longitude, latitude）
+- ✏️ 変更: IL BACARO ALMA（イル バーカロ アルマ）（longitude, latitude）
+- ✏️ 変更: IVY PLACE（longitude, latitude）
+- ✏️ 変更: In the Garden 135(イン・ザ・ガーデン135)（longitude, latitude）
+- ✏️ 変更: JIYUGAOKA BURGER(自由が丘バーガー)（longitude, latitude）
+- ✏️ 変更: JUICE BAR ROCKET(ジュースバーロケット)（longitude, latitude）
+- ✏️ 変更: Jugar cafe(フガールカフェ)（longitude, latitude）
+- ✏️ 変更: LOU（longitude, latitude）
+- ✏️ 変更: Le Maghreb（ル・マグレブ）（longitude, latitude）
+- ✏️ 変更: MEAT×WINE BISTRO DOMANNAKA（longitude, latitude）
+- ✏️ 変更: MID TREE 代官山（longitude, latitude）
+- ✏️ 変更: MOCMO sandwiches（longitude, latitude）
+- ✏️ 変更: Maison Landemaine 麻布台（longitude, latitude）
+- ✏️ 変更: Mon-TERCERO（テルセーロ）（longitude, latitude）
+- ✏️ 変更: Monsoon Cafe 代官山（longitude, latitude）
+- ✏️ 変更: NATURE&MEAT GROVE PARK VIEW（longitude, latitude）
+- ✏️ 変更: NISHIann cafe(西庵カフェ)（longitude, latitude）
+- ✏️ 変更: Nagi（longitude, latitude）
+- ✏️ 変更: Nim's Pizza（longitude, latitude）
+- ✏️ 変更: Onigily Cafe(オニギリーカフェ)（longitude, latitude）
+- ✏️ 変更: Osteria Capanna(オステリアカパンナ)（longitude, latitude）
+- ✏️ 変更: PACE ITALIAN LOUNGE（longitude, latitude）
+- ✏️ 変更: PIZZERIA PICCHI（ピッツェリア ピッキ）（longitude, latitude）
+- ✏️ 変更: Paradise Poke蔵前（longitude, latitude）
+- ✏️ 変更: Pizzeria & Trattoria アダッキオ(AD'ACCHIO)（longitude, latitude）
+- ✏️ 変更: Pizzeria&Trattoria GONZO 吉祥寺店（longitude, latitude）
+- ✏️ 変更: Plus veganique(プラスヴィーガニック自由が丘)（longitude, latitude）
+- ✏️ 変更: Pretty Good - coffee & donut（longitude, latitude）
+- ✏️ 変更: RITUEL 等々力店(リチュエル)（longitude, latitude）
+- ✏️ 変更: ROJU NAKAMEGURO（longitude, latitude）
+- ✏️ 変更: Ralph's Coffee Omotesando（longitude, latitude）
+- ✏️ 変更: SAUCE UP BURGER（longitude, latitude）
+- ✏️ 変更: SHARK COFFEE（longitude, latitude）
+- ✏️ 変更: SHUTTERS 自由が丘（longitude, latitude）
+- ✏️ 変更: SUNNY's cafe＆surf（サニーズカフェ）（longitude, latitude）
+- ✏️ 変更: SYUNA & BANI（シュナ＆バニ）（longitude, latitude）
+- ✏️ 変更: THE LINKING（longitude, latitude）
+- ✏️ 変更: TOKYO KAKI STAND 東京ドームシティ店（longitude, latitude）
+- ✏️ 変更: TRATTORIA Mocco（longitude, latitude）
+- ✏️ 変更: Takuru(タクる)（longitude, latitude）
+- ✏️ 変更: The Jones Café | Bar（longitude, latitude）
+- ✏️ 変更: Tokyo Kenkyo（longitude, latitude）
+- ✏️ 変更: VERVE COFFEE ROASTERS 六本木店（longitude, latitude）
+- ✏️ 変更: VILLAGE MARCHE(ヴィレッジマルシェ)（longitude, latitude）
+- ✏️ 変更: Vegeater（longitude, latitude）
+- ✏️ 変更: WHAT CAFE（longitude, latitude）
+- ✏️ 変更: WOODBERRY COFFEE 荻窪店（longitude, latitude）
+- ✏️ 変更: YELLOW KOMAZAWA KOEN（longitude, latitude）
+- ✏️ 変更: YOUR SIDE COFFEE（ユアサイドコーヒー）（longitude, latitude）
+- ✏️ 変更: anea cafe Monnaka village（アネアカフェ門前仲町ビレッジ）（longitude, latitude）
+- ✏️ 変更: anea cafe 中野新橋店（longitude, latitude）
+- ✏️ 変更: cafe Crumpets（longitude, latitude）
+- ✏️ 変更: cafe arica（longitude, latitude）
+- ✏️ 変更: crisscross（longitude, latitude）
+- ✏️ 変更: cure(キュア) 千歳船橋店（longitude, latitude）
+- ✏️ 変更: good fellas（longitude, latitude）
+- ✏️ 変更: gufo(グーフォ)（longitude, latitude）
+- ✏️ 変更: haluuu(ハルー)（longitude, latitude）
+- ✏️ 変更: i2 cafe（longitude, latitude）
+- ✏️ 変更: iki Roastery & Eatery（longitude, latitude）
+- ✏️ 変更: les joues de bébé（longitude, latitude）
+- ✏️ 変更: marble（longitude, latitude）
+- ✏️ 変更: mum coffee（longitude, latitude）
+- ✏️ 変更: nakameguro SLOW TABLE（longitude, latitude）
+- ✏️ 変更: rice cafe（longitude, latitude）
+- ✏️ 変更: tonkatsu.jp表参道（longitude, latitude）
+- ✏️ 変更: vegewest Cafe & WineBar(代官山vegewest)（longitude, latitude）
+- ✏️ 変更: いづも 池袋店（longitude, latitude）
+- ✏️ 変更: かざみどり南池袋（longitude, latitude）
+- ✏️ 変更: ひぐらしベーカリー（longitude, latitude）
+- ✏️ 変更: オカン焼肉 紅ちゃん 本店（longitude, latitude）
+- ✏️ 変更: オーバカナル 高輪店（longitude, latitude）
+- ✏️ 変更: オービカ モッツァレラバー 高輪店（longitude, latitude）
+- ✏️ 変更: カフェ テラス ヴェルト（Cafe Terrasse Verte）（longitude, latitude）
+- ✏️ 変更: カフェ ハルテラス(Cafe HARU terrace)（longitude, latitude）
+- ✏️ 変更: カフェ フェリーチェ(cafe Felice)（longitude, latitude）
+- ✏️ 変更: カフェ・ミケランジェロ（longitude, latitude）
+- ✏️ 変更: カフェ海猫山猫（longitude, latitude）
+- ✏️ 変更: グリル&ダイニング用賀倶楽部（longitude, latitude）
+- ✏️ 変更: サクラカフェ&レストラン日暮里(SAKURA CAFE)（longitude, latitude）
+- ✏️ 変更: サクラカフェ&レストラン池袋（longitude, latitude）
+- ✏️ 変更: サザンダイニング用賀店（longitude, latitude）
+- ✏️ 変更: シャテール（chatiere）（longitude, latitude）
+- ✏️ 変更: ジェラテリア エルバ（longitude, latitude）
+- ✏️ 変更: ステーキハウス ニューテキサス（longitude, latitude）
+- ✏️ 変更: スワン銀座（SWAN GINZA）（longitude, latitude）
+- ✏️ 変更: タパス&タパス 用賀店（longitude, latitude）
+- ✏️ 変更: デ・ラ・ナチュール(DE LA NATURE)（longitude, latitude）
+- ✏️ 変更: トラットリア トラム ロカーレ（longitude, latitude）
+- ✏️ 変更: ドッグカフェ&BAR Petit Leon（longitude, latitude）
+- ✏️ 変更: ドッグラン&カフェバー ノンノバドール（longitude, latitude）
+- ✏️ 変更: ハーベステラス 品川店（longitude, latitude）
+- ✏️ 変更: パンとcafé えだおね（longitude, latitude）
+- ✏️ 変更: フランス料理 銀座みかわや（longitude, latitude）
+- ✏️ 変更: プラスアルファキッチン（ラムと豪州ジビエバル）（longitude, latitude）
+- ✏️ 変更: プリティシングス（longitude, latitude）
+- ✏️ 変更: マキネスティコーヒー 緑本店（longitude, latitude）
+- ✏️ 変更: マホラ食堂（longitude, latitude）
+- ✏️ 変更: ミタスカフェ（Mitasu Cafe）（longitude, latitude）
+- ✏️ 変更: ミヤマ珈琲 練馬春日町店（longitude, latitude）
+- ✏️ 変更: ミルリトンカフェ(Mirliton Cafe)（longitude, latitude）
+- ✏️ 変更: ヨガカフェ（longitude, latitude）
+- ✏️ 変更: ランゾウ（longitude, latitude）
+- ✏️ 変更: リゴレッティーノ（longitude, latitude）
+- ✏️ 変更: 上島珈琲店 護国寺店（longitude, latitude）
+- ✏️ 変更: 串カツ田中 経堂店（longitude, latitude）
+- ✏️ 変更: 八十八夜 吉祥寺店（longitude, latitude）
+- ✏️ 変更: 君のハンバーグを食べたい渋谷店（longitude, latitude）
+- ✏️ 変更: 和風ジェラート おかじ Tokyo（longitude, latitude）
+- ✏️ 変更: 土鍋炊きご飯 おこめとおかず（longitude, latitude）
+- ✏️ 変更: 大衆イタリアン酒場 煙-kemuri-（longitude, latitude）
+- ✏️ 変更: 庭cafe443 in Todoroki（longitude, latitude）
+- ✏️ 変更: 木曜館（longitude, latitude）
+- ✏️ 変更: 氷屋ぴぃす（longitude, latitude）
+- ✏️ 変更: 熊祥(くまよし)（longitude, latitude）
+- ✏️ 変更: 犬茶屋本舗（longitude, latitude）
+- ✏️ 変更: 石濱茶寮 楽（longitude, latitude）
+- ✏️ 変更: 祖師谷バル haracucci(ハラクッチ)（longitude, latitude）
+- ✏️ 変更: 肉と牡蠣CARTA 池袋店（longitude, latitude）
+- ✏️ 変更: 自由が丘 カスタネット（longitude, latitude）
+- ✏️ 変更: 野菜倶楽部 oto no ha Café(オトノハカフェ)（longitude, latitude）
+- ✏️ 変更: 雪月花（longitude, latitude）
+- ✏️ 変更: 食事とナチュラルワイン AOLA(アオラ)（longitude, latitude）

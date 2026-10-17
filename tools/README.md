@@ -110,3 +110,51 @@ cafes タブに以下を追加（**すべて任意**。空欄＝不明として�
 - **実データの正本**: `data/master/cafes.csv` / `data/master/sources.csv`（`export_cafes.py` の既定入力）
 - テンプレート: `tools/sheet_template/*.csv`（Google Sheets へのインポート用・架空サンプル入り）
 - 運用: `data/master/*.csv` を直接編集 → `python3 tools/export_cafes.py` → 差分確認 → commit
+
+## 座標の突き合わせ（geocheck_coords.py・デジタル庁 abr-geocoder + 国土地理院）
+
+掲載店の座標（`cafes.csv` の latitude/longitude）を、住所を abr-geocoder（アドレス・ベース・レジストリ）で
+ジオコードした座標と突き合わせて判定し、さらに国土地理院の住所検索（msearch.gsi.go.jp）でも同じ点を確認できた `fix` だけを書き戻す（GSI と ABR は同系統の位置参照データのため独立検証ではなく、abrg の誤りを防ぐ確認程度）。
+出典台帳は `data/master/coord_sources.csv`。
+
+### 出典・ライセンス
+- ABR データは「公共データ利用規約（第1.0版）（PDL1.0）」（https://www.digital.go.jp/policies/base_registry_address_tos）。
+  表記は「位置情報の一部は、デジタル庁『アドレス・ベース・レジストリ』を Puppy With Cafe 運営が加工して作成」（`docs/privacy.html` に掲載）。
+- abr-geocoder 本体は MIT。開発用ツールでありアプリには同梱しない。
+- **地番（coordinate_level=parcel）由来の座標は fix に使わない**（登記所備付地図データの規約・住居表示と地番の取り違えを避けるため）。台帳の `geocoded_address`/`level` に parcel が現れるのは照合記録のみで、cafes.csv に書き込まれる座標は住居表示（residential_*）由来に限る。
+
+### abrg のセットアップ（作業用ディレクトリに作る。リポジトリには入れない）
+- **Node.js 22 LTS が必須**（24 は依存の uWebSockets.js が非対応で起動しない）。グローバル導入せず、公式 tarball を作業ディレクトリに展開して PATH を通すだけでよい。
+- `npm install --save-exact @digital-go-jp/abr-geocoder@2.3.1`（deprecated 表示だが v2.3.1 で動作確認済み）
+- データ取得は **`-c` に東京都62市区町村の LG code を個別に指定**し、**`-t 1`** で実行する（約86MB・DB約670MB）:
+  `abrg download -d <dir> -c 131016 131024 ... 134210 -t 1 --silent`
+  - `-c 130001`（都道府県コード）だと、住居表示（街区・住居）が DB に取り込まれずエラーも出ない。
+  - 市区町村コードは `<dir>/download/mt_city_pref13.csv` の `lg_code` 列から取れる。既定スレッド数だと `SQLITE_BUSY` で落ちる。
+
+### 使い方（レポート → GSI 確認 → 再レポート → 書き戻し）
+```bash
+python3 tools/geocheck_coords.py report --abrg-bin <abrg> --abrg-dir <dir> --save-geo-json geo_raw.json --out pre.csv   # fix 候補は gsi_pending
+python3 tools/geocheck_coords.py gsi --report pre.csv --out gsi.json                                               # 1秒1件
+python3 tools/geocheck_coords.py report --geo-json geo_raw.json --gsi-json gsi.json --out geocheck.csv             # 最終判定
+python3 tools/geocheck_coords.py apply --report geocheck.csv [--write]                                             # 既定 dry-run
+python3 tools/export_cafes.py --check
+```
+- 判定（上から順）: closed→skip / 明示 manual 指定（`--force-manual`、QA 指定の14件）→manual / 住所空 or 精度C→keep_coarse / 市区町村不一致 or d>5000m→investigate / abrg の `others` に番号が残る→manual（部分一致）/ 施設F かつ d≤300→keep・超→manual / A かつ d≤50→keep、B かつ d≤100→keep / 超過は **fix 候補**。
+- fix 候補の関門: 旧座標の lat か lng が小数5桁以上（`--precise-decimals`、末尾の 0 は数えない。小数4桁以下は丸めた概算座標とみなして上書き対象）→ d≤300 keep・超→manual / 地番座標→manual / GSI と abrg の距離が150m以下のときだけ fix（超過・GSI 結果なしは manual）。
+- 精度クラスは abrg の `match_level` かつ `coordinate_level` で決める（地番一致でも地番位置データが無い地域は町字代表点＝C）。
+- 施設フラグ F は name / address（番地より前の町名部分と「〜通り」は除外）/ description から施設語（公園・モール・ヒルズ・グランベリー・ソラマチ・スカイツリー・タワー等）を検索。「タワー」は name/address のみ、「SC」は英字に挟まれない場合のみ。汎用語の「テラス」は「テラス席」で全店に当たるため施設語から外している（「テラス棟」「シーズンテラス」は対象）。
+- `apply` は cafes.csv を読み書きしてバイト一致することを事前確認し、fix 行の latitude/longitude セルだけを小数5桁で置換する（CRLF 維持）。gsi_pending が残っていると中止する。
+- `export_cafes.py` は、座標が東京都本土範囲外・coord_sources.csv の cafe_id 不在/座標ずれ（1m超）を**警告のみ**で表示する（配信は止まらない）。
+
+### coord_sources.csv の列
+`cafe_id,name,latitude,longitude,method,level,geocoded_address,distance_m,gsi_distance_m,decision,ref,verified_at,note`
+- `method`: fix 行＝`abr_geocoder`（座標を ABR 由来に更新した）、それ以外＝`legacy_estimate`（従来の概算座標のまま）。
+- `latitude`/`longitude`: 現在 cafes.csv にある座標（fix は新座標）。
+- **`distance_m`: 旧座標（apply 前の cafes.csv の座標）と abrg 照合結果の距離（m）**。fix 行では「どれだけ動かしたか」、それ以外では「照合結果とどれだけ離れているか」。`level`/`geocoded_address` は照合に使った abrg 結果の精度（coordinate_level）と正規化住所で、`legacy_estimate` 行の座標自体の精度ではない。
+- `gsi_distance_m`: abrg と GSI 住所検索の距離（m）。GSI 照合を行った fix 候補のみ記録。
+- `decision`: keep / fix / keep_coarse / manual / investigate。
+
+### 実績（2026-10-17・初回適用）
+- 594行: keep 276 / **fix 167（cafes.csv の座標を更新）** / manual 40 / keep_coarse 92 / skip（closed）19 / investigate 0。
+- fix の移動距離: 中央値 366m、最大 3847m。abrg と GSI の距離は最大 2.4m。
+- 残りの概算座標は coord_sources.csv の `decision` が manual（施設内・地番座標・部分一致・QA 指定）/ keep_coarse（町字代表点止まり）の店。
