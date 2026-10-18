@@ -27,7 +27,7 @@ Cafe data (cafes.json) is a static JSON file fetched from GitHub Pages (https://
 On a cafe's detail screen, an Instagram post may be shown using Instagram's official embed (in a WebView), and link previews (title/image) are fetched directly by the device for the cafe's website, etc. No ads, no analytics, no tracking, no crash-reporting SDKs. App Privacy: "Data Not Collected".
 
 [Error reports / contact]
-The "情報の誤りを報告" (Report an error) button on the detail screen opens a Google Form in the browser. No sign-in is required and no email address is collected.
+The in-app error-report feature is not included (hidden) in this version, so there is no report button or form in the app. Contact and error reports are handled via the Support URL page (https://changch223.github.io/puppy-with-cafe/docs/support.html), which points to GitHub Issues. No sign-in is required in the app and the app collects no personal data.
 
 [Encryption]
 The app uses only standard HTTPS provided by the OS. ITSAppUsesNonExemptEncryption = NO.
@@ -60,7 +60,7 @@ Puppy With Cafe のご審査ありがとうございます。
 店舗詳細で、Instagram 公式の埋め込み（WebView）による投稿表示や、店舗サイト等のリンクプレビュー（端末が直接取得）を行う場合があります。広告・解析・トラッキング・クラッシュ収集 SDK は使用していません。App Privacy は「データを収集しません」です。
 
 【誤り報告・お問い合わせ】
-詳細画面の「情報の誤りを報告」から Google フォームをブラウザで開きます。サインイン不要で、メールアドレスも収集しません。
+誤り報告機能は今回の版ではアプリ内に表示されません（ボタン・フォームなし）。問い合わせ先はサポートページ（https://changch223.github.io/puppy-with-cafe/docs/support.html）で、GitHub Issues を案内しています。アプリ内ではサインイン不要で、個人情報は収集しません。
 
 【暗号化】
 OS 標準の HTTPS のみ使用。ITSAppUsesNonExemptEncryption = NO。
@@ -68,6 +68,6 @@ OS 標準の HTTPS のみ使用。ITSAppUsesNonExemptEncryption = NO。
 
 ## 注意（提出前に確認）
 
-- 審査中に GitHub Pages（cafes.json・support.html・privacy.html）が **公開状態・到達可能** であること。`{{FORM_URL}}` 未差し替えのまま提出しない。
-- 報告フォーム URL が未設定だと、店詳細の「情報の誤りを報告」ボタンが表示されない（審査メモの説明と食い違う）。**フォーム作成・URL 反映後にビルドして提出**する（`google-form-setup.md`）。
+- 審査中に GitHub Pages（cafes.json・support.html・privacy.html）が **公開状態・到達可能** であること。
+- v1.0 は報告フォームなしで提出する。報告フォーム URL が未設定（`nil`）の間は店詳細の「情報の誤りを報告」ボタンが自動で非表示になり、審査メモの記載と一致する。フォームを導入する版では審査メモを更新すること（`google-form-setup.md`）。
 - 審査メモ内の UI ラベル（地域ボタン・「詳細」「経路」）は、スクリーンショット撮影時にアプリの実際の表示と一致しているか確認する。

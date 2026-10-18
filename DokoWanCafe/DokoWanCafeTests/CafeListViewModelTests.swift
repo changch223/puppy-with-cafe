@@ -1,3 +1,4 @@
+import Combine
 import XCTest
 @testable import DokoWanCafe
 
@@ -343,5 +344,305 @@ final class CafeListViewModelTests: XCTestCase {
         let raw = try String(contentsOf: cacheStore.fileURL, encoding: .utf8)
         XCTAssertFalse(raw.contains("distance"))
         XCTAssertEqual(cacheStore.load()?.cafes, [cafe])
+    }
+
+    // MARK: - stale-while-revalidate（起動直後はローカルで表示 → 裏の取得完了で再表示）
+
+    /// リモート取得を手動で開閉できるモック（取得前=cafes、取得後=remoteCafes に差し替わる）
+    private actor RemoteMockRepository: CafeRepository {
+        private var cafes: [Cafe]
+        private let remoteCafes: [Cafe]
+        private var gateClosed: Bool
+        private var waiters: [CheckedContinuation<Void, Never>] = []
+        private(set) var refreshFlags: [Bool] = []
+
+        init(cafes: [Cafe], remoteCafes: [Cafe], gateClosed: Bool = true) {
+            self.cafes = cafes
+            self.remoteCafes = remoteCafes
+            self.gateClosed = gateClosed
+        }
+
+        func openGate() {
+            gateClosed = false
+            waiters.forEach { $0.resume() }
+            waiters.removeAll()
+        }
+
+        func nearbyCafes(
+            latitude: Double, longitude: Double, radiusMeters: Int, onlyDogOK: Bool
+        ) async throws -> [CafeWithDistance] {
+            cafes.map { cafe in
+                CafeWithDistance(
+                    cafe: cafe,
+                    distanceMeters: DistanceCalculator.distanceMeters(
+                        fromLatitude: latitude, fromLongitude: longitude,
+                        toLatitude: cafe.latitude, toLongitude: cafe.longitude
+                    )
+                )
+            }
+            .sorted { $0.distanceMeters < $1.distanceMeters }
+        }
+
+        func cafeDetail(id: UUID) async throws -> CafeDetail {
+            throw SupabaseError.emptyResponse
+        }
+
+        func allCafes() async throws -> [Cafe] { cafes }
+
+        func refreshRemote(force: Bool) async -> Bool {
+            refreshFlags.append(force)
+            if gateClosed {
+                await withCheckedContinuation { waiters.append($0) }
+            }
+            let changed = cafes != remoteCafes
+            cafes = remoteCafes
+            return changed
+        }
+    }
+
+    private func waitUntil(_ condition: @escaping () async -> Bool, timeout: TimeInterval = 5) async {
+        let deadline = Date().addingTimeInterval(timeout)
+        while Date() < deadline {
+            if await condition() { return }
+            try? await Task.sleep(nanoseconds: 10_000_000)
+        }
+        XCTFail("条件が時間内に満たされなかった")
+    }
+
+    func test_起動時はリモート取得を待たずローカルで表示し取得完了で再表示する() async {
+        let old = makeCafe(name: "古い店", latitude: 35.6897, longitude: 139.7007)
+        let new = makeCafe(name: "新しい店", latitude: 35.6898, longitude: 139.7008)
+        let repository = RemoteMockRepository(cafes: [old], remoteCafes: [old, new])
+        let viewModel = CafeListViewModel(
+            repository: repository,
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+        viewModel.includeUnverified = true
+        viewModel.sortOrder = .distance
+
+        var phases: [CafeListViewModel.Phase] = []
+        let cancellable = viewModel.$phase.sink { phases.append($0) }
+        defer { cancellable.cancel() }
+
+        let task = Task { await viewModel.refreshThenRevalidate() }
+        // リモート取得は未完了（ゲート閉）だが、ローカルのデータで表示が確定している
+        await waitUntil { await repository.refreshFlags.count == 1 }
+        XCTAssertEqual(viewModel.phase, .loaded)
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["古い店"])
+        let centerBefore = viewModel.searchCenter
+        let loadingCountBefore = phases.filter { $0 == .loading }.count
+
+        await repository.openGate()
+        await task.value
+
+        XCTAssertEqual(Set(viewModel.displayedResults.map(\.cafe.name)), ["古い店", "新しい店"])
+        XCTAssertEqual(viewModel.allLoadedCafes.count, 2, "お気に入り解決用の全件も更新される")
+        XCTAssertEqual(phases.filter { $0 == .loading }.count, loadingCountBefore, "再表示で読み込み中表示に戻さない")
+        XCTAssertEqual(viewModel.searchCenter?.latitude, centerBefore?.latitude)
+        XCTAssertEqual(viewModel.searchCenter?.longitude, centerBefore?.longitude)
+        XCTAssertTrue(viewModel.includeUnverified, "絞り込み条件は保たれる")
+        let flags = await repository.refreshFlags
+        XCTAssertEqual(flags, [false], "起動時の裏取得は force:false")
+    }
+
+    func test_裏の取得で変更がなければ再表示しない() async {
+        let cafe = makeCafe(name: "店", latitude: 35.6897, longitude: 139.7007)
+        let repository = RemoteMockRepository(cafes: [cafe], remoteCafes: [cafe], gateClosed: false)
+        let viewModel = CafeListViewModel(
+            repository: repository,
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+
+        await viewModel.refresh()
+        var changeCount = 0
+        let cancellable = viewModel.$allResults.dropFirst().sink { _ in changeCount += 1 }
+        defer { cancellable.cancel() }
+        await viewModel.revalidateInBackground()
+
+        XCTAssertEqual(changeCount, 0, "変更なし(false)なら表示を作り直さない")
+        XCTAssertEqual(viewModel.phase, .loaded)
+    }
+
+    func test_裏の取得は同時に2本走らない() async {
+        let old = makeCafe(name: "古い店", latitude: 35.6897, longitude: 139.7007)
+        let new = makeCafe(name: "新しい店", latitude: 35.6898, longitude: 139.7008)
+        let repository = RemoteMockRepository(cafes: [old], remoteCafes: [old, new])
+        let viewModel = CafeListViewModel(
+            repository: repository,
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        let first = Task { await viewModel.revalidateInBackground() }
+        await waitUntil { await repository.refreshFlags.count == 1 }
+        let second = Task { await viewModel.revalidateInBackground() }
+        await second.value  // 実行中なので即座に戻る
+        let flagsWhileRunning = await repository.refreshFlags
+        XCTAssertEqual(flagsWhileRunning.count, 1)
+
+        await repository.openGate()
+        await first.value
+        XCTAssertEqual(viewModel.displayedResults.count, 2)
+    }
+
+    func test_再読み込みはforceで取得を待ってから再表示する() async {
+        let old = makeCafe(name: "古い店", latitude: 35.6897, longitude: 139.7007)
+        let new = makeCafe(name: "新しい店", latitude: 35.6898, longitude: 139.7008)
+        let repository = RemoteMockRepository(cafes: [old], remoteCafes: [old, new])
+        let viewModel = CafeListViewModel(
+            repository: repository,
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+        XCTAssertEqual(viewModel.displayedResults.count, 1)
+
+        let task = Task { await viewModel.reloadFromRemote() }
+        await waitUntil { await repository.refreshFlags.count == 1 }
+        XCTAssertEqual(viewModel.phase, .loading, "取得を待っている間は読み込み中")
+        XCTAssertEqual(viewModel.displayedResults.count, 1, "取得が終わるまで新データは出ない")
+
+        await repository.openGate()
+        await task.value
+
+        let flags = await repository.refreshFlags
+        XCTAssertEqual(flags, [true], "再読み込みは force:true")
+        XCTAssertEqual(viewModel.phase, .loaded)
+        XCTAssertEqual(Set(viewModel.displayedResults.map(\.cafe.name)), ["古い店", "新しい店"])
+    }
+
+    func test_再読み込みでデータが変わったらお気に入り解決用の全件も取り直す() async {
+        let old = makeCafe(name: "古い店", latitude: 35.6897, longitude: 139.7007)
+        let new = makeCafe(name: "新しい店", latitude: 35.6898, longitude: 139.7008)
+        let repository = RemoteMockRepository(cafes: [old], remoteCafes: [old, new])
+        let viewModel = CafeListViewModel(
+            repository: repository,
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+        XCTAssertEqual(viewModel.allLoadedCafes.map(\.name), ["古い店"])
+
+        await repository.openGate()
+        await viewModel.reloadFromRemote()
+
+        XCTAssertEqual(Set(viewModel.allLoadedCafes.map(\.name)), ["古い店", "新しい店"], "再読み込み後は全件も最新")
+        XCTAssertEqual(viewModel.displayedResults.count, 2)
+    }
+
+    /// 最初の nearbyCafes だけ開放まで待たせ、2回目以降は即返すモック（起点変更の割り込み再現用）
+    private actor FirstCallGatedRepository: CafeRepository {
+        let cafes: [Cafe]
+        private var gateClosed = true
+        private var waiter: CheckedContinuation<Void, Never>?
+        private(set) var callCount = 0
+
+        init(cafes: [Cafe]) { self.cafes = cafes }
+
+        func openGate() {
+            gateClosed = false
+            waiter?.resume()
+            waiter = nil
+        }
+
+        func nearbyCafes(
+            latitude: Double, longitude: Double, radiusMeters: Int, onlyDogOK: Bool
+        ) async throws -> [CafeWithDistance] {
+            callCount += 1
+            if callCount == 1 {
+                await withCheckedContinuation { waiter = $0 }
+            }
+            return cafes.map { cafe in
+                CafeWithDistance(
+                    cafe: cafe,
+                    distanceMeters: DistanceCalculator.distanceMeters(
+                        fromLatitude: latitude, fromLongitude: longitude,
+                        toLatitude: cafe.latitude, toLongitude: cafe.longitude
+                    )
+                )
+            }
+        }
+
+        func cafeDetail(id: UUID) async throws -> CafeDetail { throw SupabaseError.emptyResponse }
+        func allCafes() async throws -> [Cafe] { cafes }
+    }
+
+    func test_取得中に起点が変わったら古い起点の結果で上書きしない() async {
+        let cafe = makeCafe(name: "店", latitude: 35.6897, longitude: 139.7007)
+        let repository = FirstCallGatedRepository(cafes: [cafe])
+        let viewModel = CafeListViewModel(
+            repository: repository,
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: makeFavoritesStore()
+        )
+        let areaA = makeOrigin()  // 新宿
+        let areaB = ManualArea(id: "test-tokyo", name: "テスト:東京", latitude: 35.6812, longitude: 139.7671)
+
+        viewModel.origin = .manual(areaA)
+        let first = Task { await viewModel.refresh() }
+        await waitUntil { await repository.callCount == 1 }  // A の取得が止まっている
+
+        viewModel.origin = .manual(areaB)
+        await viewModel.refresh()  // B の取得は先に完了する
+        await repository.openGate()  // 遅れて A の取得が返る
+        await first.value
+
+        XCTAssertEqual(viewModel.searchCenter?.latitude, areaB.latitude)
+        let expectedFromB = DistanceCalculator.distanceMeters(
+            fromLatitude: areaB.latitude, fromLongitude: areaB.longitude,
+            toLatitude: cafe.latitude, toLongitude: cafe.longitude
+        )
+        XCTAssertEqual(viewModel.allResults.first?.distanceMeters ?? -1, expectedFromB, accuracy: 0.001,
+                       "古い起点(A)の距離で上書きされない")
+        XCTAssertEqual(viewModel.phase, .loaded)
+    }
+
+    /// 取得は常に失敗し、裏の更新確認は「変更あり」を返すモック
+    private struct FailingChangedRepository: CafeRepository {
+        let cafes: [Cafe]
+        func nearbyCafes(
+            latitude: Double, longitude: Double, radiusMeters: Int, onlyDogOK: Bool
+        ) async throws -> [CafeWithDistance] {
+            throw URLError(.notConnectedToInternet)
+        }
+        func cafeDetail(id: UUID) async throws -> CafeDetail { throw SupabaseError.emptyResponse }
+        func allCafes() async throws -> [Cafe] { cafes }
+        func refreshRemote(force: Bool) async -> Bool { true }
+    }
+
+    func test_error状態は裏の取得でloadedに上書きされない() async {
+        let cafe = makeCafe(name: "店", latitude: 35.6897, longitude: 139.7007)
+        let viewModel = CafeListViewModel(
+            repository: FailingChangedRepository(cafes: [cafe]),
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),  // キャッシュなし
+            favoritesStore: makeFavoritesStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+        guard case .error = viewModel.phase else {
+            return XCTFail("取得失敗＋キャッシュなしはエラーのはず: \(viewModel.phase)")
+        }
+
+        await viewModel.revalidateInBackground()
+
+        guard case .error = viewModel.phase else {
+            return XCTFail("裏の取得による再表示で .error を上書きしない: \(viewModel.phase)")
+        }
+        XCTAssertEqual(viewModel.allLoadedCafes.map(\.name), ["店"], "全件の更新だけは行う")
     }
 }

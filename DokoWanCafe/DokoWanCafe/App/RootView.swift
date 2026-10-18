@@ -13,6 +13,7 @@ enum AppRoute: Hashable {
 struct RootView: View {
     let dependencies: AppDependencies
     @StateObject private var searchViewModel: CafeListViewModel
+    @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var favoritesStore: FavoritesStore
     @State private var path = NavigationPath()
     @State private var showAreaPicker = false
@@ -125,7 +126,15 @@ struct RootView: View {
                 Button(String(localized: "キャンセル"), role: .cancel) {}
             }
             .task {
-                await searchViewModel.refresh()
+                // ローカルのデータで即表示 → 裏でリモート更新（stale-while-revalidate）
+                await searchViewModel.refreshThenRevalidate()
+            }
+            // 前面に戻ったときも裏でデータ更新を確認する（取得間隔・失敗抑止は force:false の既存ルール。
+            // 起動時の .task と重なっても revalidate 側で同時実行を避ける）
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    Task { await searchViewModel.revalidateInBackground() }
+                }
             }
             // ピンカードを閉じたら下部シートをpeekへ復帰させる（S3設計書:「カード閉じでpeek復帰」）
             // iOS 16対応のため単一引数版のonChangeを使う
@@ -293,7 +302,8 @@ struct RootView: View {
             Button {
                 // 再読み込み（refresh経路）でも現在エリアに無い古い選択カードを残さない（QA指摘）
                 selectedMapItem = nil
-                Task { await searchViewModel.refresh() }
+                // 明示操作なのでリモート取得（強制）を待ってから再表示する
+                Task { await searchViewModel.reloadFromRemote() }
             } label: {
                 Label(String(localized: "再読み込み"), systemImage: "arrow.clockwise")
             }

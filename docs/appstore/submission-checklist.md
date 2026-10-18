@@ -2,7 +2,7 @@
 
 凡例: 【本人】= 本人にしかできない作業 / 【AI】= Claude に頼める作業
 
-現状（2026-10-17 時点・コードから確認）: Bundle ID `com.dokowancafe.app` / 表示名 Puppy With Cafe / 版数 1.0.0 (build 1) / `DEVELOPMENT_TEAM = MY8WU4892D`（要確認・変更）/ iPhone 専用・縦向き・iOS 16+ / 誤り報告フォーム URL は `nil`（未設定。未設定の間は店詳細の報告ボタンが非表示）。
+現状（2026-10-17 時点・コードから確認）: Bundle ID `com.dokowancafe.app` / 表示名 Puppy With Cafe / 版数 1.0.0 (build 1) / `DEVELOPMENT_TEAM = MY8WU4892D`（要確認・変更）/ iPhone 専用・縦向き・iOS 16+ / 誤り報告フォーム URL は `nil`（未設定。未設定の間は店詳細の報告ボタンが自動で非表示）。**v1.0 はフォームなしで提出する**（問い合わせ・誤り報告の窓口は GitHub Issues。docs/privacy.html・docs/support.html に記載済み）。
 
 ## 1. Apple Developer Program に加入
 - 【本人】https://developer.apple.com/programs/ から年額 US$99（≒ 15,000 円前後）で加入。個人 or 組織を選ぶ（個人の場合、App Store に表示される販売者名は本名になる。屋号表示が必要なら組織＝D-U-N-S 番号が必要）。承認まで数時間〜数日。
@@ -17,18 +17,18 @@
 ## 3. App Store Connect にアプリを登録
 - 【本人】App Store Connect > マイApp > ＋ > 新規App: プラットフォーム iOS / 名前 `Puppy With Cafe`（重複する場合は別名・`store-listing.md` 補足参照）/ 主言語 日本語 / バンドルID（Xcode で一度ビルドすると候補に出る。出ない場合は developer.apple.com > Identifiers で登録）/ SKU 任意（例 `puppywithcafe-001`）/ ユーザーアクセス 全アクセス。
 
-## 4. Google フォームを作成
-- 【本人】`google-form-setup.md` の手順 1〜3 に従ってフォーム作成、メール収集 OFF を確認、事前入力 URL を取得。
-- 【AI】設問文・説明文の推敲、事前入力 URL からテンプレート文字列の組み立て。
+## 4. 問い合わせ窓口の確認（v1.0 は Google フォームなし）
+- v1.0 はフォームなしで提出する。アプリ内の「情報の誤りを報告」ボタンは、`AppEnvironment.defaultReportFormTemplate` が `nil` の間は自動で非表示になる（コード変更は不要）。
+- 問い合わせ・誤り報告の窓口は GitHub Issues（https://github.com/changch223/puppy-with-cafe/issues）。`docs/privacy.html` `docs/support.html` に反映済み（GitHub アカウントが必要・内容は公開される旨を明記）。
+- Google フォームは後日導入する（手順は `google-form-setup.md`）。導入時にアプリと docs を更新して新版として出す。
 
-## 5. フォーム URL をアプリと docs に反映
-- 【AI】`AppConfig.swift` の `AppEnvironment.defaultReportFormTemplate` にテンプレートを設定。`docs/privacy.html` `docs/support.html` の `{{FORM_URL}}` を一括置換（`google-form-setup.md` §5）。`tools/README.md` / `CLAUDE.md` の記述を「設定済み」に更新。ビルド・テスト実行。
+## 5. docs を公開して確認
 - 【本人】PR をレビューして `main` にマージ → GitHub Pages に公開されるのを待つ（数分）。
 - 【本人】公開 URL を実ブラウザ（ログアウト状態）で確認:
   - https://changch223.github.io/puppy-with-cafe/docs/privacy.html
   - https://changch223.github.io/puppy-with-cafe/docs/support.html
   - https://changch223.github.io/puppy-with-cafe/data/cafes.json
-  - 各ページから開くフォームが回答可能（ログイン不要）なこと
+  - 各ページの GitHub Issues リンクが開くこと
 
 ## 6. スクリーンショットを撮影
 **必須: 6.9 インチ（iPhone 17 Pro Max など）= 1320 × 2868 px**（iPhone 専用アプリなので 6.9" の 1 サイズだけ必須。5〜10 枚、最低 1 枚。6.5" など他サイズは 6.9" から自動縮小される）。
@@ -82,7 +82,7 @@
   - [ ] 店詳細: 出典・確認日・営業中バッジ・電話・リンク・Instagram 埋め込み（失敗時のフォールバック）
   - [ ] 経路（Apple マップ／Google マップ）
   - [ ] お気に入りの追加・解除・再起動後の保持
-  - [ ] **「情報の誤りを報告」→ フォームが開き、店名・店舗ID・種類が自動入力される**
+  - [ ] 店詳細に「情報の誤りを報告」ボタンが**表示されない**こと（v1.0 はフォームなし。審査メモの記載どおり）
   - [ ] 機内モードで起動してもバンドルデータで動く（オフライン表示の注記）
   - [ ] クラッシュ・表示崩れなし（iPhone SE 系の小画面があれば併せて）
 - 【AI】確認中に見つかった不具合の修正、再ビルド（ビルド番号 +1）。
@@ -94,8 +94,8 @@
 - 公開後: 【AI】 `CLAUDE.md` / `HANDOFF.md` の更新、App Store の URL を support / README へ反映。
 
 ## 提出前の最終ゲート（全部 ON になってから提出）
-- [ ] `grep -rn "FORM_URL" docs/` が何も出ない（プレースホルダ残りなし）
-- [ ] `AppEnvironment.defaultReportFormTemplate` が `nil` ではない
+- [ ] `grep -rn "FORM_URL" docs/*.html` が何も出ない（プレースホルダ残りなし。google-form-setup.md の手順内の記載は除く）
+- [ ] `AppEnvironment.defaultReportFormTemplate` が `nil` のままで、報告ボタンが非表示（v1.0 の方針）
 - [ ] privacy.html / support.html / cafes.json が公開 URL で開ける
 - [ ] `ITSAppUsesNonExemptEncryption = NO` が Info.plist にある
 - [ ] `PrivacyInfo.xcprivacy` と App Privacy 回答が整合

@@ -1,4 +1,6 @@
-# Google フォーム（誤り報告＋お問い合わせ兼用）作成手順
+# Google フォーム（誤り報告＋お問い合わせ兼用）作成手順（後日導入する手順）
+
+> **v1.0 はフォームなしで提出する**（窓口は GitHub Issues。報告ボタンは URL 未設定の間は自動で非表示）。本書は将来フォームを導入するときの手順として残す。導入時は §5 の `{{FORM_URL}}` 差し替えの代わりに、docs の GitHub Issues 記載をフォーム URL へ更新すること。
 
 目的: アプリの「情報の誤りを報告」ボタンと、support.html / privacy.html の「お問い合わせ」で使うフォームを 1 つ作る。
 方針: **メールアドレス・氏名などの連絡先は集めない**（プライバシーポリシーで「収集しない」と明記済み）。
@@ -8,7 +10,7 @@
 | 項目 | 内容 |
 |---|---|
 | 設定先 | `DokoWanCafe/DokoWanCafe/App/AppConfig.swift` の `AppEnvironment.defaultReportFormTemplate`（`String?`。現在 `nil`）。※ ファイル名は AppConfig.swift だが型名は `AppEnvironment` |
-| 未設定（nil / 空）のとき | 店詳細の「情報の誤りを報告」ボタン自体が表示されない（`AppEnvironment.isReportFormConfigured()`）→ **このままでは審査メモの説明と食い違うため、提出前に必ず設定する** |
+| 未設定（nil / 空）のとき | 店詳細の「情報の誤りを報告」ボタン自体が表示されない（`AppEnvironment.isReportFormConfigured()`）→ v1.0 はこの状態（フォームなし）で提出する。導入する版では審査メモも更新する |
 | プレースホルダ | `{cafe_name}`（店名。アプリが URL エンコード済みで置換。`& = +` もエンコードされる）と `{cafe_id}`（店舗 UUID。小文字・ハイフン付き） |
 | 置換の実装 | `AppEnvironment.reportFormURL(cafeName:cafeID:)`。テンプレート文字列に対する単純な文字列置換 → `URL(string:)` |
 | 開発時の上書き | 環境変数 `REPORT_FORM_URL`（Xcode の Scheme > Run > Environment Variables）。コードを触らずに動作確認できる |
@@ -79,22 +81,22 @@ https://docs.google.com/forms/d/e/<FORM_ID>/viewform?usp=pp_url&entry.<種類の
 3. 実機 / シミュレータで確認するだけなら、環境変数 `REPORT_FORM_URL` にテンプレートを入れて試すこともできる（コード変更なし）。
 4. `tools/README.md` の記述・プロジェクト `CLAUDE.md` の「設定予定（未作成）」を「設定済み」に直す。
 
-## 5. docs の `{{FORM_URL}}` 差し替え
+## 5. docs の問い合わせ窓口をフォームへ切り替える（導入時）
 
-`{{FORM_URL}}` ＝ **プリフィルなしのフォーム URL**（`https://docs.google.com/forms/d/e/<FORM_ID>/viewform`）。
-差し替え箇所（2026-10-17 時点・全 5 か所）:
+v1.0 時点（2026-10-18）の `docs/privacy.html` / `docs/support.html` には、問い合わせ窓口として **GitHub Issues** を記載してあり、`{{FORM_URL}}` のようなプレースホルダは残っていない。フォームを導入するときは、置換ではなく**本文から書き直す**。
 
-| ファイル | 箇所 |
+`<FORM_URL>` ＝ **プリフィルなしのフォーム URL**（`https://docs.google.com/forms/d/e/<FORM_ID>/viewform`）。
+
+| ファイル | 書き直す箇所 |
 |---|---|
-| `docs/privacy.html` | 「4. 誤り報告・お問い合わせ」のお問い合わせフォーム（`href` と表示テキストの 2 か所） |
-| `docs/privacy.html` | 「8. 改定・お問い合わせ」のリンク（`href` 1 か所） |
-| `docs/support.html` | 「お問い合わせ」のフォームリンク（`href` と表示テキストの 2 か所） |
+| `docs/privacy.html` | 「4. 誤り報告・お問い合わせ（GitHub Issues）」の節を、フォーム前提の本文に書き直す（Google フォームに接続される旨・店名と店舗IDが自動入力される旨・個人情報を書かないこと・連絡先を求めないこと）。GitHub Issues に関する記述（「現在の版にはボタンやフォームは含まれていません」を含む）は削除または併記に改める |
+| `docs/privacy.html` | 「1. 収集しない情報」「5. 第三者提供・トラッキング」の「本アプリを通じては」という限定表現と、「8. 改定・お問い合わせ」の連絡先リンク |
+| `docs/support.html` | 「Q. 情報の誤りを見つけました」と「お問い合わせ」を、アプリ内の報告ボタン（詳細画面の「情報の誤りを報告」）とフォームの案内に書き直す |
 
-一括置換例（`<URL>` を実 URL に）:
+書き直したら、確認用に次を実行する（手順書自体は対象外にするため `docs/*.html` に限定する）:
 
 ```bash
-sed -i '' 's#{{FORM_URL}}#<URL>#g' docs/privacy.html docs/support.html
-grep -rn "FORM_URL" docs/   # 何も出なければ完了
+grep -n "FORM_URL\|github.com/changch223/puppy-with-cafe/issues" docs/*.html   # 意図した箇所だけが残る（フォーム導入後は Issues の記載が残っていないこと）
 ```
 
 差し替え後 `main` へマージ → GitHub Pages に反映されたら、`support.html` のフォームリンクから実際にフォームが開くか確認する。

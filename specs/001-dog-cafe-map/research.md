@@ -90,4 +90,4 @@
   - マスター: Google Sheet（2タブ: cafes / sources。列仕様は `tools/README.md`）
   - 変換: `tools/export_cafes.py` — 検証（enum/条件/確認日/重複=名寄せ）・矛盾検出・代表可否算出（FR-013 と同一規則）・差分検出（追加/変更/削除→ `data/CHANGELOG.md`）・`data/cafes.json` 生成＋アプリへコピー
   - 配信: アプリにバンドル＋静的URL（GitHub Pages 予定）から取得（バンドル/取得キャッシュへフォールバック, FR-029/032）
-  - 報告: Google フォーム（プリフィルURL。`AppConfig` に設定）
+  - 報告: Google フォーム（プリフィルURL。`AppEnvironment`（App/AppConfig.swift）に設定）
