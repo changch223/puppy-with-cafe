@@ -18,6 +18,17 @@ protocol CafeRepository: Sendable {
     /// `nearbyCafes` と異なり検索エリア・半径に関わらず、ロード済みの全カフェ（閉店除く）を返す。
     /// お気に入りは現在の検索エリアと無関係に解決するため（QA指摘: エリア外検索中の誤表示防止）。
     func allCafes() async throws -> [Cafe]
+
+    /// リモートの最新データを取得して反映する（stale-while-revalidate の revalidate 側）。
+    /// データが変わったときだけ true。`force == false` は取得間隔・失敗抑止のルールに従い、
+    /// `force == true` はユーザーの明示操作として無視して取得する。
+    /// `nearbyCafes` / `allCafes` はこれを待たずローカルのデータを即返す。
+    func refreshRemote(force: Bool) async -> Bool
+}
+
+extension CafeRepository {
+    /// リモート取得を持たない実装（Supabase 版・サンプル・テスト用フェイク）向けの既定: 何もしない。
+    func refreshRemote(force: Bool) async -> Bool { false }
 }
 
 // MARK: - Supabase 実装

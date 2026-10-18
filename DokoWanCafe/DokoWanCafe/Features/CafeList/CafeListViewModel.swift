@@ -62,6 +62,12 @@ final class CafeListViewModel: ObservableObject {
     private let locationService: LocationService
     private let cacheStore: CacheStore
     private let favoritesStore: FavoritesStore
+    /// リモートで実データが更新された回数。表示用の検索中に更新が割り込んだとき、取り直しが要るかの判定に使う。
+    private var dataRevision = 0
+    /// 裏のリモート取得（revalidate）が実行中か（同時に2本走らせない）
+    private var isRevalidating = false
+    /// データ更新に伴う再表示が実行中か（二重に再表示しない）
+    private var isReapplying = false
 
     init(
         repository: any CafeRepository,
@@ -170,18 +176,74 @@ final class CafeListViewModel: ObservableObject {
         }
 
         // 3) 取得。失敗時は直近キャッシュにフォールバック（FR-029）
+        await loadResults(at: coordinate)
+    }
+
+    /// 起動直後の読み込み（stale-while-revalidate）: まずローカルのデータで表示を確定させ、
+    /// そのあと裏でリモートの最新データを取得する。取得を待たないため初回表示はネットワークに左右されない。
+    func refreshThenRevalidate() async {
+        await refresh()
+        await revalidateInBackground()
+    }
+
+    /// 裏でリモートの最新データを取得し、データが変わったときだけ再表示する（取得間隔・失敗抑止は Repository 側のルール）。
+    func revalidateInBackground() async {
+        guard !isRevalidating else { return }
+        isRevalidating = true
+        defer { isRevalidating = false }
+
+        let changed = await repository.refreshRemote(force: false)
+        if changed { await reapplyAfterDataChange() }
+    }
+
+    /// 「再読み込み」: ユーザーが明示的に頼んだ操作なので、間隔・失敗抑止を無視してリモート取得を待ってから再表示する。
+    func reloadFromRemote() async {
+        phase = .loading
+        let changed = await repository.refreshRemote(force: true)
+        // お気に入り解決用の全件も、データが変わったなら必ず取り直す（refresh() は初回しか取得しないため）
+        if changed { await noteDataChanged() }
+        await refresh()
+    }
+
+    /// リモートでデータが変わったことを記録し、検索エリアに依存しない全件（お気に入り解決用）を取り直す。
+    private func noteDataChanged() async {
+        dataRevision += 1
+        if let all = try? await repository.allCafes() {
+            allLoadedCafes = all
+        }
+    }
+
+    /// `coordinate` が現在の検索起点か（取得中に起点が変わっていたら、古い起点の結果は捨てる）
+    private func isCurrentSearchCenter(_ coordinate: CLLocationCoordinate2D) -> Bool {
+        guard let center = searchCenter else { return false }
+        return center.latitude == coordinate.latitude && center.longitude == coordinate.longitude
+    }
+
+    /// 検索起点（searchCenter）の周辺をリポジトリから取得して表示を更新する。
+    /// 取得中に起点が変わった場合は結果を捨てる（新しい起点側の読み込みが表示を確定する）。
+    /// 取得中にリモートでデータが更新された場合は、新しいデータで取り直す。
+    private func loadResults(at coordinate: CLLocationCoordinate2D) async {
+        let revision = dataRevision
+        let fetched: Result<[CafeWithDistance], Error>
         do {
-            let results = try await repository.nearbyCafes(
+            fetched = .success(try await repository.nearbyCafes(
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude,
                 radiusMeters: Self.fetchSafetyRadiusMeters,
                 onlyDogOK: false
-            )
+            ))
+        } catch {
+            fetched = .failure(error)
+        }
+        guard isCurrentSearchCenter(coordinate) else { return }
+
+        switch fetched {
+        case .success(let results):
             allResults = results
             // 距離（検索起点由来）は保存せず、店データのみキャッシュする
             cacheStore.save(results.map(\.cafe))
             phase = results.isEmpty ? .empty : .loaded
-        } catch {
+        case .failure(let error):
             if let cached = cacheStore.load(), !cached.cafes.isEmpty {
                 // 距離はキャッシュに無いため、今回の検索起点から表示時に計算する
                 allResults = Self.withDistances(cached.cafes, from: coordinate)
@@ -190,6 +252,28 @@ final class CafeListViewModel: ObservableObject {
                 phase = .error(error.localizedDescription)
             }
         }
+        if revision != dataRevision, let center = searchCenter {
+            await loadResults(at: center)
+        }
+    }
+
+    /// リモートでデータが更新されたあとの再表示。フィルタ・起点・距離（searchCenter）は保ち、
+    /// 読み込み中表示（.loading）や位置情報の再取得はせず、データだけ差し替える。
+    private func reapplyAfterDataChange() async {
+        await noteDataChanged()
+
+        // 実行中の refresh()（.loading）は loadResults 内で revision を見て取り直す。再表示が実行中の場合も同様。
+        guard !isReapplying, let center = searchCenter else { return }
+        switch phase {
+        case .loaded, .empty, .offline:
+            break
+        case .idle, .loading, .outOfArea, .locationDenied, .error:
+            // .error は裏の取得で .loaded に上書きしない（全件の更新だけ行う）
+            return
+        }
+        isReapplying = true
+        defer { isReapplying = false }
+        await loadResults(at: center)
     }
 
     /// 店データに検索起点からの距離を付与し、安全半径内を距離昇順で返す（キャッシュ復元用）。
