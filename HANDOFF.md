@@ -25,7 +25,7 @@
 - ✅ データ基盤（サーバーレス構成B）: `data/master/*.csv` → `tools/export_cafes.py`（検証・矛盾解決・差分CHANGELOG）→ `data/cafes.json`
 - ✅ **データ配信 本稼働**: GitHub Pages で `cafes.json` を配信。アプリが起動時に取得（アプリ審査なしで更新反映）
 - ✅ テスト: 2026-10-17 に XCTest 156件 全緑（Xcode 26.6、iPhone 17 シミュレータ）。`.xcodeproj` は `DokoWanCafe/` 配下。
-- ⚠️ 残課題: `StaticCafeRepository.swift` の NSLock 警告10件（Swift 6 言語モードでエラー化する）
+- ⚠️ 残課題（**この PR で対応**）: `StaticCafeRepository.swift` の NSLock 警告10件（Swift 6 言語モードでエラー化する）／初回読み込みが最大15秒（リモート取得のタイムアウト待ちが初回表示を遅らせる）
 - ✅ 公開物: リポジトリ(public)・README・プライバシーポリシー
 
 ### 環境・URL
@@ -33,12 +33,12 @@
 - データ配信: https://changch223.github.io/puppy-with-cafe/data/cafes.json
 - プライバシーポリシー: https://changch223.github.io/puppy-with-cafe/docs/privacy.html
 - Bundle ID: `com.dokowancafe.app` / 表示名: Puppy With Cafe / 最小iOS: 16
-- 現在の実データ（`data/master/cafes.csv` / `sources.csv`、origin/main を 2026-10-07 に再集計）:
-  - **594件**（すべて東京都内・`sub_area` 83種）、出典 **1355件**
+- 現在の実データ（`data/master/cafes.csv` / `sources.csv`。件数は 2026-10-07 に origin/main で再集計したもの、出典件数のみ 2026-10-18 時点）:
+  - **594件**（すべて東京都内・`sub_area` 83種）、出典 **1384件**
   - 大型犬可否 `dog_large` 記入済み **257件**（true 229 / false 28、空欄 337）
   - 曜日別営業時間（構造化）**405件**（D-1 で330件追加）。`hours_text` のみ116件、営業時間情報なし73件
   - Instagram 代表投稿URL 135件、リンク皆無 138件
-  - **座標**: 2026-10-17 に abr-geocoder（デジタル庁ABR）＋国土地理院住所検索でも同じ点を確認（同系統データのため独立検証ではない）して住所と突き合わせ、一致した167件を住所由来の座標に更新（台帳の内訳: fix 169＝abr_geocoder 167＋住所修正2、keep 274、manual 40、町字止まり keep_coarse 92）。続けて同日、manual 40店のうち38店を食べログ等の**店舗ページのピン2出典**で照合して更新（method=shop_pin、fix 計207・manual 残り2。採否ルールは `tools/README.md`）。住所修正2店は CHUM APARTMENT（移転、公式サイトで目黒本町4-12-17）と Le Calin（番地訂正 2-1-6→2-2-43、複数出典で確認）（出典台帳 `data/master/coord_sources.csv`）。更新しなかった店は `legacy_estimate`（照合で許容内・または manual/keep_coarse）。GPS実測ではない
+  - **座標**: 2026-10-17 に abr-geocoder（デジタル庁ABR）＋国土地理院住所検索でも同じ点を確認（同系統データのため独立検証ではない）して住所と突き合わせ、一致した167件を住所由来の座標に更新（台帳の内訳: fix 169＝abr_geocoder 167＋住所修正2、keep 274、manual 40、町字止まり keep_coarse 92）。続けて同日、manual 40店のうち38店を食べログ等の**店舗ページのピン2出典**で照合して更新（method=shop_pin、fix 計207・manual 残り2。採否ルールは `tools/README.md`）。2026-10-18 に町字止まり keep_coarse 92店も店舗ピンで更新（83店＝2出典が100m以内、4店＝公式埋め込みとの食い違いは食べログ採用、5店＝単一出典で GSI 町丁目一致のみを根拠に採用〔method=shop_pin_single〕。全店を国土地理院の逆ジオコーダで町丁目照合済み。台帳の現在の内訳: fix 299＝abr_geocoder 167＋住所修正2＋shop_pin 125＋shop_pin_single 5、keep 274、manual 2、keep_coarse 0）。住所修正2店は CHUM APARTMENT（移転、公式サイトで目黒本町4-12-17）と Le Calin（番地訂正 2-1-6→2-2-43、複数出典で確認）（出典台帳 `data/master/coord_sources.csv`）。更新しなかった店は `legacy_estimate`（照合で許容内・または manual/keep_coarse）。GPS実測ではない
 
 ## 3. 別PCでの環境セットアップ（新PCで最初にやること）
 
@@ -72,8 +72,16 @@ python3 tools/export_cafes.py --check
 - **PR #17 のマージ判断**（運営）: 表示テキストの調査メモ除去・閉店/陳腐化データの是正。レビュー中。
 - **個別の確認事項**: Snow Peak Cafe の店内可否は**電話確認**／Aoi Coffee Stand の営業実態は**現地確認**。
 - **dog_large 空欄（337件）**: 収穫率が約13%と低いため**保留**（費用対効果で再開を判断）。
-- **座標の残課題**: abr-geocoder + GSI で突き合わせ済み（`tools/README.md` の「座標の突き合わせ」）。`coord_sources.csv` の `decision` が `keep_coarse`（町字止まり）・`manual`（残り2店）の店は、必要なら Google Maps 等で手動確認。
+- **座標の残課題**: abr-geocoder + GSI で突き合わせ済み（`tools/README.md` の「座標の突き合わせ」）。`coord_sources.csv` の `decision` が `manual`（残り2店。keep_coarse は 2026-10-18 に全店解消）の店は、必要なら Google Maps 等で手動確認。
   - **manual の残り2店（2026-10-17 時点・店舗ピン2出典で解消できなかった分）**: ERIC ROSE（食べログとぐるなびが約151m不一致・旧座標から最寄りピンまで約680m）／パークス光が丘（食べログとホットペッパーが約344m不一致・公園内で旧座標の近く約144m）。いずれも実座標を Google Maps 等で確認して `cafes.csv` を更新し、`coord_sources.csv` も合わせる。残り40→2店の大半は店舗ページのピン2出典（method=shop_pin）で更新済み。
+- **休業による一時非表示4店（再開を確認したら `is_closed=false` に戻す）**（2026-10-18・運営方針: 公式の休業告知が継続中で再開未確認の店は来店の空振り防止のため一時非表示。根拠は `sources.csv` に追記済み）:
+  - わんすたCafe＆酒場（…0741）: 公式X 2024-02-07「2/29をもって休業」、再開確認なし — https://x.com/onestacafeskb
+  - MILLS COFFEE（…0547）: 公式Instagramが「休業中」（9月中旬再開予定が未確認のまま） — https://www.instagram.com/millscoffeetokyo/
+  - nakameguro SLOW TABLE（…0065）: 公式Instagram「5月10日〜休業 リニューアルまで」、再開告知なし — https://www.instagram.com/nakameguro_slow_table/
+  - WANKOIWA DOG Caffe（…1291）: 公式サイト2026-04-11付「しばらくの間、休業」、再開告知なし — https://www.wankoiwa-caffe.com/299/
+- **閉店による非表示（2026-10-18）**: AINA CAFE（…0626）— 公式サイトのお知らせ https://ainacafe.com/daytime/news/news20261003.html（2026.10.03付）の「2026年10月20日（火）をもちまして閉店」を根拠に is_closed=true。**閉店日（10/20）より前に、リリース作業をまとめるため非表示にした**（閉店予定日の前倒し。再開の見込みはない）。
+- **evergreen EBISU（…0104）は非表示にしていない（要再調査: 営業時間・犬可否の条件・リンク）**: (1) 公式サイト evergreen-pet.com は「当サイトは閉鎖いたしました」と出るだけ（2026-10-18 取得。cafes.csv の link_website は空にした。sources.csv の過去の official_hp 行は根拠として残置）、(2) 公式 Instagram @evergreen_cafe_ebisu のプロフィールは「NEW OPEN！ スープ生パスタ専門店…」に変わっている、(3) 食べログは「リニューアルの為営業を一時休止」の表示。リニューアルで業態が変わった可能性があり、休業継続とも営業再開とも断定できないため表示は継続している。
+  - 参考（変更なし）: Cafe' Roju は営業継続（8月の臨時休業のみ）、SHAPLA-INDIA は閉店報道のみで公式根拠が弱く据え置き。
 - **鉄則**: 推測禁止／出典URL+確認日必須／provenance=`aggregated`固定／矛盾は両方記録／**エージェントはcommitしない**（運営がdiffレビューして反映＝承認）。
 - 新規エリア・店の追加（wave）は随時。リリースは全網羅を待たなくてよい。
 
@@ -88,11 +96,11 @@ python3 tools/export_cafes.py --check
 **App Store 準備の現状（ブランチ `feat/appstore-readiness`）**
 - アプリ側で対応済み: 誤り報告フォーム未設定時は報告ボタンを非表示（「準備中」画面に到達しない）／「このアプリについて」画面（地図画面右上「…」メニュー内。バージョン・プライバシーポリシー・サポート・出典クレジット）／`PrivacyInfo.xcprivacy` を収集なしに是正／Instagram 埋め込みの WebView を非永続化／キャッシュに距離を保存しない／リモート取得のタイムアウト15秒＋失敗後5分は再取得しない／`MARKETING_VERSION=1.0.0`・`ITSAppUsesNonExemptEncryption=NO`／日本語のみ（`ja.lproj` 生成・`en` 廃止）。
 - 公開ページ・ストア文面は `docs/`（`privacy.html` / `support.html` / `appstore/`）に作成済み。
-- **残りはユーザー作業**: Apple Developer 加入・App Store Connect 登録、Google フォーム作成（下記 C）と URL 差し替え、スクリーンショット撮影、App Privacy 入力、Archive・提出。
+- **残りはユーザー作業**: Apple Developer 加入・App Store Connect 登録、スクリーンショット撮影、App Privacy 入力、Archive・提出。
 
-### 🟡 C. Google フォーム作成（T071・ユーザー作業）
-- 誤り報告の受付。**フォームは未作成**（CLAUDE.md にも未作成と明記）。手順書: `docs/appstore/google-form-setup.md`、全体の流れ: `docs/appstore/submission-checklist.md`（`tools/README.md` 手順2 も参照）。
-- 作成後、プリフィルURL（https）を `AppEnvironment.defaultReportFormTemplate`（`DokoWanCafe/DokoWanCafe/App/AppConfig.swift`）に設定。**未設定の間は店詳細の「情報の誤りを報告」ボタン自体が表示されない**（アプリは壊れない）。ただしストア説明文・support.html・privacy.html・審査メモはフォームがある前提なので、**App Store 提出前に設定必須**（`docs/appstore/submission-checklist.md` の最終ゲート。docs の `{{FORM_URL}}` 差し替えも同時に）。
+### 🟡 C. Google フォーム作成（T071・後日。v1.0 はフォームなしで提出）
+- **v1.0 はフォームなしで App Store に提出する**。問い合わせ・誤り報告の窓口は GitHub Issues（https://github.com/changch223/puppy-with-cafe/issues）で、`docs/privacy.html` / `docs/support.html` に記載済み（GitHub アカウントが必要・内容は公開される旨も明記）。アプリ内の「情報の誤りを報告」ボタンは `AppEnvironment.defaultReportFormTemplate` が `nil` の間は自動で非表示。審査メモ・ストア文面もフォームなし前提に修正済み（`docs/appstore/`）。
+- フォームは**未作成**。後日導入する場合の手順書: `docs/appstore/google-form-setup.md`（`tools/README.md` 手順2 も参照）。導入時は、プリフィルURL（https）を `AppEnvironment.defaultReportFormTemplate`（`DokoWanCafe/DokoWanCafe/App/AppConfig.swift`）に設定し、docs の GitHub Issues 記載をフォームへ更新、審査メモも更新して新版として出す。
 
 ### ⚪ D. v2候補（リリース後）
 AIスクリーニング（設計済: `supabase/functions/ai-screen/`）・エリア拡大・営業中/設備フィルタの拡充。

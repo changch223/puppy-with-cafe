@@ -1672,3 +1672,110 @@
 - ✏️ 変更: ファーマーズキッチン 南町田グランベリーパーク（latitude, longitude）
 - ✏️ 変更: 青山川上庵（latitude, longitude）
 - ✏️ 変更: 高倉町珈琲 八王子店（latitude, longitude）
+
+## 2026-10-18 00:42 — 追加 0 / 変更 95 / 削除 0
+- ✏️ 変更: AFFIDAMENTO BAGEL（latitude, longitude）
+- ✏️ 変更: AINA CAFE(アイナカフェ)（latitude, longitude）
+- ✏️ 変更: AKIGAWA BASE（latitude, longitude）
+- ✏️ 変更: ANDog（アンドッグ）（latitude, longitude）
+- ✏️ 変更: ARBOL（アルボール神楽坂）（latitude, longitude）
+- ✏️ 変更: Apricus Cafe（アプリカス カフェ）（latitude, longitude）
+- ✏️ 変更: BASEL 豊田店（latitude, longitude）
+- ✏️ 変更: BURG HOLIC(バーグホリック)（latitude, longitude）
+- ✏️ 変更: Barry's Café（バリーズカフェ）（latitude, longitude）
+- ✏️ 変更: CAFE CHOU CHOU(シュシュ)（latitude, longitude）
+- ✏️ 変更: CAFE MOJAVE（カフェモハベ）（address, latitude, longitude）
+- ✏️ 変更: CANAL CAFE（カナルカフェ）（latitude, longitude）
+- ✏️ 変更: Cafe Hana（latitude, longitude）
+- ✏️ 変更: Cafe&Bistro Shelty（latitude, longitude）
+- ✏️ 変更: Cafe&Diner KHB（latitude, longitude）
+- ✏️ 変更: Cafeどす（latitude, longitude）
+- ✏️ 変更: Cafe茶楽（latitude, longitude）
+- ✏️ 変更: Dog Arts and Cafe インディハウス（latitude, longitude）
+- ✏️ 変更: Dog Cafe Aloha ilio(アロハイーリオ)（latitude, longitude）
+- ✏️ 変更: Eggs 'n Things お台場店（latitude, longitude）
+- ✏️ 変更: Egoland Cafe Akihabara（latitude, longitude）
+- ✏️ 変更: HOMELAND OME（latitude, longitude）
+- ✏️ 変更: Jaune Brillant（ジョンブリアン）（latitude, longitude）
+- ✏️ 変更: LARGO SENGAWA（latitude, longitude）
+- ✏️ 変更: LE PARISIEN（ル・パリジャン）（latitude, longitude）
+- ✏️ 変更: LUSH COFFEE ROASTER&LABORATORY（latitude, longitude）
+- ✏️ 変更: Le Coquillage（ル コキヤージュ）（latitude, longitude）
+- ✏️ 変更: MERRY and BRIGHT（latitude, longitude）
+- ✏️ 変更: MILLS COFFEE(ミルズコーヒー)（latitude, is_closed, longitude, sources）
+- ✏️ 変更: MozekSol(モゼクソール)（latitude, longitude）
+- ✏️ 変更: Mt.TAKAO BASE CAMP CAFE&BAR（latitude, longitude）
+- ✏️ 変更: PERFECT BEER KITCHEN 四ツ谷（latitude, longitude）
+- ✏️ 変更: PIZZA SALVATORE CUOMO 四谷（latitude, longitude）
+- ✏️ 変更: Park Side Cafe BASEL（latitude, longitude）
+- ✏️ 変更: Paston（パストン）（latitude, longitude）
+- ✏️ 変更: Pizzeria CERVO（latitude, longitude）
+- ✏️ 変更: RESTAURANT 1899 OCHANOMIZU（latitude, longitude）
+- ✏️ 変更: Tavernetta Salvatore 仙川（latitude, longitude）
+- ✏️ 変更: UN BESITO(ウン・ベシート)永山店（latitude, longitude）
+- ✏️ 変更: WANKOIWA DOG Caffe（ワンコイワドッグカフェ）（is_closed, sources）
+- ✏️ 変更: biotable.（latitude, longitude）
+- ✏️ 変更: dog cafe petitchien(プティシアン)（latitude, longitude）
+- ✏️ 変更: nakameguro SLOW TABLE（is_closed, sources）
+- ✏️ 変更: いろりの里 高尾山名主 ごん助（latitude, longitude）
+- ✏️ 変更: ごちそうや ぽっ蔵（latitude, longitude）
+- ✏️ 変更: ひーじゃー（latitude, longitude）
+- ✏️ 変更: やきとり荒木山 四谷店（latitude, longitude）
+- ✏️ 変更: やまびこ茶屋（latitude, longitude）
+- ✏️ 変更: わんすたCafe＆酒場（is_closed, sources）
+- ✏️ 変更: イタリアンダイニング Satoru 秋津店（latitude, longitude）
+- ✏️ 変更: ウニ専門レストラン unico-co(ウニココ)（latitude, longitude）
+- ✏️ 変更: ウラニワ 仙川店（latitude, longitude）
+- ✏️ 変更: オルオルアイナ(Oluolu Aina)（latitude, longitude）
+- ✏️ 変更: カフェ ポテリ（latitude, longitude）
+- ✏️ 変更: カーサ ディ カミーノ（latitude, longitude）
+- ✏️ 変更: キサキ（KISAKI）（latitude, longitude）
+- ✏️ 変更: クレアホーム&ガーデン（latitude, longitude）
+- ✏️ 変更: ジロー珈琲 羽村店（latitude, longitude）
+- ✏️ 変更: スターバックス コーヒー 国立店（latitude, longitude）
+- ✏️ 変更: スパイスカレーリコード 本店（latitude, longitude）
+- ✏️ 変更: タカオネ（latitude, longitude）
+- ✏️ 変更: デモデヘブン 福生店（latitude, longitude）
+- ✏️ 変更: ハーベステラス 昭島アウトドアヴィレッジ店（latitude, longitude）
+- ✏️ 変更: ピエトロ 国立店（latitude, longitude）
+- ✏️ 変更: プティ パルク（latitude, longitude）
+- ✏️ 変更: マイクロカフェ 調布深大寺店（latitude, longitude）
+- ✏️ 変更: マルゴ四谷(MARUGO YOTSUYA)（latitude, longitude）
+- ✏️ 変更: メゾン・ド・ラ・ブルゴーニュ（Maison de la Bourgogne）（latitude, longitude）
+- ✏️ 変更: リバゴーシュ（latitude, longitude）
+- ✏️ 変更: レストラン・ヴェール（latitude, longitude）
+- ✏️ 変更: 串カツ田中 つつじヶ丘店（latitude, longitude）
+- ✏️ 変更: 串カツ田中 秋津店（latitude, longitude）
+- ✏️ 変更: 仙川食堂ジョージ（latitude, longitude）
+- ✏️ 変更: 和牛EN yasaka.arakawa（latitude, longitude）
+- ✏️ 変更: 喫茶 ならの木（latitude, longitude）
+- ✏️ 変更: 図書喫茶 カンタカ（latitude, longitude）
+- ✏️ 変更: 場外焼肉 榮登庵 多摩センター店（latitude, longitude）
+- ✏️ 変更: 居酒屋こころ（latitude, longitude）
+- ✏️ 変更: 文流 国立店（latitude, longitude）
+- ✏️ 変更: 栄茶屋本店（latitude, longitude）
+- ✏️ 変更: 淡路島バーガー 国立谷保店（latitude, longitude）
+- ✏️ 変更: 深大寺水神苑（latitude, longitude）
+- ✏️ 変更: 炭火焼肉＆韓国家庭料理 故郷（latitude, longitude）
+- ✏️ 変更: 焼き鳥もつ鍋だるま 久米川店（latitude, longitude）
+- ✏️ 変更: 焼肉 炙りな 北千住店（latitude, longitude）
+- ✏️ 変更: 神楽坂 ラクレット&フォンデュ フロマティック（Fromatique）（latitude, longitude）
+- ✏️ 変更: 神楽坂ワインスタンド et du vin（エデュヴァン）（latitude, longitude）
+- ✏️ 変更: 蒸し料理とワインの店 味風（latitude, longitude）
+- ✏️ 変更: 蕎麦と杜々（latitude, longitude）
+- ✏️ 変更: 酒処 雅（latitude, longitude）
+- ✏️ 変更: 高尾山FuMotoYA（latitude, longitude）
+- ✏️ 変更: 高幡不動 肉流通センター（latitude, longitude）
+- ✏️ 変更: 高幡不動 肉流通センター はなれ（latitude, longitude）
+- ✏️ 変更: 魚がし どまん中 神楽坂店（latitude, longitude）
+- ✏️ 変更: 麦酒堂 KASUGAI（latitude, longitude）
+
+## 2026-10-18 01:00 — 追加 0 / 変更 3 / 削除 0
+- ✏️ 変更: AINA CAFE(アイナカフェ)（is_closed, sources）
+- ✏️ 変更: ハーベステラス 昭島アウトドアヴィレッジ店（phone, sources）
+- ✏️ 変更: 串カツ田中 秋津店（phone, contact, sources）
+
+## 2026-10-18 09:35 — 追加 0 / 変更 3 / 削除 0
+- ✏️ 変更: AINA CAFE(アイナカフェ)（sources）
+- ✏️ 変更: evergreen cafe restaurant EBISU(エヴァーグリーン カフェ レストラン エビス)（links）
+- ✏️ 変更: ハーベステラス 昭島アウトドアヴィレッジ店（hours, hours_text）

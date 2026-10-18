@@ -10,8 +10,8 @@
 ## セットアップ
 1. `DokoWanCafe/DokoWanCafe.xcodeproj` を Xcode で開いて Run。**バンドル済みの `cafes.json`（架空サンプル7件）でそのまま動く**（オレンジの「サンプルデータ表示中」バナーが出る）。
 2. データを変えたい場合: `tools/sheet_template/*.csv` を編集（または Google Sheet からダウンロード）→ `python3 tools/export_cafes.py`（実データなら `--sample` なし）→ 再ビルド。
-3. 遠隔更新を試す場合: `AppConfig.defaultCafesDataURL`（または環境変数 `CAFES_DATA_URL`）に cafes.json のURLを設定。
-4. 報告フォームを試す場合: `AppConfig.defaultReportFormTemplate`（または環境変数 `REPORT_FORM_URL`）にプリフィルURLを設定。
+3. 遠隔更新を試す場合: `AppEnvironment.defaultCafesDataURL`（または環境変数 `CAFES_DATA_URL`）に cafes.json のURLを設定。
+4. 報告フォームを試す場合: `AppEnvironment.defaultReportFormTemplate`（または環境変数 `REPORT_FORM_URL`）にプリフィルURLを設定。
 
 ## 実行
 - シミュレータの位置を東京（例: 東京駅 35.6812, 139.7671）に設定してアプリ起動。
