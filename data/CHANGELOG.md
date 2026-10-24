@@ -1779,3 +1779,37 @@
 - ✏️ 変更: AINA CAFE(アイナカフェ)（sources）
 - ✏️ 変更: evergreen cafe restaurant EBISU(エヴァーグリーン カフェ レストラン エビス)（links）
 - ✏️ 変更: ハーベステラス 昭島アウトドアヴィレッジ店（hours, hours_text）
+
+## 2026-10-20 23:58 — 追加 0 / 変更 32 / 削除 0
+- ✏️ 変更: 8dori 大門店（hours_text, sources）
+- ✏️ 変更: Apricus Cafe（アプリカス カフェ）（holiday_note, sources）
+- ✏️ 変更: CAFE MOJAVE（カフェモハベ）（hours_text, hours, holiday_note, sources）
+- ✏️ 変更: CLANN BY THE RIVER（旧PITMANS）（holiday_note）
+- ✏️ 変更: Cafe du Riche(カフェドリッチェ)（hours_text, hours, holiday_note, sources）
+- ✏️ 変更: Cafe' Roju（sources）
+- ✏️ 変更: Chanoma(チャノマ)（hours_text, hours, holiday_note, sources）
+- ✏️ 変更: Dogberry(ドッグベリー)（hours_text, hours, sources）
+- ✏️ 変更: ERIC ROSE（latitude, hours_text, longitude, sources）
+- ✏️ 変更: Le Calin（ルカラン）（sources）
+- ✏️ 変更: Mon-TERCERO（テルセーロ）（sources）
+- ✏️ 変更: Sammy331(サミーサミー)（sources）
+- ✏️ 変更: The Jones Café | Bar（hours_text）
+- ✏️ 変更: Vegeater（hours_text, holiday_note, sources）
+- ✏️ 変更: WANKOIWA DOG Caffe（ワンコイワドッグカフェ）（sources）
+- ✏️ 変更: WHAT CAFE（hours_text, sources）
+- ✏️ 変更: breadworks 天王洲（hours_text, hours, holiday_note, sources）
+- ✏️ 変更: evergreen cafe restaurant EBISU(エヴァーグリーン カフェ レストラン エビス)（is_closed, sources）
+- ✏️ 変更: iki Roastery & Eatery（hours, holiday_note, sources）
+- ✏️ 変更: nakameguro SLOW TABLE（sources）
+- ✏️ 変更: ひーじゃー（hours_text, holiday_note）
+- ✏️ 変更: ふる浜売店（holiday_note, sources）
+- ✏️ 変更: まんまる庵（sources）
+- ✏️ 変更: わんすたCafe＆酒場（sources）
+- ✏️ 変更: インド・ネパール料理 ロードブッダ 大森店（hours, holiday_note）
+- ✏️ 変更: パンとcafé えだおね（hours, holiday_note, sources）
+- ✏️ 変更: ブリコラージュ ブレッド アンド カンパニー（sources）
+- ✏️ 変更: ミルリトンカフェ(Mirliton Cafe)（sources）
+- ✏️ 変更: リキマルカフェ（hours_text, holiday_note, sources）
+- ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（hours_text, hours, holiday_note, sources）
+- ✏️ 変更: 犬茶屋本舗（hours_text, hours, sources）
+- ✏️ 変更: 肉ビストロ&クラフトビール ランプラント(l'Empreinte)（hours_text, hours, holiday_note, sources）
