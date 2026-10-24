@@ -7530,6 +7530,114 @@
       "sub_area": "小岩・新小岩・平井"
     },
     {
+      "address": "東京都目黒区目黒2-11-3",
+      "area": "tokyo",
+      "contact": null,
+      "description": "コワーキングスペース Impact HUB Tokyo に併設のカフェ。スペシャルティコーヒーと焼き菓子、曜日替わりのコラボランチが楽しめ、ベビーカーやペット連れでも入れる。",
+      "dog_amenities": {
+        "indoor": true
+      },
+      "dog_note": "公式記事に「店内はペットOK」、公式Instagramのプロフィールに「ベビーカー/ペットOK」、食べログ備考に「ペット連れのお客様も店内ご利用いただけます」と記載。犬の種類・サイズ・席・リード等の条件の記載はなし。",
+      "dog_policy_condition": null,
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "holiday_note": "月曜定休・火曜はカフェ休み（カレーの間借り営業のみ）・年末年始休み",
+      "hours": {
+        "fri": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "18:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "水〜日11:00〜18:00（火曜はカフェ休みでカレーの間借り営業のみ11:30〜14:00）",
+      "id": "beef0000-0000-4000-8000-000000001304",
+      "info_verified": "2026-10-24",
+      "is_closed": false,
+      "last_verified": "2026-10-24",
+      "latitude": 35.63387,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://hubtokyo.com/articles/communita-cafe"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/communita_cafe/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1316/A131601/13282835/"
+        }
+      ],
+      "longitude": 139.708241,
+      "name": "Communita Cafe",
+      "operator_note": {
+        "source": "instagram",
+        "text": "プロフィールに「ベビーカー/ペットOK」「ご予約は℡のみ」と記載。",
+        "verified_at": "2026-10-24"
+      },
+      "phone": "03-6873-8531",
+      "place_id": null,
+      "representative_source_id": "bde1ccc5-e78b-5f93-bfc4-47e13c9ffa06",
+      "reservation": "電話のみ",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001304",
+          "claimed_status": "allowed",
+          "id": "bde1ccc5-e78b-5f93-bfc4-47e13c9ffa06",
+          "provenance": "aggregated",
+          "reference": "https://hubtokyo.com/articles/communita-cafe",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001304",
+          "claimed_status": "allowed",
+          "id": "21d33ffe-382b-5f5a-81d2-ffc72c8e3ecd",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/communita_cafe/",
+          "type": "sns",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001304",
+          "claimed_status": "allowed",
+          "id": "90a509ec-397a-59d7-b788-3fb0e3174955",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131601/13282835/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        }
+      ],
+      "sub_area": "目黒"
+    },
+    {
       "address": "東京都世田谷区船橋1-1-17",
       "area": "tokyo",
       "contact": null,
@@ -41988,8 +42096,8 @@
       "info_verified": "2026-08-08",
       "is_closed": false,
       "last_verified": "2026-08-08",
-      "latitude": 35.76376,
-      "longitude": 139.62857,
+      "latitude": 35.764722,
+      "longitude": 139.629726,
       "name": "パークス光が丘",
       "place_id": null,
       "representative_source_id": "af137b1b-a7c8-5852-a958-b3c0c71262b5",
@@ -55714,6 +55822,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-24T03:50:15Z",
+  "generated_at": "2026-10-24T05:09:29Z",
   "is_sample_data": false
 }
