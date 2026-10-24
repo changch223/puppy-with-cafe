@@ -77,6 +77,7 @@
       ],
       "longitude": 139.69611,
       "name": "& OIMO TOKYO CAFE 中目黒店",
+      "phone": "03-6416-4908",
       "place_id": null,
       "representative_source_id": "15353481-b425-5cdc-a6c8-3fc7782360d6",
       "sources": [
@@ -124,6 +125,24 @@
           "reference": "https://inumag.jp/13744",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000062",
+          "claimed_status": "unverified",
+          "id": "fc127c41-1a79-53b5-9381-e5066d5a7e21",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131701/13260371/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000062",
+          "claimed_status": "unverified",
+          "id": "00a03db2-6c77-5316-8535-30fea061c6ee",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/shop/ZZGAmQWDQCLCU9ZSGPHb",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "中目黒"
@@ -1260,6 +1279,7 @@
       ],
       "longitude": 139.71325,
       "name": "ARMWOOD COTTAGE(アームウッドコテージ)",
+      "phone": "03-5935-8897",
       "place_id": null,
       "representative_source_id": "d0d6efb0-376d-57d1-a9a4-9d4129b10d0f",
       "sources": [
@@ -1316,6 +1336,24 @@
           "reference": "https://withwan.life/listing/5997/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000263",
+          "claimed_status": "unverified",
+          "id": "906d0ee3-495c-58ce-bad1-ce3aad966add",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/en/shop/FMr6YtS8gspHEnuPO9rI",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000263",
+          "claimed_status": "unverified",
+          "id": "69862cb1-2d24-5899-b45d-7c59b6223bd9",
+          "provenance": "aggregated",
+          "reference": "https://www.enjoytokyo.jp/article/107756/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "新宿"
@@ -1391,6 +1429,7 @@
       ],
       "longitude": 139.76163,
       "name": "AUX BACCHANALES 銀座",
+      "phone": "03-3569-0202",
       "place_id": null,
       "representative_source_id": "ac253a1f-6e5e-5399-9d60-c63debda94da",
       "sources": [
@@ -1411,6 +1450,15 @@
           "reference": "https://kyuzitsu-inubu.com/features/75417/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000240",
+          "claimed_status": "unverified",
+          "id": "0bc39572-82a6-5a81-a99d-ffe9e705eaff",
+          "provenance": "aggregated",
+          "reference": "https://www.auxbacchanales.com/shops/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -1507,6 +1555,7 @@
       ],
       "longitude": 139.7312,
       "name": "Aloha Table 大崎店",
+      "phone": "03-6277-2564",
       "place_id": null,
       "representative_source_id": "aadb34b9-4104-5899-9c86-524c0c21c232",
       "sources": [
@@ -2205,6 +2254,7 @@
       ],
       "longitude": 139.75958,
       "name": "BESIDE SEASIDE",
+      "phone": "050-3503-6506",
       "place_id": null,
       "representative_source_id": "9147fcb9-cf54-5d86-8d18-27b618fdec33",
       "sources": [
@@ -2225,6 +2275,15 @@
           "reference": "https://www.gowithdog.org/hamamatsutyo_beside_seaside/",
           "type": "blog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000868",
+          "claimed_status": "unverified",
+          "id": "7d8d13cf-adc8-5a4f-86e4-c4f9ace68808",
+          "provenance": "aggregated",
+          "reference": "https://www.beside-seaside.tokyo/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "田町・三田・浜松町"
@@ -2571,6 +2630,7 @@
       ],
       "longitude": 139.70153,
       "name": "BONDI CAFE Nakameguro",
+      "phone": "03-6303-2338",
       "place_id": null,
       "representative_source_id": "1086d80b-c08b-5a17-902f-6e8bef74c1ab",
       "sources": [
@@ -2618,6 +2678,15 @@
           "reference": "https://wanico.jp/spots/d/332",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000064",
+          "claimed_status": "unverified",
+          "id": "917e5a9b-2f6c-5104-b96e-a6fb5f80e435",
+          "provenance": "aggregated",
+          "reference": "https://map.yahoo.co.jp/v3/place/6s_hOsOhM46",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "中目黒"
@@ -3019,6 +3088,7 @@
       ],
       "longitude": 139.7429,
       "name": "Balcony by 6th",
+      "phone": "03-6459-1603",
       "place_id": null,
       "representative_source_id": "10a019da-599e-5a76-b6c4-4ef6b07b32ef",
       "sources": [
@@ -3400,6 +3470,7 @@
       ],
       "longitude": 139.655296,
       "name": "Bowery Kitchen",
+      "phone": "03-3704-9880",
       "place_id": null,
       "representative_source_id": "c01fedf8-5ab9-59c0-a3cd-f8480c509b81",
       "sources": [
@@ -3438,6 +3509,15 @@
           "reference": "https://www.gowithdog.org/komazawa-park-bowery-kitchen-restrant/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000643",
+          "claimed_status": "unverified",
+          "id": "a00aa53c-6ad4-5a55-af94-57d6c574c49d",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/bowerykitchen_komazawa/",
+          "type": "sns",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -3455,8 +3535,8 @@
       "dog_policy_condition": "テラス席のみ・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
-      "holiday_note": "月〜金定休(要最新確認)",
-      "hours_text": "土日11:00〜17:00頃(近年は営業日・時間短縮の情報あり・要最新確認)",
+      "holiday_note": "不定休(営業日はInstagramの投稿カレンダーで告知)",
+      "hours_text": "11:00〜17:00(早めに閉店する場合あり)",
       "id": "beef0000-0000-4000-8000-000000000827",
       "info_verified": "2026-08-06",
       "instagram_post_url": "https://www.instagram.com/p/DaV2cvTTEXM/",
@@ -3466,11 +3546,12 @@
       "links": [
         {
           "type": "instagram",
-          "url": "https://www.instagram.com/cafe.chou.chou/"
+          "url": "https://www.instagram.com/cafe_chouchou.r/"
         }
       ],
       "longitude": 139.271415,
       "name": "CAFE CHOU CHOU(シュシュ)",
+      "phone": "042-673-3917",
       "place_id": null,
       "representative_source_id": "aa43562e-e057-51e3-8c12-75436274c533",
       "sources": [
@@ -3509,6 +3590,24 @@
           "reference": "https://inunavi.plan-b.co.jp/inucafe_hachiouji/",
           "type": "other",
           "verified_at": "2026-08-09"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000827",
+          "claimed_status": "unverified",
+          "id": "63a60994-4d43-5602-bf9c-1a042a457137",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/cafe_chouchou.r/",
+          "type": "sns",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000827",
+          "claimed_status": "unverified",
+          "id": "abfd42ad-0e0a-556c-a4a6-85175d53f9ae",
+          "provenance": "aggregated",
+          "reference": "https://lit.link/CAFECHOUCHOU",
+          "type": "sns",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "高尾山"
@@ -4654,6 +4753,7 @@
       ],
       "longitude": 139.792,
       "name": "CLANN BY THE RIVER（旧PITMANS）",
+      "phone": "050-3188-8919",
       "place_id": null,
       "representative_source_id": "5cf9a64a-9e95-52c4-880b-7495aa301a37",
       "sources": [
@@ -6320,6 +6420,7 @@
       "latitude": 35.69826,
       "longitude": 139.70211,
       "name": "Cafe du Riche(カフェドリッチェ)",
+      "phone": "03-5285-9903",
       "place_id": null,
       "representative_source_id": "c31317d8-25d4-5073-a2df-9327a90f8fea",
       "sources": [
@@ -6344,20 +6445,20 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000265",
           "claimed_status": "unverified",
-          "id": "a66df2c0-222a-5b0a-9eed-d1877b4b1310",
+          "id": "b6a201ae-5bb2-5e36-8048-8829e77c2253",
           "provenance": "aggregated",
           "reference": "https://tabelog.com/tokyo/A1304/A130401/13185651/",
           "type": "tabelog",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
         },
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000265",
           "claimed_status": "unverified",
-          "id": "165fb554-3461-5d79-b729-f6e62311d499",
+          "id": "b676ac2e-853d-56a3-b99a-d47f77562845",
           "provenance": "aggregated",
           "reference": "https://r.gnavi.co.jp/csc25t0a0000/",
           "type": "other",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "新宿"
@@ -6905,6 +7006,7 @@
       "latitude": 35.659961,
       "longitude": 139.35928,
       "name": "Cafe' Roju",
+      "phone": "042-645-2796",
       "place_id": null,
       "representative_source_id": "22350357-0c80-50e1-a951-941172f8663f",
       "sources": [
@@ -6947,11 +7049,11 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000625",
           "claimed_status": "unverified",
-          "id": "3c7c4de3-102e-5671-b9df-7aa3781efcfb",
+          "id": "1d4da056-f7a4-5e5d-80a3-574e0c3c9928",
           "provenance": "aggregated",
           "reference": "http://caferoju.com/",
           "type": "official_hp",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
         },
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000625",
@@ -6961,6 +7063,15 @@
           "reference": "http://caferoju.com/page7",
           "type": "official_hp",
           "verified_at": "2026-10-20"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000625",
+          "claimed_status": "unverified",
+          "id": "b0fe66b9-1402-53e6-bbb1-f793805b3184",
+          "provenance": "aggregated",
+          "reference": "http://caferoju.com/page9",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "八王子"
@@ -7258,6 +7369,7 @@
       "latitude": 35.73236,
       "longitude": 139.70416,
       "name": "Chanoma(チャノマ)",
+      "phone": "03-6709-1139",
       "place_id": null,
       "representative_source_id": "aae7a529-a2d8-5bfc-aa15-6de96e982b03",
       "sources": [
@@ -7305,6 +7417,24 @@
           "reference": "https://www.timeout.jp/tokyo/ja/レストラン/chanoma",
           "type": "other",
           "verified_at": "2026-10-20"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000347",
+          "claimed_status": "unverified",
+          "id": "1bd2bb7b-7ce4-5c2f-b551-3a5ac449197d",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1322/A132202/13266446/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000347",
+          "claimed_status": "unverified",
+          "id": "041edcb9-832c-50a5-973d-6324309b9372",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/shop/jXtXBqb6NlQR7kfCwI9r",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "池袋"
@@ -7631,7 +7761,7 @@
       "hours_text": "火〜日09:00〜17:00",
       "id": "beef0000-0000-4000-8000-000000001096",
       "info_verified": "2026-08-07",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.694759,
       "links": [
@@ -7662,6 +7792,15 @@
           "reference": "https://tabelog.com/tokyo/A1319/A131903/13300102/dtlrvwlst/",
           "type": "tabelog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001096",
+          "claimed_status": "unverified",
+          "id": "5fc251fe-41e2-52c7-8ecc-b330a6e0cc58",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/cyancoffee2024/",
+          "type": "sns",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "東中野・落合・中野坂上"
@@ -8345,6 +8484,7 @@
       ],
       "longitude": 139.69241,
       "name": "District ブラッスリー・バー・ラウンジ",
+      "phone": "03-6258-1414",
       "place_id": null,
       "representative_source_id": "c19a7415-d5c5-5cd8-880b-78c02164acb8",
       "sources": [
@@ -9018,6 +9158,7 @@
       ],
       "longitude": 139.64961,
       "name": "Dogberry(ドッグベリー)",
+      "phone": "03-3337-1651",
       "place_id": null,
       "representative_source_id": "c608eb77-8158-5585-99e2-9447553cd0b1",
       "sources": [
@@ -9060,11 +9201,11 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000441",
           "claimed_status": "unverified",
-          "id": "13ddb138-4b15-5f03-88e3-fcfc3d35c424",
+          "id": "c6528e99-ee0c-5135-8bce-aea9c6f3f41d",
           "provenance": "aggregated",
           "reference": "https://tabelog.com/tokyo/A1319/A131904/13000730/",
           "type": "tabelog",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
         },
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000441",
@@ -9074,6 +9215,15 @@
           "reference": "https://r.gnavi.co.jp/2tpdmj4y0000/",
           "type": "other",
           "verified_at": "2026-10-20"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000441",
+          "claimed_status": "unverified",
+          "id": "fe1ccd30-6607-5099-9606-04eebe86e10c",
+          "provenance": "aggregated",
+          "reference": "https://retty.me/restaurant/100000005109/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "高円寺・荻窪"
@@ -9693,6 +9843,7 @@
       ],
       "longitude": 139.78361,
       "name": "EZO DELI",
+      "phone": "03-3863-8811",
       "place_id": null,
       "representative_source_id": "6a0abe1b-9234-5eeb-ae96-1f8eaf8511ca",
       "sources": [
@@ -9722,6 +9873,33 @@
           "reference": "https://wankonowa.com/column/3576/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000167",
+          "claimed_status": "unverified",
+          "id": "f3399f3d-0c0e-57f9-9a32-a8c472e5d4ac",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1311/A131103/13268121/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000167",
+          "claimed_status": "unverified",
+          "id": "d5d0a9fa-5f62-51a1-94f0-aff08ffa4513",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/1zhebm0m0000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000167",
+          "claimed_status": "unverified",
+          "id": "268e7d8d-832f-5fe1-b0a6-a088447c2ad7",
+          "provenance": "aggregated",
+          "reference": "https://map.yahoo.co.jp/v3/place/tQtzqvBUPX6",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -10317,7 +10495,7 @@
       "hours_text": "火〜金10:00〜18:00・土日11:00〜19:00",
       "id": "beef0000-0000-4000-8000-000000000881",
       "info_verified": "2026-08-06",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-06",
       "latitude": 35.63397,
       "longitude": 139.70824,
@@ -10342,6 +10520,24 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/549",
           "type": "other",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000881",
+          "claimed_status": "unverified",
+          "id": "263ee571-1392-5972-9367-db71f78f33dd",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131601/13214234/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000881",
+          "claimed_status": "unverified",
+          "id": "e603a62b-291f-5c1a-910d-7fc655dcba14",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131601/13282835/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "目黒"
@@ -10529,6 +10725,7 @@
       ],
       "longitude": 139.79397,
       "name": "FUGLEN ASAKUSA",
+      "phone": "03-5811-1756",
       "place_id": null,
       "representative_source_id": "9b6cf378-7aeb-5c48-8bd3-0894d863ee4b",
       "sources": [
@@ -10549,6 +10746,24 @@
           "reference": "https://wankonowa.com/column/3576/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000162",
+          "claimed_status": "unverified",
+          "id": "8798e693-3ad4-56d4-b264-71c30ddbbd39",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1311/A131102/13226426/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000162",
+          "claimed_status": "unverified",
+          "id": "f4bb1dc2-6f99-5a85-8d8d-d552e995dbbc",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/shop/NnPUmou8dS25kc2bWIq9",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -11082,6 +11297,7 @@
       ],
       "longitude": 139.77163,
       "name": "Farmacy-Deli&BAR 日本橋1ppon",
+      "phone": "03-6262-3463",
       "place_id": null,
       "representative_source_id": "f6ced2a7-a0d2-519e-b13d-56c2451d65d7",
       "sources": [
@@ -11182,6 +11398,7 @@
       "latitude": 35.66399,
       "longitude": 139.70802,
       "name": "GENTLE Dining",
+      "phone": "03-6897-3777",
       "place_id": null,
       "representative_source_id": "cfdc790a-75da-543e-a28a-779fe135b04b",
       "sources": [
@@ -11193,6 +11410,24 @@
           "reference": "https://odekake-wanko-bu.com/spot/gentle-dining/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000089",
+          "claimed_status": "unverified",
+          "id": "22025640-0fc8-51ec-8c78-b41c75c51e75",
+          "provenance": "aggregated",
+          "reference": "https://restaurant.ikyu.com/113687/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000089",
+          "claimed_status": "unverified",
+          "id": "8f790417-ea86-5de5-891f-754989bca626",
+          "provenance": "aggregated",
+          "reference": "https://epark.jp/shopinfo/ozr642672/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "表参道・青山"
@@ -11269,6 +11504,7 @@
       ],
       "longitude": 139.68283,
       "name": "GOOD CHEESE GOOD BAKE",
+      "phone": "03-5724-3555",
       "place_id": null,
       "representative_source_id": "704d1b66-335c-5092-86db-5fbdd8da38d5",
       "sources": [
@@ -11280,6 +11516,24 @@
           "reference": "https://petoria-tokyo.jp/feature/gakugeidaigaku-lunch/",
           "type": "blog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001123",
+          "claimed_status": "unverified",
+          "id": "ab2ff512-a5b2-53bf-aa40-e56181bf9d83",
+          "provenance": "aggregated",
+          "reference": "https://s.tabelog.com/tokyo/A1317/A131702/13297955/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001123",
+          "claimed_status": "unverified",
+          "id": "85c2ebde-c7a9-5d9f-9f77-e1810ddee47e",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/h6vjj6c70000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "学芸大学"
@@ -11691,6 +11945,7 @@
       ],
       "longitude": 139.71394,
       "name": "GRIP(グリップ)",
+      "phone": "03-5944-9063",
       "place_id": null,
       "representative_source_id": "2333bff2-505c-564c-905d-9e5e592c69d1",
       "sources": [
@@ -11711,6 +11966,15 @@
           "reference": "https://inunavi.plan-b.co.jp/inucafe_ikebukuro/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000340",
+          "claimed_status": "unverified",
+          "id": "7e2f90b3-8661-59a0-bcab-4ac07ae5aedd",
+          "provenance": "aggregated",
+          "reference": "https://dining-grip.com/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "池袋"
@@ -12118,6 +12382,7 @@
       ],
       "longitude": 139.184391,
       "name": "HOMELAND OME",
+      "phone": "0428-85-9899",
       "place_id": null,
       "representative_source_id": "faca0a68-ff39-5aad-9b37-acdf624deedc",
       "sources": [
@@ -12129,6 +12394,24 @@
           "reference": "https://www.dharma.llc/ome/cafe/",
           "type": "official_hp",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001286",
+          "claimed_status": "unverified",
+          "id": "90325e6c-ec13-5f8a-81ab-b1165aff28cf",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1330/A133003/13318530/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001286",
+          "claimed_status": "unverified",
+          "id": "0228670f-65b8-5804-a34a-2637c82ce8ab",
+          "provenance": "aggregated",
+          "reference": "https://www.omecci.jp/sankan_shop/24246.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "青梅"
@@ -12787,6 +13070,7 @@
       ],
       "longitude": 139.70728,
       "name": "Italian Dining Lui",
+      "phone": "03-6426-9486",
       "place_id": null,
       "representative_source_id": "74f922a9-e584-5bfa-959d-a2c2ccfc8f74",
       "reservation": "ペット同伴は予約時に要問合せ",
@@ -12808,6 +13092,15 @@
           "reference": "https://petoria-tokyo.jp/feature/musashikoyama-lunch/",
           "type": "blog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000891",
+          "claimed_status": "unverified",
+          "id": "c77f505d-7e1f-5eac-bbb4-ff2d19980df0",
+          "provenance": "aggregated",
+          "reference": "https://italian-dining-lui.foodre.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "武蔵小山"
@@ -12898,6 +13191,7 @@
       ],
       "longitude": 139.58452,
       "name": "Italian Kitchen VANSAN 大泉学園店",
+      "phone": "050-1792-7423",
       "place_id": null,
       "representative_source_id": "cf67b11d-31ef-55da-96b7-cae9e1362612",
       "sources": [
@@ -12909,6 +13203,24 @@
           "reference": "https://kyuzitsu-inubu.com/spot/detail/99384/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000966",
+          "claimed_status": "unverified",
+          "id": "538c1604-15e0-58c1-973f-879051d7dc21",
+          "provenance": "aggregated",
+          "reference": "https://vansan-ltd.jp/vansan/vansan-oizumigakuen/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000966",
+          "claimed_status": "unverified",
+          "id": "cc0456aa-46a8-5b1e-b88d-a48d5114d656",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1321/A132103/13227630/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "石神井公園・大泉学園"
@@ -13250,6 +13562,7 @@
       ],
       "longitude": 139.79905,
       "name": "JUICE BAR ROCKET(ジュースバーロケット)",
+      "phone": "03-6874-0626",
       "place_id": null,
       "representative_source_id": "fe29b662-5ab2-5979-b6c0-a836e12915e6",
       "sources": [
@@ -13311,6 +13624,7 @@
       ],
       "longitude": 139.74472,
       "name": "Jaho Coffee Roaster & Wine Bar 田町店",
+      "phone": "03-6275-1955",
       "place_id": null,
       "representative_source_id": "3b4ea616-900a-51fd-9eba-81141487f14d",
       "sources": [
@@ -13322,6 +13636,24 @@
           "reference": "https://petoria-tokyo.jp/feature/tamachi_mita-lunch/",
           "type": "blog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000860",
+          "claimed_status": "unverified",
+          "id": "bcc944c4-071c-541f-a21a-d5a8f733cb47",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/en/tokyo/A1314/A131402/13233931/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000860",
+          "claimed_status": "unverified",
+          "id": "372d93e3-5077-5fb5-92ed-32694da97301",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/shop/o5U1mg2gQrUZACoWPgja",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "田町・三田・浜松町"
@@ -13509,6 +13841,7 @@
       ],
       "longitude": 139.71822,
       "name": "Jugar cafe(フガールカフェ)",
+      "phone": "03-5952-0122",
       "place_id": null,
       "representative_source_id": "c01bc878-c1fe-5a1c-bdc6-ebe21a5cf6c5",
       "sources": [
@@ -13538,6 +13871,15 @@
           "reference": "https://tabelog.com/tokyo/A1305/A130501/13096971/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000348",
+          "claimed_status": "unverified",
+          "id": "4bb18078-5ed8-5346-9cf4-518ad27eb2e1",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ000245761/tel/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "池袋"
@@ -14214,6 +14556,7 @@
       "latitude": 35.660684,
       "longitude": 139.587706,
       "name": "LARGO SENGAWA",
+      "phone": "03-5969-9996",
       "place_id": null,
       "representative_source_id": "40f78208-413c-5cb9-8fce-39ba68b4be01",
       "sources": [
@@ -14234,6 +14577,24 @@
           "reference": "https://odekake-wanko-bu.com/spot/largo_sengawa/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000423",
+          "claimed_status": "unverified",
+          "id": "d8337aaf-7a65-52f7-8c53-de1b4a4dac58",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1326/A132601/13167217/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000423",
+          "claimed_status": "unverified",
+          "id": "25badf50-efa5-5f62-8842-e749b212a93b",
+          "provenance": "aggregated",
+          "reference": "https://restaurant.ikyu.com/113551/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "調布・府中"
@@ -14555,6 +14916,7 @@
       ],
       "longitude": 139.66646,
       "name": "LOU",
+      "phone": "03-3387-0888",
       "place_id": null,
       "representative_source_id": "49170f98-a55d-50cb-a135-61e223b98520",
       "sources": [
@@ -14575,6 +14937,15 @@
           "reference": "https://tabelog.com/en/tokyo/A1319/A131902/13261085/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000464",
+          "claimed_status": "unverified",
+          "id": "dbfc0654-d228-5049-aee4-cd40c8926050",
+          "provenance": "aggregated",
+          "reference": "https://www.timeout.jp/tokyo/ja/レストラン/cafe-lou-nakano",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "中野"
@@ -14993,6 +15364,7 @@
       "latitude": 35.62282,
       "longitude": 139.74786,
       "name": "Le Calin（ルカラン）",
+      "phone": "03-5479-3155",
       "place_id": null,
       "representative_source_id": "16fdd7de-d7f7-5b94-bff8-21234c294e75",
       "sources": [
@@ -15017,11 +15389,20 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000005",
           "claimed_status": "unverified",
-          "id": "9a02f562-38ab-5b43-b07d-2158c8f9411d",
+          "id": "86d211dc-450e-58d1-bd44-716c13b9fcef",
           "provenance": "aggregated",
           "reference": "https://tabelog.com/tokyo/A1314/A131404/13229263/",
           "type": "tabelog",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000005",
+          "claimed_status": "unverified",
+          "id": "54ea973e-e518-5f1c-96f0-5aea91404fa2",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ003474072/tel/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "天王洲アイル"
@@ -15292,6 +15673,7 @@
       ],
       "longitude": 139.7488,
       "name": "Le Pain Quotidien 芝公園店",
+      "phone": "03-6430-4157",
       "place_id": null,
       "representative_source_id": "0ba3e04f-6aec-50c0-b822-642bb6f4cdec",
       "sources": [
@@ -15312,6 +15694,24 @@
           "reference": "https://petoria-tokyo.jp/feature/shibapark-lunch/",
           "type": "blog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000872",
+          "claimed_status": "unverified",
+          "id": "db9db06d-d776-56bb-8318-d367e5881a72",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1314/A131401/13120999/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000872",
+          "claimed_status": "unverified",
+          "id": "5aa62520-7bcd-5151-8e1e-bdeeeceabe13",
+          "provenance": "aggregated",
+          "reference": "https://icotto.jp/restaurants/642",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "田町・三田・浜松町"
@@ -15933,6 +16333,7 @@
       "latitude": 35.70764,
       "longitude": 139.77734,
       "name": "MEAT×WINE BISTRO DOMANNAKA",
+      "phone": "03-5826-4557",
       "place_id": null,
       "representative_source_id": "ab2e6c51-1478-5d1f-89f7-c52aa8085f4c",
       "sources": [
@@ -15971,6 +16372,24 @@
           "reference": "https://wanico.jp/spots/d/1192",
           "type": "other",
           "verified_at": "2026-08-09"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000300",
+          "claimed_status": "unverified",
+          "id": "42d63ea8-19d3-5ef4-b205-5a7714559d2d",
+          "provenance": "aggregated",
+          "reference": "https://www.tablecheck.com/ja/bistro-domannaka",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000300",
+          "claimed_status": "unverified",
+          "id": "d12e40be-e469-53c8-957a-70598fb87c89",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/shop/OpcKFyY42rJuju3gK5zD",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "上野・谷根千"
@@ -16043,6 +16462,7 @@
       ],
       "longitude": 139.325583,
       "name": "MERRY and BRIGHT",
+      "phone": "080-3429-2318",
       "place_id": null,
       "representative_source_id": "3b4db4e0-de91-5cde-866a-0a4ab549bec4",
       "sources": [
@@ -16072,6 +16492,24 @@
           "reference": "https://8dabe.com/2020/12/15/merryandbright/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000621",
+          "claimed_status": "unverified",
+          "id": "3123d8c0-4d7d-51c9-8e8e-a835d5605754",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1329/A132904/13239421/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000621",
+          "claimed_status": "unverified",
+          "id": "fa1a87cf-b8af-5fae-b059-d519d8276828",
+          "provenance": "aggregated",
+          "reference": "https://map.yahoo.co.jp/v3/place/UeiabKAZezQ",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "八王子"
@@ -17022,6 +17460,7 @@
       ],
       "longitude": 139.74389,
       "name": "Mon-TERCERO（テルセーロ）",
+      "phone": "03-5461-0433",
       "place_id": null,
       "representative_source_id": "935bb4f4-0b3a-5785-b8ae-b5f0798ac550",
       "sources": [
@@ -17046,11 +17485,20 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000225",
           "claimed_status": "unverified",
-          "id": "46198e0f-cd6e-5c1b-8281-773de115dbde",
+          "id": "0b499f9e-a015-56ee-a1a8-a11ee2ac9142",
           "provenance": "aggregated",
           "reference": "https://tabelog.com/tokyo/A1314/A131403/13118520/",
           "type": "tabelog",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000225",
+          "claimed_status": "unverified",
+          "id": "c5eba109-c582-5483-8a30-ae10b8b05b12",
+          "provenance": "aggregated",
+          "reference": "https://aumo.jp/articles/19234",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "品川・大井町"
@@ -17461,6 +17909,7 @@
       ],
       "longitude": 139.73463,
       "name": "NATURE&MEAT GROVE PARK VIEW",
+      "phone": "03-6429-9777",
       "place_id": null,
       "representative_source_id": "c5f92d39-4cd5-5485-aeb4-3058161bdc44",
       "sources": [
@@ -17481,6 +17930,24 @@
           "reference": "https://k-protopia.com/5357-2/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000227",
+          "claimed_status": "unverified",
+          "id": "ccd34149-bd42-5ef7-a6a1-fbb75bb09fc4",
+          "provenance": "aggregated",
+          "reference": "https://www.oimachi-tracks.com/shop-list/restaurants/detail/2021801/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000227",
+          "claimed_status": "unverified",
+          "id": "5c328d25-4c96-5865-be21-1395620fb751",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1315/A131501/13317935/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "品川・大井町"
@@ -17976,6 +18443,7 @@
       ],
       "longitude": 139.77055,
       "name": "O.GARDEN CAFE",
+      "phone": "070-8807-0863",
       "place_id": null,
       "representative_source_id": "e580502e-f2d6-5f09-99a0-69194edc6cdb",
       "sources": [
@@ -19558,6 +20026,7 @@
       ],
       "longitude": 139.322509,
       "name": "Park Side Cafe BASEL",
+      "phone": "042-625-8981",
       "place_id": null,
       "representative_source_id": "c2fb8112-a0a1-57de-9d9a-022de89e2628",
       "sources": [
@@ -19587,6 +20056,24 @@
           "reference": "https://inunavi.plan-b.co.jp/inucafe_hachiouji/",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000622",
+          "claimed_status": "unverified",
+          "id": "46522f4a-05c3-5f12-b0a6-b7cf92d615c3",
+          "provenance": "aggregated",
+          "reference": "https://basel.co.jp/shops/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000622",
+          "claimed_status": "unverified",
+          "id": "747d0345-fa74-55b1-9be8-03c12d2a59c5",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1329/A132904/13100288/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "八王子"
@@ -19647,6 +20134,7 @@
       "latitude": 35.650038,
       "longitude": 139.54003,
       "name": "Paston（パストン）",
+      "phone": "042-445-0443",
       "place_id": null,
       "representative_source_id": "a2de05eb-bb9b-548f-afab-b1e4f4182dab",
       "sources": [
@@ -19676,6 +20164,24 @@
           "reference": "https://odekake-wanko-bu.com/spot/pastonkun/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000420",
+          "claimed_status": "unverified",
+          "id": "77a8588c-d76e-5d75-9525-746755dad3af",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1326/A132601/13270080/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000420",
+          "claimed_status": "unverified",
+          "id": "3aa69c7c-907e-5bfb-8c65-da038c456a47",
+          "provenance": "aggregated",
+          "reference": "https://www.navitime.co.jp/poi?spot=02022-1470324",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "調布・府中"
@@ -20931,6 +21437,7 @@
       ],
       "longitude": 139.70178,
       "name": "ROJU NAKAMEGURO",
+      "phone": "03-6303-0770",
       "place_id": null,
       "representative_source_id": "d8def688-926b-57f2-aee0-34d3a88ccd7d",
       "sources": [
@@ -20978,6 +21485,24 @@
           "reference": "https://wankonowa.com/column/1858/",
           "type": "blog",
           "verified_at": "2026-10-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000063",
+          "claimed_status": "unverified",
+          "id": "a45e865f-26e1-5c60-837a-317e21b5c25c",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131701/13258246/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000063",
+          "claimed_status": "unverified",
+          "id": "c98cc952-9a31-53b2-a5e6-748bc43c6ec4",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/shop/EZxo7IzEEhyVVys7QFoX",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "中目黒"
@@ -22619,6 +23144,7 @@
       ],
       "longitude": 139.470572,
       "name": "Snow Peak Cafe 南町田グランベリーパーク",
+      "phone": "042-850-5263",
       "place_id": null,
       "representative_source_id": "2e2431c6-09a9-57c5-85db-af81e633e82b",
       "sources": [
@@ -22652,11 +23178,20 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000406",
           "claimed_status": "unverified",
-          "id": "4ad785f4-b97c-55b6-9e72-d00ca9b65192",
+          "id": "ececa42d-ad1c-5208-aff1-7414df82f327",
           "provenance": "aggregated",
           "reference": "https://www.snowpeak.co.jp/news/p20250117/",
           "type": "official_hp",
-          "verified_at": "2026-10-07"
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000406",
+          "claimed_status": "unverified",
+          "id": "d570b200-a729-5c5c-bedd-c2061c18bb2d",
+          "provenance": "aggregated",
+          "reference": "https://gbp.minamimachida-grandberrypark.com/floor/detail/?cd=000397",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "町田"
@@ -22797,6 +23332,7 @@
       ],
       "longitude": 139.74731,
       "name": "T.Y.HARBOR",
+      "phone": "03-5479-4555",
       "place_id": null,
       "representative_source_id": "dd52ec68-d89b-544b-a6eb-cce77f412d94",
       "sources": [
@@ -22817,6 +23353,15 @@
           "reference": "https://wanico.jp/spots/d/1359",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000002",
+          "claimed_status": "unverified",
+          "id": "279f70e3-2377-5892-8092-ed8604f943e7",
+          "provenance": "aggregated",
+          "reference": "https://www.tysons.jp/tyharbor/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "天王洲アイル"
@@ -25587,6 +26132,7 @@
       "latitude": 35.508892,
       "longitude": 139.469711,
       "name": "WIRED KITCHEN 南町田グランベリーパーク",
+      "phone": "042-706-8430",
       "place_id": null,
       "representative_source_id": "ab62796f-12b8-52d2-a05f-9de7114b0bbb",
       "sources": [
@@ -25625,6 +26171,15 @@
           "reference": "https://petribbon.com/restaurant/tokyo/703/478",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000407",
+          "claimed_status": "unverified",
+          "id": "65b92c84-d01c-5870-986d-315afb41c459",
+          "provenance": "aggregated",
+          "reference": "https://gbp.minamimachida-grandberrypark.com/floor/detail/?cd=000222",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "町田"
@@ -25701,6 +26256,7 @@
       ],
       "longitude": 139.61372,
       "name": "WOODBERRY COFFEE 荻窪店",
+      "phone": "03-6454-7785",
       "place_id": null,
       "representative_source_id": "c222dbf3-dc53-5bcb-a5f1-7e02110e6707",
       "sources": [
@@ -25721,6 +26277,15 @@
           "reference": "https://petoria-tokyo.jp/feature/ogikubo-lunch/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000446",
+          "claimed_status": "unverified",
+          "id": "a81eee48-0e68-5ee5-9fde-706bd3b4992f",
+          "provenance": "aggregated",
+          "reference": "https://www.woodberrycoffee.com/pages/location",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "高円寺・荻窪"
@@ -25956,6 +26521,7 @@
       ],
       "longitude": 139.75234,
       "name": "Wande Shiba",
+      "phone": "03-6809-2460",
       "place_id": null,
       "representative_source_id": "e6220a19-f0da-5dd4-a1dd-978659fc6c61",
       "sources": [
@@ -25985,6 +26551,24 @@
           "reference": "https://odekake-wanko-bu.com/spot/wande-shiba",
           "type": "blog",
           "verified_at": "2026-08-09"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000871",
+          "claimed_status": "unverified",
+          "id": "911cf9d8-4fd5-54e3-b2f9-6a173178dccf",
+          "provenance": "aggregated",
+          "reference": "https://www.hvf.jp/inumo-shibakoen/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000871",
+          "claimed_status": "unverified",
+          "id": "fe9c87a9-fcee-5c8e-b547-33afb31a0b26",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1314/A131401/13269012/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "田町・三田・浜松町"
@@ -26864,6 +27448,7 @@
       ],
       "longitude": 139.376011,
       "name": "atelier BASEL",
+      "phone": "042-673-2217",
       "place_id": null,
       "representative_source_id": "5642053f-960a-50ea-822c-24f5029078a2",
       "sources": [
@@ -26902,6 +27487,15 @@
           "reference": "https://inunavi.plan-b.co.jp/inucafe_hachiouji/",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000623",
+          "claimed_status": "unverified",
+          "id": "d53633f2-78ae-5211-b8d7-949eed344775",
+          "provenance": "aggregated",
+          "reference": "https://basel.co.jp/shops/%e3%82%a2%e3%83%88%e3%83%aa%e3%82%a8%e3%80%80%e3%83%90%e3%83%bc%e3%82%bc%e3%83%ab/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "八王子"
@@ -27183,6 +27777,7 @@
       ],
       "longitude": 139.74841,
       "name": "biotable.",
+      "phone": "03-6809-5499",
       "place_id": null,
       "representative_source_id": "1d5c6498-9d94-5b93-a79c-87d836c8badf",
       "sources": [
@@ -27203,6 +27798,24 @@
           "reference": "https://magazine.hitosara.com/article/3369",
           "type": "other",
           "verified_at": "2026-08-09"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000864",
+          "claimed_status": "unverified",
+          "id": "1eaecb14-de3b-53ad-a27c-e05cdfd694dd",
+          "provenance": "aggregated",
+          "reference": "http://biotable.jp",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000864",
+          "claimed_status": "unverified",
+          "id": "b884dbc9-ec54-53bd-abab-a5e842f288a5",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1314/A131402/13259518/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "田町・三田・浜松町"
@@ -27272,6 +27885,7 @@
       "latitude": 35.6224,
       "longitude": 139.7479,
       "name": "breadworks 天王洲",
+      "phone": "03-5479-3666",
       "place_id": null,
       "representative_source_id": "7a6733d1-24c5-5f10-9d10-bd3eb9b99f7c",
       "sources": [
@@ -27287,20 +27901,20 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000004",
           "claimed_status": "unverified",
-          "id": "eb550081-b409-517a-8268-e07de29a8b9a",
+          "id": "7cb5938a-cc8f-50b2-8b1c-85d71ba20ca3",
           "provenance": "aggregated",
           "reference": "https://www.tysons.jp/breadworks/access",
           "type": "official_hp",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
         },
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000004",
           "claimed_status": "unverified",
-          "id": "2c2f2870-cf97-504f-8244-97eddda280c5",
+          "id": "c42d27c2-0131-5c4b-8019-01e9df3cb29f",
           "provenance": "aggregated",
           "reference": "https://tabelog.com/tokyo/A1314/A131404/13106585/",
           "type": "tabelog",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "天王洲アイル"
@@ -28838,6 +29452,7 @@
       ],
       "longitude": 139.6534,
       "name": "gufo(グーフォ)",
+      "phone": "03-5356-9774",
       "place_id": null,
       "representative_source_id": "63c42658-a252-5b3c-931a-29e58f0f2eb8",
       "sources": [
@@ -29378,6 +29993,7 @@
       ],
       "longitude": 139.73463,
       "name": "les joues de bébé",
+      "phone": "03-6303-8955",
       "place_id": null,
       "representative_source_id": "3891e451-8c5e-5fc7-968f-4c1bcbdffb5b",
       "sources": [
@@ -29398,6 +30014,24 @@
           "reference": "https://k-protopia.com/5357-2/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000228",
+          "claimed_status": "unverified",
+          "id": "5679b3fe-5926-522b-8331-28a8f53ecafd",
+          "provenance": "aggregated",
+          "reference": "https://www.oimachi-tracks.com/shop-list/restaurants/detail/2033601/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000228",
+          "claimed_status": "unverified",
+          "id": "8ce88079-9c3f-5a3e-a107-052f07812218",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1315/A131501/13318782/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "品川・大井町"
@@ -29462,7 +30096,7 @@
       "hours_text": "9:00〜19:00（L.O.18:30）",
       "id": "beef0000-0000-4000-8000-000000000165",
       "info_verified": "2026-07-17",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-08",
       "latitude": 35.70191,
       "links": [
@@ -29511,6 +30145,24 @@
           "reference": "https://tabelog.com/tokyo/A1311/A131103/13275522/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000165",
+          "claimed_status": "unverified",
+          "id": "18658b03-f2d3-5796-942d-269beb651c81",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/marble_kuramae/",
+          "type": "sns",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000165",
+          "claimed_status": "unverified",
+          "id": "781ee4ec-9688-5d1c-b017-390abfae8f87",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1311/A131103/13275522/dtlrvwlst/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -29993,6 +30645,7 @@
       ],
       "longitude": 139.71982,
       "name": "nico 赤羽店",
+      "phone": "03-5939-4380",
       "place_id": null,
       "representative_source_id": "33695054-c430-511b-91b4-abb59c14c703",
       "sources": [
@@ -30013,6 +30666,15 @@
           "reference": "https://tabelog.com/en/tokyo/A1323/A132305/13160478/",
           "type": "tabelog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000503",
+          "claimed_status": "unverified",
+          "id": "81cf3b3f-6cfc-58f8-84d3-9ae5b7035adb",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ001129047/tel/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "赤羽・王子"
@@ -30290,6 +30952,7 @@
       ],
       "longitude": 139.66082,
       "name": "rice cafe",
+      "phone": "03-3487-4360",
       "place_id": null,
       "representative_source_id": "69437ce6-4e91-5881-ace4-eedb89941c25",
       "sources": [
@@ -31564,83 +32227,6 @@
       "sub_area": "蒲田・田園調布"
     },
     {
-      "address": "東京都品川区西五反田1-12-1 五反田桜小路",
-      "area": "tokyo",
-      "contact": null,
-      "description": "東急池上線ガード下の飲食店街「五反田桜小路」にある居酒屋。外席(テラス)に限り犬と同伴でき、ドッグメニューも用意する。",
-      "dog_amenities": {
-        "dog_menu": true,
-        "indoor": false,
-        "terrace": true
-      },
-      "dog_note": "ドッグメニューあり(良質ささみの無塩ボイル)。リード必須",
-      "dog_policy_condition": "わんちゃんとは外席での利用が可能(店内不可)。良質ささみの無塩ボイルのドッグメニューあり",
-      "dog_policy_status": "conditional",
-      "has_conflict": false,
-      "holiday_note": "日曜定休",
-      "hours": {
-        "fri": [
-          {
-            "close": "02:00",
-            "open": "17:00"
-          }
-        ],
-        "mon": [
-          {
-            "close": "02:00",
-            "open": "17:00"
-          }
-        ],
-        "sat": [
-          {
-            "close": "02:00",
-            "open": "17:00"
-          }
-        ],
-        "sun": [],
-        "thu": [
-          {
-            "close": "02:00",
-            "open": "17:00"
-          }
-        ],
-        "tue": [
-          {
-            "close": "02:00",
-            "open": "17:00"
-          }
-        ],
-        "wed": [
-          {
-            "close": "02:00",
-            "open": "17:00"
-          }
-        ]
-      },
-      "hours_text": "17:00〜翌2:00",
-      "id": "beef0000-0000-4000-8000-000000000846",
-      "info_verified": "2026-08-06",
-      "is_closed": false,
-      "last_verified": "2026-08-06",
-      "latitude": 35.62446,
-      "longitude": 139.7238,
-      "name": "さみしがりや酒房ささ",
-      "place_id": null,
-      "representative_source_id": "3e29fe46-9268-5835-9d52-f9bc5a24e085",
-      "sources": [
-        {
-          "cafe_id": "beef0000-0000-4000-8000-000000000846",
-          "claimed_status": "conditional",
-          "id": "3e29fe46-9268-5835-9d52-f9bc5a24e085",
-          "provenance": "aggregated",
-          "reference": "https://doghuggy.petgo.jp/dogmap/spot/562",
-          "type": "other",
-          "verified_at": "2026-08-06"
-        }
-      ],
-      "sub_area": "五反田・大崎"
-    },
-    {
       "address": "東京都東久留米市氷川台1-1-15",
       "area": "tokyo",
       "contact": "042-478-2728",
@@ -32168,6 +32754,7 @@
       ],
       "longitude": 139.7978,
       "name": "まるごとVeganダイニング浅草",
+      "phone": "03-5830-8134",
       "place_id": null,
       "representative_source_id": "8527a023-b8fe-5a65-a258-14277420c50a",
       "sources": [
@@ -32179,6 +32766,33 @@
           "reference": "https://wankonowa.com/column/3576/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000164",
+          "claimed_status": "unverified",
+          "id": "1e11963f-2d6f-5a98-83f6-c14178fd7ba7",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1311/A131102/13220977/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000164",
+          "claimed_status": "unverified",
+          "id": "481425bb-eab2-5faa-b644-13f300b22b3d",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/8pgttp940000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000164",
+          "claimed_status": "unverified",
+          "id": "be1f237d-491b-562c-a3aa-da3418efdfba",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ001209968/tel/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "浅草・蔵前"
@@ -33072,7 +33686,7 @@
       "hours_text": "月・水〜土11:30〜25:00(L.O.)/日・祝11:30〜22:00(L.O.21:30)",
       "id": "beef0000-0000-4000-8000-000000001293",
       "info_verified": "2026-08-08",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-08",
       "latitude": 35.71682,
       "longitude": 139.85996,
@@ -33088,6 +33702,24 @@
           "reference": "https://www.go-with-pet.com/news_bCt9jZLe8_994.html",
           "type": "blog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001293",
+          "claimed_status": "unverified",
+          "id": "a7850ca7-ac8d-5d2d-ab41-4fbfee9cd655",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1312/A131204/13056918/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001293",
+          "claimed_status": "unverified",
+          "id": "6c0212b7-f082-56da-9bfe-da768651f919",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/kanagawa/A1404/A140402/14066480/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "小岩・新小岩・平井"
@@ -33485,6 +34117,7 @@
       ],
       "longitude": 139.6577,
       "name": "アキッチョデシカ 方南町",
+      "phone": "03-5929-7606",
       "place_id": null,
       "representative_source_id": "71cb4014-9c31-5fb6-b770-b03d472700bf",
       "sources": [
@@ -33496,6 +34129,15 @@
           "reference": "https://tabelog.com/tokyo/A1319/A131903/13186464/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001241",
+          "claimed_status": "unverified",
+          "id": "051870ff-70bd-50c3-b2bd-1516f9109cef",
+          "provenance": "aggregated",
+          "reference": "https://akiccio.com/free/akicciodesica",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "方南町・浜田山・永福町・西永福"
@@ -34013,6 +34655,7 @@
       ],
       "longitude": 139.29349,
       "name": "イチローさんのきまぐれcafe",
+      "phone": "042-579-7878",
       "place_id": null,
       "representative_source_id": "c5d1a97c-3a63-5b14-a8bd-ffdcf3c6d8fc",
       "sources": [
@@ -34024,6 +34667,33 @@
           "reference": "https://hikkoshi-rakunavi.com/wp/?p=10444",
           "type": "blog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001283",
+          "claimed_status": "unverified",
+          "id": "094bf498-6601-5ac6-88d8-c2f2c43b4348",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1330/A133002/13125794/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001283",
+          "claimed_status": "unverified",
+          "id": "c5ad2798-c8c0-5307-b222-f159cef919ce",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/f8hxcxuk0000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001283",
+          "claimed_status": "unverified",
+          "id": "be6bdeb4-c178-5b76-806a-c223ab1ee81d",
+          "provenance": "aggregated",
+          "reference": "https://hitosara.com/0031176201/tel.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "羽村"
@@ -34661,6 +35331,7 @@
       ],
       "longitude": 139.80947,
       "name": "オカン焼肉 紅ちゃん 本店",
+      "phone": "03-3888-1063",
       "place_id": null,
       "representative_source_id": "afdac7ab-b96d-5188-86c2-ad8c0b098f41",
       "sources": [
@@ -34681,6 +35352,15 @@
           "reference": "https://tonarinoleo.com/2023/02/08/tokyofoodadachileodog/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000545",
+          "claimed_status": "unverified",
+          "id": "cf79d4a9-73f7-5343-a91b-a5a77fe3afb9",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1324/A132402/13134463/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "北千住"
@@ -34843,6 +35523,7 @@
       "latitude": 35.62857,
       "longitude": 139.73699,
       "name": "オーバカナル 高輪店",
+      "phone": "03-5798-7070",
       "place_id": null,
       "representative_source_id": "62b59bc3-ecdd-500d-b40d-bd00fa6283a1",
       "sources": [
@@ -34872,6 +35553,24 @@
           "reference": "https://petoria-tokyo.jp/feature/shinagawa-lunch/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000223",
+          "claimed_status": "unverified",
+          "id": "1f43f308-2867-5c80-b591-e25b833c1f4b",
+          "provenance": "aggregated",
+          "reference": "https://www.auxbacchanales.com/shops/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000223",
+          "claimed_status": "unverified",
+          "id": "2963df50-cdf6-5329-a761-ae50c8be79a4",
+          "provenance": "aggregated",
+          "reference": "https://restaurant.ikyu.com/111800/highlights",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "品川・大井町"
@@ -36488,6 +37187,7 @@
       ],
       "longitude": 139.6565,
       "name": "クリスプ・サラダワークス駒沢公園店",
+      "phone": "03-5432-9288",
       "place_id": null,
       "representative_source_id": "2d632acc-0721-52d4-8c6f-01a1d029551e",
       "sources": [
@@ -36517,6 +37217,24 @@
           "reference": "https://petokoto.com/articles/1425",
           "type": "blog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000645",
+          "claimed_status": "unverified",
+          "id": "e99c6aa2-339f-5193-8584-aab334b78c07",
+          "provenance": "aggregated",
+          "reference": "https://crisp.co.jp/location",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000645",
+          "claimed_status": "unverified",
+          "id": "c5095539-a7af-522f-b873-41b4cce735f7",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/7dcgxb530000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -36878,6 +37596,7 @@
       "latitude": 35.72813,
       "longitude": 139.76414,
       "name": "サクラカフェ&レストラン日暮里(SAKURA CAFE)",
+      "phone": "03-5685-6111",
       "place_id": null,
       "representative_source_id": null,
       "sources": [
@@ -36916,6 +37635,15 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/478",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000307",
+          "claimed_status": "unverified",
+          "id": "28cfd2fc-682a-508d-8df4-fe907dc9f473",
+          "provenance": "aggregated",
+          "reference": "https://hitosara.com/0006118365/course.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "上野・谷根千"
@@ -37805,6 +38533,7 @@
       ],
       "longitude": 139.7097,
       "name": "ジェラート ピケ カフェ クレープリー ルミネ池袋",
+      "phone": "03-6912-5610",
       "place_id": null,
       "representative_source_id": "7121147d-5020-5ee6-98c5-52e327b99437",
       "sources": [
@@ -37825,6 +38554,15 @@
           "reference": "https://inunavi.plan-b.co.jp/inucafe_ikebukuro/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000349",
+          "claimed_status": "unverified",
+          "id": "8bb7440b-16b3-572c-a586-05cb0ebd0295",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1305/A130501/13174165/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "池袋"
@@ -38019,6 +38757,7 @@
       "latitude": 35.769494,
       "longitude": 139.304598,
       "name": "ジロー珈琲 羽村店",
+      "phone": "042-578-8950",
       "place_id": null,
       "representative_source_id": "6880c39b-af6b-564d-b07a-f97354209777",
       "sources": [
@@ -38030,6 +38769,24 @@
           "reference": "https://petribbon.com/restaurant/tokyo/718/346",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001282",
+          "claimed_status": "unverified",
+          "id": "12535228-7943-5e36-936a-c8cf03212dd7",
+          "provenance": "aggregated",
+          "reference": "https://www.giraud.co.jp/giraud-coffee",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001282",
+          "claimed_status": "unverified",
+          "id": "62b06e05-cea9-574c-a30c-e35c1c2fbe8e",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1330/A133002/13201006/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "羽村"
@@ -38310,6 +39067,7 @@
       ],
       "longitude": 139.61325,
       "name": "スターバックス コーヒー 芦花公園店",
+      "phone": "03-5316-6502",
       "place_id": null,
       "representative_source_id": "88a7ab9d-4711-584e-b5e4-fe749b203fd8",
       "sources": [
@@ -38330,6 +39088,24 @@
           "reference": "https://www.tripadvisor.jp/ShowUserReviews-g1066455-d7624839-r403432845-Starbucks_Coffee_Roka_Park-Setagaya_Tokyo_Tokyo_Prefecture_Kanto.html",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001141",
+          "claimed_status": "unverified",
+          "id": "84f67b10-c4ad-5dd9-9bdd-347576859b96",
+          "provenance": "aggregated",
+          "reference": "https://store.starbucks.co.jp/detail-1102/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001141",
+          "claimed_status": "unverified",
+          "id": "7c0d7656-6b70-5c6a-9ec8-74b047ffd461",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1318/A131809/13147369/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "千歳烏山・仙川・つつじヶ丘"
@@ -38470,6 +39246,7 @@
       ],
       "longitude": 139.65581,
       "name": "ステーキハウス ニューテキサス",
+      "phone": "03-3412-9158",
       "place_id": null,
       "representative_source_id": "0d508969-c388-5ef7-89a9-8df3fc830ded",
       "sources": [
@@ -38695,6 +39472,7 @@
       ],
       "longitude": 139.471152,
       "name": "スパイスカレーリコード 本店",
+      "phone": "080-1396-2808",
       "place_id": null,
       "representative_source_id": "0b91183e-1924-5900-8a10-64cded9eb6c0",
       "sources": [
@@ -38706,6 +39484,24 @@
           "reference": "https://tabelog.com/tokyo/A1328/A132806/13314233/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001190",
+          "claimed_status": "unverified",
+          "id": "e28b99ab-dafd-55bc-a869-1d4a93e04f8a",
+          "provenance": "aggregated",
+          "reference": "https://hitosara.com/0031753201/tel.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001190",
+          "claimed_status": "unverified",
+          "id": "7f90c6e6-e37a-5461-bf81-7c5138de08fa",
+          "provenance": "aggregated",
+          "reference": "https://www.tokyo-walkingmap.metro.tokyo.lg.jp/area_guide/kyoryoku/641",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "東村山"
@@ -38985,6 +39781,7 @@
       ],
       "longitude": 139.76942,
       "name": "スワン銀座（SWAN GINZA）",
+      "phone": "03-6757-7098",
       "place_id": null,
       "representative_source_id": "4e9650f8-3a48-549c-b7d4-a14ffce422a7",
       "sources": [
@@ -39014,6 +39811,24 @@
           "reference": "https://wanico.jp/spots/d/5495",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000247",
+          "claimed_status": "unverified",
+          "id": "91a35403-d887-548b-91e9-157baed0734f",
+          "provenance": "aggregated",
+          "reference": "https://www.swanbakery.co.jp/ginza/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000247",
+          "claimed_status": "unverified",
+          "id": "5c1ada9d-55c6-5a48-958d-47b9021955e4",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1301/A130101/13305523/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -39044,6 +39859,7 @@
       ],
       "longitude": 139.72343,
       "name": "セガフレード・ザネッティ・エスプレッソ 広尾店",
+      "phone": "03-5798-4810",
       "place_id": null,
       "representative_source_id": "6f8eb1a0-fc41-5c20-b9d4-dde4b2650e64",
       "sources": [
@@ -39055,6 +39871,15 @@
           "reference": "https://www.bungohills.com/dogcafe-hiroo",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000107",
+          "claimed_status": "unverified",
+          "id": "80137172-a223-5825-a1fc-721b327e20fb",
+          "provenance": "aggregated",
+          "reference": "https://www.segafredo.jp/shop/hiroo/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "恵比寿・広尾"
@@ -39285,6 +40110,7 @@
       ],
       "longitude": 139.78178,
       "name": "チキンカントリー",
+      "phone": "03-6204-2904",
       "place_id": null,
       "representative_source_id": "6e18561c-47fa-5830-b37e-f5217a00de69",
       "sources": [
@@ -39305,6 +40131,33 @@
           "reference": "https://pet-restaurant.com/tokyo-tsukishima-kachidoki/",
           "type": "other",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000991",
+          "claimed_status": "unverified",
+          "id": "efbeefed-009a-5125-bc9d-f778a8e1d39a",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1313/A131302/13239146/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000991",
+          "claimed_status": "unverified",
+          "id": "a92140d2-90e2-5fb1-add2-9f54a6c6bfdf",
+          "provenance": "aggregated",
+          "reference": "https://www.mapion.co.jp/phonebook/M01014/13102/Ggf0k400-001/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000991",
+          "claimed_status": "unverified",
+          "id": "9f384844-2801-57fa-8d40-2faafb4af2a8",
+          "provenance": "aggregated",
+          "reference": "https://hitosara.com/0032028674/tel.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "勝どき・月島・晴海・豊海"
@@ -40244,6 +41097,7 @@
       ],
       "longitude": 139.73404,
       "name": "ハーベステラス 品川店",
+      "phone": "03-6866-7503",
       "place_id": null,
       "representative_source_id": "5826bfba-d947-54b9-88fa-3089b6772999",
       "sources": [
@@ -40282,6 +41136,24 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/2820",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000220",
+          "claimed_status": "unverified",
+          "id": "ad1745f8-e538-5ea5-bd5d-aa3e7a448e2f",
+          "provenance": "aggregated",
+          "reference": "https://store.montbell.jp/foodservice/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000220",
+          "claimed_status": "unverified",
+          "id": "a4621ac8-6c0f-570f-ae71-216285f4e8ff",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1314/A131403/13160175/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "品川・大井町"
@@ -40966,6 +41838,7 @@
       ],
       "longitude": 139.62055,
       "name": "パンとcafé えだおね",
+      "phone": "03-6383-5422",
       "place_id": null,
       "representative_source_id": "3f8b07ef-01c2-58ce-8d18-7952c0e830e6",
       "sources": [
@@ -40990,11 +41863,11 @@
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000444",
           "claimed_status": "unverified",
-          "id": "8b254c02-932a-5281-a573-0a735c9e648c",
+          "id": "0b346634-9114-5447-b11c-e0c5d2095157",
           "provenance": "aggregated",
           "reference": "https://tabelog.com/tokyo/A1319/A131906/13161794/",
           "type": "tabelog",
-          "verified_at": "2026-10-20"
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "高円寺・荻窪"
@@ -41064,6 +41937,7 @@
       ],
       "longitude": 139.6494,
       "name": "パンとビストロ 高円寺FLAT(フラット)",
+      "phone": "03-5364-9330",
       "place_id": null,
       "representative_source_id": "ae8a330f-85ca-531d-bc76-fd2ac30db476",
       "sources": [
@@ -41084,6 +41958,15 @@
           "reference": "https://petoria-tokyo.jp/feature/koenji-lunch/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000443",
+          "claimed_status": "unverified",
+          "id": "2d262cd2-8ba0-580e-825c-2a4ae98c09a3",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/d2ghjt0s0000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "高円寺・荻窪"
@@ -41274,6 +42157,7 @@
       ],
       "longitude": 139.437425,
       "name": "ピエトロ 国立店",
+      "phone": "042-501-2448",
       "place_id": null,
       "representative_source_id": "e07d97c0-32a7-5ded-a63e-507824232cd1",
       "sources": [
@@ -41285,6 +42169,15 @@
           "reference": "https://tabelog.com/tokyo/A1325/A132503/13019984/",
           "type": "tabelog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000784",
+          "claimed_status": "unverified",
+          "id": "0ba746b8-175e-532e-a006-0ad9c45186f0",
+          "provenance": "aggregated",
+          "reference": "https://prtimes.jp/main/html/rd/p/000000227.000044322.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "国立"
@@ -41347,7 +42240,7 @@
       "id": "beef0000-0000-4000-8000-000000001081",
       "info_verified": "2026-08-07",
       "instagram_post_url": "https://www.instagram.com/p/Bpw0gjYH8j-/",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.704147,
       "links": [
@@ -41382,6 +42275,15 @@
           "reference": "https://itsumo.dog/tokyo/st/2800220/cafe/",
           "type": "other",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001081",
+          "claimed_status": "unverified",
+          "id": "bc074687-f18e-5845-a11b-a69b8b8c37ba",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/un_coeur_higashinakano/",
+          "type": "sns",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "東中野・落合・中野坂上"
@@ -41956,6 +42858,7 @@
       ],
       "longitude": 139.76584,
       "name": "フランス料理 銀座みかわや",
+      "phone": "03-3561-2006",
       "place_id": null,
       "representative_source_id": "e74bbaea-b39d-5923-a66c-f65e54e31a6c",
       "sources": [
@@ -41976,6 +42879,24 @@
           "reference": "https://petoria-tokyo.jp/feature/ginza-lunch/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000248",
+          "claimed_status": "unverified",
+          "id": "5ab6f713-3632-5ae7-9a4d-8fefe4de82d5",
+          "provenance": "aggregated",
+          "reference": "https://ginza-mikawaya.com/access.html",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000248",
+          "claimed_status": "unverified",
+          "id": "f4a7086e-b7d8-57ed-a438-0dd46afd8a1d",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1301/A130101/13002421/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -42492,6 +43413,7 @@
       ],
       "longitude": 139.7031,
       "name": "ブルーボトルコーヒー 代官山カフェ",
+      "phone": "03-6712-7617",
       "place_id": null,
       "representative_source_id": "8ae4f0f0-6e42-589e-b671-05daa8d5f328",
       "sources": [
@@ -42521,6 +43443,24 @@
           "reference": "https://cdn.shopify.com/s/files/1/0288/0549/6880/files/BBCJ_Daikanyama_Dog_Notice_Pop-2.pdf",
           "type": "official_hp",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000010",
+          "claimed_status": "unverified",
+          "id": "c92842f8-f819-5864-8b16-92f6e5df0856",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/pha3xas00000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000010",
+          "claimed_status": "unverified",
+          "id": "cf16bf82-a059-5388-a10b-d158d2700104",
+          "provenance": "aggregated",
+          "reference": "https://map.yahoo.co.jp/v3/place/OlmdhuAmWpQ",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "代官山"
@@ -43109,6 +44049,7 @@
       "latitude": 35.7908,
       "longitude": 139.79321,
       "name": "ボンマルシェ ボンテ 竹の塚店",
+      "phone": "03-5856-7945",
       "place_id": null,
       "representative_source_id": "bb94997b-67fa-580e-aadd-e1a17bc02ce4",
       "sources": [
@@ -43129,6 +44070,33 @@
           "reference": "https://takenotsuka-topic.com/matome/3740-20241004",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001063",
+          "claimed_status": "unverified",
+          "id": "2e53c728-9963-504e-a60a-32ef1021ccb5",
+          "provenance": "aggregated",
+          "reference": "https://bonte.owst.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001063",
+          "claimed_status": "unverified",
+          "id": "fc76be63-7a07-5b00-84f3-c29056a0793e",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1324/A132404/13169650/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001063",
+          "claimed_status": "unverified",
+          "id": "b1377917-23b2-5b0a-a02b-9fe06bb2958b",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/40kb7h100000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "竹ノ塚"
@@ -43203,6 +44171,7 @@
       ],
       "longitude": 139.562122,
       "name": "マイクロカフェ 調布深大寺店",
+      "phone": "042-444-3039",
       "place_id": null,
       "representative_source_id": "726ad3d4-0ddc-5a4a-b8ef-f1225cd2f5a8",
       "sources": [
@@ -43223,6 +44192,24 @@
           "reference": "https://petoria-tokyo.jp/feature/jindaiji-lunch/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000426",
+          "claimed_status": "unverified",
+          "id": "035f0cf2-62c7-515c-86ff-516627d56d6a",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1326/A132601/13130537/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000426",
+          "claimed_status": "unverified",
+          "id": "109e46f3-d735-55bd-8b90-61d51d01113d",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/3n244a650000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "調布・府中"
@@ -43852,6 +44839,7 @@
       ],
       "longitude": 139.76856,
       "name": "ミタスカフェ（Mitasu Cafe）",
+      "phone": "03-6278-7657",
       "place_id": null,
       "representative_source_id": "3f26608c-842e-501f-a663-7154e23e23a5",
       "sources": [
@@ -43872,6 +44860,24 @@
           "reference": "https://petoria-tokyo.jp/feature/ginza-lunch/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000241",
+          "claimed_status": "unverified",
+          "id": "2f6a4ba7-a087-5f18-917d-92f2740e6812",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1301/A130101/13139325/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000241",
+          "claimed_status": "unverified",
+          "id": "083eacb4-393d-579b-b702-6988f0b321b0",
+          "provenance": "aggregated",
+          "reference": "https://restaurant.ikyu.com/104610/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -43953,6 +44959,7 @@
       ],
       "longitude": 139.63898,
       "name": "ミヤマ珈琲 練馬春日町店",
+      "phone": "03-3577-8218",
       "place_id": null,
       "representative_source_id": "9b1569b6-18df-505c-b9d5-a1d20c6670cb",
       "sources": [
@@ -43982,6 +44989,24 @@
           "reference": "https://miyama-coffee.com/outdoorseat/",
           "type": "official_hp",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000527",
+          "claimed_status": "unverified",
+          "id": "cfdf7b40-59e5-52c6-95f9-5fcf4abac87a",
+          "provenance": "aggregated",
+          "reference": "https://www.ginza-renoir.co.jp/shopsearch/shops/view/96",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000527",
+          "claimed_status": "unverified",
+          "id": "723701c3-5092-5ebd-8f20-5f973f831593",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1321/A132102/13168008/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "板橋・練馬"
@@ -44245,6 +45270,7 @@
       "latitude": 35.700887,
       "longitude": 139.740477,
       "name": "メゾン・ド・ラ・ブルゴーニュ（Maison de la Bourgogne）",
+      "phone": "03-3260-7280",
       "place_id": null,
       "representative_source_id": "b6655a11-1b42-5f45-9dc7-0d5c2fa88cc8",
       "sources": [
@@ -44265,6 +45291,24 @@
           "reference": "https://pet-restaurant.com/tokyo-iidabashi-kagurazaka/",
           "type": "other",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000902",
+          "claimed_status": "unverified",
+          "id": "2abfca25-93b5-52b6-a152-7f10a92de6c1",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1309/A130905/13000401/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000902",
+          "claimed_status": "unverified",
+          "id": "cbc82f95-73a9-5519-ab30-1289168b7919",
+          "provenance": "aggregated",
+          "reference": "https://retty.me/restaurant/100000018600/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "神楽坂・飯田橋"
@@ -44283,45 +45327,47 @@
       "dog_policy_status": "conditional",
       "dog_size_limit": "テラス席2人掛け×2卓のみ(少人数限定)",
       "has_conflict": false,
+      "holiday_note": "火曜定休",
       "hours": {
         "fri": [
           {
             "close": "13:30",
-            "open": "11:00"
+            "open": "10:00"
           }
         ],
         "mon": [
           {
             "close": "13:30",
-            "open": "11:00"
+            "open": "10:00"
           }
         ],
         "sat": [
           {
             "close": "15:00",
-            "open": "11:00"
+            "open": "10:00"
           }
         ],
         "sun": [
           {
             "close": "15:00",
-            "open": "11:00"
+            "open": "10:00"
           }
         ],
         "thu": [
           {
             "close": "13:30",
-            "open": "11:00"
+            "open": "10:00"
           }
         ],
+        "tue": [],
         "wed": [
           {
             "close": "13:30",
-            "open": "11:00"
+            "open": "10:00"
           }
         ]
       },
-      "hours_text": "月水木金11:00〜13:30(L.O.13:00)・土日祝11:00〜15:00(L.O.14:30)",
+      "hours_text": "平日10:00〜13:30・土日祝10:00〜15:00",
       "id": "beef0000-0000-4000-8000-000000000465",
       "info_verified": "2026-07-18",
       "is_closed": false,
@@ -44355,6 +45401,15 @@
           "reference": "https://www.hotpepper.jp/strJ001092178/",
           "type": "other",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000465",
+          "claimed_status": "unverified",
+          "id": "624139be-edba-5b8d-a099-f6ddf9bdd2a1",
+          "provenance": "aggregated",
+          "reference": "https://always-l.com/cafe/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "中野"
@@ -45153,6 +46208,7 @@
       "latitude": 35.7625,
       "longitude": 139.82901,
       "name": "ワインとアテ bikini",
+      "phone": "03-5856-2537",
       "place_id": null,
       "representative_source_id": "713352a2-371a-5bb9-a2e1-2a95084cbcd7",
       "sources": [
@@ -45173,6 +46229,33 @@
           "reference": "https://tabelog.com/en/tokyo/A1324/A132404/13273224/",
           "type": "tabelog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001065",
+          "claimed_status": "unverified",
+          "id": "6910a685-8d2d-5705-a6d0-cd1c55bd509e",
+          "provenance": "aggregated",
+          "reference": "https://s.tabelog.com/tokyo/A1324/A132404/13273224/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001065",
+          "claimed_status": "unverified",
+          "id": "4801a5e1-a933-5179-8421-e4fae77ff4bc",
+          "provenance": "aggregated",
+          "reference": "https://hitosara.com/0031716052/tel.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001065",
+          "claimed_status": "unverified",
+          "id": "5b31c96d-1bf1-5d86-9257-8b84304e80cb",
+          "provenance": "aggregated",
+          "reference": "https://uchinokobiyori.com/shops/wine-to-ate-bikini-ayase",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "綾瀬"
@@ -45709,6 +46792,7 @@
       ],
       "longitude": 139.60172,
       "name": "串カツ田中 千歳烏山店",
+      "phone": "03-6909-1779",
       "place_id": null,
       "representative_source_id": "b7b05537-2ad0-5eea-8d20-dcbcb3819392",
       "sources": [
@@ -45720,6 +46804,24 @@
           "reference": "https://tabelog.com/tokyo/A1318/A131809/13194032/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001147",
+          "claimed_status": "unverified",
+          "id": "7600972e-5ee0-553e-b09e-5c817638b853",
+          "provenance": "aggregated",
+          "reference": "https://restaurant.kushi-tanaka.com/detail/1062/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001147",
+          "claimed_status": "unverified",
+          "id": "be3b1c4f-3be3-50fd-8678-5cdfad6416e2",
+          "provenance": "aggregated",
+          "reference": "https://s.tabelog.com/tokyo/A1318/A131809/13194032/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "千歳烏山・仙川・つつじヶ丘"
@@ -46351,6 +47453,102 @@
         }
       ],
       "sub_area": "亀戸・大島・東陽町・南砂"
+    },
+    {
+      "address": "東京都品川区西五反田1-12-1 五反田桜小路",
+      "area": "tokyo",
+      "contact": null,
+      "description": "東急池上線ガード下の飲食店街「五反田桜小路」にある居酒屋。外席(テラス)に限り犬と同伴でき、ドッグメニューも用意する。",
+      "dog_amenities": {
+        "dog_menu": true,
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ドッグメニューあり(良質ささみの無塩ボイル)。リード必須",
+      "dog_policy_condition": "わんちゃんとは外席での利用が可能(店内不可)。良質ささみの無塩ボイルのドッグメニューあり",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "日曜・祝日定休",
+      "hours": {
+        "fri": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ],
+        "sun": [],
+        "thu": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "24:00",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "17:00〜24:00",
+      "id": "beef0000-0000-4000-8000-000000000846",
+      "info_verified": "2026-08-06",
+      "is_closed": false,
+      "last_verified": "2026-08-06",
+      "latitude": 35.62446,
+      "longitude": 139.7238,
+      "name": "九州酒場ささ（旧 さみしがりや酒房ささ）",
+      "phone": "03-3491-7705",
+      "place_id": null,
+      "representative_source_id": "3e29fe46-9268-5835-9d52-f9bc5a24e085",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000846",
+          "claimed_status": "conditional",
+          "id": "3e29fe46-9268-5835-9d52-f9bc5a24e085",
+          "provenance": "aggregated",
+          "reference": "https://doghuggy.petgo.jp/dogmap/spot/562",
+          "type": "other",
+          "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000846",
+          "claimed_status": "unverified",
+          "id": "839144be-c09e-589d-9afc-456adf76119f",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131603/13130392/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000846",
+          "claimed_status": "unverified",
+          "id": "16aa18a1-bcd7-5b9c-a9f0-8ca7a7b92b6f",
+          "provenance": "aggregated",
+          "reference": "https://www.sasa-gotanda.com/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        }
+      ],
+      "sub_area": "五反田・大崎"
     },
     {
       "address": "東京都大田区大森西6-16-18 梅森プラットフォーム",
@@ -47102,6 +48300,7 @@
       ],
       "longitude": 139.480173,
       "name": "和牛EN yasaka.arakawa",
+      "phone": "042-397-4129",
       "place_id": null,
       "representative_source_id": "10885362-2b6f-5284-acfe-b8a6a42a906a",
       "sources": [
@@ -47113,6 +48312,15 @@
           "reference": "https://tabelog.com/en/tokyo/A1328/A132806/13299552/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001189",
+          "claimed_status": "unverified",
+          "id": "d004285a-2a81-5a65-8825-ddb20b5540e4",
+          "provenance": "aggregated",
+          "reference": "https://yakiniku-arakawa.com/shop.html",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "東村山"
@@ -48990,6 +50198,24 @@
           "reference": "https://inunavi.plan-b.co.jp/inucafe_kitijouji/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000045",
+          "claimed_status": "unverified",
+          "id": "071cb4ca-2ea5-5df9-a5a1-0bd1c2d1d4cb",
+          "provenance": "aggregated",
+          "reference": "https://map.yahoo.co.jp/v3/place/rGLVSu3EYFk",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000045",
+          "claimed_status": "unverified",
+          "id": "35e37bcc-8aa7-5a3c-9331-8a67e5f8e0b0",
+          "provenance": "aggregated",
+          "reference": "https://hamoni.jp/shop/Vkk62iVREoTTFVVj9jZN",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "吉祥寺"
@@ -49364,6 +50590,7 @@
       ],
       "longitude": 139.60196,
       "name": "洪記餃子",
+      "phone": "03-4362-0796",
       "place_id": null,
       "representative_source_id": "44376fb4-41be-5986-8574-f1c5be5b8725",
       "sources": [
@@ -49375,6 +50602,33 @@
           "reference": "https://tabelog.com/tokyo/A1318/A131809/13254272/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001148",
+          "claimed_status": "unverified",
+          "id": "4784670f-0f53-5499-96ec-5a4678aca84b",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/2jy0rtm10000/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001148",
+          "claimed_status": "unverified",
+          "id": "caa05532-3a24-5ac5-b5e2-0d8c3fd57d3a",
+          "provenance": "aggregated",
+          "reference": "https://s.tabelog.com/tokyo/A1318/A131809/13254272/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001148",
+          "claimed_status": "unverified",
+          "id": "8fea993f-1b16-59f0-9ad1-6623eed09228",
+          "provenance": "aggregated",
+          "reference": "https://ekitan.com/local-info/gourmet/spot/spid-4a25c6b5b641bbdf44a0a0f4485829b8",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "千歳烏山・仙川・つつじヶ丘"
@@ -49861,6 +51115,7 @@
       "latitude": 35.62263,
       "longitude": 139.74878,
       "name": "炭火×薪火×レストラン RIDE 品川 天王洲店",
+      "phone": "050-3184-2730",
       "place_id": null,
       "representative_source_id": "c0f988f7-e95c-568d-bf22-aded2bf3cd11",
       "sources": [
@@ -49899,6 +51154,24 @@
           "reference": "https://www.hotpepper.jp/strJ001209633/",
           "type": "other",
           "verified_at": "2026-10-20"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000003",
+          "claimed_status": "unverified",
+          "id": "a8c36407-d4fa-51da-b221-0f150a8a156b",
+          "provenance": "aggregated",
+          "reference": "https://ride-tennoz.tokyo/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000003",
+          "claimed_status": "unverified",
+          "id": "717fa066-e345-50f2-87c7-2ca419ff9d1f",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ001209633/tel/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "天王洲アイル"
@@ -50078,6 +51351,7 @@
       ],
       "longitude": 139.471038,
       "name": "焼き鳥もつ鍋だるま 久米川店",
+      "phone": "042-313-0394",
       "place_id": null,
       "representative_source_id": "d78ecf4a-8b00-52eb-a835-198674b67c52",
       "sources": [
@@ -50089,6 +51363,24 @@
           "reference": "https://tabelog.com/tokyo/A1328/A132806/13226988/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001188",
+          "claimed_status": "unverified",
+          "id": "91baa308-75a8-55e8-a785-594e2ec67403",
+          "provenance": "aggregated",
+          "reference": "https://s.tabelog.com/tokyo/A1328/A132806/13226988/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001188",
+          "claimed_status": "unverified",
+          "id": "a1bf580a-3348-5e27-8683-8e14454c7701",
+          "provenance": "aggregated",
+          "reference": "https://hitosara.com/0031422864/tel.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "東村山"
@@ -51171,6 +52463,7 @@
       ],
       "longitude": 139.735624,
       "name": "神楽坂ワインスタンド et du vin（エデュヴァン）",
+      "phone": "03-6280-8944",
       "place_id": null,
       "representative_source_id": "1baea24d-731d-55d3-9ade-df204bc3a0a7",
       "sources": [
@@ -51191,6 +52484,15 @@
           "reference": "https://itsumo.dog/tokyo/st/2800910/cafe/",
           "type": "other",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000900",
+          "claimed_status": "unverified",
+          "id": "3e148f21-7c5c-5d65-9bc0-a1881d3deaa9",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1309/A130905/13295347/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "神楽坂・飯田橋"
@@ -52480,6 +53782,7 @@
       ],
       "longitude": 139.70583,
       "name": "薬膳&米粉カフェ やまのひつじ",
+      "phone": "080-4710-8870",
       "place_id": null,
       "representative_source_id": "c89c3f81-87ba-55e7-a0ff-e4e79eaf9259",
       "sources": [
@@ -52491,6 +53794,24 @@
           "reference": "https://wankonowa.com/column/2389/",
           "type": "blog",
           "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000106",
+          "claimed_status": "unverified",
+          "id": "c66fe0c7-8eb7-5b3c-8e1d-f083b54cd7a4",
+          "provenance": "aggregated",
+          "reference": "https://hitsuzi.chagasi.com/access.html",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000106",
+          "claimed_status": "unverified",
+          "id": "401230e3-2e85-5f68-8985-b8305f0655a0",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1303/A130302/13204877/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "恵比寿・広尾"
@@ -52514,6 +53835,7 @@
       "latitude": 35.73813,
       "longitude": 139.5975,
       "name": "豊島屋",
+      "phone": "03-5393-6793",
       "place_id": null,
       "representative_source_id": "28bb7baf-d7a7-55af-afb6-b1b286dc735f",
       "sources": [
@@ -52525,6 +53847,33 @@
           "reference": "https://www.gowithdog.org/syakujii_park/",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000964",
+          "claimed_status": "unverified",
+          "id": "7c6922e9-ca70-5f79-9b12-edce4e41d6d0",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1321/A132103/13093252/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000964",
+          "claimed_status": "unverified",
+          "id": "84a8347f-2641-588b-941b-59fc572d04a0",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/1whna6fk0000/map/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000964",
+          "claimed_status": "unverified",
+          "id": "5f57aff4-0180-51fa-b245-c7659a864f0f",
+          "provenance": "aggregated",
+          "reference": "https://www.navitime.co.jp/poi?spt=01125.56186r",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "石神井公園・大泉学園"
@@ -52597,6 +53946,7 @@
       "latitude": 35.77988,
       "longitude": 139.72025,
       "name": "赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ",
+      "phone": "070-8379-6609",
       "place_id": null,
       "representative_source_id": "0f7d79de-1fec-5147-b3f4-a1acab12a748",
       "sources": [
@@ -52626,6 +53976,24 @@
           "reference": "https://r.gnavi.co.jp/ggcc401/",
           "type": "other",
           "verified_at": "2026-10-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000505",
+          "claimed_status": "unverified",
+          "id": "df4b2709-d3bd-573e-a25a-ddecb97cd001",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1323/A132305/13251515/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000505",
+          "claimed_status": "unverified",
+          "id": "6c32cba8-0e9e-5e6f-b64c-5ec901dbf4e6",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ001259317/tel/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "赤羽・王子"
@@ -52719,6 +54087,7 @@
       ],
       "longitude": 139.85986,
       "name": "酒と肴と子ども食堂あら川",
+      "phone": "03-6690-4460",
       "place_id": null,
       "representative_source_id": "54e74f3f-6f6e-5f0f-a212-ce4a3081eb12",
       "sources": [
@@ -52730,6 +54099,33 @@
           "reference": "https://tabelog.com/en/tokyo/A1312/A131204/13301308/",
           "type": "tabelog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001302",
+          "claimed_status": "unverified",
+          "id": "0ca07faa-0334-55f5-902f-43e8d21951ee",
+          "provenance": "aggregated",
+          "reference": "https://www.mapion.co.jp/phonebook/M01014/13123/21399214101/",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001302",
+          "claimed_status": "unverified",
+          "id": "c610e8e5-91aa-53d0-8ff9-2959cb5594a6",
+          "provenance": "aggregated",
+          "reference": "https://hitosara.com/0031713159/tel.html",
+          "type": "other",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001302",
+          "claimed_status": "unverified",
+          "id": "86fcd770-e669-5bd3-98b4-21fd762c688b",
+          "provenance": "aggregated",
+          "reference": "https://s.tabelog.com/tokyo/A1312/A131204/13301308/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "小岩・新小岩・平井"
@@ -52857,6 +54253,7 @@
       ],
       "longitude": 139.71956,
       "name": "酒呑中華コテツ",
+      "phone": "090-7279-7770",
       "place_id": null,
       "representative_source_id": "0f247792-c0ca-5650-b4db-038d19f90db9",
       "sources": [
@@ -52877,6 +54274,24 @@
           "reference": "https://pet-restaurant.com/tokyo-akabane/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000506",
+          "claimed_status": "unverified",
+          "id": "a7742543-695d-5dae-b20e-40c3774f80cc",
+          "provenance": "aggregated",
+          "reference": "https://sakenomichuka-kotetsu.com/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000506",
+          "claimed_status": "unverified",
+          "id": "37d87724-dc1d-52f7-bfb3-5e9bd3ad7948",
+          "provenance": "aggregated",
+          "reference": "https://www.hotpepper.jp/strJ003450476/tel/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "赤羽・王子"
@@ -53404,6 +54819,7 @@
       ],
       "longitude": 139.6633,
       "name": "駒沢食堂george",
+      "phone": "03-3410-5489",
       "place_id": null,
       "representative_source_id": "bea1b787-0441-5aa5-bf61-978b5d71d4ed",
       "sources": [
@@ -53424,6 +54840,24 @@
           "reference": "https://www.gowithdog.org/komazawa-park-dogrun/",
           "type": "blog",
           "verified_at": "2026-08-05"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000641",
+          "claimed_status": "unverified",
+          "id": "4891c964-29bf-5766-a0be-37a3d13cbc63",
+          "provenance": "aggregated",
+          "reference": "http://georgegeorge.co.jp/komazawa/",
+          "type": "official_hp",
+          "verified_at": "2026-10-24"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000641",
+          "claimed_status": "unverified",
+          "id": "1d4ba1a7-b738-55c2-94c1-c547934ded62",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/en/tokyo/A1317/A131707/13169688/",
+          "type": "tabelog",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -54082,6 +55516,7 @@
       ],
       "longitude": 139.452719,
       "name": "麦酒堂 KASUGAI",
+      "phone": "042-843-0990",
       "place_id": null,
       "representative_source_id": "a68672a8-1af9-548f-9e37-8fad154cd10f",
       "sources": [
@@ -54093,6 +55528,15 @@
           "reference": "https://tabelog.com/tokyo/A1325/A132503/13260049/",
           "type": "tabelog",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000785",
+          "claimed_status": "unverified",
+          "id": "4e470224-531b-5e6f-a10d-e233ffafbfd4",
+          "provenance": "aggregated",
+          "reference": "https://at-tama.tokyo/lang_en/tamagourmetclub/kasugai/",
+          "type": "other",
+          "verified_at": "2026-10-24"
         }
       ],
       "sub_area": "国立"
@@ -54270,6 +55714,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-20T14:58:58Z",
+  "generated_at": "2026-10-24T03:50:15Z",
   "is_sample_data": false
 }
