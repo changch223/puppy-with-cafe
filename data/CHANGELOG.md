@@ -1813,3 +1813,104 @@
 - ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（hours_text, hours, holiday_note, sources）
 - ✏️ 変更: 犬茶屋本舗（hours_text, hours, sources）
 - ✏️ 変更: 肉ビストロ&クラフトビール ランプラント(l'Empreinte)（hours_text, hours, holiday_note, sources）
+
+## 2026-10-24 12:50 — 追加 0 / 変更 99 / 削除 0
+- ✏️ 変更: & OIMO TOKYO CAFE 中目黒店（phone, sources）
+- ✏️ 変更: ARMWOOD COTTAGE(アームウッドコテージ)（phone, sources）
+- ✏️ 変更: AUX BACCHANALES 銀座（phone, sources）
+- ✏️ 変更: Aloha Table 大崎店（phone）
+- ✏️ 変更: BESIDE SEASIDE（phone, sources）
+- ✏️ 変更: BONDI CAFE Nakameguro（phone, sources）
+- ✏️ 変更: Balcony by 6th（phone）
+- ✏️ 変更: Bowery Kitchen（phone, sources）
+- ✏️ 変更: CAFE CHOU CHOU(シュシュ)（links, phone, holiday_note, hours_text, sources）
+- ✏️ 変更: CLANN BY THE RIVER（旧PITMANS）（phone）
+- ✏️ 変更: Cafe du Riche(カフェドリッチェ)（phone, sources）
+- ✏️ 変更: Cafe' Roju（phone, sources）
+- ✏️ 変更: Chanoma(チャノマ)（phone, sources）
+- ✏️ 変更: Cyan coffee（is_closed, sources）
+- ✏️ 変更: District ブラッスリー・バー・ラウンジ（phone）
+- ✏️ 変更: Dogberry(ドッグベリー)（phone, sources）
+- ✏️ 変更: EZO DELI（phone, sources）
+- ✏️ 変更: FITZROY（is_closed, sources）
+- ✏️ 変更: FUGLEN ASAKUSA（phone, sources）
+- ✏️ 変更: Farmacy-Deli&BAR 日本橋1ppon（phone）
+- ✏️ 変更: GENTLE Dining（phone, sources）
+- ✏️ 変更: GOOD CHEESE GOOD BAKE（phone, sources）
+- ✏️ 変更: GRIP(グリップ)（phone, sources）
+- ✏️ 変更: HOMELAND OME（phone, sources）
+- ✏️ 変更: Italian Dining Lui（phone, sources）
+- ✏️ 変更: Italian Kitchen VANSAN 大泉学園店（phone, sources）
+- ✏️ 変更: JUICE BAR ROCKET(ジュースバーロケット)（phone）
+- ✏️ 変更: Jaho Coffee Roaster & Wine Bar 田町店（phone, sources）
+- ✏️ 変更: Jugar cafe(フガールカフェ)（phone, sources）
+- ✏️ 変更: LARGO SENGAWA（phone, sources）
+- ✏️ 変更: LOU（phone, sources）
+- ✏️ 変更: Le Calin（ルカラン）（phone, sources）
+- ✏️ 変更: Le Pain Quotidien 芝公園店（phone, sources）
+- ✏️ 変更: MEAT×WINE BISTRO DOMANNAKA（phone, sources）
+- ✏️ 変更: MERRY and BRIGHT（phone, sources）
+- ✏️ 変更: Mon-TERCERO（テルセーロ）（phone, sources）
+- ✏️ 変更: NATURE&MEAT GROVE PARK VIEW（phone, sources）
+- ✏️ 変更: O.GARDEN CAFE（phone）
+- ✏️ 変更: Park Side Cafe BASEL（phone, sources）
+- ✏️ 変更: Paston（パストン）（phone, sources）
+- ✏️ 変更: ROJU NAKAMEGURO（phone, sources）
+- ✏️ 変更: Snow Peak Cafe 南町田グランベリーパーク（phone, sources）
+- ✏️ 変更: T.Y.HARBOR（phone, sources）
+- ✏️ 変更: WIRED KITCHEN 南町田グランベリーパーク（phone, sources）
+- ✏️ 変更: WOODBERRY COFFEE 荻窪店（phone, sources）
+- ✏️ 変更: Wande Shiba（phone, sources）
+- ✏️ 変更: atelier BASEL（phone, sources）
+- ✏️ 変更: biotable.（phone, sources）
+- ✏️ 変更: breadworks 天王洲（phone, sources）
+- ✏️ 変更: gufo(グーフォ)（phone）
+- ✏️ 変更: les joues de bébé（phone, sources）
+- ✏️ 変更: marble（is_closed, sources）
+- ✏️ 変更: nico 赤羽店（phone, sources）
+- ✏️ 変更: rice cafe（phone）
+- ✏️ 変更: まるごとVeganダイニング浅草（phone, sources）
+- ✏️ 変更: わいん＆野菜食堂 Cafeえにわん 新小岩（is_closed, sources）
+- ✏️ 変更: アキッチョデシカ 方南町（phone, sources）
+- ✏️ 変更: イチローさんのきまぐれcafe（phone, sources）
+- ✏️ 変更: オカン焼肉 紅ちゃん 本店（phone, sources）
+- ✏️ 変更: オーバカナル 高輪店（phone, sources）
+- ✏️ 変更: クリスプ・サラダワークス駒沢公園店（phone, sources）
+- ✏️ 変更: サクラカフェ&レストラン日暮里(SAKURA CAFE)（phone, sources）
+- ✏️ 変更: ジェラート ピケ カフェ クレープリー ルミネ池袋（phone, sources）
+- ✏️ 変更: ジロー珈琲 羽村店（phone, sources）
+- ✏️ 変更: スターバックス コーヒー 芦花公園店（phone, sources）
+- ✏️ 変更: ステーキハウス ニューテキサス（phone）
+- ✏️ 変更: スパイスカレーリコード 本店（phone, sources）
+- ✏️ 変更: スワン銀座（SWAN GINZA）（phone, sources）
+- ✏️ 変更: セガフレード・ザネッティ・エスプレッソ 広尾店（phone, sources）
+- ✏️ 変更: チキンカントリー（phone, sources）
+- ✏️ 変更: ハーベステラス 品川店（phone, sources）
+- ✏️ 変更: パンとcafé えだおね（phone, sources）
+- ✏️ 変更: パンとビストロ 高円寺FLAT(フラット)（phone, sources）
+- ✏️ 変更: ピエトロ 国立店（phone, sources）
+- ✏️ 変更: ピザとハイボール UN COEUR(アンクール) 東中野店（is_closed, sources）
+- ✏️ 変更: フランス料理 銀座みかわや（phone, sources）
+- ✏️ 変更: ブルーボトルコーヒー 代官山カフェ（phone, sources）
+- ✏️ 変更: ボンマルシェ ボンテ 竹の塚店（phone, sources）
+- ✏️ 変更: マイクロカフェ 調布深大寺店（phone, sources）
+- ✏️ 変更: ミタスカフェ（Mitasu Cafe）（phone, sources）
+- ✏️ 変更: ミヤマ珈琲 練馬春日町店（phone, sources）
+- ✏️ 変更: メゾン・ド・ラ・ブルゴーニュ（Maison de la Bourgogne）（phone, sources）
+- ✏️ 変更: ヨガカフェ（hours, holiday_note, hours_text, sources）
+- ✏️ 変更: ワインとアテ bikini（phone, sources）
+- ✏️ 変更: 串カツ田中 千歳烏山店（phone, sources）
+- ✏️ 変更: 九州酒場ささ（旧 さみしがりや酒房ささ）（name, hours, phone, holiday_note, hours_text, sources）
+- ✏️ 変更: 和牛EN yasaka.arakawa（phone, sources）
+- ✏️ 変更: 氷屋ぴぃす（sources）
+- ✏️ 変更: 洪記餃子（phone, sources）
+- ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（phone, sources）
+- ✏️ 変更: 焼き鳥もつ鍋だるま 久米川店（phone, sources）
+- ✏️ 変更: 神楽坂ワインスタンド et du vin（エデュヴァン）（phone, sources）
+- ✏️ 変更: 薬膳&米粉カフェ やまのひつじ（phone, sources）
+- ✏️ 変更: 豊島屋（phone, sources）
+- ✏️ 変更: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ（phone, sources）
+- ✏️ 変更: 酒と肴と子ども食堂あら川（phone, sources）
+- ✏️ 変更: 酒呑中華コテツ（phone, sources）
+- ✏️ 変更: 駒沢食堂george（phone, sources）
+- ✏️ 変更: 麦酒堂 KASUGAI（phone, sources）
