@@ -1914,3 +1914,7 @@
 - ✏️ 変更: 酒呑中華コテツ（phone, sources）
 - ✏️ 変更: 駒沢食堂george（phone, sources）
 - ✏️ 変更: 麦酒堂 KASUGAI（phone, sources）
+
+## 2026-10-24 14:09 — 追加 1 / 変更 1 / 削除 0
+- ➕ 追加: Communita Cafe
+- ✏️ 変更: パークス光が丘（longitude, latitude）
