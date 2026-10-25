@@ -12,7 +12,8 @@ enum SheetHeadline {
     /// - Parameters:
     ///   - count: 今の条件での件数
     ///   - amenities: 店内OK/テラス/大型犬OK/犬メニュー の条件
-    ///   - openNowOnly: 「営業中」チップ
+    ///   - openNowOnly: 「営業中」チップ（対象時刻があるときは「その時間に営業」）
+    ///   - targetLabel: 「いつ行く？」で決めた対象時刻の短い表記（例: 「土 12:00」）。nil は「今」
     ///   - includeUnverified: 未確認の店も表示中か（含むときは「犬OK」と言い切らない）
     ///   - sortOrder: 並び順
     ///   - originName: 起点名。現在地のとき（`isCurrentLocation`）は「現在地」と言う
@@ -20,6 +21,7 @@ enum SheetHeadline {
         count: Int,
         amenities: AmenityFilter,
         openNowOnly: Bool,
+        targetLabel: String? = nil,
         includeUnverified: Bool = false,
         sortOrder: CafeSortOrder = .distance,
         originName: String,
@@ -28,16 +30,18 @@ enum SheetHeadline {
         let labels = amenityLabels(amenities)
         // 未確認を含むときは「犬OK」ではなく「犬同伴」（未確認は可と言えない, 憲章 原則I）
         let dogPhrase = includeUnverified ? String(localized: "犬同伴") : String(localized: "犬OK")
+        // 「今開いている」／対象時刻があるときは「土 12:00 に開いている」
+        let openPhrase = targetLabel.map { String(localized: "\($0) に開いている") } ?? String(localized: "今開いている")
         let body: String
         switch (openNowOnly, labels.isEmpty) {
         case (false, true):
             body = String(localized: "\(dogPhrase)のお店")
         case (true, true):
-            body = String(localized: "今開いている\(dogPhrase)のお店")
+            body = String(localized: "\(openPhrase)\(dogPhrase)のお店")
         case (false, false):
             body = String(localized: "\(labels.joined(separator: "・"))のお店")
         case (true, false):
-            body = String(localized: "今開いている、\(labels.joined(separator: "・"))のお店")
+            body = String(localized: "\(openPhrase)、\(labels.joined(separator: "・"))のお店")
         }
         let suffix = includeUnverified ? String(localized: "（未確認を含む）") : ""
         return Text(

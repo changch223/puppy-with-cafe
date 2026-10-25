@@ -38,18 +38,33 @@ struct HomeSearchBar: View {
     }
 }
 
-/// 条件チップ（横スクロール）: 営業中・店内OK・テラス・大型犬OK・犬メニュー。オンはブランド色で塗る。
+/// 条件チップ（横スクロール）: いつ行く？・営業中・店内OK・テラス・大型犬OK・犬メニュー。オンはブランド色で塗る。
 /// 1つ以上オンなら末尾に「クリア」。
+/// 「いつ行く？」は対象時刻を決めると「土 12:00」の表示に変わり、「営業中」は「その時間に営業」に変わる。
 struct FilterChipsView: View {
+    /// 対象時刻の短い表記（例: 「土 12:00」）。nil は「今」
+    let targetLabel: String?
     @Binding var openNowOnly: Bool
     @Binding var amenityFilter: AmenityFilter
     let hasActiveChips: Bool
+    let onTapPlan: () -> Void
     let onClear: () -> Void
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                FilterChip(title: String(localized: "営業中"), systemImage: "clock", isOn: $openNowOnly)
+                FilterChip(
+                    title: targetLabel ?? String(localized: "いつ行く？"),
+                    systemImage: "clock",
+                    isOn: .constant(targetLabel != nil),
+                    action: onTapPlan,
+                    accessibilityTitle: targetLabel.map { String(localized: "いつ行く？ \($0)") },
+                    accessibilityHint: String(localized: "日時を選ぶシートを開きます")
+                )
+                FilterChip(
+                    title: targetLabel == nil ? String(localized: "営業中") : String(localized: "その時間に営業"),
+                    isOn: $openNowOnly
+                )
                 FilterChip(title: String(localized: "店内OK"), isOn: $amenityFilter.indoorOnly)
                 FilterChip(title: String(localized: "テラス"), isOn: $amenityFilter.terraceOnly)
                 FilterChip(title: String(localized: "大型犬OK"), isOn: $amenityFilter.largeDogOnly)
@@ -74,10 +89,14 @@ private struct FilterChip: View {
     let title: String
     var systemImage: String?
     @Binding var isOn: Bool
+    /// 指定すると、タップで ON/OFF を切り替えずにこの処理を呼ぶ（「いつ行く？」はシートを開く）
+    var action: (() -> Void)?
+    var accessibilityTitle: String?
+    var accessibilityHint: String?
 
     var body: some View {
         Button {
-            isOn.toggle()
+            if let action { action() } else { isOn.toggle() }
         } label: {
             HStack(spacing: 4) {
                 if let systemImage {
@@ -101,8 +120,9 @@ private struct FilterChip: View {
             .shadow(color: .black.opacity(isOn ? 0 : 0.12), radius: 3, y: 1)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(Text(title))
-        .accessibilityValue(Text(isOn ? "オン" : "オフ"))
+        .accessibilityLabel(Text(accessibilityTitle ?? title))
+        .accessibilityValue(action == nil ? Text(isOn ? "オン" : "オフ") : Text(verbatim: ""))
+        .accessibilityHint(Text(accessibilityHint ?? ""))
         .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 }

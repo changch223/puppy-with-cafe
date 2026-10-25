@@ -13,7 +13,7 @@ private struct TopOverlayHeightKey: PreferenceKey {
 struct SearchTabView: View {
     let dependencies: AppDependencies
     @ObservedObject var viewModel: CafeListViewModel
-    @ObservedObject var favoritesStore: FavoritesStore
+    @ObservedObject var savedStore: SavedPlacesStore
     @ObservedObject var recentSearchStore: RecentSearchStore
     @Binding var selectedMapItem: CafeWithDistance?
     let onOpenMyDog: () -> Void
@@ -25,6 +25,8 @@ struct SearchTabView: View {
     @State private var routeTarget: Cafe?
     @State private var sheetDetent: CafeSheetDetent = .peek
     @State private var showSearch = false
+    /// 「いつ行く？」シート
+    @State private var showPlanSheet = false
     @State private var topOverlayHeight: CGFloat = 0
 
     var body: some View {
@@ -34,8 +36,10 @@ struct SearchTabView: View {
                     items: viewModel.displayedResults,
                     itemsRevision: viewModel.displayRevision,
                     center: viewModel.searchCenter,
-                    favoriteIDs: favoritesStore.favoriteIDs,
-                    now: viewModel.clock,
+                    savedPlaces: savedStore.places,
+                    now: viewModel.referenceTime,
+                    isTargetTime: viewModel.isTargetTime,
+                    clock: viewModel.clock,
                     selectedItem: $selectedMapItem,
                     recenterRequestID: recenterRequestID
                 )
@@ -75,6 +79,9 @@ struct SearchTabView: View {
                 },
                 onCancel: { showSearch = false }
             )
+        }
+        .sheet(isPresented: $showPlanSheet) {
+            PlanTimeSheet(viewModel: viewModel)
         }
         .confirmationDialog(
             String(localized: "経路を開くアプリを選択"),
@@ -128,9 +135,11 @@ struct SearchTabView: View {
             .padding(.horizontal, 12)
 
             FilterChipsView(
+                targetLabel: viewModel.targetTime.map(TargetTime.shortLabel),
                 openNowOnly: $viewModel.openNowOnly,
                 amenityFilter: $viewModel.amenityFilter,
                 hasActiveChips: viewModel.hasActiveChips,
+                onTapPlan: { showPlanSheet = true },
                 onClear: { viewModel.resetFilters() }
             )
 
@@ -182,12 +191,13 @@ struct SearchTabView: View {
             if let selected = selectedMapItem {
                 PlaceCardView(
                     item: selected,
-                    isFavorite: favoritesStore.contains(selected.cafe.id),
-                    now: viewModel.clock,
+                    savedStatus: savedStore.status(of: selected.cafe.id),
+                    now: viewModel.referenceTime,
+                    isTargetTime: viewModel.isTargetTime,
                     containerHeight: containerHeight,
                     onShowDetail: { onShowDetail(selected.cafe) },
                     onOpenRoute: { routeTarget = selected.cafe },
-                    onToggleFavorite: { favoritesStore.toggle(selected.cafe.id) },
+                    onToggleWantToGo: { savedStore.toggleWantToGo(selected.cafe.id) },
                     onClose: { selectedMapItem = nil }
                 )
                 .transition(.move(edge: .bottom))
@@ -200,6 +210,7 @@ struct SearchTabView: View {
                         count: viewModel.displayedResults.count,
                         amenities: viewModel.amenityFilter,
                         openNowOnly: viewModel.openNowOnly,
+                        targetLabel: viewModel.targetTime.map(TargetTime.shortLabel),
                         includeUnverified: viewModel.includeUnverified,
                         sortOrder: viewModel.sortOrder,
                         originName: viewModel.origin.displayName,
@@ -207,8 +218,10 @@ struct SearchTabView: View {
                     ),
                     sortOrder: $viewModel.sortOrder,
                     items: viewModel.displayedResults,
-                    favoriteIDs: favoritesStore.favoriteIDs,
-                    now: viewModel.clock,
+                    savedStatuses: savedStore.places,
+                    now: viewModel.referenceTime,
+                    isTargetTime: viewModel.isTargetTime,
+                    clock: viewModel.clock,
                     isEmptyDueToFilter: viewModel.isEmptyDueToFilter,
                     unverifiedCandidateCount: viewModel.unverifiedCandidateCount,
                     includeUnverified: $viewModel.includeUnverified,

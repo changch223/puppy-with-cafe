@@ -9,11 +9,14 @@ final class CafeAnnotation: NSObject, MKAnnotation {
     /// 数字クラスタの代わりにMapKitの衝突間引きへ渡す表示優先度（近い店ほど高い）
     var displayPriority: MKFeatureDisplayPriority
     var style: MapPinStyle
+    /// VoiceOver で読む文（対象時刻・保存の状態が変わったら作り直す）
+    var spokenLabel: String
 
-    init(item: CafeWithDistance, displayPriority: MKFeatureDisplayPriority, style: MapPinStyle) {
+    init(item: CafeWithDistance, displayPriority: MKFeatureDisplayPriority, style: MapPinStyle, spokenLabel: String) {
         self.item = item
         self.displayPriority = displayPriority
         self.style = style
+        self.spokenLabel = spokenLabel
     }
 
     var coordinate: CLLocationCoordinate2D {
@@ -70,6 +73,32 @@ enum MapViewModel {
     ) -> [UUID: MapPinStyle] {
         Dictionary(
             items.map { ($0.cafe.id, MapPinStyle.make(for: $0.cafe, isFavorite: favoriteIDs.contains($0.cafe.id), at: date)) },
+            uniquingKeysWith: { first, _ in first }
+        )
+    }
+
+    /// 各店のピンの VoiceOver ラベル。営業は `date`（対象時刻があればその時刻）の言い方で読み、
+    /// 保存の状態（行きたいに登録済み／行った）も含める。「情報が古い可能性」は今（`clock`）で判定する。
+    static func spokenLabels(
+        for items: [CafeWithDistance],
+        savedPlaces: SavedPlaces,
+        at date: Date,
+        isTargetTime: Bool,
+        clock: Date
+    ) -> [UUID: String] {
+        Dictionary(
+            items.map {
+                (
+                    $0.cafe.id,
+                    CafePresentation.accessibilityLabel(
+                        for: $0,
+                        savedStatus: savedPlaces.status(of: $0.cafe.id),
+                        at: date,
+                        isTargetTime: isTargetTime,
+                        clock: clock
+                    )
+                )
+            },
             uniquingKeysWith: { first, _ in first }
         )
     }

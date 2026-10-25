@@ -35,13 +35,23 @@ struct FreshnessWarningIcon: View {
     }
 }
 
-/// お気に入りを示す小さな肉球アイコン（一覧行で使用, UI/UXブラッシュアップ設計書4）
+/// 「行きたい」を示す小さな肉球アイコン（一覧行で使用, UI/UXブラッシュアップ設計書4）
 struct FavoritePawIcon: View {
     var body: some View {
         Image(systemName: "pawprint.fill")
             .font(.caption2)
             .foregroundStyle(.pink)
-            .accessibilityLabel(Text("お気に入り"))
+            .accessibilityLabel(Text("行きたい"))
+    }
+}
+
+/// 「行った」を示す小さなチェックアイコン（一覧行で使用）
+struct VisitedCheckIcon: View {
+    var body: some View {
+        Image(systemName: "checkmark.circle.fill")
+            .font(.caption2)
+            .foregroundStyle(Color.brand)
+            .accessibilityLabel(Text("行った"))
     }
 }
 
