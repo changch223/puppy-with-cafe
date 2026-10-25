@@ -1,7 +1,10 @@
 import SwiftUI
 
 /// 地図の上の検索バー。タップで検索画面を開く。右端の犬のボタンは「うちの子」タブへ切り替える。
+/// うちの子が設定済みなら、犬のボタンに大きさの頭文字（小・中・大）の小さな印を出す。
 struct HomeSearchBar: View {
+    /// うちの子の設定（未設定は nil）
+    var dog: DogProfile?
     let onTapSearch: () -> Void
     let onTapMyDog: () -> Void
 
@@ -29,8 +32,19 @@ struct HomeSearchBar: View {
                     .font(.body)
                     .foregroundStyle(Color.brand)
                     .frame(width: 44, height: 44)
+                    .overlay(alignment: .topTrailing) {
+                        if let dog {
+                            Text(dog.size.initial)
+                                .font(.system(size: 11, weight: .bold, design: .rounded))
+                                .foregroundStyle(Color.onBrand)
+                                .frame(width: 18, height: 18)
+                                .background(Circle().fill(Color.brand))
+                                .offset(x: -2, y: 4)
+                                .accessibilityHidden(true)
+                        }
+                    }
             }
-            .accessibilityLabel(Text("うちの子"))
+            .accessibilityLabel(Text(dog.map { String(localized: "うちの子（\($0.size.displayName)）") } ?? String(localized: "うちの子")))
         }
         .padding(.trailing, 4)
         .background(.regularMaterial, in: Capsule())
@@ -38,7 +52,7 @@ struct HomeSearchBar: View {
     }
 }
 
-/// 条件チップ（横スクロール）: いつ行く？・営業中・店内OK・テラス・大型犬OK・犬メニュー。オンはブランド色で塗る。
+/// 条件チップ（横スクロール）: いつ行く？・うちの子OK・営業中・店内OK・テラス・大型犬OK・犬メニュー。オンはブランド色で塗る。
 /// 1つ以上オンなら末尾に「クリア」。
 /// 「いつ行く？」は対象時刻を決めると「土 12:00」の表示に変わり、「営業中」は「その時間に営業」に変わる。
 struct FilterChipsView: View {
@@ -46,8 +60,13 @@ struct FilterChipsView: View {
     let targetLabel: String?
     @Binding var openNowOnly: Bool
     @Binding var amenityFilter: AmenityFilter
+    /// 「うちの子OK」チップ（入れると明記された店だけ）
+    @Binding var myDogOnly: Bool
+    /// うちの子が設定済みか。未設定でチップを押したときは、オンにせず設定（初回の2問）を開く
+    let hasMyDog: Bool
     let hasActiveChips: Bool
     let onTapPlan: () -> Void
+    let onNeedMyDog: () -> Void
     let onClear: () -> Void
 
     var body: some View {
@@ -60,6 +79,17 @@ struct FilterChipsView: View {
                     action: onTapPlan,
                     accessibilityTitle: targetLabel.map { String(localized: "いつ行く？ \($0)") },
                     accessibilityHint: String(localized: "日時を選ぶシートを開きます")
+                )
+                FilterChip(
+                    title: String(localized: "うちの子OK"),
+                    systemImage: "dog.fill",
+                    isOn: Binding(
+                        get: { myDogOnly && hasMyDog },
+                        set: { newValue in
+                            if hasMyDog { myDogOnly = newValue } else { onNeedMyDog() }
+                        }
+                    ),
+                    accessibilityHint: hasMyDog ? nil : String(localized: "うちの子の設定を開きます")
                 )
                 FilterChip(
                     title: targetLabel == nil ? String(localized: "営業中") : String(localized: "その時間に営業"),

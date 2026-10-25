@@ -62,7 +62,7 @@ struct CafeThumbnailView: View {
     }
 }
 
-/// タグ1つ（店内OK／テラスのみ／条件を確認／未確認／大型犬OK）
+/// タグ1つ（うちの子OK／店内OK／テラスのみ／条件を確認／未確認／大型犬OK）
 struct CafeTagChip: View {
     let tag: CafeTag
 
@@ -81,6 +81,7 @@ struct CafeTagChip: View {
         switch tag.kind {
         case .category(let category): return category.tint
         case .largeDog: return Color(UIColor.systemIndigo)
+        case .myDog: return Color.brand
         }
     }
 }
@@ -88,9 +89,10 @@ struct CafeTagChip: View {
 /// タグの並び。幅が足りない（大きな文字サイズなど）ときは縦に積む。
 struct CafeTagsView: View {
     let cafe: Cafe
+    @Environment(\.dogProfile) private var dog
 
     var body: some View {
-        let tags = CafePresentation.tags(for: cafe)
+        let tags = CafePresentation.tags(for: cafe, dog: dog)
         ViewThatFits(in: .horizontal) {
             HStack(spacing: 6) {
                 ForEach(Array(tags.enumerated()), id: \.offset) { CafeTagChip(tag: $0.element) }

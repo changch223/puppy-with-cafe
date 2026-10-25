@@ -15,6 +15,8 @@ struct CafeRowView: View {
     /// 名前の下に添える一言（保存タブの「10/25 に行った」など）
     var caption: String?
 
+    @Environment(\.dogProfile) private var dog
+
     private var cafe: Cafe { item.cafe }
     private var walking: WalkingTime.Summary { WalkingTime.summary(meters: item.distanceMeters) }
 
@@ -48,6 +50,7 @@ struct CafeRowView: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
+                MyDogNoteView(cafe: cafe)
                 OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
             }
 
@@ -68,7 +71,7 @@ struct CafeRowView: View {
         .padding(.vertical, 4)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(CafePresentation.accessibilityLabel(
-            for: item, savedStatus: savedStatus, at: now, isTargetTime: isTargetTime, clock: clock, caption: caption
+            for: item, savedStatus: savedStatus, at: now, isTargetTime: isTargetTime, clock: clock, caption: caption, dog: dog
         )))
     }
 }

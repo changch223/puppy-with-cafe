@@ -84,7 +84,8 @@ enum MapViewModel {
         savedPlaces: SavedPlaces,
         at date: Date,
         isTargetTime: Bool,
-        clock: Date
+        clock: Date,
+        dog: DogProfile? = nil
     ) -> [UUID: String] {
         Dictionary(
             items.map {
@@ -95,7 +96,8 @@ enum MapViewModel {
                         savedStatus: savedPlaces.status(of: $0.cafe.id),
                         at: date,
                         isTargetTime: isTargetTime,
-                        clock: clock
+                        clock: clock,
+                        dog: dog
                     )
                 )
             },

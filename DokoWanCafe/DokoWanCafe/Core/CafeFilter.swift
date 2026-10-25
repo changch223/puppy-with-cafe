@@ -36,12 +36,15 @@ extension CafeFilter {
     /// - Parameters:
     ///   - amenities: 店内OK/テラスOK/大型犬OK/犬メニューのトグル（AND結合）
     ///   - includeUnverified: `false`（既定）なら未確認ステータスの店を除外する
+    ///   - dog: 指定すると、その子が入れると明記された店（`DogFit` が fits）だけを通す（「うちの子OK」チップ）。
+    ///     入れないと明記された店・分からない店・未確認の店は通さない。`nil`（既定）は絞らない。
     ///   - openNowAt: 指定すると、その時刻に営業中と判定できる店だけを通す（営業時間が不明の店は通さない）。
     ///     `nil`（既定）は営業時間で絞らない。
     static func apply(
         amenities: AmenityFilter,
         includeUnverified: Bool = false,
         openNowAt: Date? = nil,
+        dog: DogProfile? = nil,
         to cafes: [CafeWithDistance]
     ) -> [CafeWithDistance] {
         cafes.filter { item in
@@ -57,6 +60,9 @@ extension CafeFilter {
                 return false
             }
             if !includeUnverified && item.cafe.dogPolicyStatus == .unverified {
+                return false
+            }
+            if let dog, DogFit.evaluate(cafe: item.cafe, dog: dog).overall != .fits {
                 return false
             }
             if amenities.indoorOnly && item.cafe.dogAmenities?.indoor != true {

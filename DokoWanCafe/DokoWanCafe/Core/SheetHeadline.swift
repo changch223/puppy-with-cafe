@@ -14,6 +14,7 @@ enum SheetHeadline {
     ///   - amenities: 店内OK/テラス/大型犬OK/犬メニュー の条件
     ///   - openNowOnly: 「営業中」チップ（対象時刻があるときは「その時間に営業」）
     ///   - targetLabel: 「いつ行く？」で決めた対象時刻の短い表記（例: 「土 12:00」）。nil は「今」
+    ///   - myDog: 「うちの子OK」チップがオンのときのうちの子（見出しが「うちの子（小型犬）が入れるお店」になる）。オフは nil
     ///   - includeUnverified: 未確認の店も表示中か（含むときは「犬OK」と言い切らない）
     ///   - sortOrder: 並び順
     ///   - originName: 起点名。現在地のとき（`isCurrentLocation`）は「現在地」と言う
@@ -22,6 +23,7 @@ enum SheetHeadline {
         amenities: AmenityFilter,
         openNowOnly: Bool,
         targetLabel: String? = nil,
+        myDog: DogProfile? = nil,
         includeUnverified: Bool = false,
         sortOrder: CafeSortOrder = .distance,
         originName: String,
@@ -33,15 +35,31 @@ enum SheetHeadline {
         // 「今開いている」／対象時刻があるときは「土 12:00 に開いている」
         let openPhrase = targetLabel.map { String(localized: "\($0) に開いている") } ?? String(localized: "今開いている")
         let body: String
-        switch (openNowOnly, labels.isEmpty) {
-        case (false, true):
-            body = String(localized: "\(dogPhrase)のお店")
-        case (true, true):
-            body = String(localized: "\(openPhrase)\(dogPhrase)のお店")
-        case (false, false):
-            body = String(localized: "\(labels.joined(separator: "・"))のお店")
-        case (true, false):
-            body = String(localized: "\(openPhrase)、\(labels.joined(separator: "・"))のお店")
+        if let myDog {
+            // 「うちの子（小型犬）が入れるお店」。ほかの条件はその前後に添える
+            let dogName = myDog.size.displayName
+            let canEnter = String(localized: "うちの子（\(dogName)）が入れる")
+            switch (openNowOnly, labels.isEmpty) {
+            case (false, true):
+                body = String(localized: "\(canEnter)お店")
+            case (true, true):
+                body = String(localized: "\(openPhrase)、\(canEnter)お店")
+            case (false, false):
+                body = String(localized: "\(canEnter)、\(labels.joined(separator: "・"))のお店")
+            case (true, false):
+                body = String(localized: "\(openPhrase)、\(canEnter)、\(labels.joined(separator: "・"))のお店")
+            }
+        } else {
+            switch (openNowOnly, labels.isEmpty) {
+            case (false, true):
+                body = String(localized: "\(dogPhrase)のお店")
+            case (true, true):
+                body = String(localized: "\(openPhrase)\(dogPhrase)のお店")
+            case (false, false):
+                body = String(localized: "\(labels.joined(separator: "・"))のお店")
+            case (true, false):
+                body = String(localized: "\(openPhrase)、\(labels.joined(separator: "・"))のお店")
+            }
         }
         let suffix = includeUnverified ? String(localized: "（未確認を含む）") : ""
         return Text(

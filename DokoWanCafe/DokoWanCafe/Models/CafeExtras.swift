@@ -124,17 +124,50 @@ struct OpeningHours: Codable, Equatable, Sendable {
 }
 
 /// 犬向け設備（true=✓ / false=✕ / nil=不明。「不明」を「✕」と混同しない, FR-104）
+///
+/// 再設計 段階3: 「うちの子」の判定用に、席ごとのサイズ上限と店内での過ごし方を持つ。
+/// - `sizeMaxIndoor` / `sizeMaxTerrace`: 明記された上限（nil＝明記なし。「制限なし」ではない）
+/// - `indoorStyle`: 店内で認められていると明記された過ごし方。網羅的ではなく、含まれていないことを不可とは扱わない
 struct DogAmenities: Codable, Equatable, Sendable {
     var indoor: Bool?
     var terrace: Bool?
     var largeDogs: Bool?
     var dogMenu: Bool?
+    var sizeMaxIndoor: DogSize?
+    var sizeMaxTerrace: DogSize?
+    var indoorStyle: [DogStyle]?
 
     enum CodingKeys: String, CodingKey {
         case indoor
         case terrace
         case largeDogs = "large_dogs"
         case dogMenu = "dog_menu"
+        case sizeMaxIndoor = "size_max_indoor"
+        case sizeMaxTerrace = "size_max_terrace"
+        case indoorStyle = "indoor_style"
+    }
+}
+
+extension DogAmenities {
+    /// 新キーの未知の値（将来追加される大きさ・過ごし方）は無視して読み込む（デコード全体を落とさない）。
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        indoor = try container.decodeIfPresent(Bool.self, forKey: .indoor)
+        terrace = try container.decodeIfPresent(Bool.self, forKey: .terrace)
+        largeDogs = try container.decodeIfPresent(Bool.self, forKey: .largeDogs)
+        dogMenu = try container.decodeIfPresent(Bool.self, forKey: .dogMenu)
+        sizeMaxIndoor = Self.tolerantSize(container, .sizeMaxIndoor)
+        sizeMaxTerrace = Self.tolerantSize(container, .sizeMaxTerrace)
+        if let raws = try? container.decodeIfPresent([String].self, forKey: .indoorStyle) {
+            indoorStyle = raws.compactMap(DogStyle.init(rawValue:))
+        } else {
+            indoorStyle = nil
+        }
+    }
+
+    private static func tolerantSize(_ container: KeyedDecodingContainer<CodingKeys>, _ key: CodingKeys) -> DogSize? {
+        guard let raw = (try? container.decodeIfPresent(String.self, forKey: key)) ?? nil else { return nil }
+        return DogSize(rawValue: raw)
     }
 }
 

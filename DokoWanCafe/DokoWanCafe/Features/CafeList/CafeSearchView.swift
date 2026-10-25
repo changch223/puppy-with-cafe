@@ -221,6 +221,7 @@ struct CafeSearchView: View {
 /// 検索候補のお店の行: 名前・エリア（sub_area）・タグ
 private struct CafeSearchRow: View {
     let cafe: Cafe
+    @Environment(\.dogProfile) private var dog
 
     var body: some View {
         HStack(spacing: 12) {
@@ -252,7 +253,7 @@ private struct CafeSearchRow: View {
     private var accessibilityText: String {
         var parts = [cafe.name]
         if let subArea = cafe.subArea, !subArea.isEmpty { parts.append(subArea) }
-        parts.append(contentsOf: CafePresentation.tags(for: cafe).map(\.label))
+        parts.append(contentsOf: CafePresentation.tags(for: cafe, dog: dog).map(\.label))
         return parts.joined(separator: "、")
     }
 }

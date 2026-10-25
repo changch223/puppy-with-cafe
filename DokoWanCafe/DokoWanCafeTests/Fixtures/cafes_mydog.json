@@ -1,0 +1,64 @@
+{
+  "cafes": [
+    {
+      "area": "tokyo",
+      "dog_amenities": {
+        "dog_menu": false,
+        "indoor": true,
+        "indoor_style": ["floor", "carrier"],
+        "large_dogs": null,
+        "size_max_indoor": "medium",
+        "size_max_terrace": "large",
+        "terrace": true
+      },
+      "dog_policy_condition": "店内は中型犬まで（架空の条件）",
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "id": "d0000000-0000-4000-8000-000000000001",
+      "is_closed": false,
+      "last_verified": "2026-10-01",
+      "latitude": 35.68,
+      "longitude": 139.76,
+      "name": "サンプルカフェ うちの子A",
+      "sources": []
+    },
+    {
+      "area": "tokyo",
+      "dog_amenities": {
+        "indoor": true,
+        "indoor_style": ["hold", "sidecar"],
+        "size_max_indoor": "huge",
+        "size_max_terrace": 3
+      },
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "id": "d0000000-0000-4000-8000-000000000002",
+      "is_closed": false,
+      "last_verified": "2026-10-01",
+      "latitude": 35.681,
+      "longitude": 139.761,
+      "name": "サンプルカフェ 未知の値B",
+      "sources": []
+    },
+    {
+      "area": "tokyo",
+      "dog_amenities": {
+        "dog_menu": true,
+        "indoor": true,
+        "terrace": false
+      },
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "id": "d0000000-0000-4000-8000-000000000003",
+      "is_closed": false,
+      "last_verified": "2026-10-01",
+      "latitude": 35.682,
+      "longitude": 139.762,
+      "name": "サンプルカフェ 新キーなしC",
+      "sources": []
+    }
+  ],
+  "format_version": 1,
+  "generated_at": "2026-10-25T00:00:00Z",
+  "is_sample_data": true
+}

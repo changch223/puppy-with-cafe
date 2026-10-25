@@ -17,6 +17,10 @@ struct SearchTabView: View {
     @ObservedObject var recentSearchStore: RecentSearchStore
     @Binding var selectedMapItem: CafeWithDistance?
     let onOpenMyDog: () -> Void
+    /// 「うちの子OK」チップを未設定のまま押したとき（うちの子の設定を開く）
+    let onNeedMyDog: () -> Void
+    /// 検索画面・「いつ行く？」シートが開いているか（開いている間は初回の2問を出さない。RootView が閉じてから出す）
+    @Binding var isModalOpen: Bool
     /// 詳細へ進む（さがすタブの NavigationStack に積む）
     let onShowDetail: (Cafe) -> Void
 
@@ -40,6 +44,7 @@ struct SearchTabView: View {
                     now: viewModel.referenceTime,
                     isTargetTime: viewModel.isTargetTime,
                     clock: viewModel.clock,
+                    dog: viewModel.dogProfile,
                     selectedItem: $selectedMapItem,
                     recenterRequestID: recenterRequestID
                 )
@@ -62,6 +67,7 @@ struct SearchTabView: View {
             .onPreferenceChange(TopOverlayHeightKey.self) { topOverlayHeight = $0 }
         }
         .toolbar(.hidden, for: .navigationBar)
+        .onChange(of: showSearch || showPlanSheet) { _, isOpen in isModalOpen = isOpen }
         .fullScreenCover(isPresented: $showSearch) {
             CafeSearchView(
                 allCafes: viewModel.allLoadedCafes,
@@ -129,6 +135,7 @@ struct SearchTabView: View {
     private var topOverlay: some View {
         VStack(spacing: 8) {
             HomeSearchBar(
+                dog: viewModel.dogProfile,
                 onTapSearch: { showSearch = true },
                 onTapMyDog: onOpenMyDog
             )
@@ -138,8 +145,11 @@ struct SearchTabView: View {
                 targetLabel: viewModel.targetTime.map(TargetTime.shortLabel),
                 openNowOnly: $viewModel.openNowOnly,
                 amenityFilter: $viewModel.amenityFilter,
+                myDogOnly: $viewModel.myDogOnly,
+                hasMyDog: viewModel.dogProfile != nil,
                 hasActiveChips: viewModel.hasActiveChips,
                 onTapPlan: { showPlanSheet = true },
+                onNeedMyDog: onNeedMyDog,
                 onClear: { viewModel.resetFilters() }
             )
 
@@ -211,6 +221,7 @@ struct SearchTabView: View {
                         amenities: viewModel.amenityFilter,
                         openNowOnly: viewModel.openNowOnly,
                         targetLabel: viewModel.targetTime.map(TargetTime.shortLabel),
+                        myDog: viewModel.myDogFilterDog,
                         includeUnverified: viewModel.includeUnverified,
                         sortOrder: viewModel.sortOrder,
                         originName: viewModel.origin.displayName,
