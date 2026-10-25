@@ -73,6 +73,20 @@ final class CafeListViewModel: ObservableObject {
     @Published private(set) var targetTime: Date? = nil {
         didSet { recomputeDisplayed() }
     }
+    /// うちの子の設定（再設計 段階3）。端末ローカルの保存は `DogProfileStore` が持ち、変わるたびに RootView がここへ渡す。
+    /// 未設定（nil）になったら「うちの子OK」チップはオフに戻す。
+    @Published var dogProfile: DogProfile? = nil {
+        didSet {
+            if dogProfile == nil { myDogOnly = false }
+            recomputeDisplayed()
+        }
+    }
+    /// 「うちの子OK」チップ: 入れると明記された店だけを表示するか（設定済みのときだけ有効）
+    @Published var myDogOnly = false {
+        didSet { recomputeDisplayed() }
+    }
+    /// 絞り込みに使ううちの子（チップがオンで設定済みのときだけ。それ以外は nil）
+    var myDogFilterDog: DogProfile? { myDogOnly ? dogProfile : nil }
     /// 一覧・地図の並び順（既定は距離昇順, 設計書1b/4）
     @Published var sortOrder: CafeSortOrder = .distance {
         didSet { recomputeDisplayed() }
@@ -168,6 +182,7 @@ final class CafeListViewModel: ObservableObject {
             amenities: amenityFilter,
             includeUnverified: includeUnverified,
             openNowAt: openAt,
+            dog: myDogFilterDog,
             to: allResults
         )
     }
@@ -179,6 +194,7 @@ final class CafeListViewModel: ObservableObject {
             amenities: amenityFilter,
             includeUnverified: true,
             openNowAt: openNowOnly ? (targetTime ?? current) : nil,
+            dog: myDogFilterDog,
             to: allResults
         )
         let verified = withUnverified.filter { $0.cafe.dogPolicyStatus != .unverified }
@@ -190,7 +206,7 @@ final class CafeListViewModel: ObservableObject {
 
     /// チップ（営業中・犬向け条件）がオンか。「クリア」チップの表示に使う。
     var hasActiveChips: Bool {
-        openNowOnly || targetTime != nil || !amenityFilter.isEmpty
+        openNowOnly || targetTime != nil || !amenityFilter.isEmpty || myDogOnly
     }
 
     /// 「行きたい」のお店（追加が新しい順）。
@@ -222,7 +238,7 @@ final class CafeListViewModel: ObservableObject {
         }
     }
 
-    /// 現在適用中の絞り込み条件の数（営業中＋犬向け条件4種＋未確認表示）。
+    /// 現在適用中の絞り込み条件の数（営業中＋犬向け条件4種＋うちの子OK＋未確認表示）。
     var activeFilterCount: Int {
         [
             openNowOnly,
@@ -230,6 +246,7 @@ final class CafeListViewModel: ObservableObject {
             amenityFilter.terraceOnly,
             amenityFilter.largeDogOnly,
             amenityFilter.dogMenuOnly,
+            myDogOnly,
             includeUnverified,
         ].filter { $0 }.count
     }
@@ -243,6 +260,7 @@ final class CafeListViewModel: ObservableObject {
     func resetFilters() {
         amenityFilter = AmenityFilter()
         includeUnverified = false
+        myDogOnly = false
         openNowOnly = false
         openNowBeforePlan = nil
         targetTime = nil

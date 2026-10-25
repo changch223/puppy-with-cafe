@@ -22,11 +22,13 @@ enum InitialTile {
     }
 }
 
-/// 一覧の行・ピンカードのタグ（店内OK／テラスのみ／条件を確認／未確認 ＋ 大型犬OK）
+/// 一覧の行・ピンカードのタグ（うちの子OK ＋ 店内OK／テラスのみ／条件を確認／未確認 ＋ 大型犬OK）
 struct CafeTag: Equatable {
     enum Kind: Equatable {
         case category(MapPinCategory)
         case largeDog
+        /// うちの子が入れると明記された店（再設計 段階3）
+        case myDog
     }
 
     let kind: Kind
@@ -66,10 +68,15 @@ enum CafePresentation {
         return limit.isEmpty
     }
 
-    /// 可否のタグ1つ＋大型犬OK（無条件で大型犬が可と分かる店だけ。不明・条件つきは出さない）
-    static func tags(for cafe: Cafe) -> [CafeTag] {
+    /// （うちの子OK＋）可否のタグ1つ＋大型犬OK（無条件で大型犬が可と分かる店だけ。不明・条件つきは出さない）。
+    /// 「うちの子OK」は `dog` が設定済みで、その子が入れると明記された店だけ（再設計 段階3）。
+    static func tags(for cafe: Cafe, dog: DogProfile? = nil) -> [CafeTag] {
         let category = MapPinCategory.category(for: cafe)
-        var result = [CafeTag(kind: .category(category), label: categoryLabel(for: cafe))]
+        var result: [CafeTag] = []
+        if let dog, let label = DogFit.evaluate(cafe: cafe, dog: dog).tagLabel {
+            result.append(CafeTag(kind: .myDog, label: label))
+        }
+        result.append(CafeTag(kind: .category(category), label: categoryLabel(for: cafe)))
         if showsLargeDogTag(for: cafe) {
             result.append(CafeTag(kind: .largeDog, label: String(localized: "大型犬OK")))
         }
@@ -98,13 +105,15 @@ enum CafePresentation {
     ///   - isTargetTime: `date` が対象時刻か（営業を「土 12:00 は営業中…」の言い方で読む）
     ///   - clock: 「情報が古い可能性」の判定に使う「今」。対象時刻ではなく今で判定する。省略時は `date`
     ///   - caption: 保存タブの「10/25 に行った」など、名前に続けて読む一言
+    ///   - dog: うちの子の設定（あれば「うちの子OK」「うちの子は不可（…）」も読む）
     static func accessibilityLabel(
         for item: CafeWithDistance,
         savedStatus: SavedStatus? = nil,
         at date: Date = Date(),
         isTargetTime: Bool = false,
         clock: Date? = nil,
-        caption: String? = nil
+        caption: String? = nil,
+        dog: DogProfile? = nil
     ) -> String {
         var parts = [item.cafe.name]
         switch savedStatus {
@@ -113,7 +122,8 @@ enum CafePresentation {
         case nil: break
         }
         if let caption { parts.append(caption) }
-        parts.append(contentsOf: tags(for: item.cafe).map(\.label))
+        parts.append(contentsOf: tags(for: item.cafe, dog: dog).map(\.label))
+        if let dog, let note = DogFit.evaluate(cafe: item.cafe, dog: dog).rowNote { parts.append(note) }
         if let condition = conditionSummary(for: item.cafe) { parts.append(condition) }
         parts.append(OpenLine.make(hours: item.cafe.hours, at: date, isTargetTime: isTargetTime).spokenText)
         parts.append(WalkingTime.summary(meters: item.distanceMeters).spoken)

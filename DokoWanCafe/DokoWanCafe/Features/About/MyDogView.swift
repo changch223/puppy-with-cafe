@@ -6,10 +6,14 @@ private struct AboutSafariItem: Identifiable {
     let url: URL
 }
 
-/// 「うちの子」タブ（再設計 段階1a。段階3で犬の設定が入る）。
-/// 段階1では、データの更新日と再読み込み・ピンと表示の見かた・このアプリについて（旧 AboutView の中身）を置く。
+/// 「うちの子」タブ（再設計 段階3）。一番上にうちの子の設定（大きさ・過ごし方。変更できる）、
+/// 続けて データの更新日と再読み込み・ピンと表示の見かた・このアプリについて（旧 AboutView の中身）を置く。
 /// リンクは既存の `SafariView`（アプリ内ブラウザ）で開く。
 struct MyDogView: View {
+    /// うちの子の設定（未設定は nil）
+    let dog: DogProfile?
+    /// 設定シートを開く（未設定なら設定、設定済みなら変更）
+    let onEditDog: () -> Void
     /// データ（cafes.json）の生成日時（FR-032: 鮮度の提示）。分からなければ nil。
     let dataGeneratedAt: Date?
     let isSampleMode: Bool
@@ -20,6 +24,7 @@ struct MyDogView: View {
 
     var body: some View {
         List {
+            dogSection
             dataSection
             legendSection
             appSection
@@ -28,6 +33,47 @@ struct MyDogView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $safariItem) { item in
             SafariView(url: item.url)
+        }
+    }
+
+    // MARK: - うちの子
+
+    private var dogSection: some View {
+        Section {
+            if let dog {
+                HStack {
+                    Text("大きさ")
+                    Spacer()
+                    Text(dog.size.displayName)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityElement(children: .combine)
+                HStack(alignment: .firstTextBaseline) {
+                    Text("お店での過ごし方")
+                    Spacer()
+                    Text(dog.stylesSummary ?? String(localized: "未選択"))
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.trailing)
+                }
+                .accessibilityElement(children: .combine)
+                Button(action: onEditDog) {
+                    Label(String(localized: "変更する"), systemImage: "pencil")
+                        .frame(minHeight: 44)
+                }
+                .accessibilityHint(Text("大きさと過ごし方を変えます"))
+            } else {
+                Text("うちの子を設定すると、入れるお店がひと目で分かります")
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
+                Button(action: onEditDog) {
+                    Label(String(localized: "うちの子を設定する"), systemImage: "dog.fill")
+                        .frame(minHeight: 44)
+                }
+            }
+        } header: {
+            Text("うちの子")
+        } footer: {
+            Text("設定はこの端末の中だけに保存され、外へは送られません。「入れる」と表示するのは、お店の情報に明記があるときだけです。")
         }
     }
 

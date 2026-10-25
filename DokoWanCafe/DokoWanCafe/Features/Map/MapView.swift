@@ -21,6 +21,8 @@ struct CafeMapView: UIViewRepresentable {
     let isTargetTime: Bool
     /// 今の時刻（「情報が古い可能性」の判定。対象時刻ではなく今で判定する）
     let clock: Date
+    /// うちの子の設定（ピンの読み上げに「うちの子OK」「うちの子は不可」を含める）。未設定は nil
+    var dog: DogProfile?
     /// タップ選択中のカフェ（一覧シートがその店のカードに変わる）。×やマップタップで nil に戻る双方向バインディング。
     @Binding var selectedItem: CafeWithDistance?
     /// インクリメントすると現在地（center）へ再センタリングする（現在地ボタンから使用）
@@ -92,6 +94,7 @@ struct CafeMapView: UIViewRepresentable {
             let savedPlaces: SavedPlaces
             let isTargetTime: Bool
             let time: Date
+            let dog: DogProfile?
         }
         private var annotationsByID: [UUID: CafeAnnotation] = [:]
 
@@ -105,7 +108,8 @@ struct CafeMapView: UIViewRepresentable {
                 revision: parent.itemsRevision,
                 savedPlaces: parent.savedPlaces,
                 isTargetTime: parent.isTargetTime,
-                time: parent.now
+                time: parent.now,
+                dog: parent.dog
             )
             guard key != lastSyncKey else { return }
             lastSyncKey = key
@@ -113,7 +117,8 @@ struct CafeMapView: UIViewRepresentable {
             let styles = MapViewModel.styles(for: items, favoriteIDs: parent.savedPlaces.wantToGoIDs, at: parent.now)
             let spokenLabels = MapViewModel.spokenLabels(
                 for: items, savedPlaces: parent.savedPlaces,
-                at: parent.now, isTargetTime: parent.isTargetTime, clock: parent.clock
+                at: parent.now, isTargetTime: parent.isTargetTime, clock: parent.clock,
+                dog: parent.dog
             )
             let priorities = MapViewModel.displayPriorities(for: items)
             let itemsByID = Dictionary(items.map { ($0.cafe.id, $0) }, uniquingKeysWith: { first, _ in first })

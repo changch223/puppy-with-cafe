@@ -63,6 +63,8 @@ struct CafeDetailView: View {
                 VStack(spacing: 16) {
                     titleRow
 
+                    CafeDetailMyDogLine(cafe: cafe)
+
                     CafeDetailAnswerCard(
                         answer: CafeDetailAnswer.make(cafe: cafe),
                         evidence: CafeDetailEvidence.make(

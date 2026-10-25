@@ -12,6 +12,8 @@ final class AppDependencies: ObservableObject {
     let cacheStore: CacheStore
     /// 保存したお店（行きたい／行った・端末ローカル）。地図・一覧・詳細・保存タブで同一インスタンスを共有し、即時に反映させる。
     let savedStore: SavedPlacesStore
+    /// うちの子の設定（大きさ・過ごし方・端末ローカル）。
+    let dogProfileStore: DogProfileStore
 
     /// 架空のサンプルデータで動作中か（データファイルの is_sample_data。誤認防止バナー表示）
     var isSampleMode: Bool { staticRepository.isSampleData }
@@ -26,5 +28,6 @@ final class AppDependencies: ObservableObject {
         self.locationService = LocationService()
         self.cacheStore = CacheStore()
         self.savedStore = SavedPlacesStore()
+        self.dogProfileStore = DogProfileStore()
     }
 }

@@ -46,6 +46,7 @@ struct PlaceCardView: View {
                                 .foregroundStyle(Color(.secondaryLabel))
                                 .lineLimit(2)
                         }
+                        MyDogNoteView(cafe: cafe)
                         HStack(spacing: 8) {
                             OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
                             Text(walkingText)
