@@ -1,296 +1,346 @@
 import SwiftUI
 import UIKit
 
-/// SafariView(sheet) 提示用の識別可能なURLラッパー（写真・雰囲気機能: OGP写真カード・地図案内・
-/// 出典URL・公式リンク等のアプリ内ブラウザ表示を `.sheet(item:)` で一元管理する）。
-private struct SafariItem: Identifiable {
-    let id = UUID()
-    let url: URL
-}
-
-/// カフェ詳細画面（T032/T035/T046/T047/T048/T050）。
+/// カフェ詳細画面（再設計 段階1b: 答えを先に）。
+/// 上から 写真の帯 → 店名 → 答えのカード → 3つの要点 → 操作 → 条件・マナー → 営業時間 → 写真・雰囲気
+/// → わんちゃん向け情報 → 公式情報・SNS → 店舗情報 → 誤り報告。
 /// 可否・条件・出典・最終確認日を提示し（US2）、矛盾と AI 推測を明示区別する（US4）。
 struct CafeDetailView: View {
     @StateObject private var viewModel: CafeDetailViewModel
     private let dependencies: AppDependencies
     @Environment(\.openURL) private var openURL
     @State private var showReport = false
-    @State private var safariItem: SafariItem?
-    // 経路チューザー（S1）: 「経路案内」タップ時にAppleマップ/Googleマップを選ばせる
+    @State private var showEvidence = false
+    @State private var safariItem: CafeDetailSafariItem?
+    // 経路チューザー（S1）: 「経路」タップ時にAppleマップ/Googleマップを選ばせる
     @State private var showRouteChooser = false
     // 写真・雰囲気セクションの表示チェーン現在地（IG埋め込み失敗→OGP写真カード失敗→地図案内、の順に遷移）
     @State private var photoTier: PhotoTier?
     @State private var instagramEmbedHeight: CGFloat = OGPPhotoCardView.cardHeight
-    // お気に入り（端末ローカル）。地図・一覧と同一インスタンスを共有する（UI/UXブラッシュアップ設計書1c/3）。
+    // お気に入り（端末ローカル）。地図・一覧と同一インスタンスを共有する（段階2で「行きたい」に変わる予定）。
     @ObservedObject private var favoritesStore: FavoritesStore
+    // 写真の帯の取得状況。OGP 画像を帯に出した店では「写真・雰囲気」で同じ画像を繰り返さない。
+    @State private var heroPhoto: HeroPhoto
+    // 店名が画面上から隠れたらナビゲーションバーに店名を出す
+    @State private var showsNavigationTitle = false
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    private enum HeroPhoto: Equatable {
+        case pending
+        case photo(URL)
+        case none
+    }
+
+    private static let scrollSpace = "cafeDetailScroll"
 
     init(cafe: Cafe, dependencies: AppDependencies) {
         self.dependencies = dependencies
         _viewModel = StateObject(
             wrappedValue: CafeDetailViewModel(cafe: cafe, repository: dependencies.repository)
         )
-        _photoTier = State(initialValue: Self.initialPhotoTier(for: cafe))
+        let tier = Self.initialPhotoTier(for: cafe)
+        _photoTier = State(initialValue: tier)
+        _heroPhoto = State(
+            initialValue: PhotoSourceResolver.previewSourceURL(for: cafe) != nil
+                ? .pending : .none
+        )
         _favoritesStore = ObservedObject(wrappedValue: dependencies.favoritesStore)
     }
 
+    private var cafe: Cafe { viewModel.cafe }
+
     var body: some View {
-        List {
-            // セクション順（S3: 営業時間はヘッダーに統合済みのため独立セクションなし）
-            headerSection
+        // 「今日」の判定・曜日表で同じ時刻を使う
+        let now = Date()
+        GeometryReader { outer in
+        ScrollView {
+            VStack(spacing: 0) {
+                CafeDetailHeroBand(
+                    cafe: cafe,
+                    onResolve: { url in heroPhoto = url.map { .photo($0) } ?? .none }
+                )
 
-            if viewModel.cafe.dogAmenities != nil {
-                amenitiesSection
-            }
+                VStack(spacing: 16) {
+                    titleRow
 
-            photoSection
+                    CafeDetailAnswerCard(
+                        answer: CafeDetailAnswer.make(cafe: cafe),
+                        evidence: CafeDetailEvidence.make(
+                            sourceType: viewModel.representativeSource?.type,
+                            lastVerified: cafe.lastVerified,
+                            hasConflict: viewModel.hasConflict
+                        ),
+                        isStale: viewModel.isStale && CafeDetailAnswer.isConfirmed(cafe),
+                        onTapEvidence: { showEvidence = true }
+                    )
 
-            if !viewModel.sources.isEmpty {
-                sourcesSection
-            }
+                    CafeDetailHighlightTiles(highlights: CafeDetailHighlights.all(cafe: cafe, at: now))
 
-            if viewModel.cafe.links?.isEmpty == false || viewModel.cafe.operatorNote != nil {
-                linksSection
-            }
+                    actionRow
 
-            if hasConditionInfo {
-                conditionSection
-            }
+                    if hasConditionInfo {
+                        conditionCard
+                    }
 
-            if viewModel.hasConflict {
-                conflictSection
-            }
+                    if hasHoursInfo {
+                        hoursCard(now: now)
+                    }
 
-            infoSection
+                    photoCard
 
-            // 報告フォーム未設定のときは「準備中」画面を見せず、セクションごと出さない（App Store 審査対応）
-            if AppEnvironment.isReportFormConfigured() {
-                actionSection
+                    if let amenities = cafe.dogAmenities {
+                        amenitiesCard(amenities, confirmed: CafeDetailAnswer.isConfirmed(cafe))
+                    }
+
+                    if cafe.links?.isEmpty == false || cafe.operatorNote != nil {
+                        linksCard
+                    }
+
+                    infoCard
+
+                    // 報告フォーム未設定のときは「準備中」画面を見せず、セクションごと出さない（App Store 審査対応）
+                    if AppEnvironment.isReportFormConfigured() {
+                        reportCard
+                    }
+                }
+                .padding(16)
             }
         }
-        .listStyle(.insetGrouped)
-        .navigationTitle(viewModel.cafe.name)
+        .coordinateSpace(name: Self.scrollSpace)
+        .onPreferenceChange(CafeDetailTitleOffsetKey.self) { titleBottom in
+            showsNavigationTitle = titleBottom < outer.safeAreaInsets.top
+        }
+        }
+        .background(Color(.systemGroupedBackground))
+        .navigationTitle(showsNavigationTitle ? cafe.name : "")
         .navigationBarTitleDisplayMode(.inline)
         .task { await viewModel.load() }
-        .safeAreaInset(edge: .bottom) {
-            ctaBar
-        }
         .sheet(isPresented: $showReport) {
-            ReportView(cafe: viewModel.cafe)
+            ReportView(cafe: cafe)
                 .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $showEvidence) {
+            CafeDetailEvidenceSheet(
+                viewModel: viewModel,
+                evidence: CafeDetailEvidence.make(
+                    sourceType: viewModel.representativeSource?.type,
+                    lastVerified: cafe.lastVerified,
+                    hasConflict: viewModel.hasConflict
+                )
+            )
+            .presentationDetents([.medium, .large])
         }
         .sheet(item: $safariItem) { item in
             SafariView(url: item.url)
         }
     }
 
-    /// 「来店時の条件・マナー」セクションを出すか（条件文・サイズ制限・運営メモのいずれかがある時, P1-2）
     private var hasConditionInfo: Bool {
-        viewModel.cafe.dogPolicyCondition != nil
-            || viewModel.cafe.dogSizeLimit != nil
-            || viewModel.cafe.dogNote != nil
+        cafe.dogPolicyCondition != nil || cafe.dogSizeLimit != nil || cafe.dogNote != nil
     }
 
-    /// 犬目線ピン分類（一覧・地図と共通の判定, UI/UXブラッシュアップ設計書1a）
-    private var mapPinCategory: MapPinCategory { MapPinCategory.category(for: viewModel.cafe) }
+    private var hasHoursInfo: Bool {
+        cafe.hours?.hasAnyDay == true || cafe.hoursText != nil || cafe.holidayNote != nil
+    }
 
-    // MARK: - 可否・鮮度（US2）
+    private var telURL: URL? {
+        guard let phone = cafe.phone else { return nil }
+        return URL(string: "tel://" + phone.filter { $0.isNumber || $0 == "+" })
+    }
 
-    private var headerSection: some View {
-        Section {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(viewModel.cafe.name)
-                            .font(.title3.bold())
-                        if let subArea = viewModel.cafe.subArea {
-                            Label(subArea, systemImage: "mappin")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    Spacer()
-                    favoriteToggleButton
-                    VStack(alignment: .trailing, spacing: 6) {
-                        // 犬目線チップを先に見せる（「条件付き」単独より「テラスOK」等が先に見えること, P1-3）
-                        MapPinCategoryBadge(category: mapPinCategory)
-                        StatusBadge(status: viewModel.cafe.dogPolicyStatus)
-                    }
-                }
+    // MARK: - 店名・エリア・保存
 
-                // 営業時間をヘッダーに統合（S3: 独立hoursSectionは廃止し、
-                // 営業中/営業時間外バッジ＋当日の時間 or hours_text をコンパクト表示する）
-                if viewModel.cafe.hours?.hasAnyDay == true || viewModel.cafe.hoursText != nil {
-                    HStack(spacing: 6) {
-                        OpenStateBadge(state: OpeningHoursEvaluator.state(hours: viewModel.cafe.hours))
-                        if let todayHours = todayHoursCompactText {
-                            Text(todayHours)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    // 営業時間の確認日・免責（旧hoursSectionのfooterを踏襲, QA指摘: 独立セクション廃止で
-                    // 確認日と「最新の営業情報は公式でご確認ください」の免責が消えないようにする）
-                    hoursConfirmationCaption
-                }
-
-                // 運営確認日チップ（P0-3: footnoteの文字列表示からCapsuleチップへ格上げ）は一旦非表示（S3）。
-                // ロジック・データ（verifiedDateChip/verifiedDateChipColor）は復元しやすいよう残す
-                // （未確認であることは下の warningBox が担う, QA指摘）。
-                // if let lastVerified = viewModel.cafe.lastVerified,
-                //    viewModel.cafe.dogPolicyStatus != .unverified {
-                //     verifiedDateChip(lastVerified)
-                // }
-
-                // 店舗紹介（002/FR-107）
-                if let description = viewModel.cafe.description {
-                    Text(description)
+    private var titleRow: some View {
+        HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(cafe.name)
+                    .font(.title.bold())
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityAddTraits(.isHeader)
+                if let subArea = cafe.subArea {
+                    Label(subArea, systemImage: "mappin")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
-
-                // 条件付きの1行要約（詳細は「来店時の条件・マナー」セクションへ, P1-2）
-                if viewModel.cafe.dogPolicyStatus == .conditional,
-                   viewModel.cafe.dogPolicyCondition != nil {
-                    Label(
-                        String(localized: "来店に条件があります（詳細は下記「来店時の条件・マナー」）"),
-                        systemImage: "info.circle"
-                    )
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                }
-
-                // 未確認情報の明示区別（FR-009/T035）
-                if viewModel.isUnverified {
-                    warningBox(
-                        text: String(localized: "この情報は未確認です。参考記事・確認日のある確定情報ではありません。ご来店前に店舗へ直接ご確認ください。"),
-                        systemImage: "questionmark.circle",
-                        color: .gray
-                    )
-                }
-
-                // 古い情報の警告（FR-010/T033）
-                if viewModel.isStale && !viewModel.isUnverified {
-                    warningBox(
-                        text: String(localized: "この情報は最終確認から1年以上経過しています。最新でない可能性があります。"),
-                        systemImage: "clock.badge.exclamationmark",
-                        color: .orange
-                    )
-                }
             }
-            .padding(.vertical, 4)
-            .accessibilityElement(children: .combine)
+            Spacer(minLength: 0)
+            favoriteToggleButton
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            GeometryReader { geometry in
+                Color.clear.preference(
+                    key: CafeDetailTitleOffsetKey.self,
+                    value: geometry.frame(in: .named(Self.scrollSpace)).maxY
+                )
+            }
+        )
     }
 
-    /// お気に入りトグル（肉球, P1-1/P2-4）。ON=塗り肉球。
+    /// 保存トグル（今のお気に入り切り替え。段階2で「行きたい」に変わる）。ON=塗り肉球。
     private var favoriteToggleButton: some View {
-        let isFavorite = favoritesStore.contains(viewModel.cafe.id)
+        let isFavorite = favoritesStore.contains(cafe.id)
         return Button {
-            favoritesStore.toggle(viewModel.cafe.id)
+            favoritesStore.toggle(cafe.id)
         } label: {
             Image(systemName: isFavorite ? "pawprint.fill" : "pawprint")
-                .font(.title3)
-                .foregroundStyle(isFavorite ? Color.orange : Color.secondary)
+                .font(.title2)
+                .foregroundStyle(isFavorite ? Color.cafeDetailOrange : Color.secondary)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
         }
-        .accessibilityLabel(Text(isFavorite ? "お気に入りから外す" : "お気に入りに追加"))
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(isFavorite ? "保存から外す" : "保存する"))
     }
 
-    /// 運営確認日のCapsuleチップ（P0-3）。未確認/1年超は既存の警告色を反映する。
-    private func verifiedDateChip(_ date: Date) -> some View {
-        Label {
-            Text("運営確認 \(date.formatted(date: .abbreviated, time: .omitted))")
-        } icon: {
-            Image(systemName: "checkmark.seal.fill")
+    // MARK: - 操作（経路・電話・保存・共有）
+
+    private var actionRow: some View {
+        let isFavorite = favoritesStore.contains(cafe.id)
+        // 大きな文字ではボタンを縦に積み、ラベルが途中で切れないようにする
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(spacing: 8))
+            : AnyLayout(HStackLayout(spacing: 8))
+        return layout {
+            Button {
+                showRouteChooser = true
+            } label: {
+                CafeDetailActionLabel(
+                    title: String(localized: "経路"),
+                    systemImage: "arrow.triangle.turn.up.right.diamond.fill",
+                    prominent: true
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text("経路案内を開く"))
+            .confirmationDialog(
+                String(localized: "経路を開くアプリを選択"),
+                isPresented: $showRouteChooser,
+                titleVisibility: .visible
+            ) {
+                Button(String(localized: "Apple マップ")) {
+                    RouteLauncher.open(cafe: cafe, using: .apple)
+                }
+                Button(String(localized: "Google マップ")) {
+                    RouteLauncher.open(cafe: cafe, using: .google)
+                }
+                Button(String(localized: "キャンセル"), role: .cancel) {}
+            }
+
+            // 電話がある店のみ。無い店は他のボタンが広がる。
+            if let telURL {
+                Button {
+                    openURL(telURL)
+                } label: {
+                    CafeDetailActionLabel(title: String(localized: "電話"), systemImage: "phone.fill")
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text("電話をかける"))
+            }
+
+            Button {
+                favoritesStore.toggle(cafe.id)
+            } label: {
+                CafeDetailActionLabel(
+                    title: isFavorite ? String(localized: "保存済み") : String(localized: "保存"),
+                    systemImage: isFavorite ? "pawprint.fill" : "pawprint"
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(isFavorite ? "保存から外す" : "保存する"))
+
+            ShareLink(item: CafeDetailShare.message(for: cafe)) {
+                CafeDetailActionLabel(title: String(localized: "共有"), systemImage: "square.and.arrow.up")
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text("この店を共有"))
         }
-        .font(.footnote.bold())
-        .padding(.horizontal, 10)
-        .padding(.vertical, 4)
-        .background(Capsule().fill(verifiedDateChipColor.opacity(0.15)))
-        .foregroundStyle(verifiedDateChipColor)
     }
 
-    private var verifiedDateChipColor: Color {
-        if viewModel.isUnverified { return .gray }
-        if viewModel.isStale { return .orange }
-        return .blue
-    }
+    // MARK: - 来店時の条件・マナー
 
-    // MARK: - 来店時の条件・マナー（P1-2: dogPolicyCondition/dogSizeLimit/dogNoteを集約）
-
-    private var conditionSection: some View {
-        Section {
-            if let condition = viewModel.cafe.dogPolicyCondition {
+    private var conditionCard: some View {
+        CafeDetailCard(title: String(localized: "来店時の条件・マナー")) {
+            if let condition = cafe.dogPolicyCondition {
                 Label(condition, systemImage: "info.circle")
                     .font(.subheadline)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Color.cafeDetailOrange)
             }
             // サイズ制限（002/FR-107。例: 小型・中型のみ、抱っこ・カート推奨）
-            if let sizeLimit = viewModel.cafe.dogSizeLimit {
-                LabeledContent {
+            if let sizeLimit = cafe.dogSizeLimit {
+                CafeDetailInfoRow(label: String(localized: "サイズ")) {
                     Text(sizeLimit)
-                        .multilineTextAlignment(.trailing)
-                } label: {
-                    Text("サイズ")
                 }
-                .font(.footnote)
             }
-            if let note = viewModel.cafe.dogNote {
+            if let note = cafe.dogNote {
                 Label(note, systemImage: "pawprint")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
-        } header: {
-            Text("来店時の条件・マナー")
         }
     }
 
-    // MARK: - CTA固定バー（P0-1: 経路案内・電話, safeAreaInset）
+    // MARK: - 営業時間
 
-    private var ctaBar: some View {
-        VStack(spacing: 0) {
-            Divider()
-            HStack(spacing: 10) {
-                Button {
-                    showRouteChooser = true
-                } label: {
-                    Label(String(localized: "経路案内"), systemImage: "arrow.triangle.turn.up.right.diamond")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                .confirmationDialog(
-                    String(localized: "経路を開くアプリを選択"),
-                    isPresented: $showRouteChooser,
-                    titleVisibility: .visible
-                ) {
-                    Button(String(localized: "Apple マップ")) {
-                        RouteLauncher.open(cafe: viewModel.cafe, using: .apple)
+    private func hoursCard(now: Date) -> some View {
+        CafeDetailCard(title: String(localized: "営業時間")) {
+            if let text = cafe.hoursText {
+                Text(text)
+                    .font(.callout)
+            }
+            if let hours = cafe.hours, hours.hasAnyDay {
+                VStack(spacing: 0) {
+                    ForEach(CafeDetailHoursTable.rows(hours: hours, at: now), id: \.weekday) { row in
+                        HStack(alignment: .firstTextBaseline) {
+                            Text(row.weekday.displayName)
+                                .frame(minWidth: 24, alignment: .leading)
+                            if row.isToday {
+                                Text("今日")
+                                    .font(.caption2.bold())
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 1)
+                                    .background(Capsule().fill(Color.accentColor.opacity(0.15)))
+                                    .foregroundStyle(Color.accentColor)
+                            }
+                            Spacer(minLength: 8)
+                            Text(row.text)
+                                .monospacedDigit()
+                                .multilineTextAlignment(.trailing)
+                        }
+                        .font(row.isToday ? .callout.bold() : .callout)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(row.isToday ? Color.accentColor.opacity(0.08) : Color.clear)
+                        )
+                        .accessibilityElement(children: .combine)
                     }
-                    Button(String(localized: "Google マップ")) {
-                        RouteLauncher.open(cafe: viewModel.cafe, using: .google)
-                    }
-                    Button(String(localized: "キャンセル"), role: .cancel) {}
-                }
-
-                // 電話がある店のみ併記。無い店は経路案内が全幅になる（P0-1）。
-                if let phone = viewModel.cafe.phone,
-                   let telURL = URL(string: "tel://" + phone.filter { $0.isNumber || $0 == "+" }) {
-                    Button {
-                        openURL(telURL)
-                    } label: {
-                        Label(String(localized: "電話"), systemImage: "phone.fill")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.bordered)
                 }
             }
-            .controlSize(.large)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
+            if let holidayNote = cafe.holidayNote {
+                CafeDetailInfoRow(label: String(localized: "定休日")) {
+                    Text(holidayNote)
+                }
+            }
+            hoursConfirmationCaption
         }
-        .background(.regularMaterial)
     }
 
-    // MARK: - 写真・雰囲気（写真プレビュー機能: IG投稿埋め込み→OGP写真カード→地図案内の3段フォールバック）
+    /// 営業時間の確認日・免責（ヘッダーから移設）。二次情報から推定された鮮度を利用者に伝え続ける。
+    private var hoursConfirmationCaption: some View {
+        Group {
+            if let verified = cafe.infoVerified {
+                Text("基本情報の確認日: \(verified.formatted(date: .abbreviated, time: .omitted))。最新の営業情報は公式でご確認ください。")
+            } else {
+                Text("最新の営業情報は公式でご確認ください。")
+            }
+        }
+        .font(.caption)
+        .foregroundStyle(.secondary)
+    }
+
+    // MARK: - 写真・雰囲気（IG投稿埋め込み→OGP写真カード→地図案内の3段フォールバック）
 
     /// 表示チェーンの現在の段。IG埋め込み・OGP画像取得の失敗時に次段へ遷移する。
     private enum PhotoTier {
@@ -323,25 +373,35 @@ struct CafeDetailView: View {
         PhotoSourceResolver.mapsPhotoSearchURL(name: cafe.name, address: cafe.address).map { .mapsFallback(url: $0) }
     }
 
-    private var photoSection: some View {
-        Group {
-            if let photoTier {
-                Section {
-                    photoCard(for: photoTier)
-                        .padding(.vertical, 4)
-                } header: {
-                    Text("写真・雰囲気")
-                }
+    /// 実際に出す段。写真の帯が OGP 画像を出した店では、同じ画像の OGP カードは繰り返さず地図案内にする。
+    /// 帯の取得が終わるまでは OGP カードを出さない（出してから消えるとレイアウトが跳ねるため）。
+    private var displayedPhotoTier: PhotoTier? {
+        guard let photoTier else { return nil }
+        if case .ogpCard(let url, _, _) = photoTier {
+            switch heroPhoto {
+            case .pending: return nil
+            case .photo(let heroURL) where heroURL == url: return Self.mapsOnlyTier(for: cafe)
+            default: break
+            }
+        }
+        return photoTier
+    }
+
+    @ViewBuilder
+    private var photoCard: some View {
+        if let tier = displayedPhotoTier {
+            CafeDetailCard(title: String(localized: "写真・雰囲気")) {
+                photoContent(for: tier)
             }
         }
     }
 
     @ViewBuilder
-    private func photoCard(for tier: PhotoTier) -> some View {
+    private func photoContent(for tier: PhotoTier) -> some View {
         switch tier {
         case .instagramEmbed(let html):
             InstagramPostEmbedView(html: html, height: $instagramEmbedHeight) {
-                photoTier = Self.fallbackPhotoTier(for: viewModel.cafe)
+                photoTier = Self.fallbackPhotoTier(for: cafe)
             }
             .frame(height: instagramEmbedHeight)
             .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -351,274 +411,104 @@ struct CafeDetailView: View {
                 if linkType == .instagram {
                     openURL(url)
                 } else {
-                    safariItem = SafariItem(url: url)
+                    safariItem = CafeDetailSafariItem(url: url)
                 }
             } onFail: {
-                photoTier = Self.mapsOnlyTier(for: viewModel.cafe)
+                photoTier = Self.mapsOnlyTier(for: cafe)
             }
         case .mapsFallback(let url):
             MapsPhotoFallbackCardView {
-                safariItem = SafariItem(url: url)
+                safariItem = CafeDetailSafariItem(url: url)
             }
         }
     }
 
-    // MARK: - 犬向け設備（002/FR-101/104, T108）
+    // MARK: - わんちゃん向け情報（状態を言葉で: 「店内 ✓ 可」「犬メニュー ? 情報なし」）
 
-    private var amenitiesSection: some View {
-        Section {
-            if let amenities = viewModel.cafe.dogAmenities {
-                HStack(spacing: 8) {
-                    AmenityBadge(label: String(localized: "店内OK"), value: amenities.indoor)
-                    AmenityBadge(label: String(localized: "テラスOK"), value: amenities.terrace)
-                    AmenityBadge(label: String(localized: "大型犬OK"), value: amenities.largeDogs)
-                    AmenityBadge(label: String(localized: "犬メニュー"), value: amenities.dogMenu)
-                }
-                .padding(.vertical, 4)
-            }
-        } header: {
-            Text("わんちゃん向け情報")
-        }
-    }
-
-    // MARK: - 営業時間（002/FR-102, T109。S3: 独立セクションは廃止しヘッダーへコンパクト統合）
-
-    /// ヘッダーに出す「当日の時間」テキスト。構造化営業時間があれば当日分のみ、
-    /// なければ `hoursText`（自由記述）にフォールバックする（コンパクト表示, S3）。
-    /// 本日定休の場合はバッジ側の「本日定休」と重複するため nil（QA指摘: 二重表示の解消）。
-    private var todayHoursCompactText: String? {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = OpeningHoursEvaluator.tokyoTimeZone
-        if let hours = viewModel.cafe.hours, hours.hasAnyDay,
-           let weekday = Weekday.from(calendarWeekday: calendar.component(.weekday, from: Date())),
-           let ranges = hours.ranges(for: weekday) {
-            return ranges.isEmpty ? nil : hoursText(for: ranges)
-        }
-        return viewModel.cafe.hoursText
-    }
-
-    private func hoursText(for ranges: [TimeRange]) -> String {
-        if ranges.isEmpty { return String(localized: "定休日") }
-        return ranges.map { "\($0.open)〜\($0.close)" }.joined(separator: ", ")
-    }
-
-    /// 営業時間の確認日・免責キャプション（旧hoursSectionのfooterを踏襲, QA指摘）。
-    /// 独立セクションを廃止しても、営業時間が二次情報から推定された鮮度を利用者に伝え続ける。
-    private var hoursConfirmationCaption: some View {
-        Group {
-            if let verified = viewModel.cafe.infoVerified {
-                Text("基本情報の確認日: \(verified.formatted(date: .abbreviated, time: .omitted))。最新の営業情報は公式でご確認ください。")
-            } else {
-                Text("最新の営業情報は公式でご確認ください。")
-            }
-        }
-        .font(.caption2)
-        .foregroundStyle(.secondary)
-    }
-
-    // MARK: - 矛盾提示（US4/FR-011/T046）
-
-    private var conflictSection: some View {
-        Section {
-            warningBox(
-                text: String(localized: "参考記事によって犬同伴可否の情報が食い違っています。各記事の内容と確認日をご確認ください。"),
-                systemImage: "exclamationmark.triangle.fill",
-                color: .yellow
-            )
-            ForEach(viewModel.sources) { source in
-                SourceRow(
-                    source: source,
-                    isRepresentative: source.id == viewModel.representativeSource?.id,
-                    onOpenURL: { url in safariItem = SafariItem(url: url) }
-                )
-            }
-        } header: {
-            Text("参考記事間の食い違い")
-        } footer: {
-            Text("代表表示は「確認日が新しい参考記事 → 由来の信頼順」で決定しています。確定できない場合は「未確認」になります。")
-        }
-    }
-
-    // MARK: - 参考記事（US2/FR-008/T032, S1: 出典→参考記事の記事カード化）
-
-    /// OGP代表画像を取得しにいく件数の上限（先頭何件目まで, 設計書S1）。
-    /// これ以降はテキストカード（アイコン＋タイトル）のまま、ネットワーク取得を試みない。
-    private static let articlePreviewFetchLimit = 5
-
-    private var sourcesSection: some View {
-        Section {
-            if viewModel.hasConflict {
-                // 矛盾セクションで既に全出典を表示済み
-                EmptyView()
-            } else {
-                ForEach(Array(viewModel.sources.enumerated()), id: \.element.id) { index, source in
-                    ArticleCardView(
-                        source: source,
-                        isRepresentative: source.id == viewModel.representativeSource?.id,
-                        fetchesPreview: index < Self.articlePreviewFetchLimit,
-                        onOpenURL: openSourceURL
-                    )
-                }
-            }
-        } header: {
-            if !viewModel.hasConflict {
-                Text("参考記事")
-            }
-        } footer: {
-            if !viewModel.hasConflict {
-                Text("参考記事の代表画像・要約は各記事からの引用であり、詳細は元記事をご確認ください。")
-            }
-        }
-    }
-
-    /// 参考記事リンクの開き方（写真・雰囲気機能のリンク開示ルールを踏襲）:
-    /// http(s)はアプリ内ブラウザ、instagram/xは外部アプリ（ユニバーサルリンクでアプリが開く方がUX良）。
-    private func openSourceURL(_ url: URL) {
-        if let host = url.host?.lowercased(),
-           host.contains("instagram.com") || host.contains("x.com") || host.contains("twitter.com") {
-            openURL(url)
-        } else {
-            safariItem = SafariItem(url: url)
-        }
-    }
-
-    // MARK: - 店舗情報（US5/FR-014/T050）
-
-    private var infoSection: some View {
-        Section("店舗情報") {
-            if let address = viewModel.cafe.address {
-                LabeledContent {
-                    Text(address)
-                        .multilineTextAlignment(.trailing)
-                } label: {
-                    Text("住所")
-                }
-            }
-            // 電話（タップで発信, 002/FR-106）
-            if let phone = viewModel.cafe.phone,
-               let telURL = URL(string: "tel://" + phone.filter { $0.isNumber || $0 == "+" }) {
-                Link(destination: telURL) {
-                    LabeledContent {
-                        Text(phone)
-                            .foregroundStyle(.tint)
-                    } label: {
-                        Label(String(localized: "電話"), systemImage: "phone")
-                            .labelStyle(.titleOnly)
-                    }
-                }
-                .accessibilityLabel(Text("電話をかける: \(phone)"))
-            }
-            // 予約情報（002/FR-101）
-            if let reservation = viewModel.cafe.reservation {
-                LabeledContent {
-                    Text(reservation)
-                        .multilineTextAlignment(.trailing)
-                } label: {
-                    Text("予約")
-                }
-            }
-            // 営業時間（詳細）（QA指摘: ヘッダーのコンパクト表示（営業中バッジ＋当日の時間）とは別に、
-            // 構造化hoursの週間表とhours_text（L.O.・曜日別の但し書き等）を店舗情報に残す。
-            // S3で独立hoursSectionを廃止した際に表示先を失ったため、ここに集約する）。
-            if viewModel.cafe.hours?.hasAnyDay == true || viewModel.cafe.hoursText != nil {
-                Text("営業時間（詳細）")
-                    .font(.footnote.bold())
-                    .foregroundStyle(.secondary)
-                if let hours = viewModel.cafe.hours, hours.hasAnyDay {
-                    ForEach(Weekday.allCases, id: \.rawValue) { day in
-                        if let ranges = hours.ranges(for: day) {
-                            LabeledContent {
-                                Text(hoursText(for: ranges))
-                                    .font(.callout.monospacedDigit())
-                            } label: {
-                                Text(day.displayName)
-                            }
+    private func amenitiesCard(_ amenities: DogAmenities, confirmed: Bool) -> some View {
+        // 大きな文字では「項目名」と「状態」を縦に積み、状態の言葉が欠けないようにする
+        let rowLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4))
+            : AnyLayout(HStackLayout(alignment: .firstTextBaseline))
+        return CafeDetailCard(title: String(localized: "わんちゃん向け情報")) {
+            VStack(spacing: 0) {
+                let rows = CafeDetailAmenities.rows(amenities, confirmed: confirmed)
+                ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
+                    rowLayout {
+                        Text(row.label)
+                            .font(.body)
+                        if !dynamicTypeSize.isAccessibilitySize {
+                            Spacer(minLength: 8)
                         }
+                        Label {
+                            Text(row.valueText)
+                                .font(.body.bold())
+                                .fixedSize(horizontal: false, vertical: true)
+                        } icon: {
+                            Image(systemName: symbol(for: row.state))
+                        }
+                        .foregroundStyle(color(for: row.state))
                     }
-                }
-                if let text = viewModel.cafe.hoursText {
-                    Text(text)
-                        .font(.callout)
-                }
-            }
-            // 定休日メモ（002/FR-107。例: 不定休・展示入替で休館あり）。
-            // S3で独立hoursSectionを廃止したため、店舗情報側に維持する（データを欠落させない）。
-            if let holidayNote = viewModel.cafe.holidayNote {
-                LabeledContent {
-                    Text(holidayNote)
-                        .multilineTextAlignment(.trailing)
-                } label: {
-                    Text("定休日")
-                }
-            }
-            if let contact = viewModel.cafe.contact {
-                if let url = URL(string: contact), url.scheme?.hasPrefix("http") == true {
-                    // アプリ内ブラウザで開く（写真・雰囲気機能）
-                    Button {
-                        safariItem = SafariItem(url: url)
-                    } label: {
-                        LabeledContent(String(localized: "連絡先・サイト"), value: contact)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 8)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Text("\(row.label): \(row.valueText)"))
+                    if index < rows.count - 1 {
+                        Divider()
                     }
-                    .foregroundStyle(.tint)
-                } else {
-                    LabeledContent(String(localized: "連絡先"), value: contact)
-                }
-            }
-            if case .loading = viewModel.phase {
-                HStack {
-                    ProgressView()
-                    Text("参考記事を読み込み中…")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            if case .error(let message) = viewModel.phase {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("参考記事を取得できませんでした: \(message)")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                    Button(String(localized: "再試行")) {
-                        Task { await viewModel.load() }
-                    }
-                    .font(.footnote)
                 }
             }
         }
     }
 
-    // MARK: - 公式リンク・運営メモ（002/FR-103/106, T110）
+    private func symbol(for state: CafeDetailAmenityRow.State) -> String {
+        switch state {
+        case .yes: return "checkmark.circle.fill"
+        case .no: return "xmark.circle.fill"
+        case .unknown, .unconfirmed: return "questionmark.circle"
+        }
+    }
 
-    private var linksSection: some View {
-        Section {
-            if let links = viewModel.cafe.links, !links.isEmpty {
+    private func color(for state: CafeDetailAmenityRow.State) -> Color {
+        switch state {
+        case .yes: return .cafeDetailGreen
+        case .no: return .cafeDetailRed
+        case .unknown, .unconfirmed: return .secondary
+        }
+    }
+
+    // MARK: - 公式情報・SNS（002/FR-103/106）
+
+    private var linksCard: some View {
+        CafeDetailCard(title: String(localized: "公式情報・SNS")) {
+            if let links = cafe.links, !links.isEmpty {
                 ForEach(links) { link in
                     if let url = link.resolvedURL {
                         switch link.type {
                         case .website, .tabelog, .other:
-                            // アプリ内ブラウザで開く（写真・雰囲気機能: 閉じて即アプリへ復帰できるUX）
+                            // アプリ内ブラウザで開く（閉じて即アプリへ復帰できるUX）
                             Button {
-                                safariItem = SafariItem(url: url)
+                                safariItem = CafeDetailSafariItem(url: url)
                             } label: {
-                                Label(link.type.displayName, systemImage: link.type.systemImage)
+                                linkLabel(link)
                             }
-                            .foregroundStyle(.tint)
                         default:
                             // instagram/x/google_map は従来通り外部（ユニバーサルリンクでアプリが開く方がUX良）
                             Link(destination: url) {
-                                Label(link.type.displayName, systemImage: link.type.systemImage)
+                                linkLabel(link)
                             }
                         }
                     }
                 }
             }
-            if let note = viewModel.cafe.operatorNote {
+            if let note = cafe.operatorNote {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(spacing: 4) {
                         Image(systemName: "text.quote")
                         Text("運営メモ（\(note.sourceDisplayName)より・\(note.verifiedAt.formatted(date: .abbreviated, time: .omitted))確認）")
                             .font(.caption.bold())
                     }
-                    .foregroundStyle(.teal)
+                    .foregroundStyle(Color.cafeDetailTeal)
                     Text(note.text)
                         .font(.footnote)
                 }
@@ -626,89 +516,98 @@ struct CafeDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(RoundedRectangle(cornerRadius: 8).fill(Color.teal.opacity(0.10)))
                 .accessibilityElement(children: .combine)
-            }
-        } header: {
-            Text("公式情報・SNS")
-        } footer: {
-            if viewModel.cafe.operatorNote != nil {
+
                 Text("運営メモは公式SNS等で運営が確認した内容の転記であり、公式の一次情報そのものではありません。")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
         }
     }
 
-    // MARK: - アクション（US5/T049, US3/T038。経路案内はCTA固定バーへ移動, P0-1）
+    private func linkLabel(_ link: CafeLink) -> some View {
+        HStack {
+            Label(link.type.displayName, systemImage: link.type.systemImage)
+            Spacer(minLength: 8)
+            Image(systemName: "arrow.up.right")
+                .font(.caption2.bold())
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.vertical, 4)
+        .contentShape(Rectangle())
+    }
 
-    private var actionSection: some View {
-        Section {
+    // MARK: - 店舗情報（US5/FR-014/T050）
+
+    private var infoCard: some View {
+        CafeDetailCard(title: String(localized: "店舗情報")) {
+            // 店舗紹介（002/FR-107）。ヘッダーから移設。
+            if let description = cafe.description {
+                Text(description)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            if let address = cafe.address {
+                CafeDetailInfoRow(label: String(localized: "住所")) {
+                    Text(address)
+                }
+                .contextMenu {
+                    Button {
+                        UIPasteboard.general.string = address
+                    } label: {
+                        Label(String(localized: "住所をコピー"), systemImage: "doc.on.doc")
+                    }
+                }
+                .accessibilityHint(Text("長押しでコピーできます"))
+            }
+            // 電話（タップで発信, 002/FR-106）
+            if let phone = cafe.phone, let telURL {
+                Link(destination: telURL) {
+                    CafeDetailInfoRow(label: String(localized: "電話")) {
+                        Text(phone)
+                            .foregroundStyle(.tint)
+                    }
+                }
+                .accessibilityLabel(Text("電話をかける: \(phone)"))
+            }
+            // 予約情報（002/FR-101）
+            if let reservation = cafe.reservation {
+                CafeDetailInfoRow(label: String(localized: "予約")) {
+                    Text(reservation)
+                }
+            }
+            if let contact = cafe.contact {
+                if let url = URL(string: contact), url.scheme?.hasPrefix("http") == true {
+                    // アプリ内ブラウザで開く
+                    Button {
+                        safariItem = CafeDetailSafariItem(url: url)
+                    } label: {
+                        CafeDetailInfoRow(label: String(localized: "連絡先・サイト")) {
+                            Text(contact)
+                                .foregroundStyle(.tint)
+                        }
+                    }
+                } else {
+                    CafeDetailInfoRow(label: String(localized: "連絡先")) {
+                        Text(contact)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - 情報の誤りを報告（US3/T038）
+
+    private var reportCard: some View {
+        CafeDetailCard {
             Button {
                 showReport = true
             } label: {
                 Label(String(localized: "情報の誤りを報告"), systemImage: "exclamationmark.bubble")
             }
-        } footer: {
             Text("誤り報告は審査（v1: 運営確認）を通過してから反映されます。")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
-    }
-
-    private func warningBox(text: String, systemImage: String, color: Color) -> some View {
-        HStack(alignment: .top, spacing: 8) {
-            Image(systemName: systemImage)
-            Text(text)
-                .font(.footnote)
-        }
-        .padding(10)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: 8).fill(color.opacity(0.15)))
-        .foregroundStyle(color == .yellow ? Color.primary : color)
-        .accessibilityElement(children: .combine)
-    }
-}
-
-/// 出典1件の行: 種別・主張する可否・確認日・由来（provenance）を提示。
-/// AI推測は明示ラベルで確定情報と視覚的に区別する（FR-012/T047）。
-struct SourceRow: View {
-    let source: Source
-    let isRepresentative: Bool
-    /// 出典URLのアプリ内ブラウザ起動（写真・雰囲気機能: SafariView sheet を呼び出し側が一元管理する）
-    let onOpenURL: (URL) -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Text(source.type.displayName)
-                    .font(.subheadline.bold())
-                if isRepresentative {
-                    Text("採用根拠")
-                        .font(.caption2.bold())
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Capsule().fill(Color.blue.opacity(0.15)))
-                        .foregroundStyle(.blue)
-                }
-                Spacer()
-                StatusBadge(status: source.claimedStatus)
-            }
-            HStack(spacing: 8) {
-                ProvenanceChip(provenance: source.provenance)
-                if let verifiedAt = source.verifiedAt {
-                    Text("確認日: \(verifiedAt.formatted(date: .abbreviated, time: .omitted))")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            if let url = source.referenceURL {
-                Button {
-                    onOpenURL(url)
-                } label: {
-                    Text(url.absoluteString)
-                        .font(.caption)
-                        .lineLimit(1)
-                }
-                .foregroundStyle(.tint)
-            }
-        }
-        .padding(.vertical, 2)
-        .accessibilityElement(children: .combine)
     }
 }
 
@@ -765,7 +664,7 @@ struct ArticleCardView: View {
                     }
                     HStack(spacing: 6) {
                         ProvenanceChip(provenance: source.provenance)
-                        StatusBadge(status: source.claimedStatus)
+                        CafeDetailStatusChip(status: source.claimedStatus)
                     }
                     HStack(spacing: 4) {
                         Text(source.type.displayName)
