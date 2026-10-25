@@ -2153,3 +2153,43 @@
 - ✏️ 変更: 高輪バール・デルソーレ（dog_amenities）
 - ✏️ 変更: 魚がし どまん中 神楽坂店（dog_amenities）
 - ✏️ 変更: 麺恋処 爆龍（dog_amenities）
+
+## 2026-10-25 09:22 — 追加 0 / 変更 38 / 削除 0
+- ✏️ 変更: AKIGAWA BASE（dog_amenities）
+- ✏️ 変更: CAFE CHOU CHOU(シュシュ)（dog_amenities）
+- ✏️ 変更: Cafe Hana（dog_amenities）
+- ✏️ 変更: Cafe Lisette 二子玉川店（dog_amenities）
+- ✏️ 変更: Chanoma(チャノマ)（dog_amenities）
+- ✏️ 変更: GRIP(グリップ)（dog_amenities）
+- ✏️ 変更: HOMELAND OME（dog_amenities, dog_note, last_verified, representative_source_id, sources）
+- ✏️ 変更: Italian Kitchen VANSAN 祖師ヶ谷大蔵店（dog_amenities）
+- ✏️ 変更: Le Maghreb（ル・マグレブ）（dog_amenities, dog_note）
+- ✏️ 変更: MOCMO sandwiches（is_closed, sources）
+- ✏️ 変更: Mallorca（マヨルカ）二子玉川（dog_amenities）
+- ✏️ 変更: NISHIann cafe(西庵カフェ)（dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: PERFECT BEER KITCHEN 四ツ谷（dog_amenities, dog_note, last_verified, representative_source_id, sources）
+- ✏️ 変更: Park Side Cafe BASEL（dog_amenities）
+- ✏️ 変更: Ron Herman Cafe 二子玉川店（dog_amenities）
+- ✏️ 変更: Set Lip 成城店(セットリップ)（dog_policy_condition, dog_amenities, last_verified, representative_source_id, sources）
+- ✏️ 変更: TRATTORIA Elmo Cielo(トラットリア エルモチェーロ)（dog_amenities, dog_note）
+- ✏️ 変更: VERVE COFFEE ROASTERS 六本木店（dog_amenities）
+- ✏️ 変更: YOUR SIDE COFFEE（ユアサイドコーヒー）（dog_amenities）
+- ✏️ 変更: biotable.（dog_policy_condition, dog_amenities, dog_note, last_verified, representative_source_id, sources）
+- ✏️ 変更: cookee NARIMASU（dog_amenities, dog_note）
+- ✏️ 変更: オルオルアイナ(Oluolu Aina)（dog_policy_condition, dog_amenities, last_verified, representative_source_id, sources）
+- ✏️ 変更: カキノキテラス（dog_amenities）
+- ✏️ 変更: サクラカフェ&レストラン池袋（dog_amenities）
+- ✏️ 変更: スパイスと創作料理 この一杯のために。（dog_policy_condition, last_verified, representative_source_id, sources）
+- ✏️ 変更: デモデヘブン 福生店（dog_amenities）
+- ✏️ 変更: パンとcafé えだおね（dog_policy_condition, dog_amenities, dog_note, last_verified, representative_source_id, sources）
+- ✏️ 変更: ボンマルシェ ボンテ 竹の塚店（dog_amenities）
+- ✏️ 変更: マキネスティコーヒー 緑本店（dog_policy_condition, dog_amenities, dog_note, last_verified, has_conflict, representative_source_id, dog_policy_status, sources）
+- ✏️ 変更: リゴレッティーノ（dog_amenities）
+- ✏️ 変更: ワインとアテ bikini（dog_amenities）
+- ✏️ 変更: 串カツ田中 つつじヶ丘店（dog_amenities, dog_note, last_verified, representative_source_id, sources）
+- ✏️ 変更: 串カツ田中 千歳烏山店（dog_amenities, dog_note, last_verified, representative_source_id, sources）
+- ✏️ 変更: 串焼き 大地 綾瀬店（dog_amenities）
+- ✏️ 変更: 栄茶屋本店（dog_amenities）
+- ✏️ 変更: 肉とワイン bonanza（dog_amenities）
+- ✏️ 変更: 高倉町珈琲 八王子店（dog_amenities）
+- ✏️ 変更: 高幡不動 肉流通センター（dog_policy_condition, dog_amenities, last_verified, representative_source_id, sources）

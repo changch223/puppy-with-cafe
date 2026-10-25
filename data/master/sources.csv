@@ -463,7 +463,7 @@ beef0000-0000-4000-8000-000000000403,blog,https://machida.goguynet.jp/2023/08/27
 beef0000-0000-4000-8000-000000000403,blog,https://wankonowa.com/column/dogcafe/1397/,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000403,blog,https://wan-paku.life/?store=dog-cafe-uru,allowed,,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000404,official_hp,https://oluolu-aina.com/,conditional,テラス同伴可(店内可否の記載なし),2026-07-18,aggregated
-beef0000-0000-4000-8000-000000000404,blog,https://wankonowa.com/column/dogcafe/1397/,conditional,テラス同伴可(店内可否の記載なし),2026-07-18,aggregated
+beef0000-0000-4000-8000-000000000404,blog,https://wankonowa.com/column/dogcafe/1397/,conditional,テラスのみ同伴可,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000405,official_hp,https://gbp.minamimachida-grandberrypark.com/special/?cd=000062,conditional,テラス席のみペット同伴可(店内不可),2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000405,blog,https://www.inutome.jp/c/column_2-601-41256.html,conditional,外の40席あるテラス席のみペット同伴可・店内不可,2026-07-18,aggregated
 beef0000-0000-4000-8000-000000000406,official_hp,https://www.snowpeak.co.jp/news/p20230622/,conditional,テラス席のみペット同伴可(店内不可),2026-07-18,aggregated
@@ -1290,7 +1290,7 @@ beef0000-0000-4000-8000-000000000441,other,https://wanico.jp/spots/d/6335,condit
 beef0000-0000-4000-8000-000000000407,other,https://petribbon.com/restaurant/tokyo/703/478,conditional,店内ペット同伴可能エリアで大型・中型・小型OK,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000000281,other,https://r.gnavi.co.jp/a634203/,conditional,テラスのみ・小型/中型/大型/ネコ/小動物すべてOK,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000000482,other,https://wanico.jp/spots/d/1515,conditional,テラスのみ・小型/中型/大型OK・大型犬も歓迎・リード必須,2026-08-08,aggregated
-beef0000-0000-4000-8000-000000000484,other,https://wanico.jp/spots/d/6015,conditional,店内・テラスとも小型/中型/大型OK,2026-08-08,aggregated
+beef0000-0000-4000-8000-000000000484,other,https://wanico.jp/spots/d/6015,allowed,店内・テラスとも同伴可（小型・中型・大型犬）,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000200,other,https://wanico.jp/spots/d/850,conditional,屋上テラス席・小型/中型/大型OK・リード必須,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000000480,other,https://pet-map.jp/spot/87012,conditional,サイズ制限は中型犬まで,2026-08-08,aggregated
 beef0000-0000-4000-8000-000000000481,tabelog,https://tabelog.com/tokyo/A1312/A131203/13299616/,conditional,小型・中型犬のみ・大型犬不可・1組4頭まで・マット/ブランケット持参必須,2026-08-08,aggregated
@@ -1402,7 +1402,7 @@ beef0000-0000-4000-8000-000000000347,other,https://www.timeout.jp/tokyo/ja/レ�
 beef0000-0000-4000-8000-000000000441,sns,https://www.instagram.com/cafegarage_dogberry/,unverified,,2026-10-20,aggregated
 beef0000-0000-4000-8000-000000000441,tabelog,https://tabelog.com/tokyo/A1319/A131904/13000730/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000441,other,https://r.gnavi.co.jp/2tpdmj4y0000/,unverified,,2026-10-20,aggregated
-beef0000-0000-4000-8000-000000000444,tabelog,https://tabelog.com/tokyo/A1319/A131906/13161794/,unverified,,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000444,tabelog,https://tabelog.com/tokyo/A1319/A131906/13161794/,conditional,テラス席のみ,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000283,tabelog,https://tabelog.com/tokyo/A1302/A130201/13152067/,unverified,,2026-10-20,aggregated
 beef0000-0000-4000-8000-000000000483,tabelog,https://tabelog.com/tokyo/A1312/A131201/13096167/,unverified,,2026-10-20,aggregated
 beef0000-0000-4000-8000-000000000329,official_hp,https://vegeater.imachika.com/store/vegeater,unverified,,2026-10-20,aggregated
@@ -1520,7 +1520,7 @@ beef0000-0000-4000-8000-000000000827,sns,https://www.instagram.com/cafe_chouchou
 beef0000-0000-4000-8000-000000000827,sns,https://lit.link/CAFECHOUCHOU,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000860,tabelog,https://tabelog.com/en/tokyo/A1314/A131402/13233931/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000860,other,https://hamoni.jp/shop/o5U1mg2gQrUZACoWPgja,unverified,,2026-10-24,aggregated
-beef0000-0000-4000-8000-000000000864,official_hp,http://biotable.jp,unverified,,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000864,official_hp,http://biotable.jp,conditional,ディナー限定の店内ペットOKデーあり（日程は公式で告知）,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000864,tabelog,https://tabelog.com/tokyo/A1314/A131402/13259518/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000868,official_hp,https://www.beside-seaside.tokyo/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000000871,official_hp,https://www.hvf.jp/inumo-shibakoen/,unverified,,2026-10-24,aggregated
@@ -1543,7 +1543,7 @@ beef0000-0000-4000-8000-000000001065,other,https://hitosara.com/0031716052/tel.h
 beef0000-0000-4000-8000-000000001065,other,https://uchinokobiyori.com/shops/wine-to-ate-bikini-ayase,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001141,official_hp,https://store.starbucks.co.jp/detail-1102/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001141,tabelog,https://tabelog.com/tokyo/A1318/A131809/13147369/,unverified,,2026-10-24,aggregated
-beef0000-0000-4000-8000-000000001147,official_hp,https://restaurant.kushi-tanaka.com/detail/1062/,unverified,,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000001147,official_hp,https://restaurant.kushi-tanaka.com/detail/1062/,allowed,洋服の着用が必要・1名につき最大2匹まで・アレルギーのお客様がいる場合などは入店不可の場合あり,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001147,tabelog,https://s.tabelog.com/tokyo/A1318/A131809/13194032/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001148,other,https://r.gnavi.co.jp/2jy0rtm10000/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001148,tabelog,https://s.tabelog.com/tokyo/A1318/A131809/13254272/,unverified,,2026-10-24,aggregated
@@ -1553,7 +1553,7 @@ beef0000-0000-4000-8000-000000001282,tabelog,https://tabelog.com/tokyo/A1330/A13
 beef0000-0000-4000-8000-000000001283,tabelog,https://tabelog.com/tokyo/A1330/A133002/13125794/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001283,other,https://r.gnavi.co.jp/f8hxcxuk0000/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001283,other,https://hitosara.com/0031176201/tel.html,unverified,,2026-10-24,aggregated
-beef0000-0000-4000-8000-000000001286,tabelog,https://tabelog.com/tokyo/A1330/A133003/13318530/,unverified,,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000001286,tabelog,https://tabelog.com/tokyo/A1330/A133003/13318530/,allowed,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001286,other,https://www.omecci.jp/sankan_shop/24246.html,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001123,tabelog,https://s.tabelog.com/tokyo/A1317/A131702/13297955/,unverified,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001123,other,https://r.gnavi.co.jp/h6vjj6c70000/,unverified,,2026-10-24,aggregated
@@ -1579,3 +1579,12 @@ beef0000-0000-4000-8000-000000000846,official_hp,https://www.sasa-gotanda.com/,u
 beef0000-0000-4000-8000-000000001304,official_hp,https://hubtokyo.com/articles/communita-cafe,allowed,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001304,sns,https://www.instagram.com/communita_cafe/,allowed,,2026-10-24,aggregated
 beef0000-0000-4000-8000-000000001304,tabelog,https://tabelog.com/tokyo/A1316/A131601/13282835/,allowed,,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000442,tabelog,https://tabelog.com/tokyo/A1319/A131904/13283229/,conditional,テラス席はペット同伴可,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000662,tabelog,https://tabelog.com/tokyo/A1318/A131814/13127047/,conditional,ペットはテラス席のみ可,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000662,official_hp,https://www.setlip.com/seijo,conditional,テラス席ではペットOK（テラス4席）,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000683,sns,https://www.instagram.com/nishiann.cafe/,conditional,テラス席はペット可,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000928,other,https://r.gnavi.co.jp/a97ppukz0000/,allowed,トイレのしつけ済み・無駄吠えしない・発情中は不可,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000001145,official_hp,https://restaurant.kushi-tanaka.com/detail/0075/,allowed,洋服の着用が必要・1名につき最大2匹まで・アレルギーのお客様がいる場合などは入店不可の場合あり,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000001286,other,https://www.hotpepper.jp/strJ004620003/,allowed,,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000001162,tabelog,https://tabelog.com/tokyo/A1329/A132903/13237029/,conditional,テラス席は喫煙・ペット同伴OK,2026-10-24,aggregated
+beef0000-0000-4000-8000-000000000744,tabelog,https://tabelog.com/tokyo/A1320/A132002/13245550/,unverified,,2026-10-24,aggregated
