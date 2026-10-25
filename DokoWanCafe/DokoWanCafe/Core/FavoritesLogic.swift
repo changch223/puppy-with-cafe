@@ -1,6 +1,7 @@
 import Foundation
 
-/// お気に入り（端末ローカル, UI/UXブラッシュアップ設計書 1c）の純ロジック。
+/// 旧お気に入り（端末ローカル, UI/UXブラッシュアップ設計書 1c）の保存形式の純ロジック。段階2で「行きたい／行った」（`SavedPlaces`）に置き換わり、
+/// 現在は旧データの読み取り（`decode`、`SavedPlacesMigration` から利用）のために残している。
 /// UserDefaults の保存形式（UUID文字列の配列）とアプリ内で扱う `Set<UUID>` の変換、
 /// トグル後の集合算出を担う（純ロジック・UI非依存, 憲章 原則IV）。
 enum FavoritesLogic {

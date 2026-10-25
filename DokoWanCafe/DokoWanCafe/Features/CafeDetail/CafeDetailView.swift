@@ -17,8 +17,8 @@ struct CafeDetailView: View {
     // 写真・雰囲気セクションの表示チェーン現在地（IG埋め込み失敗→OGP写真カード失敗→地図案内、の順に遷移）
     @State private var photoTier: PhotoTier?
     @State private var instagramEmbedHeight: CGFloat = OGPPhotoCardView.cardHeight
-    // お気に入り（端末ローカル）。地図・一覧と同一インスタンスを共有する（段階2で「行きたい」に変わる予定）。
-    @ObservedObject private var favoritesStore: FavoritesStore
+    // 保存（行きたい／行った・端末ローカル）。地図・一覧・保存タブと同一インスタンスを共有する。
+    @ObservedObject private var savedStore: SavedPlacesStore
     // 写真の帯の取得状況。OGP 画像を帯に出した店では「写真・雰囲気」で同じ画像を繰り返さない。
     @State private var heroPhoto: HeroPhoto
     // 店名が画面上から隠れたらナビゲーションバーに店名を出す
@@ -44,7 +44,7 @@ struct CafeDetailView: View {
             initialValue: PhotoSourceResolver.previewSourceURL(for: cafe) != nil
                 ? .pending : .none
         )
-        _favoritesStore = ObservedObject(wrappedValue: dependencies.favoritesStore)
+        _savedStore = ObservedObject(wrappedValue: dependencies.savedStore)
     }
 
     private var cafe: Cafe { viewModel.cafe }
@@ -77,6 +77,8 @@ struct CafeDetailView: View {
                     CafeDetailHighlightTiles(highlights: CafeDetailHighlights.all(cafe: cafe, at: now))
 
                     actionRow
+
+                    visitedButton
 
                     if hasConditionInfo {
                         conditionCard
@@ -177,26 +179,26 @@ struct CafeDetailView: View {
         )
     }
 
-    /// 保存トグル（今のお気に入り切り替え。段階2で「行きたい」に変わる）。ON=塗り肉球。
+    /// 「行きたい」トグル。ON=塗り肉球。
     private var favoriteToggleButton: some View {
-        let isFavorite = favoritesStore.contains(cafe.id)
+        let isWantToGo = savedStore.isWantToGo(cafe.id)
         return Button {
-            favoritesStore.toggle(cafe.id)
+            savedStore.toggleWantToGo(cafe.id)
         } label: {
-            Image(systemName: isFavorite ? "pawprint.fill" : "pawprint")
+            Image(systemName: isWantToGo ? "pawprint.fill" : "pawprint")
                 .font(.title2)
-                .foregroundStyle(isFavorite ? Color.cafeDetailOrange : Color.secondary)
+                .foregroundStyle(isWantToGo ? Color.cafeDetailOrange : Color.secondary)
                 .frame(width: 44, height: 44)
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(Text(isFavorite ? "保存から外す" : "保存する"))
+        .accessibilityLabel(Text(isWantToGo ? "行きたいから外す" : "行きたいに入れる"))
     }
 
-    // MARK: - 操作（経路・電話・保存・共有）
+    // MARK: - 操作（経路・電話・行きたい・共有）
 
     private var actionRow: some View {
-        let isFavorite = favoritesStore.contains(cafe.id)
+        let isWantToGo = savedStore.isWantToGo(cafe.id)
         // 大きな文字ではボタンを縦に積み、ラベルが途中で切れないようにする
         let layout = dynamicTypeSize.isAccessibilitySize
             ? AnyLayout(VStackLayout(spacing: 8))
@@ -239,15 +241,15 @@ struct CafeDetailView: View {
             }
 
             Button {
-                favoritesStore.toggle(cafe.id)
+                savedStore.toggleWantToGo(cafe.id)
             } label: {
                 CafeDetailActionLabel(
-                    title: isFavorite ? String(localized: "保存済み") : String(localized: "保存"),
-                    systemImage: isFavorite ? "pawprint.fill" : "pawprint"
+                    title: isWantToGo ? String(localized: "行きたい ✓") : String(localized: "行きたい"),
+                    systemImage: isWantToGo ? "pawprint.fill" : "pawprint"
                 )
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(Text(isFavorite ? "保存から外す" : "保存する"))
+            .accessibilityLabel(Text(isWantToGo ? "行きたいから外す" : "行きたいに入れる"))
 
             ShareLink(item: CafeDetailShare.message(for: cafe)) {
                 CafeDetailActionLabel(title: String(localized: "共有"), systemImage: "square.and.arrow.up")
@@ -255,6 +257,28 @@ struct CafeDetailView: View {
             .buttonStyle(.plain)
             .accessibilityLabel(Text("この店を共有"))
         }
+    }
+
+    /// 「行った」ボタン（操作の下の小さなボタン）。押すと行きたいから外して行ったに入れ、「行った ✓ 10/25」と表示する。
+    /// もう一度押すと外せる。
+    private var visitedButton: some View {
+        let visitedDate = savedStore.visitedDate(of: cafe.id)
+        let isVisited = visitedDate != nil
+        let title = visitedDate.map { String(localized: "行った ✓ \(TargetTime.monthDayText($0))") }
+            ?? String(localized: "行った")
+        return Button {
+            savedStore.toggleVisited(cafe.id)
+        } label: {
+            Label(title, systemImage: isVisited ? "checkmark.circle.fill" : "checkmark.circle")
+                .font(.subheadline.bold())
+                .foregroundStyle(isVisited ? Color.onBrand : Color.brand)
+                .padding(.horizontal, 16)
+                .frame(minHeight: 44)
+                .background(Capsule().fill(isVisited ? Color.brand : Color.brand.opacity(0.12)))
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityLabel(Text(visitedDate.map { "行った、\(TargetTime.monthDayText($0))。タップで外す" } ?? "行ったに記録する"))
     }
 
     // MARK: - 来店時の条件・マナー

@@ -1,19 +1,24 @@
 import SwiftUI
 
 /// ピンを選んだときに一覧シートの中身が変わる「店のカード」（再設計 段階1a）。
-/// 写真 or 頭文字タイル・店名・タグ・条件の要点・営業の行・徒歩の目安と、経路／電話／保存、「詳しく見る」。
+/// 写真 or 頭文字タイル・店名・タグ・条件の要点・営業の行・徒歩の目安と、経路／電話／行きたい／共有、「詳しく見る」。
 /// 一覧に戻す（✕）と、シートは元の段に戻る。
 struct PlaceCardView: View {
     let item: CafeWithDistance
-    let isFavorite: Bool
+    /// 保存の状態（行きたい／行った）。未保存は nil
+    let savedStatus: SavedStatus?
+    /// 営業の判定に使う時刻（対象時刻があればその時刻）
     let now: Date
+    /// `now` が「いつ行く？」で決めた対象時刻か
+    let isTargetTime: Bool
     let containerHeight: CGFloat
     let onShowDetail: () -> Void
     let onOpenRoute: () -> Void
-    let onToggleFavorite: () -> Void
+    let onToggleWantToGo: () -> Void
     let onClose: () -> Void
 
     @Environment(\.openURL) private var openURL
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private var cafe: Cafe { item.cafe }
     private var walking: WalkingTime.Summary { WalkingTime.summary(meters: item.distanceMeters) }
@@ -25,9 +30,15 @@ struct PlaceCardView: View {
                     CafeThumbnailView(cafe: cafe, size: 72)
 
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(cafe.name)
-                            .font(.headline)
-                            .lineLimit(2)
+                        HStack(alignment: .firstTextBaseline, spacing: 4) {
+                            Text(cafe.name)
+                                .font(.headline)
+                                .lineLimit(2)
+                            // 行った店は名前の横の小さなチェックで示す（押せない表示）
+                            if savedStatus == .visited {
+                                VisitedCheckIcon()
+                            }
+                        }
                         CafeTagsView(cafe: cafe)
                         if let condition = CafePresentation.conditionSummary(for: cafe) {
                             Text(condition)
@@ -36,7 +47,7 @@ struct PlaceCardView: View {
                                 .lineLimit(2)
                         }
                         HStack(spacing: 8) {
-                            OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now))
+                            OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
                             Text(walkingText)
                                 .font(.caption.bold())
                                 .foregroundStyle(Color(.secondaryLabel))
@@ -53,30 +64,38 @@ struct PlaceCardView: View {
                     .accessibilityLabel(Text("閉じて一覧に戻る"))
                 }
 
-                HStack(spacing: 8) {
+                // 大きな文字ではボタンを縦に積み、ラベルが切れないようにする
+                let layout = dynamicTypeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(spacing: 8))
+                    : AnyLayout(HStackLayout(spacing: 8))
+                layout {
                     Button(action: onOpenRoute) {
-                        Label(String(localized: "経路"), systemImage: "arrow.triangle.turn.up.right.diamond.fill")
+                        CafeDetailActionLabel(
+                            title: String(localized: "経路"),
+                            systemImage: "arrow.triangle.turn.up.right.diamond.fill",
+                            prominent: true
+                        )
                     }
-                    .buttonStyle(BrandProminentButtonStyle())
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text("\(cafe.name)への経路を開く"))
 
                     if let phoneURL = PhoneLink.url(for: cafe.phone) {
                         Button {
                             openURL(phoneURL)
                         } label: {
-                            Label(String(localized: "電話"), systemImage: "phone.fill")
+                            CafeDetailActionLabel(title: String(localized: "電話"), systemImage: "phone.fill")
                         }
-                        .buttonStyle(BrandSecondaryButtonStyle())
+                        .buttonStyle(.plain)
                         .accessibilityLabel(Text("\(cafe.name)に電話する"))
                     }
 
-                    Button(action: onToggleFavorite) {
-                        Label(
-                            isFavorite ? String(localized: "保存済み") : String(localized: "保存"),
-                            systemImage: isFavorite ? "pawprint.fill" : "pawprint"
-                        )
+                    savedButton
+
+                    ShareLink(item: CafeDetailShare.message(for: cafe)) {
+                        CafeDetailActionLabel(title: String(localized: "共有"), systemImage: "square.and.arrow.up")
                     }
-                    .buttonStyle(BrandSecondaryButtonStyle())
-                    .accessibilityLabel(Text(isFavorite ? "保存を外す" : "保存する"))
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text("\(cafe.name)を共有"))
                 }
 
                 Button(action: onShowDetail) {
@@ -96,6 +115,22 @@ struct PlaceCardView: View {
         .frame(height: CafeSheetDetent.cardHeight(containerHeight: containerHeight))
         .sheetChrome()
         .accessibilityElement(children: .contain)
+    }
+
+    /// 「行きたい」ボタン（トグル）。詳細と同じ表示で、行きたいのときだけ塗った肉球にする。
+    /// 行った店は未保存と同じ表示（塗っていない肉球）で、押すと「行きたい」に戻す
+    /// （保存から黙って消さない。行った記録を外すのは詳細の「行った ✓」と保存タブのスワイプだけ）。
+    /// 行った状態は名前の横のチェックで示す。
+    private var savedButton: some View {
+        let isWantToGo = savedStatus == .wantToGo
+        return Button(action: onToggleWantToGo) {
+            CafeDetailActionLabel(
+                title: String(localized: "行きたい"),
+                systemImage: isWantToGo ? "pawprint.fill" : "pawprint"
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(isWantToGo ? "行きたいから外す" : "行きたいに入れる"))
     }
 
     private var walkingText: String {

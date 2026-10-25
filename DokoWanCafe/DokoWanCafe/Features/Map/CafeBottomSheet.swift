@@ -95,9 +95,14 @@ struct CafeBottomSheet: View {
     let headline: SheetHeadline.Text
     @Binding var sortOrder: CafeSortOrder
     let items: [CafeWithDistance]
-    let favoriteIDs: Set<UUID>
-    /// 営業の判定に使う時刻
+    /// 保存の状態（行きたい／行った）を行に出すため
+    let savedStatuses: SavedPlaces
+    /// 営業の判定に使う時刻（対象時刻があればその時刻）
     let now: Date
+    /// `now` が「いつ行く？」で決めた対象時刻か（営業の行の言い方が変わる）
+    let isTargetTime: Bool
+    /// 今の時刻（「情報が古い可能性」の判定。対象時刻ではなく今で判定する）
+    let clock: Date
     /// フィルタ起因の0件か（true の時のみシート内に「条件に合うお店がありません」を出す）
     let isEmptyDueToFilter: Bool
     /// 「未確認の店も見る（N件）」の N（今の条件のまま未確認の店を足した件数）
@@ -247,7 +252,13 @@ struct CafeBottomSheet: View {
             List {
                 ForEach(items) { item in
                     NavigationLink(value: item.cafe) {
-                        CafeRowView(item: item, isFavorite: favoriteIDs.contains(item.cafe.id), now: now)
+                        CafeRowView(
+                            item: item,
+                            savedStatus: savedStatuses.status(of: item.cafe.id),
+                            now: now,
+                            isTargetTime: isTargetTime,
+                            clock: clock
+                        )
                     }
                 }
                 if showsUnverifiedRow {

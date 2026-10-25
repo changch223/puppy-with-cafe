@@ -57,8 +57,20 @@ final class CafeListViewModel: ObservableObject {
     @Published var includeUnverified = false {
         didSet { recomputeDisplayed() }
     }
-    /// 「営業中」チップ: 今営業中と判定できる店だけを表示するか（時間が不明の店は通さない）
+    /// 「営業中」チップ: 今（対象時刻があればその時刻）営業中と判定できる店だけを表示するか（時間が不明の店は通さない）
     @Published var openNowOnly = false {
+        didSet {
+            // 利用者が自分で切り替えたら、「いつ行く？」のリセットでは戻さない（利用者の操作を優先）
+            if !isChangingOpenNowForPlan { openNowBeforePlan = nil }
+            recomputeDisplayed()
+        }
+    }
+    /// 「いつ行く？」の適用でオンにする前の「営業中」の状態（リセットで戻す）。適用中でなければ nil
+    private var openNowBeforePlan: Bool?
+    /// 「いつ行く？」の適用・リセットが `openNowOnly` を変えている最中か
+    private var isChangingOpenNowForPlan = false
+    /// 「いつ行く？」で決めた対象時刻（nil＝今）。保存しない（アプリを開き直したら「今」）。
+    @Published private(set) var targetTime: Date? = nil {
         didSet { recomputeDisplayed() }
     }
     /// 一覧・地図の並び順（既定は距離昇順, 設計書1b/4）
@@ -71,7 +83,7 @@ final class CafeListViewModel: ObservableObject {
     private let repository: any CafeRepository
     private let locationService: LocationService
     private let cacheStore: CacheStore
-    private let favoritesStore: FavoritesStore
+    private let savedStore: SavedPlacesStore
     /// 「今」の時刻（営業中フィルタの判定に使う。テストでは固定の時刻を注入する）
     private let now: () -> Date
     /// リモートで実データが更新された回数。表示用の検索中に更新が割り込んだとき、取り直しが要るかの判定に使う。
@@ -85,13 +97,13 @@ final class CafeListViewModel: ObservableObject {
         repository: any CafeRepository,
         locationService: LocationService,
         cacheStore: CacheStore,
-        favoritesStore: FavoritesStore,
+        savedStore: SavedPlacesStore,
         now: @escaping () -> Date = { Date() }
     ) {
         self.repository = repository
         self.locationService = locationService
         self.cacheStore = cacheStore
-        self.favoritesStore = favoritesStore
+        self.savedStore = savedStore
         self.now = now
         self.clock = now()
     }
@@ -116,13 +128,57 @@ final class CafeListViewModel: ObservableObject {
         recomputeDisplayed()
     }
 
+    /// 営業の判定・ピンの薄さ・営業の行に使う時刻: 対象時刻があればそれ、なければ「今」（`clock`）。
+    var referenceTime: Date { targetTime ?? clock }
+
+    /// 対象時刻が「今」でないか
+    var isTargetTime: Bool { targetTime != nil }
+
+    /// 「いつ行く？」を決める。`nil` は「今」。決めたら「営業中」チップ（その時間に営業）もオンにして、
+    /// その時刻に開いている店だけを表示する。オンにする前の「営業中」の状態は覚えておき、リセットで戻す。
+    func applyTargetTime(_ date: Date?) {
+        if openNowBeforePlan == nil { openNowBeforePlan = openNowOnly }
+        targetTime = date
+        isChangingOpenNowForPlan = true
+        openNowOnly = true
+        isChangingOpenNowForPlan = false
+    }
+
+    /// 「いつ行く？」のリセット: 対象時刻を「今」に戻し、適用でオンにした「営業中」は適用前の状態に戻す。
+    /// 適用より前に利用者がオンにしていた「営業中」や、適用後に利用者が自分で切り替えた「営業中」は変えない。
+    func clearTargetTime() {
+        if let before = openNowBeforePlan {
+            isChangingOpenNowForPlan = true
+            openNowOnly = before
+            isChangingOpenNowForPlan = false
+            openNowBeforePlan = nil
+        }
+        targetTime = nil
+    }
+
+    /// 「いつ行く？」シートの件数: `date`（nil は今）に開いている店の数。
+    /// 今の他の条件（店内OK等・未確認の表示）を含めて数える。
+    func openCount(at date: Date?) -> Int {
+        visibleResults(openAt: date ?? now()).count
+    }
+
+    /// 犬向け条件・未確認の表示条件に加えて、`openAt` に営業中と判定できる店だけを返す（並べ替え前）。
+    private func visibleResults(openAt: Date) -> [CafeWithDistance] {
+        CafeFilter.apply(
+            amenities: amenityFilter,
+            includeUnverified: includeUnverified,
+            openNowAt: openAt,
+            to: allResults
+        )
+    }
+
     private func recomputeDisplayed() {
         let current = now()
         clock = current
         let withUnverified = CafeFilter.apply(
             amenities: amenityFilter,
             includeUnverified: true,
-            openNowAt: openNowOnly ? current : nil,
+            openNowAt: openNowOnly ? (targetTime ?? current) : nil,
             to: allResults
         )
         let verified = withUnverified.filter { $0.cafe.dogPolicyStatus != .unverified }
@@ -134,15 +190,25 @@ final class CafeListViewModel: ObservableObject {
 
     /// チップ（営業中・犬向け条件）がオンか。「クリア」チップの表示に使う。
     var hasActiveChips: Bool {
-        openNowOnly || !amenityFilter.isEmpty
+        openNowOnly || targetTime != nil || !amenityFilter.isEmpty
     }
 
-    /// お気に入り専用画面（機能4）向け: 全ロード済みカフェ ∩ お気に入りIDを距離順で返す。
+    /// 「行きたい」のお店（追加が新しい順）。
+    var wantToGoCafes: [CafeWithDistance] {
+        SavedPlaces.resolve(savedStore.places.wantToGo, in: loadedCafesWithDistance())
+    }
+
+    /// 「行った」のお店（行った日が新しい順）。
+    var visitedCafes: [CafeWithDistance] {
+        SavedPlaces.resolve(savedStore.places.visited, in: loadedCafesWithDistance())
+    }
+
+    /// 保存タブ向け: 全ロード済みカフェに検索起点からの距離を付ける。
     /// 犬向け条件・未確認フィルタは無視し、かつ現在の検索エリア（allResults）にも依存しない
-    /// （対象エリア外を検索中でも保存済みのお気に入りが消えないよう `allLoadedCafes` から解決する, S4設計書）。
-    var favoriteCafes: [CafeWithDistance] {
+    /// （対象エリア外を検索中でも保存済みの店が消えないよう `allLoadedCafes` から解決する, S4設計書）。
+    private func loadedCafesWithDistance() -> [CafeWithDistance] {
         let center = searchCenter
-        let withDistance = allLoadedCafes.map { cafe -> CafeWithDistance in
+        return allLoadedCafes.map { cafe -> CafeWithDistance in
             let distance: Double
             if let center {
                 distance = DistanceCalculator.distanceMeters(
@@ -154,7 +220,6 @@ final class CafeListViewModel: ObservableObject {
             }
             return CafeWithDistance(cafe: cafe, distanceMeters: distance)
         }
-        return CafeFilter.favorites(from: withDistance, favoriteIDs: favoritesStore.favoriteIDs)
     }
 
     /// 現在適用中の絞り込み条件の数（営業中＋犬向け条件4種＋未確認表示）。
@@ -174,11 +239,13 @@ final class CafeListViewModel: ObservableObject {
         phase == .loaded && displayedResults.isEmpty
     }
 
-    /// 営業中・犬向け条件・未確認の絞り込みを初期状態に戻す（「クリア」チップ・空状態の「条件をクリア」から使用）
+    /// 営業中・「いつ行く？」・犬向け条件・未確認の絞り込みを初期状態に戻す（「クリア」チップ・空状態の「条件をクリア」から使用）
     func resetFilters() {
         amenityFilter = AmenityFilter()
         includeUnverified = false
         openNowOnly = false
+        openNowBeforePlan = nil
+        targetTime = nil
     }
 
     /// 周辺検索を実行（contracts/api-contracts.md #1 の利用側）

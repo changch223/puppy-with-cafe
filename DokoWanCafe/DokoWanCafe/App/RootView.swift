@@ -4,7 +4,7 @@ import SwiftUI
 enum AppTab: Hashable {
     /// 地図と一覧
     case search
-    /// 保存したお店（段階2で「行きたい／行った」に分ける）
+    /// 保存したお店（行きたい／行った）
     case saved
     /// うちの子（段階3で犬の設定が入る）
     case myDog
@@ -18,7 +18,7 @@ struct RootView: View {
     @StateObject private var searchViewModel: CafeListViewModel
     @StateObject private var recentSearchStore = RecentSearchStore()
     @Environment(\.scenePhase) private var scenePhase
-    @ObservedObject private var favoritesStore: FavoritesStore
+    @ObservedObject private var savedStore: SavedPlacesStore
     @State private var tab: AppTab = .search
     @State private var searchPath = NavigationPath()
     @State private var savedPath = NavigationPath()
@@ -35,10 +35,10 @@ struct RootView: View {
                 repository: dependencies.repository,
                 locationService: dependencies.locationService,
                 cacheStore: dependencies.cacheStore,
-                favoritesStore: dependencies.favoritesStore
+                savedStore: dependencies.savedStore
             )
         )
-        _favoritesStore = ObservedObject(wrappedValue: dependencies.favoritesStore)
+        _savedStore = ObservedObject(wrappedValue: dependencies.savedStore)
     }
 
     var body: some View {
@@ -47,7 +47,7 @@ struct RootView: View {
                 SearchTabView(
                     dependencies: dependencies,
                     viewModel: searchViewModel,
-                    favoritesStore: favoritesStore,
+                    savedStore: savedStore,
                     recentSearchStore: recentSearchStore,
                     selectedMapItem: $selectedMapItem,
                     onOpenMyDog: { tab = .myDog },
@@ -61,9 +61,9 @@ struct RootView: View {
             .tag(AppTab.search)
 
             NavigationStack(path: $savedPath) {
-                FavoritesView(
+                SavedView(
                     viewModel: searchViewModel,
-                    favoritesStore: favoritesStore,
+                    savedStore: savedStore,
                     onGoSearch: { tab = .search }
                 )
                 .navigationDestination(for: Cafe.self) { cafe in

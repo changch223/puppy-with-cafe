@@ -114,7 +114,8 @@ struct OpenLineView: View {
             Text(line.text)
                 .font(.caption)
                 .foregroundStyle(line.state == .open ? Color.brand : Color(.secondaryLabel))
-                .lineLimit(1)
+                .lineLimit(2)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityHidden(true)
     }

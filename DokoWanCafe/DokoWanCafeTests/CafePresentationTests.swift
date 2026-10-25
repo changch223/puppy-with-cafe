@@ -168,8 +168,8 @@ final class CafePresentationTests: XCTestCase {
             "テストカフェ、店内OK、営業中19時まで、徒歩約7分"
         )
         XCTAssertEqual(
-            CafePresentation.accessibilityLabel(for: item, isFavorite: true, at: monday(hour: 12)),
-            "テストカフェ、保存済み、店内OK、営業中19時まで、徒歩約7分"
+            CafePresentation.accessibilityLabel(for: item, savedStatus: .wantToGo, at: monday(hour: 12)),
+            "テストカフェ、行きたいに登録済み、店内OK、営業中19時まで、徒歩約7分"
         )
     }
 
@@ -186,6 +186,37 @@ final class CafePresentationTests: XCTestCase {
             CafePresentation.accessibilityLabel(for: item, at: monday(hour: 12)),
             "テストカフェ、店内OK、テラス席のみ、営業中19時まで、徒歩約7分、情報が古い可能性があります"
         )
+    }
+
+    func test_行のVoiceOverは行った日の一言と対象時刻の営業を読む() {
+        let cafe = makeCafe(
+            name: "テストカフェ",
+            lastVerified: monday(hour: 9),
+            amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil),
+            hours: mondayHours
+        )
+        let item = CafeWithDistance(cafe: cafe, distanceMeters: 520)
+        XCTAssertEqual(
+            CafePresentation.accessibilityLabel(
+                for: item, savedStatus: .visited, at: monday(hour: 12), isTargetTime: true, caption: "10/25 に行った"
+            ),
+            "テストカフェ、行った、10/25 に行った、店内OK、月 12:00 は営業中19時まで、徒歩約7分"
+        )
+    }
+
+    func test_情報が古い可能性は対象時刻ではなく今で判定する() {
+        // 今から見れば確認日は360日前（新しい）。対象時刻（10日後）から見ると370日前になるが、警告は今で判定する。
+        let now = monday(hour: 12)
+        let target = now.addingTimeInterval(10 * 24 * 60 * 60)
+        let cafe = makeCafe(
+            lastVerified: now.addingTimeInterval(-360 * 24 * 60 * 60),
+            amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        let item = CafeWithDistance(cafe: cafe, distanceMeters: 520)
+        let label = CafePresentation.accessibilityLabel(for: item, at: target, isTargetTime: true, clock: now)
+        XCTAssertFalse(label.contains("情報が古い可能性があります"))
+        // 今を渡さなければ従来どおり `at` で判定する
+        XCTAssertTrue(CafePresentation.accessibilityLabel(for: item, at: target).contains("情報が古い可能性があります"))
     }
 
     // MARK: - 電話

@@ -93,18 +93,31 @@ enum CafePresentation {
     }
 
     /// 行・カードのVoiceOver用ラベル。「店名、店内OK、条件の要点、営業中19時まで、徒歩約7分、情報が古い可能性があります」のように1つにまとめる。
+    /// - Parameters:
+    ///   - date: 営業の判定に使う時刻（今、または「いつ行く？」の対象時刻）
+    ///   - isTargetTime: `date` が対象時刻か（営業を「土 12:00 は営業中…」の言い方で読む）
+    ///   - clock: 「情報が古い可能性」の判定に使う「今」。対象時刻ではなく今で判定する。省略時は `date`
+    ///   - caption: 保存タブの「10/25 に行った」など、名前に続けて読む一言
     static func accessibilityLabel(
         for item: CafeWithDistance,
-        isFavorite: Bool = false,
-        at date: Date = Date()
+        savedStatus: SavedStatus? = nil,
+        at date: Date = Date(),
+        isTargetTime: Bool = false,
+        clock: Date? = nil,
+        caption: String? = nil
     ) -> String {
         var parts = [item.cafe.name]
-        if isFavorite { parts.append(String(localized: "保存済み")) }
+        switch savedStatus {
+        case .wantToGo: parts.append(String(localized: "行きたいに登録済み"))
+        case .visited: parts.append(String(localized: "行った"))
+        case nil: break
+        }
+        if let caption { parts.append(caption) }
         parts.append(contentsOf: tags(for: item.cafe).map(\.label))
         if let condition = conditionSummary(for: item.cafe) { parts.append(condition) }
-        parts.append(OpenLine.make(hours: item.cafe.hours, at: date).spokenText)
+        parts.append(OpenLine.make(hours: item.cafe.hours, at: date, isTargetTime: isTargetTime).spokenText)
         parts.append(WalkingTime.summary(meters: item.distanceMeters).spoken)
-        if showsFreshnessWarning(for: item.cafe, now: date) {
+        if showsFreshnessWarning(for: item.cafe, now: clock ?? date) {
             parts.append(String(localized: "情報が古い可能性があります"))
         }
         return parts.joined(separator: "、")
@@ -112,17 +125,35 @@ enum CafePresentation {
 }
 
 /// 営業の行（「営業中・19:00まで」「営業時間外」「本日定休」「時間の情報なし」）の純ロジック。
+/// 「いつ行く？」で対象時刻を決めているときは、その時刻のことだと分かる言い方にする
+/// （「土 12:00 は営業中・19:00まで」「土 12:00 は営業時間外」「土曜は定休」）。
 /// 時間が分からない店を「営業中」とも「時間外」とも言わない（憲章 原則I）。
 struct OpenLine: Equatable {
     let state: OpenState
     let text: String
     let spokenText: String
 
-    static func make(hours: OpeningHours?, at date: Date = Date()) -> OpenLine {
+    /// - Parameters:
+    ///   - date: 判定する時刻（今、または対象時刻）
+    ///   - isTargetTime: `date` が「いつ行く？」で決めた対象時刻か
+    static func make(hours: OpeningHours?, at date: Date = Date(), isTargetTime: Bool = false) -> OpenLine {
         let state = OpeningHoursEvaluator.state(hours: hours, at: date)
+        let label = isTargetTime ? TargetTime.shortLabel(date) : nil
         switch state {
         case .open:
-            if let closing = OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: date) {
+            let closing = OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: date)
+            if let label {
+                if let closing {
+                    return OpenLine(
+                        state: state,
+                        text: String(localized: "\(label) は営業中・\(closing)まで"),
+                        spokenText: String(localized: "\(label) は営業中\(spokenTime(closing))まで")
+                    )
+                }
+                let text = String(localized: "\(label) は営業中")
+                return OpenLine(state: state, text: text, spokenText: text)
+            }
+            if let closing {
                 return OpenLine(
                     state: state,
                     text: String(localized: "営業中・\(closing)まで"),
@@ -132,10 +163,12 @@ struct OpenLine: Equatable {
             let text = String(localized: "営業中")
             return OpenLine(state: state, text: text, spokenText: text)
         case .outsideHours:
-            let text = String(localized: "営業時間外")
+            let text = label.map { String(localized: "\($0) は営業時間外") } ?? String(localized: "営業時間外")
             return OpenLine(state: state, text: text, spokenText: text)
         case .closedToday:
-            let text = String(localized: "本日定休")
+            let text = isTargetTime
+                ? String(localized: "\(TargetTime.weekdayName(of: date))曜は定休")
+                : String(localized: "本日定休")
             return OpenLine(state: state, text: text, spokenText: text)
         case .unknown:
             let text = String(localized: "時間の情報なし")

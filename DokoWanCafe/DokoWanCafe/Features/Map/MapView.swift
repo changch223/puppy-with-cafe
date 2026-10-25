@@ -13,10 +13,14 @@ struct CafeMapView: UIViewRepresentable {
     /// `items` を計算し直した回数（`CafeListViewModel.displayRevision`）。変わったときだけピンの見た目を計算し直す。
     let itemsRevision: Int
     let center: CLLocationCoordinate2D?
-    /// 保存済み店の視覚区別に使う
-    let favoriteIDs: Set<UUID>
-    /// 営業中かどうかの判定時刻（営業時間外の店のピンを薄くする）
+    /// 保存の状態（行きたいの店は縁取りで区別し、行きたい／行ったは読み上げにも含める）
+    let savedPlaces: SavedPlaces
+    /// 営業中かどうかの判定時刻（営業時間外の店のピンを薄くする）。対象時刻があればその時刻
     let now: Date
+    /// `now` が「いつ行く？」で決めた対象時刻か（ピンの読み上げの言い方が変わる）
+    let isTargetTime: Bool
+    /// 今の時刻（「情報が古い可能性」の判定。対象時刻ではなく今で判定する）
+    let clock: Date
     /// タップ選択中のカフェ（一覧シートがその店のカードに変わる）。×やマップタップで nil に戻る双方向バインディング。
     @Binding var selectedItem: CafeWithDistance?
     /// インクリメントすると現在地（center）へ再センタリングする（現在地ボタンから使用）
@@ -80,11 +84,14 @@ struct CafeMapView: UIViewRepresentable {
         var parent: CafeMapView
         var lastRegionKey: String?
         var lastRecenterRequestID = 0
-        /// 直近に反映した（データの版, 保存済みID）。変わらなければ注釈の見た目を計算し直さない。
+        /// 直近に反映した（データの版, 保存の状態, 対象時刻）。変わらなければ注釈の見た目と読み上げを計算し直さない。
+        /// 見た目が同じピンでも、対象時刻や保存の状態が変わったら読み上げ文は作り直す。
         private var lastSyncKey: SyncKey?
         private struct SyncKey: Equatable {
             let revision: Int
-            let favoriteIDs: Set<UUID>
+            let savedPlaces: SavedPlaces
+            let isTargetTime: Bool
+            let time: Date
         }
         private var annotationsByID: [UUID: CafeAnnotation] = [:]
 
@@ -94,11 +101,20 @@ struct CafeMapView: UIViewRepresentable {
 
         /// 表示結果との差分だけを反映する。残る注釈は作り直さず値を更新するので、選択中のピンの選択が外れない。
         func syncAnnotations(on mapView: MKMapView) {
-            let key = SyncKey(revision: parent.itemsRevision, favoriteIDs: parent.favoriteIDs)
+            let key = SyncKey(
+                revision: parent.itemsRevision,
+                savedPlaces: parent.savedPlaces,
+                isTargetTime: parent.isTargetTime,
+                time: parent.now
+            )
             guard key != lastSyncKey else { return }
             lastSyncKey = key
             let items = parent.items
-            let styles = MapViewModel.styles(for: items, favoriteIDs: parent.favoriteIDs, at: parent.now)
+            let styles = MapViewModel.styles(for: items, favoriteIDs: parent.savedPlaces.wantToGoIDs, at: parent.now)
+            let spokenLabels = MapViewModel.spokenLabels(
+                for: items, savedPlaces: parent.savedPlaces,
+                at: parent.now, isTargetTime: parent.isTargetTime, clock: parent.clock
+            )
             let priorities = MapViewModel.displayPriorities(for: items)
             let itemsByID = Dictionary(items.map { ($0.cafe.id, $0) }, uniquingKeysWith: { first, _ in first })
 
@@ -120,15 +136,21 @@ struct CafeMapView: UIViewRepresentable {
                 let style = styles[id] ?? MapPinStyle.make(for: item.cafe, isFavorite: false, at: parent.now)
                 let priority = priorities[id] ?? .defaultLow
                 if let existing = annotationsByID[id] {
-                    guard existing.item != item || existing.style != style || existing.displayPriority != priority else { continue }
+                    let spoken = spokenLabels[id] ?? item.cafe.name
+                    guard existing.item != item || existing.style != style || existing.displayPriority != priority
+                            || existing.spokenLabel != spoken else { continue }
                     existing.item = item
                     existing.style = style
+                    existing.spokenLabel = spoken
                     existing.displayPriority = priority
                     if let view = mapView.view(for: existing) {
                         configure(view, for: existing, isSelected: mapView.selectedAnnotations.contains { $0 === existing })
                     }
                 } else {
-                    let annotation = CafeAnnotation(item: item, displayPriority: priority, style: style)
+                    let annotation = CafeAnnotation(
+                        item: item, displayPriority: priority, style: style,
+                        spokenLabel: spokenLabels[id] ?? item.cafe.name
+                    )
                     annotationsByID[id] = annotation
                     added.append(annotation)
                 }
@@ -147,7 +169,7 @@ struct CafeMapView: UIViewRepresentable {
             view.displayPriority = annotation.displayPriority
             view.canShowCallout = false
             view.clusteringIdentifier = nil
-            view.accessibilityLabel = CafePresentation.accessibilityLabel(for: annotation.item, at: parent.now)
+            view.accessibilityLabel = annotation.spokenLabel
         }
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

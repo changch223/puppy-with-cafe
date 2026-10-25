@@ -62,22 +62,22 @@ final class CafeListViewModelTests: XCTestCase {
         )
     }
 
-    /// テストごとに専用の UserDefaults suite を注入し、他テスト・実データと隔離する（FavoritesStoreTests と同様の方針）。
-    private func makeFavoritesStore() -> FavoritesStore {
+    /// テストごとに専用の UserDefaults suite を注入し、他テスト・実データと隔離する（SavedPlacesStoreTests と同様の方針）。
+    private func makeSavedStore(now: @escaping () -> Date = { Date() }) -> SavedPlacesStore {
         let suiteName = "CafeListViewModelTests-\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: suiteName)!
         addTeardownBlock {
             defaults.removePersistentDomain(forName: suiteName)
         }
-        return FavoritesStore(defaults: defaults)
+        return SavedPlacesStore(defaults: defaults, now: now)
     }
 
-    private func makeViewModel(cafes: [Cafe], favoritesStore: FavoritesStore? = nil) -> CafeListViewModel {
+    private func makeViewModel(cafes: [Cafe], savedStore: SavedPlacesStore? = nil) -> CafeListViewModel {
         CafeListViewModel(
             repository: DistanceFilteringMockRepository(cafes: cafes),
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: favoritesStore ?? makeFavoritesStore()
+            savedStore: savedStore ?? makeSavedStore()
         )
     }
 
@@ -153,14 +153,14 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["店内OKカフェ"])
     }
 
-    func test_favoriteCafesは対象エリア外を検索中でも保存済みお気に入りを返す() async {
+    func test_wantToGoCafesは対象エリア外を検索中でも保存済みお気に入りを返す() async {
         // お気に入り画面は現在の検索エリアに依存しない（QA #1 の回帰防止）。
         let favoriteCafe = makeCafe(name: "保存済みカフェ", latitude: 35.6897, longitude: 139.7007)
         let otherCafe = makeCafe(name: "非お気に入り", latitude: 35.6898, longitude: 139.7008)
-        let favoritesStore = makeFavoritesStore()
-        favoritesStore.toggle(favoriteCafe.id)
+        let savedStore = makeSavedStore()
+        savedStore.toggleWantToGo(favoriteCafe.id)
 
-        let viewModel = makeViewModel(cafes: [favoriteCafe, otherCafe], favoritesStore: favoritesStore)
+        let viewModel = makeViewModel(cafes: [favoriteCafe, otherCafe], savedStore: savedStore)
         // 対象エリア外（大阪付近）を手動検索 → allResults は空・phase は outOfArea になる
         viewModel.origin = .manual(ManualArea(id: "osaka", name: "大阪", latitude: 34.7, longitude: 135.5))
         await viewModel.refresh()
@@ -168,7 +168,7 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.phase, .outOfArea)
         XCTAssertTrue(viewModel.allResults.isEmpty)
         // それでもお気に入りは全ロード済みカフェから解決され、保存済みの店が出る
-        XCTAssertEqual(viewModel.favoriteCafes.map(\.cafe.name), ["保存済みカフェ"])
+        XCTAssertEqual(viewModel.wantToGoCafes.map(\.cafe.name), ["保存済みカフェ"])
     }
 
     func test_sortOrderをrecentlyVerifiedにすると確認日が新しい順になる() async {
@@ -254,7 +254,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: DistanceFilteringMockRepository(cafes: [open, evening, unknown]),
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: makeFavoritesStore(),
+            savedStore: makeSavedStore(),
             now: { currentTime }
         )
         viewModel.origin = .manual(makeOrigin())
@@ -271,6 +271,147 @@ final class CafeListViewModelTests: XCTestCase {
         viewModel.tick()
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["夜の店"])
         XCTAssertEqual(viewModel.clock, mondayTokyo(hour: 20))
+    }
+
+    // MARK: - いつ行く？（再設計 段階2: 対象時刻）
+
+    /// 2026-07-06（月曜）12:00 を「今」として、昼の店・夜の店・時間不明の店を読み込んだ VM
+    private func makeTargetTimeViewModel(
+        extra: [Cafe] = [], currentTime: Date? = nil
+    ) async -> CafeListViewModel {
+        var day = makeCafe(name: "昼の店", latitude: 35.6897, longitude: 139.7007)
+        day.hours = hours(mon: [TimeRange(open: "09:00", close: "18:00")])
+        var evening = makeCafe(name: "夜の店", latitude: 35.6898, longitude: 139.7008)
+        evening.hours = hours(mon: [TimeRange(open: "19:00", close: "23:00")])
+        let unknown = makeCafe(name: "時間不明の店", latitude: 35.6899, longitude: 139.7009)
+        let time = currentTime ?? mondayTokyo(hour: 12)
+        let viewModel = CafeListViewModel(
+            repository: DistanceFilteringMockRepository(cafes: [day, evening, unknown] + extra),
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            savedStore: makeSavedStore(),
+            now: { time }
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+        return viewModel
+    }
+
+    func test_対象時刻を決めるとその時刻に営業中の店だけを通し表示の時刻も対象時刻になる() async {
+        let viewModel = await makeTargetTimeViewModel()
+        XCTAssertFalse(viewModel.isTargetTime)
+        XCTAssertEqual(viewModel.referenceTime, mondayTokyo(hour: 12), "対象時刻がなければ今")
+
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+
+        XCTAssertTrue(viewModel.isTargetTime)
+        XCTAssertTrue(viewModel.openNowOnly, "決めたら「その時間に営業」もオンになる")
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["夜の店"])
+        XCTAssertEqual(viewModel.referenceTime, mondayTokyo(hour: 20))
+        XCTAssertEqual(viewModel.clock, mondayTokyo(hour: 12), "今の時計は変えない")
+        XCTAssertTrue(viewModel.hasActiveChips)
+    }
+
+    func test_対象時刻の件数は今の他の条件を含めて数える() async {
+        var indoorEvening = makeCafe(
+            name: "店内OKの夜の店", latitude: 35.6900, longitude: 139.7010,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        indoorEvening.hours = hours(mon: [TimeRange(open: "19:00", close: "23:00")])
+        let viewModel = await makeTargetTimeViewModel(extra: [indoorEvening])
+        let evening = mondayTokyo(hour: 20)
+
+        XCTAssertEqual(viewModel.openCount(at: evening), 2, "夜の店と店内OKの夜の店")
+        XCTAssertEqual(viewModel.openCount(at: nil), 1, "nil は今（昼の店）")
+
+        viewModel.amenityFilter.indoorOnly = true
+        XCTAssertEqual(viewModel.openCount(at: evening), 1, "店内OKの条件を含めて数える")
+        XCTAssertEqual(viewModel.openCount(at: mondayTokyo(hour: 3)), 0)
+    }
+
+    func test_日跨ぎの深夜帯は前日の枠が対象時刻まで続いていれば通す() async {
+        var late = makeCafe(name: "深夜の店", latitude: 35.6900, longitude: 139.7010)
+        late.hours = OpeningHours(
+            mon: [TimeRange(open: "17:00", close: "02:00")],
+            tue: nil, wed: nil, thu: nil, fri: nil, sat: nil, sun: nil
+        )
+        let viewModel = await makeTargetTimeViewModel(extra: [late])
+
+        let tuesday1am = mondayTokyo(hour: 25)
+        XCTAssertEqual(viewModel.openCount(at: tuesday1am), 1, "月曜17:00-02:00の店は火曜1:00も営業中")
+        XCTAssertEqual(viewModel.openCount(at: mondayTokyo(hour: 27)), 0, "火曜3:00は閉まっている")
+    }
+
+    func test_clearTargetTimeは対象時刻とセットの営業中もオフに戻す() async {
+        let viewModel = await makeTargetTimeViewModel()
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+
+        viewModel.clearTargetTime()
+
+        XCTAssertFalse(viewModel.isTargetTime)
+        XCTAssertFalse(viewModel.openNowOnly)
+        XCTAssertEqual(viewModel.displayedResults.count, 3)
+    }
+
+    func test_いつ行く？のリセットは適用前から利用者がオンにしていた営業中を消さない() async {
+        let viewModel = await makeTargetTimeViewModel()
+        viewModel.openNowOnly = true
+
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+        viewModel.clearTargetTime()
+
+        XCTAssertFalse(viewModel.isTargetTime)
+        XCTAssertTrue(viewModel.openNowOnly, "適用の前に利用者が自分でオンにしていた営業中は残す")
+    }
+
+    func test_今のまま適用した営業中もリセットで戻せる() async {
+        let viewModel = await makeTargetTimeViewModel()
+        XCTAssertFalse(viewModel.openNowOnly)
+
+        viewModel.applyTargetTime(nil)
+        XCTAssertTrue(viewModel.openNowOnly)
+        XCTAssertFalse(viewModel.isTargetTime)
+
+        viewModel.clearTargetTime()
+        XCTAssertFalse(viewModel.openNowOnly, "対象時刻が今のままでも、適用でオンにした営業中は戻る")
+        XCTAssertEqual(viewModel.displayedResults.count, 3)
+    }
+
+    func test_適用後に利用者が営業中を切り替えたらリセットでは触らない() async {
+        let viewModel = await makeTargetTimeViewModel()
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+        viewModel.openNowOnly = false  // 利用者がチップを自分でオフにした
+
+        viewModel.clearTargetTime()
+        XCTAssertFalse(viewModel.openNowOnly)
+
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+        viewModel.openNowOnly = false
+        viewModel.openNowOnly = true  // 自分でオフ→オンにした
+        viewModel.clearTargetTime()
+        XCTAssertTrue(viewModel.openNowOnly, "自分で切り替えた営業中はリセットで消さない")
+    }
+
+    func test_applyTargetTimeにnilを渡すと今に開いている店だけを表示する() async {
+        let viewModel = await makeTargetTimeViewModel()
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+
+        viewModel.applyTargetTime(nil)
+
+        XCTAssertFalse(viewModel.isTargetTime)
+        XCTAssertTrue(viewModel.openNowOnly)
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["昼の店"])
+    }
+
+    func test_resetFiltersは対象時刻も今に戻す() async {
+        let viewModel = await makeTargetTimeViewModel()
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+
+        viewModel.resetFilters()
+
+        XCTAssertFalse(viewModel.isTargetTime)
+        XCTAssertFalse(viewModel.openNowOnly)
+        XCTAssertFalse(viewModel.hasActiveChips)
     }
 
     func test_displayedResultsは入力が変わったときだけ計算し直す() async {
@@ -319,25 +460,27 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.displayedResults.count, 2)
     }
 
-    // MARK: - favoriteCafes（お気に入り専用画面, S4設計書）
+    // MARK: - wantToGoCafes / visitedCafes（保存タブ, S4設計書・再設計 段階2）
 
-    func test_favoriteCafesは犬向け条件や未確認フィルタを無視して距離順に返す() async {
+    func test_wantToGoCafesは犬向け条件や未確認フィルタを無視して追加が新しい順に返す() async {
         let favoriteUnverified = makeCafe(
-            name: "未確認だがお気に入り", latitude: 35.70, longitude: 139.80,
+            name: "未確認だが行きたい", latitude: 35.70, longitude: 139.80,
             dogPolicyStatus: .unverified
         )
-        let favoriteNear = makeCafe(name: "近いお気に入り", latitude: 35.6897, longitude: 139.7007)
-        let notFavorite = makeCafe(name: "お気に入りでない", latitude: 35.6898, longitude: 139.7008)
-        let favoritesStore = makeFavoritesStore()
-        favoritesStore.toggle(favoriteUnverified.id)
-        favoritesStore.toggle(favoriteNear.id)
+        let favoriteNear = makeCafe(name: "近い行きたい", latitude: 35.6897, longitude: 139.7007)
+        let notFavorite = makeCafe(name: "行きたいでない", latitude: 35.6898, longitude: 139.7008)
+        var storeTime = mondayTokyo(hour: 9)
+        let savedStore = makeSavedStore(now: { storeTime })
+        savedStore.toggleWantToGo(favoriteNear.id)
+        storeTime = mondayTokyo(hour: 10)
+        savedStore.toggleWantToGo(favoriteUnverified.id)
 
         let viewModel = makeViewModel(
             cafes: [favoriteUnverified, favoriteNear, notFavorite],
-            favoritesStore: favoritesStore
+            savedStore: savedStore
         )
         viewModel.origin = .manual(makeOrigin())
-        // displayedResults向けの絞り込みを掛けても favoriteCafes には影響しないことを確認（設計書S4: フィルタ無視）
+        // displayedResults向けの絞り込みを掛けても wantToGoCafes には影響しないことを確認（設計書S4: フィルタ無視）
         viewModel.amenityFilter.indoorOnly = true
         await viewModel.refresh()
 
@@ -346,19 +489,38 @@ final class CafeListViewModelTests: XCTestCase {
             "前提: amenityFilter.indoorOnlyによりdisplayedResultsは0件（いずれもindoor情報なし・未確認）"
         )
         XCTAssertEqual(
-            viewModel.favoriteCafes.map(\.cafe.name),
-            ["近いお気に入り", "未確認だがお気に入り"],
-            "距離昇順・amenity/未確認フィルタを無視して両方のお気に入りが含まれる"
+            viewModel.wantToGoCafes.map(\.cafe.name),
+            ["未確認だが行きたい", "近い行きたい"],
+            "追加が新しい順・amenity/未確認フィルタを無視して両方が含まれる"
         )
     }
 
-    func test_favoriteCafesはお気に入りが空なら空配列() async {
+    func test_行ったに移すとwantToGoCafesから外れvisitedCafesに入る() async {
+        let first = makeCafe(name: "先に行った店", latitude: 35.6897, longitude: 139.7007)
+        let second = makeCafe(name: "後で行った店", latitude: 35.6898, longitude: 139.7008)
+        var storeTime = mondayTokyo(hour: 9)
+        let savedStore = makeSavedStore(now: { storeTime })
+        savedStore.toggleWantToGo(first.id)
+        savedStore.toggleWantToGo(second.id)
+        savedStore.toggleVisited(first.id)
+        storeTime = mondayTokyo(hour: 12)
+        savedStore.toggleVisited(second.id)
+
+        let viewModel = makeViewModel(cafes: [first, second], savedStore: savedStore)
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        XCTAssertTrue(viewModel.wantToGoCafes.isEmpty)
+        XCTAssertEqual(viewModel.visitedCafes.map(\.cafe.name), ["後で行った店", "先に行った店"], "行った日が新しい順")
+    }
+
+    func test_wantToGoCafesはお気に入りが空なら空配列() async {
         let cafe = makeCafe(name: "カフェ", latitude: 35.6897, longitude: 139.7007)
         let viewModel = makeViewModel(cafes: [cafe])
         viewModel.origin = .manual(makeOrigin())
         await viewModel.refresh()
 
-        XCTAssertTrue(viewModel.favoriteCafes.isEmpty)
+        XCTAssertTrue(viewModel.wantToGoCafes.isEmpty)
     }
 
     func test_フィルタ起因の0件はisEmptyDueToFilterがtrueになる() async {
@@ -402,7 +564,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: FailingRepository(cafes: [far, near]),
             locationService: LocationService(),
             cacheStore: cacheStore,
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(origin)
         await viewModel.refresh()
@@ -426,7 +588,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: DistanceFilteringMockRepository(cafes: [cafe]),
             locationService: LocationService(),
             cacheStore: cacheStore,
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(makeOrigin())
         await viewModel.refresh()
@@ -507,7 +669,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: repository,
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(makeOrigin())
         viewModel.includeUnverified = true
@@ -545,7 +707,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: repository,
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(makeOrigin())
 
@@ -567,7 +729,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: repository,
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(makeOrigin())
         await viewModel.refresh()
@@ -592,7 +754,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: repository,
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(makeOrigin())
         await viewModel.refresh()
@@ -620,7 +782,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: repository,
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(makeOrigin())
         await viewModel.refresh()
@@ -677,7 +839,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: repository,
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         let areaA = makeOrigin()  // 新宿
         let areaB = ManualArea(id: "test-tokyo", name: "テスト:東京", latitude: 35.6812, longitude: 139.7671)
@@ -720,7 +882,7 @@ final class CafeListViewModelTests: XCTestCase {
             repository: FailingChangedRepository(cafes: [cafe]),
             locationService: LocationService(),
             cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),  // キャッシュなし
-            favoritesStore: makeFavoritesStore()
+            savedStore: makeSavedStore()
         )
         viewModel.origin = .manual(makeOrigin())
         await viewModel.refresh()
