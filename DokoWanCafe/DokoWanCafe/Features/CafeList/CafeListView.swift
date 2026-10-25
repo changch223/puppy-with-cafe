@@ -1,95 +1,58 @@
-import MapKit
 import SwiftUI
-import UIKit
 
-/// 一覧の1行: 詳細を開かなくても「犬目線の可否」と「距離」が判別できる（SC-002, 設計書4）
+/// 一覧の1行（再設計 段階1a）: 写真（なければ頭文字タイル）／店名・タグ・条件の要点・営業の行／徒歩の目安。
+/// 詳細を開かなくても「入れるか・今開いているか・どれくらいで着くか」が分かる。
 struct CafeRowView: View {
     let item: CafeWithDistance
     let isFavorite: Bool
+    /// 営業の判定に使う時刻（既定は現在。プレビュー・テスト用に注入できる）
+    var now: Date = Date()
 
-    private var category: MapPinCategory { MapPinCategory.category(for: item.cafe) }
-
-    /// 未確認 or 最終確認から1年超の店に鮮度警告アイコンを出す（設計書4）
-    private var showsFreshnessWarning: Bool {
-        item.cafe.dogPolicyStatus == .unverified
-            || FreshnessEvaluator.isStale(lastVerified: item.cafe.lastVerified)
-    }
+    private var cafe: Cafe { item.cafe }
+    private var walking: WalkingTime.Summary { WalkingTime.summary(meters: item.distanceMeters) }
 
     var body: some View {
-        HStack(alignment: .center, spacing: 12) {
-            CafeRowThumbnailView(cafe: item.cafe)
+        HStack(alignment: .top, spacing: 12) {
+            CafeThumbnailView(cafe: cafe, size: 64)
+
             VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 4) {
-                    Text(item.cafe.name)
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
+                    Text(cafe.name)
                         .font(.headline)
                         .lineLimit(2)
                     if isFavorite {
                         FavoritePawIcon()
                     }
-                    if showsFreshnessWarning {
+                    if CafePresentation.showsFreshnessWarning(for: cafe, now: now) {
                         FreshnessWarningIcon()
                     }
                 }
-                if let condition = item.cafe.dogPolicyCondition,
-                   item.cafe.dogPolicyStatus == .conditional {
+                CafeTagsView(cafe: cafe)
+                if let condition = CafePresentation.conditionSummary(for: cafe) {
                     Text(condition)
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                        .lineLimit(1)
+                        .lineLimit(2)
                 }
-                // 営業状態（構造化営業時間のある店のみ, FR-102）
-                OpenStateBadge(state: OpeningHoursEvaluator.state(hours: item.cafe.hours))
+                OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now))
             }
-            Spacer(minLength: 8)
-            VStack(alignment: .trailing, spacing: 4) {
-                MapPinCategoryBadge(category: category)
-                Text(MapViewModel.distanceText(meters: item.distanceMeters))
-                    .font(.subheadline.monospacedDigit())
-                    .foregroundStyle(.secondary)
+
+            Spacer(minLength: 4)
+
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(walking.headline)
+                    .font(.subheadline.bold())
+                    .multilineTextAlignment(.trailing)
+                if let detail = walking.detail {
+                    Text(detail)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
+            .fixedSize(horizontal: true, vertical: false)
         }
         .padding(.vertical, 4)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text(
-            "\(item.cafe.name)、\(category.displayName)、\(MapViewModel.distanceText(meters: item.distanceMeters))"
-        ))
-    }
-}
-
-/// 一覧行の56×56角丸サムネイル（写真プレビュー機能）。`LinkPreviewService` のキャッシュ経由の画像のみを使い、
-/// 埋め込みWebViewは一覧では使わない。キャッシュ命中時は即表示、未キャッシュは非同期取得しつつ
-/// スクロールで行が入れ替わってもプレースホルダに切り替わるようにする（`.task(id:)` による自動キャンセル）。
-private struct CafeRowThumbnailView: View {
-    let cafe: Cafe
-
-    @State private var image: UIImage?
-
-    private static let size: CGFloat = 56
-
-    var body: some View {
-        Group {
-            if let image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                Rectangle()
-                    .fill(Color(.secondarySystemBackground))
-                    .overlay {
-                        Image(systemName: "pawprint.fill")
-                            .foregroundStyle(.secondary)
-                    }
-            }
-        }
-        .frame(width: Self.size, height: Self.size)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-        .accessibilityHidden(true)
-        .task(id: cafe.id) {
-            image = nil
-            guard let url = PhotoSourceResolver.previewSourceURL(for: cafe) else { return }
-            let preview = await LinkPreviewService.shared.preview(for: url)
-            guard !Task.isCancelled else { return }
-            image = preview?.image
-        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(CafePresentation.accessibilityLabel(for: item, isFavorite: isFavorite, at: now)))
     }
 }

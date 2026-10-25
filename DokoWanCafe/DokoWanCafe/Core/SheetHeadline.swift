@@ -1,0 +1,68 @@
+import Foundation
+
+/// 一覧シートの見出し（今の条件を言葉にする）の純ロジック（憲章 原則IV）。
+enum SheetHeadline {
+    struct Text: Equatable {
+        /// 例: 「犬OKのお店 547件」
+        let title: String
+        /// 並び順と起点（例: 「現在地から近い順」「渋谷駅から近い順」「確認日が新しい順」）
+        let subtitle: String
+    }
+
+    /// - Parameters:
+    ///   - count: 今の条件での件数
+    ///   - amenities: 店内OK/テラス/大型犬OK/犬メニュー の条件
+    ///   - openNowOnly: 「営業中」チップ
+    ///   - includeUnverified: 未確認の店も表示中か（含むときは「犬OK」と言い切らない）
+    ///   - sortOrder: 並び順
+    ///   - originName: 起点名。現在地のとき（`isCurrentLocation`）は「現在地」と言う
+    static func make(
+        count: Int,
+        amenities: AmenityFilter,
+        openNowOnly: Bool,
+        includeUnverified: Bool = false,
+        sortOrder: CafeSortOrder = .distance,
+        originName: String,
+        isCurrentLocation: Bool
+    ) -> Text {
+        let labels = amenityLabels(amenities)
+        // 未確認を含むときは「犬OK」ではなく「犬同伴」（未確認は可と言えない, 憲章 原則I）
+        let dogPhrase = includeUnverified ? String(localized: "犬同伴") : String(localized: "犬OK")
+        let body: String
+        switch (openNowOnly, labels.isEmpty) {
+        case (false, true):
+            body = String(localized: "\(dogPhrase)のお店")
+        case (true, true):
+            body = String(localized: "今開いている\(dogPhrase)のお店")
+        case (false, false):
+            body = String(localized: "\(labels.joined(separator: "・"))のお店")
+        case (true, false):
+            body = String(localized: "今開いている、\(labels.joined(separator: "・"))のお店")
+        }
+        let suffix = includeUnverified ? String(localized: "（未確認を含む）") : ""
+        return Text(
+            title: String(localized: "\(body) \(count)件\(suffix)"),
+            subtitle: subtitle(sortOrder: sortOrder, originName: originName, isCurrentLocation: isCurrentLocation)
+        )
+    }
+
+    static func subtitle(sortOrder: CafeSortOrder, originName: String, isCurrentLocation: Bool) -> String {
+        switch sortOrder {
+        case .distance:
+            let origin = isCurrentLocation ? String(localized: "現在地") : originName
+            return String(localized: "\(origin)から近い順")
+        case .recentlyVerified:
+            return String(localized: "確認日が新しい順")
+        }
+    }
+
+    /// オンの犬向け条件の表示名（チップと同じ並び）
+    static func amenityLabels(_ amenities: AmenityFilter) -> [String] {
+        var labels: [String] = []
+        if amenities.indoorOnly { labels.append(String(localized: "店内OK")) }
+        if amenities.terraceOnly { labels.append(String(localized: "テラス")) }
+        if amenities.largeDogOnly { labels.append(String(localized: "大型犬OK")) }
+        if amenities.dogMenuOnly { labels.append(String(localized: "犬メニュー")) }
+        return labels
+    }
+}

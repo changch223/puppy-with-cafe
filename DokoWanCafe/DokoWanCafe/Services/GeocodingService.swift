@@ -5,7 +5,7 @@ import MapKit
 /// 住所・駅名検索サービス（機能2: 住所・駅名で周辺のカフェを探せる）。
 ///
 /// `MKLocalSearch`（駅名・施設名等のPOIに強い）と `CLGeocoder`（住所に強い）を併用し、
-/// ユーザーが `AreaPickerView` の検索欄に入力した検索クエリ（住所・駅名等の文字列）
+/// ユーザーが `CafeSearchView` の検索欄に入力した検索クエリ（住所・駅名等の文字列）
 /// のみをAppleへ送信する。GPS由来の現在地は送信しない（憲章 原則III: 検索座標のみ送信、に整合）。
 final class GeocodingService {
     /// クエリ正規化・regionヒント生成などの純ロジック（ネットワーク非依存・XCTest対象）

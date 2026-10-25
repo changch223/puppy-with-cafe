@@ -39,22 +39,32 @@ final class CafeListViewModel: ObservableObject {
     /// データ取得用の安全上限（UI向けの意味は持たない）。
     /// データはローカル（StaticCafeRepository）に全件保持されており、絞り込みコストは実質ゼロのため、
     /// 事実上「東京都内は無制限」とみなせる大きな値を使う（実測: 全268件の最大ペア間距離 約52.4km）。
-    /// 地図の初期表示ズームは別途 `MapViewModel.initialCameraRegion` が距離分布から算出する。
+    /// 地図の初期表示ズームは別途 `MapViewModel.walkingRegion`（検索地点を中心に徒歩圏）で決める。
     private static let fetchSafetyRadiusMeters = 60_000
 
     @Published private(set) var phase: Phase = .idle
-    @Published private(set) var allResults: [CafeWithDistance] = []
+    @Published private(set) var allResults: [CafeWithDistance] = [] {
+        didSet { recomputeDisplayed() }
+    }
     /// お気に入り専用画面（機能4）用の全ロード済みカフェ。現在の検索エリア（allResults）に依存せず、
     /// 対象エリア外を検索中でも保存済みのお気に入りを解決できるよう、リポジトリから全件を一度だけ取得して保持する。
     @Published private(set) var allLoadedCafes: [Cafe] = []
     /// 犬向け条件の絞り込み（店内OK/テラスOK/大型犬OK/犬メニュー, AND結合, 既定は絞り込みなし。UI/UXブラッシュアップ設計書1b/4）
-    @Published var amenityFilter = AmenityFilter()
+    @Published var amenityFilter = AmenityFilter() {
+        didSet { recomputeDisplayed() }
+    }
     /// 未確認ステータスの店も表示するか（既定false。原則I: 未確認を可と主張しない, 設計書1b/4）
-    @Published var includeUnverified = false
-    /// お気に入りのみ表示するか（既定false, 設計書1c/4）
-    @Published var favoritesOnly = false
+    @Published var includeUnverified = false {
+        didSet { recomputeDisplayed() }
+    }
+    /// 「営業中」チップ: 今営業中と判定できる店だけを表示するか（時間が不明の店は通さない）
+    @Published var openNowOnly = false {
+        didSet { recomputeDisplayed() }
+    }
     /// 一覧・地図の並び順（既定は距離昇順, 設計書1b/4）
-    @Published var sortOrder: CafeSortOrder = .distance
+    @Published var sortOrder: CafeSortOrder = .distance {
+        didSet { recomputeDisplayed() }
+    }
     @Published var origin: SearchOrigin = .currentLocation
     @Published private(set) var searchCenter: CLLocationCoordinate2D?
 
@@ -62,6 +72,8 @@ final class CafeListViewModel: ObservableObject {
     private let locationService: LocationService
     private let cacheStore: CacheStore
     private let favoritesStore: FavoritesStore
+    /// 「今」の時刻（営業中フィルタの判定に使う。テストでは固定の時刻を注入する）
+    private let now: () -> Date
     /// リモートで実データが更新された回数。表示用の検索中に更新が割り込んだとき、取り直しが要るかの判定に使う。
     private var dataRevision = 0
     /// 裏のリモート取得（revalidate）が実行中か（同時に2本走らせない）
@@ -73,21 +85,56 @@ final class CafeListViewModel: ObservableObject {
         repository: any CafeRepository,
         locationService: LocationService,
         cacheStore: CacheStore,
-        favoritesStore: FavoritesStore
+        favoritesStore: FavoritesStore,
+        now: @escaping () -> Date = { Date() }
     ) {
         self.repository = repository
         self.locationService = locationService
         self.cacheStore = cacheStore
         self.favoritesStore = favoritesStore
+        self.now = now
+        self.clock = now()
     }
 
-    /// 一覧・地図で共有する表示用の結果（犬向け条件・未確認・お気に入り絞り込み＋並び替え, FR-004/005, 設計書4）
-    var displayedResults: [CafeWithDistance] {
-        var results = CafeFilter.apply(amenities: amenityFilter, includeUnverified: includeUnverified, to: allResults)
-        if favoritesOnly {
-            results = results.filter { favoritesStore.contains($0.cafe.id) }
-        }
-        return CafeFilter.sorted(results, by: sortOrder)
+    /// 一覧・地図で共有する表示用の結果（犬向け条件・営業中・未確認の絞り込み＋並び替え, FR-004/005, 設計書4）。
+    /// 入力（結果・条件・並び順・時刻）が変わったときに一度だけ計算して保持する（描画ごとに計算しない）。
+    @Published private(set) var displayedResults: [CafeWithDistance] = []
+
+    /// 今の条件（チップ）のまま未確認の店も足した場合に増える（オンのときは含まれている）未確認の店の数。
+    /// 一覧の最後の「未確認の店も見る（N件）」に使う。`displayedResults` と一緒に計算して保持する。
+    @Published private(set) var unverifiedCandidateCount = 0
+
+    /// 営業中の判定・ピンの薄さ・営業の行（行・ピン・カード）が使う「今」。絞り込みと表示で同じ値を使うため、
+    /// 計算のたびに `now()` を一度だけ読んでここへ保存する。時間が進んだら `tick()` で更新する。
+    @Published private(set) var clock = Date()
+
+    /// `displayedResults` を計算し直した回数（地図が「データが変わったときだけ」見た目を計算し直すための印）
+    private(set) var displayRevision = 0
+
+    /// 時刻だけが進んだとき（定期更新・前面復帰）に、営業中の判定と表示を今の時刻で計算し直す。
+    func tick() {
+        recomputeDisplayed()
+    }
+
+    private func recomputeDisplayed() {
+        let current = now()
+        clock = current
+        let withUnverified = CafeFilter.apply(
+            amenities: amenityFilter,
+            includeUnverified: true,
+            openNowAt: openNowOnly ? current : nil,
+            to: allResults
+        )
+        let verified = withUnverified.filter { $0.cafe.dogPolicyStatus != .unverified }
+        unverifiedCandidateCount = withUnverified.count - verified.count
+        let visible = includeUnverified ? withUnverified : verified
+        displayRevision += 1
+        displayedResults = CafeFilter.sorted(visible, by: sortOrder)
+    }
+
+    /// チップ（営業中・犬向け条件）がオンか。「クリア」チップの表示に使う。
+    var hasActiveChips: Bool {
+        openNowOnly || !amenityFilter.isEmpty
     }
 
     /// お気に入り専用画面（機能4）向け: 全ロード済みカフェ ∩ お気に入りIDを距離順で返す。
@@ -110,16 +157,15 @@ final class CafeListViewModel: ObservableObject {
         return CafeFilter.favorites(from: withDistance, favoriteIDs: favoritesStore.favoriteIDs)
     }
 
-    /// 現在適用中の絞り込み条件の数（犬向け条件4種＋未確認表示＋お気に入りのみ）。
-    /// ツールバーのフィルタアイコンにバッジ表示するために使う（設計書4）。
+    /// 現在適用中の絞り込み条件の数（営業中＋犬向け条件4種＋未確認表示）。
     var activeFilterCount: Int {
         [
+            openNowOnly,
             amenityFilter.indoorOnly,
             amenityFilter.terraceOnly,
             amenityFilter.largeDogOnly,
             amenityFilter.dogMenuOnly,
             includeUnverified,
-            favoritesOnly,
         ].filter { $0 }.count
     }
 
@@ -128,11 +174,11 @@ final class CafeListViewModel: ObservableObject {
         phase == .loaded && displayedResults.isEmpty
     }
 
-    /// 犬向け条件・未確認・お気に入りの絞り込みを初期状態に戻す（空状態の「条件をリセット」から使用, 設計書4）
+    /// 営業中・犬向け条件・未確認の絞り込みを初期状態に戻す（「クリア」チップ・空状態の「条件をクリア」から使用）
     func resetFilters() {
         amenityFilter = AmenityFilter()
         includeUnverified = false
-        favoritesOnly = false
+        openNowOnly = false
     }
 
     /// 周辺検索を実行（contracts/api-contracts.md #1 の利用側）

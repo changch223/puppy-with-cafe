@@ -182,4 +182,52 @@ final class CafeFilterTests: XCTestCase {
 
         XCTAssertTrue(result.isEmpty)
     }
+
+    // MARK: - 営業中（再設計 段階1a: 条件チップ「営業中」）
+
+    private func makeItem(hours: OpeningHours?) -> CafeWithDistance {
+        CafeWithDistance(
+            cafe: Cafe(
+                id: UUID(), placeID: nil, name: "営業時間テスト",
+                latitude: 35.68, longitude: 139.76,
+                address: nil, contact: nil,
+                dogPolicyStatus: .allowed, dogPolicyCondition: nil,
+                lastVerified: nil, representativeSourceID: nil,
+                hasConflict: false, isClosed: false, area: "tokyo",
+                hours: hours
+            ),
+            distanceMeters: 100
+        )
+    }
+
+    /// 2026-07-06（月曜）の東京時間
+    private func mondayTokyo(hour: Int) -> Date {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        return calendar.date(from: DateComponents(year: 2026, month: 7, day: 6, hour: hour))!
+    }
+
+    func test_営業中フィルタは今営業中と判定できる店だけを通す() {
+        let open = makeItem(hours: OpeningHours(mon: [TimeRange(open: "09:00", close: "18:00")], tue: nil, wed: nil, thu: nil, fri: nil, sat: nil, sun: nil))
+        let closed = makeItem(hours: OpeningHours(mon: [TimeRange(open: "19:00", close: "23:00")], tue: nil, wed: nil, thu: nil, fri: nil, sat: nil, sun: nil))
+        let holiday = makeItem(hours: OpeningHours(mon: [], tue: nil, wed: nil, thu: nil, fri: nil, sat: nil, sun: nil))
+        let unknown = makeItem(hours: nil)
+
+        let result = CafeFilter.apply(
+            amenities: AmenityFilter(), openNowAt: mondayTokyo(hour: 12),
+            to: [open, closed, holiday, unknown]
+        )
+        XCTAssertEqual(result.map(\.cafe.id), [open.cafe.id], "時間外・定休・時間が不明の店は通さない")
+    }
+
+    func test_営業中フィルタは注入した時刻で判定する() {
+        let evening = makeItem(hours: OpeningHours(mon: [TimeRange(open: "17:00", close: "22:00")], tue: nil, wed: nil, thu: nil, fri: nil, sat: nil, sun: nil))
+        XCTAssertTrue(CafeFilter.apply(amenities: AmenityFilter(), openNowAt: mondayTokyo(hour: 12), to: [evening]).isEmpty)
+        XCTAssertEqual(CafeFilter.apply(amenities: AmenityFilter(), openNowAt: mondayTokyo(hour: 18), to: [evening]).count, 1)
+    }
+
+    func test_営業中フィルタを指定しなければ営業時間では絞らない() {
+        let unknown = makeItem(hours: nil)
+        XCTAssertEqual(CafeFilter.apply(amenities: AmenityFilter(), to: [unknown]).count, 1)
+    }
 }

@@ -36,12 +36,19 @@ extension CafeFilter {
     /// - Parameters:
     ///   - amenities: 店内OK/テラスOK/大型犬OK/犬メニューのトグル（AND結合）
     ///   - includeUnverified: `false`（既定）なら未確認ステータスの店を除外する
+    ///   - openNowAt: 指定すると、その時刻に営業中と判定できる店だけを通す（営業時間が不明の店は通さない）。
+    ///     `nil`（既定）は営業時間で絞らない。
     static func apply(
         amenities: AmenityFilter,
         includeUnverified: Bool = false,
+        openNowAt: Date? = nil,
         to cafes: [CafeWithDistance]
     ) -> [CafeWithDistance] {
         cafes.filter { item in
+            if let openNowAt,
+               OpeningHoursEvaluator.state(hours: item.cafe.hours, at: openNowAt) != .open {
+                return false
+            }
             // 犬不可(not_allowed)は常時除外する（トグルでも表示しない）。
             // 本アプリは犬同伴OK店のみを扱うデータ方針であり（実データは不可0件）、
             // 将来 not_allowed が入っても既定フィルタを素通りして

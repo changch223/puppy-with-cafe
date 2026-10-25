@@ -4,66 +4,41 @@ import UIKit
 import XCTest
 @testable import DokoWanCafe
 
-/// 地図の初期カメラ半径算出ロジックのユニットテスト（憲章 原則IV）。
-/// データ層は全カフェを絞り込みなしで保持するため、地図の「近さ感」は
-/// 初期カメラの表示範囲（span）だけで演出する。疎な地域での空白地図を防ぎつつ、
-/// 密な地域では現在地起点の近距離感を保つことを検証する。
+/// 地図表示の純ロジック（徒歩圏の縮尺・表示優先度・ピンの見た目・注釈の差分）のユニットテスト（憲章 原則IV）。
 final class MapViewModelTests: XCTestCase {
-    private func makeItem(distanceMeters: Double) -> CafeWithDistance {
+    private func makeItem(
+        distanceMeters: Double,
+        status: DogPolicyStatus = .allowed,
+        amenities: DogAmenities? = nil,
+        hours: OpeningHours? = nil
+    ) -> CafeWithDistance {
         CafeWithDistance(
             cafe: Cafe(
                 id: UUID(), placeID: nil, name: "テスト",
                 latitude: 35.68, longitude: 139.76,
                 address: nil, contact: nil,
-                dogPolicyStatus: .allowed, dogPolicyCondition: nil,
+                dogPolicyStatus: status, dogPolicyCondition: nil,
                 lastVerified: nil, representativeSourceID: nil,
-                hasConflict: false, isClosed: false, area: "tokyo"
+                hasConflict: false, isClosed: false, area: "tokyo",
+                hours: hours, dogAmenities: amenities
             ),
             distanceMeters: distanceMeters
         )
     }
 
-    func test_十分な件数が近くにあれば下限付近に収まる() {
-        // 東京駅級の密集地点を想定: 5件目までがごく近い
-        let items = [100.0, 300.0, 500.0, 800.0, 1_200.0].map(makeItem(distanceMeters:))
-        let span = MapViewModel.initialCameraSpanMeters(items: items)
-        XCTAssertEqual(span, MapViewModel.minInitialCameraMeters, accuracy: 0.1)
-    }
+    // MARK: - 徒歩圏の縮尺
 
-    func test_疎な地点では上限でクランプされる() {
-        // 八王子・葛飾級の疎な地点を想定: 最寄りでも数十km離れている
-        let items = [40_000.0, 45_000.0, 50_000.0].map(makeItem(distanceMeters:))
-        let span = MapViewModel.initialCameraSpanMeters(items: items)
-        XCTAssertEqual(span, MapViewModel.maxInitialCameraMeters, accuracy: 0.1)
-    }
-
-    func test_5件未満でも最遠件までの距離を基準にする() {
-        let items = [500.0, 1_000.0].map(makeItem(distanceMeters:))
-        let span = MapViewModel.initialCameraSpanMeters(items: items)
-        // 最遠(1,000m) * 1.3 = 1,300m だが下限3,000mでクランプされる
-        XCTAssertEqual(span, MapViewModel.minInitialCameraMeters, accuracy: 0.1)
-    }
-
-    func test_中間的な距離では比例して広がる() {
-        // 5件目までの距離が 10,000m のケース: 10,000 * 1.3 = 13,000m（下限・上限の中間）
-        let items = Array(repeating: 10_000.0, count: 5).map(makeItem(distanceMeters:))
-        let span = MapViewModel.initialCameraSpanMeters(items: items)
-        XCTAssertEqual(span, 13_000, accuracy: 0.1)
-    }
-
-    func test_カフェが1件もなければフォールバックで下限を返す() {
-        let span = MapViewModel.initialCameraSpanMeters(items: [])
-        XCTAssertEqual(span, MapViewModel.minInitialCameraMeters, accuracy: 0.1)
-    }
-
-    func test_initialCameraRegionは中心座標を保持する() {
+    func test_初期の縮尺は検索地点を中心に縦横約1_6km() {
         let center = CLLocationCoordinate2D(latitude: 35.6896, longitude: 139.7006)
-        let region = MapViewModel.initialCameraRegion(center: center, items: [])
+        let region = MapViewModel.walkingRegion(center: center)
         XCTAssertEqual(region.center.latitude, center.latitude, accuracy: 0.0001)
         XCTAssertEqual(region.center.longitude, center.longitude, accuracy: 0.0001)
+        // 緯度1度 ≒ 111km → 1.6km ≒ 0.0144度
+        XCTAssertEqual(region.span.latitudeDelta, 1_600 / 111_000, accuracy: 0.001)
+        XCTAssertGreaterThan(region.span.longitudeDelta, 0)
     }
 
-    // MARK: - displayPriority（数字クラスタ廃止の代替, UI/UXブラッシュアップ設計書2）
+    // MARK: - displayPriority（数字クラスタ廃止の代替）
 
     func test_近い順位はrequired中間はdefaultHigh遠い順位はdefaultLow() {
         XCTAssertEqual(MapViewModel.displayPriority(rank: 0), .required)
@@ -82,22 +57,106 @@ final class MapViewModelTests: XCTestCase {
         XCTAssertEqual(priorities[far.cafe.id], .required) // 2件のみなら両方 requiredPinRank 未満
     }
 
-    // MARK: - markerTintColor（旧 markerTintColor(for: DogPolicyStatus) を置換, 設計書1a/2）
+    // MARK: - ピンの形と色
 
-    func test_MapPinCategoryごとのマーカー色() {
-        // UIColor は Equatable ではないため isEqual(_:) で比較する
-        XCTAssertTrue(MapViewModel.markerTintColor(for: .indoorOK).isEqual(UIColor.systemGreen))
-        XCTAssertTrue(MapViewModel.markerTintColor(for: .terraceOnly).isEqual(UIColor.systemTeal))
-        XCTAssertTrue(MapViewModel.markerTintColor(for: .checkDetail).isEqual(UIColor.systemOrange))
-        XCTAssertTrue(MapViewModel.markerTintColor(for: .unverified).isEqual(UIColor.systemGray))
+    func test_分類ごとにピンの形が違う() {
+        XCTAssertEqual(MapPinCategory.indoorOK.pinShape, .circle)
+        XCTAssertEqual(MapPinCategory.terraceOnly.pinShape, .roundedSquare)
+        XCTAssertEqual(MapPinCategory.checkDetail.pinShape, .teardrop)
+        // 未確認は店内OKの丸（薄い店内OKも丸）と見分けるため菱形
+        XCTAssertEqual(MapPinCategory.unverified.pinShape, .diamond)
+        XCTAssertNotEqual(MapPinCategory.unverified.pinShape, MapPinCategory.indoorOK.pinShape)
     }
 
-    // MARK: - signature（お気に入り・分類の変化を再描画のトリガーに含める, 設計書2）
+    func test_分類ごとにピンの色が違う() {
+        let colors = [MapPinCategory.indoorOK, .terraceOnly, .checkDetail, .unverified].map { MapPinRenderer.fillColor(for: $0) }
+        for (index, color) in colors.enumerated() {
+            for other in colors[(index + 1)...] {
+                XCTAssertFalse(color.isEqual(other))
+            }
+        }
+    }
 
-    func test_signatureはお気に入りの変化で異なる値になる() {
-        let item = makeItem(distanceMeters: 100)
-        let withoutFavorite = MapViewModel.signature(of: [item], favoriteIDs: [])
-        let withFavorite = MapViewModel.signature(of: [item], favoriteIDs: [item.cafe.id])
-        XCTAssertNotEqual(withoutFavorite, withFavorite)
+    func test_ピン画像はキャッシュされ選択中は大きい() {
+        let style = MapPinStyle(category: .indoorOK, isFavorite: false, isDimmed: false)
+        let normal = MapPinRenderer.image(for: style)
+        XCTAssertTrue(normal === MapPinRenderer.image(for: style), "同じ見た目は描き直さずキャッシュを返す")
+        let selected = MapPinRenderer.image(for: style, isSelected: true)
+        XCTAssertGreaterThan(selected.size.width, normal.size.width)
+        // 薄さは画像ではなく alpha で表すので、薄い・濃いで同じ画像を使う
+        let dimmed = MapPinStyle(category: .indoorOK, isFavorite: false, isDimmed: true)
+        XCTAssertTrue(normal === MapPinRenderer.image(for: dimmed))
+    }
+
+    func test_しずく形は先端を座標に合わせるためにoffsetが上へずれる() {
+        let drop = MapPinStyle(category: .checkDetail, isFavorite: false, isDimmed: false)
+        let image = MapPinRenderer.image(for: drop)
+        XCTAssertLessThan(MapPinRenderer.centerOffset(for: drop, image: image).y, 0)
+        let circle = MapPinStyle(category: .indoorOK, isFavorite: false, isDimmed: false)
+        XCTAssertEqual(MapPinRenderer.centerOffset(for: circle, image: MapPinRenderer.image(for: circle)), .zero)
+        let diamond = MapPinStyle(category: .unverified, isFavorite: false, isDimmed: false)
+        XCTAssertEqual(MapPinRenderer.centerOffset(for: diamond, image: MapPinRenderer.image(for: diamond)), .zero)
+    }
+
+    // MARK: - 営業時間外のピンは薄く
+
+    /// 2026-07-06（月曜）の東京時間
+    private func monday(hour: Int) -> Date {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        return calendar.date(from: DateComponents(year: 2026, month: 7, day: 6, hour: hour))!
+    }
+
+    private var mondayHours: OpeningHours {
+        OpeningHours(mon: [TimeRange(open: "09:00", close: "18:00")], tue: [], wed: nil, thu: nil, fri: nil, sat: nil, sun: nil)
+    }
+
+    func test_営業時間が分かっていて時間外なら薄くする() {
+        let cafe = makeItem(distanceMeters: 100, hours: mondayHours).cafe
+        let style = MapPinStyle.make(for: cafe, isFavorite: false, at: monday(hour: 20))
+        XCTAssertTrue(style.isDimmed)
+        XCTAssertEqual(style.alpha, 0.4, accuracy: 0.001)
+    }
+
+    func test_本日定休も薄くする() {
+        let cafe = makeItem(distanceMeters: 100, hours: mondayHours).cafe
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        let tuesday = calendar.date(byAdding: .day, value: 1, to: monday(hour: 12))!
+        XCTAssertTrue(MapPinStyle.make(for: cafe, isFavorite: false, at: tuesday).isDimmed)
+    }
+
+    func test_営業中は薄くしない() {
+        let cafe = makeItem(distanceMeters: 100, hours: mondayHours).cafe
+        let style = MapPinStyle.make(for: cafe, isFavorite: false, at: monday(hour: 12))
+        XCTAssertFalse(style.isDimmed)
+        XCTAssertEqual(style.alpha, 1)
+    }
+
+    func test_営業時間が不明な店は薄くしない() {
+        let noHours = makeItem(distanceMeters: 100, hours: nil).cafe
+        XCTAssertFalse(MapPinStyle.make(for: noHours, isFavorite: false, at: monday(hour: 3)).isDimmed)
+        // 該当曜日が未登録（キー欠落）も不明
+        let wednesday = OpeningHours(mon: nil, tue: nil, wed: nil, thu: nil, fri: nil, sat: nil, sun: [])
+        let unknownDay = makeItem(distanceMeters: 100, hours: wednesday).cafe
+        XCTAssertFalse(MapPinStyle.make(for: unknownDay, isFavorite: false, at: monday(hour: 3)).isDimmed)
+    }
+
+    func test_保存済みと分類はピンの見た目に反映される() {
+        let item = makeItem(distanceMeters: 100, amenities: DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil))
+        let plain = MapPinStyle.make(for: item.cafe, isFavorite: false, at: monday(hour: 12))
+        let saved = MapPinStyle.make(for: item.cafe, isFavorite: true, at: monday(hour: 12))
+        XCTAssertEqual(plain.category, .terraceOnly)
+        XCTAssertNotEqual(plain, saved)
+        XCTAssertEqual(MapViewModel.styles(for: [item], favoriteIDs: [item.cafe.id], at: monday(hour: 12))[item.cafe.id], saved)
+    }
+
+    // MARK: - 注釈の差分
+
+    func test_注釈の差分は追加と削除だけを返す() {
+        let a = UUID(), b = UUID(), c = UUID()
+        let diff = MapViewModel.diff(existingIDs: [a, b], newIDs: [b, c])
+        XCTAssertEqual(diff.added, [c])
+        XCTAssertEqual(diff.removed, [a])
     }
 }
