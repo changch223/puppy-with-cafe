@@ -113,7 +113,7 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["近い", "遠い"])
     }
 
-    // MARK: - amenityFilter / includeUnverified / favoritesOnly / sortOrder（UI/UXブラッシュアップ設計書4）
+    // MARK: - amenityFilter / includeUnverified / openNowOnly / sortOrder（UI/UXブラッシュアップ設計書4）
 
     private func makeOrigin() -> ManualArea {
         ManualArea(id: "test-shinjuku", name: "テスト:新宿", latitude: 35.6896, longitude: 139.7006)
@@ -153,22 +153,6 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["店内OKカフェ"])
     }
 
-    func test_favoritesOnlyでお気に入りの店だけに絞り込める() async {
-        let favoriteCafe = makeCafe(name: "お気に入りカフェ", latitude: 35.6897, longitude: 139.7007)
-        let otherCafe = makeCafe(name: "他のカフェ", latitude: 35.6898, longitude: 139.7008)
-        let favoritesStore = makeFavoritesStore()
-        favoritesStore.toggle(favoriteCafe.id)
-
-        let viewModel = makeViewModel(cafes: [favoriteCafe, otherCafe], favoritesStore: favoritesStore)
-        viewModel.origin = .manual(makeOrigin())
-        await viewModel.refresh()
-
-        XCTAssertEqual(viewModel.displayedResults.count, 2)
-
-        viewModel.favoritesOnly = true
-        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["お気に入りカフェ"])
-    }
-
     func test_favoriteCafesは対象エリア外を検索中でも保存済みお気に入りを返す() async {
         // お気に入り画面は現在の検索エリアに依存しない（QA #1 の回帰防止）。
         let favoriteCafe = makeCafe(name: "保存済みカフェ", latitude: 35.6897, longitude: 139.7007)
@@ -204,17 +188,17 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["新しい確認", "古い確認"])
     }
 
-    func test_resetFiltersでamenityFilterとincludeUnverifiedとfavoritesOnlyが初期化される() {
+    func test_resetFiltersでamenityFilterとincludeUnverifiedとopenNowOnlyが初期化される() {
         let viewModel = makeViewModel(cafes: [])
         viewModel.amenityFilter = AmenityFilter(indoorOnly: true, terraceOnly: true, dogMenuOnly: true)
         viewModel.includeUnverified = true
-        viewModel.favoritesOnly = true
+        viewModel.openNowOnly = true
 
         viewModel.resetFilters()
 
         XCTAssertEqual(viewModel.amenityFilter, AmenityFilter())
         XCTAssertFalse(viewModel.includeUnverified)
-        XCTAssertFalse(viewModel.favoritesOnly)
+        XCTAssertFalse(viewModel.openNowOnly)
     }
 
     func test_activeFilterCountは適用中のトグル数() {
@@ -225,8 +209,114 @@ final class CafeListViewModelTests: XCTestCase {
         viewModel.includeUnverified = true
         XCTAssertEqual(viewModel.activeFilterCount, 2)
 
-        viewModel.favoritesOnly = true
+        viewModel.openNowOnly = true
         XCTAssertEqual(viewModel.activeFilterCount, 3)
+    }
+
+    func test_hasActiveChipsは営業中か犬向け条件がオンのときだけtrue() {
+        let viewModel = makeViewModel(cafes: [])
+        XCTAssertFalse(viewModel.hasActiveChips)
+
+        // 未確認の表示はチップではないので「クリア」チップの対象外
+        viewModel.includeUnverified = true
+        XCTAssertFalse(viewModel.hasActiveChips)
+
+        viewModel.openNowOnly = true
+        XCTAssertTrue(viewModel.hasActiveChips)
+
+        viewModel.openNowOnly = false
+        viewModel.amenityFilter.dogMenuOnly = true
+        XCTAssertTrue(viewModel.hasActiveChips)
+    }
+
+    // MARK: - 営業中チップ・未確認の行（再設計 段階1a）
+
+    private func hours(mon: [TimeRange]) -> OpeningHours {
+        OpeningHours(mon: mon, tue: nil, wed: nil, thu: nil, fri: nil, sat: nil, sun: nil)
+    }
+
+    /// 2026-07-06（月曜）の東京時間
+    private func mondayTokyo(hour: Int) -> Date {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Tokyo")!
+        return calendar.date(from: DateComponents(year: 2026, month: 7, day: 6, hour: hour))!
+    }
+
+    func test_営業中チップは注入した時刻で営業中の店だけを通し時間が不明の店は通さない() async {
+        var open = makeCafe(name: "昼の店", latitude: 35.6897, longitude: 139.7007)
+        open.hours = hours(mon: [TimeRange(open: "09:00", close: "18:00")])
+        var evening = makeCafe(name: "夜の店", latitude: 35.6898, longitude: 139.7008)
+        evening.hours = hours(mon: [TimeRange(open: "19:00", close: "23:00")])
+        let unknown = makeCafe(name: "時間不明の店", latitude: 35.6899, longitude: 139.7009)
+
+        var currentTime = mondayTokyo(hour: 12)
+        let viewModel = CafeListViewModel(
+            repository: DistanceFilteringMockRepository(cafes: [open, evening, unknown]),
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            favoritesStore: makeFavoritesStore(),
+            now: { currentTime }
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        XCTAssertEqual(viewModel.displayedResults.count, 3)
+
+        viewModel.openNowOnly = true
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["昼の店"])
+        XCTAssertEqual(viewModel.clock, mondayTokyo(hour: 12), "表示（行・ピン・カード）も絞り込みと同じ時刻を使う")
+
+        // 時間が進んだら tick() で絞り込みと表示の時刻が一緒に更新される
+        currentTime = mondayTokyo(hour: 20)
+        viewModel.tick()
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["夜の店"])
+        XCTAssertEqual(viewModel.clock, mondayTokyo(hour: 20))
+    }
+
+    func test_displayedResultsは入力が変わったときだけ計算し直す() async {
+        let cafe = makeCafe(name: "店", latitude: 35.6897, longitude: 139.7007)
+        let viewModel = makeViewModel(cafes: [cafe])
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        let revision = viewModel.displayRevision
+        // 読むだけでは計算し直さない（描画ごとに何度も呼ばれても同じ）
+        _ = viewModel.displayedResults
+        _ = viewModel.displayedResults
+        _ = viewModel.unverifiedCandidateCount
+        XCTAssertEqual(viewModel.displayRevision, revision)
+
+        viewModel.openNowOnly = true
+        XCTAssertEqual(viewModel.displayRevision, revision + 1)
+        viewModel.sortOrder = .recentlyVerified
+        XCTAssertEqual(viewModel.displayRevision, revision + 2)
+    }
+
+    func test_未確認の件数は今の条件で未確認だけを足したときの数() async {
+        let verified = makeCafe(
+            name: "確認済み", latitude: 35.6897, longitude: 139.7007,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        let unverifiedIndoor = makeCafe(
+            name: "未確認・店内OK", latitude: 35.6898, longitude: 139.7008, dogPolicyStatus: .unverified,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        let unverifiedOther = makeCafe(
+            name: "未確認・不明", latitude: 35.6899, longitude: 139.7009, dogPolicyStatus: .unverified
+        )
+        let viewModel = makeViewModel(cafes: [verified, unverifiedIndoor, unverifiedOther])
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        XCTAssertEqual(viewModel.unverifiedCandidateCount, 2)
+
+        viewModel.amenityFilter.indoorOnly = true
+        XCTAssertEqual(viewModel.unverifiedCandidateCount, 1, "条件に合う未確認だけを数える")
+
+        // オンのときも同じ数（「未確認の店を隠す」の行を出す判断に使う）
+        viewModel.includeUnverified = true
+        XCTAssertEqual(viewModel.unverifiedCandidateCount, 1)
+        XCTAssertEqual(viewModel.displayedResults.count, 2)
     }
 
     // MARK: - favoriteCafes（お気に入り専用画面, S4設計書）

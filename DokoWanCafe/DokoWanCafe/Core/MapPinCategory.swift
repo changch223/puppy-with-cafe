@@ -2,7 +2,7 @@ import Foundation
 
 /// 地図ピンの犬目線分類（UI/UXブラッシュアップ設計書 1a）。
 /// 純ロジック・UI非依存（憲章 原則IV）。色・アイコンの実マッピングは呼び出し側（MapViewModel等）で行う。
-enum MapPinCategory: Equatable, Sendable {
+enum MapPinCategory: Hashable, Sendable {
     /// 未確認（既定では地図・一覧に出ない。原則I: 未確認を可と主張しない）
     case unverified
     /// 店内OK
