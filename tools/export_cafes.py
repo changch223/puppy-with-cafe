@@ -41,6 +41,8 @@ DEFAULT_APP_COPY = ROOT / "DokoWanCafe" / "DokoWanCafe" / "Resources" / "cafes.j
 # data-model.md の列挙型と一致させる
 DOG_POLICY_STATUSES = {"allowed", "conditional", "not_allowed", "unverified"}
 SOURCE_TYPES = {"official_hp", "sns", "google_map", "tabelog", "blog", "other"}
+DOG_SIZES = {"small", "medium", "large"}  # 店内/テラスで入れる犬の大きさの上限（バッチK）
+DOG_INDOOR_STYLES = ["floor", "carrier", "hold"]  # 店内での過ごし方。この順序で出力する（床 / カート・キャリー / 抱っこ）
 PROVENANCES = {
     "official": 5,
     "operator_verified": 5,
@@ -255,6 +257,47 @@ def load_extras(row, label, errors):
         value = parse_tristate(row.get(column), label, column, errors)
         if value is not None:
             amenities[key] = value
+
+    # 「うちの子」判定用（バッチK）: 大きさの上限は small/medium/large、過ごし方は floor|carrier|hold を | 区切り。
+    # 空欄=不明（キーを出さない）。推測で埋めない。
+    # 大きさの上限は、その側（店内/テラス）に入れる（true）と確認できている行にだけ付けられる
+    for column, key, gate_key, gate_column in [
+        ("dog_size_max_indoor", "size_max_indoor", "indoor", "dog_indoor"),
+        ("dog_size_max_terrace", "size_max_terrace", "terrace", "dog_terrace"),
+    ]:
+        size = clean_text(row.get(column))
+        if size is None:
+            continue
+        if size not in DOG_SIZES:
+            errors.append(f"{label}: {column} は small / medium / large / 空欄 のいずれかにしてください（入力値: {size!r}）")
+        elif amenities.get(gate_key) is not True:
+            errors.append(f"{label}: {column} を入れるには {gate_column} が true である必要があります"
+                          "（入れない・不明な側に大きさの上限は付けられません）")
+        else:
+            amenities[key] = size
+
+    style_raw = clean_text(row.get("dog_indoor_style"))
+    if style_raw is not None:
+        tokens = [t.strip() for t in style_raw.split("|")]
+        bad = [t for t in tokens if t not in DOG_INDOOR_STYLES]
+        if bad:
+            errors.append(f"{label}: dog_indoor_style に不正な値があります {bad!r}"
+                          f"（{'|'.join(DOG_INDOOR_STYLES)} を | 区切りで指定してください）")
+        elif len(set(tokens)) != len(tokens):
+            errors.append(f"{label}: dog_indoor_style に重複があります（入力値: {style_raw!r}）")
+        elif amenities.get("indoor") is not True:
+            errors.append(f"{label}: dog_indoor_style を入れるには dog_indoor が true である必要があります"
+                          "（店内に入れない・不明な店に過ごし方は付けられません）")
+        else:
+            amenities["indoor_style"] = [t for t in DOG_INDOOR_STYLES if t in tokens]
+
+    # 閉店（非表示）の店に「うちの子」用の値を残さない
+    if parse_bool(row.get("is_closed")):
+        filled = [c for c in ("dog_size_max_indoor", "dog_size_max_terrace", "dog_indoor_style")
+                  if clean_text(row.get(c)) is not None]
+        if filled:
+            errors.append(f"{label}: is_closed=true の行に {', '.join(filled)} の値があります（閉店の店は空にしてください）")
+
     if amenities:
         extras["dog_amenities"] = amenities
 

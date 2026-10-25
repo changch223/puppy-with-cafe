@@ -41,6 +41,16 @@
   - (e) カート/バッグ条件など**周辺条件からの推論で `false` にしない**（明記があるときだけ）。
   - (f) 新規出典が**代表可否（allowed/conditional 等）を動かす**場合は、運営レビュー対象として報告に明記する。
 
+### 「うちの子」用の3列を調査で埋めるときのルール（バッチK・2026-10-24。バッチC など犬の条件を調べるときに併せて適用）
+- 列: `dog_size_max_indoor`（店内の大きさ上限）・`dog_size_max_terrace`（テラスの上限）= `small` / `medium` / `large` / 空、`dog_indoor_style` = `floor` / `carrier` / `hold` を `|` 区切り（順序は floor→carrier→hold）/ 空。仕様は `tools/README.md`。
+- **明記されているときだけ書く。書かれていないことは推測せず空欄**。`dog_large` の値や周辺条件（「リード必須」等）からの推論も禁止。
+- 大きさ: `large`=大型犬OK・全犬種OK・サイズ制限なし、`medium`=中型犬まで、`small`=小型犬のみ・10kg未満・抱っこ／カート／バッグに入るサイズのみ。店内とテラスで違うときは別々の列に入れる。
+- 過ごし方（店内に入れる店だけ。`dog_indoor` が true でないと配信エラー）: `floor`=床に下ろしてよい・足元・椅子やソファに座らせてよいなど、カートや抱っこを求めない明記、`carrier`=カート・キャリー・ドッグバッグ・ケージが条件、`hold`=抱っこが条件。「カートまたは抱っこ」なら `carrier|hold`。**単に「店内OK」だけで条件の記載がなければ空**（`floor` にしない）。テラスの過ごし方は対象外。
+- `dog_indoor_style` は「明記された過ごし方の**一覧**」で網羅的ではない。含まれていないことは不可を意味しない（`carrier` だけでも「カート必須」とは限らない）。必須・禁止の条件は `dog_note`／出典の条件文に書く。**「〜がおすすめ」の推奨や、体験談（「〜できた」）だけの記述は根拠にしない**。
+- サイズ上限は対応する可否が `true` の側にだけ入れる（店内=`dog_indoor`、テラス=`dog_terrace`）。「要確認」「未確認」「不明」と並んでいる値は入れない。閉店の店は3列とも空。「大型犬不可」だけの記載は `medium` と読んでよい（運営承認済み）。
+- 出典間で食い違うときはその列を**空欄**にする（`dog_large` の (d) と同じ扱い）。根拠の原文は報告に添える。
+- 可能なら**独立した2者が別々に読み取り、一致した値だけを採用**する（バッチKの方式）。
+
 ## バッチE: リンク皆無の補完（138件）
 - **対象**: `link_website / link_instagram / link_x / link_tabelog` が**すべて空**の行。
   抽出: `python3 -c "import csv;print(sum(1 for r in csv.DictReader(open('data/master/cafes.csv')) if not any(r[c].strip() for c in ['link_website','link_instagram','link_x','link_tabelog'])))"`

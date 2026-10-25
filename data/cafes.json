@@ -9,6 +9,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "店内は入口付近の一部席のみ・テラスは全席可。大型犬も可",
@@ -156,6 +157,7 @@
         "dog_menu": true,
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定(インナーテラス仕様で天候に左右されにくい)・ペット用リードフック/足洗い場完備・トマトピザやミートボール等のペット専用メニューあり・犬種条件は要問合せ。",
@@ -466,7 +468,11 @@
       "contact": "03-6820-5325",
       "description": "多摩センター駅近くの土日限定営業のベーグル専門店。店内での犬同伴が可能。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ]
       },
       "dog_note": "リード着用またはキャリー・カート等の使用が必須(専門サイトの案内)。",
       "dog_policy_condition": null,
@@ -767,6 +773,7 @@
       "contact": null,
       "description": "秋川渓谷・石舟橋そばのキッチンカー店。ソフトクリームやハンバーガーを提供し、川沿いの屋外席は愛犬とリード同伴で利用できる。",
       "dog_amenities": {
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "リード必須・小型/中型/大型犬とも制限なしと案内。屋内席はなくキッチンカー+屋外席のみの営業形態。",
@@ -1023,7 +1030,12 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": false
       },
       "dog_note": "店内のみ入店可能(テラス席なし)・1グループ最大6頭まで(大型犬は3頭まで)・リード着用とカフェマット使用が基本(公式・紹介記事)",
@@ -1366,6 +1378,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ同伴可・大型犬OK",
@@ -1579,6 +1592,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内可否は情報により異なる(店内・テラスともOKとする情報と、テラス席のみ可とする情報がある)。大型犬まで同伴可との記載あり。営業状況は来店前に要確認。",
@@ -1991,7 +2005,11 @@
       "description": "葛西の川沿いにあるドッグカフェ。店内・テラスとも犬同伴が可能で、オーガニックコーヒーと軽食が楽しめる。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "テラス席は禁煙・カウンター席は喫煙可。昼はドッグカフェ、夜は「そばBAR」として営業",
@@ -2296,7 +2314,12 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "来店時は事前連絡必須・1グループ原則3頭まで・店内はリードを短く持つかキャリー使用・テラス席は会員制",
@@ -2414,7 +2437,11 @@
       "description": "大森駅東口徒歩3〜4分の裏路地イタリアン・ダイニングバー。店内で犬と食事ができ、姉妹店に焼肉ぼんぼりがある。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "狂犬病ワクチン接種済みの犬に限り店内可。店内はリード着用必須・テーブルに犬を乗せない。小型〜大型犬OK・お水サービスあり。",
       "dog_policy_condition": null,
@@ -2559,7 +2586,11 @@
       "description": "目黒川沿いのビーチスタイルカフェ。店内・テラスとも犬同伴可能。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "入店時は椅子に店側貸出のマットを使用",
@@ -2700,6 +2731,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "犬用マットの貸出あり(dog-eats.tokyoより)",
@@ -2772,6 +2804,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -2862,7 +2895,11 @@
       "description": "新宿三丁目駅近くの犬同伴OKカフェ。店内・テラスとも犬同伴可能で大型犬も歓迎している。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "椅子やソファ席を利用する場合はカフェマットを敷いて対応(出典記載)。手作り犬用おやつの販売あり(正式なフードメニューの明記なし)。",
@@ -2933,7 +2970,8 @@
       "description": "四谷三丁目のステーキとクラフトビールの店。喫煙可の一角がペット同伴席として利用できる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "medium"
       },
       "dog_note": "ペット同伴可能な席は喫煙可能な席のみ(分煙)。",
       "dog_policy_condition": "店内OK・犬種条件は中型犬まで",
@@ -3121,7 +3159,12 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "carrier",
+          "hold"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "入口付近に大型犬用1卓、それ以外は抱っこやカートであれば店内どの席もOK。手作り無添加のわんちゃん用おやつも販売。",
@@ -3306,6 +3349,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "small",
         "terrace": true
       },
       "dog_note": "店内同伴可能日は毎月1日・11日・21日(31日も対象とする情報もある)。トイレのしつけ・ワクチン証明・無駄吠えのしつけ・リード使用・カフェマット持参が条件（条件は情報により異なる）。それ以外の日はテラス席のみ同伴可。テラス席の犬サイズ制限は不明。",
@@ -3406,7 +3450,8 @@
       "description": "駒沢公園西口近くのアメリカンダイニング&バー。店内の一部の席で犬同伴が可能で大型犬もOK。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内は一部の席のみ犬同伴可",
       "dog_policy_condition": null,
@@ -3529,6 +3574,7 @@
       "description": "JR高尾駅と京王高尾山口駅の間、甲州街道沿いの小仏川ほとりにあるグルメバーガー専門カフェ。奥に茶室も併設。テラス席で犬と同伴でき、飲み水のサービスもある。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "営業日・時間が資料により異なるため来店前に公式SNSでの確認を推奨",
@@ -3735,7 +3781,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "リードフックあり・犬用の水/食事を提供",
       "dog_policy_condition": null,
@@ -3855,6 +3902,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": false,
+        "size_max_indoor": "small",
         "terrace": true
       },
       "dog_note": "無駄吠え・威嚇が強い場合はテラス席への移動をお願いする場合あり",
@@ -4126,6 +4174,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "デッキサイド／レストランサイドのテラス席のみ犬同伴可（店内は不可）。リードは短めに、水辺のため要注意。事前連絡推奨。",
@@ -4227,6 +4276,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(樽状テーブル)・混雑時は入店不可の場合あり・事前電話推奨",
@@ -4451,7 +4501,8 @@
       "contact": null,
       "description": "目黒本町（武蔵小山エリア）のカフェダイニング。ランチタイムのみ愛犬と一緒に入店できる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "size_max_indoor": "small"
       },
       "dog_policy_condition": "ランチタイムのみ愛犬と入店可（移転後の店舗）",
       "dog_policy_status": "conditional",
@@ -4516,6 +4567,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス(ウッドデッキ)限定・大型犬もOK",
@@ -4636,6 +4688,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -4679,6 +4732,7 @@
         "dog_menu": true,
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラスにリードフックあり・お水とドッグトリーツを提供",
@@ -4795,6 +4849,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "「店内：不可／テラス：大型犬・中型犬・小型犬いずれも同伴可」と明記",
@@ -5390,6 +5445,7 @@
       "description": "食べログカフェ百名店にも選ばれた二子玉川の人気カフェ。テラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "同伴条件の詳細は未確認のため、来店前に確認推奨",
@@ -5678,6 +5734,7 @@
         "dog_menu": false,
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席はハイチェア+樽テーブル席、スノーピークのチェア&テーブル席の2種類。カート利用可。マナーウェアは任意。",
@@ -5784,6 +5841,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可。全サイズ対応でお水サービスあり。",
@@ -5875,7 +5933,11 @@
       "description": "堀切菖蒲園駅近くのフレンチ系カフェレストラン。全犬種が店内の全席で同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "椅子に乗せる場合はシート持参が必要(公式パートナー情報より)",
       "dog_policy_condition": "全席(7テーブル26席)で全犬種が同伴可能。椅子に乗せる場合はシート持参が必要",
@@ -6180,7 +6242,11 @@
       "description": "用賀駅から徒歩9分・雑居ビル2階の和洋折衷ダイニングカフェ。店内で犬同伴の食事が楽しめる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_policy_condition": "店内全席可・大型犬も歓迎・リード必須",
       "dog_policy_status": "conditional",
@@ -6299,7 +6365,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "リード必須(店内で手を離さないよう案内)。複数頭でのお茶会などは事前予約が必要。",
       "dog_policy_condition": null,
@@ -6361,6 +6431,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席は間隔が広くカート利用もしやすいと紹介されている。大型犬も同伴可との記載あり(inunavi, 2026-08確認)。",
@@ -6471,7 +6542,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "carrier"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "カートでの入店も可能・看板犬がいる(出典記載)",
       "dog_policy_condition": null,
@@ -6767,7 +6842,11 @@
       "description": "北千住駅西口徒歩3分・桝屋ビル1階のテキサスメキシカン料理のカフェ&ダイナー。ペット同伴が可能で、同伴の場合は予約が推奨されている。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "ペット同伴の場合は予約推奨(座席数の制限に関する記載はなし)",
       "dog_policy_condition": "小型・中型・大型犬OK・店内ペットOK席2席・リード必須",
@@ -6887,6 +6966,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(店内不可)。",
@@ -6993,7 +7073,8 @@
       "description": "大和田町のカフェ。体重10kg前後までの小型犬に限り同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "small"
       },
       "dog_policy_condition": "体重10kg前後までの犬が同伴可・大型犬同伴不可",
       "dog_policy_status": "conditional",
@@ -7083,7 +7164,8 @@
       "description": "国道16号沿いに移転オープンした福生のドッグカフェ。看板犬の黒ラブがお出迎えし、おばんざい付きランチとクレープが名物。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "小型・中型・大型犬いずれも同伴可。看板犬は黒のラブラドール。",
       "dog_policy_condition": null,
@@ -7194,6 +7276,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "全22席が犬同伴対応(小型・中型・大型犬すべてOK)。お水提供・リードフック席あり。犬用の天然酵母パン・おやつの販売あり。",
@@ -7261,6 +7344,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "入口テラスカウンター席のみ犬同伴可(出典記載)",
@@ -7316,6 +7400,7 @@
       "description": "西池袋のニシイケバレイ内にあるカフェ。テラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席で犬同伴可(店内の記載なし)・大型犬OK",
@@ -8012,7 +8097,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -8158,6 +8247,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "全犬種同伴可・基本的なマナーを守っての利用が条件(公式サイト)",
@@ -8273,7 +8363,11 @@
       "description": "東急スクエアガーデンサイト内の犬同伴専門カフェ。全犬種・全50席で犬と一緒に過ごせる。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内は必ずリード着用・来店前にトイレを済ませる・無駄吠えに注意(水皿・イス用マット・床用マット貸出あり)",
@@ -8572,6 +8666,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "犬同伴はテラス席と店内「ラウンジ」エリアに限る(一般の店内席は不可)。1予約につき犬4頭まで同伴可。大型犬も同伴可との記載あり(petokoto・inunavi, 2026-07〜08確認)。",
@@ -8634,7 +8729,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "リード必須・ヒート中の犬は利用不可",
@@ -8919,6 +9018,9 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ],
         "large_dogs": true
       },
       "dog_note": "床は滑りにくい素材・全席リードフック完備・飲み水提供。バギー(犬用キャリー)での入店も可能。",
@@ -9025,7 +9127,8 @@
       "description": "京成小岩近くのドッグカフェ。看板犬のバーニーズマウンテンドッグ「ジェリー」が出迎え、犬を連れていても連れていなくても利用できる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_policy_condition": "大型・中型・小型犬同伴可・トイレのしつけ済みが条件",
       "dog_policy_status": "conditional",
@@ -9201,7 +9304,8 @@
       "description": "高円寺駅北口近くのソファー席主体のカフェ。店内で犬同伴が可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "ほぼ全席がソファー席・マット使用などのマナー厳守(出典記載)",
       "dog_policy_condition": "大型・中型・小型犬は店内利用可（一部席）",
@@ -9342,7 +9446,10 @@
       "contact": null,
       "description": "トリミングサロン併設の美容室系カフェ。リード着用を条件に店内で犬と食事ができる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor"
+        ]
       },
       "dog_note": "リード必須。小型犬限定とする情報もあり、中大型犬の可否は要確認",
       "dog_policy_condition": "店内可(小型犬の同伴として記載。中大型犬への言及なし)",
@@ -9438,6 +9545,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "1階店内とテラス席で犬同伴可(全犬種OK・犬用の水も提供)。2階の同伴可否は不明。※「テラス・オープンエアのみ可」とする情報もあり、情報が分かれる(来店前に要確認)",
@@ -9557,7 +9665,8 @@
       "description": "押上駅近くのオールデイダイニングカフェ。ナチュラルワインや多国籍料理が楽しめ、小〜中型犬同伴で店内利用ができる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "medium"
       },
       "dog_policy_condition": "小型・中型犬のみ・大型犬不可・1組4頭まで・マット/ブランケット持参必須",
       "dog_policy_status": "conditional",
@@ -9698,6 +9807,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可・ヒーターやパラソル、ペット用飲用水の用意はないため要持参(出典記載)",
@@ -9772,6 +9882,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ同伴可",
@@ -10126,6 +10237,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "天候等によりテラス利用不可の場合あり（来店前に公式Instagram等で要確認）。",
@@ -10237,6 +10349,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定(店内不可)。2020年10月にテラスへの直通階段を設置し大型犬も利用しやすくなった",
@@ -10331,7 +10444,8 @@
       "description": "成城学園前駅から南へ徒歩数分の一軒家カフェ。各国の家庭料理と手作りケーキを提供し、週末には生演奏ライブも開催。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内に小型犬(トイプードル・ポメラニアン等)を複数同伴した実績を来店者が報告。小型〜大型犬まで店内可との記載あり(itsumo.dog, 2026-08確認・来店前の電話確認推奨)。テラスに関する記載はなし。ライブ開催日は同伴可否が変わる場合があるとの紹介もあり(来店前の確認推奨)。",
       "dog_policy_condition": "店内・小型〜大型犬まで終日入店可（要電話確認）",
@@ -10657,7 +10771,11 @@
       "description": "池上駅近くのドッグカフェ&バー。室内ドッグラン併設で犬用メニューも人気。旧「ドッグカフェ フレンド」を改装。",
       "dog_amenities": {
         "dog_menu": true,
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ]
       },
       "dog_note": "マナーベルト着用またはカート・かばん内での利用で入店可・室内ドッグラン併設",
       "dog_policy_condition": "店内奥に犬用スペース（ドッグラン）があり、そこで犬同伴可。犬用メニュー「わんバーグ」等あり。テラス席の有無は不明。",
@@ -10770,6 +10888,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ犬同伴可(店内不可)。大型犬もテラスなら可",
@@ -10884,6 +11003,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "大型犬もテラス席なら同伴可(店内は不可)",
@@ -11547,6 +11667,10 @@
       "description": "碑文谷公園そば・東急東横線高架下のチーズ工房併設ベイクカフェ。店内・テラス席ともに愛犬と過ごせる。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "hold"
+        ],
         "terrace": true
       },
       "dog_note": "リードは短めに保持。椅子に乗せる場合は抱っこかカフェマットを使用のこと(店舗の案内による)",
@@ -11654,6 +11778,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(店内不可)。大型犬もテラス席で同伴可。",
@@ -11961,6 +12086,7 @@
       "description": "南池袋にあるカフェ。テラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席で犬同伴可(店内の記載なし)・大型犬OK",
@@ -12225,7 +12351,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_policy_condition": "大型犬店内OK・サイズや性格は事前相談前提",
       "dog_policy_status": "conditional",
@@ -12329,7 +12456,11 @@
       "contact": null,
       "description": "新宿御苑前の英国式クラフトビールバー。店内で小型犬と一緒に過ごせる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
+        "size_max_indoor": "small"
       },
       "dog_note": "店内利用時はリード着用必須。他の客の事情により同伴を断る場合あり。",
       "dog_policy_condition": "小型犬OK・店内OK・リード着用必須",
@@ -12638,7 +12769,8 @@
       "description": "目黒川沿いのビストロ。店内奥の一部席のみ犬同伴可能(川沿いの窓際席は不可)。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "medium"
       },
       "dog_note": "事前電話予約推奨(ペット可能席が少数のため)",
       "dog_policy_condition": "店内は2テーブル限定で犬同伴可・テラスの記載なし",
@@ -12796,6 +12928,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ同伴可（小型・中型・大型犬とも可）",
@@ -12903,6 +13036,7 @@
         "dog_menu": true,
         "indoor": false,
         "large_dogs": false,
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "テラス席(約50席)限定・店内不可・ワンちゃん専用メニュー(パン・モンブランケーキ・ノンアルコールドリンク)あり(出典記載)",
@@ -12974,6 +13108,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席は予約制(電話のみ・ネット予約不可)",
@@ -13036,6 +13171,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "大型犬も同伴可との記載あり(petokoto・inunavi, 2026-07〜08確認)。公式サイトには犬同伴に関する案内が見当たらない(2026-07時点)。",
@@ -13278,6 +13414,7 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": false,
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "リード・ペットカート利用可。犬用メニュー(特別フード・記念日ケーキ等)あり。",
@@ -13340,6 +13477,7 @@
       "description": "祖師ヶ谷大蔵駅近くのイタリアンチェーン店。生パスタと石窯ピザが人気で、公式にペット同伴可の案内がある。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "公式店舗ページは設備欄に「ペット同伴可」とのみ記載(店内・テラスの区分の明記なし)。外部の犬お出かけ紹介サイトはテラス席限定での犬同伴を案内。",
@@ -14386,7 +14524,11 @@
       "description": "葛西の住宅街にあるドッグカフェ。看板犬のゾロ君とミロちゃんが出迎え、店内・テラスとも大型犬まで同伴可能。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "トイレのしつけ・予防接種・無駄吠えのしつけ必須・ヒート中不可・リード使用/カフェマット持参必須(貸出あり)",
@@ -14650,6 +14792,7 @@
         "dog_menu": false,
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "駐車場なし",
@@ -14716,6 +14859,7 @@
         "dog_menu": true,
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス限定・鹿肉と紫芋のごはん等のドッグメニューあり(量調整可)・お水サービスあり。",
@@ -14772,6 +14916,7 @@
         "dog_menu": true,
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定・店内不可・ワンちゃん用メニュー(300円)あり",
@@ -15066,6 +15211,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内奥はガラス扉で仕切られた犬同伴専用スペース・外壁沿いに小さなテラス席あり(混雑時は入店できない場合あり)",
@@ -15458,6 +15604,7 @@
       "description": "天王洲アイルのペット可カフェ。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席はペット同伴可（店内は未確認）",
@@ -15652,6 +15799,7 @@
       "description": "二子玉川高島屋裏にある本格モロッコ料理店。テラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定とする情報と、店内の一部・テラスともペット同伴可とする情報がある。店内可否の詳細は未確認。",
@@ -15832,6 +15980,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席で大型犬も同伴可(店内可否は本記事に明記なし)",
@@ -15932,7 +16081,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内は犬のみペット同伴可(猫等の他ペットは不可)・テラスでの可否は出典に記載なし",
       "dog_policy_condition": null,
@@ -16057,6 +16207,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": false,
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "ランチタイムのテラス席限定。ディナー等その他時間帯の可否は出典に記載なし",
@@ -16509,7 +16660,8 @@
       "description": "冨士森公園向かいのカフェ。店内でわんちゃんと過ごせ、室内ミニドッグランや犬用パンなど設備・メニューが充実。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "室内にミニドッグラン完備・カフェマット/リードフック無料・犬用パン(300円)あり",
       "dog_policy_condition": null,
@@ -16630,6 +16782,8 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "medium",
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "店内・テラス可、大型犬はテラスのみ可",
@@ -16822,7 +16976,11 @@
       "description": "駒沢公園から徒歩圏内のカジュアルイタリアン。店内・テラスとも犬同伴が可能で大型犬もOK。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "カートでの入店も可能だが混雑時は犬の頭数・カートの有無により入店を断られる場合があるため予約時の事前確認を推奨",
@@ -17062,6 +17220,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(道路に面したテラス席)",
@@ -17619,6 +17778,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "テラス席は屋根なし",
@@ -17672,7 +17832,8 @@
       "description": "中野山王のカフェ。全席・全犬種で同伴可能なドッグフレンドリーな店。Honda公式おでかけ情報でも紹介されている。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "全客席(6テーブル14席)すべてで犬同伴可・入店可能犬種は全犬種OK・お水のサービスあり・周囲への配慮を求める注意書きあり",
       "dog_policy_condition": null,
@@ -17778,6 +17939,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定(店内は不可)",
@@ -18350,7 +18512,12 @@
       "contact": null,
       "description": "上野駅近くの隠れ家的カフェ。自家焙煎コーヒーとフレンチトーストが人気で、犬は抱っこ・床置き・バッグでの同伴が可能。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier",
+          "hold"
+        ]
       },
       "dog_policy_condition": "大型犬同伴の可否は要確認(記事内に明記なし)",
       "dog_policy_status": "conditional",
@@ -18442,6 +18609,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内・テラスとも犬同伴可・1組2頭まで(画像キャプションより・来店前要確認)。サイズ・頭数の詳細は来店前に要問合せ。",
@@ -18530,6 +18698,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可・リード必須・排泄物は飼主が処理(公式サイトによる)。",
@@ -18801,6 +18970,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席(屋根付き・全6席中2卓)限定で犬同伴可・大型犬まで対応可",
@@ -18904,6 +19074,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラスへの移動時、共用部(エスカレーター・階段等)ではキャリーバッグ等への収納が必要",
@@ -19001,6 +19172,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "犬以外の小動物(猫・フェレット等)も同伴可との紹介あり",
@@ -19159,7 +19331,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "ドッグメニュー・おやつ・お水・ブランケット貸出あり(専門サイト記載)。犬用トイレ設備はないため来店前の排泄推奨。",
       "dog_policy_condition": null,
@@ -19415,6 +19588,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "東京ソラマチ館内は犬同伴不可・店舗外のテラス席のみ利用可(満席時はソラマチ広場のオープンテラスも利用可とスタッフ案内あり)",
@@ -19731,6 +19905,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定・大型犬同伴可（出典記載）。",
@@ -19934,7 +20109,8 @@
       "description": "蔵前駅近くのポキボウル専門店。混雑時を除き店内で犬と食事ができる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "混雑状況により店内同伴に制限がある場合がある（出典記載）",
       "dog_policy_condition": null,
@@ -20060,6 +20236,7 @@
       "description": "冨士森公園近くのカフェ。屋根付きのテラス席でわんちゃんと一緒に過ごせる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "屋根付き・空調完備のテラス席が犬同伴可能エリア",
@@ -20194,7 +20371,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
@@ -20726,6 +20904,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "ビニールシートで覆われたテラス席・ペットカート可(専門サイト記載)",
@@ -20824,7 +21003,8 @@
       "description": "自由通り沿いのオーガニック&ヴィーガン一軒家カフェ。ソファ席1席限定で小型犬のみ同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "small"
       },
       "dog_note": "該当席は1席のみのため要予約推奨。犬同伴席の階は情報により異なる(上階寄りとする情報と1階とする情報がある)・来店前に要確認",
       "dog_policy_condition": "1階ソファ席1卓のみ・小型犬のみ入店可",
@@ -20927,6 +21107,7 @@
         "dog_menu": false,
         "indoor": true,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "店内は入口付近の一部席のみ犬同伴可",
@@ -21145,7 +21326,12 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内ではリード着用またはバスケット・カート使用が必須。狂犬病予防接種証明・発情中のメスは入店不可等の条件あり。",
       "dog_policy_condition": null,
@@ -21257,6 +21443,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定・屋内利用不可（公式ページに明記）。",
@@ -21369,6 +21556,7 @@
       "description": "二子玉川ライズ内、大航海時代の香辛料交易をテーマにしたネオビストロ。看板に「PET WELCOME」と掲げ、テラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "大型犬テラス席OK（雨天ビニールカーテン時は不可）",
@@ -21519,6 +21707,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "店内同伴可否は情報により異なる(店内可とする情報と、テラス席のみ・店内不可とする情報がある)。来店前に要確認",
@@ -21622,7 +21811,8 @@
       "description": "八王子駅近くにオープンしたドッグカフェ。看板犬ロッソ・チュルが出迎え、店内の座席でわんちゃんと一緒に過ごせる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "個室は扉設置後にノーリードで過ごせる予定・各所にリードフック完備",
       "dog_policy_condition": null,
@@ -21685,6 +21875,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可・ペットカートでの来店も可(出典記載)",
@@ -22021,6 +22212,7 @@
       "description": "玉川高島屋アイビーズプレイス最上階、緑に囲まれたウッドデッキテラスが特徴のカフェ。テラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "犬用の水やリードフックを用意しているとの紹介あり(出典による)。",
@@ -22318,6 +22510,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": false,
+        "size_max_indoor": "medium",
         "terrace": true
       },
       "dog_note": "ソファー席は犬同伴不可・ワンちゃん用マット貸出とお水の用意あり",
@@ -22442,6 +22635,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "犬同伴可能な席はテラスの4テーブル・8席に限定(予約可)",
@@ -22803,6 +22997,7 @@
       "description": "砧公園内・世田谷美術館地下1階のカフェ。噴水を望むテラス席(20席)で犬同伴が可能(美術館内はペット入場不可)。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "美術館館内はペット入場不可・テラス席のみ利用可",
@@ -22905,6 +23100,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可・店内(30席)は不可・注文時はカウンターへ行く必要あり",
@@ -23419,6 +23615,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ・小型〜大型犬OK（大型犬も歓迎）",
@@ -23481,6 +23678,7 @@
       "description": "ホテルルミエール西葛西1階の寿司・創作料理店。カウンターではジャズが流れ、テラス席では愛犬と一緒に握り寿司が楽しめる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "公式サイトに「ペット可のテラス席は大人気です。テラス席では、ペットと同伴でお寿司が食べられます」と明記。店内可否の明記はなし。",
@@ -24068,7 +24266,12 @@
       "description": "東京ドームシティ「Meets Port」エリアにある産直牡蠣バー。店内・テラスともマナーパンツ着用で犬同伴が可能。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "マナーパンツ着用必須。椅子や床に座らせる際はカフェマットまたはカートを使用(公式記載)。",
@@ -24391,6 +24594,7 @@
       "description": "荻窪駅近くのナポリピッツァが自慢のイタリアンレストラン。屋根付きのテラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "ペットOKのテラス席あり(出典記載)・店内同伴可否の明記なし",
@@ -24552,7 +24756,8 @@
       "description": "自由が丘駅南口徒歩3分、隠れ家的な本格イタリアン。店内入口側の限られた席のみ犬同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内が狭いため大型犬は注意との紹介あり",
       "dog_policy_condition": "店内入口側4人掛け×4席のみ犬同伴可(奥のエリアは不可)",
@@ -24657,7 +24862,8 @@
       "description": "北千住駅徒歩4分の台湾人オーナーによる台湾カフェ。1階の座席でペット入店が可能で、散歩ついでの利用も歓迎されている。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "1階の座席でペット入店可能と紹介(2階については記載なし)",
       "dog_policy_condition": "小型・中型・大型犬OK・店内一部の席のみ",
@@ -24935,7 +25141,12 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "hold"
+        ],
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "ワクチン接種済みの犬のみ・ヒート中の犬は同伴不可(専門サイト記載)",
@@ -25008,7 +25219,8 @@
       "description": "キンプトン新宿東京1階のニューヨークスタイルカフェ&バー。公式サイトに1予約あたり犬4頭まで同伴可能と明記されている。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "1予約につき犬4頭まで同伴可(公式サイト明記)。カフェマット持参が必要(出典記載)。オリジナルボーンクッキーの提供あり(正式な犬用フードメニューではない、と公式は案内)。",
       "dog_policy_condition": "公式サイトに「At District – Brasserie, Bar, Lounge and The Jones Café | Bar, we welcome up to 4 pets maximum per reservation.」と明記(1予約4頭まで)。テラス限定の記載はなし。",
@@ -25823,7 +26035,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "テラス席は3月〜10月限定(オーニングテント付き)。犬用フード・お水の用意やフードボウルの貸出あり。犬が苦手な方向けの専用エリアもあり。ソファ席利用時はカフェマット持参が望ましい(出典記載)。",
@@ -25897,6 +26113,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ犬同伴可(店内不可)",
@@ -25955,6 +26172,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": false
       },
       "dog_note": "個室のみ利用可・座席数限定のため要予約",
@@ -26124,6 +26342,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": false,
+        "size_max_indoor": "medium",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -26406,6 +26625,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ犬同伴可(店内不可)。大型犬も同伴可",
@@ -26508,7 +26728,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内で犬同伴可。テーブルにリードフックあり、ドッグメニューも提供。",
       "dog_policy_condition": "店内OK・大型犬まで",
@@ -26842,7 +27063,8 @@
       "description": "駒沢のガラス戸内席が特徴のカフェ。店内の一部席で犬同伴が可能で大型犬もOK。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内はガラス戸内の一部席のみ犬同伴可",
       "dog_policy_condition": "店内一部(ガラス戸内)のみ犬同伴可・大型犬OK",
@@ -27045,6 +27267,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "屋上テラス席・小型/中型/大型OK・リード必須",
@@ -27285,6 +27508,9 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
         "terrace": true
       },
@@ -27487,6 +27713,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席(サンルーム)・大型犬OK",
@@ -27615,7 +27842,11 @@
       "description": "デックス東京ビーチ3階のシドニー発オールデイダイニング。パンケーキが有名で200席超の広い店内とテラス席を持つ。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内利用時はペットゲージまたはペットカートの使用が必須(デックス公式)・テラス席は終日同伴可",
@@ -27810,6 +28041,7 @@
       "description": "芝浦運河沿いのヘルシー志向レストラン。テラス席で犬同伴が可能で、店内も特定のペットOKデーに限り可という案内あり。",
       "dog_amenities": {
         "large_dogs": false,
+        "size_max_terrace": "small",
         "terrace": true
       },
       "dog_note": "通常はテラス席のみ犬同伴可。店内は「ペットOKデー」等特定日のみ案内あり(詳細は要問合せ)。",
@@ -28035,6 +28267,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "犬用メニューの有無は情報により異なる",
@@ -28209,6 +28442,9 @@
       "dog_amenities": {
         "dog_menu": false,
         "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ],
         "terrace": true
       },
       "dog_note": "ペットカート利用可。ペット用メニュー・お水・リードフックは出典に記載なし(要持参・要確認)。",
@@ -28402,7 +28638,11 @@
       "description": "アメリカンガレージ風の内装が特徴のカフェ&ダイニングバー。店内・テラス席とも犬同伴可能。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "ドッグカフェではないが、ペット1頭につきドッグフード付きセットチャージ550円（ぐるなび）(詳細は要問合せ)。大型犬も店内・テラスとも同伴可",
@@ -28537,7 +28777,12 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "small",
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "リード必須・予防接種済みが条件・椅子やソファに乗せる際は犬用敷物持参・手作りドッグメニューあり(itsumo.dog)",
@@ -28717,6 +28962,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "ペット用の水皿はあるがリードフックはなし・方針変更の可能性があるため来店前に要確認(出典記載)",
@@ -28898,6 +29144,9 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
         "terrace": true
       },
@@ -28969,7 +29218,10 @@
       "contact": null,
       "description": "武蔵小山パルム商店街のピザダイニング。カートかケージに入れれば愛犬と店内で過ごせる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ]
       },
       "dog_note": "入店にはカートまたはケージ使用必須と明記",
       "dog_policy_condition": "カートまたはケージに入れた状態での入店をお願いしていますと明記",
@@ -29323,6 +29575,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": false,
+        "size_max_indoor": "medium",
         "terrace": false
       },
       "dog_note": "3階のため小型犬はカート等での来店が望ましい",
@@ -29683,7 +29936,8 @@
       "description": "花とグリーンに囲まれたボタニカルな空間のカフェ。店内で犬同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "medium"
       },
       "dog_note": "椅子への同伴時はカフェマット使用必須・床を歩かせるのは不可のためカートやスリングでの来店推奨(出典記載)",
       "dog_policy_condition": "店内犬同伴可(テラスなし)・大型犬不可・カートやスリング利用推奨と明記",
@@ -29902,7 +30156,10 @@
       "description": "犬と人が同じ食事を共有できるコンセプトの月島のカフェ。全席犬同伴可でリードフック・ペットマットを常備。",
       "dog_amenities": {
         "dog_menu": true,
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ]
       },
       "dog_note": "全席犬同伴可(店内)。リードフック・ペットマット完備、ペットカート持込可。",
       "dog_policy_condition": null,
@@ -30281,7 +30538,8 @@
       "contact": null,
       "description": "都立大学駅すぐのニューレトロイタリアン。店内の一部席で小型犬と食事ができる(座席数に限りあり)。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "size_max_indoor": "small"
       },
       "dog_policy_condition": "店内でもワンちゃんと一緒に過ごせる(小型犬に限る)と明記",
       "dog_policy_status": "conditional",
@@ -30881,6 +31139,10 @@
       "description": "井の頭恩賜公園内にあるタイ・ベトナム料理レストラン。リードまたはケージ・カート使用を条件に、店内で犬同伴で利用できる。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ],
         "large_dogs": true
       },
       "dog_note": "リードに繋ぐかケージ・カートに入れ足元で同伴(椅子・テーブルへの同席は不可)。トイレトレーニング未完了・予防接種未実施のペットは入店不可。屋根付きテラス席で大型犬も歓迎との記載あり(wanico, 2026-08確認)。",
@@ -30996,7 +31258,8 @@
       "description": "駒沢大学駅から徒歩1〜2分のカフェ。店内全席で犬同伴が可能で大型犬もOK・看板犬もいる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "店内は全席犬同伴可(小型〜大型犬)・看板犬「アイビーちゃん」がいる",
       "dog_policy_condition": null,
@@ -31298,6 +31561,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": false,
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "テラス席は1席のみのため犬同伴時は前日までの予約が必要(出典記載)",
@@ -31414,7 +31678,11 @@
       "contact": null,
       "description": "東武東上線中板橋駅南口徒歩2分の韓国風カフェ。飼い主の愛犬を偲んで名付けられ、犬はバッグ収納・抱っこで店内同伴できる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "carrier",
+          "hold"
+        ]
       },
       "dog_note": "店内利用に慣れていない犬は入店不可と食べログの店舗情報に明記。ブログ記事では「外の席」利用時の同伴にも言及。",
       "dog_policy_condition": "バッグ内または抱っこでの入店のみ可(床に下ろすのは不可)。店内利用に慣れていない犬は不可。",
@@ -31516,7 +31784,8 @@
       "description": "新鮮野菜にこだわる八百屋に併設されたカフェ&ワインバー。店内で大型犬も同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
@@ -31568,6 +31837,7 @@
       "description": "西葛西の炉端・鮮魚居酒屋。名物の「あばら大根」や鮪カマ肉が人気で、風通しの良いテラス席は愛犬同伴もできる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席は小動物〜大型犬まで対応・お水のサービスあり(2018年時点の情報・要最新確認)。店内/テラスの区分は不明で「同伴可」とのみ案内する情報もある。",
@@ -31766,7 +32036,11 @@
       "description": "六千坪の庭に離れが点在するろばた焼き店。ペット専用の個室(離れ)を予約すれば犬と一緒に食事でき、個室内はノーリード可。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "ペット同伴は専用個室(離れ)限定・要予約・個室内ノーリードOK",
       "dog_policy_condition": "店内個室(要予約)・大型犬OK・個室内ノーリード可",
@@ -32068,7 +32342,11 @@
       "contact": null,
       "description": "東中野駅すぐの炉端焼き居酒屋。事前予約すれば愛犬と一緒に入店できる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ]
       },
       "dog_note": "事前予約制。大人しい犬に限り、マナーベルトまたはペットカート着用必須。",
       "dog_policy_condition": "事前予約制。大人しい犬のみ、マナーベルトまたはペットカート必須",
@@ -32419,6 +32697,7 @@
       "description": "本と暮らしの複合施設「ひぐらしガーデン」内にあるベーカリーカフェ。中庭のテラス席で愛犬と焼きたてパンを楽しめる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席は3テーブル程で屋根はあるが、雨天時の利用は難しいとの来店者の声あり",
@@ -32783,6 +33062,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -33427,6 +33707,7 @@
       "contact": null,
       "description": "西葛西駅南口すぐの焼き鳥居酒屋。ひな鳥の希少部位を使った串焼きが名物で、テラス席では愛犬同伴での利用ができる。",
       "dog_amenities": {
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "テラス席であれば小動物〜中型犬まで可能とする情報(2018年公開・最新情報は要確認)がある。店内/テラスの区分は不明で「同伴可」とのみ案内する情報もある。",
@@ -33628,6 +33909,7 @@
       "description": "高尾山山頂にある1945年創業の老舗食堂。森を望むテラス席で犬と同伴でき、蕎麦やカレーライスが名物。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "店内可否は情報により異なる(店内にペット同伴席があるとする情報と、テラス限定とする情報がある)",
@@ -33708,7 +33990,8 @@
       "description": "巣鴨・とげぬき地蔵通り入口の沖縄料理居酒屋。要予約で小型犬に限り同伴できる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "small"
       },
       "dog_note": "要事前電話予約。無駄吠えしない犬に限る。座布団の用意あり。",
       "dog_policy_condition": "店内犬同伴OKだが小型犬のみ・大型犬不可。要事前電話予約",
@@ -33839,7 +34122,11 @@
       "description": "江戸川区大杉のガラス温室をリノベーションしたカフェ&レストラン。店内全52席で犬同伴が可能で、室内ドッグランも併設。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "室内ドッグラン併設(利用無料)・リード必須(散歩エリアの一部除く。大型犬は常にリード必須)",
       "dog_policy_condition": null,
@@ -35254,7 +35541,8 @@
       "description": "武蔵小山のフランス郷土料理店。犬同伴可能な席は数に限りがあり要予約。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "犬同伴席は店内1席のみで、事前予約が必須。公式サイト・Instagramには犬同伴の案内が見当たらないため、来店前に確認推奨。",
       "dog_policy_condition": "店内同伴OK・大型犬OK・多頭OK（犬同伴席は店内1席のみ・要予約）",
@@ -35743,6 +36031,7 @@
       "description": "古民家を改装した欧風カレー店。テラス席でわんちゃんと同伴できる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラスのみ・大型犬OK",
@@ -36619,7 +36908,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "マナーおむつ着用・ドッグメニュー1品以上の注文が条件・お水サービスあり(itsumo.dog)",
       "dog_policy_condition": "マナーおむつ着用・ドッグメニュー1品以上の注文が条件",
@@ -36708,6 +36998,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -36954,7 +37245,8 @@
       "contact": null,
       "description": "東中野駅すぐのアロマ漂う隠れ家的カラオケバー。小型犬に限り同伴入店できる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "size_max_indoor": "small"
       },
       "dog_note": "小型犬入店可。お子様の入店は不可。",
       "dog_policy_condition": "小型犬のみ入店可",
@@ -37230,6 +37522,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内は一部席のみ犬同伴可・テラス席の壁にリードフックを設置",
@@ -37395,6 +37688,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内は入口側の指定テーブル(8テーブル28席)のみ・サロンスペースは犬不可・ヒート中の犬は不可",
@@ -37763,6 +38057,7 @@
       "description": "世界各国の料理とビールが楽しめる国際色豊かなカフェ&レストラン。テラス席で犬同伴が可能。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "冬季はテラス席にビニールカーテンを設置。足元が冷えるため犬を床におろす際は注意との案内あり",
@@ -37870,6 +38165,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席(4テーブル)のみ犬同伴可・全犬種OK",
@@ -38113,7 +38409,10 @@
       "contact": null,
       "description": "氷川台・城北中央公園近くのカフェ。店内で犬同伴可能・リード必須。ワッフルや軽食、犬用メニューも提供。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor"
+        ]
       },
       "dog_note": "リード必須。粗相の心配がある犬はマナーベルト・マナーパンツ着用を案内。",
       "dog_policy_condition": null,
@@ -38357,7 +38656,10 @@
       "description": "門前仲町の完全予約制フレンチレストラン。犬はカート持参で店内に同伴が可能で、専用のドッグフレンチコースも用意されている。",
       "dog_amenities": {
         "dog_menu": true,
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ]
       },
       "dog_note": "ドッグフレンチ(犬種・年齢に応じた専用コース¥4500〜)は同伴時必ず注文",
       "dog_policy_condition": "ペットはカートに入れて入店可。専用「ドッグフレンチ」コース（¥4,500〜、犬種・年齢に応じて）の注文が必須",
@@ -38683,6 +38985,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "ペット連れはテラス席のみ利用可",
@@ -39288,6 +39591,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": false
       },
       "dog_note": "ワンちゃん用のお肉サービスあり",
@@ -39835,6 +40139,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "小型・中型・大型犬OK・屋外のみ・リード着用",
@@ -40363,6 +40668,7 @@
       "description": "インドカレー/インド料理レストラン。テラス席でわんちゃんと一緒に食事ができる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席・大型犬同伴可能",
@@ -40566,6 +40872,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ犬同伴可(店内に関する記載なし)",
@@ -40757,6 +41064,10 @@
       "description": "南砂町駅から徒歩10分のドッグカフェ。店内・テラスともに犬同伴可で、カート利用にも対応する。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ],
         "terrace": true
       },
       "dog_note": "リード必須・予防接種/混合ワクチン接種済みが条件・ヒート中不可・1歳未満はマナーパンツ/ベルト必須・店内はカート使用または床でのステイ(公式サイト)",
@@ -40846,7 +41157,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "基本ノーリードOK(公式サイトより)。マーキングが心配な場合はマナーベルト着用を推奨。",
       "dog_policy_condition": null,
@@ -41141,6 +41456,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "小型〜超大型犬ともテラス席のみ可・マナーウェア着用が条件",
@@ -41520,7 +41836,11 @@
       "description": "広尾駅前にあるハンバーガー専門店。テラス席と奥のソファー席を含む店内全席が犬同伴で利用できる。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -42404,6 +42724,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "リード必須・カフェマットと食器の持参が必要。トイレのしつけ・予防接種済み・無駄吠えしつけが条件。ヒート中は利用不可。",
@@ -42901,6 +43222,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席は2卓程度",
@@ -43017,6 +43339,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(店内不可)。公式サイトに明記。",
@@ -43259,6 +43582,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "公式は無限定の「ペット同伴OK(詳細は問い合わせ)」、pet-restaurant.comはテラス限定と記載。店内可否は要確認",
@@ -43457,6 +43781,8 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "medium",
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "店内は小型・中型犬（1グループ3頭まで）・大型犬はテラス席",
@@ -43765,6 +44091,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "カフェマット持参必須・ペット同伴は要予約(電話またはDM)",
@@ -43901,6 +44228,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_policy_condition": null,
@@ -44006,6 +44334,10 @@
       "description": "羽村の小さなカフェ。自家製メニューが評判で、店内・テラス(1卓限定)ともに愛犬同伴が可能。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor",
+          "hold"
+        ],
         "terrace": true
       },
       "dog_note": "抱っこまたは足元ステイでの同伴限定(ドッグカートでの入店不可)・ノーリード不可。",
@@ -44672,6 +45004,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "ぐるなび店舗情報に「小型犬 テラスOK/中型犬 テラスOK/大型犬 テラスOK/ネコ テラスOK」と明記。ペット用のお水サービスあり。店内可否の明記はなし。",
@@ -44998,6 +45331,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": false,
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ・中型犬迄・雨天時テラス利用不可",
@@ -45126,7 +45460,8 @@
       "description": "新宿御苑前駅そばの隠れ家カフェ。犬同伴は店内1階席に限り可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_policy_condition": "大型犬OK・店内同伴は1階のみ・よく吠える犬はNG",
       "dog_policy_status": "conditional",
@@ -45702,6 +46037,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "大型犬OK・テラスOK",
@@ -45763,7 +46099,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "犬用メニュー(ヤギミルク・ほねケーキ等)あり。愛犬同伴可能な席が用意されている(全席ではない可能性・詳細は要問合せ)。",
       "dog_policy_condition": "店内可・大型犬OK・体重/頭数制限なし",
@@ -46375,7 +46712,11 @@
       "description": "亀有のアットホームなドッグカフェ。全犬種が店内全席で同伴可能で、フードやおやつの販売も行う。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "リード必須・男の子はマナーベルト着用必須・椅子に直接乗せない",
       "dog_policy_condition": "店内全席(1テーブル9席)で全犬種が同伴可能。リード必須・男の子はマナーベルト着用必須・椅子に直接乗せない",
@@ -47180,7 +47521,8 @@
       "description": "大阪発の串カツ居酒屋チェーンの経堂店。犬同伴時のマナールールを明示したうえで受け入れている。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "洋服の着用必須・おやつ持込可(ご飯持込不可)・人間用食器や料理の共用禁止・1名につき最大2匹まで・当日の状況により入店をお断りする場合あり",
       "dog_policy_condition": "店内全席・大型/中型/小型可・洋服着用必須・1名2匹まで",
@@ -47276,7 +47618,11 @@
       "contact": null,
       "description": "西葛西駅近くの串カツ居酒屋チェーン店舗。洋服着用などのマナーを守れば店内でも愛犬と同席できる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor",
+          "carrier"
+        ]
       },
       "dog_note": "洋服の着用必須(毛・ふけ飛散防止)。おやつ持込可・ご飯持込不可。ヒート中(生理中)は入店不可。1名につき最大2匹まで。ペット同伴可のテーブルは数に限りがあるため事前予約推奨。2018年の古い情報には「屋外席のみ」とするものもあり、現行の店内可という情報と異なるため来店前に要確認。",
       "dog_policy_condition": null,
@@ -47837,6 +48183,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "店内も同伴可とする情報もあるが、公式サイトの現行案内ではテラス限定のため来店前に要確認",
@@ -48219,6 +48566,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "入店料220円/頭(店内・テラス共通)・フォトスポット利用500円/頭・ミニドッグラン併設(有料)。",
@@ -48310,7 +48658,10 @@
       "contact": null,
       "description": "1989年創業「焼肉 八坂 あら川」を改装したハワイアン風焼肉店。犬同伴は完全個室限定でカート・キャリー使用が条件。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ]
       },
       "dog_note": "犬同伴時は完全個室の利用が条件",
       "dog_policy_condition": "完全個室限定・カートまたはキャリーバッグでの入場必須",
@@ -48619,7 +48970,8 @@
       "description": "銀座一丁目の土鍋炊きご飯が名物の和食店。小型犬に限り店内同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "small"
       },
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
@@ -48725,7 +49077,8 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "無駄吠えする犬は入店をお断りする場合あり。要事前電話予約。カゴ・足ふきタオル・犬用おやつあり。",
       "dog_policy_condition": "店内犬同伴OK。小型・中型犬300円、大型犬500円の同伴チャージ・要事前予約",
@@ -48980,6 +49333,7 @@
       "description": "経堂の路地裏にある大衆イタリアン酒場。テラス席で犬と食事を楽しめると紹介されている。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席は犬同伴可と店の公式ページに記載(店内の可否は明記なし・詳細は要問合せ)",
@@ -49415,6 +49769,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "ぐるなび店舗情報に「小型犬 テラスOK/中型犬 テラスOK/大型犬 テラスOK」と明記。店内可否の明記はなし。",
@@ -49534,6 +49889,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定。ペット用洗濯機(700円)・乾燥機(8分100円)を併設",
@@ -49995,6 +50351,7 @@
       "description": "高尾山口駅からケーブルカー駅へ向かう参道沿いの老舗そば店。名物の自然薯そばが人気で、テラス席で犬と同伴できる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席のみ・大型犬OK",
@@ -50613,7 +50970,11 @@
       "contact": null,
       "description": "南烏山の中華食堂。餃子や麺類を提供し、バッグやペットカートに入れれば犬同伴で利用できる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ],
+        "size_max_indoor": "small"
       },
       "dog_note": "店舗ページの備考欄に「ペットはバッグやペットカーなどに入れればOK」と明記(リードでの歩行入店は不可と考えられる)。",
       "dog_policy_condition": "設備欄「ペット可」・備考欄「ペットはバッグやペットカーなどに入れればOKです」と明記",
@@ -50934,7 +51295,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
-        "large_dogs": true
+        "indoor_style": [
+          "carrier"
+        ],
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "犬同伴可は土日祝17時以降のみ・平日/ランチは不可。1階ホール席限定でペットカート入店可。前日17時までに要予約",
       "dog_policy_condition": "土日祝17時以降のみ・要予約(前日17時まで)・1階ホール席限定・ペットカート入店可",
@@ -51145,6 +51510,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "小型・中型・大型犬ともテラス席のみ可",
@@ -51603,7 +51969,8 @@
       "description": "北千住駅西口徒歩5分の韓国料理・焼肉の店。店内でのペット同伴が可能だが小型犬に限られるとの紹介がある。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "small"
       },
       "dog_policy_condition": null,
       "dog_policy_status": "allowed",
@@ -51921,7 +52288,11 @@
       "dog_amenities": {
         "dog_menu": true,
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "トイレのしつけ必須・予防接種必須・無駄吠えのしつけ必須・ヒート(発情中)の利用不可・リード使用必須・店内はペット可席と一般席に分かれている",
@@ -52034,6 +52405,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "無料駐車場あり(3台)・事前電話確認推奨",
@@ -52150,6 +52522,7 @@
       "description": "石浜神社の境内にある甘味処。テラス席で愛犬と甘味や軽食を味わえる。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "テラス席犬OK・大型犬も歓迎",
@@ -52369,6 +52742,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス・ガーデン席は屋根とヒーターあり（雨天時は利用不可）。店内は犬不可。テラスでは犬に飲み水サービスあり。",
@@ -52612,7 +52986,12 @@
       "description": "押上駅近くでスカイツリーを望むテラス席がある発酵×窯焼きピッツァのバルカフェ。テラス席は犬同伴可・小型犬は抱っこで店内利用も可。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "hold"
+        ],
         "large_dogs": false,
+        "size_max_indoor": "small",
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "店内は席が手狭なためテラス席を推奨(店内利用時は抱っこ必須)",
@@ -52733,6 +53112,7 @@
         "dog_menu": true,
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "店内・屋外ガーデン席とも小型・中型・大型犬同伴可。 犬用ステーキメニューあり。",
@@ -52934,7 +53314,8 @@
       "description": "鎌倉公園近くの美容室併設カフェ。大型犬も同伴でき、ドッグシャンプーブースも備える。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "大型犬も同伴可。マナーベルト着用を推奨(公式サイト記載)。併設の美容室は個室のため犬同伴での利用も可(要予約)。",
       "dog_policy_condition": null,
@@ -53031,6 +53412,7 @@
       "description": "大門駅近くの肉バル。ディナー帯のテラス席限定・時間指定で犬同伴が可能。土曜日は小型犬に限り店内も案内あり。",
       "dog_amenities": {
         "large_dogs": false,
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "テラス席は17:00〜21:00のみ犬同伴可。土曜日は小型犬に限り店内利用も案内あり(詳細要問合せ)。",
@@ -53291,6 +53673,7 @@
         "dog_menu": true,
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "わんちゃん専用のステーキメニューあり(公式サイトより)",
@@ -53362,6 +53745,7 @@
       "dog_amenities": {
         "indoor": true,
         "large_dogs": true,
+        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "公式の案内では「テラスだけでなく店内一部わんちゃんOK」(店内全エリアOKとする情報もあり・来店前に要確認)",
@@ -53455,6 +53839,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "ぐるなび店舗情報に「小型犬 テラスOK/中型犬 テラスOK/大型犬 テラスOK/ネコ テラスOK/その他小動物 テラスOK」と明記。人気のテラス席は1組限定。店内可否の明記はなし。",
@@ -53544,7 +53929,10 @@
       "contact": null,
       "description": "2021年オープンのカフェ&バー。全席でペット同伴可能で気軽に立ち寄れる。",
       "dog_amenities": {
-        "indoor": true
+        "indoor": true,
+        "indoor_style": [
+          "floor"
+        ]
       },
       "dog_note": "椅子・ソファーにワンちゃんを乗せる際はシート等の利用をお願いされる",
       "dog_policy_condition": null,
@@ -53839,7 +54227,8 @@
       "description": "恵比寿と代官山の間の住宅街にある薬膳と米粉スイーツの隠れ家カフェ。看板犬がいる店内に小型・中型犬まで同伴可能。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "large_dogs": false,
+        "size_max_indoor": "medium"
       },
       "dog_note": "看板犬のこむぎが犬が少し苦手なため、無理に近づいたり触ったりしないよう案内あり(wankonowaより)",
       "dog_policy_condition": "店内同伴OKだが大型犬は不可",
@@ -53994,6 +54383,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": false,
+        "size_max_terrace": "medium",
         "terrace": true
       },
       "dog_note": "テラス席のみとする情報と、「ペット同伴可」とのみで店内/テラスの区別が不明な情報がある。",
@@ -54468,7 +54858,8 @@
       "description": "銀座の蕎麦店の暖簾分け店。3階の完全個室が犬同伴可(要予約)。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "3階の貸切個室に限り犬同伴可・要予約(通常フロアの可否は不明)。",
       "dog_policy_condition": "3階の個室（1室）のみ犬同伴可・大型犬OK・完全予約制（予約時にペット同伴を伝える）",
@@ -54630,6 +55021,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "1Fテラス6席のみ犬同伴可(公式サイト記載)・犬連れ利用時は事前予約推奨(出典記載)",
@@ -54692,7 +55084,11 @@
       "description": "荻窪駅北口近くの食事とナチュラルワインが楽しめるレストラン。店内で小型犬のみ同伴が可能(最大2頭)。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": false
+        "indoor_style": [
+          "floor"
+        ],
+        "large_dogs": false,
+        "size_max_indoor": "small"
       },
       "dog_note": "リード必須・椅子に乗せる場合はカフェマット持参必須(出典記載)",
       "dog_policy_condition": "小型犬まで・店内合計2頭まで・リード必須・椅子使用時はカフェマット持参必須",
@@ -54862,6 +55258,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "リード必須・椅子やテーブルにペットを乗せる行為は禁止・1組4匹以上の同伴は不可・雨天時はクローズの場合あり",
@@ -54977,6 +55374,7 @@
       "description": "全国チェーンの喫茶店。八王子店は公式サイトでテラス席でのペット同伴利用を案内している。",
       "dog_amenities": {
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "公式サイトに「テラス席でペットと一緒にお食事ができます」と明記",
@@ -55350,6 +55748,7 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
+        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_policy_condition": "小型・中型・大型犬・ネコ・小動物ともテラスOK（しつけ・接種済等の条件）",
@@ -55449,7 +55848,8 @@
       "description": "神楽坂の海鮮居酒屋。地下1階の店内で犬同伴が可能な珍しい業態。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "規定なし（膝上・床・椅子など自由）だが事前相談必須。犬用飲食物の持込は不可、給水サービスあり。地下1階のためテラスなし。",
       "dog_policy_condition": "小型・中型・大型犬対応・事前相談必須",
@@ -55656,7 +56056,8 @@
       "description": "武蔵小山のラーメン専門店。犬同伴専用席を設け、リードフック付きで利用できる。",
       "dog_amenities": {
         "indoor": true,
-        "large_dogs": true
+        "large_dogs": true,
+        "size_max_indoor": "large"
       },
       "dog_note": "犬同伴OK専用席にリードフックあり・入店前にスタッフへ声掛けを",
       "dog_policy_condition": "犬同伴OK席にはリードフックあり・入店前にスタッフへ声掛けと明記(小型・中型・大型犬OK)",
@@ -55822,6 +56223,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-24T05:09:29Z",
+  "generated_at": "2026-10-24T09:21:50Z",
   "is_sample_data": false
 }

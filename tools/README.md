@@ -106,6 +106,23 @@ cafes タブに以下を追加（**すべて任意**。空欄＝不明として�
 - `link_instagram` は **@ハンドルだけでもOK**（`@shop_name` → `https://www.instagram.com/shop_name/` に自動変換）
 - どの項目も `unknown` / `不明` / `-` は**空欄と同じ扱い**（アプリでは「不明」表示。「なし/✕」にはならない）
 
+## 「うちの子」判定用の追加列（バッチK・2026-10-24）
+
+cafes.csv の右端に追加（**すべて任意**。空欄＝不明。「制限なし」ではない）。`cafes.json` では `dog_amenities` の新キーとして出力される。
+
+| 列 | 値 | 意味 | cafes.json のキー |
+|---|---|---|---|
+| dog_size_max_indoor | `small` / `medium` / `large` / 空 | 店内に入れる犬の大きさの上限（明記がある場合だけ） | `dog_amenities.size_max_indoor`（文字列） |
+| dog_size_max_terrace | 同上 | テラスに入れる犬の大きさの上限 | `dog_amenities.size_max_terrace`（文字列） |
+| dog_indoor_style | `floor` / `carrier` / `hold` を `\|` 区切り（順序は floor→carrier→hold）/ 空 | 店内で認められている過ごし方（floor=床・足元・席、carrier=カート・キャリー・バッグ・ケージ、hold=抱っこ） | `dog_amenities.indoor_style`（文字列の配列） |
+
+- **二重独立変換で一致した値だけを入れる。推測しない。** 既存の文章（dog_size_limit・dog_note・description・出典の条件文）に明記があるものだけを、独立した2者が別々に読み取り、一致したものを採用する。食い違い・明記なし・単に「店内OK」とだけある店は空欄。
+- `dog_indoor_style` は **`dog_indoor` が `true` の行にだけ**、`dog_size_max_indoor` も **`dog_indoor` が `true` の行にだけ**、`dog_size_max_terrace` は **`dog_terrace` が `true` の行にだけ**入れられる（それ以外に値があるとエクスポートがエラーで配信中止）。閉店（`is_closed=true`）の店は3列とも空。
+- **`dog_indoor_style` の意味**: 「店内で認められていると**明記された**過ごし方の一覧」で、**網羅的ではない**。`floor` が無くても床が不可とは限らず、`carrier` だけでも「カート必須」とは限らない（必須かどうかは条件の文＝`dog_policy_condition`／`dog_note` に残る）。利用側（アプリ）は「含まれていれば可」とだけ使い、含まれていないことを「不可」とは扱わない。推奨（「〜がおすすめ」）や体験談だけの記述は根拠にしない。
+- **運営の承認（2026-10-24）**: 「大型犬不可」だけの記載は `medium`（中型犬まで）と読んで入れてよい。
+- 検証（エクスポートが拒否）: 大きさが3値以外／過ごし方が3語以外・重複・空要素／`dog_indoor_style`・`dog_size_max_indoor` があるのに `dog_indoor` が true でない行／`dog_size_max_terrace` があるのに `dog_terrace` が true でない行／`is_closed=true` の行に3列のどれかの値がある行。
+- `dog_large`（大型犬可否）とは別の列で、`dog_large` は変更していない。両者の整合チェックは運営が行う。
+
 ## マスターCSVの場所（Google Sheet 移行まで）
 
 - **実データの正本**: `data/master/cafes.csv` / `data/master/sources.csv`（`export_cafes.py` の既定入力）

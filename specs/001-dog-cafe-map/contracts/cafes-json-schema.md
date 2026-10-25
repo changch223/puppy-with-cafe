@@ -79,9 +79,9 @@ cafe 要素に以下の**任意**フィールドが追加される（キー欠�
 | hours_text | string? | 営業時間フリーテキスト |
 | hours | object? | 曜日別構造化 `{"mon":[{"open":"09:00","close":"18:00"}], "tue":[], ...}`。キー欠落=不明・空配列=定休。1曜日以上あればアプリが営業中バッジを表示（FR-102）。close は `24:00`（当日終端＝翌0:00）まで許容し、open >= close（例: `{"open":"18:00","close":"02:00"}`）は日跨ぎ営業として扱う（S4, 2026-08-08） |
 | links | array? | `[{"type":"website\|instagram\|x\|tabelog\|google_map\|other","url":"https://..."}]` |
-| dog_amenities | object? | `{"indoor":bool?,"terrace":bool?,"large_dogs":bool?,"dog_menu":bool?}`（キー欠落=不明の三値） |
+| dog_amenities | object? | `{"indoor":bool?,"terrace":bool?,"large_dogs":bool?,"dog_menu":bool?}`（キー欠落=不明の三値）。バッチK（2026-10-24）で任意キー `size_max_indoor`（店内に入れる犬の大きさの上限: `"small"\|"medium"\|"large"`）・`size_max_terrace`（テラスの上限、同値域）・`indoor_style`（店内での過ごし方の配列。要素は `"floor"`（床・足元・席）／`"carrier"`（カート・キャリー・バッグ）／`"hold"`（抱っこ）、順序は floor→carrier→hold・重複なし）を追加。キー欠落=不明。`size_max_indoor`・`indoor_style` は `indoor` が `true` の店に、`size_max_terrace` は `terrace` が `true` の店にだけ付く（閉店の店には付かない）。**`indoor_style` は「店内で認められていると明記された過ごし方の一覧」であり網羅的ではない**: `floor` が無くても床が不可とは限らず、`carrier` だけでも「カート必須」とは限らない（必須かどうかは `dog_policy_condition`／`dog_note` に残る）。利用側は「含まれていれば可」とだけ扱い、含まれていないことを「不可」と解釈しない。アプリは未対応のキーを無視する（後方互換・format_version 1 のまま） |
 | dog_note | string? | 犬向け条件の自由記述 |
 | info_verified | date? | 基本情報（営業時間等）の確認日 |
 | operator_note | object? | `{"text","source","verified_at"}`。運営が公式SNS等で確認した転記メモ。**verified_at 必須**（FR-103。無ければ配信拒否） |
 
-追加の検証（エクスポートが拒否）: 時刻形式不正（0-23時・0-59分の範囲外、close は 24:00 のみ例外）／URL形式不正／三値以外の値／確認日なしの転記メモ。開店≧閉店（例 `18:00-2:00`）は**日跨ぎ営業として許可**する（2026-08-08改訂。従来はエラーとし hours_text で表現させていた, S4）。
+追加の検証（エクスポートが拒否）: `size_max_*` が small/medium/large 以外／`indoor_style` が floor/carrier/hold 以外・重複／`indoor_style`・`size_max_indoor` があるのに `indoor` が true でない店／`size_max_terrace` があるのに `terrace` が true でない店／閉店店に3キー相当の列がある行／時刻形式不正（0-23時・0-59分の範囲外、close は 24:00 のみ例外）／URL形式不正／三値以外の値／確認日なしの転記メモ。開店≧閉店（例 `18:00-2:00`）は**日跨ぎ営業として許可**する（2026-08-08改訂。従来はエラーとし hours_text で表現させていた, S4）。

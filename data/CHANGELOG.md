@@ -1918,3 +1918,238 @@
 ## 2026-10-24 14:09 — 追加 1 / 変更 1 / 削除 0
 - ➕ 追加: Communita Cafe
 - ✏️ 変更: パークス光が丘（longitude, latitude）
+
+## 2026-10-24 18:21 — 追加 0 / 変更 233 / 削除 0
+- ✏️ 変更: & OIMO TOKYO CAFE 中目黒店（dog_amenities）
+- ✏️ 変更: 44APARTMENT 多摩センター店（dog_amenities）
+- ✏️ 変更: AFFIDAMENTO BAGEL（dog_amenities）
+- ✏️ 変更: AKIGAWA BASE（dog_amenities）
+- ✏️ 変更: ANEA CAFE Toyosu（dog_amenities）
+- ✏️ 変更: AUX BACCHANALES 銀座（dog_amenities）
+- ✏️ 変更: Aoi Coffee Stand（dog_amenities）
+- ✏️ 変更: BARCA(バルカ)（dog_amenities）
+- ✏️ 変更: BLACK TERRACE（dog_amenities）
+- ✏️ 変更: BODEGA（dog_amenities）
+- ✏️ 変更: BONDI CAFE Nakameguro（dog_amenities）
+- ✏️ 変更: BONDI CAFE 広尾店(ボンダイカフェ広尾店)（dog_amenities）
+- ✏️ 変更: BONTA ITALIA(ボンタイタリア)（dog_amenities）
+- ✏️ 変更: BOWLS cafe(ボウルズカフェ)（dog_amenities）
+- ✏️ 変更: BURG HOLIC(バーグホリック)（dog_amenities）
+- ✏️ 変更: Barry's Café（バリーズカフェ）（dog_amenities）
+- ✏️ 変更: Bleue Blanche（ブルーブランシュ）（dog_amenities）
+- ✏️ 変更: Bowery Kitchen（dog_amenities）
+- ✏️ 変更: CAFE CHOU CHOU(シュシュ)（dog_amenities）
+- ✏️ 変更: CAFE TANTON（カフェタントン）（dog_amenities）
+- ✏️ 変更: CAFE TORA(カフェトラ)（dog_amenities）
+- ✏️ 変更: CANAL CAFE（カナルカフェ）（dog_amenities）
+- ✏️ 変更: CANTERA（カンテラ）立川店（dog_amenities）
+- ✏️ 変更: CHUM APARTMENT（dog_amenities）
+- ✏️ 変更: CIRCULO(シルクロ)（dog_amenities）
+- ✏️ 変更: CIRTY CAFE(サーティーカフェ)（dog_amenities）
+- ✏️ 変更: CLANN BY THE RIVER（旧PITMANS）（dog_amenities）
+- ✏️ 変更: COFFEE STAND .OTTEN（dog_amenities）
+- ✏️ 変更: Cafe Lisette 二子玉川店（dog_amenities）
+- ✏️ 変更: Cafe Port Glasgow（カフェ ポート グラスゴー）（dog_amenities）
+- ✏️ 変更: Cafe Restaurant AUREOLE(カフェレストラン オリオール)（dog_amenities）
+- ✏️ 変更: Cafe Restaurant+Dog Grandir(グランディール)（dog_amenities）
+- ✏️ 変更: Cafe and Dining Paco（dog_amenities）
+- ✏️ 変更: Cafe de Cuore(カフェ・ド・クオーレ)（dog_amenities）
+- ✏️ 変更: Cafe du Riche(カフェドリッチェ)（dog_amenities）
+- ✏️ 変更: Cafe さんぽ道（dog_amenities）
+- ✏️ 変更: Cafe&Diner KHB（dog_amenities）
+- ✏️ 変更: Cafe&Restaurant CENTRALE（セントラーレ）（dog_amenities）
+- ✏️ 変更: Cafe' Roju（dog_amenities）
+- ✏️ 変更: Cafeどす（dog_amenities）
+- ✏️ 変更: Cafe＆Gallery Roomer（dog_amenities）
+- ✏️ 変更: Café Kitsuné Aoyama（dog_amenities）
+- ✏️ 変更: Chanoma(チャノマ)（dog_amenities）
+- ✏️ 変更: DOG DEPT + CAFE 浅草隅田川テラス店（dog_amenities）
+- ✏️ 変更: DOG DEPT+CAFE お台場東京ビーチ店（dog_amenities）
+- ✏️ 変更: Deco's Dog Cafe 田園茶房（dog_amenities）
+- ✏️ 変更: District ブラッスリー・バー・ラウンジ（dog_amenities）
+- ✏️ 変更: Dog Arts and Cafe インディハウス（dog_amenities）
+- ✏️ 変更: Dog Cafe Uru(ドッグカフェ ウル)（dog_amenities）
+- ✏️ 変更: Dog Café Bee（dog_amenities）
+- ✏️ 変更: Dogberry(ドッグベリー)（dog_amenities）
+- ✏️ 変更: EARTH CAFE 五反田店（アースカフェ）（dog_amenities）
+- ✏️ 変更: EMPORIO cafe&dining（dog_amenities）
+- ✏️ 変更: ENRICH（dog_amenities）
+- ✏️ 変更: ERIC ROSE（dog_amenities）
+- ✏️ 変更: EVERYONEs CAFE（dog_amenities）
+- ✏️ 変更: Egoland Cafe Akihabara（dog_amenities）
+- ✏️ 変更: Embassy Cafe & Dining（dog_amenities）
+- ✏️ 変更: F*GICCO by F.gohan(エフジッコ バイ エフゴハン)（dog_amenities）
+- ✏️ 変更: FRIEND MONSTER(フレンドモンスター)（dog_amenities）
+- ✏️ 変更: FUGLEN ASAKUSA（dog_amenities）
+- ✏️ 変更: FUNGO 三宿本店（dog_amenities）
+- ✏️ 変更: GOOD CHEESE GOOD BAKE（dog_amenities）
+- ✏️ 変更: GOOD MORNING CAFE 中野セントラルパーク（dog_amenities）
+- ✏️ 変更: GRIP(グリップ)（dog_amenities）
+- ✏️ 変更: HANAKADO(ハナカド)（dog_amenities）
+- ✏️ 変更: HIGHBURY -THE HOME OF BEER-(ハイバリー)（dog_amenities）
+- ✏️ 変更: Huit(ユイット)（dog_amenities）
+- ✏️ 変更: IL BACARO ALMA（イル バーカロ アルマ）（dog_amenities）
+- ✏️ 変更: IL LUPINO PRIME（dog_amenities）
+- ✏️ 変更: IVY PLACE（dog_amenities）
+- ✏️ 変更: In the Garden 135(イン・ザ・ガーデン135)（dog_amenities）
+- ✏️ 変更: Italian Kitchen VANSAN 大泉学園店（dog_amenities）
+- ✏️ 変更: Italian Kitchen VANSAN 祖師ヶ谷大蔵店（dog_amenities）
+- ✏️ 変更: KZ House(ケージーハウス)（dog_amenities）
+- ✏️ 変更: LARGO SENGAWA（dog_amenities）
+- ✏️ 変更: LATTE GRAPHIC 聖蹟桜ヶ丘店（dog_amenities）
+- ✏️ 変更: LATTE GRAPHIC 自由が丘店（dog_amenities）
+- ✏️ 変更: LUSH COFFEE ROASTER&LABORATORY（dog_amenities）
+- ✏️ 変更: Le Calin（ルカラン）（dog_amenities）
+- ✏️ 変更: Le Maghreb（ル・マグレブ）（dog_amenities）
+- ✏️ 変更: Le quattro stagioni（dog_amenities）
+- ✏️ 変更: Les deux Bleue ららぽーと豊洲店（dog_amenities）
+- ✏️ 変更: Los Angeles BALCONY Terrace Restaurant & Moon Bar（dog_amenities）
+- ✏️ 変更: MERRY and BRIGHT（dog_amenities）
+- ✏️ 変更: MID TREE 代官山（dog_amenities）
+- ✏️ 変更: MIO（dog_amenities）
+- ✏️ 変更: MOTHERS ORIENTAL（dog_amenities）
+- ✏️ 変更: Monsoon Cafe 代官山（dog_amenities）
+- ✏️ 変更: MozekSol(モゼクソール)（dog_amenities）
+- ✏️ 変更: Mr.FARMER 駒沢オリンピック公園店（dog_amenities）
+- ✏️ 変更: Nagi（dog_amenities）
+- ✏️ 変更: Nim's Pizza（dog_amenities）
+- ✏️ 変更: O.GARDEN CAFE（dog_amenities）
+- ✏️ 変更: Osteria Capanna(オステリアカパンナ)（dog_amenities）
+- ✏️ 変更: Osteria IL VIAGGIO（dog_amenities）
+- ✏️ 変更: P.C.M. パブ・カーディナル・マルノウチ（dog_amenities）
+- ✏️ 変更: PACE ITALIAN LOUNGE（dog_amenities）
+- ✏️ 変更: PENNY LANE ソラマチ店（dog_amenities）
+- ✏️ 変更: PIZZERIA & BAR NOHGA（NOHGA HOTEL AKIHABARA TOKYO内）（dog_amenities）
+- ✏️ 変更: Paradise Poke蔵前（dog_amenities）
+- ✏️ 変更: Park Side Cafe BASEL（dog_amenities）
+- ✏️ 変更: Paston（パストン）（dog_amenities）
+- ✏️ 変更: Pizzeria&Trattoria GONZO 吉祥寺店（dog_amenities）
+- ✏️ 変更: Plus veganique(プラスヴィーガニック自由が丘)（dog_amenities）
+- ✏️ 変更: Pretty Good - coffee & donut（dog_amenities）
+- ✏️ 変更: RENOBELA（リノビラ）（dog_amenities）
+- ✏️ 変更: RESTAURANT 1899 OCHANOMIZU（dog_amenities）
+- ✏️ 変更: RIGOLETTO spice market（dog_amenities）
+- ✏️ 変更: ROJU NAKAMEGURO（dog_amenities）
+- ✏️ 変更: ROSSO CAFE（dog_amenities）
+- ✏️ 変更: Ralph's Coffee Omotesando（dog_amenities）
+- ✏️ 変更: Ron Herman Cafe 二子玉川店（dog_amenities）
+- ✏️ 変更: SHARK COFFEE（dog_amenities）
+- ✏️ 変更: SHUTTERS 自由が丘（dog_amenities）
+- ✏️ 変更: SeTaBi Cafe(セタビカフェ)（dog_amenities）
+- ✏️ 変更: Sestina（セスティーナ）（dog_amenities）
+- ✏️ 変更: T.Y.HARBOR（dog_amenities）
+- ✏️ 変更: TAIZUSHI(寿司・創作料理)（dog_amenities）
+- ✏️ 変更: TOKYO KAKI STAND 東京ドームシティ店（dog_amenities）
+- ✏️ 変更: TRATTORIA Elmo Cielo(トラットリア エルモチェーロ)（dog_amenities）
+- ✏️ 変更: TRATTORIA Mocco（dog_amenities）
+- ✏️ 変更: Takuru(タクる)（dog_amenities）
+- ✏️ 変更: The House of Hounds by fäfä（dog_amenities）
+- ✏️ 変更: The Jones Café | Bar（dog_amenities）
+- ✏️ 変更: VILLAGE MARCHE(ヴィレッジマルシェ)（dog_amenities）
+- ✏️ 変更: VIRON 丸の内店（dog_amenities）
+- ✏️ 変更: Vegeater（dog_amenities）
+- ✏️ 変更: WHAT CAFE（dog_amenities）
+- ✏️ 変更: Waffle cafe ORANGE(ワッフルカフェ・オランジ)（dog_amenities）
+- ✏️ 変更: Wande Shiba（dog_amenities）
+- ✏️ 変更: YELLOW KOMAZAWA KOEN（dog_amenities）
+- ✏️ 変更: a-bridge 三軒茶屋店（dog_amenities）
+- ✏️ 変更: anea cafe 中野新橋店（dog_amenities）
+- ✏️ 変更: atelier BASEL（dog_amenities）
+- ✏️ 変更: bills お台場（dog_amenities）
+- ✏️ 変更: biotable.（dog_amenities）
+- ✏️ 変更: cafe Crumpets（dog_amenities）
+- ✏️ 変更: cafe de Fleurus 27（dog_amenities）
+- ✏️ 変更: cafe garage Dogberry(ドッグベリー)下北沢（dog_amenities）
+- ✏️ 変更: cafe italiano LA STELLA（カフェ イタリアーノ ラ・ステラ）（dog_amenities）
+- ✏️ 変更: crisscross（dog_amenities）
+- ✏️ 変更: dog cafe petitchien(プティシアン)（dog_amenities）
+- ✏️ 変更: essence dining（dog_amenities）
+- ✏️ 変更: good fellas（dog_amenities）
+- ✏️ 変更: i2 cafe（dog_amenities）
+- ✏️ 変更: inu to hito（dog_amenities）
+- ✏️ 変更: marble（dog_amenities）
+- ✏️ 変更: pepacafe FOREST（ペパカフェ・フォレスト）（dog_amenities）
+- ✏️ 変更: rice cafe（dog_amenities）
+- ✏️ 変更: tonkatsu.jp表参道（dog_amenities）
+- ✏️ 変更: uyamuya（dog_amenities）
+- ✏️ 変更: vegewest Cafe & WineBar(代官山vegewest)（dog_amenities）
+- ✏️ 変更: あばら大根 西葛西店（dog_amenities）
+- ✏️ 変更: いろりの里 高尾山名主 ごん助（dog_amenities）
+- ✏️ 変更: けむっ亭（dog_amenities）
+- ✏️ 変更: ひぐらしベーカリー（dog_amenities）
+- ✏️ 変更: まるごとVeganダイニング浅草（dog_amenities）
+- ✏️ 変更: やきとり家すみれ 西葛西店（dog_amenities）
+- ✏️ 変更: やまびこ茶屋（dog_amenities）
+- ✏️ 変更: ゆんたく酒場 増富商店（dog_amenities）
+- ✏️ 変更: わん!リトルガーデン（dog_amenities）
+- ✏️ 変更: エメ(Eme)（dog_amenities）
+- ✏️ 変更: カキノキテラス（dog_amenities）
+- ✏️ 変更: カフェ・パークサイド（dog_amenities）
+- ✏️ 変更: カフェ・ミケランジェロ（dog_amenities）
+- ✏️ 変更: カラオケ処Bar めめ（dog_amenities）
+- ✏️ 変更: クリスプ・サラダワークス駒沢公園店（dog_amenities）
+- ✏️ 変更: グリル&ダイニング用賀倶楽部（dog_amenities）
+- ✏️ 変更: サクラカフェ&レストラン池袋（dog_amenities）
+- ✏️ 変更: サザンダイニング用賀店（dog_amenities）
+- ✏️ 変更: シアン ア ラ モード(Chien a la mode)（dog_amenities）
+- ✏️ 変更: シャテール（chatiere）（dog_amenities）
+- ✏️ 変更: ジャンピングパンダ(丸の内テラス)（dog_amenities）
+- ✏️ 変更: ステーキハウス ニューテキサス（dog_amenities）
+- ✏️ 変更: スワン銀座（SWAN GINZA）（dog_amenities）
+- ✏️ 変更: デルコス八王子本店（dog_amenities）
+- ✏️ 変更: トラットリア トラム ロカーレ（dog_amenities）
+- ✏️ 変更: ドッグカフェ アプリコット（dog_amenities）
+- ✏️ 変更: ドッグカフェ&BAR Petit Leon（dog_amenities）
+- ✏️ 変更: ハーベステラス 品川店（dog_amenities）
+- ✏️ 変更: バーガーマニア 広尾店（dog_amenities）
+- ✏️ 変更: ピッツェリア ジターリア ダ フィリッポ(PIZZERIA GTALIA DA FILIPPO)（dog_amenities）
+- ✏️ 変更: フランス料理 銀座みかわや（dog_amenities）
+- ✏️ 変更: フランツクラブ 浜松町店（dog_amenities）
+- ✏️ 変更: ブラッスリー セント・ベルナルデュス 神田(St.Bernardus)（dog_amenities）
+- ✏️ 変更: ブルーボトルコーヒー 代官山カフェ（dog_amenities）
+- ✏️ 変更: プラスアルファキッチン（ラムと豪州ジビエバル）（dog_amenities）
+- ✏️ 変更: プリティシングス（dog_amenities）
+- ✏️ 変更: ペラゾカフェ（Perrazo Cafe）（dog_amenities）
+- ✏️ 変更: マリノステリア 葛西店（dog_amenities）
+- ✏️ 変更: ミヤマ珈琲 練馬春日町店（dog_amenities）
+- ✏️ 変更: ミルリトンカフェ(Mirliton Cafe)（dog_amenities）
+- ✏️ 変更: ラ・ベファーナ 吉祥寺（dog_amenities）
+- ✏️ 変更: リキマルカフェ（dog_amenities）
+- ✏️ 変更: ワン茶房（dog_amenities）
+- ✏️ 変更: 串カツ田中 経堂店（dog_amenities）
+- ✏️ 変更: 串カツ田中 西葛西店（dog_amenities）
+- ✏️ 変更: 八十八夜 吉祥寺店（dog_amenities）
+- ✏️ 変更: 和むすびや＆わんこのまるっと（dog_amenities）
+- ✏️ 変更: 和牛EN yasaka.arakawa（dog_amenities）
+- ✏️ 変更: 土鍋炊きご飯 おこめとおかず（dog_amenities）
+- ✏️ 変更: 地蔵そば 大橋屋（dog_amenities）
+- ✏️ 変更: 大衆イタリアン酒場 煙-kemuri-（dog_amenities）
+- ✏️ 変更: 島ごはん 西葛西（dog_amenities）
+- ✏️ 変更: 庭cafe443 in Todoroki（dog_amenities）
+- ✏️ 変更: 栄茶屋本店（dog_amenities）
+- ✏️ 変更: 洪記餃子（dog_amenities）
+- ✏️ 変更: 深大寺水神苑（dog_amenities）
+- ✏️ 変更: 炭火×薪火×レストラン RIDE 品川 天王洲店（dog_amenities）
+- ✏️ 変更: 焼肉 炙りな 北千住店（dog_amenities）
+- ✏️ 変更: 犬茶屋本舗（dog_amenities）
+- ✏️ 変更: 田園調布倶楽部（dog_amenities）
+- ✏️ 変更: 石濱茶寮 楽（dog_amenities）
+- ✏️ 変更: 神楽坂 ラクレット&フォンデュ フロマティック（Fromatique）（dog_amenities）
+- ✏️ 変更: 窯焼きバルカフェ らんぷ+k（dog_amenities）
+- ✏️ 変更: 米沢牛ステーキハウス un（アン） ドッグカフェ（dog_amenities）
+- ✏️ 変更: 美容室・喫茶 どっくwどっぐ（dog_amenities）
+- ✏️ 変更: 肉とワイン bonanza（dog_amenities）
+- ✏️ 変更: 肉ビストロ&クラフトビール ランプラント(l'Empreinte)（dog_amenities）
+- ✏️ 変更: 自由が丘 カスタネット（dog_amenities）
+- ✏️ 変更: 葛西ホルモン市場（dog_amenities）
+- ✏️ 変更: 蒲田カフェ（dog_amenities）
+- ✏️ 変更: 薬膳&米粉カフェ やまのひつじ（dog_amenities）
+- ✏️ 変更: 赤羽 せんべろ 大衆酒場 にくまれ屋 はなれ（dog_amenities）
+- ✏️ 変更: 銀蕎麦 國定 勝どき店（dog_amenities）
+- ✏️ 変更: 青山川上庵（dog_amenities）
+- ✏️ 変更: 食事とナチュラルワイン AOLA(アオラ)（dog_amenities）
+- ✏️ 変更: 駒沢食堂george（dog_amenities）
+- ✏️ 変更: 高倉町珈琲 八王子店（dog_amenities）
+- ✏️ 変更: 高輪バール・デルソーレ（dog_amenities）
+- ✏️ 変更: 魚がし どまん中 神楽坂店（dog_amenities）
+- ✏️ 変更: 麺恋処 爆龍（dog_amenities）
