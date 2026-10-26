@@ -2193,3 +2193,14 @@
 - ✏️ 変更: 肉とワイン bonanza（dog_amenities）
 - ✏️ 変更: 高倉町珈琲 八王子店（dog_amenities）
 - ✏️ 変更: 高幡不動 肉流通センター（dog_policy_condition, dog_amenities, last_verified, representative_source_id, sources）
+
+## 2026-10-26 22:43 — 追加 0 / 変更 9 / 削除 0
+- ✏️ 変更: Aoi Coffee Stand（dog_note, dog_policy_status, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: EMPORIO cafe&dining（dog_note, last_verified, dog_policy_status, representative_source_id, has_conflict, dog_policy_condition, sources）
+- ✏️ 変更: ROJU NAKAMEGURO（dog_note, last_verified, representative_source_id, dog_amenities, dog_size_limit, dog_policy_condition, sources）
+- ✏️ 変更: Restaurant Perfumes（レストランパフューム）（dog_note, description, last_verified, representative_source_id, dog_amenities, dog_policy_condition, sources）
+- ✏️ 変更: The Jones Café | Bar（last_verified, dog_policy_status, representative_source_id, has_conflict, dog_policy_condition, sources）
+- ✏️ 変更: VERVE COFFEE ROASTERS 六本木店（dog_note, description, last_verified, representative_source_id, sources）
+- ✏️ 変更: pepacafe FOREST（ペパカフェ・フォレスト）（dog_note, description, dog_amenities, has_conflict, dog_policy_condition, sources）
+- ✏️ 変更: カフェ海猫山猫（dog_note, last_verified, representative_source_id, dog_amenities, sources）
+- ✏️ 変更: サクラカフェ&レストラン日暮里(SAKURA CAFE)（last_verified, dog_policy_status, representative_source_id, sources）
