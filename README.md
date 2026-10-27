@@ -6,9 +6,9 @@
 <img src="docs/screenshots/app_icon.png" width="96" alt="App Icon" />
 </p>
 
-| 地図で発見 | 
-|---|
-| <img src="docs/screenshots/map_tennoz.png" width="260" alt="Map" /> |
+| 地図と検索で発見 | 答えを先に（店の詳細） | うちの子の設定 |
+|---|---|---|
+| <img src="docs/screenshots/home.png" width="240" alt="ホーム: 地図・検索バー・条件チップ・一覧シート" /> | <img src="docs/screenshots/detail.png" width="240" alt="店の詳細: 答えのカードと根拠の1行" /> | <img src="docs/screenshots/onboarding.png" width="240" alt="うちの子の設定（初回の2問）" /> |
 
 > 🤝 **開発を引き継ぐ人（別PC・別AIセッション）へ**: まず [`HANDOFF.md`](HANDOFF.md) を読んでください。現状・環境セットアップ・次の作業がまとまっています。
 
@@ -38,7 +38,7 @@ Google Sheet / data/master/*.csv（マスター）
    → data/cafes.json
        ├─ アプリにバンドル（オフライン対応）
        └─ GitHub Pages から配信（アプリ審査なしでデータ即時更新）
-誤り報告: GitHub Issues（専用フォームは準備中）→ 運営レビュー → マスター反映
+誤り報告: メール（irairappo@gmail.com）または GitHub Issues（専用フォームは準備中）→ 運営レビュー → マスター反映
 ```
 
 - iOS: Swift / SwiftUI（+ MapKit は UIKit 橋渡し）/ MVVM / iOS 17+ / **外部パッケージ依存ゼロ**
@@ -66,7 +66,7 @@ python3 tools/export_cafes.py           # 本出力
 
 - 対象エリア: **東京都内・595件**（出典1594件。店数は 2026-10-24 時点、出典数は 2026-10-25 時点。うち表示中は564件。座標は全店を住所・店舗ページのピンと照合済み。他府県への拡大は今後の課題）
 - 掲載情報は収集時点のものです。**お出かけ前に店舗の公式情報をご確認ください。**
-- 誤りを見つけた場合は GitHub Issues でお知らせください（専用フォームは準備中です）。
+- 誤りを見つけた場合は、メール（irairappo@gmail.com）または GitHub Issues でお知らせください（専用フォームは準備中です）。
 
 ## データ収集に参加する
 

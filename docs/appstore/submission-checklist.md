@@ -19,7 +19,7 @@
 
 ## 4. 問い合わせ窓口の確認（v1.0 は Google フォームなし）
 - v1.0 はフォームなしで提出する。アプリ内の「情報の誤りを報告」ボタンは、`AppEnvironment.defaultReportFormTemplate` が `nil` の間は自動で非表示になる（コード変更は不要）。
-- 問い合わせ・誤り報告の窓口は GitHub Issues（https://github.com/changch223/puppy-with-cafe/issues）。`docs/privacy.html` `docs/support.html` に反映済み（GitHub アカウントが必要・内容は公開される旨を明記）。
+- 問い合わせ・誤り報告の窓口はメール（irairappo@gmail.com）と GitHub Issues（https://github.com/changch223/puppy-with-cafe/issues）。`docs/privacy.html` `docs/support.html` に反映済み（メールの扱い、GitHub アカウントが必要・内容は公開される旨を明記）。App Store Connect の「App Review に関する情報」の連絡先メールにも同じアドレスを使える。
 - Google フォームは後日導入する（手順は `google-form-setup.md`）。導入時にアプリと docs を更新して新版として出す。
 
 ## 5. docs を公開して確認
@@ -28,7 +28,7 @@
   - https://changch223.github.io/puppy-with-cafe/docs/privacy.html
   - https://changch223.github.io/puppy-with-cafe/docs/support.html
   - https://changch223.github.io/puppy-with-cafe/data/cafes.json
-  - 各ページの GitHub Issues リンクが開くこと
+  - 各ページのメールアドレスと GitHub Issues リンクが表示・開くこと
 
 ## 6. スクリーンショットを撮影
 **必須: 6.9 インチ（iPhone 17 Pro Max など）= 1320 × 2868 px**（iPhone 専用アプリなので 6.9" の 1 サイズだけ必須。5〜10 枚、最低 1 枚。6.5" など他サイズは 6.9" から自動縮小される）。
