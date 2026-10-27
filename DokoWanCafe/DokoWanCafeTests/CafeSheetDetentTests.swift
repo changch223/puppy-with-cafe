@@ -61,11 +61,25 @@ final class CafeSheetDetentTests: XCTestCase {
         )
     }
 
-    func test_見出しだけの段は半分より高くならない() {
+    func test_見出しだけの段は地図領域の6割を超えない() {
         XCTAssertEqual(
             CafeSheetDetent.peek.height(containerHeight: 400, topReserved: 100, peekHeight: 500),
-            180
+            240
         )
+    }
+
+    func test_見出しが大きいときも半分の段は見出しの下に一覧を見せ_大きい段より低くならない() {
+        // 大きな文字: 見出しブロック300 → peek 324。半分(45%=360)では一覧が24しか見えないので、peek + 140 まで広げる
+        let peekHeight = CafeSheetDetent.peekHeight(headerBlockHeight: 300)
+        let peek = CafeSheetDetent.peek.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight)
+        let medium = CafeSheetDetent.medium.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight)
+        let large = CafeSheetDetent.large.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight)
+        XCTAssertEqual(peek, 324)
+        XCTAssertEqual(medium, 464)
+        XCTAssertEqual(large, 680)
+        XCTAssertTrue(peek < medium && medium <= large)
+        // 通常の文字サイズでは従来どおり 45%
+        XCTAssertEqual(CafeSheetDetent.medium.height(containerHeight: containerHeight, topReserved: topReserved), 360)
     }
 
     func test_伸びたpeekでも最寄り段を判定できる() {
@@ -98,5 +112,7 @@ final class CafeSheetDetentTests: XCTestCase {
         XCTAssertEqual(CafeSheetDetent.cardHeight(containerHeight: 600), 300)
         // 300 のとき下限 300 でも画面の 80% = 240 に抑える
         XCTAssertEqual(CafeSheetDetent.cardHeight(containerHeight: 300), 240)
+        // 大きな文字では割合を大きくする（800 の 62% = 496）
+        XCTAssertEqual(CafeSheetDetent.cardHeight(containerHeight: 800, isAccessibilitySize: true), 496)
     }
 }

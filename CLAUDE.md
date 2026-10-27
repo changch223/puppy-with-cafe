@@ -22,10 +22,17 @@
 - 憲章: `.specify/memory/constitution.md`（**最優先。特に 原則I 信頼できるデータ / 原則III プライバシー は必須ゲート**）
 - フィーチャー: `specs/001-dog-cafe-map/`（中核: 発見・信頼・報告。contracts/ にデータ契約）、`specs/002-cafe-rich-info/`（詳細充実: 営業時間+営業中バッジ・電話/予約・公式リンク・犬向け設備4項目・運営転記メモ）
 
+## 画面構成（再設計 段階1〜4 完了・2026-10-26）
+- 下に3タブ: **さがす**（地図＋検索バー＋条件チップ＋3段の一覧シート＋ピンのカード。`Features/Map/SearchTabView.swift`）／**保存**（行きたい・行った。`Features/Saved/SavedView.swift`）／**うちの子**（犬の設定・データ更新日・ピンの見かた・このアプリについて。`Features/About/MyDogView.swift`）。
+- 店の詳細（`Features/CafeDetail/`）は先頭に**答えのカード**（`Core/CafeDetailAnswer.swift`）と根拠の1行。根拠をタップすると参考記事の**根拠のシート**。
+- 「いつ行く？」（`Features/Map/PlanTimeSheet.swift`・`Core/TargetTime.swift`）で日時を選ぶと、その時刻に営業中の店だけを表示。決めた時刻は保存しない。
+- 「うちの子」（`Core/DogProfile.swift`・`Core/DogFit.swift`・`Services/DogProfileStore.swift`）: 大きさ・過ごし方を端末内（UserDefaults）にだけ保存し、席（店内・テラス）ごとに入れるかを判定する。**データに明記された事実だけで判定し、推測で「うちの子OK」と言わない（原則I）。**
+- 主要ファイルの一覧と全体像は `HANDOFF.md` §2.5。旧「右上のアイコン」「お気に入り」「AreaPickerView」は上記に置き換わった（お気に入りは「行きたい」へ移行）。
+
 ## 技術スタック（plan.md 準拠）
-- **Swift 5.9+ / iOS 16+**、UIは **SwiftUI 優先**、地図クラスタリング等のみ **MKMapView を UIViewRepresentable で橋渡し**
+- **Swift 5.9+ / iOS 17+**、UIは **SwiftUI 優先**、地図（形と色のピン・衝突間引き）のみ **MKMapView を UIViewRepresentable で橋渡し**
 - アーキテクチャ **MVVM**。純ロジック（距離/名寄せ/矛盾解決/フィルタ）は `Core/` に隔離し **XCTest 必須**
-- MapKit / CoreLocation（**WhenInUse**）/ AuthenticationServices（**Appleでサインイン**）
+- MapKit / CoreLocation（**WhenInUse**）。サインインなし（AuthenticationServices は旧A案の保管コードのみ）
 - **バックエンド（2026-07-05 構成Bに改訂, research.md R11）**: サーバーレス。**マスターCSV `data/master/*.csv`（Google Sheet 移行まで）→ `tools/export_cafes.py`（検証・矛盾/代表導出・差分CHANGELOG）→ `cafes.json`** をアプリにバンドル＋静的URL（GitHub Pages 予定）から遠隔更新（`Services/StaticCafeRepository.swift`）。検索・距離計算は端末内完結（位置情報を送信しない）。実データ: **595件・東京都内**（出典1594件。初期268件＝天王洲アイル5＋姉妹リポジトリ `../CafeResearchAgent/` の手動調査263件に、2026-08 の wave2〜4 で追加。大型犬可否 約254件・曜日別営業時間 約464件を構造化済み。座標は 2026-10-17 の ABR/GSI 照合で167件＋住所修正2店を更新済み、さらに manual 40店のうち38店と keep_coarse 92店は店舗ページのピンで更新済み（台帳: fix 302・keep 274・manual 0・keep_coarse 0）。595件は 2026-10-24 時点、出典1594件は 2026-10-25 時点の件数）。テストは凍結フィクスチャ（`DokoWanCafeTests/Fixtures/`）を使用
 - 誤り報告は **Google フォーム**（プリフィル。`AppEnvironment.defaultReportFormTemplate`（`App/AppConfig.swift`）に設定予定）— **フォーム未作成。v1.0 は GitHub Issues を窓口にして提出**（報告ボタンは URL 未設定の間は自動で非表示。後日導入の手順は `docs/appstore/google-form-setup.md`）。**サインインなし**（FR-028改訂）。運営がマスター反映＝承認
 - 旧A案（Supabase: `supabase/` の SQL・`Services/Supabase*`/`AuthService` 等）は**保管**。規模拡大時の移行先。v1では配線しない

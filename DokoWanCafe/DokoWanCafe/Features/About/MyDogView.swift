@@ -21,6 +21,7 @@ struct MyDogView: View {
     let onReload: () -> Void
 
     @State private var safariItem: AboutSafariItem?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         List {
@@ -41,19 +42,23 @@ struct MyDogView: View {
     private var dogSection: some View {
         Section {
             if let dog {
-                HStack {
+                // 大きな文字では「項目名」と「値」を縦に積み、値が細い列で1文字ずつ折れないようにする
+                let rowLayout = dynamicTypeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 2))
+                    : AnyLayout(HStackLayout(alignment: .firstTextBaseline))
+                rowLayout {
                     Text("大きさ")
-                    Spacer()
+                    if !dynamicTypeSize.isAccessibilitySize { Spacer() }
                     Text(dog.size.displayName)
                         .foregroundStyle(.secondary)
                 }
                 .accessibilityElement(children: .combine)
-                HStack(alignment: .firstTextBaseline) {
+                rowLayout {
                     Text("お店での過ごし方")
-                    Spacer()
+                    if !dynamicTypeSize.isAccessibilitySize { Spacer() }
                     Text(dog.stylesSummary ?? String(localized: "未選択"))
                         .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.trailing)
+                        .multilineTextAlignment(dynamicTypeSize.isAccessibilitySize ? .leading : .trailing)
                 }
                 .accessibilityElement(children: .combine)
                 Button(action: onEditDog) {

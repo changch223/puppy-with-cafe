@@ -238,22 +238,13 @@ final class CafeListViewModel: ObservableObject {
         }
     }
 
-    /// 現在適用中の絞り込み条件の数（営業中＋犬向け条件4種＋うちの子OK＋未確認表示）。
-    var activeFilterCount: Int {
-        [
-            openNowOnly,
-            amenityFilter.indoorOnly,
-            amenityFilter.terraceOnly,
-            amenityFilter.largeDogOnly,
-            amenityFilter.dogMenuOnly,
-            myDogOnly,
-            includeUnverified,
-        ].filter { $0 }.count
-    }
-
-    /// 取得自体は成功しているが、絞り込み条件によって表示結果が0件になっているか（FR-020, 設計書4）
+    /// 取得自体は成功している（オフライン中の保存データ表示を含む）が、絞り込み条件によって表示結果が0件になっているか
+    /// （FR-020, 設計書4）。オフライン中も「条件に合うお店がありません」と「条件をクリア」を出す。
     var isEmptyDueToFilter: Bool {
-        phase == .loaded && displayedResults.isEmpty
+        switch phase {
+        case .loaded, .offline: return displayedResults.isEmpty
+        default: return false
+        }
     }
 
     /// 営業中・「いつ行く？」・犬向け条件・未確認の絞り込みを初期状態に戻す（「クリア」チップ・空状態の「条件をクリア」から使用）

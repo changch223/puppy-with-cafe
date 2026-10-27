@@ -8,17 +8,8 @@ enum OpenState: Equatable, Sendable {
     case outsideHours
     /// 本日定休
     case closedToday
-    /// 構造化データなし → バッジを出さない（推測で「営業中」と示さない）
+    /// 構造化データなし（推測で「営業中」とも「時間外」とも言わない）
     case unknown
-
-    var displayText: String? {
-        switch self {
-        case .open: return String(localized: "営業中")
-        case .outsideHours: return String(localized: "営業時間外")
-        case .closedToday: return String(localized: "本日定休")
-        case .unknown: return nil
-        }
-    }
 }
 
 /// 営業中判定（純ロジック・UI非依存, 憲章 原則IV / FR-102）。

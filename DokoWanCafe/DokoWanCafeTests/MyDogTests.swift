@@ -103,8 +103,42 @@ final class MyDogTests: XCTestCase {
 
     func test_初回の2問はデータを表示できてから出す() {
         let store = DogProfileStore(defaults: makeDefaults())
-        XCTAssertFalse(store.shouldPresentOnboarding(dataDisplayed: false), "データ表示前は出さない")
-        XCTAssertTrue(store.shouldPresentOnboarding(dataDisplayed: true))
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: false, anotherModalOpen: false), .skip, "データ表示前は出さない")
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: true, anotherModalOpen: false), .present)
+    }
+
+    func test_初回の2問はほかのモーダルが開いている間は出さない() {
+        let store = DogProfileStore(defaults: makeDefaults())
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: true, anotherModalOpen: true), .waitForModal)
+        // 閉じたら出せる（出せなかったことは「出した」に数えない）
+        XCTAssertFalse(store.hasShownOnboarding)
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: true, anotherModalOpen: false), .present)
+    }
+
+    func test_初回の2問の判定_全パターン() {
+        typealias Gate = OnboardingGate
+        // データ表示済み・未表示・未設定・モーダルなし → 出す
+        XCTAssertEqual(Gate.decide(dataDisplayed: true, hasShown: false, hasProfile: false, anotherModalOpen: false), .present)
+        // ほかのモーダルが開いている → 待つ（出したことにはしない）
+        XCTAssertEqual(Gate.decide(dataDisplayed: true, hasShown: false, hasProfile: false, anotherModalOpen: true), .waitForModal)
+        // データ未表示 → 出さない（モーダルの有無によらない）
+        XCTAssertEqual(Gate.decide(dataDisplayed: false, hasShown: false, hasProfile: false, anotherModalOpen: false), .skip)
+        XCTAssertEqual(Gate.decide(dataDisplayed: false, hasShown: false, hasProfile: false, anotherModalOpen: true), .skip)
+        // すでに出した・すでに設定済み → 出さない（待たない）
+        XCTAssertEqual(Gate.decide(dataDisplayed: true, hasShown: true, hasProfile: false, anotherModalOpen: false), .skip)
+        XCTAssertEqual(Gate.decide(dataDisplayed: true, hasShown: true, hasProfile: false, anotherModalOpen: true), .skip)
+        XCTAssertEqual(Gate.decide(dataDisplayed: true, hasShown: false, hasProfile: true, anotherModalOpen: false), .skip)
+        XCTAssertEqual(Gate.decide(dataDisplayed: true, hasShown: true, hasProfile: true, anotherModalOpen: true), .skip)
+        // 再試行には上限がある
+        XCTAssertEqual(Gate.maxRetries, 20)
+    }
+
+    func test_ストアの判定は純関数と一致する() {
+        let store = DogProfileStore(defaults: makeDefaults())
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: true, anotherModalOpen: false), .present)
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: true, anotherModalOpen: true), .waitForModal)
+        store.save(DogProfile(size: .small))
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: true, anotherModalOpen: false), .skip)
     }
 
     func test_初回の2問は一度出したら二度と出さない_アプリを開き直しても() {
@@ -113,16 +147,16 @@ final class MyDogTests: XCTestCase {
         store.markOnboardingShown()
         // 「あとで設定する」を選んで未設定のままでも出さない
         XCTAssertNil(store.profile)
-        XCTAssertFalse(store.shouldPresentOnboarding(dataDisplayed: true))
+        XCTAssertEqual(store.onboardingDecision(dataDisplayed: true, anotherModalOpen: false), .skip)
         let reopened = DogProfileStore(defaults: defaults)
         XCTAssertTrue(reopened.hasShownOnboarding)
-        XCTAssertFalse(reopened.shouldPresentOnboarding(dataDisplayed: true))
+        XCTAssertEqual(reopened.onboardingDecision(dataDisplayed: true, anotherModalOpen: false), .skip)
     }
 
     func test_すでに設定済みなら初回の2問は出さない() {
         let defaults = makeDefaults()
         DogProfileStore(defaults: defaults).save(DogProfile(size: .small))
-        XCTAssertFalse(DogProfileStore(defaults: defaults).shouldPresentOnboarding(dataDisplayed: true))
+        XCTAssertEqual(DogProfileStore(defaults: defaults).onboardingDecision(dataDisplayed: true, anotherModalOpen: false), .skip)
     }
 
     func test_DogProfileの表示用の並びと要約() {
@@ -324,7 +358,6 @@ final class MyDogTests: XCTestCase {
         viewModel.myDogOnly = true
         XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name).sorted(), ["中型犬まで", "大型犬可"])
         XCTAssertTrue(viewModel.hasActiveChips)
-        XCTAssertEqual(viewModel.activeFilterCount, 1)
 
         viewModel.resetFilters()
         XCTAssertFalse(viewModel.myDogOnly)

@@ -1,8 +1,7 @@
 # 🤝 引き継ぎドキュメント — Puppy With Cafe
 
 > **別PC・別AIセッションへの引き継ぎ用**。このファイルとリポジトリを渡せば作業を継続できる。
-> 最終更新: 2026-10-24 / 状態: **MVP実装完了・データ配信本稼働・595件到達・データ品質改善（ギャップ補完）フェーズ**
-> （PR #17「表示テキストの調査メモ除去と閉店・陳腐化是正」は**レビュー中**＝未マージの可能性あり。`gh pr list` で確認）
+> 最終更新: 2026-10-26 / 状態: **MVP実装完了・画面の再設計（段階1〜4）完了・データ配信本稼働・595件到達・データ品質改善（ギャップ補完）フェーズ・App Store 提出準備**
 
 ## 0. まず読む順番（新しいAIへ）
 
@@ -20,19 +19,37 @@
 
 ## 2. いま完成しているもの（コード面はほぼ完了）
 
-- ✅ iOSアプリ全機能: 地図(MKMapView橋渡し+クラスタ)・一覧・詳細・可否4値・出典/確認日/矛盾/AI区別・営業時間(営業中バッジ)・犬設備・電話/リンク・オフライン・a11y・日本語ファースト・**アプリアイコン**
-- ✅ 2026-07〜10 の追加機能（PR #2/#4/#9/#13）: IG投稿埋め込み・OGP写真プレビュー、Google Maps流UI（下部シート2段）、住所・**駅名検索**、経路選択、お気に入り画面（遷移修正済み）、参考記事カード、詳細画面の再構成、営業時間の**日跨ぎ対応**、「大型犬OK」フィルタ
+- ✅ iOSアプリ全機能: 地図(MKMapView橋渡し・形と色のピン)・3段の一覧シート・詳細（答えのカード）・可否4値・出典/確認日/矛盾/AI区別・営業時間(営業中の判定)・犬設備・電話/リンク・オフライン・a11y・日本語ファースト・**アプリアイコン**
+- ✅ 2026-07〜10 の追加機能（PR #2/#4/#9/#13）: IG投稿埋め込み・OGP写真プレビュー、住所・**駅名検索**、経路選択、参考記事カード、営業時間の**日跨ぎ対応**、「大型犬OK」フィルタ
+- ✅ **画面の再設計（段階1〜4・2026-10-24〜26・PR #31/#33/#34/#35＋段階4）**: 「うちの子と、今、入れる？」に3タップで答える構成に作り直した（再設計案は利用者承認済み）。下のタブ3つ（さがす／保存／うちの子）・検索バー＋条件チップ（いつ行く？・うちの子OK・営業中・店内OK・テラス・大型犬OK・犬メニュー）・3段の一覧シート（見出しだけ／半分／ほぼ全画面）・ピンのカード・詳細の答えのカード（根拠の1行→根拠のシート）・「いつ行く？」（日時で絞る）・「行きたい／行った」（旧お気に入り）・「うちの子」（犬の大きさ・過ごし方の設定と入れるかの判定）。段階4（提出前の仕上げ）で積み残しの解消・未使用コードの削除・文字列カタログの同期・ライト/ダーク×最大文字サイズの通し確認・提出資料の更新を行った。画面構成と主要ファイルは §2.5。
 - ✅ データ基盤（サーバーレス構成B）: `data/master/*.csv` → `tools/export_cafes.py`（検証・矛盾解決・差分CHANGELOG）→ `data/cafes.json`
 - ✅ **データ配信 本稼働**: GitHub Pages で `cafes.json` を配信。アプリが起動時に取得（アプリ審査なしで更新反映）
-- ✅ テスト: 2026-10-17 に XCTest 156件 全緑（Xcode 26.6、iPhone 17 シミュレータ）。`.xcodeproj` は `DokoWanCafe/` 配下。
-- ⚠️ 残課題（**この PR で対応**）: `StaticCafeRepository.swift` の NSLock 警告10件（Swift 6 言語モードでエラー化する）／初回読み込みが最大15秒（リモート取得のタイムアウト待ちが初回表示を遅らせる）
+- ✅ テスト: 2026-10-26（再設計 段階4）に XCTest 434件 全緑（Xcode 26、iPhone 17 シミュレータ）、ビルド警告なし。最小 iOS は 17。`.xcodeproj` は `DokoWanCafe/` 配下。
 - ✅ 公開物: リポジトリ(public)・README・プライバシーポリシー
+
+### 2.5 画面構成と主要ファイル（再設計 段階1〜4 完了時点）
+
+アプリは下の3タブ（`App/RootView.swift`）。さがす・保存の両方から店の詳細へ進める（タブごとに NavigationStack）。純ロジックは `Core/` に隔離して XCTest で検証する（憲章 原則IV）。
+
+| 画面 | 主要ファイル | 役割 |
+|---|---|---|
+| **さがす**タブ | `Features/Map/SearchTabView.swift`・`SearchTopBar.swift`（`HomeSearchBar`・`FilterChipsView`）・`MapView.swift`（`CafeMapView`）・`MapPinRenderer.swift`・`CafeBottomSheet.swift`（3段シート）・`PlaceCardView.swift`（ピンのカード）・`Features/CafeList/CafeSearchView.swift`（検索画面）・`SearchStateView.swift`（読み込み中・圏外・位置情報なし・エラー）・`CafeListView.swift`（`CafeRowView`＝一覧の行） | 地図を常時ベースに、検索バー・条件チップ・3段の一覧シート。ピンを選ぶとシートの中身が店のカードに変わる |
+| **いつ行く？** | `Features/Map/PlanTimeSheet.swift`・`Core/TargetTime.swift`・`Features/Common/TargetTimeEnvironment.swift` | 日（今・今日・明日・その先の曜日）と時刻を選ぶと、その時刻に営業中の店だけを表示。対象時刻は保存しない。詳細の「今日」タイルも対象時刻を反映する |
+| **店の詳細** | `Features/CafeDetail/CafeDetailView.swift`・`CafeDetailComponents.swift`（答えのカード・要点タイル・根拠のシート）・`CafeDetailMyDogLine.swift`・`Core/CafeDetailAnswer.swift`（答えと根拠の1行）・`Core/CafeDetailSummary.swift`（要点タイル・曜日表・わんちゃん向け情報・共有文） | 先頭に答え（「店内で一緒に過ごせます」等）と根拠の1行。根拠をタップすると参考記事・食い違いの説明（`CafeDetailEvidenceSheet`） |
+| **保存**タブ | `Features/Saved/SavedView.swift`・`Services/SavedPlacesStore.swift`・`Core/SavedPlaces.swift` | 「行きたい」（追加が新しい順）／「行った」（行った日が新しい順）。端末内のみ（UserDefaults）。旧お気に入りは初回に「行きたい」へ移行 |
+| **うちの子**タブ | `Features/About/MyDogView.swift`・`MyDogSetupSheet.swift`・`Services/DogProfileStore.swift`・`Core/DogProfile.swift`・`Core/DogFit.swift` | 犬の大きさ・過ごし方の設定（端末内のみ）、データ更新日・再読み込み、ピンの見かた、このアプリについて。`DogFit` が席（店内・テラス）ごとに「入れると明記／入れないと明記／分からない」を判定（推測で「うちの子OK」と言わない） |
+| 共通 | `Core/CafePresentation.swift`（行・カードのタグ最大2つ・営業の行・VoiceOver 文）・`Core/SheetHeadline.swift`（見出し）・`Core/CafeFilter.swift`・`Features/CafeList/CafeListViewModel.swift`・`Features/Common/CafeRowParts.swift`・`DogProfileEnvironment.swift`・`BrandStyle.swift`・`Features/CafeList/RowStatusIcons.swift` | 地図・一覧・保存は同一の `CafeListViewModel`（`displayedResults`）を共有し、乖離させない（FR-003） |
+
+- **初回の2問**（`RootView.presentOnboardingIfNeeded`）: データを表示できたあと、どのモーダル（検索画面・「いつ行く？」・共有シート・アプリ内ブラウザなど）も出ていないときに一度だけ「うちの子のことを教えてください」を出す。出せなかったら閉じるのを待って出し直す。
+- **文字列**: 日本語の文字列リテラルがそのままキー。`Resources/Localizable.xcstrings` は段階4で現在のコードと同期済み（コードから消えた文字列は削除、新しい文字列は日本語＝キーで追加）。新しい文言を足したら Xcode でビルドして抽出・確認する（`SWIFT_EMIT_LOC_STRINGS=YES`）。
+- **大きな文字サイズ**: 最大（accessibility-extra-extra-extra-large）まで拡大して確認済み。一覧の行・ピンのカード・操作ボタンは縦に積み、条件チップは最大まで拡大して横スクロールにする。**検索バー（地図の上の固定の帯）だけは xxxLarge で止める**（最大にすると帯が画面を占めるため）。「いつ行く？」の時刻選択は AX ではメニュー式、根拠のシート・「いつ行く？」シートは AX では全画面で開く。
+- **提出資料**: `docs/appstore/`（`store-listing.md`・`screenshots.md`・`review-notes.md`・`submission-checklist.md`・`app-privacy.md`）。
 
 ### 環境・URL
 - リポジトリ: https://github.com/changch223/puppy-with-cafe （public / GitHubアカウント: changch223）
 - データ配信: https://changch223.github.io/puppy-with-cafe/data/cafes.json
 - プライバシーポリシー: https://changch223.github.io/puppy-with-cafe/docs/privacy.html
-- Bundle ID: `com.dokowancafe.app` / 表示名: Puppy With Cafe / 最小iOS: 16
+- Bundle ID: `com.dokowancafe.app` / 表示名: Puppy With Cafe / 最小iOS: 17
 - 現在の実データ（`data/master/cafes.csv` / `sources.csv`。件数は 2026-10-07 に origin/main で再集計したもの、曜日別営業時間・営業時間情報なしの件数は 2026-10-20 時点、出典件数・電話番号の件数は 2026-10-24 時点）:
   - **595件**（すべて東京都内・`sub_area` 83種。2026-10-24 に Communita Cafe を追加）、出典 **1594件**（2026-10-25 時点。電話番号 `phone` 記入済み 515件、表示中の564店では 502件・空欄 62件）
   - 大型犬可否 `dog_large` 記入済み **254件**（true 229 / false 25、空欄 341）
@@ -48,7 +65,7 @@ git clone https://github.com/changch223/puppy-with-cafe.git
 cd puppy-with-cafe
 
 # 2) 必要ツール
-#    - Xcode 26+（iOS 16+ シミュレータ）
+#    - Xcode 26+（iOS 17+ シミュレータ）
 #    - Python 3（標準ライブラリのみ。追加パッケージ不要）
 #    - gh CLI（push用。`gh auth login` で changch223 アカウントにログイン）
 
@@ -78,7 +95,7 @@ python3 tools/export_cafes.py --check
   - ふる浜売店（…1010）: 売店の営業時間の掲載なし（公園の開園時間は売店の営業時間ではない。公園管理事務所へ要確認）。
   - 喫茶 ならの木（…1168）: 公式サイト・SNS・グルメサイトに営業時間の掲載なし（電話確認が必要）。
   - まんまる庵（…1223）: 食べログの日曜が「11:09〜17:09」と不自然で確定できず（現状値は火曜11:00〜15:00・日曜11:00〜17:00）。
-- **PR #17 のマージ判断**（運営）: 表示テキストの調査メモ除去・閉店/陳腐化データの是正。レビュー中。
+- PR #17（表示テキストの調査メモ除去・閉店/陳腐化データの是正）は 2026-10-07 にマージ済み。
 - **個別の確認事項**: Snow Peak Cafe の店内可否は**電話確認**／Aoi Coffee Stand の営業実態は**現地確認**。
 - **dog_large 空欄（341件）**: 収穫率が約13%と低いため**保留**（費用対効果で再開を判断）。
 - **座標の残課題**: abr-geocoder + GSI で突き合わせ済み（`tools/README.md` の「座標の突き合わせ」）。`coord_sources.csv` の `decision` が `manual` は 2026-10-24 に0店になった（keep_coarse は 2026-10-18 に全店解消）。台帳の内訳: fix 302（新規掲載の Communita Cafe を含む）・keep 274・manual 0。
@@ -119,13 +136,14 @@ python3 tools/export_cafes.py --check
 - **進捗: 未確認**（本ドキュメント更新時点でリポジトリ上に記録なし。着手状況は本人に確認すること）。
 1. **Apple Developer Program 加入**（$99/年・審査1-2日）
 2. App Store Connect でアプリ登録（Bundle ID `com.dokowancafe.app` / 名前「Puppy With Cafe」の空き確認）
-3. ストア素材（スクショ・説明文・キーワード）→ 下書き: `docs/appstore/store-listing.md`
+3. ストア素材（スクショ・説明文・キーワード）→ 下書き: `docs/appstore/store-listing.md`（2026-10-26 に再設計後の画面・機能へ書き直し済み）、スクリーンショットの撮影ガイド: `docs/appstore/screenshots.md`（6.9" で5枚）
 4. App Privacy 申告 → **「データを収集していません」**（方針・根拠は `docs/appstore/app-privacy.md`。現在地は端末内のみで処理し送信・保存しない）
 5. Xcode で Archive → アップロード → 審査提出（審査メモ: `docs/appstore/review-notes.md`、全手順: `docs/appstore/submission-checklist.md`）
 
 **App Store 準備の現状（ブランチ `feat/appstore-readiness`）**
-- アプリ側で対応済み: 誤り報告フォーム未設定時は報告ボタンを非表示（「準備中」画面に到達しない）／「このアプリについて」画面（地図画面右上「…」メニュー内。バージョン・プライバシーポリシー・サポート・出典クレジット）／`PrivacyInfo.xcprivacy` を収集なしに是正／Instagram 埋め込みの WebView を非永続化／キャッシュに距離を保存しない／リモート取得のタイムアウト15秒＋失敗後5分は再取得しない／`MARKETING_VERSION=1.0.0`・`ITSAppUsesNonExemptEncryption=NO`／日本語のみ（`ja.lproj` 生成・`en` 廃止）。
+- アプリ側で対応済み: 誤り報告フォーム未設定時は報告ボタンを非表示（「準備中」画面に到達しない）／「このアプリについて」画面（「うちの子」タブの下部。バージョン・プライバシーポリシー・サポート・出典クレジット）／`PrivacyInfo.xcprivacy` を収集なしに是正／Instagram 埋め込みの WebView を非永続化／キャッシュに距離を保存しない／リモート取得のタイムアウト15秒＋失敗後5分は再取得しない／`MARKETING_VERSION=1.0.0`・`ITSAppUsesNonExemptEncryption=NO`／日本語のみ（`ja.lproj` 生成・`en` 廃止）。
 - 公開ページ・ストア文面は `docs/`（`privacy.html` / `support.html` / `appstore/`）に作成済み。
+- 審査メモ（`review-notes.md`）・提出チェックリスト（`submission-checklist.md`）は 2026-10-26 に再設計後の画面（検索バー・3タブ・うちの子）へ更新済み。
 - **残りはユーザー作業**: Apple Developer 加入・App Store Connect 登録、スクリーンショット撮影、App Privacy 入力、Archive・提出。
 
 ### 🟡 C. Google フォーム作成（T071・後日。v1.0 はフォームなしで提出）
@@ -165,6 +183,7 @@ git add -A && git commit -m "data: <エリア> N件追加" && git push
 
 ## 7. 触るときの注意（落とし穴）
 - **憲章 原則I は絶対**: 「推測で犬OK」「出典/確認日なしの確定情報」を作らない。これを破るデータはエクスポート検証が拒否する設計。
+- 外部依存はゼロ。最小 iOS は 17（`onChange(of:)` は2引数版など新しい形を使う。非推奨 API の警告は0に保つ）。
 - Xcode プロジェクトは `FileSystemSynchronizedRootGroup` 方式。`DokoWanCafe/DokoWanCafe/` 以下にファイルを置けば自動でターゲットに入る（pbxproj 手編集ほぼ不要）。
 - テストは凍結フィクスチャ（`DokoWanCafeTests/Fixtures/cafes.json`）を使う。アプリ本体の `Resources/cafes.json`（実データ）とは別物。
 - 旧A案（Supabase）の `supabase/` `Services/Supabase*` `AuthService` 等は**保管**。v1では未使用（規模拡大時の移行先）。research.md R11 参照。
@@ -173,7 +192,8 @@ git add -A && git commit -m "data: <エリア> N件追加" && git push
 ## 8. ファイル地図（どこに何があるか）
 | パス | 役割 |
 |---|---|
-| `DokoWanCafe/` | Xcode プロジェクト（アプリ本体・テスト） |
+| `DokoWanCafe/` | Xcode プロジェクト（アプリ本体・テスト）。画面と主要ファイルは §2.5 |
+| `docs/appstore/` | App Store 提出資料（ストア文面・スクショガイド・審査メモ・チェックリスト・App Privacy） |
 | `data/master/*.csv` | **データの正本**（ここを編集） |
 | `data/cafes.json` / `CHANGELOG.md` | 生成物・変更履歴 |
 | `tools/export_cafes.py` / `README.md` | 変換スクリプト・列仕様 |

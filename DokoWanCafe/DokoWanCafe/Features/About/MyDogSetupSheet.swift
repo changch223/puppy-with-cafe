@@ -105,9 +105,11 @@ struct MyDogSetupSheet: View {
                     Button(action: onDismiss) {
                         Text(mode == .onboarding ? "あとで設定する" : "キャンセル")
                             .font(.subheadline.bold())
-                            .foregroundStyle(.secondary)
+                            // ボタンの色味（tint）が薄く混ざって読みにくくならないよう、固定のラベル色にする
+                            .foregroundStyle(Color(.secondaryLabel))
                             .frame(maxWidth: .infinity, minHeight: 44)
                     }
+                    .buttonStyle(.plain)
                 }
             }
             .padding(20)

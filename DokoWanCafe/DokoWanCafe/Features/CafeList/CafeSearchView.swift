@@ -18,6 +18,7 @@ struct CafeSearchView: View {
     /// 実行中の場所検索。キャンセルや画面を閉じたときに取り消し、検索地点・最近の検索を変えない。
     @State private var placeSearchTask: Task<Void, Never>?
     @FocusState private var isFocused: Bool
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     // GeocodingService はキャッシュ等の共有状態を持たないため画面ごとに生成する
     private let geocodingService = GeocodingService()
 
@@ -54,42 +55,56 @@ struct CafeSearchView: View {
     // MARK: - 検索欄
 
     private var searchField: some View {
-        HStack(spacing: 8) {
-            HStack(spacing: 8) {
-                Image(systemName: "magnifyingglass")
-                    .foregroundStyle(.secondary)
-                TextField(String(localized: "店名・駅・エリアで検索"), text: $query)
-                    .focused($isFocused)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .submitLabel(.search)
-                    .onSubmit { startPlaceSearch() }
-                    .onChange(of: query) { _, _ in errorMessage = nil }
-                if isSearching {
-                    ProgressView()
-                } else if !query.isEmpty {
-                    Button {
-                        query = ""
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(.secondary)
-                            .frame(width: 32, height: 44)
-                    }
-                    .accessibilityLabel(Text("入力を消す"))
-                }
-            }
-            .padding(.horizontal, 12)
-            .frame(minHeight: 44)
-            .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-
-            Button(String(localized: "キャンセル")) {
-                placeSearchTask?.cancel()
-                onCancel()
-            }
-            .frame(minHeight: 44)
+        // 大きな文字では「キャンセル」が縦に折れて読めなくなるため、入力欄の上に右寄せで出す
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .trailing, spacing: 4))
+            : AnyLayout(HStackLayout(spacing: 8))
+        return layout {
+            if dynamicTypeSize.isAccessibilitySize { cancelButton }
+            fieldBox
+            if !dynamicTypeSize.isAccessibilitySize { cancelButton }
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
+    }
+
+    private var cancelButton: some View {
+        Button(String(localized: "キャンセル")) {
+            placeSearchTask?.cancel()
+            onCancel()
+        }
+        .lineLimit(1)
+        .fixedSize()
+        .frame(minHeight: 44)
+    }
+
+    private var fieldBox: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(.secondary)
+            TextField(String(localized: "店名・駅・エリアで検索"), text: $query)
+                .focused($isFocused)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .submitLabel(.search)
+                .onSubmit { startPlaceSearch() }
+                .onChange(of: query) { _, _ in errorMessage = nil }
+            if isSearching {
+                ProgressView()
+            } else if !query.isEmpty {
+                Button {
+                    query = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.secondary)
+                        .frame(width: 32, height: 44)
+                }
+                .accessibilityLabel(Text("入力を消す"))
+            }
+        }
+        .padding(.horizontal, 12)
+        .frame(minHeight: 44)
+        .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
     // MARK: - 入力前

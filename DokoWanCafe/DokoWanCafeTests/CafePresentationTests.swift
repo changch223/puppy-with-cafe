@@ -115,6 +115,20 @@ final class CafePresentationTests: XCTestCase {
         XCTAssertFalse(CafePresentation.showsLargeDogTag(for: no))
     }
 
+    func test_タグは最大2つでうちの子OKを優先する() {
+        let cafe = makeCafe(
+            lastVerified: Date(),
+            amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil)
+        )
+        // うちの子が入れる店: うちの子OK＋可否（大型犬OKは詳細にだけ出る）
+        XCTAssertEqual(CafePresentation.tags(for: cafe, dog: DogProfile(size: .small)).map(\.label), ["うちの子OK", "店内OK"])
+        // うちの子が未設定: 可否＋大型犬OK
+        XCTAssertEqual(CafePresentation.tags(for: cafe).map(\.label), ["店内OK", "大型犬OK"])
+        for dog in [nil, DogProfile(size: .small), DogProfile(size: .large)] {
+            XCTAssertLessThanOrEqual(CafePresentation.tags(for: cafe, dog: dog).count, CafePresentation.maxTagCount)
+        }
+    }
+
     func test_大型犬の可否が不明ならタグを出さない() {
         let cafe = makeCafe(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil))
         XCTAssertEqual(CafePresentation.tags(for: cafe).map(\.label), ["店内OK"])

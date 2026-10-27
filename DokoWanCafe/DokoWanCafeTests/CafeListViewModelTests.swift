@@ -201,18 +201,6 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.openNowOnly)
     }
 
-    func test_activeFilterCountは適用中のトグル数() {
-        let viewModel = makeViewModel(cafes: [])
-        XCTAssertEqual(viewModel.activeFilterCount, 0)
-
-        viewModel.amenityFilter.indoorOnly = true
-        viewModel.includeUnverified = true
-        XCTAssertEqual(viewModel.activeFilterCount, 2)
-
-        viewModel.openNowOnly = true
-        XCTAssertEqual(viewModel.activeFilterCount, 3)
-    }
-
     func test_hasActiveChipsは営業中か犬向け条件がオンのときだけtrue() {
         let viewModel = makeViewModel(cafes: [])
         XCTAssertFalse(viewModel.hasActiveChips)
@@ -536,6 +524,27 @@ final class CafeListViewModelTests: XCTestCase {
         viewModel.amenityFilter.indoorOnly = true
         XCTAssertTrue(viewModel.displayedResults.isEmpty)
         XCTAssertTrue(viewModel.isEmptyDueToFilter, "取得自体は成功しているため phase は .loaded のまま、フィルタ起因の0件と判定される")
+    }
+
+    func test_オフライン中のフィルタ起因の0件もisEmptyDueToFilterがtrueになる() async {
+        let near = makeCafe(name: "近い", latitude: 35.6897, longitude: 139.7007)
+        let cacheStore = CacheStore(filename: "test-cache-\(UUID().uuidString).json")
+        addTeardownBlock { cacheStore.clear() }
+        cacheStore.save([near])
+        let viewModel = CafeListViewModel(
+            repository: FailingRepository(cafes: [near]),
+            locationService: LocationService(),
+            cacheStore: cacheStore,
+            savedStore: makeSavedStore()
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+        guard case .offline = viewModel.phase else { return XCTFail("オフライン表示のはず: \(viewModel.phase)") }
+        XCTAssertFalse(viewModel.isEmptyDueToFilter)
+
+        viewModel.amenityFilter.indoorOnly = true
+        XCTAssertTrue(viewModel.displayedResults.isEmpty)
+        XCTAssertTrue(viewModel.isEmptyDueToFilter, "オフライン中でも条件に合う店がなければ案内と「条件をクリア」を出す")
     }
 
     // MARK: - オフラインキャッシュ（距離は保存せず表示時に計算）

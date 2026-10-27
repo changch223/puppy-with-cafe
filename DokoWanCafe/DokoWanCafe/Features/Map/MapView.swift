@@ -97,6 +97,9 @@ struct CafeMapView: UIViewRepresentable {
             let dog: DogProfile?
         }
         private var annotationsByID: [UUID: CafeAnnotation] = [:]
+        /// 今の縮尺で店名をピンの下に出すか（大きな縮尺のときだけ）
+        private var showsNames = false
+        private static let nameLabelTag = 7_001
 
         init(parent: CafeMapView) {
             self.parent = parent
@@ -175,6 +178,56 @@ struct CafeMapView: UIViewRepresentable {
             view.canShowCallout = false
             view.clusteringIdentifier = nil
             view.accessibilityLabel = annotation.spokenLabel
+            configureNameLabel(on: view, name: annotation.item.cafe.name)
+        }
+
+        /// ピンの下の店名（大きな縮尺のときだけ）。読み上げはピン本体が担うので、ラベルは VoiceOver から隠す。
+        private func configureNameLabel(on view: MKAnnotationView, name: String) {
+            let existing = view.viewWithTag(Self.nameLabelTag) as? UILabel
+            guard showsNames else {
+                existing?.isHidden = true
+                return
+            }
+            let label: UILabel
+            if let existing {
+                label = existing
+            } else {
+                label = UILabel()
+                label.tag = Self.nameLabelTag
+                label.numberOfLines = 1
+                label.lineBreakMode = .byTruncatingTail
+                label.textAlignment = .center
+                label.isAccessibilityElement = false
+                view.clipsToBounds = false
+                view.addSubview(label)
+            }
+            label.isHidden = false
+            // 地図の上でも読めるよう、文字色の反対色で縁取る（ライト・ダークどちらでも）
+            label.attributedText = NSAttributedString(string: name, attributes: [
+                .font: UIFont.systemFont(ofSize: 11, weight: .bold),
+                .foregroundColor: UIColor.label,
+                .strokeColor: UIColor.systemBackground,
+                .strokeWidth: -4,
+            ])
+            let maxWidth: CGFloat = 130
+            let size = label.sizeThatFits(CGSize(width: maxWidth, height: 20))
+            let width = min(size.width, maxWidth)
+            label.frame = CGRect(
+                x: (view.bounds.width - width) / 2, y: view.bounds.height - 2,
+                width: width, height: size.height
+            )
+        }
+
+        /// 縮尺が変わったとき、店名を出す／隠すが切り替わるなら表示中のピンを更新する
+        func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+            let region = mapView.region
+            let shows = MapViewModel.showsPinNames(span: region.span, centerLatitude: region.center.latitude)
+            guard shows != showsNames else { return }
+            showsNames = shows
+            for case let annotation as CafeAnnotation in mapView.annotations(in: mapView.visibleMapRect) {
+                guard let view = mapView.view(for: annotation) else { continue }
+                configure(view, for: annotation, isSelected: parent.selectedItem?.cafe.id == annotation.item.cafe.id)
+            }
         }
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -204,29 +257,6 @@ struct CafeMapView: UIViewRepresentable {
             if parent.selectedItem?.cafe.id == cafeAnnotation.item.cafe.id {
                 parent.selectedItem = nil
             }
-        }
-    }
-}
-
-/// MapPinCategory の小バッジ（詳細画面で使用）
-struct MapPinCategoryBadge: View {
-    let category: MapPinCategory
-
-    var body: some View {
-        Text(category.displayName)
-            .font(.caption2.bold())
-            .padding(.horizontal, 8)
-            .padding(.vertical, 3)
-            .background(Capsule().fill(tint.opacity(0.15)))
-            .foregroundStyle(tint)
-    }
-
-    private var tint: Color {
-        switch category {
-        case .indoorOK: return .green
-        case .terraceOnly: return .teal
-        case .checkDetail: return .orange
-        case .unverified: return .gray
         }
     }
 }

@@ -41,6 +41,21 @@ enum MapViewModel {
         )
     }
 
+    /// ピンの下に店名を出す縮尺の上限（地図の表示範囲の縦・横がどちらもこれ未満のとき。メートル）。
+    /// 広い縮尺では名前を出さず（ごちゃつく）、ズームインしたときだけ店名で見分けられるようにする。
+    static let pinNameMaxSpanMeters: Double = 600
+
+    /// 緯度1度あたりのメートル（概算）
+    private static let metersPerDegree = 111_320.0
+
+    /// ズームしているとき（表示範囲が縦横とも `pinNameMaxSpanMeters` 未満）だけ、ピンの下に店名を出す。
+    /// 重なりの間引きは MapKit の衝突回避に任せる。
+    static func showsPinNames(span: MKCoordinateSpan, centerLatitude: Double) -> Bool {
+        let heightMeters = span.latitudeDelta * metersPerDegree
+        let widthMeters = span.longitudeDelta * metersPerDegree * cos(centerLatitude * .pi / 180)
+        return heightMeters < pinNameMaxSpanMeters && widthMeters < pinNameMaxSpanMeters
+    }
+
     /// 数字クラスタ廃止の代替: 距離順の上位何件目までを
     /// 各段（必ず表示=required／中距離=defaultHigh）とするかの境界ランク。
     /// これ以降（遠い店）は defaultLow とし、MapKit標準の衝突間引きに委ねることで、

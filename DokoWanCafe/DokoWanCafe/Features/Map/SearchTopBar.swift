@@ -14,6 +14,8 @@ struct HomeSearchBar: View {
                 HStack(spacing: 8) {
                     Image(systemName: "magnifyingglass")
                         .foregroundStyle(.secondary)
+                    // 検索バーは地図の上に常に出る固定の帯。最大の文字では帯が画面を占めてしまうので、
+                    // 1行で全文が読める大きさ（xxxLarge）までにとどめる（一覧・詳細などは最大まで拡大する）
                     Text("店名・駅・エリアで検索")
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -47,6 +49,7 @@ struct HomeSearchBar: View {
             .accessibilityLabel(Text(dog.map { String(localized: "うちの子（\($0.size.displayName)）") } ?? String(localized: "うちの子")))
         }
         .padding(.trailing, 4)
+        .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         .background(.regularMaterial, in: Capsule())
         .shadow(color: .black.opacity(0.15), radius: 6, y: 2)
     }

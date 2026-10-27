@@ -12,16 +12,6 @@ enum MapPinCategory: Hashable, Sendable {
     /// 可・条件付きだが席種が不明 → 詳細確認を促す
     case checkDetail
 
-    /// 一覧・地図・詳細で共通に使う表示名（日本語ファースト）
-    var displayName: String {
-        switch self {
-        case .unverified: return String(localized: "未確認")
-        case .indoorOK: return String(localized: "店内OK")
-        case .terraceOnly: return String(localized: "テラスOK")
-        case .checkDetail: return String(localized: "詳細確認")
-        }
-    }
-
     /// カフェの犬同伴可否・設備情報から優先順で判定する。
     /// 1. `dogPolicyStatus == .unverified` → `.unverified`
     /// 2. `dogAmenities?.indoor == true` → `.indoorOK`
