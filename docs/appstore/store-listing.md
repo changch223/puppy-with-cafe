@@ -1,7 +1,7 @@
 # ストア掲載情報（App Store Connect 入力用・下書き）
 
 > 日本語（主言語）のみ。文字数は Python の `len()`（Unicode 文字数）で計測。App Store Connect の上限は文字数ベース。
-> v1.0 はフォームなしで提出する。問い合わせ・誤り報告の窓口は GitHub Issues（サポートページに記載）。
+> v1.0 はフォームなしで提出する。問い合わせ・誤り報告の窓口はメール（irairappo@gmail.com）と GitHub Issues（サポートページに記載）。
 > 2026-10-26 再設計（段階1〜4）に合わせて書き直した。画面・機能の根拠は `HANDOFF.md` §2 と `screenshots.md`。
 
 | 項目 | 値 | 文字数 / 上限 |
@@ -14,7 +14,7 @@
 | 主カテゴリ | フード/ドリンク (Food & Drink) | - |
 | 副カテゴリ | ナビゲーション (Navigation) | - |
 | 著作権 | © 2026 Puppy With Cafe | - |
-| サポートURL | https://changch223.github.io/puppy-with-cafe/docs/support.html（ページ内に GitHub Issues の問い合わせ窓口を記載。v1.0 はフォームなし） | - |
+| サポートURL | https://changch223.github.io/puppy-with-cafe/docs/support.html（ページ内にメール irairappo@gmail.com と GitHub Issues の問い合わせ窓口を記載。v1.0 はフォームなし） | - |
 | プライバシーポリシーURL | https://changch223.github.io/puppy-with-cafe/docs/privacy.html | - |
 | マーケティングURL | （任意・なし） | - |
 | 年齢区分 | 4+ | - |

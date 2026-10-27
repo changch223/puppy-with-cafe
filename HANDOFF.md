@@ -147,7 +147,7 @@ python3 tools/export_cafes.py --check
 - **残りはユーザー作業**: Apple Developer 加入・App Store Connect 登録、スクリーンショット撮影、App Privacy 入力、Archive・提出。
 
 ### 🟡 C. Google フォーム作成（T071・後日。v1.0 はフォームなしで提出）
-- **v1.0 はフォームなしで App Store に提出する**。問い合わせ・誤り報告の窓口は GitHub Issues（https://github.com/changch223/puppy-with-cafe/issues）で、`docs/privacy.html` / `docs/support.html` に記載済み（GitHub アカウントが必要・内容は公開される旨も明記）。アプリ内の「情報の誤りを報告」ボタンは `AppEnvironment.defaultReportFormTemplate` が `nil` の間は自動で非表示。審査メモ・ストア文面もフォームなし前提に修正済み（`docs/appstore/`）。
+- **v1.0 はフォームなしで App Store に提出する**。問い合わせ・誤り報告の窓口は**メール（irairappo@gmail.com、2026-10-27 運営決定）**と GitHub Issues（https://github.com/changch223/puppy-with-cafe/issues）で、`docs/privacy.html` / `docs/support.html` に記載済み（メールの扱い、GitHub アカウントが必要・内容は公開される旨も明記）。アプリ内の「情報の誤りを報告」ボタンは `AppEnvironment.defaultReportFormTemplate` が `nil` の間は自動で非表示。審査メモ・ストア文面もフォームなし前提に修正済み（`docs/appstore/`）。
 - フォームは**未作成**。後日導入する場合の手順書: `docs/appstore/google-form-setup.md`（`tools/README.md` 手順2 も参照）。導入時は、プリフィルURL（https）を `AppEnvironment.defaultReportFormTemplate`（`DokoWanCafe/DokoWanCafe/App/AppConfig.swift`）に設定し、docs の GitHub Issues 記載をフォームへ更新、審査メモも更新して新版として出す。
 
 ### ⚪ D. v2候補（リリース後）
