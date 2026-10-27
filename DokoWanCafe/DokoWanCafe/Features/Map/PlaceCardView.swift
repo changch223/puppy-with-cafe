@@ -26,43 +26,21 @@ struct PlaceCardView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .top, spacing: 12) {
-                    CafeThumbnailView(cafe: cafe, size: 72)
-
-                    VStack(alignment: .leading, spacing: 6) {
-                        HStack(alignment: .firstTextBaseline, spacing: 4) {
-                            Text(cafe.name)
-                                .font(.headline)
-                                .lineLimit(2)
-                            // 行った店は名前の横の小さなチェックで示す（押せない表示）
-                            if savedStatus == .visited {
-                                VisitedCheckIcon()
-                            }
-                        }
-                        CafeTagsView(cafe: cafe)
-                        if let condition = CafePresentation.conditionSummary(for: cafe) {
-                            Text(condition)
-                                .font(.caption)
-                                .foregroundStyle(Color(.secondaryLabel))
-                                .lineLimit(2)
-                        }
-                        MyDogNoteView(cafe: cafe)
-                        HStack(spacing: 8) {
-                            OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
-                            Text(walkingText)
-                                .font(.caption.bold())
-                                .foregroundStyle(Color(.secondaryLabel))
-                        }
+                if dynamicTypeSize.isAccessibilitySize {
+                    // 大きな文字では写真と閉じるボタンの行の下に、店名・タグ・条件を全幅で並べる（店名を省略しない）
+                    HStack(alignment: .top) {
+                        CafeThumbnailView(cafe: cafe, size: 56)
+                        Spacer(minLength: 0)
+                        closeButton
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                    Button(action: onClose) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title2)
-                            .foregroundStyle(Color(.secondaryLabel))
-                            .frame(width: 44, height: 44)
+                    cardInfo
+                } else {
+                    HStack(alignment: .top, spacing: 12) {
+                        CafeThumbnailView(cafe: cafe, size: 72)
+                        cardInfo
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        closeButton
                     }
-                    .accessibilityLabel(Text("閉じて一覧に戻る"))
                 }
 
                 // 大きな文字ではボタンを縦に積み、ラベルが切れないようにする
@@ -113,9 +91,62 @@ struct PlaceCardView: View {
             }
             .padding(16)
         }
-        .frame(height: CafeSheetDetent.cardHeight(containerHeight: containerHeight))
+        .frame(height: CafeSheetDetent.cardHeight(
+            containerHeight: containerHeight, isAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+        ))
         .sheetChrome()
         .accessibilityElement(children: .contain)
+    }
+
+    private var closeButton: some View {
+        Button(action: onClose) {
+            Image(systemName: "xmark.circle.fill")
+                .font(.title2)
+                .foregroundStyle(Color(.secondaryLabel))
+                .frame(width: 44, height: 44)
+        }
+        .accessibilityLabel(Text("閉じて一覧に戻る"))
+    }
+
+    /// 店名・タグ・条件の要点・営業と徒歩の目安
+    private var cardInfo: some View {
+        let isLarge = dynamicTypeSize.isAccessibilitySize
+        return VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(cafe.name)
+                    .font(.headline)
+                    .lineLimit(isLarge ? nil : 2)
+                    .fixedSize(horizontal: false, vertical: isLarge)
+                // 行った店は名前の横の小さなチェックで示す（押せない表示）
+                if savedStatus == .visited {
+                    VisitedCheckIcon()
+                }
+            }
+            CafeTagsView(cafe: cafe)
+            if let condition = CafePresentation.conditionSummary(for: cafe) {
+                Text(condition)
+                    .font(.caption)
+                    .foregroundStyle(Color(.secondaryLabel))
+                    .lineLimit(isLarge ? nil : 2)
+            }
+            MyDogNoteView(cafe: cafe)
+            let line = HStack(spacing: 8) {
+                OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
+                Text(walkingText)
+                    .font(.caption.bold())
+                    .foregroundStyle(Color(.secondaryLabel))
+            }
+            if isLarge {
+                VStack(alignment: .leading, spacing: 4) {
+                    OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
+                    Text(walkingText)
+                        .font(.caption.bold())
+                        .foregroundStyle(Color(.secondaryLabel))
+                }
+            } else {
+                line
+            }
+        }
     }
 
     /// 「行きたい」ボタン（トグル）。詳細と同じ表示で、行きたいのときだけ塗った肉球にする。

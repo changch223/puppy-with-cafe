@@ -24,6 +24,8 @@ struct CafeDetailView: View {
     // 店名が画面上から隠れたらナビゲーションバーに店名を出す
     @State private var showsNavigationTitle = false
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    // 「いつ行く？」の対象時刻（あれば「今日」タイルを「土 12:00」にする）
+    @Environment(\.targetTime) private var targetTime
 
     private enum HeroPhoto: Equatable {
         case pending
@@ -76,7 +78,7 @@ struct CafeDetailView: View {
                         onTapEvidence: { showEvidence = true }
                     )
 
-                    CafeDetailHighlightTiles(highlights: CafeDetailHighlights.all(cafe: cafe, at: now))
+                    CafeDetailHighlightTiles(highlights: CafeDetailHighlights.all(cafe: cafe, at: targetTime ?? now, isTargetTime: targetTime != nil))
 
                     actionRow
 
@@ -111,6 +113,19 @@ struct CafeDetailView: View {
             }
         }
         .coordinateSpace(name: Self.scrollSpace)
+        // 店名をナビゲーションバーに出すとき（本文がバーの下をスクロールしているとき）は、バーの背景（ぼかし）も見せる。
+        // 背景がないと本文と店名が重なって読めない。標準の toolbarBackground は iOS 26 の透明なバーでは効かないため、
+        // バーの高さぶんの帯を自前で重ねる。写真の帯が見えている間は透明のまま。
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(.regularMaterial)
+                .frame(height: outer.safeAreaInsets.top)
+                // この GeometryReader は安全領域の内側から始まるので、バー（ステータスバー込み）の上端まで引き上げる
+                .offset(y: -outer.safeAreaInsets.top)
+                .opacity(showsNavigationTitle ? 1 : 0)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        }
         .onPreferenceChange(CafeDetailTitleOffsetKey.self) { titleBottom in
             showsNavigationTitle = titleBottom < outer.safeAreaInsets.top
         }
@@ -132,7 +147,8 @@ struct CafeDetailView: View {
                     hasConflict: viewModel.hasConflict
                 )
             )
-            .presentationDetents([.medium, .large])
+            // 大きな文字では中身が収まるよう、全画面まで開く
+            .presentationDetents(dynamicTypeSize.isAccessibilitySize ? [.large] : [.medium, .large])
         }
         .sheet(item: $safariItem) { item in
             SafariView(url: item.url)
@@ -294,7 +310,7 @@ struct CafeDetailView: View {
             }
             // サイズ制限（002/FR-107。例: 小型・中型のみ、抱っこ・カート推奨）
             if let sizeLimit = cafe.dogSizeLimit {
-                CafeDetailInfoRow(label: String(localized: "サイズ")) {
+                CafeDetailInfoRow(label: String(localized: "席・サイズの条件")) {
                     Text(sizeLimit)
                 }
             }
@@ -419,6 +435,16 @@ struct CafeDetailView: View {
             CafeDetailCard(title: String(localized: "写真・雰囲気")) {
                 photoContent(for: tier)
             }
+        } else if photoTier != nil, heroPhoto == .pending {
+            // 写真の帯の取得中は、セクションを消さずに読み込み中の枠を出す（取得後にレイアウトが跳ねない）
+            CafeDetailCard(title: String(localized: "写真・雰囲気")) {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color(.secondarySystemBackground))
+                    .frame(maxWidth: .infinity, minHeight: OGPPhotoCardView.cardHeight, maxHeight: OGPPhotoCardView.cardHeight)
+                    .overlay { ProgressView() }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Text("写真を読み込み中"))
+            }
         }
     }
 
@@ -458,7 +484,8 @@ struct CafeDetailView: View {
             : AnyLayout(HStackLayout(alignment: .firstTextBaseline))
         return CafeDetailCard(title: String(localized: "わんちゃん向け情報")) {
             VStack(spacing: 0) {
-                let rows = CafeDetailAmenities.rows(amenities, confirmed: confirmed)
+                let hasSizeLimit = cafe.dogSizeLimit?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+                let rows = CafeDetailAmenities.rows(amenities, confirmed: confirmed, hasSizeLimit: hasSizeLimit)
                 ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
                     rowLayout {
                         Text(row.label)
@@ -492,6 +519,7 @@ struct CafeDetailView: View {
         case .yes: return "checkmark.circle.fill"
         case .no: return "xmark.circle.fill"
         case .unknown, .unconfirmed: return "questionmark.circle"
+        case .conditional: return "checkmark.circle"
         }
     }
 
@@ -500,6 +528,7 @@ struct CafeDetailView: View {
         case .yes: return .cafeDetailGreen
         case .no: return .cafeDetailRed
         case .unknown, .unconfirmed: return .secondary
+        case .conditional: return .primary
         }
     }
 

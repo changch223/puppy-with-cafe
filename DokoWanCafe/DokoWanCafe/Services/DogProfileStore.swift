@@ -35,8 +35,11 @@ final class DogProfileStore: ObservableObject {
         defaults.set(true, forKey: Self.onboardingShownKey)
     }
 
-    /// 初回の2問を今出すか: データを表示できていて、まだ一度も出しておらず、設定もまだないとき。
-    func shouldPresentOnboarding(dataDisplayed: Bool) -> Bool {
-        dataDisplayed && !hasShownOnboarding && profile == nil
+    /// 初回の2問を今どうするか（出す／ほかのモーダルが閉じるのを待つ／出さない）。判定は `OnboardingGate`（純ロジック）。
+    func onboardingDecision(dataDisplayed: Bool, anotherModalOpen: Bool) -> OnboardingGate.Decision {
+        OnboardingGate.decide(
+            dataDisplayed: dataDisplayed, hasShown: hasShownOnboarding,
+            hasProfile: profile != nil, anotherModalOpen: anotherModalOpen
+        )
     }
 }

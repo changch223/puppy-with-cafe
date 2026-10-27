@@ -19,6 +19,12 @@ enum CafeSheetDetent: CaseIterable, Equatable {
     /// 店のカード表示中の高さの割合・下限（medium より少し低い固定の高さ）
     static let cardRatio: CGFloat = 0.40
     static let cardMinHeight: CGFloat = 300
+    /// 大きな文字での店のカードの高さの割合
+    static let accessibilityCardRatio: CGFloat = 0.62
+    /// 「見出しだけ」の段の高さの上限（地図領域に対する割合。大きな文字で見出しが長くなっても切れないように medium より大きく取る）
+    static let peekMaxRatio: CGFloat = 0.6
+    /// 半分の段で、見出しの下に最低限見せる一覧の高さ（見出しが大きくて半分では一覧が見えなくなるのを防ぐ）
+    static let mediumListAllowance: CGFloat = 140
 
     /// 「見出しだけ」の段の高さ。グラバー＋見出し（Dynamic Type で伸びる）の実測の高さ＋1行目の覗き分。
     /// 基本の高さより小さくならない。
@@ -44,20 +50,26 @@ enum CafeSheetDetent: CaseIterable, Equatable {
         topReserved: CGFloat = 0,
         peekHeight: CGFloat = CafeSheetDetent.peekHeight
     ) -> CGFloat {
+        let peek = min(peekHeight, containerHeight * Self.peekMaxRatio)
+        // 見出しが大きい（大きな文字）ときは、半分の段でも見出しの下に一覧が少し見えるようにする
+        // （基本の高さのままなら従来どおり地図領域の45%）
+        let mediumBase = containerHeight * Self.mediumRatio
+        let medium = peekHeight > Self.peekHeight ? max(mediumBase, peek + Self.mediumListAllowance) : mediumBase
         switch self {
         case .peek:
-            return min(peekHeight, containerHeight * Self.mediumRatio)
+            return peek
         case .medium:
-            return containerHeight * Self.mediumRatio
+            return medium
         case .large:
-            let mediumHeight = containerHeight * Self.mediumRatio
-            return max(containerHeight - topReserved, mediumHeight)
+            return max(containerHeight - topReserved, medium)
         }
     }
 
     /// 店のカードを出しているときのシートの高さ（段とは別の固定の高さ。小さな画面では上限を設ける）
-    static func cardHeight(containerHeight: CGFloat) -> CGFloat {
-        min(max(containerHeight * cardRatio, cardMinHeight), containerHeight * 0.8)
+    /// 大きな文字（アクセシビリティサイズ）では内容が多く縦に伸びるため、割合を大きくする。
+    static func cardHeight(containerHeight: CGFloat, isAccessibilitySize: Bool = false) -> CGFloat {
+        let ratio = isAccessibilitySize ? accessibilityCardRatio : cardRatio
+        return min(max(containerHeight * ratio, cardMinHeight), containerHeight * 0.8)
     }
 
     /// ドラッグ終了時点の高さから最も近い段を求める純関数。

@@ -55,6 +55,41 @@ final class CafeDetailSummaryTests: XCTestCase {
         XCTAssertEqual(tile.tone, .caution)
     }
 
+    func test_今日_対象時刻があればその時刻のタイルにする() {
+        // 行で「月 10:00 は営業中」と出る店は、詳細でも同じ時刻の営業を示す（「今日 営業時間外」と食い違わない）
+        let open = CafeDetailHighlights.today(
+            hours: hours, at: tokyoDate(hour: 10, minute: 0), isTargetTime: true, timeZone: tokyo
+        )
+        XCTAssertEqual(open.title, "月 10:00")
+        XCTAssertEqual(open.value, "営業中・19:00まで")
+        XCTAssertEqual(open.tone, .good)
+
+        let outside = CafeDetailHighlights.today(
+            hours: hours, at: tokyoDate(hour: 20, minute: 0), isTargetTime: true, timeZone: tokyo
+        )
+        XCTAssertEqual(outside.title, "月 20:00")
+        XCTAssertEqual(outside.value, "営業時間外")
+
+        // 対象日が定休なら「本日」とは言わない
+        let closed = CafeDetailHighlights.today(
+            hours: hours, at: tokyoDate(day: 7, hour: 10, minute: 0), isTargetTime: true, timeZone: tokyo
+        )
+        XCTAssertEqual(closed.title, "火 10:00")
+        XCTAssertEqual(closed.value, "定休")
+        XCTAssertEqual(closed.tone, .caution)
+    }
+
+    func test_今日_対象時刻なしは今日のまま() {
+        let tile = CafeDetailHighlights.today(
+            hours: hours, at: tokyoDate(hour: 10, minute: 0), isTargetTime: false, timeZone: tokyo
+        )
+        XCTAssertEqual(tile.title, "今日")
+        let all = CafeDetailHighlights.all(
+            cafe: makeCafe(), at: tokyoDate(hour: 10, minute: 0), isTargetTime: true, timeZone: tokyo
+        )
+        XCTAssertEqual(all[0].title, "月 10:00")
+    }
+
     func test_今日_不明は時間の情報なし() {
         // 未登録の曜日・構造化データなしのどちらでも「営業中」と推測しない
         let unknownDay = CafeDetailHighlights.today(hours: hours, at: tokyoDate(day: 8, hour: 10, minute: 0), timeZone: tokyo)
@@ -174,6 +209,23 @@ final class CafeDetailSummaryTests: XCTestCase {
         XCTAssertEqual(rows.map(\.label), ["店内", "テラス", "大型犬", "犬メニュー"])
         XCTAssertEqual(rows.map(\.valueText), ["不可", "可", "情報なし", "情報なし"])
         XCTAssertEqual(rows.map(\.state), [.no, .yes, .unknown, .unknown])
+    }
+
+    func test_わんちゃん向け情報_サイズの条件がある店の大型犬はタイルと同じ条件つきで可() {
+        let amenities = DogAmenities(indoor: true, terrace: true, largeDogs: true, dogMenu: nil)
+        let limited = CafeDetailAmenities.rows(amenities, confirmed: true, hasSizeLimit: true)
+        XCTAssertEqual(limited[2].valueText, "条件つきで可")
+        XCTAssertEqual(limited[2].state, .conditional)
+        // タイルと同じ言葉・中立
+        XCTAssertEqual(CafeDetailHighlights.largeDogs(true, confirmed: true, hasSizeLimit: true).value, limited[2].valueText)
+        // 条件がなければ従来どおり「可」
+        XCTAssertEqual(CafeDetailAmenities.rows(amenities, confirmed: true, hasSizeLimit: false)[2].valueText, "可")
+        // 不可・情報なし・未確認は条件の有無で変えない
+        let no = DogAmenities(indoor: true, terrace: nil, largeDogs: false, dogMenu: nil)
+        XCTAssertEqual(CafeDetailAmenities.rows(no, confirmed: true, hasSizeLimit: true)[2].valueText, "不可")
+        XCTAssertEqual(CafeDetailAmenities.rows(amenities, confirmed: false, hasSizeLimit: true)[2].valueText, "記載あり（未確認）")
+        // 他の行（店内・テラス）は条件があっても「可」のまま
+        XCTAssertEqual(limited.map(\.valueText).prefix(2), ["可", "可"])
     }
 
     func test_わんちゃん向け情報_犬メニューはありなし() {

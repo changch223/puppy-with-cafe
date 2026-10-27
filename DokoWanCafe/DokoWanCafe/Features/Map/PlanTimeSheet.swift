@@ -39,15 +39,21 @@ struct PlanTimeSheet: View {
         let count = viewModel.openCount(at: target)
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                HStack {
+                // 大きな文字では「リセット」が縦に折れないよう、見出しの下に回す
+                let headerLayout = dynamicTypeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 0))
+                    : AnyLayout(HStackLayout())
+                headerLayout {
                     Text("いつ行く？")
                         .font(.title3.bold())
                         .accessibilityAddTraits(.isHeader)
-                    Spacer()
+                    if !dynamicTypeSize.isAccessibilitySize { Spacer() }
                     Button(action: reset) {
                         Text("リセット")
                             .font(.subheadline.bold())
                             .foregroundStyle(Color.brand)
+                            .lineLimit(1)
+                            .fixedSize()
                             .frame(minWidth: 44, minHeight: 44)
                     }
                     .accessibilityLabel(Text("リセットして今に戻す"))
@@ -137,16 +143,34 @@ struct PlanTimeSheet: View {
                 }
             }
 
-            Picker(String(localized: "時刻"), selection: $minutes) {
-                ForEach(TargetTime.timeChoices, id: \.self) { value in
-                    Text(TargetTime.timeText(minutes: value)).tag(value)
+            if dynamicTypeSize.isAccessibilitySize {
+                // ホイールの文字は文字サイズに合わせて大きくならず、高さだけ広げても読みにくいため、
+                // 大きな文字ではメニュー式（選んだ時刻が大きな文字で出る）にする
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("時刻（30分刻み）")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                    Picker(String(localized: "時刻"), selection: $minutes) {
+                        ForEach(TargetTime.timeChoices, id: \.self) { value in
+                            Text(TargetTime.timeText(minutes: value)).tag(value)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    .tint(Color.brand)
+                    .labelsHidden()
+                    .accessibilityLabel(Text("時刻（30分刻み）"))
                 }
+            } else {
+                Picker(String(localized: "時刻"), selection: $minutes) {
+                    ForEach(TargetTime.timeChoices, id: \.self) { value in
+                        Text(TargetTime.timeText(minutes: value)).tag(value)
+                    }
+                }
+                .pickerStyle(.wheel)
+                .frame(height: 96)
+                .clipped()
+                .accessibilityLabel(Text("時刻（30分刻み）"))
             }
-            .pickerStyle(.wheel)
-            // ホイールの文字も大きくなるので、大きな文字では高さを広げる
-            .frame(height: dynamicTypeSize.isAccessibilitySize ? 180 : 96)
-            .clipped()
-            .accessibilityLabel(Text("時刻（30分刻み）"))
         }
     }
 

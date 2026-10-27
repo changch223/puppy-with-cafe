@@ -189,4 +189,21 @@ final class MapViewModelTests: XCTestCase {
         XCTAssertEqual(diff.added, [c])
         XCTAssertEqual(diff.removed, [a])
     }
+
+    // MARK: - ズーム時の店名ラベル
+
+    func test_店名は大きな縮尺のときだけ出す() {
+        let lat = 35.68
+        func span(meters: Double) -> MKCoordinateSpan {
+            MKCoordinateSpan(latitudeDelta: meters / 111_320, longitudeDelta: meters / (111_320 * cos(lat * .pi / 180)))
+        }
+        // 徒歩圏の初期表示（1.6km）では出さない
+        XCTAssertFalse(MapViewModel.showsPinNames(span: span(meters: MapViewModel.walkingSpanMeters), centerLatitude: lat))
+        XCTAssertFalse(MapViewModel.showsPinNames(span: span(meters: 600), centerLatitude: lat))
+        XCTAssertTrue(MapViewModel.showsPinNames(span: span(meters: 590), centerLatitude: lat))
+        XCTAssertTrue(MapViewModel.showsPinNames(span: span(meters: 200), centerLatitude: lat))
+        // 縦か横のどちらかが広ければ出さない
+        let wide = MKCoordinateSpan(latitudeDelta: 300 / 111_320, longitudeDelta: 0.02)
+        XCTAssertFalse(MapViewModel.showsPinNames(span: wide, centerLatitude: lat))
+    }
 }

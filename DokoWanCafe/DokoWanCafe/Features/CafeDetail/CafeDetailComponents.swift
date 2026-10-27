@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-// 店詳細の再設計（段階1b）で使う部品。1a の共通部品とは独立させるため、ここで完結させる。
+// 店詳細の再設計（段階1b）で使う部品。
 
 // MARK: - 色
 
@@ -106,7 +106,7 @@ struct CafeDetailFlowLayout: Layout {
     }
 }
 
-/// 可否ステータスの小チップ（参考記事カード用。1a の共通バッジには依存しない）。
+/// 可否ステータスの小チップ（根拠のシートの参考記事カード用）。
 struct CafeDetailStatusChip: View {
     let status: DogPolicyStatus
 
@@ -449,8 +449,13 @@ struct CafeDetailEvidenceSheet: View {
         NavigationStack {
             List {
                 Section {
-                    Label(evidence.text, systemImage: "checkmark.seal")
-                        .font(.subheadline)
+                    // 「出典の記載が食い違っています」のときは、確認済みを示す印ではなく警告の印にする
+                    Label(
+                        evidence.text,
+                        systemImage: evidence.textIsWarning ? "exclamationmark.triangle.fill" : "checkmark.seal"
+                    )
+                    .font(.subheadline)
+                    .foregroundStyle(evidence.textIsWarning ? Color.cafeDetailOrange : Color.primary)
                     if viewModel.isUnverified {
                         warningBox(
                             text: String(localized: "この情報は未確認です。参考記事・確認日のある確定情報ではありません。ご来店前に店舗へ直接ご確認ください。"),

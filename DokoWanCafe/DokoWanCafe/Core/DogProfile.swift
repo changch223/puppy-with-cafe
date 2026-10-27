@@ -85,3 +85,27 @@ struct DogProfile: Codable, Equatable, Sendable {
         return names.isEmpty ? nil : names.joined(separator: "、")
     }
 }
+
+/// 初回の2問（うちの子の設定）を今出すかの判定（純ロジック・UI非依存, 憲章 原則IV）。
+/// データを表示できていて、まだ一度も出しておらず、設定もまだなく、ほかのモーダル（検索画面・「いつ行く？」・
+/// 共有シート・アプリ内ブラウザなど）が開いていないときだけ出す。モーダルが開いているだけなら「待つ」（閉じたら出す）。
+enum OnboardingGate {
+    enum Decision: Equatable, Sendable {
+        /// 今出す
+        case present
+        /// 出したいが、ほかのモーダルが開いている（閉じたら出し直す）
+        case waitForModal
+        /// 出さない（データ未表示・すでに出した・すでに設定済み）
+        case skip
+    }
+
+    /// モーダルが閉じるのを待つ再試行の上限回数（1.5秒おき＝約30秒）
+    static let maxRetries = 20
+
+    static func decide(
+        dataDisplayed: Bool, hasShown: Bool, hasProfile: Bool, anotherModalOpen: Bool
+    ) -> Decision {
+        guard dataDisplayed, !hasShown, !hasProfile else { return .skip }
+        return anotherModalOpen ? .waitForModal : .present
+    }
+}

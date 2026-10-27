@@ -70,11 +70,4 @@ final class MapPinCategoryTests: XCTestCase {
         )
         XCTAssertEqual(MapPinCategory.category(for: cafe), .checkDetail)
     }
-
-    func test_各カテゴリのdisplayName() {
-        XCTAssertEqual(MapPinCategory.unverified.displayName, "未確認")
-        XCTAssertEqual(MapPinCategory.indoorOK.displayName, "店内OK")
-        XCTAssertEqual(MapPinCategory.terraceOnly.displayName, "テラスOK")
-        XCTAssertEqual(MapPinCategory.checkDetail.displayName, "詳細確認")
-    }
 }

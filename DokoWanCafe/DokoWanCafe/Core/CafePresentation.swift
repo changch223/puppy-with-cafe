@@ -22,7 +22,7 @@ enum InitialTile {
     }
 }
 
-/// 一覧の行・ピンカードのタグ（うちの子OK ＋ 店内OK／テラスのみ／条件を確認／未確認 ＋ 大型犬OK）
+/// 一覧の行・ピンカードのタグ（最大2つ: うちの子OK ＋ 店内OK／テラスのみ／条件を確認／未確認、または 可否 ＋ 大型犬OK）
 struct CafeTag: Equatable {
     enum Kind: Equatable {
         case category(MapPinCategory)
@@ -36,7 +36,7 @@ struct CafeTag: Equatable {
 }
 
 extension MapPinCategory {
-    /// 行・カード用の短いタグ文言（`displayName` は詳細画面で使うので変えない）
+    /// 行・カード用の短いタグ文言
     var tagLabel: String {
         switch self {
         case .indoorOK: return String(localized: "店内OK")
@@ -68,19 +68,23 @@ enum CafePresentation {
         return limit.isEmpty
     }
 
-    /// （うちの子OK＋）可否のタグ1つ＋大型犬OK（無条件で大型犬が可と分かる店だけ。不明・条件つきは出さない）。
+    /// 行・カードのタグ（最大2つ。標準の文字サイズで1行に収める）。
+    /// うちの子が入れると明記された店は「うちの子OK」＋可否のタグ。そうでなければ可否のタグ＋大型犬OK
+    /// （無条件で大型犬が可と分かる店だけ。不明・条件つきは出さない）。「大型犬OK」は詳細にも出る。
     /// 「うちの子OK」は `dog` が設定済みで、その子が入れると明記された店だけ（再設計 段階3）。
+    static let maxTagCount = 2
+
     static func tags(for cafe: Cafe, dog: DogProfile? = nil) -> [CafeTag] {
         let category = MapPinCategory.category(for: cafe)
-        var result: [CafeTag] = []
+        let categoryTag = CafeTag(kind: .category(category), label: categoryLabel(for: cafe))
         if let dog, let label = DogFit.evaluate(cafe: cafe, dog: dog).tagLabel {
-            result.append(CafeTag(kind: .myDog, label: label))
+            return [CafeTag(kind: .myDog, label: label), categoryTag]
         }
-        result.append(CafeTag(kind: .category(category), label: categoryLabel(for: cafe)))
+        var result = [categoryTag]
         if showsLargeDogTag(for: cafe) {
             result.append(CafeTag(kind: .largeDog, label: String(localized: "大型犬OK")))
         }
-        return result
+        return Array(result.prefix(maxTagCount))
     }
 
     /// 条件の要点。`dogPolicyCondition`、なければ `dogSizeLimit`。空文字は無いものとして扱う。

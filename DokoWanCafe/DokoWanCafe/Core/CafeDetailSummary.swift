@@ -30,10 +30,14 @@ enum CafeDetailHighlights {
     static func all(
         cafe: Cafe,
         at date: Date = Date(),
+        isTargetTime: Bool = false,
         timeZone: TimeZone = OpeningHoursEvaluator.tokyoTimeZone
     ) -> [CafeDetailHighlight] {
         [
-            today(hours: cafe.hours, hoursText: cafe.hoursText, at: date, timeZone: timeZone),
+            today(
+                hours: cafe.hours, hoursText: cafe.hoursText, at: date,
+                isTargetTime: isTargetTime, timeZone: timeZone
+            ),
             reservation(cafe.reservation),
             largeDogs(
                 cafe.dogAmenities?.largeDogs,
@@ -44,14 +48,17 @@ enum CafeDetailHighlights {
     }
 
     /// 今日: 「営業中・19:00まで」／「営業時間外」／「本日定休」／「営業時間は下記」（曜日別の時間は無く
-    /// hours_text だけがある店）／「時間の情報なし」
+    /// hours_text だけがある店）／「時間の情報なし」。
+    /// 「いつ行く？」で対象時刻を決めているとき（`isTargetTime`）は、行の「土 12:00 は営業中」と食い違って見えないよう、
+    /// タイルの見出しを「土 12:00」にして、その時刻の営業を示す（定休は「定休」。「本日」とは言わない）。
     static func today(
         hours: OpeningHours?,
         hoursText: String? = nil,
         at date: Date = Date(),
+        isTargetTime: Bool = false,
         timeZone: TimeZone = OpeningHoursEvaluator.tokyoTimeZone
     ) -> CafeDetailHighlight {
-        let title = String(localized: "今日")
+        let title = isTargetTime ? TargetTime.shortLabel(date) : String(localized: "今日")
         switch OpeningHoursEvaluator.state(hours: hours, at: date, timeZone: timeZone) {
         case .open:
             let value: String
@@ -64,7 +71,8 @@ enum CafeDetailHighlights {
         case .outsideHours:
             return CafeDetailHighlight(title: title, value: String(localized: "営業時間外"), tone: .neutral)
         case .closedToday:
-            return CafeDetailHighlight(title: title, value: String(localized: "本日定休"), tone: .caution)
+            let value = isTargetTime ? String(localized: "定休") : String(localized: "本日定休")
+            return CafeDetailHighlight(title: title, value: value, tone: .caution)
         case .unknown:
             if hasText(hoursText) {
                 return CafeDetailHighlight(title: title, value: String(localized: "営業時間は下記"), tone: .neutral)
@@ -156,6 +164,8 @@ struct CafeDetailAmenityRow: Equatable, Sendable {
         case yes, no, unknown
         /// 記載はあるが未確認（✓/✕ にせず中立に示す）
         case unconfirmed
+        /// 可だがサイズ・席の条件がある（緑の ✓ にせず中立に示す。タイルの「条件つきで可」と同じ）
+        case conditional
     }
 
     let label: String
@@ -167,23 +177,33 @@ struct CafeDetailAmenityRow: Equatable, Sendable {
 enum CafeDetailAmenities {
     /// 店内・テラス・大型犬・犬メニューの4行。不明は「情報なし」（「不可」と混同しない, FR-104）。
     /// `confirmed == false`（未確認・確認日なしの店）では記載があっても「記載あり（未確認）」の中立表示にする。
-    static func rows(_ amenities: DogAmenities, confirmed: Bool = true) -> [CafeDetailAmenityRow] {
+    /// `hasSizeLimit`（サイズ・席の条件の記載がある店）の大型犬「可」は、タイルと同じ「条件つきで可」の中立表示にする
+    /// （条件の中身は答えのカードと「席・サイズの条件」にあるので、この行は状態の言葉だけ）。
+    static func rows(
+        _ amenities: DogAmenities, confirmed: Bool = true, hasSizeLimit: Bool = false
+    ) -> [CafeDetailAmenityRow] {
         [
             row(String(localized: "店内"), amenities.indoor, confirmed, yes: String(localized: "可"), no: String(localized: "不可")),
             row(String(localized: "テラス"), amenities.terrace, confirmed, yes: String(localized: "可"), no: String(localized: "不可")),
-            row(String(localized: "大型犬"), amenities.largeDogs, confirmed, yes: String(localized: "可"), no: String(localized: "不可")),
+            row(
+                String(localized: "大型犬"), amenities.largeDogs, confirmed, yes: String(localized: "可"), no: String(localized: "不可"),
+                yesIsConditional: hasSizeLimit
+            ),
             row(String(localized: "犬メニュー"), amenities.dogMenu, confirmed, yes: String(localized: "あり"), no: String(localized: "なし")),
         ]
     }
 
     private static func row(
-        _ label: String, _ value: Bool?, _ confirmed: Bool, yes: String, no: String
+        _ label: String, _ value: Bool?, _ confirmed: Bool, yes: String, no: String, yesIsConditional: Bool = false
     ) -> CafeDetailAmenityRow {
         guard let value else {
             return CafeDetailAmenityRow(label: label, state: .unknown, valueText: String(localized: "情報なし"))
         }
         if !confirmed {
             return CafeDetailAmenityRow(label: label, state: .unconfirmed, valueText: String(localized: "記載あり（未確認）"))
+        }
+        if value, yesIsConditional {
+            return CafeDetailAmenityRow(label: label, state: .conditional, valueText: String(localized: "条件つきで可"))
         }
         return CafeDetailAmenityRow(label: label, state: value ? .yes : .no, valueText: value ? yes : no)
     }
