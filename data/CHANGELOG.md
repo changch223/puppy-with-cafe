@@ -2227,3 +2227,45 @@
 - ➕ 追加: 牛たん うしすけ 吉祥寺店
 - ➕ 追加: 立飲ビストロ Ryo
 - ➕ 追加: 肉Q
+
+## 2026-10-31 08:44 — 追加 40 / 変更 0 / 削除 0
+- ➕ 追加: & Yogurt 表参道店(アンドヨーグルト)
+- ➕ 追加: 3pmTOKYO
+- ➕ 追加: AMAZON POLPAS CAFE & MARKET 自由が丘
+- ➕ 追加: Arl Eee nakameguro
+- ➕ 追加: BURGERS TOKYO
+- ➕ 追加: Baru Comodo(バルコモド)
+- ➕ 追加: DOG SIDE Lounge
+- ➕ 追加: Enso. 円相 代官山
+- ➕ 追加: Green Cafe 西郷山店
+- ➕ 追加: IL MARE AZZURRO（イル マーレ アッズーロ）
+- ➕ 追加: KOKKO KURKKU
+- ➕ 追加: Kuss代官山
+- ➕ 追加: MANDARINE BROTHERS 自由が丘
+- ➕ 追加: MARY STAND（メアリースタンド）
+- ➕ 追加: NICE minamiaoyama
+- ➕ 追加: OVERWHELM 中目黒店
+- ➕ 追加: Pebble Hiroo Terrace
+- ➕ 追加: RAINBOW CAFE＆WINE DINING 三軒茶屋
+- ➕ 追加: TIME, TIME, TIME.
+- ➕ 追加: WM 有無
+- ➕ 追加: mamocafe（Specialtycoffee&Food mamocafe）
+- ➕ 追加: meso（メソ）
+- ➕ 追加: mi:ne
+- ➕ 追加: アニヴェルセル カフェ 表参道(ANNIVERSAIRE CAFE)
+- ➕ 追加: イル カンパネッロ（IL CAMPANELLO）
+- ➕ 追加: エル フォー ユー(L for You)
+- ➕ 追加: カフェ ラ・ボエム 自由が丘
+- ➕ 追加: カフェレストラン フィガロ(FIGARO)
+- ➕ 追加: サリーヒルズ
+- ➕ 追加: サンクスネイチャー 恵比寿店(ThanksNature)
+- ➕ 追加: テトテ アパートメント(TETOTE APARTMENT)
+- ➕ 追加: パンとエスプレッソと自由形 自由が丘店
+- ➕ 追加: ボンベイバザー
+- ➕ 追加: マジョレルカフェ（Majorelle Cafe）
+- ➕ 追加: 中目黒ひつじ 目黒川店
+- ➕ 追加: 南青山エッセンス
+- ➕ 追加: 南青山カフェ(MinamiAoyamaCafe)
+- ➕ 追加: 恵比寿ビストロ 猫も杓子も
+- ➕ 追加: 食酒場Nest広尾
+- ➕ 追加: 鶏バル 串サンロク

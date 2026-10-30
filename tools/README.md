@@ -184,3 +184,4 @@ python3 tools/export_cafes.py --check
 - 2026-10-20、ERIC ROSE を食べログのピン（食べログ・公式サイトの Google 埋め込み・さんたつの3本が22m以内で一致。ぐるなびのみ約151m外れ）で更新（method=shop_pin、ゲートG通過: 港区 北青山三丁目）。fix 計300 / manual 残り1。
 - 2026-10-24、パークス光が丘を食べログのピンで更新（運営が Google マップで確認した売店のピンと2.1mで一致、method=shop_pin、ゲートG通過: 練馬区 光が丘四丁目）。fix 計301 / manual 0。同日、新規掲載の Communita Cafe を台帳に追加（method=shop_pin・旧座標がないため distance_m は空。新規掲載店は以後この書式で台帳に1行追加する）→ fix 計302（keep_coarse は 2026-10-18 に全店解消）。
 - 2026-10-30、バッチR で新規掲載した16店（代官山・中目黒・吉祥寺・二子玉川。id …1305〜…1320）を台帳に追加（method=shop_pin_single・食べログ JSON-LD の単一出典・ゲートG通過〔国土地理院の町丁目が住所と一致〕・distance_m は空）→ fix 計318 / keep 274 / manual 0。
+- 2026-10-30、バッチS で新規掲載した40店（代官山・中目黒・恵比寿・広尾・表参道・青山・自由が丘・三軒茶屋・下北沢。id …1321〜…1360）を台帳に追加（method=shop_pin_single・食べログ JSON-LD の単一出典・ゲートG通過〔国土地理院の町丁目が住所と一致〕・distance_m は空）。Green Cafe 西郷山店（…1325）だけは GSI が区境で鉢山町を返し町名が不一致だが、食べログとホットペッパーのピンが約7mで一致するため method=shop_pin で採用（2点目を note に記録）→ fix 計358 / keep 274 / manual 0。
