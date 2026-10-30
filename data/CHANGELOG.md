@@ -2204,3 +2204,8 @@
 - ✏️ 変更: pepacafe FOREST（ペパカフェ・フォレスト）（dog_note, description, dog_amenities, has_conflict, dog_policy_condition, sources）
 - ✏️ 変更: カフェ海猫山猫（dog_note, last_verified, representative_source_id, dog_amenities, sources）
 - ✏️ 変更: サクラカフェ&レストラン日暮里(SAKURA CAFE)（last_verified, dog_policy_status, representative_source_id, sources）
+
+## 2026-10-30 19:04 — 追加 0 / 変更 3 / 削除 0
+- ✏️ 変更: Aoi Coffee Stand（is_closed, sources）
+- ✏️ 変更: SHAPLA-INDIA（is_closed, sources）
+- ✏️ 変更: THE LINKING（dog_amenities, sources）

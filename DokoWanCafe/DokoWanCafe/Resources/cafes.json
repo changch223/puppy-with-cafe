@@ -1602,7 +1602,7 @@
       "hours_text": "平日18:00〜(ラストオーダーまで)",
       "id": "beef0000-0000-4000-8000-000000000840",
       "info_verified": "2026-08-06",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-09",
       "latitude": 35.62471,
       "links": [
@@ -1652,6 +1652,15 @@
           "reference": "https://odekake-wanko-bu.com/spot/aoi/",
           "type": "blog",
           "verified_at": "2026-08-09"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000840",
+          "claimed_status": "unverified",
+          "id": "1b1359a2-fce9-5919-b5df-57a8035e90e0",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131603/13142228/",
+          "type": "tabelog",
+          "verified_at": "2026-10-27"
         }
       ],
       "sub_area": "五反田・大崎"
@@ -22563,7 +22572,7 @@
       "hours_text": "月〜土11:00〜23:00",
       "id": "beef0000-0000-4000-8000-000000000884",
       "info_verified": "2026-08-06",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-06",
       "latitude": 35.63243,
       "longitude": 139.71242,
@@ -22590,6 +22599,24 @@
           "reference": "https://doghuggy.petgo.jp/dogmap/spot/544",
           "type": "other",
           "verified_at": "2026-08-06"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000884",
+          "claimed_status": "unverified",
+          "id": "57fc0a61-1a92-55d2-a882-e1f363f277e5",
+          "provenance": "aggregated",
+          "reference": "https://umami.run/2021/03/27/shapla-india-curry-meguro-goodbye/",
+          "type": "other",
+          "verified_at": "2026-10-27"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000884",
+          "claimed_status": "unverified",
+          "id": "100beaff-b0b4-597c-bee4-7cccc4ef512e",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131601/13058504/",
+          "type": "tabelog",
+          "verified_at": "2026-10-27"
         }
       ],
       "sub_area": "目黒"
@@ -24172,6 +24199,9 @@
       "description": "神南のアメリカンダイナー。アンガス牛のチャックテールステーキが看板で、店内での犬同伴に対応。",
       "dog_amenities": {
         "indoor": true,
+        "indoor_style": [
+          "floor"
+        ],
         "terrace": false
       },
       "dog_note": "大型犬可否は情報により異なる・犬種条件は要問合せ",
@@ -24276,6 +24306,24 @@
           "reference": "https://r.gnavi.co.jp/9sn0s7ss0000/pet/",
           "type": "other",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000321",
+          "claimed_status": "unverified",
+          "id": "8760a3d9-e099-5818-84d6-b28f3d154ccc",
+          "provenance": "aggregated",
+          "reference": "https://r.gnavi.co.jp/9sn0s7ss0000/pet/",
+          "type": "other",
+          "verified_at": "2026-10-27"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000321",
+          "claimed_status": "unverified",
+          "id": "b9dd2f9b-7fe4-5c06-909b-7a074dacf760",
+          "provenance": "aggregated",
+          "reference": "https://wanico.jp/spots/d/97",
+          "type": "other",
+          "verified_at": "2026-10-27"
         }
       ],
       "sub_area": "渋谷駅周辺"
@@ -56387,6 +56435,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-10-26T13:43:09Z",
+  "generated_at": "2026-10-30T10:04:06Z",
   "is_sample_data": false
 }
