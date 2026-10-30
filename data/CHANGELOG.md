@@ -2209,3 +2209,21 @@
 - ✏️ 変更: Aoi Coffee Stand（is_closed, sources）
 - ✏️ 変更: SHAPLA-INDIA（is_closed, sources）
 - ✏️ 変更: THE LINKING（dog_amenities, sources）
+
+## 2026-10-30 19:16 — 追加 16 / 変更 0 / 削除 0
+- ➕ 追加: 88 Asia（ハチハチアジア）
+- ➕ 追加: ALLO（アロ）
+- ➕ 追加: Asian Cafe & Diner Vivid Ajia
+- ➕ 追加: BISTRO FAVORI 代官山
+- ➕ 追加: COM DAIKANYAMA
+- ➕ 追加: Mark Matsuoka Grill 中目黒
+- ➕ 追加: Mary Jane
+- ➕ 追加: NAKAMEGURO TERRACE
+- ➕ 追加: PRIM
+- ➕ 追加: TOKIO フレンチ ルナティック
+- ➕ 追加: 北海道物産 吉祥寺
+- ➕ 追加: 吉祥寺 井の頭テラス HONOO
+- ➕ 追加: 東京焼肉 黒乃 Beef up tokyo
+- ➕ 追加: 牛たん うしすけ 吉祥寺店
+- ➕ 追加: 立飲ビストロ Ryo
+- ➕ 追加: 肉Q

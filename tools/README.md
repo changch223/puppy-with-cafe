@@ -183,3 +183,4 @@ python3 tools/export_cafes.py --check
 - `method=shop_pin_single`: 店舗ピンが1出典しか得られなかった店（5店）。**ゲートG**（国土地理院逆ジオコーダ `mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress` に採用座標をかけ、muniCd が住所の市区町村と一致し、かつ lv01Nm がアプリ登録住所の町名〔丁目は漢数字/算用数字を正規化、丁目の無い住所は町名のみ。ヶ/ケ・大字の表記差は同一視〕と一致すること）を通った場合のみ採用する。ゲートGは shop_pin / shop_pin_single の全店に適用し、不一致なら採用せず据え置いて運営に報告する。
 - 2026-10-20、ERIC ROSE を食べログのピン（食べログ・公式サイトの Google 埋め込み・さんたつの3本が22m以内で一致。ぐるなびのみ約151m外れ）で更新（method=shop_pin、ゲートG通過: 港区 北青山三丁目）。fix 計300 / manual 残り1。
 - 2026-10-24、パークス光が丘を食べログのピンで更新（運営が Google マップで確認した売店のピンと2.1mで一致、method=shop_pin、ゲートG通過: 練馬区 光が丘四丁目）。fix 計301 / manual 0。同日、新規掲載の Communita Cafe を台帳に追加（method=shop_pin・旧座標がないため distance_m は空。新規掲載店は以後この書式で台帳に1行追加する）→ fix 計302（keep_coarse は 2026-10-18 に全店解消）。
+- 2026-10-30、バッチR で新規掲載した16店（代官山・中目黒・吉祥寺・二子玉川。id …1305〜…1320）を台帳に追加（method=shop_pin_single・食べログ JSON-LD の単一出典・ゲートG通過〔国土地理院の町丁目が住所と一致〕・distance_m は空）→ fix 計318 / keep 274 / manual 0。
