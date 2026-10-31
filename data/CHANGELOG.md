@@ -2269,3 +2269,47 @@
 - ➕ 追加: 恵比寿ビストロ 猫も杓子も
 - ➕ 追加: 食酒場Nest広尾
 - ➕ 追加: 鶏バル 串サンロク
+
+## 2026-10-31 13:25 — 追加 42 / 変更 0 / 削除 0
+- ➕ 追加: 347CAFE＆LOUNGE
+- ➕ 追加: Ariake Miraie
+- ➕ 追加: BROOKS GREENLIT CAFE
+- ➕ 追加: Bar B&W
+- ➕ 追加: Bowery lane
+- ➕ 追加: Café PA·TRI·CIAN
+- ➕ 追加: DDSK サイゴン キッチン
+- ➕ 追加: F BULL'S Cafe
+- ➕ 追加: Kento's Burger
+- ➕ 追加: LOOK UP COFFEE
+- ➕ 追加: Nine9 Style hamburger&bar
+- ➕ 追加: ORTIGA（オルティガ）
+- ➕ 追加: PARKSTAND Coffee & Bakery
+- ➕ 追加: POSH
+- ➕ 追加: RELAX Healthy Ice Cream
+- ➕ 追加: SLOWJAM GARAGE Singaporean cuisine
+- ➕ 追加: Seaside Café SOLARIS
+- ➕ 追加: The World Cafe 中目黒
+- ➕ 追加: Tiki's Tokyo
+- ➕ 追加: WINESTAND TEO
+- ➕ 追加: attic room LOG
+- ➕ 追加: better is
+- ➕ 追加: cacom（カコム）
+- ➕ 追加: cafe 明日も発酵ごはん nippon
+- ➕ 追加: cherry pick hills
+- ➕ 追加: est tokyo uno et001
+- ➕ 追加: milkygreek 恵比寿店
+- ➕ 追加: アティックルーム（attic room）
+- ➕ 追加: ココロゴトカフェ
+- ➕ 追加: シーウルフダイナー（SHE WOLF DINER）
+- ➕ 追加: タールムビアンコ お台場店
+- ➕ 追加: ビストロ 石川亭 豊洲フォレシア店
+- ➕ 追加: ブルーボトルコーヒー 豊洲パークカフェ
+- ➕ 追加: ベルギービール ベル・オーブ ららぽーと豊洲
+- ➕ 追加: ロイヤルガーデンカフェ&タバーン 豊洲
+- ➕ 追加: 代官山 琴
+- ➕ 追加: 友安製作所カフェ 浅草橋
+- ➕ 追加: 台湾 席茶 蓮月庭
+- ➕ 追加: 呑冨（NOMITOMI）
+- ➕ 追加: 桜丘カフェ
+- ➕ 追加: 浅草 たこ丸
+- ➕ 追加: 浅草 更科天狐
