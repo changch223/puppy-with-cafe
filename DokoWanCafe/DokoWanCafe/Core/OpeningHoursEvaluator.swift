@@ -120,9 +120,25 @@ enum OpeningHoursEvaluator {
         for range in ranges {
             guard let open = range.openMinutes, let close = range.closeMinutes else { continue }
             if isForwardOpen(minutes: minutes, open: open, close: close) {
-                return range.close
+                return contiguousClose(from: range, in: ranges)
             }
         }
         return nil
+    }
+
+    /// 切れ目なく続く枠（例: 10:00-17:00 と 17:00-23:00）を辿り、最後の枠の閉店時刻を返す。
+    /// 最初の枠の閉店時刻を返すと、続けて営業しているのに閉店が近いように見えるため。
+    /// 日跨ぎの枠（close <= open）に達したらそこで止める（翌日へ延びる枠の先は辿らない）。
+    /// 閉店時刻を解釈できない枠には進まない（壊れた文字列をそのまま表示しない）。
+    private static func contiguousClose(from start: TimeRange, in ranges: [TimeRange]) -> String {
+        var current = start
+        var visited = 0
+        while visited < ranges.count,
+              let open = current.openMinutes, let close = current.closeMinutes, close > open,
+              let next = ranges.first(where: { $0.openMinutes == close && $0.closeMinutes != nil }) {
+            current = next
+            visited += 1
+        }
+        return current.close
     }
 }

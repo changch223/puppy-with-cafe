@@ -111,6 +111,46 @@ final class OpeningHoursEvaluatorTests: XCTestCase {
         )
     }
 
+    func test_切れ目なく続く枠は最後の枠の閉店時刻を返す() {
+        // 例: 10:00-17:00,17:00-23:00（帯の区切りは営業の切れ目ではない）。2026-07-06 は月曜日、07-07 は火曜日
+        let contiguous = OpeningHours(
+            mon: [TimeRange(open: "10:00", close: "17:00"), TimeRange(open: "17:00", close: "23:00")],
+            tue: [TimeRange(open: "10:00", close: "17:00"), TimeRange(open: "17:00", close: "2:00")],
+            wed: nil, thu: nil, fri: nil, sat: nil, sun: nil
+        )
+        XCTAssertEqual(
+            OpeningHoursEvaluator.closingTimeIfOpen(hours: contiguous, at: tokyoDate(hour: 12, minute: 0)),
+            "23:00"
+        )
+        XCTAssertEqual(
+            OpeningHoursEvaluator.closingTimeIfOpen(hours: contiguous, at: tokyoDate(hour: 18, minute: 0)),
+            "23:00"
+        )
+        // 続く枠が日跨ぎなら、その枠の閉店時刻（翌日早朝）まで辿る
+        XCTAssertEqual(
+            OpeningHoursEvaluator.closingTimeIfOpen(hours: contiguous, at: tokyoDate(day: 7, hour: 12, minute: 0)),
+            "2:00"
+        )
+    }
+
+    func test_続く枠の境界() {
+        // 2026-07-06 月: 3枠が続く／07-07 火: 逆順に並んだ2枠／07-08 水: 間が空いた枠はつながない
+        // 07-09 木: 24:00 で終わる／07-10 金: 続く枠の閉店時刻が壊れていれば進まない
+        let ranges = OpeningHours(
+            mon: [TimeRange(open: "08:00", close: "11:00"), TimeRange(open: "11:00", close: "14:00"), TimeRange(open: "14:00", close: "20:00")],
+            tue: [TimeRange(open: "17:00", close: "23:00"), TimeRange(open: "10:00", close: "17:00")],
+            wed: [TimeRange(open: "10:00", close: "15:00"), TimeRange(open: "16:00", close: "20:00")],
+            thu: [TimeRange(open: "10:00", close: "17:00"), TimeRange(open: "17:00", close: "24:00")],
+            fri: [TimeRange(open: "10:00", close: "17:00"), TimeRange(open: "17:00", close: "25:00")],
+            sat: nil, sun: nil
+        )
+        XCTAssertEqual(OpeningHoursEvaluator.closingTimeIfOpen(hours: ranges, at: tokyoDate(day: 6, hour: 9, minute: 0)), "20:00")
+        XCTAssertEqual(OpeningHoursEvaluator.closingTimeIfOpen(hours: ranges, at: tokyoDate(day: 7, hour: 12, minute: 0)), "23:00")
+        XCTAssertEqual(OpeningHoursEvaluator.closingTimeIfOpen(hours: ranges, at: tokyoDate(day: 8, hour: 12, minute: 0)), "15:00")
+        XCTAssertEqual(OpeningHoursEvaluator.closingTimeIfOpen(hours: ranges, at: tokyoDate(day: 9, hour: 12, minute: 0)), "24:00")
+        XCTAssertEqual(OpeningHoursEvaluator.closingTimeIfOpen(hours: ranges, at: tokyoDate(day: 10, hour: 12, minute: 0)), "17:00")
+    }
+
     func test_営業中でなければnil() {
         // 時間外・定休・未登録曜日・構造化データなしのいずれも nil（判定不能な店で嘘をつかない）
         XCTAssertNil(OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: tokyoDate(hour: 8, minute: 59)))
