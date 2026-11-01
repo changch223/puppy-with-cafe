@@ -2357,3 +2357,24 @@
 - ➕ 追加: 神楽坂ワインバー六花（Rokka）
 - ➕ 追加: 茶彩 絲
 - ➕ 追加: 銀座フィッシュバーガー NAGOMI
+
+## 2026-11-01 09:16 — 追加 19 / 変更 0 / 削除 0
+- ➕ 追加: Bon Vent
+- ➕ 追加: Brasserie Laiton
+- ➕ 追加: Brasserie la Maison
+- ➕ 追加: CAFE 33
+- ➕ 追加: Cafe Shakey's
+- ➕ 追加: DiningCafeフルスイング
+- ➕ 追加: GOOD MORNING CAFE NOWADAYS
+- ➕ 追加: Green Beans Coffee
+- ➕ 追加: MAISON CLASSIC SALON
+- ➕ 追加: Mr.Tokyo BURGER’S cafe
+- ➕ 追加: NIGICHA
+- ➕ 追加: TIGRATO Gelateria&Cafe Bar
+- ➕ 追加: cafe milkygreek 新宿御苑店
+- ➕ 追加: miki's cafe
+- ➕ 追加: アティックルーム新宿
+- ➕ 追加: エノパニーノ イケブクロ
+- ➕ 追加: フリコトー
+- ➕ 追加: ベルギービール カフェ ベル・オーブ 東京芸術劇場
+- ➕ 追加: マックス キャロット
