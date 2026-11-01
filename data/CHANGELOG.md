@@ -2469,3 +2469,100 @@
 - ➕ 追加: 炭火焼鳥くまり鶏
 - ➕ 追加: 餃子マニア 練馬店
 - ➕ 追加: 馬刺酒家 一家 桜台店
+
+## 2026-11-02 00:19 — 追加 0 / 変更 95 / 削除 0
+- ✏️ 変更: AJIANA 烏山店（dog_policy_condition）
+- ✏️ 変更: BASEL 豊田店（dog_policy_condition）
+- ✏️ 変更: Besties Tokyo（dog_policy_condition）
+- ✏️ 変更: COFFEE STAND .OTTEN（dog_policy_condition）
+- ✏️ 変更: CORNO BiANCO(コルノビアンコ)（dog_policy_condition）
+- ✏️ 変更: CREPE by SIDER（dog_policy_condition）
+- ✏️ 変更: Cafe Hana（dog_policy_condition）
+- ✏️ 変更: Cafe Madu 青山店（dog_policy_condition）
+- ✏️ 変更: Chanoma(チャノマ)（dog_policy_condition）
+- ✏️ 変更: Connect Kitchen（dog_policy_condition）
+- ✏️ 変更: Dog Cafe & Bar Deco et Deco(デコデコ)（dog_policy_condition）
+- ✏️ 変更: EARTH CAFE 五反田店（アースカフェ）（dog_policy_condition）
+- ✏️ 変更: Embassy Cafe & Dining（dog_policy_condition）
+- ✏️ 変更: FITZROY（dog_policy_condition）
+- ✏️ 変更: Family Restaurant POT 大泉町店（dog_policy_condition）
+- ✏️ 変更: GOOD CHEESE GOOD BAKE（dog_policy_condition）
+- ✏️ 変更: GRIP(グリップ)（dog_policy_condition）
+- ✏️ 変更: Green Witch Tea House（dog_policy_condition）
+- ✏️ 変更: Hamadayama VIVACE（dog_policy_condition）
+- ✏️ 変更: Huit(ユイット)（dog_policy_condition）
+- ✏️ 変更: IL LUPINO PRIME（dog_policy_condition）
+- ✏️ 変更: Italian Dining Lui（dog_policy_condition）
+- ✏️ 変更: Italian Kitchen VANSAN 大泉学園店（dog_policy_condition）
+- ✏️ 変更: Kinone coffee & flower（dog_policy_condition）
+- ✏️ 変更: La VASARA CAFE&GRILL（dog_policy_condition）
+- ✏️ 変更: Le Calin（ルカラン）（dog_policy_condition）
+- ✏️ 変更: Le quattro stagioni（dog_policy_condition）
+- ✏️ 変更: Los Angeles BALCONY Terrace Restaurant & Moon Bar（dog_policy_condition）
+- ✏️ 変更: MAISON KAYSER 五反田店（dog_policy_condition）
+- ✏️ 変更: Mon-TERCERO（テルセーロ）（dog_policy_condition）
+- ✏️ 変更: NATURE&MEAT GROVE PARK VIEW（dog_policy_condition）
+- ✏️ 変更: Nagi（representative_source_id, dog_policy_condition, sources）
+- ✏️ 変更: Nim's Pizza（dog_policy_condition）
+- ✏️ 変更: OVERWHELM HAMBURGER & BAR STAND（dog_policy_condition）
+- ✏️ 変更: P.S. COFFEE（dog_policy_condition）
+- ✏️ 変更: PASTA＆PIZZA WINE BAR YOLO（dog_policy_condition）
+- ✏️ 変更: PIZZERIA&BAR PAGLIACCIO（dog_policy_condition）
+- ✏️ 変更: RITUEL 等々力店(リチュエル)（dog_policy_condition）
+- ✏️ 変更: ROJU NAKAMEGURO（dog_policy_condition）
+- ✏️ 変更: Ralph's Coffee Omotesando（dog_policy_condition）
+- ✏️ 変更: Restaurant Perfumes（レストランパフューム）（dog_policy_condition）
+- ✏️ 変更: SHAPLA-INDIA（dog_policy_condition）
+- ✏️ 変更: Sammy331(サミーサミー)（dog_policy_condition）
+- ✏️ 変更: THE OPEN BAKERY（dog_policy_condition）
+- ✏️ 変更: WOODBERRY COFFEE 荻窪店（dog_policy_condition）
+- ✏️ 変更: Wine & Mexican Cosi Cosi（dog_policy_condition）
+- ✏️ 変更: cookee NARIMASU（dog_policy_condition）
+- ✏️ 変更: cure(キュア) 千歳船橋店（dog_policy_condition）
+- ✏️ 変更: essence dining（dog_policy_condition）
+- ✏️ 変更: i2 cafe（dog_policy_condition）
+- ✏️ 変更: iki Roastery & Eatery（dog_policy_condition）
+- ✏️ 変更: les joues de bébé（dog_policy_condition）
+- ✏️ 変更: marble（dog_policy_condition）
+- ✏️ 変更: tonkatsu.jp表参道（dog_policy_condition）
+- ✏️ 変更: アキッチョデシカ 方南町（dog_policy_condition）
+- ✏️ 変更: イタリアン リゾート ペルティカ 大泉学園店（dog_policy_condition）
+- ✏️ 変更: ウラニワ 仙川店（dog_policy_condition）
+- ✏️ 変更: オカン焼肉 紅ちゃん 本店（dog_policy_condition）
+- ✏️ 変更: オーバカナル 高輪店（dog_policy_condition）
+- ✏️ 変更: オービカ モッツァレラバー 高輪店（dog_policy_condition）
+- ✏️ 変更: カフェ エナジャイズ（dog_policy_condition）
+- ✏️ 変更: カフェ テラス ヴェルト（Cafe Terrasse Verte）（dog_policy_condition）
+- ✏️ 変更: カフェ ハルテラス(Cafe HARU terrace)（dog_policy_condition）
+- ✏️ 変更: カフェ フェリーチェ(cafe Felice)（dog_policy_condition）
+- ✏️ 変更: カボスオジサン（dog_policy_condition）
+- ✏️ 変更: コーヒーロースト ビバーチェ（dog_policy_condition）
+- ✏️ 変更: シェリーズバーガーカフェ（dog_policy_condition）
+- ✏️ 変更: ジェラート ピケ カフェ クレープリー ルミネ池袋（dog_policy_condition）
+- ✏️ 変更: スターバックス コーヒー 芦花公園店（dog_policy_condition）
+- ✏️ 変更: スターバックスコーヒー上野恩賜公園店（dog_policy_condition）
+- ✏️ 変更: タパス&タパス 用賀店（dog_policy_condition）
+- ✏️ 変更: タマネギヘッドバッド（dog_policy_condition）
+- ✏️ 変更: トラットリア トラム ロカーレ（dog_policy_condition）
+- ✏️ 変更: パンとビストロ 高円寺FLAT(フラット)（dog_policy_condition）
+- ✏️ 変更: ピッツェリア マルデナポリ大泉学園店(MAR-DE NAPOLI)（dog_policy_condition）
+- ✏️ 変更: ブッチャーズテーブル 石神井公園店（dog_policy_condition）
+- ✏️ 変更: ブレッド マチエール（dog_policy_condition）
+- ✏️ 変更: マホラ食堂（dog_policy_condition）
+- ✏️ 変更: リゴレッティーノ（dog_policy_condition）
+- ✏️ 変更: 上島珈琲店 護国寺店（dog_policy_condition）
+- ✏️ 変更: 仙川食堂ジョージ（dog_policy_condition）
+- ✏️ 変更: 天現寺カフェ（dog_policy_condition）
+- ✏️ 変更: 方南カフェ（dog_policy_condition）
+- ✏️ 変更: 桜キッチンカフェ（dog_policy_condition）
+- ✏️ 変更: 永福スタンド SOU（dog_policy_condition）
+- ✏️ 変更: 洪記餃子（dog_policy_condition）
+- ✏️ 変更: 焼肉本家Ponga（dog_policy_condition）
+- ✏️ 変更: 祖師谷バル haracucci(ハラクッチ)（dog_policy_condition）
+- ✏️ 変更: 蒸し料理とワインの店 味風（dog_policy_condition）
+- ✏️ 変更: 豊島屋（dog_policy_condition）
+- ✏️ 変更: 酒呑中華コテツ（dog_policy_condition）
+- ✏️ 変更: 野菜倶楽部 oto no ha Café(オトノハカフェ)（dog_policy_condition）
+- ✏️ 変更: 青山川上庵（dog_policy_condition）
+- ✏️ 変更: 食堂101（dog_policy_condition）
+- ✏️ 変更: 麺恋処 爆龍（dog_policy_condition）
