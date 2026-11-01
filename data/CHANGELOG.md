@@ -2378,3 +2378,26 @@
 - ➕ 追加: フリコトー
 - ➕ 追加: ベルギービール カフェ ベル・オーブ 東京芸術劇場
 - ➕ 追加: マックス キャロット
+
+## 2026-11-01 09:38 — 追加 21 / 変更 0 / 削除 0
+- ➕ 追加: ECO FARM CAFE 632
+- ➕ 追加: E・A・T GRILL&BAR
+- ➕ 追加: FARO 代々木本店
+- ➕ 追加: Hawaiian Cafe OluOlu 西新宿店
+- ➕ 追加: JOLT the COFFEE(ジョルト ザ コーヒー)
+- ➕ 追加: LE BISTRO
+- ➕ 追加: Mr.FARMER 表参道店
+- ➕ 追加: Nature Pizza TOSCANA 学芸大学(ナチュールピッツァ トスカーナ)
+- ➕ 追加: ONE THE DINER(ワンザダイナー)
+- ➕ 追加: PLANT PLANET 学芸大学本店(プラント プラネット)
+- ➕ 追加: Pizzeria NICO(ピッツェリア ニコ)
+- ➕ 追加: RAW SOUP 学芸大学(ロウスープ)
+- ➕ 追加: SLOW FOOD CAFE SMILE(スマイル)
+- ➕ 追加: TREE by NAKED meiji park
+- ➕ 追加: WELLNESSCAFE SAPRO
+- ➕ 追加: cafe STUDIO
+- ➕ 追加: くるりんぱカフェ
+- ➕ 追加: カフェ ラ・ボエム 桜新町
+- ➕ 追加: トラットリア・イタリア 目黒店(TRATTORIA Italia)
+- ➕ 追加: モスプレミアム 千駄ヶ谷店
+- ➕ 追加: 表参道バンブー
