@@ -1368,7 +1368,7 @@
         "terrace": true
       },
       "dog_note": "店舗ページの設備欄「ペット可」・備考欄「テラス席は、ペット連れのお客様もご利用が可能」と明記(店内不可)。",
-      "dog_policy_condition": "設備欄「ペット可」・備考欄「テラス席は、ペット連れのお客様もご利用が可能となっております」と明記(店内不可)",
+      "dog_policy_condition": "テラス席は、ペット連れのお客様もご利用が可能となっております(店内不可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -3315,7 +3315,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定でペット同伴可・喫煙も可(店内は不可)。",
-      "dog_policy_condition": "サービス欄に「ペット可のテラス席あり。テラス席はペットの同伴も可。ご喫煙もテラスでできます。」と明記",
+      "dog_policy_condition": "ペット可のテラス席あり。テラス席はペットの同伴も可。ご喫煙もテラスでできます。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "元旦のみ休み",
@@ -4944,7 +4944,7 @@
         "terrace": true
       },
       "dog_note": "屋外ドッグラン併設(カフェ営業時間外も6:00〜21:00で利用可・要ワクチン証明)。店内同伴可否は公式サイトに明記なし",
-      "dog_policy_condition": "テラス席は犬同伴可(店内可否は公式サイトに記載なし)。屋外ドッグラン併設(要ワクチン証明・カフェ営業時間外も6:00〜21:00利用可)",
+      "dog_policy_condition": "テラス席は犬同伴可。屋外ドッグラン併設(要ワクチン証明・カフェ営業時間外も6:00〜21:00利用可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "木曜定休(祝日は営業)",
@@ -7144,7 +7144,7 @@
         "size_max_terrace": "large",
         "terrace": true
       },
-      "dog_policy_condition": "「店内：不可／テラス：大型犬・中型犬・小型犬いずれも同伴可」と明記",
+      "dog_policy_condition": "店内：不可／テラス：大型犬・中型犬・小型犬いずれも同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "土日祝休（不定休あり）",
@@ -7439,7 +7439,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "「全席禁煙 テラス喫煙可ワンコ可」と店の公式ブログ(Ameba)に明記。店内不可。",
+      "dog_policy_condition": "全席禁煙 テラス喫煙可ワンコ可。店内不可。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "火曜定休",
@@ -7631,7 +7631,7 @@
         "terrace": true
       },
       "dog_note": "テラス・屋外カウンター席限定・店内不可",
-      "dog_policy_condition": "テラス席のみOK(店内不可)と明記",
+      "dog_policy_condition": "テラス席のみOK(店内不可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "11:00〜22:00(L.O.21:00)・月曜のみ11:00〜18:00(L.O.17:00)",
@@ -7741,7 +7741,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定でペット同伴可。四季の風を感じながら食事ができるテラス席と明記。",
-      "dog_policy_condition": "テラス席でペット連れの食事が可能と明記",
+      "dog_policy_condition": "テラス席でペット連れの食事が可能",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休(貸切等応相談)",
@@ -7950,7 +7950,7 @@
         "terrace": true
       },
       "dog_note": "店内一部同伴可とする情報とテラスのみとする情報がある・テラス席は小型〜大型犬まで対応可能・来店前に要確認",
-      "dog_policy_condition": "テラス・オープンエアのみ犬同伴可(小型〜大型犬まで対応可能)と明記",
+      "dog_policy_condition": "テラス・オープンエアのみ犬同伴可(小型〜大型犬まで対応可能)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -10191,7 +10191,7 @@
         "size_max_terrace": "large",
         "terrace": true
       },
-      "dog_policy_condition": "テラス席で犬同伴可(店内の記載なし)・大型犬OK",
+      "dog_policy_condition": "テラス席で犬同伴可・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "火曜定休",
@@ -10603,7 +10603,7 @@
         "terrace": true
       },
       "dog_note": "テラス席は1席のみ・要予約(店内不可)",
-      "dog_policy_condition": "店舗登録の備考欄「ペットはテラス席のみ可」・PR欄「外のテラス席(1席しか無いので要予約)はペット歓迎」と明記(店内不可)",
+      "dog_policy_condition": "ペットはテラス席のみ可／外のテラス席(1席しか無いので要予約)はペット歓迎",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休",
@@ -11981,7 +11981,7 @@
         "indoor": true
       },
       "dog_note": "大型犬可否は出典に明記なし(要確認)。",
-      "dog_policy_condition": "「ペットとご一緒にくつろげるアットホームな空間を目指しています」と明記。トイプードルの看板犬「デコポン」店長が在籍。大型犬可否の明記なし。",
+      "dog_policy_condition": "ペットとご一緒にくつろげるアットホームな空間を目指しています。トイプードルの看板犬「デコポン」店長が在籍。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "木曜定休(雪の日・台風の日も休業)",
@@ -12599,7 +12599,7 @@
         ]
       },
       "dog_note": "リード必須。小型犬限定とする情報もあり、中大型犬の可否は要確認",
-      "dog_policy_condition": "店内可(小型犬の同伴として記載。中大型犬への言及なし)",
+      "dog_policy_condition": "店内可(小型犬の同伴)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -13614,7 +13614,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定(店内不可)。2020年10月にテラスへの直通階段を設置し大型犬も利用しやすくなった",
-      "dog_policy_condition": "ペット(大型犬も可)はテラス席にて同伴できると明記",
+      "dog_policy_condition": "ペット(大型犬も可)はテラス席にて同伴できる",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -14366,7 +14366,7 @@
       "dog_amenities": {
         "indoor": true
       },
-      "dog_policy_condition": "記事内の目黒駅周辺リストで「店内OK」と紹介",
+      "dog_policy_condition": "店内OK",
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型犬のみ",
       "has_conflict": false,
@@ -14925,7 +14925,7 @@
         "terrace": true
       },
       "dog_note": "店内の犬同伴可否は出典に記載なし。",
-      "dog_policy_condition": "公式Instagramで「わんちゃん可能なテラス席」と明記。店内可否の記載なし。",
+      "dog_policy_condition": "わんちゃん可能なテラス席",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "定休日なし（月1回清掃のため休業あり）",
@@ -15466,7 +15466,7 @@
         "terrace": true
       },
       "dog_note": "リードは短めに保持。椅子に乗せる場合は抱っこかカフェマットを使用のこと(店舗の案内による)",
-      "dog_policy_condition": "店内・テラス席ともにOK。リード着用・短めに保持、椅子に乗せる場合は抱っこかカフェマット使用と明記",
+      "dog_policy_condition": "店内・テラス席ともにOK。リード着用・短めに保持、椅子に乗せる場合は抱っこかカフェマット使用",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -16061,7 +16061,7 @@
         "size_max_terrace": "large",
         "terrace": true
       },
-      "dog_policy_condition": "テラス席で犬同伴可(店内の記載なし)・大型犬OK",
+      "dog_policy_condition": "テラス席で犬同伴可・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年末年始休業",
@@ -16512,7 +16512,7 @@
         "terrace": true
       },
       "dog_note": "店舗ページの備考欄に「ペットはテラス席のみ可」と明記(店内不可)。",
-      "dog_policy_condition": "設備欄「ペット可」・備考欄「ペットはテラス席のみ可」と明記(店内不可)",
+      "dog_policy_condition": "ペットはテラス席のみ可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "木曜・日曜定休",
@@ -17051,7 +17051,7 @@
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(店内不可)。犬種・頭数の制限記載なし(出典記載)。",
-      "dog_policy_condition": "ペットはテラス席のみ可(食べログこだわり条件)",
+      "dog_policy_condition": "ペットはテラス席のみ可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "水曜定休",
@@ -17253,7 +17253,7 @@
         "size_max_indoor": "medium"
       },
       "dog_note": "事前電話予約推奨(ペット可能席が少数のため)",
-      "dog_policy_condition": "店内は2テーブル限定で犬同伴可・テラスの記載なし",
+      "dog_policy_condition": "店内は2テーブル限定で犬同伴可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "店内奥のソファ席(6名)と通路を挟んだ4人掛け2卓のみ犬同伴可・川沿いの窓際席は不可・桜シーズン(3月中旬〜4月下旬)は混雑のため予約不可(犬同伴可否は要確認)",
       "has_conflict": false,
@@ -17520,7 +17520,7 @@
         "terrace": true
       },
       "dog_note": "テラス席(約50席)限定・店内不可・ワンちゃん専用メニュー(パン・モンブランケーキ・ノンアルコールドリンク)あり(出典記載)",
-      "dog_policy_condition": "テラス席(約50席)のみ犬同伴可・店内不可と明記",
+      "dog_policy_condition": "テラス席(約50席)のみ犬同伴可・店内不可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "11:30〜23:30(L.O.22:30)",
@@ -17881,7 +17881,7 @@
         "indoor": true
       },
       "dog_note": "武蔵小山駅より徒歩約15分(荏原中延・戸越寄り)・エリア境界寄りのため要確認",
-      "dog_policy_condition": "「ペット連れのお客様に関しては、予約時にお問合せ下さい」と明記",
+      "dog_policy_condition": "ペット連れのお客様に関しては、予約時にお問合せ下さい",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "不定休",
@@ -18079,7 +18079,7 @@
         "terrace": true
       },
       "dog_note": "リード・ペットカート利用可。犬用メニュー(特別フード・記念日ケーキ等)あり。",
-      "dog_policy_condition": "「テラス席同伴OK テラス席のみ同伴可能です(店内への同伴はできません)」と明記。犬用メニューや中型犬までの記載あり。",
+      "dog_policy_condition": "テラス席同伴OK テラス席のみ同伴可能です(店内への同伴はできません)。犬用メニューあり・中型犬まで。",
       "dog_policy_status": "conditional",
       "dog_size_limit": "中型犬まで",
       "has_conflict": false,
@@ -19653,7 +19653,7 @@
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(コーヒースタンド・口コミによる)",
-      "dog_policy_condition": "口コミに「テラス席のみのコーヒースタンドがオープン」と記載(店内席なし)",
+      "dog_policy_condition": "テラス席のみのコーヒースタンドがオープン",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "10:00〜17:00（L.O.料理16:30・ドリンク16:45）",
@@ -20830,7 +20830,7 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_policy_condition": "テラス席のみ犬同伴可(店内の記載なし)",
+      "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -20945,7 +20945,7 @@
         "size_max_terrace": "large",
         "terrace": true
       },
-      "dog_policy_condition": "テラス席はペット同伴可（店内は未確認）",
+      "dog_policy_condition": "テラス席はペット同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "不定休",
@@ -21322,7 +21322,7 @@
         "size_max_terrace": "large",
         "terrace": true
       },
-      "dog_policy_condition": "テラス席で大型犬も同伴可(店内可否は本記事に明記なし)",
+      "dog_policy_condition": "テラス席で大型犬も同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "無休(年末年始休業あり)",
@@ -21637,7 +21637,7 @@
         "terrace": true
       },
       "dog_note": "ランチタイムのテラス席限定。ディナー等その他時間帯の可否は出典に記載なし",
-      "dog_policy_condition": "「ランチタイムのテラス席のみOK（小型〜中型犬のみ可、大型犬不可）」と明記",
+      "dog_policy_condition": "ランチタイムのテラス席のみOK（小型〜中型犬のみ可、大型犬不可）",
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型〜中型犬のみ可（ランチタイムのテラス席限定）",
       "has_conflict": false,
@@ -21960,7 +21960,7 @@
         "terrace": true
       },
       "dog_note": "店先のオープンテラスでの同伴可(店内可否は不明)",
-      "dog_policy_condition": "店先のオープンテラスで愛犬とイートイン可能(店内可否は記載なし)",
+      "dog_policy_condition": "店先のオープンテラスで愛犬とイートイン可能",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -23650,7 +23650,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "犬連れランチスポット一覧で「テラス席のみOK」と明記（住所確認済み）",
+      "dog_policy_condition": "テラス席のみOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月2回程度の不定休",
@@ -24457,7 +24457,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "施設公式ページに「緑に囲まれた開放的なテラス席は、ペット同伴も可能です」と明記（2F NATURE&MEAT GROVE PARK VIEW）",
+      "dog_policy_condition": "緑に囲まれた開放的なテラス席は、ペット同伴も可能です",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "ビル施設の休業日に準ずる",
@@ -25052,7 +25052,7 @@
           "hold"
         ]
       },
-      "dog_policy_condition": "大型犬同伴の可否は要確認(記事内に明記なし)",
+      "dog_policy_condition": "抱っこ・床置き・バッグ内に限り同伴可(ベビーカー不可)",
       "dog_policy_status": "conditional",
       "dog_size_limit": "抱っこ・床置き・バッグ内に限り同伴可(ベビーカー不可)",
       "has_conflict": false,
@@ -25111,23 +25111,23 @@
       "name": "Nagi",
       "phone": "070-9153-5161",
       "place_id": null,
-      "representative_source_id": "4f5bb4e3-0f9d-58eb-af56-59d9587a4cfb",
+      "representative_source_id": "920293f6-f8a1-5953-b1e7-aa48906233dd",
       "sources": [
-        {
-          "cafe_id": "beef0000-0000-4000-8000-000000000301",
-          "claimed_status": "conditional",
-          "id": "4f5bb4e3-0f9d-58eb-af56-59d9587a4cfb",
-          "provenance": "aggregated",
-          "reference": "https://wankonowa.com/column/2441/",
-          "type": "blog",
-          "verified_at": "2026-07-18"
-        },
         {
           "cafe_id": "beef0000-0000-4000-8000-000000000301",
           "claimed_status": "conditional",
           "id": "920293f6-f8a1-5953-b1e7-aa48906233dd",
           "provenance": "aggregated",
           "reference": "https://visitingcafe.com/%E3%80%90%E4%B8%8A%E9%87%8E%E3%80%80nagi%E3%80%91%E6%9C%9D%E6%B4%BB%E3%81%AB%E3%82%82%E6%9C%80%E9%81%A9%EF%BC%81%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E6%98%A0%E3%81%88%E3%82%B9%E3%82%A4%E3%83%BC/",
+          "type": "blog",
+          "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000301",
+          "claimed_status": "conditional",
+          "id": "4f5bb4e3-0f9d-58eb-af56-59d9587a4cfb",
+          "provenance": "aggregated",
+          "reference": "https://wankonowa.com/column/2441/",
           "type": "blog",
           "verified_at": "2026-07-18"
         }
@@ -25244,7 +25244,7 @@
         "terrace": true
       },
       "dog_note": "店内・テラスとも犬同伴可・1組2頭まで(画像キャプションより・来店前要確認)。サイズ・頭数の詳細は来店前に要問合せ。",
-      "dog_policy_condition": "店内・テラスともOK。中型・大型犬もOK(画像キャプション)。1組2頭まで(画像キャプション)。サイズ・頭数は店舗へ要確認。",
+      "dog_policy_condition": "店内・テラスともOK。中型・大型犬もOK。1組2頭まで。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -25796,7 +25796,7 @@
         "indoor": true
       },
       "dog_note": "店内は犬同伴可だがソファ席への同伴は不可",
-      "dog_policy_condition": "店内OK(ソファ席は不可)と明記",
+      "dog_policy_condition": "店内OK(ソファ席は不可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "不定休",
@@ -26551,7 +26551,7 @@
         "indoor": true
       },
       "dog_note": "1階のみ犬同伴可(2階は不可)。リードフック設置・ペット用の水を無料提供",
-      "dog_policy_condition": "１Fはわんちゃん同伴OK・わんちゃん用の水とご飯も用意できると明記(2階は対象外)",
+      "dog_policy_condition": "１Fはわんちゃん同伴OK・わんちゃん用の水とご飯も用意できる(2階は対象外)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "10:00〜22:00(料理L.O.21:00・ドリンクL.O.21:30)",
@@ -26869,7 +26869,7 @@
         "terrace": true
       },
       "dog_note": "ペットはテラス席のみ(食べログ備考欄に明記)。",
-      "dog_policy_condition": "ペットはテラス席のみと備考欄に明記",
+      "dog_policy_condition": "ペットはテラス席のみ",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -27409,7 +27409,7 @@
         "terrace": true
       },
       "dog_note": "目黒通り沿いのテラス席のみ・店内不可",
-      "dog_policy_condition": "記事内の目黒駅周辺リストで「テラスOK」と紹介",
+      "dog_policy_condition": "テラスOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "無休",
@@ -30014,7 +30014,7 @@
         "terrace": true
       },
       "dog_note": "店内可否は出典に記載なし。テラス(入口ソファー席)はOZmallの口コミ由来。寒い季節はストーブを設置。",
-      "dog_policy_condition": "外のテラスがペットOK。寒い季節はストーブあり。店内可否の記載なし",
+      "dog_policy_condition": "外のテラスがペットOK。寒い季節はストーブあり",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -30111,7 +30111,7 @@
         "terrace": true
       },
       "dog_note": "店内の可否は出典により異なる(公式はテラス席での同伴のみ記載。紹介サイトには店内・テラスともOKとするものと、テラス席のみとするものがある)。",
-      "dog_policy_condition": "公式に記載があるのはテラス席での同伴のみ",
+      "dog_policy_condition": "テラス席での同伴可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "イスの上はNG・犬種は要問い合わせ",
       "has_conflict": true,
@@ -30288,7 +30288,7 @@
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可・ペットカートでの来店も可(出典記載)",
-      "dog_policy_condition": "テラス席のみペットOKと明記",
+      "dog_policy_condition": "テラス席のみペットOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "不定休",
@@ -30556,7 +30556,7 @@
         "terrace": true
       },
       "dog_note": "公式サイトと食べログ(店舗関係者公開)には「ペットのご同伴はご相談ください」とだけ記載(席の指定なし)。専門サイトにはランチはテラス席、ディナーは限定で個室での同伴可との記載がある。",
-      "dog_policy_condition": "「お子様のご利用・ペットのご同伴はご相談ください」と公式に記載",
+      "dog_policy_condition": "お子様のご利用・ペットのご同伴はご相談ください",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜・第2第4火曜定休",
@@ -31101,7 +31101,7 @@
         "terrace": true
       },
       "dog_note": "店先の簡易テーブル席のみ・店内不可",
-      "dog_policy_condition": "記事内で店内不可・テラス(店先)席OKと紹介",
+      "dog_policy_condition": "店内不可・テラス(店先)席OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "日曜定休",
@@ -31980,7 +31980,7 @@
         "terrace": true
       },
       "dog_note": "店内の犬同伴可否は出典に記載なし。",
-      "dog_policy_condition": "テラス席は犬同伴OKと明記(看板犬サミーがいる)。店内可否の記載なし。",
+      "dog_policy_condition": "テラス席は犬同伴OK(看板犬サミーがいる)。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "11:30〜17:00(L.O.16:30)※プレオープン時情報のため要確認",
@@ -33602,7 +33602,7 @@
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(公式サイトにはペット記載なし・犬連れ紹介サイト2件で確認)",
-      "dog_policy_condition": "テラス席で犬同伴可(店内可否の記載なし)",
+      "dog_policy_condition": "テラス席で犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "毎週月曜定休(祝日の場合は翌日休み)",
@@ -36983,7 +36983,7 @@
         "indoor": true
       },
       "dog_note": "1階の丸テーブル席を利用(出典記載)",
-      "dog_policy_condition": "1階のみペット同伴可能なスペースと明記",
+      "dog_policy_condition": "1階のみペット同伴可能なスペース",
       "dog_policy_status": "conditional",
       "dog_size_limit": "1階のみ(出典記載)",
       "has_conflict": false,
@@ -37531,7 +37531,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定・店内不可",
-      "dog_policy_condition": "テラス席のみペット可と明記",
+      "dog_policy_condition": "テラス席のみペット可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休",
@@ -40249,7 +40249,7 @@
         "terrace": true
       },
       "dog_note": "食べログ備考欄に「ペットはテラス席のみ可」と明記。公式Instagramにも「テラス席わんこOK」と記載あり。",
-      "dog_policy_condition": "備考欄に「ペットはテラス席のみ可」と明記",
+      "dog_policy_condition": "ペットはテラス席のみ可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休",
@@ -40416,7 +40416,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定(店内は不可)",
-      "dog_policy_condition": "公式サイトのペット同伴欄に「可（テラス席のみ）」と明記(店内不可)",
+      "dog_policy_condition": "可（テラス席のみ）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "火曜定休",
@@ -40610,7 +40610,7 @@
         ]
       },
       "dog_note": "入店にはカートまたはケージ使用必須と明記",
-      "dog_policy_condition": "カートまたはケージに入れた状態での入店をお願いしていますと明記",
+      "dog_policy_condition": "カートまたはケージに入れた状態での入店をお願いしています",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -41561,7 +41561,7 @@
         "size_max_indoor": "medium"
       },
       "dog_note": "椅子への同伴時はカフェマット使用必須・床を歩かせるのは不可のためカートやスリングでの来店推奨(出典記載)",
-      "dog_policy_condition": "店内犬同伴可(テラスなし)・大型犬不可・カートやスリング利用推奨と明記",
+      "dog_policy_condition": "店内犬同伴可(テラスなし)・大型犬不可・カートやスリング利用推奨",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "無休",
@@ -41661,7 +41661,7 @@
         "terrace": true
       },
       "dog_note": "大型犬・犬種条件は要問い合わせ(明記なし)。犬用メニューの提供はなし",
-      "dog_policy_condition": "店内は犬同伴可(犬種条件は要問い合わせ)。テラスの記載なし",
+      "dog_policy_condition": "店内は犬同伴可(犬種条件は要問い合わせ)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -41917,7 +41917,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "施設公式ページに「ペットと一緒にテラスでお楽しみいただけます」と明記（3F les joues de bébé）",
+      "dog_policy_condition": "ペットと一緒にテラスでお楽しみいただけます",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "OIMACHI TRACKSの休館日に準ずる",
@@ -42312,7 +42312,7 @@
         "indoor": true,
         "size_max_indoor": "small"
       },
-      "dog_policy_condition": "店内でもワンちゃんと一緒に過ごせる(小型犬に限る)と明記",
+      "dog_policy_condition": "店内でもワンちゃんと一緒に過ごせる(小型犬に限る)",
       "dog_policy_status": "conditional",
       "dog_size_limit": "小型犬のみ・同伴可能な座席に限りあり",
       "has_conflict": false,
@@ -43802,7 +43802,7 @@
         "terrace": true
       },
       "dog_note": "テラス席は1席のみのため犬同伴時は前日までの予約が必要(出典記載)",
-      "dog_policy_condition": "テラス1席のみ犬同伴可・大型犬不可・前日予約可と明記",
+      "dog_policy_condition": "テラス1席のみ犬同伴可・大型犬不可・前日予約可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "大型犬不可",
       "has_conflict": false,
@@ -46719,7 +46719,7 @@
         "terrace": true
       },
       "dog_note": "屋根付きの簡易テラス席(最大6名)でのみ犬同伴可。天候に左右される旨の案内あり(出典記載)。",
-      "dog_policy_condition": "ペットはテラス席のみ可。簡易的なテラス席(屋根あり・最大6名)(食べログこだわり条件・お店の説明)",
+      "dog_policy_condition": "ペットはテラス席のみ可。簡易的なテラス席(屋根あり・最大6名)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "火曜定休(祝日は営業)",
@@ -47717,7 +47717,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "運営会社ニラックス公式プレスリリースに「ペット同伴はテラス席のみ可能」と明記。",
+      "dog_policy_condition": "ペット同伴はテラス席のみ可能",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "10:30〜23:00(L.O.22:00)",
@@ -48483,7 +48483,7 @@
         "terrace": true
       },
       "dog_note": "店舗ページの備考欄に「ペットはテラスのみ可」と明記(店内不可)。",
-      "dog_policy_condition": "設備欄「ペット可」・備考欄「ペットはテラスのみ可」と明記(店内不可)",
+      "dog_policy_condition": "ペットはテラスのみ可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "無休",
@@ -49122,7 +49122,7 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_policy_condition": "テラス席はペット同伴もOKと紹介(店内可否の記載なし)",
+      "dog_policy_condition": "テラス席はペット同伴もOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "定休日なし",
@@ -49322,7 +49322,7 @@
         "terrace": true
       },
       "dog_note": "テラス席は天井あり（雨の日も利用可）",
-      "dog_policy_condition": "「テラスのみ（天井あり。雨の日〇）」と明記。店内は不可扱い",
+      "dog_policy_condition": "テラスのみ（天井あり。雨の日〇）",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -49439,7 +49439,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "公式サイトに「テラス席ワンちゃんOK」と明記",
+      "dog_policy_condition": "テラス席ワンちゃんOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "11:00〜23:00（L.O.22:00）",
@@ -49832,7 +49832,7 @@
         "terrace": true
       },
       "dog_note": "テラス席でペット可(2020年頃の情報・要最新確認。店内可否は不明)。",
-      "dog_policy_condition": "テラス席でペット可(店内可否は出典に記載なし)",
+      "dog_policy_condition": "テラス席でペット可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -49882,7 +49882,7 @@
         "terrace": true
       },
       "dog_note": "公式サイトに「テラス席は愛犬同伴OK」と明記。店内可否の記載はなし。",
-      "dog_policy_condition": "テラス席は愛犬同伴OKと明記(店内可否の記載なし)",
+      "dog_policy_condition": "テラス席は愛犬同伴OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours": {
@@ -49969,7 +49969,7 @@
         "terrace": true
       },
       "dog_note": "テラス席(全50席)限定で犬同伴可(店内不可)。",
-      "dog_policy_condition": "開放的なテラス席でワンちゃんOK(店内可否の記載なし)。",
+      "dog_policy_condition": "開放的なテラス席でワンちゃんOK。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "ランチ11:00〜15:00・カフェ15:00〜21:00・ディナー16:00〜21:00",
@@ -50021,7 +50021,7 @@
         "terrace": true
       },
       "dog_note": "「当店はドッグカフェではありません」と公式に明記(テラス席限定)。",
-      "dog_policy_condition": "テラス席のみ犬同伴可(店内不可)。ドッグカフェではない旨明記。",
+      "dog_policy_condition": "テラス席のみ犬同伴可(店内不可)。ドッグカフェではない。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "木曜定休（木曜が祝日の場合は営業）",
@@ -51191,7 +51191,7 @@
         "indoor": true
       },
       "dog_note": "1階立ち飲み席で犬同伴可(詳細は要問合せ)",
-      "dog_policy_condition": "店舗登録のサービス欄「ペット可」・備考欄「1階立ち飲み席/ペット可」と明記",
+      "dog_policy_condition": "1階立ち飲み席/ペット可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "17:00〜0:30(料理L.O.23:30・ドリンクL.O.0:00)",
@@ -52123,7 +52123,7 @@
         "terrace": true
       },
       "dog_note": "店内・テラス共に犬同伴可(同伴範囲の詳細は出典に明記なし)",
-      "dog_policy_condition": "店内&テラス〜ペット可と明記(同伴範囲の詳細記載なし)",
+      "dog_policy_condition": "店内&テラス〜ペット可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "水曜定休",
@@ -53061,7 +53061,7 @@
         "indoor": true
       },
       "dog_note": "混雑時は入店を断る場合ありと明記",
-      "dog_policy_condition": "「ワンちゃん店内同伴可」・混雑時は入店を断る場合ありと明記",
+      "dog_policy_condition": "ワンちゃん店内同伴可・混雑時は入店を断る場合あり",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "ランチ11:30〜15:00(L.O.14:30)・ディナー18:00〜21:00(L.O.20:30)、日曜はランチタイムのみ",
@@ -53537,7 +53537,7 @@
       "dog_amenities": {
         "terrace": true
       },
-      "dog_policy_condition": "テラス席で犬同伴可(店内の記載なし)・大型犬は要確認",
+      "dog_policy_condition": "テラス席で犬同伴可",
       "dog_policy_status": "conditional",
       "dog_size_limit": "大型犬可否は情報により異なる(要確認とする情報とOKとする情報がある)",
       "has_conflict": false,
@@ -54165,7 +54165,7 @@
         "terrace": true
       },
       "dog_note": "1階テラス席に犬用リードフックがあり、犬連れ客も多く利用と複数の来店レビューに記載(店内可否の記載なし・2階テラスは喫煙可で区画が別)。",
-      "dog_policy_condition": "口コミに「テラス席はペット同伴可能。リードをつなげておくところもあった」と記載(店内の記載なし)",
+      "dog_policy_condition": "テラス席はペット同伴可能。リードをつなげる所あり",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "不定休",
@@ -54280,7 +54280,7 @@
         "terrace": true
       },
       "dog_note": "テラス席にリードを結べるポールとペット用クッションを設置(ドッグメニュー・お水サービスはなし)。大型犬可否は情報により異なる(可とする情報と小型犬のみとする情報がある)・要確認",
-      "dog_policy_condition": "テラス席で大型犬も同伴可(店内可否は本記事に明記なし)",
+      "dog_policy_condition": "テラス席で大型犬も同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "8:00〜21:00",
@@ -55123,7 +55123,7 @@
         "terrace": true
       },
       "dog_note": "店外(テラス)のみ犬同伴可・リード必須",
-      "dog_policy_condition": "店内不可・店外(テラス)は同伴可(リード必須)と明記",
+      "dog_policy_condition": "店内不可・店外(テラス)は同伴可(リード必須)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "11:30〜15:00(L.O.14:30)・17:00〜22:00(L.O.21:30)",
@@ -55175,7 +55175,7 @@
         "large_dogs": true,
         "terrace": true
       },
-      "dog_policy_condition": "テラス席(屋根付き)で犬同伴可(店内の記載なし)・大型犬OK",
+      "dog_policy_condition": "テラス席(屋根付き)で犬同伴可・大型犬OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000344",
@@ -55776,7 +55776,7 @@
         "size_max_terrace": "large",
         "terrace": true
       },
-      "dog_policy_condition": "テラス席のみ犬同伴可(店内に関する記載なし)",
+      "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休",
@@ -57739,7 +57739,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定・店内同伴可否の明記なし(出典記載)",
-      "dog_policy_condition": "テラス席ペット可と明記(こだわり条件)・室内の同伴可否の記載なし",
+      "dog_policy_condition": "テラス席ペット可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "毎月第2月曜（月曜祝日の場合は翌日）・年末年始休",
@@ -58497,7 +58497,7 @@
         "terrace": true
       },
       "dog_note": "店内の犬同伴可否は出典に記載なし。",
-      "dog_policy_condition": "「テラス席ペット同伴可能」と明記(2階テラス席)。店内可否の記載なし。",
+      "dog_policy_condition": "テラス席ペット同伴可能(2階テラス席)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "11:00〜23:00",
@@ -59072,7 +59072,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "テラス席のみペット同伴可能(店内不可)と明記。",
+      "dog_policy_condition": "テラス席のみペット同伴可能(店内不可)。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休(年末年始を除く)",
@@ -59820,7 +59820,7 @@
         "terrace": true
       },
       "dog_note": "店舗横のペット専用テラス席のみ・店内不可。※一部出典(hotpepper)には室内ペット席との表記もあり要確認",
-      "dog_policy_condition": "「テラス席同伴OK」と明記(店内は記載なし)",
+      "dog_policy_condition": "テラス席同伴OK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "火曜定休",
@@ -61305,7 +61305,7 @@
         "indoor": true
       },
       "dog_note": "ペットは1階(立ち飲みスペース)のみ利用可・2階テーブル席は不可",
-      "dog_policy_condition": "店舗登録の備考欄に「ペットは1階のみ可」と明記(1階は立ち飲みスペース・2階はテーブル席)",
+      "dog_policy_condition": "ペットは1階のみ可(1階は立ち飲みスペース・2階はテーブル席)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "水曜定休",
@@ -63009,7 +63009,7 @@
         "terrace": true
       },
       "dog_note": "ペット可能なテラス席は冷暖房設備がないため季節の良い時期のみ利用可",
-      "dog_policy_condition": "店舗登録のサービス欄「ペット可」・備考欄「ペットはテラス席のみ可」と明記(冷暖房設備がないため季節限定利用)",
+      "dog_policy_condition": "ペットはテラス席のみ可(冷暖房設備がないため季節限定利用)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "水曜・第1,3火曜定休(月により変動あり)",
@@ -64318,7 +64318,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定で犬同伴可(店内不可)",
-      "dog_policy_condition": "テラス席のみOKと明記。",
+      "dog_policy_condition": "テラス席のみOK。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -65799,7 +65799,7 @@
         "terrace": true
       },
       "dog_note": "店舗ページの備考欄に「ペットはテラスのみ可」と明記(店内不可)。",
-      "dog_policy_condition": "設備欄「ペット可」・備考欄「テラスのみ可」と明記(店内不可)",
+      "dog_policy_condition": "テラスのみ可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年始等特別休業あり(基本無休)",
@@ -67983,7 +67983,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "テラス席のみ犬同伴可(店内の記載なし)",
+      "dog_policy_condition": "テラス席のみ犬同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休",
@@ -68893,7 +68893,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定(食べログこだわり条件「ペット可(テラス席のみ)」に明記)。店内同伴は不可。",
-      "dog_policy_condition": "ペット可(テラス席のみ)。オープンテラス席・全席禁煙(食べログこだわり条件)",
+      "dog_policy_condition": "ペット可(テラス席のみ)。オープンテラス席・全席禁煙",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "木曜定休",
@@ -69459,7 +69459,7 @@
         "terrace": true
       },
       "dog_note": "1階テラス席のみ犬同伴可。屋上テラス・店内は不可。",
-      "dog_policy_condition": "「ペットは1階テラス席のみご一緒いただけます」と明記",
+      "dog_policy_condition": "ペットは1階テラス席のみご一緒いただけます",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "火・水定休",
@@ -69962,7 +69962,7 @@
         "terrace": true
       },
       "dog_note": "テラス席のみペット可(食べログこだわり条件に明記)。店内可否の明記なし。",
-      "dog_policy_condition": "テラス席のみペット可(食べログこだわり条件・お店の説明)",
+      "dog_policy_condition": "テラス席のみペット可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月・火曜定休",
@@ -70245,7 +70245,7 @@
         "size_max_indoor": "small"
       },
       "dog_note": "店舗ページの備考欄に「ペットはバッグやペットカーなどに入れればOK」と明記(リードでの歩行入店は不可と考えられる)。",
-      "dog_policy_condition": "設備欄「ペット可」・備考欄「ペットはバッグやペットカーなどに入れればOKです」と明記",
+      "dog_policy_condition": "ペットはバッグやペットカーなどに入れればOKです",
       "dog_policy_status": "conditional",
       "dog_size_limit": "バッグ・ペットカートに収まるサイズのみ(出典記載どおり)",
       "has_conflict": false,
@@ -71627,7 +71627,7 @@
         "terrace": true
       },
       "dog_note": "開閉式屋根・ビニール囲い付きテラス席・犬用飲料水サービスあり",
-      "dog_policy_condition": "「テラスはペット連れも可能です」と明記(店内は記載なし)",
+      "dog_policy_condition": "テラスはペット連れも可能です",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "年中無休(元旦を除く)",
@@ -72349,7 +72349,7 @@
         "terrace": true
       },
       "dog_note": "ウッドテラス全6席が犬同伴可(夏場は増席あり)。トイレ・無駄吠えのしつけが必要。テラスは喫煙可のため他客の喫煙に注意。冬季はビニールカーテン・ストーブで防寒対応。",
-      "dog_policy_condition": "テラス席(ペット可)と明記。店内可否の記載なし。",
+      "dog_policy_condition": "テラス席(ペット可)。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休・木曜はランチ休み",
@@ -74118,7 +74118,7 @@
         "terrace": true
       },
       "dog_note": "テラス席限定でペット同伴可。テラスは公園のような広場に面した開放的な空間。",
-      "dog_policy_condition": "サービス欄に「ペットをお連れのお客様、テラス席のご用意ございます。」と明記",
+      "dog_policy_condition": "ペットをお連れのお客様、テラス席のご用意ございます。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休・隔週火曜定休",
@@ -74464,7 +74464,7 @@
         "indoor": false,
         "terrace": true
       },
-      "dog_policy_condition": "テラス席と座敷に分かれており、ペット同伴可能なのはテラス席のみと明記。",
+      "dog_policy_condition": "テラス席と座敷に分かれており、ペット同伴可能なのはテラス席のみ。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "id": "beef0000-0000-4000-8000-000000000964",
@@ -74831,7 +74831,7 @@
         "terrace": true
       },
       "dog_note": "ペットはテラス席のみ可(店内不可)とホットペッパーに明記。",
-      "dog_policy_condition": "ペットはテラス席のみ可(店内不可)と明記",
+      "dog_policy_condition": "ペットはテラス席のみ可(店内不可)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "不定休",
@@ -74946,7 +74946,7 @@
         "terrace": true
       },
       "dog_note": "野間記念館に面したテラス席限定で犬同伴可(店内不可)。",
-      "dog_policy_condition": "テラス席のみOKと明記。",
+      "dog_policy_condition": "テラス席のみOK。",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月曜定休",
@@ -75258,7 +75258,7 @@
         "terrace": true
       },
       "dog_note": "1Fテラス6席のみ犬同伴可(公式サイト記載)・犬連れ利用時は事前予約推奨(出典記載)",
-      "dog_policy_condition": "1Fテラス(6席)はペットOKと公式サイトに明記",
+      "dog_policy_condition": "1Fテラス(6席)はペットOK",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "holiday_note": "月1回、店舗ミーティングのため16:30〜18:00休業の場合あり",
@@ -75432,7 +75432,7 @@
         "terrace": true
       },
       "dog_note": "テラス席のみ犬同伴可(店内不可)・リード/キャリーいずれも対応。テラス席数は少ない(1席程度)との訪問記あり",
-      "dog_policy_condition": "テラス席でペット同伴可(店内可否・リード/キャリーの条件は本ページに記載なし)",
+      "dog_policy_condition": "テラス席でペット同伴可",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "ランチ11:30〜15:00(L.O.14:30)・ディナー17:00〜23:00(L.O.22:00)",
@@ -76821,7 +76821,7 @@
         "size_max_indoor": "large"
       },
       "dog_note": "犬同伴OK専用席にリードフックあり・入店前にスタッフへ声掛けを",
-      "dog_policy_condition": "犬同伴OK席にはリードフックあり・入店前にスタッフへ声掛けと明記(小型・中型・大型犬OK)",
+      "dog_policy_condition": "犬同伴OK席にはリードフックあり・入店前にスタッフへ声掛け(小型・中型・大型犬OK)",
       "dog_policy_status": "conditional",
       "has_conflict": false,
       "hours_text": "平日11:30〜15:30(L.O.)・17:30〜21:00(L.O.)/土日祝11:30〜20:00(L.O.)",
@@ -76984,6 +76984,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-11-01T15:02:17Z",
+  "generated_at": "2026-11-01T15:19:06Z",
   "is_sample_data": false
 }
