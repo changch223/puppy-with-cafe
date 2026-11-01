@@ -12095,6 +12095,102 @@
       "sub_area": "五反田・大崎"
     },
     {
+      "address": "東京都渋谷区神宮前6-32-10",
+      "area": "tokyo",
+      "contact": null,
+      "description": "明治神宮前駅近くの自家農園野菜のカフェレストラン。ペットはテラス席で過ごせる。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可。テラス席は、高い天井とガラス張りの店舗の中心にある。",
+      "dog_policy_condition": "ペットはテラス席のみ可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "無休",
+      "hours": {
+        "fri": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "11:00〜21:00（ランチ 11:00〜17:00、ディナー 17:30〜21:00。L.O. 料理20:00・ドリンク20:30）",
+      "id": "beef0000-0000-4000-8000-000000001474",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.667967,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://www.ecofarmcafe632.com"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/ecofarmcafe_632/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1306/A130601/13010652/"
+        }
+      ],
+      "longitude": 139.704328,
+      "name": "ECO FARM CAFE 632",
+      "phone": "03-3498-0632",
+      "place_id": null,
+      "representative_source_id": "6a7571a4-949c-5e05-b1da-0b87d3fe89cb",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001474",
+          "claimed_status": "conditional",
+          "id": "6a7571a4-949c-5e05-b1da-0b87d3fe89cb",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1306/A130601/13010652/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "表参道・青山"
+    },
+    {
       "address": "東京都目黒区鷹番3-24-15 nfs bldg.1+2F",
       "area": "tokyo",
       "contact": null,
@@ -13137,6 +13233,56 @@
       "sub_area": "代官山"
     },
     {
+      "address": "東京都渋谷区千駄ヶ谷4-10-4 千駄ヶ谷グリーンランドビル 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "北参道駅近くのハンバーガーとダイニングバー。ペットは店内に入れ、愛犬向けの食事もある。",
+      "dog_amenities": {
+        "dog_menu": true,
+        "indoor": true
+      },
+      "dog_note": "ペットの入店OK。リードを着用するか飼い主の膝の上で過ごす。マーキング癖のある犬にはマナーベルト・マナーパンツの着用を依頼している。愛犬の食事も用意している。",
+      "dog_policy_condition": null,
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "id": "beef0000-0000-4000-8000-000000001469",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.67994,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://eat-burger.com/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/eat_dagayasando/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1304/A130403/13094589/"
+        }
+      ],
+      "longitude": 139.706469,
+      "name": "E・A・T GRILL&BAR",
+      "phone": "03-6447-2218",
+      "place_id": null,
+      "representative_source_id": "8fd194de-57e9-5f9e-a057-4c5f1d1a4882",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001469",
+          "claimed_status": "allowed",
+          "id": "8fd194de-57e9-5f9e-a057-4c5f1d1a4882",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1304/A130403/13094589/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "千駄ヶ谷"
+    },
+    {
       "address": "東京都目黒区中目黒3-6-2 FSビル",
       "area": "tokyo",
       "contact": null,
@@ -13292,6 +13438,97 @@
         }
       ],
       "sub_area": "成城・祖師ヶ谷大蔵"
+    },
+    {
+      "address": "東京都渋谷区代々木1-37-4 長谷川ビル1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "代々木駅近くのサンドイッチとコーヒーのカフェ。ペットはテラス席で過ごせる。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペット同伴の方はテラス席のみのご利用になります。",
+      "dog_policy_condition": "ペット同伴の方はテラス席のみのご利用になります。",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "月曜日（不定休あり。最新の営業日はInstagramで案内）",
+      "hours": {
+        "fri": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "19:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "火〜日・祝 11:00〜19:00（L.O. 18:15）。不定休あり（最新はInstagramで案内）",
+      "id": "beef0000-0000-4000-8000-000000001470",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.683608,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://faro-caffe.tokyo/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/farocaffe/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1304/A130403/13195163/"
+        }
+      ],
+      "longitude": 139.70078,
+      "name": "FARO 代々木本店",
+      "phone": "03-6886-4169",
+      "place_id": null,
+      "representative_source_id": "c05e8dc4-c619-5413-b55c-96e0e5beada0",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001470",
+          "claimed_status": "conditional",
+          "id": "c05e8dc4-c619-5413-b55c-96e0e5beada0",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1304/A130403/13195163/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "代々木"
     },
     {
       "address": "東京都足立区弘道1-14-28 プルーリオン101",
@@ -16060,6 +16297,100 @@
       "sub_area": "方南町・浜田山・永福町・西永福"
     },
     {
+      "address": "東京都新宿区西新宿7-7-33 新銘ビル 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "西新宿のハワイ料理とパンケーキのカフェ。テラス席でペットと過ごせる。",
+      "dog_amenities": {
+        "terrace": true
+      },
+      "dog_note": "テラス席はペット可。テラスは10席で、ワンちゃんの同伴もOK。",
+      "dog_policy_condition": "テラス席はペット可です",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "年中無休（年末年始を除く）",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "月〜木・日・祝 11:00〜21:00／金・土・祝前日 11:00〜22:00",
+      "id": "beef0000-0000-4000-8000-000000001478",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.69654,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://sunrisefoods.biz/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/hawaiiancafeoluolu/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1304/A130401/13279862/"
+        }
+      ],
+      "longitude": 139.697952,
+      "name": "Hawaiian Cafe OluOlu 西新宿店",
+      "place_id": null,
+      "representative_source_id": "5d0e8ede-a39e-5533-84af-35514c8a3271",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001478",
+          "claimed_status": "conditional",
+          "id": "5d0e8ede-a39e-5533-84af-35514c8a3271",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1304/A130401/13279862/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "新宿"
+    },
+    {
       "address": "東京都目黒区中目黒1-10-23 リバーサイドテラス1F",
       "area": "tokyo",
       "contact": null,
@@ -17215,6 +17546,95 @@
         }
       ],
       "sub_area": "自由が丘"
+    },
+    {
+      "address": "東京都目黒区八雲3-1-6 八雲スカイハイツ 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "八雲の住宅街にあるコーヒーと焼き菓子の店。店前・テラス席と店内入口側のテーブルでペット同伴ができる。",
+      "dog_amenities": {
+        "indoor": true,
+        "terrace": true
+      },
+      "dog_note": "店前・テラス席と店内入口側2テーブルのみペット同伴可（ほかのお客様へのご配慮をお願いします）。",
+      "dog_policy_condition": "店前・テラス席と店内入口側2テーブルのみペット同伴可です（ほかのお客様へのご配慮はお願い申し上げます）",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "火・水。臨時休業あり（Instagram・Xで最新情報を確認）",
+      "hours": {
+        "fri": [
+          {
+            "close": "18:00",
+            "open": "10:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "18:00",
+            "open": "10:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "18:00",
+            "open": "10:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "18:00",
+            "open": "10:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "18:00",
+            "open": "10:00"
+          }
+        ],
+        "tue": [],
+        "wed": []
+      },
+      "hours_text": "10:00〜18:00",
+      "id": "beef0000-0000-4000-8000-000000001485",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.619765,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://www.jolt.tokyo/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/joltthecoffee/"
+        },
+        {
+          "type": "x",
+          "url": "https://x.com/jolt_the_coffee"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1317/A131702/13262555/"
+        }
+      ],
+      "longitude": 139.66737,
+      "name": "JOLT the COFFEE(ジョルト ザ コーヒー)",
+      "place_id": null,
+      "representative_source_id": "d35bfe06-3c00-5a92-955a-7d3e4988b8ae",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001485",
+          "claimed_status": "conditional",
+          "id": "d35bfe06-3c00-5a92-955a-7d3e4988b8ae",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131702/13262555/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "都立大学"
     },
     {
       "address": "東京都足立区千住1-1-10",
@@ -18741,6 +19161,129 @@
         }
       ],
       "sub_area": "自由が丘"
+    },
+    {
+      "address": "東京都渋谷区千駄ヶ谷4-6-8 パークコート神宮北参道 ザ タワー 1F・2F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "北参道駅近くのフレンチビストロ。ペットはテラス席などで過ごせる。",
+      "dog_amenities": {
+        "terrace": true
+      },
+      "dog_note": "ペットをお連れのお客様は、テラス席と一部店内を利用できる。",
+      "dog_policy_condition": "ペットをお連れのお客様は、テラス席と一部店内をご利用いただけます",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:30",
+            "open": "11:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:30",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜15:00（L.O. 14:30）／17:00〜22:30、土・日・祝 11:30〜22:30",
+      "id": "beef0000-0000-4000-8000-000000001471",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.680187,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://www.huge.co.jp/restaurant/french/lebistro"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/lebistro_kitasando/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1304/A130403/13288187/"
+        }
+      ],
+      "longitude": 139.70537,
+      "name": "LE BISTRO",
+      "phone": "03-6635-1030",
+      "place_id": null,
+      "representative_source_id": "9b7d1858-b0ca-516a-96c1-dc48c04a208d",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001471",
+          "claimed_status": "conditional",
+          "id": "9b7d1858-b0ca-516a-96c1-dc48c04a208d",
+          "provenance": "aggregated",
+          "reference": "https://www.huge.co.jp/restaurant/french/lebistro",
+          "type": "official_hp",
+          "verified_at": "2026-10-31"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001471",
+          "claimed_status": "conditional",
+          "id": "8225a30e-26c6-5c76-94c4-e1588f70dc2e",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1304/A130403/13288187/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "千駄ヶ谷"
     },
     {
       "address": "〒162-0832 東京都新宿区岩戸町19 高野ビル1F",
@@ -22381,6 +22924,105 @@
       "sub_area": "八王子"
     },
     {
+      "address": "東京都渋谷区神宮前4-5-12 セピア原宿ビル 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "表参道のヴィーガン・野菜料理のカフェ。ペットはテラスで過ごせる。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラスのみOK。",
+      "dog_policy_condition": "ペットはテラスのみOKです",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "hours": {
+        "fri": [
+          {
+            "close": "21:00",
+            "open": "10:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "21:00",
+            "open": "10:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "21:00",
+            "open": "09:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "21:00",
+            "open": "09:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "21:00",
+            "open": "10:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "21:00",
+            "open": "10:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "21:00",
+            "open": "10:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 10:00〜21:00（L.O. 20:00）／土・日・祝 9:00〜21:00（L.O. 20:00）",
+      "id": "beef0000-0000-4000-8000-000000001480",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.668124,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://mr-farmer.jp/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/mr.farmer_/"
+        },
+        {
+          "type": "x",
+          "url": "https://x.com/mr_farmer__"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1306/A130602/13150938/"
+        }
+      ],
+      "longitude": 139.711928,
+      "name": "Mr.FARMER 表参道店",
+      "phone": "03-5413-4215",
+      "place_id": null,
+      "representative_source_id": "336d3fdf-956f-5fe0-844b-d10a0ff1d121",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001480",
+          "claimed_status": "conditional",
+          "id": "336d3fdf-956f-5fe0-844b-d10a0ff1d121",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1306/A130602/13150938/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "表参道・青山"
+    },
+    {
       "address": "東京都世田谷区駒沢公園1-1-2",
       "area": "tokyo",
       "contact": "03-5432-7062",
@@ -23382,6 +24024,104 @@
       "sub_area": "上野・谷根千"
     },
     {
+      "address": "東京都目黒区鷹番3-2-1 学大市場 13bl-8",
+      "area": "tokyo",
+      "contact": null,
+      "description": "学芸大学駅近くの窯焼きピッツァと東京野菜のイタリアン。テラス席はペット同伴可。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可能。",
+      "dog_policy_condition": "【ペット同伴可】当店の「テラス席」でピッツァを楽しみませんか？",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "第2・第4月曜日",
+      "hours": {
+        "fri": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:30",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "23:00",
+            "open": "11:30"
+          }
+        ]
+      },
+      "hours_text": "月〜土 11:30〜23:00（L.O. 22:30）、日・祝 11:30〜22:30（L.O. 22:00）",
+      "id": "beef0000-0000-4000-8000-000000001487",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.628929,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://toscana-pizza.com/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/toscana_gakugeidai/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1317/A131702/13261459/"
+        }
+      ],
+      "longitude": 139.685316,
+      "name": "Nature Pizza TOSCANA 学芸大学(ナチュールピッツァ トスカーナ)",
+      "place_id": null,
+      "representative_source_id": "d106a1fe-dac8-57b3-bf16-ac81e734be7f",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001487",
+          "claimed_status": "conditional",
+          "id": "d106a1fe-dac8-57b3-bf16-ac81e734be7f",
+          "provenance": "aggregated",
+          "reference": "https://toscana-pizza.com/",
+          "type": "official_hp",
+          "verified_at": "2026-10-31"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001487",
+          "claimed_status": "conditional",
+          "id": "d919d791-aae6-509a-9584-15cd8e573483",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131702/13261459/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "学芸大学"
+    },
+    {
       "address": "東京都港区麻布十番1-3-13 CASA ESENCIA 1F",
       "area": "tokyo",
       "contact": null,
@@ -23739,6 +24479,116 @@
         }
       ],
       "sub_area": "麻布・六本木"
+    },
+    {
+      "address": "東京都品川区上大崎1-1-14 トーカン白金キャステール 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "目黒駅近くのアメリカンダイナー。ステーキとハンバーガーが楽しめ、店内には小型犬をケージかカートに入れて同伴できる。",
+      "dog_amenities": {
+        "indoor": true,
+        "indoor_style": [
+          "carrier"
+        ],
+        "size_max_indoor": "small"
+      },
+      "dog_note": "店内は小型犬（ケージまたはカート使用のみ可）。ケージまたはカートから出さない（上の蓋を外すのはOK）。食器・グラスの使用不可。",
+      "dog_policy_condition": null,
+      "dog_policy_status": "allowed",
+      "dog_size_limit": "小型犬（ケージまたはカート使用）",
+      "has_conflict": false,
+      "holiday_note": "月曜・祝日",
+      "hours": {
+        "fri": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "24:00",
+            "open": "18:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "24:00",
+            "open": "18:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:00",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "24:00",
+            "open": "18:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "24:00",
+            "open": "18:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "14:30",
+            "open": "11:30"
+          },
+          {
+            "close": "24:00",
+            "open": "18:00"
+          }
+        ]
+      },
+      "hours_text": "火〜土 11:30〜14:30（L.O. 14:00）、18:00〜24:00／日 11:30〜22:00",
+      "id": "beef0000-0000-4000-8000-000000001488",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.634081,
+      "links": [
+        {
+          "type": "website",
+          "url": "http://one-thediner.com"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1316/A131601/13182455/"
+        }
+      ],
+      "longitude": 139.720327,
+      "name": "ONE THE DINER(ワンザダイナー)",
+      "place_id": null,
+      "representative_source_id": "7dde9402-9429-52d0-beca-52cdd54f5db1",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001488",
+          "claimed_status": "allowed",
+          "id": "7dde9402-9429-52d0-beca-52cdd54f5db1",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131601/13182455/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "目黒"
     },
     {
       "address": "東京都台東区雷門2-16-3",
@@ -25337,6 +26187,108 @@
       "sub_area": "目黒"
     },
     {
+      "address": "東京都目黒区目黒本町2-3-1 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "目黒本町のヴィーガン創作料理とナチュールワインの店。ランチがあり、犬連れの客も歓迎している。",
+      "dog_note": "わんちゃん連れのお客様も歓迎。",
+      "dog_policy_condition": null,
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "holiday_note": "火曜日",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "21:00",
+            "open": "18:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "21:00",
+            "open": "18:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "21:00",
+            "open": "18:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "21:00",
+            "open": "18:00"
+          }
+        ],
+        "tue": [],
+        "wed": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "21:00",
+            "open": "18:00"
+          }
+        ]
+      },
+      "hours_text": "月 11:00〜15:00（L.O. 14:30）／水〜日・祝 11:00〜15:00（L.O. 14:30）、18:00〜21:00（L.O. 20:30）",
+      "id": "beef0000-0000-4000-8000-000000001490",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.625326,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/plantplanet.jp/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1317/A131710/13296172/"
+        }
+      ],
+      "longitude": 139.694571,
+      "name": "PLANT PLANET 学芸大学本店(プラント プラネット)",
+      "place_id": null,
+      "representative_source_id": "b5da5527-da15-59ad-bdea-016fd72d2d8f",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001490",
+          "claimed_status": "allowed",
+          "id": "b5da5527-da15-59ad-bdea-016fd72d2d8f",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131710/13296172/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "武蔵小山"
+    },
+    {
       "address": "東京都江東区常盤1-3-7 ラフィーヴィル清澄白河EAST 1F",
       "area": "tokyo",
       "contact": null,
@@ -26318,6 +27270,116 @@
       "sub_area": "東村山"
     },
     {
+      "address": "東京都目黒区八雲5-18-16",
+      "area": "tokyo",
+      "contact": null,
+      "description": "八雲のナポリピザの店。ランチとディナーがあり、ペットはテラス席と店内手前の席まで同伴できる。",
+      "dog_amenities": {
+        "indoor": true,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席と店内手前席まで可。",
+      "dog_policy_condition": "ペットはテラス席と店内手前席まで可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "水・祝後日",
+      "hours": {
+        "fri": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "15:00",
+            "open": "11:00"
+          },
+          {
+            "close": "23:00",
+            "open": "17:30"
+          }
+        ],
+        "wed": []
+      },
+      "hours_text": "11:00〜15:00（L.O. 14:30）、17:30〜23:00",
+      "id": "beef0000-0000-4000-8000-000000001486",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.622933,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/pizza_nico_cthree/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1317/A131702/13300532/"
+        }
+      ],
+      "longitude": 139.665447,
+      "name": "Pizzeria NICO(ピッツェリア ニコ)",
+      "place_id": null,
+      "representative_source_id": "b8d74c1e-44c0-525f-97b5-6bc6afe3c011",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001486",
+          "claimed_status": "conditional",
+          "id": "b8d74c1e-44c0-525f-97b5-6bc6afe3c011",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131702/13300532/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "都立大学"
+    },
+    {
       "address": "〒180-0004 東京都武蔵野市吉祥寺本町2-12-6 グラニコビル1F",
       "area": "tokyo",
       "contact": null,
@@ -26921,6 +27983,87 @@
         }
       ],
       "sub_area": "大森・大井"
+    },
+    {
+      "address": "東京都目黒区中央町2-30-23",
+      "area": "tokyo",
+      "contact": null,
+      "description": "学芸大学駅近くのスープとホットドッグのカフェ。ペットは1階の店内とテラス席で利用できる。",
+      "dog_amenities": {
+        "indoor": true,
+        "terrace": true
+      },
+      "dog_note": "ペットは1階店内およびテラス席可。",
+      "dog_policy_condition": "ペットは1階店内およびテラス席可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "水・木",
+      "hours": {
+        "fri": [
+          {
+            "close": "16:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "16:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "16:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "16:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [],
+        "tue": [
+          {
+            "close": "16:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": []
+      },
+      "hours_text": "11:00〜16:00（18時以降の夜営業は現在お休み）",
+      "id": "beef0000-0000-4000-8000-000000001484",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.632399,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/rawsoup.jp/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1317/A131702/13303174/"
+        }
+      ],
+      "longitude": 139.687568,
+      "name": "RAW SOUP 学芸大学(ロウスープ)",
+      "place_id": null,
+      "representative_source_id": "f33da634-4f92-5254-96c2-b7c50312f28d",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001484",
+          "claimed_status": "conditional",
+          "id": "f33da634-4f92-5254-96c2-b7c50312f28d",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131702/13303174/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "学芸大学"
     },
     {
       "address": "東京都江東区富岡1-13-3 TSUMUJI monnaka 1F",
@@ -28656,6 +29799,96 @@
         }
       ],
       "sub_area": "自由が丘"
+    },
+    {
+      "address": "東京都世田谷区駒沢2-18-4 福々マンション 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "駒沢の自然派イタリアンカフェ。オーガニック食材を使ったピッツァやパスタが楽しめ、他の客に迷惑のかからないペットは店内で同伴できる。",
+      "dog_amenities": {
+        "indoor": true
+      },
+      "dog_note": "無駄吠えや異臭がしなくて他のお客様に迷惑がかからないペットなら店内ペット同伴OK。",
+      "dog_policy_condition": null,
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "holiday_note": "不定休（インスタのストーリーで確認）",
+      "hours": {
+        "fri": [
+          {
+            "close": "22:30",
+            "open": "11:45"
+          }
+        ],
+        "mon": [
+          {
+            "close": "22:30",
+            "open": "11:45"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:30",
+            "open": "11:45"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:30",
+            "open": "11:45"
+          }
+        ],
+        "thu": [
+          {
+            "close": "22:30",
+            "open": "11:45"
+          }
+        ],
+        "tue": [
+          {
+            "close": "22:30",
+            "open": "11:45"
+          }
+        ],
+        "wed": [
+          {
+            "close": "22:30",
+            "open": "11:45"
+          }
+        ]
+      },
+      "hours_text": "11:45〜22:30（L.O. 22:00）。ランチ&カフェ 11:45〜15:00(L.O.)、ディナー&カフェ 15:00〜22:00(L.O.)。予約があれば L.O. を24時まで延長可",
+      "id": "beef0000-0000-4000-8000-000000001482",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.631581,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/slow_food_cafe_smile/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1317/A131707/13042096/"
+        }
+      ],
+      "longitude": 139.656544,
+      "name": "SLOW FOOD CAFE SMILE(スマイル)",
+      "place_id": null,
+      "representative_source_id": "19e8617a-e188-5174-8c59-60a53bcb3a3d",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001482",
+          "claimed_status": "allowed",
+          "id": "19e8617a-e188-5174-8c59-60a53bcb3a3d",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131707/13042096/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "駒沢・桜新町"
     },
     {
       "address": "東京都目黒区上目黒1-17-3",
@@ -31563,6 +32796,52 @@
       "sub_area": "自由が丘"
     },
     {
+      "address": "東京都渋谷区神宮前2-2-39 THE COURT 神宮外苑 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "都立明治公園すぐのパークサイドカフェ。サンドイッチやスムージーボウルがあり、愛犬と店内で過ごせる。",
+      "dog_amenities": {
+        "indoor": true
+      },
+      "dog_note": "愛犬と店内でゆっくり過ごせる。ドッグカフェとしても利用できる。",
+      "dog_policy_condition": null,
+      "dog_policy_status": "allowed",
+      "has_conflict": false,
+      "holiday_note": "水曜日",
+      "hours_text": "月・火・木・金 7:00〜15:00（L.O. 14:30）／土・日・祝 7:00〜17:00（L.O. 16:30）。臨時休業・営業時間変更はInstagramで案内",
+      "id": "beef0000-0000-4000-8000-000000001472",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.674611,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/treebynaked_meijipark/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1306/A130603/13283518/"
+        }
+      ],
+      "longitude": 139.713945,
+      "name": "TREE by NAKED meiji park",
+      "place_id": null,
+      "representative_source_id": "ba52ea6a-a5d2-5b53-a099-bd7baf67734a",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001472",
+          "claimed_status": "allowed",
+          "id": "ba52ea6a-a5d2-5b53-a099-bd7baf67734a",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1306/A130603/13283518/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "表参道・青山"
+    },
+    {
       "address": "東京都足立区千住仲町18-11 田中仲町ビル",
       "area": "tokyo",
       "contact": null,
@@ -33308,6 +34587,103 @@
         }
       ],
       "sub_area": "小岩・新小岩・平井"
+    },
+    {
+      "address": "東京都渋谷区神宮前3-20-3 IJK神宮前れい 1F・3F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "原宿駅近くのカスタムスムージーのカフェ。テラス席でペットと過ごせ、犬用のセットメニューもある。",
+      "dog_amenities": {
+        "dog_menu": true,
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可。犬用スムージーとおやつ、オリジナルTシャツがセットになった「ドッグフレンドリーセット」がある。",
+      "dog_policy_condition": "ペットはテラス席のみ可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "定休日なし",
+      "hours": {
+        "fri": [
+          {
+            "close": "20:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "20:00",
+            "open": "11:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "20:00",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "20:00",
+            "open": "11:00"
+          }
+        ],
+        "thu": [
+          {
+            "close": "20:00",
+            "open": "11:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "20:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "20:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "11:00〜20:00",
+      "id": "beef0000-0000-4000-8000-000000001473",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.670455,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://wellness-cafe-sapro.com/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/wellness_cafe_sapro/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1306/A130601/13325441/"
+        }
+      ],
+      "longitude": 139.708245,
+      "name": "WELLNESSCAFE SAPRO",
+      "phone": "03-6447-0656",
+      "place_id": null,
+      "representative_source_id": "e284933f-fcd9-59a9-b88b-952570734473",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001473",
+          "claimed_status": "conditional",
+          "id": "e284933f-fcd9-59a9-b88b-952570734473",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1306/A130601/13325441/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "表参道・青山"
     },
     {
       "address": "東京都品川区東品川2-1-11",
@@ -35914,6 +37290,52 @@
         }
       ],
       "sub_area": "麻布・六本木"
+    },
+    {
+      "address": "東京都渋谷区神宮前4-31-10 ＹＭスクエア原宿１階",
+      "area": "tokyo",
+      "contact": null,
+      "description": "原宿・竹下通り近くのカフェ・ダイニング。ペットはテラス席で過ごせる。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可。",
+      "dog_policy_condition": "ペットはテラス席のみ可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "hours_text": "11:30〜21:00（L.O. 20:00）。貸切等で営業時間が異なる場合あり",
+      "id": "beef0000-0000-4000-8000-000000001475",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.669081,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/cafestudio.harajuku/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1306/A130601/13045879/"
+        }
+      ],
+      "longitude": 139.706346,
+      "name": "cafe STUDIO",
+      "place_id": null,
+      "representative_source_id": "ee0f7f69-5757-5116-ab11-bdac869bfa3b",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001475",
+          "claimed_status": "conditional",
+          "id": "ee0f7f69-5757-5116-ab11-bdac869bfa3b",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1306/A130601/13045879/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "表参道・青山"
     },
     {
       "address": "東京都板橋区南常盤台2-3-12",
@@ -40863,6 +42285,57 @@
         }
       ],
       "sub_area": "池袋"
+    },
+    {
+      "address": "東京都新宿区霞ケ丘町14-1 明治神宮外苑休憩所 2F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "明治神宮外苑の信濃町休憩所2階にあるカフェ。ペットはテラス席で過ごせる。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可。テラス席はペット同伴可能。",
+      "dog_policy_condition": "ペットはテラス席のみ可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "月曜日（月曜が祝日の場合は営業、翌火曜日が定休）",
+      "hours_text": "火〜日・祝 10:30〜17:30（L.O. 17:00）。神宮球場の試合日は試合終了後1時間後に閉店。基本の営業日・営業時間は東京ヤクルトスワローズ Official Goods Shop 信濃町店に準ずる",
+      "id": "beef0000-0000-4000-8000-000000001477",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.679597,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/kururinpacafe/"
+        },
+        {
+          "type": "x",
+          "url": "https://x.com/kururinpacafe"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1309/A130901/13318373/"
+        }
+      ],
+      "longitude": 139.719356,
+      "name": "くるりんぱカフェ",
+      "place_id": null,
+      "representative_source_id": "bb5642f7-9a08-53ac-92b9-e633f2aded98",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001477",
+          "claimed_status": "conditional",
+          "id": "bb5642f7-9a08-53ac-92b9-e633f2aded98",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1309/A130901/13318373/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "四谷・市ヶ谷"
     },
     {
       "address": "東京都中野区東中野4-3-2 川崎ビル1F",
@@ -45948,6 +47421,101 @@
         }
       ],
       "sub_area": "東村山"
+    },
+    {
+      "address": "東京都世田谷区桜新町2-9-2 TNKビル 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "桜新町駅すぐのイタリアンカフェレストラン。窯焼きピザやパスタが楽しめ、ペットはテラス席で利用できる。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可。",
+      "dog_policy_condition": "ペットはテラス席のみ可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "定休日なし",
+      "hours": {
+        "fri": [
+          {
+            "close": "24:00",
+            "open": "11:30"
+          }
+        ],
+        "mon": [
+          {
+            "close": "24:00",
+            "open": "11:30"
+          }
+        ],
+        "sat": [
+          {
+            "close": "24:00",
+            "open": "11:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "24:00",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "24:00",
+            "open": "11:30"
+          }
+        ],
+        "tue": [
+          {
+            "close": "24:00",
+            "open": "11:30"
+          }
+        ],
+        "wed": [
+          {
+            "close": "24:00",
+            "open": "11:30"
+          }
+        ]
+      },
+      "hours_text": "11:30〜24:00（L.O. Food 23:00／Drink 23:30）",
+      "id": "beef0000-0000-4000-8000-000000001481",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.631752,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://boheme.jp/sakura-shinmachi/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/boheme_sakurashinmachi/"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1317/A131707/13098624/"
+        }
+      ],
+      "longitude": 139.644238,
+      "name": "カフェ ラ・ボエム 桜新町",
+      "place_id": null,
+      "representative_source_id": "9a20b018-bb6b-5f2c-bbeb-25faffc101f9",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001481",
+          "claimed_status": "conditional",
+          "id": "9a20b018-bb6b-5f2c-bbeb-25faffc101f9",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131707/13098624/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "駒沢・桜新町"
     },
     {
       "address": "東京都目黒区自由が丘1-4-8 1F・2F",
@@ -51249,6 +52817,113 @@
         }
       ],
       "sub_area": "荒川"
+    },
+    {
+      "address": "東京都品川区上大崎2-24-1 アクティー目黒 1F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "目黒駅近くのイタリアン。パスタやピザが楽しめ、テラス席はペット同伴可。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可。",
+      "dog_policy_condition": "ペットはテラス席のみ可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "holiday_note": "12/30(16:00まで)・12/31〜1/2",
+      "hours": {
+        "fri": [
+          {
+            "close": "16:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "mon": [
+          {
+            "close": "16:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "sat": [
+          {
+            "close": "22:30",
+            "open": "11:30"
+          }
+        ],
+        "sun": [
+          {
+            "close": "22:30",
+            "open": "11:30"
+          }
+        ],
+        "thu": [
+          {
+            "close": "16:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "tue": [
+          {
+            "close": "16:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "16:30",
+            "open": "11:30"
+          },
+          {
+            "close": "22:30",
+            "open": "17:00"
+          }
+        ]
+      },
+      "hours_text": "月〜金 11:30〜16:30、17:00〜22:30／土・日・祝 11:30〜22:30",
+      "id": "beef0000-0000-4000-8000-000000001489",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.636145,
+      "links": [
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1316/A131601/13015577/"
+        }
+      ],
+      "longitude": 139.714294,
+      "name": "トラットリア・イタリア 目黒店(TRATTORIA Italia)",
+      "place_id": null,
+      "representative_source_id": "dc14fef9-ccc3-5f45-9a27-4240d21e74ca",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001489",
+          "claimed_status": "conditional",
+          "id": "dc14fef9-ccc3-5f45-9a27-4240d21e74ca",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1316/A131601/13015577/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "目黒"
     },
     {
       "address": "東京都豊島区駒込5-4-28 1F",
@@ -57251,6 +58926,57 @@
         }
       ],
       "sub_area": "神楽坂・飯田橋"
+    },
+    {
+      "address": "東京都渋谷区千駄ヶ谷1-8-11",
+      "area": "tokyo",
+      "contact": null,
+      "description": "千駄ヶ谷駅近くのハンバーガーとクラフトビールの店。テラス席でペットと過ごせる。",
+      "dog_amenities": {
+        "terrace": true
+      },
+      "dog_note": "テラス席ではペット同席可能。",
+      "dog_policy_condition": "テラス席ではペット同席可能です。",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "hours_text": "11:00〜22:00（L.O. 21:00）",
+      "id": "beef0000-0000-4000-8000-000000001476",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.678768,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://www.mospremium.jp/shop_info.html"
+        },
+        {
+          "type": "x",
+          "url": "https://x.com/mosclassic"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1309/A130901/13189556/"
+        }
+      ],
+      "longitude": 139.710581,
+      "name": "モスプレミアム 千駄ヶ谷店",
+      "phone": "03-5413-8301",
+      "place_id": null,
+      "representative_source_id": "296ee7d0-3eb6-54a0-b731-f6398b4f1a07",
+      "reservation": "国立競技場・東京体育館のイベント開催日は混雑のため予約不可",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001476",
+          "claimed_status": "conditional",
+          "id": "296ee7d0-3eb6-54a0-b731-f6398b4f1a07",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1309/A130901/13189556/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "千駄ヶ谷"
     },
     {
       "address": "東京都江東区富岡1-14-14 和楽ビル 1F",
@@ -68058,6 +69784,60 @@
       "sub_area": "恵比寿・広尾"
     },
     {
+      "address": "東京都渋谷区神宮前5-8-8",
+      "area": "tokyo",
+      "contact": null,
+      "description": "表参道の一軒家イタリアン。花と緑に囲まれたテラス席でペットと過ごせる。",
+      "dog_amenities": {
+        "indoor": false,
+        "terrace": true
+      },
+      "dog_note": "ペットはテラス席のみ可。テラス席はペットをお連れの方も利用できる。",
+      "dog_policy_condition": "ペットはテラス席のみ可",
+      "dog_policy_status": "conditional",
+      "has_conflict": false,
+      "id": "beef0000-0000-4000-8000-000000001479",
+      "info_verified": "2026-10-31",
+      "is_closed": false,
+      "last_verified": "2026-10-31",
+      "latitude": 35.666689,
+      "links": [
+        {
+          "type": "website",
+          "url": "https://www.bamboo.co.jp/omotesando/"
+        },
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/bamboo_omotesando/"
+        },
+        {
+          "type": "x",
+          "url": "https://x.com/1977bamboo"
+        },
+        {
+          "type": "tabelog",
+          "url": "https://tabelog.com/tokyo/A1306/A130602/13001318/"
+        }
+      ],
+      "longitude": 139.708059,
+      "name": "表参道バンブー",
+      "phone": "03-3407-8427",
+      "place_id": null,
+      "representative_source_id": "89ea0b82-e481-59d6-88a5-d18d446da8c1",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001479",
+          "claimed_status": "conditional",
+          "id": "89ea0b82-e481-59d6-88a5-d18d446da8c1",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1306/A130602/13001318/",
+          "type": "tabelog",
+          "verified_at": "2026-10-31"
+        }
+      ],
+      "sub_area": "表参道・青山"
+    },
+    {
       "address": "東京都練馬区石神井台1-27-19",
       "area": "tokyo",
       "contact": null,
@@ -70241,6 +72021,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-11-01T00:16:38Z",
+  "generated_at": "2026-11-01T00:38:13Z",
   "is_sample_data": false
 }
