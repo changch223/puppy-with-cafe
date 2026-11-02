@@ -2566,3 +2566,29 @@
 - ✏️ 変更: 青山川上庵（dog_policy_condition）
 - ✏️ 変更: 食堂101（dog_policy_condition）
 - ✏️ 変更: 麺恋処 爆龍（dog_policy_condition）
+
+## 2026-11-02 09:07 — 追加 24 / 変更 0 / 削除 0
+- ➕ 追加: 373-DINING gajumaru & THE BASQUE
+- ➕ 追加: 428cafe+（ヨツヤカフェ）
+- ➕ 追加: Atelier（アトリエール）
+- ➕ 追加: BEER&CAFE つるま食堂
+- ➕ 追加: Luna et Bois（ルナ エ ボワ）
+- ➕ 追加: Moncru（モンクル）
+- ➕ 追加: My Home Coffee, Bakes, Beer
+- ➕ 追加: T's Village（ティーズビレッジ）
+- ➕ 追加: TEXMEXTMXCN（テクスメクスザメキシカン）
+- ➕ 追加: Tapps’Café（タップスカフェ）
+- ➕ 追加: Zéro One Café & Brasserie 町田
+- ➕ 追加: こけけ
+- ➕ 追加: そば処 湧水（ゆうすい）
+- ➕ 追加: つくしのローズガーデン
+- ➕ 追加: トゥーマイ（TOUMAI）
+- ➕ 追加: ブラッスリー・バーゼル 京王八王子駅前店（Brasserie BASEL）
+- ➕ 追加: ル ミエル（le miel）
+- ➕ 追加: 府中けやきテラス（BASE.S CAFE&DINER FUCHU TERRACE）
+- ➕ 追加: 武相庵 LIBRARY＆HOSTEL
+- ➕ 追加: 深大寺 鈴や
+- ➕ 追加: 深水庵（じんすいあん）
+- ➕ 追加: 茶房 山もも
+- ➕ 追加: 蕎麦処 くに作
+- ➕ 追加: 青木屋 深大寺店（深大寺そば）
