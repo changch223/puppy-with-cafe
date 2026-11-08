@@ -26,6 +26,8 @@ struct SearchTabView: View {
     let onShowDetail: (Cafe) -> Void
 
     @State private var recenterRequestID = 0
+    /// 検索画面から店を開いたときの「この座標へ寄せる」要求（地図だけを動かす。起点は変えない）
+    @State private var focusRequest: MapFocusRequest?
     /// 経路チューザー: 「経路」タップ時にAppleマップ/Googleマップを選ばせる対象
     @State private var routeTarget: Cafe?
     @State private var sheetDetent: CafeSheetDetent = .peek
@@ -58,6 +60,7 @@ struct SearchTabView: View {
                     dog: viewModel.dogProfile,
                     selectedItem: $selectedMapItem,
                     recenterRequestID: recenterRequestID,
+                    focusRequest: focusRequest,
                     // 「このあたりで探す」で起点が地図の中心になったときは、地図を動かさない
                     movesToCenterOnChange: !isMapCenterOrigin,
                     onRegionSettled: { center, widthMeters, byUser in
@@ -104,13 +107,22 @@ struct SearchTabView: View {
             CafeSearchView(
                 allCafes: viewModel.allLoadedCafes,
                 recentSearchStore: recentSearchStore,
+                wantToGoIDs: savedStore.places.wantToGoIDs,
+                origin: viewModel.origin,
+                originCoordinate: viewModel.searchCenter,
+                referenceTime: viewModel.referenceTime,
+                isTargetTime: viewModel.isTargetTime,
                 onSelectOrigin: { origin in
                     showSearch = false
                     changeOrigin(to: origin)
                 },
+                onApplyConditions: { conditions in
+                    showSearch = false
+                    applyConditions(conditions)
+                },
                 onSelectCafe: { cafe in
                     showSearch = false
-                    onShowDetail(cafe)
+                    openCafeFromSearch(cafe)
                 },
                 onCancel: { showSearch = false }
             )
@@ -170,6 +182,31 @@ struct SearchTabView: View {
         selectedMapItem = nil
         viewModel.origin = origin
         Task { await viewModel.refresh() }
+    }
+
+    /// 検索画面の条件の提案を、地図の条件チップ（フィルタ）に反映する。オンにするだけで、起点は変えない。
+    private func applyConditions(_ conditions: [SearchCondition]) {
+        var amenities = viewModel.amenityFilter
+        var openNowOnly = viewModel.openNowOnly
+        var myDogOnly = viewModel.myDogOnly
+        SearchCondition.apply(conditions, amenities: &amenities, openNowOnly: &openNowOnly, myDogOnly: &myDogOnly)
+        viewModel.amenityFilter = amenities
+        viewModel.openNowOnly = openNowOnly
+        viewModel.myDogOnly = myDogOnly
+    }
+
+    /// 検索画面で選んだ店を開く。今の表示結果にいる店は、地図の上のカードを開いて地図をその店へ寄せる（起点は変えない）。
+    /// 絞り込みで外れている店は、カードが出せないので詳細を開く。
+    private func openCafeFromSearch(_ cafe: Cafe) {
+        guard let item = viewModel.displayedResults.first(where: { $0.cafe.id == cafe.id }) else {
+            onShowDetail(cafe)
+            return
+        }
+        selectedMapItem = item
+        focusRequest = MapFocusRequest(
+            id: (focusRequest?.id ?? 0) + 1,
+            coordinate: CLLocationCoordinate2D(latitude: cafe.latitude, longitude: cafe.longitude)
+        )
     }
 
     private var isMapCenterOrigin: Bool {

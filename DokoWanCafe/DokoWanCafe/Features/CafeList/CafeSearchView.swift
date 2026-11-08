@@ -1,24 +1,40 @@
+import CoreLocation
 import SwiftUI
 
-/// 検索画面（再設計 段階1a。旧 AreaPickerView を置き換える全画面）。
-/// 入力中: お店（店名の部分一致）と「『入力語』の周りで探す」（場所検索）。
-/// 入力前: 現在地の周り・よく探されるエリア・最近の検索。
+/// 検索画面（再設計 段階1a。旧 AreaPickerView を置き換える全画面。さがす体験 第2弾で候補を4つに分けた）。
+/// 入力中: 条件（テラスなど）・エリア・お店（店名の部分一致）・ほかの場所（地図で探す）。端末の中だけで計算し、打っている途中は外へ何も送らない。
+/// 入力前: 現在地の周り・近くのエリア・最近（場所と見たお店）・行きたい。
 struct CafeSearchView: View {
     /// 読み込み済みの全店（閉店は検索側で除く）
     let allCafes: [Cafe]
     @ObservedObject var recentSearchStore: RecentSearchStore
+    /// 行きたいの店の id（打つ前の「行きたい」と、候補の並びに使う）
+    let wantToGoIDs: Set<UUID>
+    /// 今の起点（条件の行のサブ行に「◯◯の周り」と出す）
+    let origin: SearchOrigin
+    /// 今の起点の座標（距離と近い順に使う。まだ無ければ nil）
+    let originCoordinate: CLLocationCoordinate2D?
+    /// 営業の判定に使う時刻（今、または「いつ行く？」の対象時刻）
+    let referenceTime: Date
+    let isTargetTime: Bool
     let onSelectOrigin: (SearchOrigin) -> Void
+    /// 条件の提案を押した（フィルタをオンにして画面を閉じる。起点は変えない）
+    let onApplyConditions: ([SearchCondition]) -> Void
     let onSelectCafe: (Cafe) -> Void
     let onCancel: () -> Void
 
     @State private var query = ""
     @State private var isSearching = false
     @State private var errorMessage: String?
-    @State private var popularAreas: [PopularAreaRanking.Entry] = []
+    /// エリアの索引（`sub_area` とプリセットから。画面を開いたときに一度だけ作る）
+    @State private var areaIndex: [SearchArea] = []
+    /// 正規化した掲載店の名前（店名そのものを打ったときは条件を出さない）
+    @State private var shopNames: Set<String> = []
     /// 実行中の場所検索。キャンセルや画面を閉じたときに取り消し、検索地点・最近の検索を変えない。
     @State private var placeSearchTask: Task<Void, Never>?
     @FocusState private var isFocused: Bool
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.dogProfile) private var dog
     // GeocodingService はキャッシュ等の共有状態を持たないため画面ごとに生成する
     private let geocodingService = GeocodingService()
 
@@ -26,8 +42,23 @@ struct CafeSearchView: View {
         query.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var cafeMatches: [Cafe] {
-        CafeNameSearch.results(query: query, in: allCafes)
+    private var hasMyDog: Bool { dog != nil }
+
+    private var areaMatches: [SearchArea] {
+        SearchSuggestion.areas(matching: query, in: areaIndex)
+    }
+
+    private func rebuildIndex() {
+        areaIndex = SearchSuggestion.buildIndex(cafes: allCafes, presets: ManualArea.tokyoPresets)
+        shopNames = Set(allCafes.filter { !$0.isClosed }.map { CafeNameSearch.normalize($0.name) })
+    }
+
+    private var conditionMatches: [SearchCondition] {
+        SearchSuggestion.conditions(for: query, hasMyDog: hasMyDog, shopNames: shopNames)
+    }
+
+    private var comboMatch: SearchCombo? {
+        SearchSuggestion.combo(for: query, areas: areaIndex, hasMyDog: hasMyDog)
     }
 
     var body: some View {
@@ -47,8 +78,15 @@ struct CafeSearchView: View {
         .background(Color(.systemBackground))
         .onAppear {
             isFocused = true
-            popularAreas = PopularAreaRanking.ranked(areas: ManualArea.tokyoPresets, cafes: allCafes)
+            rebuildIndex()
+            // 閉店・削除で見えなくなった「見たお店」は、上限の枠をふさがないよう消す。
+            // データをまだ読み込めていない（空の）ときは、全部消してしまわないよう何もしない
+            if !allCafes.isEmpty {
+                recentSearchStore.removeCafes(notIn: Set(allCafes.filter { !$0.isClosed }.map(\.id)))
+            }
         }
+        // 画面を開いている間に裏でデータが更新されたら、索引も作り直す
+        .onChange(of: allCafes) { _, _ in rebuildIndex() }
         .onDisappear { placeSearchTask?.cancel() }
     }
 
@@ -82,12 +120,12 @@ struct CafeSearchView: View {
         HStack(spacing: 8) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
-            TextField(String(localized: "店名・駅・エリアで検索"), text: $query)
+            TextField(String(localized: "店名・駅・エリア・テラスなど"), text: $query)
                 .focused($isFocused)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .submitLabel(.search)
-                .onSubmit { startPlaceSearch() }
+                .onSubmit { submit() }
                 .onChange(of: query) { _, _ in errorMessage = nil }
             if isSearching {
                 ProgressView()
@@ -121,76 +159,198 @@ struct CafeSearchView: View {
             }
         }
 
-        if !popularAreas.isEmpty {
+        let nearbyAreas = SearchSuggestion.nearbyAreas(in: areaIndex, origin: originCoordinate)
+        if !nearbyAreas.isEmpty {
             Section {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        ForEach(popularAreas, id: \.area.id) { entry in
+                        ForEach(nearbyAreas) { area in
                             Button {
-                                select(name: entry.area.name, latitude: entry.area.latitude, longitude: entry.area.longitude)
+                                select(area)
                             } label: {
-                                Text(entry.area.name)
-                                    .font(.subheadline.bold())
-                                    .foregroundStyle(Color.primary)
-                                    .padding(.horizontal, 14)
-                                    .frame(minHeight: 44)
-                                    .background(Capsule().fill(Color(.secondarySystemBackground)))
+                                HStack(spacing: 6) {
+                                    Text(area.name)
+                                        .font(.subheadline.bold())
+                                        .foregroundStyle(Color.primary)
+                                    Text(verbatim: "\(area.count)")
+                                        .font(.subheadline)
+                                        .foregroundStyle(.secondary)
+                                }
+                                .lineLimit(1)
+                                .padding(.horizontal, 14)
+                                .frame(minHeight: 44)
+                                .background(Capsule().fill(Color(.secondarySystemBackground)))
                             }
                             .buttonStyle(.plain)
-                            .accessibilityLabel(Text("\(entry.area.name)、\(entry.count)件"))
+                            .accessibilityLabel(Text("\(area.name)、掲載\(area.count)店"))
                         }
                     }
                 }
                 .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
             } header: {
-                Text("よく探されるエリア")
+                Text("近くのエリア")
             }
         }
 
-        if !recentSearchStore.entries.isEmpty {
+        // 見たお店は、データに残っている営業中の店だけを出す
+        let recents = recentSearchStore.entries.filter { entry in
+            guard let id = entry.cafeID else { return true }
+            return allCafes.contains { $0.id == id && !$0.isClosed }
+        }
+        if !recents.isEmpty {
             Section {
-                ForEach(recentSearchStore.entries) { entry in
-                    Button {
-                        select(name: entry.name, latitude: entry.latitude, longitude: entry.longitude)
-                    } label: {
-                        Label(entry.name, systemImage: "clock.arrow.circlepath")
-                            .foregroundStyle(Color.primary)
-                            .frame(minHeight: 44, alignment: .leading)
-                    }
+                ForEach(recents) { entry in
+                    recentRow(entry)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                recentSearchStore.remove(entry)
+                            } label: {
+                                Label(String(localized: "削除"), systemImage: "trash")
+                            }
+                        }
                 }
             } header: {
-                Text("最近の検索")
+                recentHeader
             }
         }
+
+        let wantToGo = SearchSuggestion.wantToGoShops(in: allCafes, wantToGoIDs: wantToGoIDs, origin: originCoordinate)
+        if !wantToGo.isEmpty {
+            Section {
+                ForEach(wantToGo) { cafe in
+                    shopButton(cafe)
+                }
+            } header: {
+                Text("行きたい")
+            }
+        }
+    }
+
+    /// 「最近」の見出しと、右の「すべて消す」。大きな文字では縦に積む
+    private var recentHeader: some View {
+        let clearAll = Button(String(localized: "すべて消す")) {
+            recentSearchStore.removeAll()
+        }
+        .font(.subheadline)
+        .textCase(nil)
+        .frame(minHeight: 44)
+        return ViewThatFits(in: .horizontal) {
+            HStack {
+                Text("最近")
+                Spacer(minLength: 8)
+                clearAll.lineLimit(1).fixedSize()
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("最近")
+                clearAll
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func recentRow(_ entry: RecentSearch) -> some View {
+        if let id = entry.cafeID, let cafe = allCafes.first(where: { $0.id == id }) {
+            // 見たお店: 名前・「見たお店 · エリア」・タグ
+            let parts = [String(localized: "見たお店")] + [areaName(of: cafe)].compactMap { $0 }
+            Button {
+                openCafe(cafe)
+            } label: {
+                CafeSearchRow(cafe: cafe, subtitle: parts.joined(separator: " · "), spokenParts: parts)
+            }
+            .buttonStyle(.plain)
+        } else {
+            Button {
+                select(name: entry.name, latitude: entry.latitude, longitude: entry.longitude)
+            } label: {
+                Label(entry.name, systemImage: "clock.arrow.circlepath")
+                    .foregroundStyle(Color.primary)
+                    .frame(minHeight: 44, alignment: .leading)
+            }
+        }
+    }
+
+    private func areaName(of cafe: Cafe) -> String? {
+        guard let name = cafe.subArea?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty else { return nil }
+        return name
     }
 
     // MARK: - 入力中
 
     @ViewBuilder
     private var typingSections: some View {
-        let matches = cafeMatches
-        if !matches.isEmpty {
+        let combo = comboMatch
+        let conditions = conditionMatches
+        let areas = areaMatches
+        let shops = SearchSuggestion.shops(
+            matching: query, in: allCafes, wantToGoIDs: wantToGoIDs, origin: originCoordinate
+        )
+
+        // (a) 条件
+        if combo != nil || !conditions.isEmpty {
             Section {
-                ForEach(matches) { cafe in
-                    Button {
-                        onSelectCafe(cafe)
-                    } label: {
-                        CafeSearchRow(cafe: cafe)
+                if let combo {
+                    SuggestionRow(
+                        systemImage: "line.3.horizontal.decrease.circle.fill",
+                        title: combo.title(isTargetTime: isTargetTime),
+                        subtitle: String(localized: "起点を\(combo.area.name)に変えて、地図の条件チップもオンにします"),
+                        spokenText: String(localized: "\(combo.title(isTargetTime: isTargetTime))。起点を変えて、地図のチップをオンにします")
+                    ) {
+                        selectCombo(combo)
                     }
-                    .buttonStyle(.plain)
+                }
+                ForEach(conditions, id: \.self) { condition in
+                    SuggestionRow(
+                        systemImage: "line.3.horizontal.decrease.circle",
+                        title: condition.title(isTargetTime: isTargetTime),
+                        subtitle: condition.subtitle(originName: origin.displayName, isTargetTime: isTargetTime),
+                        spokenText: condition.spokenText(isTargetTime: isTargetTime)
+                    ) {
+                        onApplyConditions([condition])
+                    }
+                }
+            } header: {
+                Text("条件")
+            }
+        }
+
+        // (b) エリア
+        if !areas.isEmpty {
+            Section {
+                ForEach(areas) { area in
+                    SuggestionRow(
+                        systemImage: "mappin.circle",
+                        title: String(localized: "\(area.name)の周り"),
+                        subtitle: String(localized: "掲載 \(area.count)店"),
+                        spokenText: String(localized: "\(area.name)の周り、掲載\(area.count)店")
+                    ) {
+                        select(area)
+                    }
+                }
+            } header: {
+                Text("エリア")
+            }
+        }
+
+        // (c) お店
+        if !shops.isEmpty {
+            Section {
+                ForEach(shops) { cafe in
+                    shopButton(cafe)
                 }
             } header: {
                 Text("お店")
             }
         }
 
+        // (d) ほかの場所
         Section {
-            Button {
+            SuggestionRow(
+                systemImage: "magnifyingglass",
+                title: String(localized: "地図で「\(trimmedQuery)」を探す"),
+                subtitle: String(localized: "駅名・住所を Apple のマップで探します"),
+                spokenText: String(localized: "地図で「\(trimmedQuery)」を探す。駅名・住所を Apple のマップで探します")
+            ) {
                 startPlaceSearch()
-            } label: {
-                Label("「\(trimmedQuery)」の周りで探す", systemImage: "mappin.and.ellipse")
-                    .foregroundStyle(Color.brand)
-                    .frame(minHeight: 44, alignment: .leading)
             }
             if let errorMessage {
                 Text(errorMessage)
@@ -198,7 +358,52 @@ struct CafeSearchView: View {
                     .foregroundStyle(.secondary)
             }
         } header: {
-            Text("場所")
+            Text("ほかの場所")
+        }
+    }
+
+    /// 候補・行きたいのお店の行。押すと検索画面を閉じて地図の上のカードを開く
+    private func shopButton(_ cafe: Cafe) -> some View {
+        let subtitle = SearchShopSubtitle.make(
+            cafe: cafe, origin: originCoordinate, at: referenceTime, isTargetTime: isTargetTime
+        )
+        return Button {
+            openCafe(cafe)
+        } label: {
+            CafeSearchRow(cafe: cafe, subtitle: subtitle.text, spokenParts: subtitle.spokenParts)
+        }
+        .buttonStyle(.plain)
+    }
+
+    // MARK: - 選ぶ
+
+    /// 検索画面からお店を開く。最近に「見たお店」として残してから、カード（または詳細）を開く
+    private func openCafe(_ cafe: Cafe) {
+        recentSearchStore.addViewedCafe(cafe)
+        onSelectCafe(cafe)
+    }
+
+    private func select(_ area: SearchArea) {
+        select(name: area.name, latitude: area.latitude, longitude: area.longitude)
+    }
+
+    /// 組み合わせ: 起点をそのエリアに変え（最近の検索に残す）、フィルタもオンにする
+    private func selectCombo(_ combo: SearchCombo) {
+        onApplyConditions(combo.conditions)
+        select(combo.area)
+    }
+
+    /// キーボードの「検索」: 組み合わせ → エリアの候補の先頭 → 条件だけが当たるなら条件をオン → 無ければ地図で探す
+    /// （「テラス」で検索を押して、どこかの「〇〇テラス」へ起点が飛ばないように）
+    private func submit() {
+        if let combo = comboMatch {
+            selectCombo(combo)
+        } else if let area = areaMatches.first {
+            select(area)
+        } else if !conditionMatches.isEmpty {
+            onApplyConditions(conditionMatches)
+        } else {
+            startPlaceSearch()
         }
     }
 
@@ -233,9 +438,13 @@ struct CafeSearchView: View {
     }
 }
 
-/// 検索候補のお店の行: 名前・エリア（sub_area）・タグ
+/// 検索候補のお店の行: 名前・2行目（エリア · 距離 · 営業など）・タグ・写真（キャッシュのみ）
 private struct CafeSearchRow: View {
     let cafe: Cafe
+    /// 2行目の文字（無ければ出さない）
+    let subtitle: String?
+    /// VoiceOver で店名に続けて読む部分（エリア・距離・営業など）
+    let spokenParts: [String]
     @Environment(\.dogProfile) private var dog
 
     var body: some View {
@@ -245,11 +454,11 @@ private struct CafeSearchRow: View {
                 Text(cafe.name)
                     .font(.subheadline.bold())
                     .lineLimit(2)
-                if let subArea = cafe.subArea, !subArea.isEmpty {
-                    Text(subArea)
+                if let subtitle {
+                    Text(subtitle)
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                        .lineLimit(1)
+                        .lineLimit(2)
                 }
                 CafeTagsView(cafe: cafe)
             }
@@ -266,9 +475,45 @@ private struct CafeSearchRow: View {
     }
 
     private var accessibilityText: String {
-        var parts = [cafe.name]
-        if let subArea = cafe.subArea, !subArea.isEmpty { parts.append(subArea) }
+        var parts = [cafe.name] + spokenParts
         parts.append(contentsOf: CafePresentation.tags(for: cafe, dog: dog).map(\.label))
         return parts.joined(separator: "、")
+    }
+}
+
+/// 条件・エリア・ほかの場所の提案の行: アイコン・タイトル・サブ行。大きな文字では折り返して全文を出す。
+private struct SuggestionRow: View {
+    let systemImage: String
+    let title: String
+    let subtitle: String
+    let spokenText: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(alignment: .top, spacing: 12) {
+                Image(systemName: systemImage)
+                    .font(.body)
+                    .foregroundStyle(Color.brand)
+                    .frame(width: 28, height: 28)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.subheadline.bold())
+                        .foregroundStyle(Color.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: 0)
+            }
+            .frame(minHeight: 44, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(spokenText))
+        .accessibilityAddTraits(.isButton)
     }
 }

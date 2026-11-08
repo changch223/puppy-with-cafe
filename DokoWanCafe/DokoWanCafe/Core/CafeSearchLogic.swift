@@ -1,6 +1,6 @@
 import Foundation
 
-/// 検索画面の純ロジック（店名検索の正規化と一致・よく探されるエリアの並べ替え・最近の検索）。憲章 原則IV。
+/// 検索画面の純ロジック（店名検索の正規化と一致・エリアの件数の数え方・最近の検索）。憲章 原則IV。
 enum CafeNameSearch {
     /// 候補の最大件数
     static let maxResults = 20
@@ -23,8 +23,14 @@ enum CafeNameSearch {
 
     /// 店名の部分一致。閉店の店は除く。前方一致を先に、続いて途中一致（それぞれ元の並びを保つ）。最大 `limit` 件。
     static func results(query: String, in cafes: [Cafe], limit: Int = maxResults) -> [Cafe] {
+        let grouped = groupedResults(query: query, in: cafes)
+        return Array((grouped.prefix + grouped.other).prefix(limit))
+    }
+
+    /// 店名の一致を前方一致と途中一致に分けて返す（閉店は除く・件数の上限なし・それぞれ元の並びを保つ）。
+    static func groupedResults(query: String, in cafes: [Cafe]) -> (prefix: [Cafe], other: [Cafe]) {
         let needle = normalize(query)
-        guard !needle.isEmpty else { return [] }
+        guard !needle.isEmpty else { return ([], []) }
         var prefixMatches: [Cafe] = []
         var otherMatches: [Cafe] = []
         for cafe in cafes where !cafe.isClosed {
@@ -35,7 +41,7 @@ enum CafeNameSearch {
                 otherMatches.append(cafe)
             }
         }
-        return Array((prefixMatches + otherMatches).prefix(limit))
+        return (prefixMatches, otherMatches)
     }
 }
 
@@ -72,13 +78,23 @@ enum PopularAreaRanking {
     }
 }
 
-/// 最近の検索（場所検索とエリア選択）の1件。名前と座標だけを持つ（端末内のみ・位置情報そのものは保存しない）。
+/// 最近の検索（場所検索とエリア選択）と見たお店の1件。名前と座標（見たお店は店の id も）だけを持つ（端末内のみ・位置情報そのものは保存しない）。
+/// `cafeID` は見たお店のときだけ入る。古い保存データ（項目なし）もそのまま読める。
 struct RecentSearch: Codable, Equatable, Identifiable {
     let name: String
     let latitude: Double
     let longitude: Double
+    let cafeID: UUID?
 
-    var id: String { name }
+    init(name: String, latitude: Double, longitude: Double, cafeID: UUID? = nil) {
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+        self.cafeID = cafeID
+    }
+
+    /// 見たお店は店の id、場所は名前（同じ名前の店と場所が互いを消さないようにする）
+    var id: String { cafeID?.uuidString ?? name }
 
     var origin: SearchOrigin {
         .searched(name: name, latitude: latitude, longitude: longitude)
@@ -89,9 +105,14 @@ struct RecentSearch: Codable, Equatable, Identifiable {
 enum RecentSearchLogic {
     static let limit = 5
 
-    /// 先頭に追加する。同じ名前は古い方を消して先頭へ移し、上限を超えた分は末尾から捨てる。
+    /// 先頭に追加する。同じ場所（名前）・同じお店（id）は古い方を消して先頭へ移し、上限（場所とお店を合わせて）を超えた分は末尾から捨てる。
     static func adding(_ entry: RecentSearch, to list: [RecentSearch], limit: Int = limit) -> [RecentSearch] {
-        Array(([entry] + list.filter { $0.name != entry.name }).prefix(limit))
+        Array(([entry] + list.filter { $0.id != entry.id }).prefix(limit))
+    }
+
+    /// 1件消す
+    static func removing(_ entry: RecentSearch, from list: [RecentSearch]) -> [RecentSearch] {
+        list.filter { $0.id != entry.id }
     }
 
     static func encode(_ list: [RecentSearch]) -> Data? {

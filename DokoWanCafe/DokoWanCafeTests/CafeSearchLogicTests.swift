@@ -1,7 +1,7 @@
 import XCTest
 @testable import DokoWanCafe
 
-/// 検索画面の純ロジック（店名検索の正規化と一致・よく探されるエリアの並べ替え・最近の検索）のユニットテスト
+/// 検索画面の純ロジック（店名検索の正規化と一致・よく探されるエリアの並べ替え・最近の検索と見たお店）のユニットテスト
 final class CafeSearchLogicTests: XCTestCase {
     private func makeCafe(name: String, latitude: Double = 35.68, longitude: Double = 139.76, isClosed: Bool = false) -> Cafe {
         Cafe(
@@ -143,6 +143,97 @@ final class CafeSearchLogicTests: XCTestCase {
         XCTAssertEqual(RecentSearchLogic.decode(RecentSearchLogic.encode(list)), list)
         XCTAssertEqual(RecentSearchLogic.decode(Data("not json".utf8)), [])
         XCTAssertEqual(RecentSearchLogic.decode(nil), [])
+    }
+
+    func test_古い保存データ_店のid項目なし_もそのまま読める() throws {
+        let legacy = Data(#"[{"name":"渋谷","latitude":35.658,"longitude":139.7016},{"name":"新宿","latitude":35.6896,"longitude":139.7006}]"#.utf8)
+        let list = RecentSearchLogic.decode(legacy)
+        XCTAssertEqual(list.map(\.name), ["渋谷", "新宿"])
+        XCTAssertEqual(list.map(\.cafeID), [nil, nil])
+        XCTAssertEqual(list.first?.origin, .searched(name: "渋谷", latitude: 35.658, longitude: 139.7016))
+    }
+
+    func test_見たお店は店のidを持って往復できる() {
+        let id = UUID()
+        let shop = RecentSearch(name: "ブルーボトル", latitude: 35.0, longitude: 139.0, cafeID: id)
+        let list = [shop, entry("渋谷")]
+        let restored = RecentSearchLogic.decode(RecentSearchLogic.encode(list))
+        XCTAssertEqual(restored, list)
+        XCTAssertEqual(restored.first?.cafeID, id)
+        XCTAssertNil(restored.last?.cafeID)
+    }
+
+    func test_同じ名前の店と場所は互いを消さず_同じ店は重複しない() {
+        let id = UUID()
+        let shop = RecentSearch(name: "渋谷", latitude: 35.0, longitude: 139.0, cafeID: id)
+        let both = RecentSearchLogic.adding(shop, to: [entry("渋谷")])
+        XCTAssertEqual(both.count, 2)
+        XCTAssertEqual(Set(both.map(\.id)).count, 2)
+
+        let again = RecentSearchLogic.adding(shop, to: [entry("新宿"), shop])
+        XCTAssertEqual(again.map(\.name), ["渋谷", "新宿"])
+    }
+
+    func test_上限は場所と見たお店を合わせて5件() {
+        var list: [RecentSearch] = []
+        for index in 0..<4 {
+            list = RecentSearchLogic.adding(entry("場所\(index)"), to: list)
+            list = RecentSearchLogic.adding(RecentSearch(name: "店\(index)", latitude: 35.0, longitude: 139.0, cafeID: UUID()), to: list)
+        }
+        XCTAssertEqual(RecentSearchLogic.limit, 5)
+        XCTAssertEqual(list.count, 5)
+        XCTAssertEqual(list.map(\.name), ["店3", "場所3", "店2", "場所2", "店1"])
+    }
+
+    func test_1件消す() {
+        let shop = RecentSearch(name: "店", latitude: 35.0, longitude: 139.0, cafeID: UUID())
+        let list = [entry("渋谷"), shop, entry("新宿")]
+        XCTAssertEqual(RecentSearchLogic.removing(shop, from: list).map(\.name), ["渋谷", "新宿"])
+        XCTAssertEqual(RecentSearchLogic.removing(entry("渋谷"), from: list).map(\.name), ["店", "新宿"])
+    }
+
+    @MainActor
+    func test_ストアは見たお店を残して消せる() {
+        let suiteName = "RecentSearchStoreTests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        addTeardownBlock { defaults.removePersistentDomain(forName: suiteName) }
+
+        let cafe = makeCafe(name: "ブルーボトル", latitude: 35.66, longitude: 139.70)
+        let store = RecentSearchStore(defaults: defaults)
+        store.add(name: "渋谷", latitude: 35.658, longitude: 139.7016)
+        store.addViewedCafe(cafe)
+        XCTAssertEqual(store.entries.map(\.name), ["ブルーボトル", "渋谷"])
+        XCTAssertEqual(store.entries.first?.cafeID, cafe.id)
+
+        // 保存するのは名前・座標・店のidだけ（再起動後も復元する）
+        let restored = RecentSearchStore(defaults: defaults)
+        XCTAssertEqual(restored.entries, store.entries)
+        XCTAssertEqual(restored.entries.first?.latitude, 35.66)
+
+        restored.remove(restored.entries[0])
+        XCTAssertEqual(restored.entries.map(\.name), ["渋谷"])
+        XCTAssertEqual(RecentSearchStore(defaults: defaults).entries.map(\.name), ["渋谷"])
+
+        restored.removeAll()
+        XCTAssertTrue(restored.entries.isEmpty)
+        XCTAssertTrue(RecentSearchStore(defaults: defaults).entries.isEmpty)
+    }
+
+    @MainActor
+    func test_データから消えた見たお店だけを消し_場所の検索は残す() {
+        let suiteName = "RecentSearchStoreTests-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        addTeardownBlock { defaults.removePersistentDomain(forName: suiteName) }
+
+        let kept = makeCafe(name: "残る店", latitude: 35.66, longitude: 139.70)
+        let gone = makeCafe(name: "閉店した店", latitude: 35.67, longitude: 139.71)
+        let store = RecentSearchStore(defaults: defaults)
+        store.add(name: "渋谷", latitude: 35.658, longitude: 139.7016)
+        store.addViewedCafe(kept)
+        store.addViewedCafe(gone)
+        store.removeCafes(notIn: [kept.id])
+        XCTAssertEqual(store.entries.map(\.name), ["残る店", "渋谷"])
+        XCTAssertEqual(RecentSearchStore(defaults: defaults).entries.map(\.name), ["残る店", "渋谷"])
     }
 
     @MainActor
