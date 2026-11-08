@@ -249,7 +249,7 @@ enum CafeDetailBand {
         return String(first).uppercased()
     }
 
-    /// 写真として帯に使える画像か。LinkPresentation は画像がないときサイトのアイコンを返すことがあり、
+    /// 写真として帯に使える画像か。og:image に小さなロゴ・アイコンが指定されていることがあり、
     /// 引き伸ばすとぼやけるので、小さい画像は写真として扱わない。
     static func isUsablePhoto(size: CGSize) -> Bool {
         size.width >= 300 && size.height >= 160

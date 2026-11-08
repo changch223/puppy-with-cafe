@@ -36,6 +36,9 @@ struct InitialTileView: View {
 struct CafeThumbnailView: View {
     let cafe: Cafe
     var size: CGFloat = 64
+    /// 写真を取りに行く（通信する）か。false（既定）はキャッシュにあるものだけを出す（一覧・検索候補。スクロールを軽くするため）。
+    /// ピンのカード・詳細は true で取りに行き、取れた写真は次から一覧にも出る。
+    var allowsNetwork = false
 
     @State private var image: UIImage?
 
@@ -55,7 +58,7 @@ struct CafeThumbnailView: View {
         .task(id: cafe.id) {
             image = nil
             guard let url = PhotoSourceResolver.previewSourceURL(for: cafe) else { return }
-            let preview = await LinkPreviewService.shared.preview(for: url)
+            let preview = await LinkPreviewService.shared.preview(for: url, allowNetwork: allowsNetwork)
             guard !Task.isCancelled else { return }
             image = preview?.image
         }

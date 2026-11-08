@@ -28,4 +28,25 @@ final class SearchOriginTests: XCTestCase {
         XCTAssertNotEqual(searched, .currentLocation)
         XCTAssertNotEqual(searched, .manual(area))
     }
+
+    // MARK: - 地図の中心（このあたりで探す）と「◯◯の周り」
+
+    func test_mapCenterのdisplayNameは地図の中心() {
+        XCTAssertEqual(SearchOrigin.mapCenter(latitude: 35.68, longitude: 139.76).displayName, "地図の中心")
+    }
+
+    func test_mapCenterは緯度経度が同じなら等しく違えば等しくない() {
+        let a = SearchOrigin.mapCenter(latitude: 35.68, longitude: 139.76)
+        XCTAssertEqual(a, .mapCenter(latitude: 35.68, longitude: 139.76))
+        XCTAssertNotEqual(a, .mapCenter(latitude: 35.69, longitude: 139.76))
+        XCTAssertNotEqual(a, .currentLocation)
+    }
+
+    func test_aroundLabelは現在地ならnilでそれ以外は周りが付く() {
+        let area = ManualArea(id: "shibuya", name: "渋谷", latitude: 35.6580, longitude: 139.7016)
+        XCTAssertNil(SearchOrigin.currentLocation.aroundLabel)
+        XCTAssertEqual(SearchOrigin.searched(name: "渋谷駅", latitude: 35.658, longitude: 139.7016).aroundLabel, "渋谷駅の周り")
+        XCTAssertEqual(SearchOrigin.manual(area).aroundLabel, "渋谷の周り")
+        XCTAssertEqual(SearchOrigin.mapCenter(latitude: 35.68, longitude: 139.76).aroundLabel, "地図の中心の周り")
+    }
 }

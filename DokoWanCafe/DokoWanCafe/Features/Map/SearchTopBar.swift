@@ -2,23 +2,40 @@ import SwiftUI
 
 /// 地図の上の検索バー。タップで検索画面を開く。右端の犬のボタンは「うちの子」タブへ切り替える。
 /// うちの子が設定済みなら、犬のボタンに大きさの頭文字（小・中・大）の小さな印を出す。
+/// 起点が現在地以外のとき（`originLabel` あり）は、虫めがねの代わりに場所のピンと「◯◯の周り」を出し、
+/// 右に✕（現在地に戻る）を置く。今どこを見ているかが分かるように。
 struct HomeSearchBar: View {
     /// うちの子の設定（未設定は nil）
     var dog: DogProfile?
+    /// 起点が現在地以外のときの「◯◯の周り」（現在地は nil）
+    var originLabel: String?
     let onTapSearch: () -> Void
+    /// ✕（現在地に戻る）。`originLabel` があるときだけ出る
+    var onClearOrigin: () -> Void = {}
     let onTapMyDog: () -> Void
 
     var body: some View {
         HStack(spacing: 4) {
             Button(action: onTapSearch) {
                 HStack(spacing: 8) {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundStyle(.secondary)
-                    // 検索バーは地図の上に常に出る固定の帯。最大の文字では帯が画面を占めてしまうので、
-                    // 1行で全文が読める大きさ（xxxLarge）までにとどめる（一覧・詳細などは最大まで拡大する）
-                    Text("店名・駅・エリアで検索")
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
+                    if let originLabel {
+                        Image(systemName: "mappin.circle.fill")
+                            .foregroundStyle(Color.brand)
+                        // 長い名前は末尾を省略して1行にとどめる
+                        Text(originLabel)
+                            .font(.body.bold())
+                            .foregroundStyle(.primary)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    } else {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(.secondary)
+                        // 検索バーは地図の上に常に出る固定の帯。最大の文字では帯が画面を占めてしまうので、
+                        // 1行で全文が読める大きさ（xxxLarge）までにとどめる（一覧・詳細などは最大まで拡大する）
+                        Text("店名・駅・エリアで検索")
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
                     Spacer(minLength: 0)
                 }
                 .padding(.leading, 14)
@@ -26,8 +43,20 @@ struct HomeSearchBar: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(Text("店名・駅・エリアで検索"))
+            .accessibilityLabel(originLabel.map { Text("検索。今は\($0)") } ?? Text("店名・駅・エリアで検索"))
             .accessibilityHint(Text("検索画面を開きます"))
+
+            if originLabel != nil {
+                Button(action: onClearOrigin) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text("現在地に戻る"))
+            }
 
             Button(action: onTapMyDog) {
                 Image(systemName: "dog.fill")
@@ -52,6 +81,51 @@ struct HomeSearchBar: View {
         .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         .background(.regularMaterial, in: Capsule())
         .shadow(color: .black.opacity(0.15), radius: 6, y: 2)
+    }
+}
+
+/// 地図を動かしたあとに出る「このあたりで探す」ボタン（カプセル）。押したときだけ地図の中心を検索の起点にする。
+struct SearchHereButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 6) {
+                Image(systemName: "magnifyingglass")
+                    .font(.subheadline.bold())
+                Text("このあたりで探す")
+                    .font(.subheadline.bold())
+                    .lineLimit(1)
+            }
+            .foregroundStyle(Color.brand)
+            .padding(.horizontal, 18)
+            .frame(minHeight: 44)
+            .background(.regularMaterial, in: Capsule())
+            .shadow(color: .black.opacity(0.15), radius: 4, y: 1)
+        }
+        .buttonStyle(.plain)
+        .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+        .accessibilityHint(Text("地図の中心の周りのお店を近い順に並べます"))
+    }
+}
+
+/// 探し直している間（前の結果を残している間）に検索バーの下へ出す「探しています…」の小さなカプセル。
+struct SearchingIndicator: View {
+    var body: some View {
+        HStack(spacing: 8) {
+            ProgressView()
+                .controlSize(.small)
+            Text("探しています…")
+                .font(.subheadline.bold())
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+        }
+        .padding(.horizontal, 16)
+        .frame(minHeight: 36)
+        .background(.regularMaterial, in: Capsule())
+        .shadow(color: .black.opacity(0.15), radius: 4, y: 1)
+        .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+        .accessibilityElement(children: .combine)
     }
 }
 

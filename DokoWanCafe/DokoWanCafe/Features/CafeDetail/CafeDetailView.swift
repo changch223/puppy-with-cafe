@@ -814,7 +814,7 @@ struct ProvenanceChip: View {
 }
 
 /// OGP写真カード（写真プレビュー機能・表示チェーン2段目）。
-/// リンク先ページの画像を `LinkPreviewService`（`LPMetadataProvider`）で端末側が直接取得して表示する
+/// リンク先ページの画像を `LinkPreviewService`（`URLSession`）で端末側が直接取得して表示する
 /// （画像の転載・再ホストはしない）。取得中はプレースホルダを表示し、取得失敗（画像なし含む）時は
 /// `onFail` を呼んで、呼び出し側が「地図で写真を見る」カードへフォールバックする。タップで取得元URLを開く。
 struct OGPPhotoCardView: View {

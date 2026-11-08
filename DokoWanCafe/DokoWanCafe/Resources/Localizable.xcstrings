@@ -261,6 +261,16 @@
         }
       }
     },
+    "%@の周り" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@の周り"
+          }
+        }
+      }
+    },
     "%@の詳細を見る" : {
       "localizations" : {
         "ja" : {
@@ -707,6 +717,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "お店の詳細で「行った」を押すと、ここに記録されます"
+          }
+        }
+      }
+    },
+    "このあたりで探す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このあたりで探す"
           }
         }
       }
@@ -1951,6 +1971,26 @@
         }
       }
     },
+    "地図の中心" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地図の中心"
+          }
+        }
+      }
+    },
+    "地図の中心の周りのお店を近い順に並べます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地図の中心の周りのお店を近い順に並べます"
+          }
+        }
+      }
+    },
     "地域を選んで探す" : {
       "localizations" : {
         "ja" : {
@@ -2391,6 +2431,16 @@
         }
       }
     },
+    "探しています…" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探しています…"
+          }
+        }
+      }
+    },
     "数字つきのピン" : {
       "localizations" : {
         "ja" : {
@@ -2677,6 +2727,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "根拠: %@"
+          }
+        }
+      }
+    },
+    "検索。今は%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "検索。今は%@"
           }
         }
       }

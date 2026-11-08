@@ -80,4 +80,12 @@ final class SheetHeadlineTests: XCTestCase {
         )
         XCTAssertEqual(text.title, "犬メニューのお店 0件")
     }
+
+    func test_地図の中心を起点にすると2行目は地図の中心から近い順() {
+        let text = SheetHeadline.make(
+            count: 30, amenities: AmenityFilter(), openNowOnly: false,
+            originName: SearchOrigin.mapCenter(latitude: 35.68, longitude: 139.76).displayName, isCurrentLocation: false
+        )
+        XCTAssertEqual(text.subtitle, "地図の中心から近い順")
+    }
 }
