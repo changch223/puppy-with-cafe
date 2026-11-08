@@ -5,15 +5,22 @@ import UIKit
 /// ピンの見た目（`style`）や距離・優先度が変わったときは、作り直さず同じ注釈の値を更新する
 /// （選択中のピンを選択解除させないため）。
 final class CafeAnnotation: NSObject, MKAnnotation {
+    /// 代表の店（組の先頭。ピンの見た目・タップ時の選択に使う）
     var item: CafeWithDistance
+    /// 同じ場所（5m 以内）の店すべて（代表を含む・`SameSpotGrouping` の並び）。単独の店は代表だけ
+    var members: [CafeWithDistance]
     /// 数字クラスタの代わりにMapKitの衝突間引きへ渡す表示優先度（近い店ほど高い）
     var displayPriority: MKFeatureDisplayPriority
     var style: MapPinStyle
     /// VoiceOver で読む文（対象時刻・保存の状態が変わったら作り直す）
     var spokenLabel: String
 
-    init(item: CafeWithDistance, displayPriority: MKFeatureDisplayPriority, style: MapPinStyle, spokenLabel: String) {
+    init(
+        item: CafeWithDistance, members: [CafeWithDistance]? = nil,
+        displayPriority: MKFeatureDisplayPriority, style: MapPinStyle, spokenLabel: String
+    ) {
         self.item = item
+        self.members = members ?? [item]
         self.displayPriority = displayPriority
         self.style = style
         self.spokenLabel = spokenLabel
@@ -118,6 +125,29 @@ enum MapViewModel {
             },
             uniquingKeysWith: { first, _ in first }
         )
+    }
+
+    /// 同じ場所の組の displayPriority。組の中でいちばん高い（＝いちばん近い店の）値にする。
+    static func displayPriority(
+        for group: [CafeWithDistance],
+        priorities: [UUID: MKFeatureDisplayPriority]
+    ) -> MKFeatureDisplayPriority {
+        group.compactMap { priorities[$0.cafe.id] }.max { $0.rawValue < $1.rawValue } ?? .defaultLow
+    }
+
+    /// ピンの下に出す店名。同じ場所に複数の店があるときは「食堂101 ほか2店」
+    static func nameLabel(for group: [CafeWithDistance]) -> String {
+        guard let first = group.first else { return "" }
+        guard group.count > 1 else { return first.cafe.name }
+        return String(localized: "\(first.cafe.name) ほか\(group.count - 1)店")
+    }
+
+    /// 同じ場所の組のピンの読み上げ文。代表の読み上げ文のあとに、ほかの店の名前を続ける。
+    /// 単独の店は代表の読み上げ文のまま。
+    static func spokenLabel(for group: [CafeWithDistance], representative: String) -> String {
+        guard group.count > 1 else { return representative }
+        let others = group.dropFirst().map(\.cafe.name).joined(separator: "、")
+        return representative + String(localized: "。同じ場所にほか\(group.count - 1)店: \(others)")
     }
 
     /// 現在表示中の注釈集合との差分（追加・削除）を求める純ロジック。

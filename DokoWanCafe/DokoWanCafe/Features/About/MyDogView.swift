@@ -123,15 +123,21 @@ struct MyDogView: View {
 
     private var legendSection: some View {
         Section {
-            legendRow(category: .indoorOK, title: String(localized: "店内OK"), detail: String(localized: "愛犬と店内に入れます（緑の丸）"))
-            legendRow(category: .terraceOnly, title: String(localized: "テラスOK"), detail: String(localized: "テラス席は可。店内は不可または不明です（青緑の角丸四角）"))
-            legendRow(category: .checkDetail, title: String(localized: "条件を確認"), detail: String(localized: "席の種類や条件を詳細で確認（橙のしずく形）"))
-            legendRow(category: .unverified, title: String(localized: "未確認"), detail: String(localized: "犬同伴の可否を確認できていません（グレーの菱形）"))
+            legendRow(category: .indoorOK, title: MapPinCategory.indoorOK.legendTitle, detail: String(localized: "愛犬と店内に入れます（緑の丸）"))
+            legendRow(category: .terraceOnly, title: MapPinCategory.terraceOnly.legendTitle, detail: String(localized: "テラス席は可。店内は不可または不明です（青緑の角丸四角）"))
+            legendRow(category: .checkDetail, title: MapPinCategory.checkDetail.legendTitle, detail: String(localized: "席の種類や条件を詳細で確認（橙のしずく形）"))
+            legendRow(category: .unverified, title: MapPinCategory.unverified.legendTitle, detail: String(localized: "犬同伴の可否を確認できていません（グレーの菱形）"))
             legendRow(
                 category: .indoorOK,
                 title: String(localized: "薄いピン"),
                 detail: String(localized: "営業時間が分かっていて、今は営業時間外です"),
                 isDimmed: true
+            )
+            legendRow(
+                category: .indoorOK,
+                title: String(localized: "数字つきのピン"),
+                detail: String(localized: "同じ建物など、同じ場所に複数のお店があります。タップしてカードで切り替えます。ピンの色と形は代表の1店のものです。各店の可否はカードで確かめてください"),
+                count: 3
             )
         } header: {
             Text("ピンと表示の見かた")
@@ -140,10 +146,10 @@ struct MyDogView: View {
         }
     }
 
-    private func legendRow(category: MapPinCategory, title: String, detail: String, isDimmed: Bool = false) -> some View {
+    private func legendRow(category: MapPinCategory, title: String, detail: String, isDimmed: Bool = false, count: Int = 1) -> some View {
         let style = MapPinStyle(category: category, isFavorite: false, isDimmed: isDimmed)
         return HStack(spacing: 12) {
-            Image(uiImage: MapPinRenderer.image(for: style))
+            Image(uiImage: MapPinRenderer.image(for: style, count: count))
                 .opacity(style.alpha)
                 .frame(width: 44)
                 .accessibilityHidden(true)

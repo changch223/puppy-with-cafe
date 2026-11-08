@@ -100,6 +100,9 @@ struct CafeMapView: UIViewRepresentable {
         /// 今の縮尺で店名をピンの下に出すか（大きな縮尺のときだけ）
         private var showsNames = false
         private static let nameLabelTag = 7_001
+        /// `syncAnnotations` が注釈を付け外ししている間は true。MKMapView は選択中の注釈を外すと同期で didDeselect を呼ぶので、
+        /// その間はカードの選択（`parent.selectedItem`）を消さない（代表が変わっただけでカードが閉じないように）。
+        private var isSyncingAnnotations = false
 
         init(parent: CafeMapView) {
             self.parent = parent
@@ -117,37 +120,47 @@ struct CafeMapView: UIViewRepresentable {
             guard key != lastSyncKey else { return }
             lastSyncKey = key
             let items = parent.items
-            let styles = MapViewModel.styles(for: items, favoriteIDs: parent.savedPlaces.wantToGoIDs, at: parent.now)
+            let favoriteIDs = parent.savedPlaces.wantToGoIDs
+            let styles = MapViewModel.styles(for: items, favoriteIDs: favoriteIDs, at: parent.now)
             let spokenLabels = MapViewModel.spokenLabels(
                 for: items, savedPlaces: parent.savedPlaces,
                 at: parent.now, isTargetTime: parent.isTargetTime, clock: parent.clock,
                 dog: parent.dog
             )
             let priorities = MapViewModel.displayPriorities(for: items)
-            let itemsByID = Dictionary(items.map { ($0.cafe.id, $0) }, uniquingKeysWith: { first, _ in first })
+            // 同じ場所（5m 以内）の店は1つの注釈（ピン）にまとめる。注釈のキーは代表（組の先頭）の店の id
+            let groups = SameSpotGrouping.groups(for: items, favoriteIDs: favoriteIDs, at: parent.now)
+            let groupsByID = Dictionary(groups.map { ($0[0].cafe.id, $0) }, uniquingKeysWith: { first, _ in first })
 
-            // 座標が変わった店は作り直す（MKMapView は coordinate の変化を追わないため）
-            var removedIDs = MapViewModel.diff(existingIDs: Set(annotationsByID.keys), newIDs: Set(itemsByID.keys)).removed
+            // 座標が変わった店・代表が変わった組は作り直す（MKMapView は coordinate の変化を追わないため）
+            var removedIDs = MapViewModel.diff(existingIDs: Set(annotationsByID.keys), newIDs: Set(groupsByID.keys)).removed
             for (id, annotation) in annotationsByID {
-                if let item = itemsByID[id],
-                   item.cafe.latitude != annotation.item.cafe.latitude || item.cafe.longitude != annotation.item.cafe.longitude {
+                if let group = groupsByID[id],
+                   group[0].cafe.latitude != annotation.item.cafe.latitude || group[0].cafe.longitude != annotation.item.cafe.longitude {
                     removedIDs.insert(id)
                 }
             }
+            isSyncingAnnotations = true
+            defer { isSyncingAnnotations = false }
             if !removedIDs.isEmpty {
                 mapView.removeAnnotations(removedIDs.compactMap { annotationsByID[$0] })
                 for id in removedIDs { annotationsByID[id] = nil }
             }
 
             var added: [CafeAnnotation] = []
-            for (id, item) in itemsByID {
-                let style = styles[id] ?? MapPinStyle.make(for: item.cafe, isFavorite: false, at: parent.now)
-                let priority = priorities[id] ?? .defaultLow
+            for (id, group) in groupsByID {
+                let item = group[0]
+                let representativeStyle = styles[id] ?? MapPinStyle.make(for: item.cafe, isFavorite: false, at: parent.now)
+                // 組の誰か1店でも薄くなければ薄くしない（行きたいの店が代表で時間外でも、ほかの店が営業中なら濃いまま）
+                let isDimmed = group.allSatisfy { styles[$0.cafe.id]?.isDimmed ?? false }
+                let style = MapPinStyle(category: representativeStyle.category, isFavorite: representativeStyle.isFavorite, isDimmed: isDimmed)
+                let priority = MapViewModel.displayPriority(for: group, priorities: priorities)
+                let spoken = MapViewModel.spokenLabel(for: group, representative: spokenLabels[id] ?? item.cafe.name)
                 if let existing = annotationsByID[id] {
-                    let spoken = spokenLabels[id] ?? item.cafe.name
-                    guard existing.item != item || existing.style != style || existing.displayPriority != priority
-                            || existing.spokenLabel != spoken else { continue }
+                    guard existing.item != item || existing.members != group || existing.style != style
+                            || existing.displayPriority != priority || existing.spokenLabel != spoken else { continue }
                     existing.item = item
+                    existing.members = group
                     existing.style = style
                     existing.spokenLabel = spoken
                     existing.displayPriority = priority
@@ -156,21 +169,42 @@ struct CafeMapView: UIViewRepresentable {
                     }
                 } else {
                     let annotation = CafeAnnotation(
-                        item: item, displayPriority: priority, style: style,
-                        spokenLabel: spokenLabels[id] ?? item.cafe.name
+                        item: item, members: group, displayPriority: priority, style: style, spokenLabel: spoken
                     )
                     annotationsByID[id] = annotation
                     added.append(annotation)
                 }
             }
             if !added.isEmpty { mapView.addAnnotations(added) }
+            reconcileSelection(on: mapView)
+        }
+
+        /// 地図の選択を「選択中の店がいる組」のピン1つに合わせる（カードの店は変えない）。
+        /// 代表が変わって作り直したときだけでなく、組がつながる・分かれるときも、選択中の店が別のピンへ移るため。
+        /// 付け外しの間は didDeselect が選択を消さないので、ここで選択中の店がまだ残っている。
+        /// 選択中の店が表示から消えたときは SearchTabView が選択を外すので、ここでは何もしない。
+        private func reconcileSelection(on mapView: MKMapView) {
+            guard parent.selectedItem != nil,
+                  let target = annotationsByID.values.first(where: { isSelected($0) }) else { return }
+            for case let annotation as CafeAnnotation in mapView.selectedAnnotations where annotation !== target {
+                mapView.deselectAnnotation(annotation, animated: false)
+            }
+            if !mapView.selectedAnnotations.contains(where: { $0 === target }) {
+                mapView.selectAnnotation(target, animated: false)
+            }
+        }
+
+        /// 選択中の店がこの組（ピン）にいるか。カードで同じ場所の別の店に切り替えても、地図のピンは選択のまま
+        private func isSelected(_ annotation: CafeAnnotation) -> Bool {
+            guard let selected = parent.selectedItem else { return false }
+            return annotation.members.contains { $0.cafe.id == selected.cafe.id }
         }
 
         private func configure(_ view: MKAnnotationView, for annotation: CafeAnnotation, isSelected: Bool) {
             let style = annotation.style
-            let image = MapPinRenderer.image(for: style, isSelected: isSelected)
+            let image = MapPinRenderer.image(for: style, isSelected: isSelected, count: annotation.members.count)
             view.image = image
-            view.centerOffset = MapPinRenderer.centerOffset(for: style, image: image)
+            view.centerOffset = MapPinRenderer.centerOffset(for: style, image: image, count: annotation.members.count)
             // 営業時間が分かっていて今は時間外の店は薄く（選択中は見失わないよう通常の濃さ）
             view.alpha = isSelected ? 1 : style.alpha
             view.zPriority = isSelected ? .max : .defaultUnselected
@@ -178,7 +212,7 @@ struct CafeMapView: UIViewRepresentable {
             view.canShowCallout = false
             view.clusteringIdentifier = nil
             view.accessibilityLabel = annotation.spokenLabel
-            configureNameLabel(on: view, name: annotation.item.cafe.name)
+            configureNameLabel(on: view, name: MapViewModel.nameLabel(for: annotation.members))
         }
 
         /// ピンの下の店名（大きな縮尺のときだけ）。読み上げはピン本体が担うので、ラベルは VoiceOver から隠す。
@@ -226,7 +260,7 @@ struct CafeMapView: UIViewRepresentable {
             showsNames = shows
             for case let annotation as CafeAnnotation in mapView.annotations(in: mapView.visibleMapRect) {
                 guard let view = mapView.view(for: annotation) else { continue }
-                configure(view, for: annotation, isSelected: parent.selectedItem?.cafe.id == annotation.item.cafe.id)
+                configure(view, for: annotation, isSelected: isSelected(annotation))
             }
         }
 
@@ -237,13 +271,16 @@ struct CafeMapView: UIViewRepresentable {
                 withIdentifier: CafeMapView.cafeReuseID,
                 for: cafeAnnotation
             )
-            configure(view, for: cafeAnnotation, isSelected: parent.selectedItem?.cafe.id == cafeAnnotation.item.cafe.id)
+            configure(view, for: cafeAnnotation, isSelected: isSelected(cafeAnnotation))
             return view
         }
 
         func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
             guard let cafeAnnotation = annotation as? CafeAnnotation else { return }
-            parent.selectedItem = cafeAnnotation.item
+            // 代表が変わって作り直した直後など、選択中の店がすでにこの組にいるときは、カードの店を変えない
+            if !isSelected(cafeAnnotation) {
+                parent.selectedItem = cafeAnnotation.item
+            }
             if let view = mapView.view(for: annotation) {
                 configure(view, for: cafeAnnotation, isSelected: true)
             }
@@ -254,7 +291,10 @@ struct CafeMapView: UIViewRepresentable {
             if let view = mapView.view(for: annotation) {
                 configure(view, for: cafeAnnotation, isSelected: false)
             }
-            if parent.selectedItem?.cafe.id == cafeAnnotation.item.cafe.id {
+            // 注釈の付け外しや選択の合わせ直し（代表の入れ替え・組のつながり／分かれ）による選択解除は、
+            // ユーザー操作ではないのでカードを閉じない
+            guard !isSyncingAnnotations else { return }
+            if isSelected(cafeAnnotation) {
                 parent.selectedItem = nil
             }
         }

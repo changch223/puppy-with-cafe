@@ -2,12 +2,15 @@ import UIKit
 
 /// 地図ピンの画像を描いてキャッシュする（毎回描かない）。
 /// 形（丸／角丸四角／しずく）と色の両方で区別し、中に白い肉球を置く。保存済みは白い縁を太く、選択中は大きくする。
-/// 描画とキャッシュはメインスレッドから呼ぶ前提。薄く見せる（営業時間外）処理は画像ではなく表示側の alpha で行うので、画像は可否の分類×保存×選択だけでキャッシュできる。
+/// 同じ場所に複数の店があるとき（`count` が2以上）は、右上に数のバッジ（白地の丸に濃い文字。10以上は「9+」）を付ける。
+/// 描画とキャッシュはメインスレッドから呼ぶ前提。薄く見せる（営業時間外）処理は画像ではなく表示側の alpha で行うので、画像は可否の分類×保存×選択×バッジの数だけでキャッシュできる。
 enum MapPinRenderer {
     private struct Key: Hashable {
         let category: MapPinCategory
         let isFavorite: Bool
         let isSelected: Bool
+        /// バッジの数（10以上は同じ「9+」なので10にそろえる。1はバッジなし）
+        let count: Int
     }
 
     private static var cache: [Key: UIImage] = [:]
@@ -16,6 +19,20 @@ enum MapPinRenderer {
     static let selectedScale: CGFloat = 1.35
     /// 影のための余白
     private static let padding: CGFloat = 4
+    /// バッジが付くときの余白の増分（バッジがピンの右上へはみ出すぶん。上下左右そろえて増やし、ピンの中心を画像の中心に保つ）
+    private static let badgeExtraPadding: CGFloat = 3
+    private static let badgeHeight: CGFloat = 17
+    /// バッジがピンの角からはみ出す量
+    private static let badgeOverhang: CGFloat = 4
+
+    /// バッジの数字（10以上は「9+」）
+    static func badgeText(count: Int) -> String {
+        count >= 10 ? "9+" : "\(count)"
+    }
+
+    private static func pad(count: Int) -> CGFloat {
+        count > 1 ? padding + badgeExtraPadding : padding
+    }
 
     /// 可否の分類ごとのピン色（固定色。ライト・ダークどちらの地図でも見分けられる濃さ）
     static func fillColor(for category: MapPinCategory) -> UIColor {
@@ -27,23 +44,24 @@ enum MapPinRenderer {
         }
     }
 
-    static func image(for style: MapPinStyle, isSelected: Bool = false) -> UIImage {
-        let key = Key(category: style.category, isFavorite: style.isFavorite, isSelected: isSelected)
+    static func image(for style: MapPinStyle, isSelected: Bool = false, count: Int = 1) -> UIImage {
+        let key = Key(category: style.category, isFavorite: style.isFavorite, isSelected: isSelected, count: min(max(count, 1), 10))
         if let cached = cache[key] { return cached }
-        let image = draw(category: style.category, isFavorite: style.isFavorite, isSelected: isSelected)
+        let image = draw(category: style.category, isFavorite: style.isFavorite, isSelected: isSelected, count: key.count)
         cache[key] = image
         return image
     }
 
     /// 地図上の座標にピンの先端（しずく）または中心（丸・四角）を合わせるための offset
-    static func centerOffset(for style: MapPinStyle, image: UIImage) -> CGPoint {
+    static func centerOffset(for style: MapPinStyle, image: UIImage, count: Int = 1) -> CGPoint {
         switch style.shape {
         case .circle, .roundedSquare, .diamond: return .zero
-        case .teardrop: return CGPoint(x: 0, y: -(image.size.height / 2 - padding))
+        case .teardrop: return CGPoint(x: 0, y: -(image.size.height / 2 - pad(count: count)))
         }
     }
 
-    private static func draw(category: MapPinCategory, isFavorite: Bool, isSelected: Bool) -> UIImage {
+    private static func draw(category: MapPinCategory, isFavorite: Bool, isSelected: Bool, count: Int) -> UIImage {
+        let padding = pad(count: count)
         let shape = category.pinShape
         let size = baseSize * (isSelected ? selectedScale : 1)
         let height = shape == .teardrop ? size * 1.28 : size
@@ -79,7 +97,33 @@ enum MapPinRenderer {
                     width: fitted.width, height: fitted.height
                 ))
             }
+
+            if count > 1 { drawBadge(count: count, pinRect: outer, in: cg) }
         }
+    }
+
+    /// 右上の数のバッジ（白地の丸＋濃い文字）。ピンの右上の角から少しはみ出させる
+    private static func drawBadge(count: Int, pinRect: CGRect, in cg: CGContext) {
+        let text = NSAttributedString(string: badgeText(count: count), attributes: [
+            .font: UIFont.systemFont(ofSize: 11, weight: .heavy),
+            .foregroundColor: UIColor(white: 0.12, alpha: 1),
+        ])
+        let textSize = text.size()
+        let width = max(badgeHeight, ceil(textSize.width) + 8)
+        let rect = CGRect(
+            x: pinRect.maxX + badgeOverhang - width, y: pinRect.minY - badgeOverhang,
+            width: width, height: badgeHeight
+        )
+        cg.saveGState()
+        cg.setShadow(offset: CGSize(width: 0, height: 1), blur: 2, color: UIColor.black.withAlphaComponent(0.35).cgColor)
+        UIColor.white.setFill()
+        UIBezierPath(roundedRect: rect, cornerRadius: badgeHeight / 2).fill()
+        cg.restoreGState()
+        UIColor(white: 0.12, alpha: 0.35).setStroke()
+        let outline = UIBezierPath(roundedRect: rect.insetBy(dx: 0.5, dy: 0.5), cornerRadius: badgeHeight / 2)
+        outline.lineWidth = 1
+        outline.stroke()
+        text.draw(at: CGPoint(x: rect.midX - textSize.width / 2, y: rect.midY - textSize.height / 2))
     }
 
     private static func aspectFit(_ size: CGSize, in box: CGSize) -> CGSize {

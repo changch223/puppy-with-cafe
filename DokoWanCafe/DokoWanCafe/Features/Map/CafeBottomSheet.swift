@@ -19,6 +19,9 @@ enum CafeSheetDetent: CaseIterable, Equatable {
     /// 店のカード表示中の高さの割合・下限（medium より少し低い固定の高さ）
     static let cardRatio: CGFloat = 0.40
     static let cardMinHeight: CGFloat = 300
+    /// 同じ場所の店の切り替え列ぶんの増分（見出し＋44ptのチップ＋間隔。大きな文字では見出しも大きい）
+    static let sameSpotRowHeight: CGFloat = 76
+    static let sameSpotRowAccessibilityHeight: CGFloat = 100
     /// 大きな文字での店のカードの高さの割合
     static let accessibilityCardRatio: CGFloat = 0.62
     /// 「見出しだけ」の段の高さの上限（地図領域に対する割合。大きな文字で見出しが長くなっても切れないように medium より大きく取る）
@@ -67,9 +70,11 @@ enum CafeSheetDetent: CaseIterable, Equatable {
 
     /// 店のカードを出しているときのシートの高さ（段とは別の固定の高さ。小さな画面では上限を設ける）
     /// 大きな文字（アクセシビリティサイズ）では内容が多く縦に伸びるため、割合を大きくする。
-    static func cardHeight(containerHeight: CGFloat, isAccessibilitySize: Bool = false) -> CGFloat {
+    /// 同じ場所の店の切り替え列（見出し＋チップ）を出すときは、そのぶん高くする。
+    static func cardHeight(containerHeight: CGFloat, isAccessibilitySize: Bool = false, hasSameSpotRow: Bool = false) -> CGFloat {
         let ratio = isAccessibilitySize ? accessibilityCardRatio : cardRatio
-        return min(max(containerHeight * ratio, cardMinHeight), containerHeight * 0.8)
+        let extra = hasSameSpotRow ? (isAccessibilitySize ? sameSpotRowAccessibilityHeight : sameSpotRowHeight) : 0
+        return min(max(containerHeight * ratio, cardMinHeight) + extra, containerHeight * 0.8)
     }
 
     /// ドラッグ終了時点の高さから最も近い段を求める純関数。

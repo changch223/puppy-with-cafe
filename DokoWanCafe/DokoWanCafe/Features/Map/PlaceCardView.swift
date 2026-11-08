@@ -11,11 +11,15 @@ struct PlaceCardView: View {
     let now: Date
     /// `now` が「いつ行く？」で決めた対象時刻か
     let isTargetTime: Bool
+    /// 同じ場所（5m 以内）の店（選択中の店を含む・地図のピンの並び）。2店以上のときだけカードの上に切り替えの列を出す
+    var sameSpot: [CafeWithDistance] = []
     let containerHeight: CGFloat
     let onShowDetail: () -> Void
     let onOpenRoute: () -> Void
     let onToggleWantToGo: () -> Void
     let onClose: () -> Void
+    /// 同じ場所の列で別の店を選んだとき（カードをその店に切り替える。地図の選択は変えない）
+    var onSelectSameSpot: (CafeWithDistance) -> Void = { _ in }
 
     @Environment(\.openURL) private var openURL
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -26,6 +30,8 @@ struct PlaceCardView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
+                if hasSameSpot { sameSpotRow }
+
                 if dynamicTypeSize.isAccessibilitySize {
                     // 大きな文字では写真と閉じるボタンの行の下に、店名・タグ・条件を全幅で並べる（店名を省略しない）
                     HStack(alignment: .top) {
@@ -92,10 +98,61 @@ struct PlaceCardView: View {
             .padding(16)
         }
         .frame(height: CafeSheetDetent.cardHeight(
-            containerHeight: containerHeight, isAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+            containerHeight: containerHeight, isAccessibilitySize: dynamicTypeSize.isAccessibilitySize,
+            hasSameSpotRow: hasSameSpot
         ))
         .sheetChrome()
         .accessibilityElement(children: .contain)
+    }
+
+    private var hasSameSpot: Bool { sameSpot.count > 1 }
+
+    /// 同じ場所の店を切り替える列（見出し＋横スクロールのチップ）。チップの先頭はピンと同じ形・色
+    private var sameSpotRow: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("同じ場所に\(sameSpot.count)店")
+                .font(.caption.bold())
+                .foregroundStyle(Color(.secondaryLabel))
+                .accessibilityAddTraits(.isHeader)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(sameSpot) { other in
+                        sameSpotChip(other)
+                    }
+                }
+                .padding(.vertical, 2)
+            }
+        }
+    }
+
+    private func sameSpotChip(_ other: CafeWithDistance) -> some View {
+        let isCurrent = other.cafe.id == item.cafe.id
+        let category = MapPinCategory.category(for: other.cafe)
+        // 色だけでなく形でも分類が分かるよう、ピンと同じ形・色の小さな画像を使う（原則I）
+        let pin = MapPinRenderer.image(for: MapPinStyle(category: category, isFavorite: false, isDimmed: false))
+        return Button {
+            onSelectSameSpot(other)
+        } label: {
+            HStack(spacing: 6) {
+                Image(uiImage: pin)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .accessibilityHidden(true)
+                Text(other.cafe.name)
+                    .font(.subheadline.weight(isCurrent ? .bold : .regular))
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
+            .foregroundStyle(isCurrent ? Color.brand : Color(.label))
+            .padding(.horizontal, 12)
+            .frame(maxWidth: 240, minHeight: 44)
+            .background(isCurrent ? Color.brand.opacity(0.12) : Color(.secondarySystemBackground), in: Capsule())
+            .overlay(Capsule().stroke(isCurrent ? Color.brand : Color.clear, lineWidth: 2))
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text("\(other.cafe.name)、\(category.legendTitle)、同じ場所の店に切り替える"))
+        .accessibilityAddTraits(isCurrent ? .isSelected : [])
     }
 
     private var closeButton: some View {
