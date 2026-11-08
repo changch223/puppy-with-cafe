@@ -189,6 +189,14 @@ struct SearchTabView: View {
 
     // MARK: - 下部（一覧シート／店のカード）
 
+    /// 選択中の店と同じ場所（5m 以内）の店（選択中のときだけ計算する。地図のピンと同じ並び）
+    private func sameSpotItems(of selected: CafeWithDistance) -> [CafeWithDistance] {
+        SameSpotGrouping.group(
+            of: selected, in: viewModel.displayedResults,
+            favoriteIDs: savedStore.places.wantToGoIDs, at: viewModel.referenceTime
+        ) ?? []
+    }
+
     private func bottomArea(containerHeight: CGFloat) -> some View {
         VStack(alignment: .trailing, spacing: 8) {
             if sheetDetent != .large || selectedMapItem != nil {
@@ -204,11 +212,13 @@ struct SearchTabView: View {
                     savedStatus: savedStore.status(of: selected.cafe.id),
                     now: viewModel.referenceTime,
                     isTargetTime: viewModel.isTargetTime,
+                    sameSpot: sameSpotItems(of: selected),
                     containerHeight: containerHeight,
                     onShowDetail: { onShowDetail(selected.cafe) },
                     onOpenRoute: { routeTarget = selected.cafe },
                     onToggleWantToGo: { savedStore.toggleWantToGo(selected.cafe.id) },
-                    onClose: { selectedMapItem = nil }
+                    onClose: { selectedMapItem = nil },
+                    onSelectSameSpot: { selectedMapItem = $0 }
                 )
                 .transition(.move(edge: .bottom))
             } else {

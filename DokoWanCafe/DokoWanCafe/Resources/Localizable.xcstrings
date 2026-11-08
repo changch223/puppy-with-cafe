@@ -91,6 +91,16 @@
         }
       }
     },
+    "%@ ほか%lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ほか%lld店"
+          }
+        }
+      }
+    },
     "%@%@のお店" : {
       "localizations" : {
         "ja" : {
@@ -117,6 +127,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@、%2$@、%3$@のお店"
+          }
+        }
+      }
+    },
+    "%@、%@、同じ場所の店に切り替える" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@、%@、同じ場所の店に切り替える"
           }
         }
       }
@@ -447,6 +467,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "© 2026 Puppy With Cafe"
+          }
+        }
+      }
+    },
+    "。同じ場所にほか%lld店: %@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "。同じ場所にほか%lld店: %@"
           }
         }
       }
@@ -1791,6 +1821,26 @@
         }
       }
     },
+    "同じ場所に%lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同じ場所に%lld店"
+          }
+        }
+      }
+    },
+    "同じ建物など、同じ場所に複数のお店があります。タップしてカードで切り替えます。ピンの色と形は代表の1店のものです。各店の可否はカードで確かめてください" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同じ建物など、同じ場所に複数のお店があります。タップしてカードで切り替えます。ピンの色と形は代表の1店のものです。各店の可否はカードで確かめてください"
+          }
+        }
+      }
+    },
     "周辺のカフェを検索中…" : {
       "localizations" : {
         "ja" : {
@@ -2337,6 +2387,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "採用根拠"
+          }
+        }
+      }
+    },
+    "数字つきのピン" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "数字つきのピン"
           }
         }
       }

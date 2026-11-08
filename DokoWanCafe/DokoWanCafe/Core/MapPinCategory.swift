@@ -30,3 +30,15 @@ enum MapPinCategory: Hashable, Sendable {
         return .checkDetail
     }
 }
+
+extension MapPinCategory {
+    /// 凡例・読み上げで使う分類名（凡例の見出しと同じ語）
+    var legendTitle: String {
+        switch self {
+        case .indoorOK: return String(localized: "店内OK")
+        case .terraceOnly: return String(localized: "テラスOK")
+        case .checkDetail: return String(localized: "条件を確認")
+        case .unverified: return String(localized: "未確認")
+        }
+    }
+}
