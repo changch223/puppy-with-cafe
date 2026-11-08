@@ -2,6 +2,13 @@ import MapKit
 import SwiftUI
 import UIKit
 
+/// 「この座標へ寄せる」要求。`id` が変わったときだけ地図をそこへ動かす（検索画面から店を開いたとき）。
+/// 起点（`center`）は変えない。地図の動きはプログラムによるものなので `onRegionSettled` の byUser は false になる。
+struct MapFocusRequest {
+    let id: Int
+    let coordinate: CLLocationCoordinate2D
+}
+
 /// 地図画面（T026/T028・再設計 段階1a: 形と色で分かるピン・徒歩圏の縮尺）。
 ///
 /// UIKit 使用理由（憲章 原則V に基づく明記）:
@@ -27,6 +34,8 @@ struct CafeMapView: UIViewRepresentable {
     @Binding var selectedItem: CafeWithDistance?
     /// インクリメントすると現在地（center）へ再センタリングする（現在地ボタンから使用）
     let recenterRequestID: Int
+    /// この座標へ寄せる要求（`id` が変わったときだけ動かす。起点は変えない）。なければ nil
+    var focusRequest: MapFocusRequest?
     /// `center` が変わったときに地図をそこへ動かすか。「このあたりで探す」で起点が地図の中心になったときは false
     /// （検索地点を今見ている場所に合わせるだけで、地図は動かさない・ズームも変えない）
     var movesToCenterOnChange = true
@@ -82,7 +91,15 @@ struct CafeMapView: UIViewRepresentable {
             }
         }
 
+        // 検索画面から店を開いたときの「この座標へ寄せる」要求。起点は変えず、地図だけを動かす。
+        if let focusRequest, focusRequest.id != coordinator.lastFocusRequestID {
+            coordinator.lastFocusRequestID = focusRequest.id
+            mapView.setRegion(MapViewModel.walkingRegion(center: focusRequest.coordinate), animated: true)
+        }
+
         coordinator.syncAnnotations(on: mapView)
+        // 地図の外（検索画面など）でカードの店が変わったときも、地図の選択をその店のピンに合わせる
+        coordinator.reconcileSelectionFromOutside(on: mapView)
 
         // ×ボタン等、地図の外からの選択解除をマップ側にも反映する
         if selectedItem == nil, let selected = mapView.selectedAnnotations.first {
@@ -94,6 +111,7 @@ struct CafeMapView: UIViewRepresentable {
         var parent: CafeMapView
         var lastRegionKey: String?
         var lastRecenterRequestID = 0
+        var lastFocusRequestID = 0
         /// 直近に反映した（データの版, 保存の状態, 対象時刻）。変わらなければ注釈の見た目と読み上げを計算し直さない。
         /// 見た目が同じピンでも、対象時刻や保存の状態が変わったら読み上げ文は作り直す。
         private var lastSyncKey: SyncKey?
@@ -186,6 +204,12 @@ struct CafeMapView: UIViewRepresentable {
                 }
             }
             if !added.isEmpty { mapView.addAnnotations(added) }
+            reconcileSelection(on: mapView)
+        }
+
+        /// 地図の外でカードの店が変わったとき（`syncAnnotations` が早く戻る場合も含む）に、地図の選択を合わせる。
+        /// 付け外しではないので、カードの選択は消さない（古いピンの選択解除は `isSelected` が false で何もしない）。
+        func reconcileSelectionFromOutside(on mapView: MKMapView) {
             reconcileSelection(on: mapView)
         }
 

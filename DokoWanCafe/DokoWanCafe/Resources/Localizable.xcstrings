@@ -51,6 +51,16 @@
         }
       }
     },
+    "%@ は%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ は%2$@"
+          }
+        }
+      }
+    },
     "%@ は営業中" : {
       "localizations" : {
         "ja" : {
@@ -171,6 +181,36 @@
         }
       }
     },
+    "%@、掲載%lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@、掲載%2$lld店"
+          }
+        }
+      }
+    },
+    "%@。地図のチップをオンにします" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@。地図のチップをオンにします"
+          }
+        }
+      }
+    },
+    "%@。起点を変えて、地図のチップをオンにします" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@。起点を変えて、地図のチップをオンにします"
+          }
+        }
+      }
+    },
     "%@お店" : {
       "localizations" : {
         "ja" : {
@@ -251,6 +291,16 @@
         }
       }
     },
+    "%@のお店に絞る" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@のお店に絞る"
+          }
+        }
+      }
+    },
     "%@の写真" : {
       "localizations" : {
         "ja" : {
@@ -267,6 +317,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@の周り"
+          }
+        }
+      }
+    },
+    "%@の周り · 地図の「%@」チップをオンにします" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@の周り · 地図の「%2$@」チップをオンにします"
+          }
+        }
+      }
+    },
+    "%@の周り、掲載%lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@の周り、掲載%2$lld店"
+          }
+        }
+      }
+    },
+    "%@の周りで、%@のお店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@の周りで、%2$@のお店"
           }
         }
       }
@@ -337,6 +417,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@曜は定休"
+          }
+        }
+      }
+    },
+    "%lldメートル" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lldメートル"
           }
         }
       }
@@ -487,16 +577,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "。同じ場所にほか%lld店: %@"
-          }
-        }
-      }
-    },
-    "「%@」の周りで探す" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「%@」の周りで探す"
           }
         }
       }
@@ -851,6 +931,16 @@
         }
       }
     },
+    "すべて消す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべて消す"
+          }
+        }
+      }
+    },
     "その他" : {
       "localizations" : {
         "ja" : {
@@ -877,6 +967,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "その時間に営業"
+          }
+        }
+      }
+    },
+    "その時間に営業のお店に絞る" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "その時間に営業のお店に絞る"
           }
         }
       }
@@ -911,6 +1011,16 @@
         }
       }
     },
+    "ほかの場所" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ほかの場所"
+          }
+        }
+      }
+    },
     "ほぼ全画面" : {
       "localizations" : {
         "ja" : {
@@ -931,16 +1041,6 @@
         }
       }
     },
-    "よく探されるエリア" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "よく探されるエリア"
-          }
-        }
-      }
-    },
     "わんちゃん向け情報" : {
       "localizations" : {
         "ja" : {
@@ -957,6 +1057,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "アプリ名"
+          }
+        }
+      }
+    },
+    "エリア" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エリア"
           }
         }
       }
@@ -1147,6 +1257,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "テラスのみ"
+          }
+        }
+      }
+    },
+    "テラス席OK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラス席OK"
           }
         }
       }
@@ -1731,6 +1851,16 @@
         }
       }
     },
+    "削除" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除"
+          }
+        }
+      }
+    },
     "午後" : {
       "localizations" : {
         "ja" : {
@@ -1961,6 +2091,26 @@
         }
       }
     },
+    "地図で「%@」を探す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地図で「%@」を探す"
+          }
+        }
+      }
+    },
+    "地図で「%@」を探す。駅名・住所を Apple のマップで探します" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "地図で「%1$@」を探す。駅名・住所を Apple のマップで探します"
+          }
+        }
+      }
+    },
     "地図で写真を見る" : {
       "localizations" : {
         "ja" : {
@@ -2047,16 +2197,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "報告フォームを開く"
-          }
-        }
-      }
-    },
-    "場所" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "場所"
           }
         }
       }
@@ -2351,6 +2491,16 @@
         }
       }
     },
+    "店名・駅・エリア・テラスなど" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店名・駅・エリア・テラスなど"
+          }
+        }
+      }
+    },
     "店舗情報" : {
       "localizations" : {
         "ja" : {
@@ -2441,6 +2591,16 @@
         }
       }
     },
+    "掲載 %lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "掲載 %lld店"
+          }
+        }
+      }
+    },
     "数字つきのピン" : {
       "localizations" : {
         "ja" : {
@@ -2521,6 +2681,16 @@
         }
       }
     },
+    "時間外" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間外"
+          }
+        }
+      }
+    },
     "最新の営業情報は公式でご確認ください。" : {
       "localizations" : {
         "ja" : {
@@ -2541,12 +2711,12 @@
         }
       }
     },
-    "最近の検索" : {
+    "最近" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "最近の検索"
+            "value" : "最近"
           }
         }
       }
@@ -2627,6 +2797,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "本日定休"
+          }
+        }
+      }
+    },
+    "条件" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "条件"
           }
         }
       }
@@ -2817,6 +2997,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "犬メニュー"
+          }
+        }
+      }
+    },
+    "犬メニューあり" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬メニューあり"
           }
         }
       }
@@ -3201,6 +3391,16 @@
         }
       }
     },
+    "見たお店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "見たお店"
+          }
+        }
+      }
+    },
     "見出しだけ" : {
       "localizations" : {
         "ja" : {
@@ -3291,12 +3491,32 @@
         }
       }
     },
+    "起点を%@に変えて、地図の条件チップもオンにします" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "起点を%@に変えて、地図の条件チップもオンにします"
+          }
+        }
+      }
+    },
     "近い順" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "近い順"
+          }
+        }
+      }
+    },
+    "近くのエリア" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "近くのエリア"
           }
         }
       }
@@ -3447,6 +3667,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "食べログ"
+          }
+        }
+      }
+    },
+    "駅名・住所を Apple のマップで探します" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "駅名・住所を Apple のマップで探します"
           }
         }
       }
