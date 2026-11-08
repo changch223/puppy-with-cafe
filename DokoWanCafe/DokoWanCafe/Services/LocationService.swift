@@ -36,11 +36,17 @@ struct ManualArea: Identifiable, Equatable, Sendable {
     ]
 }
 
+/// 現在地を返すもの（`CafeListViewModel` が使う。テストで応答を遅らせる・拒否を返すモックに差し替えられるようにする）
+@MainActor
+protocol LocationProviding: AnyObject {
+    func currentLocation() async throws -> CLLocationCoordinate2D
+}
+
 /// 位置情報サービス（憲章 原則III / FR-016）。
 /// - 「使用中のみ (WhenInUse)」でのみ権限を要求する。
 /// - 取得した座標は周辺検索の入力にのみ使い、永続保存しない。
 @MainActor
-final class LocationService: NSObject, ObservableObject {
+final class LocationService: NSObject, ObservableObject, LocationProviding {
     @Published private(set) var authorizationStatus: CLAuthorizationStatus
 
     private let manager = CLLocationManager()

@@ -35,14 +35,14 @@ struct PlaceCardView: View {
                 if dynamicTypeSize.isAccessibilitySize {
                     // 大きな文字では写真と閉じるボタンの行の下に、店名・タグ・条件を全幅で並べる（店名を省略しない）
                     HStack(alignment: .top) {
-                        CafeThumbnailView(cafe: cafe, size: 56)
+                        CafeThumbnailView(cafe: cafe, size: 56, allowsNetwork: true)
                         Spacer(minLength: 0)
                         closeButton
                     }
                     cardInfo
                 } else {
                     HStack(alignment: .top, spacing: 12) {
-                        CafeThumbnailView(cafe: cafe, size: 72)
+                        CafeThumbnailView(cafe: cafe, size: 72, allowsNetwork: true)
                         cardInfo
                             .frame(maxWidth: .infinity, alignment: .leading)
                         closeButton

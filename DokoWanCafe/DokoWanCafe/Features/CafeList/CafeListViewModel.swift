@@ -7,12 +7,23 @@ enum SearchOrigin: Equatable {
     case manual(ManualArea)
     /// 住所・駅名・エリア名の検索結果による起点（機能2: 住所・駅名検索、`GeocodingService` 経由）
     case searched(name: String, latitude: Double, longitude: Double)
+    /// 地図を動かしたあとの「このあたりで探す」による起点（地図の中心。端末内で並び順と距離に使うだけで、保存も送信もしない）
+    case mapCenter(latitude: Double, longitude: Double)
 
     var displayName: String {
         switch self {
         case .currentLocation: return String(localized: "現在地")
         case .manual(let area): return area.name
         case .searched(let name, _, _): return name
+        case .mapCenter: return String(localized: "地図の中心")
+        }
+    }
+
+    /// 検索バーに出す「◯◯の周り」。現在地のときは nil（バーは通常の「店名・駅・エリアで検索」のまま）
+    var aroundLabel: String? {
+        switch self {
+        case .currentLocation: return nil
+        default: return String(localized: "\(displayName)の周り")
         }
     }
 }
@@ -92,16 +103,21 @@ final class CafeListViewModel: ObservableObject {
         didSet { recomputeDisplayed() }
     }
     @Published var origin: SearchOrigin = .currentLocation
+    /// 今の結果（一覧・地図）を読み込み終えた起点。読み込み中は `origin` が先に新しくなるが、結果は前の起点のままなので、
+    /// シートの小見出し（「○○から近い順」）は結果と食い違わないようこちらで出す。
+    @Published private(set) var loadedOrigin: SearchOrigin = .currentLocation
     @Published private(set) var searchCenter: CLLocationCoordinate2D?
 
     private let repository: any CafeRepository
-    private let locationService: LocationService
+    private let locationService: any LocationProviding
     private let cacheStore: CacheStore
     private let savedStore: SavedPlacesStore
     /// 「今」の時刻（営業中フィルタの判定に使う。テストでは固定の時刻を注入する）
     private let now: () -> Date
     /// リモートで実データが更新された回数。表示用の検索中に更新が割り込んだとき、取り直しが要るかの判定に使う。
     private var dataRevision = 0
+    /// `refresh()` の世代番号。待っている間（位置情報・取得）に新しい `refresh()` が始まったら、古い方は何も書き換えずに戻る。
+    private var refreshGeneration = 0
     /// 裏のリモート取得（revalidate）が実行中か（同時に2本走らせない）
     private var isRevalidating = false
     /// データ更新に伴う再表示が実行中か（二重に再表示しない）
@@ -109,7 +125,7 @@ final class CafeListViewModel: ObservableObject {
 
     init(
         repository: any CafeRepository,
-        locationService: LocationService,
+        locationService: any LocationProviding,
         cacheStore: CacheStore,
         savedStore: SavedPlacesStore,
         now: @escaping () -> Date = { Date() }
@@ -257,32 +273,44 @@ final class CafeListViewModel: ObservableObject {
         targetTime = nil
     }
 
-    /// 周辺検索を実行（contracts/api-contracts.md #1 の利用側）
+    /// 周辺検索を実行（contracts/api-contracts.md #1 の利用側）。
+    /// 位置情報や取得を待つ間に新しい `refresh()` が始まったら、古い方は結果も状態も書き換えずに戻る（起点の切り替えの競合）。
     func refresh() async {
+        refreshGeneration += 1
+        let generation = refreshGeneration
+        let requestedOrigin = origin
         phase = .loading
 
         // 0) お気に入り解決用に全カフェを一度だけ取得（対象エリア外の早期returnより前に行う）。
         //    データは静的なので初回ロードのみ。失敗時は次回 refresh で再試行する。
         if allLoadedCafes.isEmpty {
-            allLoadedCafes = (try? await repository.allCafes()) ?? []
+            let cafes = (try? await repository.allCafes()) ?? []
+            guard generation == refreshGeneration else { return }
+            allLoadedCafes = cafes
         }
 
         // 1) 起点を解決（現在地 or 手動エリア）
         let coordinate: CLLocationCoordinate2D
-        switch origin {
+        switch requestedOrigin {
         case .currentLocation:
             do {
-                coordinate = try await locationService.currentLocation()
+                let location = try await locationService.currentLocation()
+                guard generation == refreshGeneration else { return }
+                coordinate = location
             } catch LocationError.denied {
+                guard generation == refreshGeneration else { return }
                 phase = .locationDenied
                 return
             } catch {
+                guard generation == refreshGeneration else { return }
                 phase = .error(LocationError.unavailable.localizedDescription)
                 return
             }
         case .manual(let area):
             coordinate = CLLocationCoordinate2D(latitude: area.latitude, longitude: area.longitude)
         case .searched(_, let latitude, let longitude):
+            coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        case .mapCenter(let latitude, let longitude):
             coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         }
         searchCenter = coordinate
@@ -293,12 +321,13 @@ final class CafeListViewModel: ObservableObject {
             longitude: coordinate.longitude
         ) != nil else {
             allResults = []
+            loadedOrigin = requestedOrigin
             phase = .outOfArea
             return
         }
 
         // 3) 取得。失敗時は直近キャッシュにフォールバック（FR-029）
-        await loadResults(at: coordinate)
+        await loadResults(at: coordinate, generation: generation, origin: requestedOrigin)
     }
 
     /// 起動直後の読み込み（stale-while-revalidate）: まずローカルのデータで表示を確定させ、
@@ -344,7 +373,10 @@ final class CafeListViewModel: ObservableObject {
     /// 検索起点（searchCenter）の周辺をリポジトリから取得して表示を更新する。
     /// 取得中に起点が変わった場合は結果を捨てる（新しい起点側の読み込みが表示を確定する）。
     /// 取得中にリモートでデータが更新された場合は、新しいデータで取り直す。
-    private func loadResults(at coordinate: CLLocationCoordinate2D) async {
+    /// - Parameters:
+    ///   - generation: `refresh()` から呼ぶときの世代番号。取得中に新しい `refresh()` が始まっていたら結果を捨てる
+    ///   - origin: この結果の起点（`loadedOrigin` に反映する）。データ更新後の再表示は nil（起点は変わらない）
+    private func loadResults(at coordinate: CLLocationCoordinate2D, generation: Int? = nil, origin: SearchOrigin? = nil) async {
         let revision = dataRevision
         let fetched: Result<[CafeWithDistance], Error>
         do {
@@ -358,6 +390,8 @@ final class CafeListViewModel: ObservableObject {
             fetched = .failure(error)
         }
         guard isCurrentSearchCenter(coordinate) else { return }
+        if let generation, generation != refreshGeneration { return }
+        if let origin { loadedOrigin = origin }
 
         switch fetched {
         case .success(let results):
@@ -375,7 +409,7 @@ final class CafeListViewModel: ObservableObject {
             }
         }
         if revision != dataRevision, let center = searchCenter {
-            await loadResults(at: center)
+            await loadResults(at: center, generation: generation, origin: origin)
         }
     }
 
@@ -395,7 +429,8 @@ final class CafeListViewModel: ObservableObject {
         }
         isReapplying = true
         defer { isReapplying = false }
-        await loadResults(at: center)
+        // 再表示の取得を待つ間に新しい refresh()（起点の切り替え）が始まったら、その結果を上書きしない
+        await loadResults(at: center, generation: refreshGeneration)
     }
 
     /// 店データに検索起点からの距離を付与し、安全半径内を距離昇順で返す（キャッシュ復元用）。

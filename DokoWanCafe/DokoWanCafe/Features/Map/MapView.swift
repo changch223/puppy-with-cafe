@@ -27,6 +27,12 @@ struct CafeMapView: UIViewRepresentable {
     @Binding var selectedItem: CafeWithDistance?
     /// インクリメントすると現在地（center）へ再センタリングする（現在地ボタンから使用）
     let recenterRequestID: Int
+    /// `center` が変わったときに地図をそこへ動かすか。「このあたりで探す」で起点が地図の中心になったときは false
+    /// （検索地点を今見ている場所に合わせるだけで、地図は動かさない・ズームも変えない）
+    var movesToCenterOnChange = true
+    /// 地図の動きが止まったときに、地図の中心・見えている範囲の幅（メートル）・ユーザーが動かしたか（false はプログラムの setRegion）を伝える。
+    /// 動いている間は呼ばない
+    var onRegionSettled: ((_ center: CLLocationCoordinate2D, _ widthMeters: Double, _ byUser: Bool) -> Void)?
 
     private static let cafeReuseID = "cafe"
 
@@ -62,7 +68,9 @@ struct CafeMapView: UIViewRepresentable {
             if coordinator.lastRegionKey != regionKey {
                 let isFirst = coordinator.lastRegionKey == nil
                 coordinator.lastRegionKey = regionKey
-                mapView.setRegion(MapViewModel.walkingRegion(center: center), animated: !isFirst)
+                if movesToCenterOnChange {
+                    mapView.setRegion(MapViewModel.walkingRegion(center: center), animated: !isFirst)
+                }
             }
         }
 
@@ -103,6 +111,8 @@ struct CafeMapView: UIViewRepresentable {
         /// `syncAnnotations` が注釈を付け外ししている間は true。MKMapView は選択中の注釈を外すと同期で didDeselect を呼ぶので、
         /// その間はカードの選択（`parent.selectedItem`）を消さない（代表が変わっただけでカードが閉じないように）。
         private var isSyncingAnnotations = false
+        /// 今の地図の動きがユーザーの操作（パン・ピンチ・回転など）によるものか。動き始めに判定し、止まったときに使う
+        private var regionChangeIsByUser = false
 
         init(parent: CafeMapView) {
             self.parent = parent
@@ -252,6 +262,27 @@ struct CafeMapView: UIViewRepresentable {
             )
         }
 
+        /// 地図の動き始め。ユーザーの指の操作によるものか（プログラムの setRegion ではないか）を覚えておく。
+        /// MKMapView の中身のジェスチャが操作中（began / ended）かで判定する。
+        func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+            let recognizers = mapView.subviews.first?.gestureRecognizers ?? []
+            regionChangeIsByUser = recognizers.contains { $0.state == .began || $0.state == .changed || $0.state == .ended }
+        }
+
+        /// 地図の動きが止まったとき（動いている間は呼ばれない）。中心と見えている幅を SearchTabView へ伝える。
+        func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+            let byUser = regionChangeIsByUser
+            regionChangeIsByUser = false
+            guard let onRegionSettled = parent.onRegionSettled else { return }
+            let region = mapView.region
+            guard CLLocationCoordinate2DIsValid(region.center) else { return }
+            let width = MapRecenterLogic.visibleWidthMeters(
+                longitudeDelta: region.span.longitudeDelta, latitude: region.center.latitude
+            )
+            // updateUIView の中（setRegion 直後）で呼ばれても、SwiftUI の状態を描画中に変えないよう次の周期に回す
+            DispatchQueue.main.async { onRegionSettled(region.center, width, byUser) }
+        }
+
         /// 縮尺が変わったとき、店名を出す／隠すが切り替わるなら表示中のピンを更新する
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
             let region = mapView.region
@@ -301,7 +332,7 @@ struct CafeMapView: UIViewRepresentable {
     }
 }
 
-/// 現在地（手動エリア選択中はその地点）へ再センタリングするFAB
+/// 現在地へ戻るFAB（起点が現在地でなければ現在地に戻して探し直す。SearchTabView 側で切り替える）
 struct CurrentLocationButton: View {
     let action: () -> Void
 

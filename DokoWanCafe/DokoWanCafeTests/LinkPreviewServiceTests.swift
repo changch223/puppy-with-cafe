@@ -78,4 +78,16 @@ final class LinkPreviewServiceTests: XCTestCase {
         let size = LinkPreviewService.PureLogic.resizedSize(originalSize: .zero)
         XCTAssertEqual(size, .zero)
     }
+
+    func test_ttlは画像ありが14日で画像なしが1日() {
+        XCTAssertEqual(LinkPreviewService.PureLogic.ttl(hasImage: true), 14 * 24 * 60 * 60)
+        XCTAssertEqual(LinkPreviewService.PureLogic.ttl(hasImage: false), 24 * 60 * 60)
+    }
+
+    func test_画像なしは1日を過ぎると新鮮でなく画像ありは新鮮のまま() {
+        let now = Date()
+        let twoDaysAgo = now.addingTimeInterval(-2 * 24 * 60 * 60)
+        XCTAssertFalse(LinkPreviewService.PureLogic.isFresh(fetchedAt: twoDaysAgo, now: now, ttl: LinkPreviewService.PureLogic.ttl(hasImage: false)))
+        XCTAssertTrue(LinkPreviewService.PureLogic.isFresh(fetchedAt: twoDaysAgo, now: now, ttl: LinkPreviewService.PureLogic.ttl(hasImage: true)))
+    }
 }

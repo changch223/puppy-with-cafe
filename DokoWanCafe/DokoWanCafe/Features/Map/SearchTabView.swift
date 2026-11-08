@@ -1,3 +1,4 @@
+import CoreLocation
 import SwiftUI
 
 /// 上部オーバーレイ（検索バー＋チップ＋バナー）の高さを親へ伝える
@@ -32,6 +33,16 @@ struct SearchTabView: View {
     /// 「いつ行く？」シート
     @State private var showPlanSheet = false
     @State private var topOverlayHeight: CGFloat = 0
+    /// ユーザーが地図を動かして止まったときの地図の中心と見えている幅（メートル）。「このあたりで探す」の判定に使う。
+    /// プログラムで地図が動いたとき・ボタンを押したときは nil に戻る。端末の中だけで使い、保存も送信もしない。
+    @State private var userMovedRegion: MovedRegion?
+    /// 「このあたりで探す」を押した回数（触覚フィードバックのきっかけ）
+    @State private var searchHereCount = 0
+
+    private struct MovedRegion {
+        let center: CLLocationCoordinate2D
+        let widthMeters: Double
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -46,7 +57,12 @@ struct SearchTabView: View {
                     clock: viewModel.clock,
                     dog: viewModel.dogProfile,
                     selectedItem: $selectedMapItem,
-                    recenterRequestID: recenterRequestID
+                    recenterRequestID: recenterRequestID,
+                    // 「このあたりで探す」で起点が地図の中心になったときは、地図を動かさない
+                    movesToCenterOnChange: !isMapCenterOrigin,
+                    onRegionSettled: { center, widthMeters, byUser in
+                        userMovedRegion = byUser ? MovedRegion(center: center, widthMeters: widthMeters) : nil
+                    }
                 )
                 .ignoresSafeArea(edges: .top)
 
@@ -61,12 +77,28 @@ struct SearchTabView: View {
                     bottomArea(containerHeight: proxy.size.height)
                 }
 
+                // 探し直している間（前の結果を残している間）は「探しています…」、それ以外で条件を満たせば「このあたりで探す」
+                if isSearchingWithResults {
+                    SearchingIndicator()
+                        .padding(.top, topOverlayHeight + 4)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                        .transition(.opacity)
+                } else if showsSearchHereButton {
+                    SearchHereButton(action: searchHere)
+                        .padding(.top, topOverlayHeight + 4)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                        .transition(.opacity)
+                }
+
                 topOverlay
             }
+            .animation(.easeInOut(duration: 0.2), value: showsSearchHereButton)
+            .animation(.easeInOut(duration: 0.2), value: isSearchingWithResults)
             .animation(.easeInOut(duration: 0.2), value: selectedMapItem)
             .onPreferenceChange(TopOverlayHeightKey.self) { topOverlayHeight = $0 }
         }
         .toolbar(.hidden, for: .navigationBar)
+        .sensoryFeedback(.impact(weight: .light), trigger: searchHereCount)
         .onChange(of: showSearch || showPlanSheet) { _, isOpen in isModalOpen = isOpen }
         .fullScreenCover(isPresented: $showSearch) {
             CafeSearchView(
@@ -74,10 +106,7 @@ struct SearchTabView: View {
                 recentSearchStore: recentSearchStore,
                 onSelectOrigin: { origin in
                     showSearch = false
-                    // 検索地点が変わったとき、別の場所の店のカードを残さない
-                    selectedMapItem = nil
-                    viewModel.origin = origin
-                    Task { await viewModel.refresh() }
+                    changeOrigin(to: origin)
                 },
                 onSelectCafe: { cafe in
                     showSearch = false
@@ -123,11 +152,55 @@ struct SearchTabView: View {
     /// フィルタ起因の0件はシート内の「条件に合うお店がありません」で扱う。
     private var showsStateOverlay: Bool {
         switch viewModel.phase {
-        case .idle, .loading, .empty, .outOfArea, .locationDenied, .error:
+        case .loading:
+            // 起点を変えて探し直す間は、前の結果を地図と一覧に残す（「このあたりで探す」で地図が一瞬隠れないように）。
+            // まだ何も出ていない初回だけ読み込み中を出す
+            return viewModel.displayedResults.isEmpty
+        case .idle, .empty, .outOfArea, .locationDenied, .error:
             return true
         case .loaded, .offline:
             return false
         }
+    }
+
+    // MARK: - 検索地点の切り替え
+
+    /// 検索地点を変えて探し直す。別の場所の店のカードを残さない。
+    private func changeOrigin(to origin: SearchOrigin) {
+        selectedMapItem = nil
+        viewModel.origin = origin
+        Task { await viewModel.refresh() }
+    }
+
+    private var isMapCenterOrigin: Bool {
+        if case .mapCenter = viewModel.origin { return true }
+        return false
+    }
+
+    /// 読み込み中で、前の結果をまだ地図と一覧に出しているか（このとき検索バーの下に「探しています…」を出す）
+    private var isSearchingWithResults: Bool {
+        viewModel.phase == .loading && !showsStateOverlay
+    }
+
+    /// 「このあたりで探す」を出すか（判定は `MapRecenterLogic`）。状態オーバーレイ（読み込み中・対象外など）の間は出さない
+    private var showsSearchHereButton: Bool {
+        guard !showsStateOverlay, let moved = userMovedRegion else { return false }
+        return MapRecenterLogic.shouldOffer(
+            didUserMove: true,
+            mapCenter: moved.center,
+            visibleWidthMeters: moved.widthMeters,
+            searchCenter: viewModel.searchCenter,
+            hasSelectedCard: selectedMapItem != nil,
+            isSheetLarge: sheetDetent == .large
+        )
+    }
+
+    /// 「このあたりで探す」: 地図の中心を起点にして探し直す（地図は動かさない）。最近の検索には残さない。
+    private func searchHere() {
+        guard let moved = userMovedRegion else { return }
+        searchHereCount += 1
+        userMovedRegion = nil
+        changeOrigin(to: .mapCenter(latitude: moved.center.latitude, longitude: moved.center.longitude))
     }
 
     // MARK: - 上部（検索バー・チップ・バナー）
@@ -136,7 +209,10 @@ struct SearchTabView: View {
         VStack(spacing: 8) {
             HomeSearchBar(
                 dog: viewModel.dogProfile,
+                originLabel: viewModel.origin.aroundLabel,
                 onTapSearch: { showSearch = true },
+                // ✕: 現在地に戻る（検索地点を変えるときと同じ扱い）
+                onClearOrigin: { changeOrigin(to: .currentLocation) },
                 onTapMyDog: onOpenMyDog
             )
             .padding(.horizontal, 12)
@@ -201,7 +277,14 @@ struct SearchTabView: View {
         VStack(alignment: .trailing, spacing: 8) {
             if sheetDetent != .large || selectedMapItem != nil {
                 CurrentLocationButton {
-                    recenterRequestID += 1
+                    // 「現在地に戻る」: 起点が現在地でなければ現在地に戻して探し直す（地図も現在地へ動く）。
+                    // 起点がすでに現在地なら、地図だけを現在地へ戻す（現在地を探している間は何もしない。
+                    // 前の検索地点へ動いてしまうため。確定すれば地図は現在地へ動く）
+                    if viewModel.origin == .currentLocation {
+                        if viewModel.phase != .loading { recenterRequestID += 1 }
+                    } else {
+                        changeOrigin(to: .currentLocation)
+                    }
                 }
                 .padding(.trailing, 12)
             }
@@ -234,8 +317,9 @@ struct SearchTabView: View {
                         myDog: viewModel.myDogFilterDog,
                         includeUnverified: viewModel.includeUnverified,
                         sortOrder: viewModel.sortOrder,
-                        originName: viewModel.origin.displayName,
-                        isCurrentLocation: viewModel.origin == .currentLocation
+                        // 結果が確定した起点で出す（探し直している間は前の結果のままなので、食い違わせない）
+                        originName: viewModel.loadedOrigin.displayName,
+                        isCurrentLocation: viewModel.loadedOrigin == .currentLocation
                     ),
                     sortOrder: $viewModel.sortOrder,
                     items: viewModel.displayedResults,

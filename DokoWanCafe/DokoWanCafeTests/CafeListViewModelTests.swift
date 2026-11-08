@@ -1,4 +1,5 @@
 import Combine
+import CoreLocation
 import XCTest
 @testable import DokoWanCafe
 
@@ -99,6 +100,170 @@ final class CafeListViewModelTests: XCTestCase {
             "旧半径(既定3km/拡大10km)なら除外されていたはずの遠方カフェが、安全半径の拡大により含まれる"
         )
         XCTAssertTrue(names.contains("近くのカフェ"))
+    }
+
+    func test_地図の中心を起点にすると中心からの距離で並びsearchCenterが中心になる() async {
+        let near = makeCafe(name: "中心に近い", latitude: 35.6897, longitude: 139.7007)
+        let far = makeCafe(name: "中心から遠い", latitude: 35.70, longitude: 139.80)
+
+        let viewModel = makeViewModel(cafes: [far, near])
+        viewModel.origin = .mapCenter(latitude: 35.6896, longitude: 139.7006)
+        await viewModel.refresh()
+
+        XCTAssertEqual(viewModel.phase, .loaded)
+        XCTAssertEqual(viewModel.searchCenter?.latitude, 35.6896)
+        XCTAssertEqual(viewModel.searchCenter?.longitude, 139.7006)
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["中心に近い", "中心から遠い"])
+    }
+
+    /// 現在地の応答をテストから制御するモック（即答 or 開けるまで待つ。成功・失敗を選べる）
+    @MainActor
+    private final class MockLocationProvider: LocationProviding {
+        let result: Result<CLLocationCoordinate2D, LocationError>
+        private var gateClosed: Bool
+        private var waiters: [CheckedContinuation<Void, Never>] = []
+        private(set) var isWaiting = false
+
+        init(result: Result<CLLocationCoordinate2D, LocationError>, gated: Bool = false) {
+            self.result = result
+            self.gateClosed = gated
+        }
+
+        func openGate() {
+            gateClosed = false
+            isWaiting = false
+            waiters.forEach { $0.resume() }
+            waiters.removeAll()
+        }
+
+        func currentLocation() async throws -> CLLocationCoordinate2D {
+            if gateClosed {
+                isWaiting = true
+                await withCheckedContinuation { waiters.append($0) }
+            }
+            return try result.get()
+        }
+    }
+
+    private let tokyoStation = CLLocationCoordinate2D(latitude: 35.6812, longitude: 139.7671)
+    private let shibuya = CLLocationCoordinate2D(latitude: 35.6580, longitude: 139.7016)
+
+    private func makeViewModel(cafes: [Cafe], location: any LocationProviding) -> CafeListViewModel {
+        CafeListViewModel(
+            repository: DistanceFilteringMockRepository(cafes: cafes),
+            locationService: location,
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            savedStore: makeSavedStore()
+        )
+    }
+
+    func test_地図の中心から現在地に戻すとsearchCenterが現在地に替わる() async {
+        let cafe = makeCafe(name: "カフェ", latitude: 35.6897, longitude: 139.7007)
+        let viewModel = makeViewModel(cafes: [cafe], location: MockLocationProvider(result: .success(tokyoStation)))
+
+        viewModel.origin = .mapCenter(latitude: shibuya.latitude, longitude: shibuya.longitude)
+        await viewModel.refresh()
+        XCTAssertEqual(viewModel.searchCenter?.latitude, shibuya.latitude)
+        XCTAssertEqual(viewModel.loadedOrigin, .mapCenter(latitude: shibuya.latitude, longitude: shibuya.longitude))
+
+        viewModel.origin = .currentLocation
+        await viewModel.refresh()
+        XCTAssertEqual(viewModel.searchCenter?.latitude, tokyoStation.latitude)
+        XCTAssertEqual(viewModel.searchCenter?.longitude, tokyoStation.longitude)
+        XCTAssertEqual(viewModel.loadedOrigin, .currentLocation)
+        XCTAssertEqual(viewModel.phase, .loaded)
+    }
+
+    // MARK: - refresh の競合（位置情報を待つ間に起点が変わる）
+
+    func test_現在地を待つ間に地図の中心へ替えたら新しい起点の結果が残る() async {
+        let cafe = makeCafe(name: "カフェ", latitude: 35.6897, longitude: 139.7007)
+        let location = MockLocationProvider(result: .success(tokyoStation), gated: true)
+        let viewModel = makeViewModel(cafes: [cafe], location: location)
+
+        viewModel.origin = .currentLocation
+        let first = Task { await viewModel.refresh() }
+        await waitUntil { await location.isWaiting }
+
+        viewModel.origin = .mapCenter(latitude: shibuya.latitude, longitude: shibuya.longitude)
+        await viewModel.refresh()
+        await location.openGate()  // 遅れて現在地が返る
+        await first.value
+
+        XCTAssertEqual(viewModel.searchCenter?.latitude, shibuya.latitude)
+        XCTAssertEqual(viewModel.searchCenter?.longitude, shibuya.longitude)
+        XCTAssertEqual(viewModel.loadedOrigin, .mapCenter(latitude: shibuya.latitude, longitude: shibuya.longitude))
+        XCTAssertEqual(viewModel.phase, .loaded)
+        let expected = DistanceCalculator.distanceMeters(
+            fromLatitude: shibuya.latitude, fromLongitude: shibuya.longitude,
+            toLatitude: cafe.latitude, toLongitude: cafe.longitude
+        )
+        XCTAssertEqual(viewModel.allResults.first?.distanceMeters ?? -1, expected, accuracy: 0.001)
+    }
+
+    func test_現在地を待つ間に検索した場所へ替えたら新しい起点の結果が残る() async {
+        let cafe = makeCafe(name: "カフェ", latitude: 35.6897, longitude: 139.7007)
+        let location = MockLocationProvider(result: .success(tokyoStation), gated: true)
+        let viewModel = makeViewModel(cafes: [cafe], location: location)
+
+        viewModel.origin = .currentLocation
+        let first = Task { await viewModel.refresh() }
+        await waitUntil { await location.isWaiting }
+
+        let searched = SearchOrigin.searched(name: "渋谷駅", latitude: shibuya.latitude, longitude: shibuya.longitude)
+        viewModel.origin = searched
+        await viewModel.refresh()
+        await location.openGate()
+        await first.value
+
+        XCTAssertEqual(viewModel.searchCenter?.latitude, shibuya.latitude)
+        XCTAssertEqual(viewModel.loadedOrigin, searched)
+        XCTAssertEqual(viewModel.phase, .loaded)
+    }
+
+    func test_現在地を待つ間に起点を替え現在地が拒否で返っても新しい結果を上書きしない() async {
+        let cafe = makeCafe(name: "カフェ", latitude: 35.6897, longitude: 139.7007)
+        let location = MockLocationProvider(result: .failure(.denied), gated: true)
+        let viewModel = makeViewModel(cafes: [cafe], location: location)
+
+        viewModel.origin = .currentLocation
+        let first = Task { await viewModel.refresh() }
+        await waitUntil { await location.isWaiting }
+
+        viewModel.origin = .mapCenter(latitude: shibuya.latitude, longitude: shibuya.longitude)
+        await viewModel.refresh()
+        await location.openGate()  // 遅れて「拒否」が返る
+        await first.value
+
+        XCTAssertEqual(viewModel.phase, .loaded, "古い現在地の拒否で locationDenied にならない")
+        XCTAssertEqual(viewModel.searchCenter?.latitude, shibuya.latitude)
+        XCTAssertFalse(viewModel.allResults.isEmpty)
+    }
+
+    func test_現在地を待つ間に起点を替え現在地の取得失敗が返ってもエラーにならない() async {
+        let cafe = makeCafe(name: "カフェ", latitude: 35.6897, longitude: 139.7007)
+        let location = MockLocationProvider(result: .failure(.unavailable), gated: true)
+        let viewModel = makeViewModel(cafes: [cafe], location: location)
+
+        viewModel.origin = .currentLocation
+        let first = Task { await viewModel.refresh() }
+        await waitUntil { await location.isWaiting }
+
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+        await location.openGate()
+        await first.value
+
+        XCTAssertEqual(viewModel.phase, .loaded)
+        XCTAssertEqual(viewModel.searchCenter?.latitude, makeOrigin().latitude)
+    }
+
+    func test_拒否は起点が変わっていなければ従来どおりlocationDeniedになる() async {
+        let location = MockLocationProvider(result: .failure(.denied))
+        let viewModel = makeViewModel(cafes: [], location: location)
+        viewModel.origin = .currentLocation
+        await viewModel.refresh()
+        XCTAssertEqual(viewModel.phase, .locationDenied)
     }
 
     func test_displayedResultsは距離昇順() async {
@@ -870,6 +1035,29 @@ final class CafeListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.allResults.first?.distanceMeters ?? -1, expectedFromB, accuracy: 0.001,
                        "古い起点(A)の距離で上書きされない")
         XCTAssertEqual(viewModel.phase, .loaded)
+    }
+
+    func test_読み込み中はloadedOriginが前の起点のままで終わると新しい起点になる() async {
+        let cafe = makeCafe(name: "店", latitude: 35.6897, longitude: 139.7007)
+        let repository = FirstCallGatedRepository(cafes: [cafe])
+        let viewModel = CafeListViewModel(
+            repository: repository,
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            savedStore: makeSavedStore()
+        )
+        XCTAssertEqual(viewModel.loadedOrigin, .currentLocation)
+
+        viewModel.origin = .manual(makeOrigin())
+        let task = Task { await viewModel.refresh() }
+        await waitUntil { await repository.callCount == 1 }  // 取得が止まっている
+        XCTAssertEqual(viewModel.phase, .loading)
+        XCTAssertEqual(viewModel.origin, .manual(makeOrigin()))
+        XCTAssertEqual(viewModel.loadedOrigin, .currentLocation, "結果が確定するまで小見出しは前の起点のまま")
+
+        await repository.openGate()
+        await task.value
+        XCTAssertEqual(viewModel.loadedOrigin, .manual(makeOrigin()))
     }
 
     /// 取得は常に失敗し、裏の更新確認は「変更あり」を返すモック
