@@ -14024,7 +14024,6 @@
       "dog_amenities": {
         "indoor": false,
         "large_dogs": true,
-        "size_max_terrace": "large",
         "terrace": true
       },
       "dog_note": "テラス席限定(店内不可)。2020年10月にテラスへの直通階段を設置し大型犬も利用しやすくなった",
@@ -14072,7 +14071,7 @@
       "hours_text": "火〜土・祝前日11:30〜21:00(L.O.20:30、ディナー17:30〜21:00)・日祝11:00〜17:30(L.O.17:00、ランチL.O.14:30)",
       "id": "beef0000-0000-4000-8000-000000001127",
       "info_verified": "2026-08-08",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-08",
       "latitude": 35.62248,
       "links": [
@@ -14108,6 +14107,15 @@
           "reference": "https://odekake-wanko-bu.com/spot/embassy_cafe/",
           "type": "blog",
           "verified_at": "2026-08-08"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001127",
+          "claimed_status": "unverified",
+          "id": "b8d7bed6-8548-5525-8acf-326382ea3cd5",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1317/A131702/13215550/",
+          "type": "tabelog",
+          "verified_at": "2026-11-09"
         }
       ],
       "sub_area": "碑文谷"
@@ -23338,11 +23346,7 @@
       "description": "駒沢公園から徒歩圏内のカジュアルイタリアン。店内・テラスとも犬同伴が可能で大型犬もOK。",
       "dog_amenities": {
         "indoor": true,
-        "indoor_style": [
-          "carrier"
-        ],
         "large_dogs": true,
-        "size_max_indoor": "large",
         "terrace": true
       },
       "dog_note": "カートでの入店も可能だが混雑時は犬の頭数・カートの有無により入店を断られる場合があるため予約時の事前確認を推奨",
@@ -23424,7 +23428,7 @@
       "hours_text": "月〜日11:30〜15:00(L.O.14:15)・18:00〜22:00(L.O.21:00)",
       "id": "beef0000-0000-4000-8000-000000000644",
       "info_verified": "2026-08-05",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-08-07",
       "latitude": 35.628007,
       "links": [
@@ -23483,6 +23487,15 @@
           "reference": "https://www.go-with-pet.com/news_tfJyGemDj.html",
           "type": "blog",
           "verified_at": "2026-08-07"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000644",
+          "claimed_status": "unverified",
+          "id": "03fe1d48-02e8-50a8-b633-83209f02d65d",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/mio_komazawa/",
+          "type": "sns",
+          "verified_at": "2026-11-09"
         }
       ],
       "sub_area": "駒沢・桜新町"
@@ -25715,12 +25728,7 @@
       "contact": null,
       "description": "上野駅近くの隠れ家的カフェ。自家焙煎コーヒーとフレンチトーストが人気で、犬は抱っこ・床置き・バッグでの同伴が可能。",
       "dog_amenities": {
-        "indoor": true,
-        "indoor_style": [
-          "floor",
-          "carrier",
-          "hold"
-        ]
+        "indoor": true
       },
       "dog_policy_condition": "抱っこ・床置き・バッグ内に限り同伴可(ベビーカー不可)",
       "dog_policy_status": "conditional",
@@ -25774,7 +25782,7 @@
       "hours_text": "8:30〜17:00",
       "id": "beef0000-0000-4000-8000-000000000301",
       "info_verified": "2026-07-18",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-07-18",
       "latitude": 35.71144,
       "longitude": 139.77917,
@@ -25800,6 +25808,15 @@
           "reference": "https://wankonowa.com/column/2441/",
           "type": "blog",
           "verified_at": "2026-07-18"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000301",
+          "claimed_status": "unverified",
+          "id": "4b6aeecc-95e0-56d8-aeb3-f4321c8d93c1",
+          "provenance": "aggregated",
+          "reference": "https://tabelog.com/tokyo/A1311/A131101/13285008/",
+          "type": "tabelog",
+          "verified_at": "2026-11-09"
         }
       ],
       "sub_area": "上野・谷根千"
@@ -31512,7 +31529,7 @@
       "hours_text": "月〜金 11:30-23:00／土・祝前日 11:30-22:00／日・祝 11:30-19:00",
       "id": "beef0000-0000-4000-8000-000000001438",
       "info_verified": "2026-10-31",
-      "is_closed": false,
+      "is_closed": true,
       "last_verified": "2026-10-31",
       "latitude": 35.688317,
       "links": [
@@ -31542,6 +31559,24 @@
           "reference": "https://tabelog.com/tokyo/A1302/A130202/13224681/",
           "type": "tabelog",
           "verified_at": "2026-10-31"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001438",
+          "claimed_status": "unverified",
+          "id": "2137c495-8d41-5f46-8afd-f5cf118a2cc3",
+          "provenance": "aggregated",
+          "reference": "https://salone-vendredi.jp/",
+          "type": "official_hp",
+          "verified_at": "2026-11-09"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000001438",
+          "claimed_status": "unverified",
+          "id": "9789fcbd-d7e4-575d-a0d4-b9322a80e5b8",
+          "provenance": "aggregated",
+          "reference": "https://www.instagram.com/salonevendredi/",
+          "type": "sns",
+          "verified_at": "2026-11-09"
         }
       ],
       "sub_area": "銀座・日本橋"
@@ -79102,6 +79137,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-11-09T13:39:26Z",
+  "generated_at": "2026-11-09T13:40:27Z",
   "is_sample_data": false
 }
