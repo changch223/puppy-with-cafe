@@ -2606,3 +2606,169 @@
 - ✏️ 変更: Pcm's Cafe（name_reading）
 - ✏️ 変更: marble（name_reading）
 - ✏️ 変更: passage coffee（name_reading）
+
+## 2026-11-09 22:39 — 追加 0 / 変更 164 / 削除 0
+- ✏️ 変更: 347CAFE＆LOUNGE（name_reading）
+- ✏️ 変更: AFFIDAMENTO BAGEL（name_reading）
+- ✏️ 変更: AKIGAWA BASE（name_reading）
+- ✏️ 変更: ANEA CAFE Toyosu（name_reading）
+- ✏️ 変更: ARK HiLLS CAFE（name_reading）
+- ✏️ 変更: AUX BACCHANALES 銀座（name_reading）
+- ✏️ 変更: Aloha Table 大崎店（name_reading）
+- ✏️ 変更: Ariake Miraie（name_reading）
+- ✏️ 変更: BAGUS BAR Shibaura Island（name_reading）
+- ✏️ 変更: BASEL 豊田店（name_reading）
+- ✏️ 変更: BESIDE SEASIDE（name_reading）
+- ✏️ 変更: BISTRO FAVORI 代官山（name_reading）
+- ✏️ 変更: BLACK TERRACE（name_reading）
+- ✏️ 変更: Balcony by 6th（name_reading）
+- ✏️ 変更: Besties Tokyo（name_reading）
+- ✏️ 変更: Bowery Kitchen（name_reading）
+- ✏️ 変更: Brasserie Laiton（name_reading）
+- ✏️ 変更: Brasserie la Maison（name_reading）
+- ✏️ 変更: CHICHICAFE（name_reading）
+- ✏️ 変更: CHUM APARTMENT（name_reading）
+- ✏️ 変更: COFFEE STAND .OTTEN（name_reading）
+- ✏️ 変更: COM DAIKANYAMA（name_reading）
+- ✏️ 変更: COZY STYLE COFFEE（name_reading）
+- ✏️ 変更: CREPE by SIDER（name_reading）
+- ✏️ 変更: Cafe Lisette 二子玉川店（name_reading）
+- ✏️ 変更: Cafe Madu 青山店（name_reading）
+- ✏️ 変更: Cafe Shakey's（name_reading）
+- ✏️ 変更: Cafe and Dining Paco（name_reading）
+- ✏️ 変更: Cafe＆Gallery Roomer（name_reading）
+- ✏️ 変更: Café Kitsuné Aoyama（name_reading）
+- ✏️ 変更: Chou de ruban（name_reading）
+- ✏️ 変更: Copan（name_reading）
+- ✏️ 変更: Deco's Dog Cafe 田園茶房（name_reading）
+- ✏️ 変更: Dining kitchen VENT MARCHE 大森店（name_reading）
+- ✏️ 変更: Dog Café Bee（name_reading）
+- ✏️ 変更: Dog Salon & Cafe Karin堂（name_reading）
+- ✏️ 変更: EMPORIO cafe&dining（name_reading）
+- ✏️ 変更: ERIC ROSE（name_reading）
+- ✏️ 変更: EVERYONEs CAFE（name_reading）
+- ✏️ 変更: Egoland Cafe Akihabara（name_reading）
+- ✏️ 変更: E・A・T GRILL&BAR（name_reading）
+- ✏️ 変更: F BULL'S Cafe（name_reading）
+- ✏️ 変更: FUGLEN ASAKUSA（name_reading）
+- ✏️ 変更: FUNGO 三宿本店（name_reading）
+- ✏️ 変更: Family Restaurant POT 大泉町店（name_reading）
+- ✏️ 変更: GENTLE Dining（name_reading）
+- ✏️ 変更: GINZA Cafe Hanon（name_reading）
+- ✏️ 変更: GOOD CHEESE GOOD BAKE（name_reading）
+- ✏️ 変更: GOOD MORNING CAFE NOWADAYS（name_reading）
+- ✏️ 変更: GRAPHY NEZU CAFE&LOUNGE（name_reading）
+- ✏️ 変更: Green Beans Coffee（name_reading）
+- ✏️ 変更: Green Cafe 西郷山店（name_reading）
+- ✏️ 変更: Green Witch Tea House（name_reading）
+- ✏️ 変更: HAGI CAFE（name_reading）
+- ✏️ 変更: HOMELAND OME（name_reading）
+- ✏️ 変更: Hawaiian Cafe OluOlu 西新宿店（name_reading）
+- ✏️ 変更: IL LUPINO PRIME（name_reading）
+- ✏️ 変更: IPC Lounge（name_reading）
+- ✏️ 変更: Italian Kitchen VANSAN 大泉学園店（name_reading）
+- ✏️ 変更: JUNOS CAFE（name_reading）
+- ✏️ 変更: Jaho Coffee Roaster & Wine Bar 田町店（name_reading）
+- ✏️ 変更: Kento's Burger（name_reading）
+- ✏️ 変更: LARGO SENGAWA（name_reading）
+- ✏️ 変更: LE BISTRO（name_reading）
+- ✏️ 変更: LOOK UP COFFEE（name_reading）
+- ✏️ 変更: LUSH COFFEE ROASTER&LABORATORY（name_reading）
+- ✏️ 変更: Le quattro stagioni（name_reading）
+- ✏️ 変更: MAISON KAYSER 五反田店（name_reading）
+- ✏️ 変更: MEAT×WINE BISTRO DOMANNAKA（name_reading）
+- ✏️ 変更: MERRY and BRIGHT（name_reading）
+- ✏️ 変更: MID TREE 代官山（name_reading）
+- ✏️ 変更: Maison Landemaine 麻布台（name_reading）
+- ✏️ 変更: Mark Matsuoka Grill 中目黒（name_reading）
+- ✏️ 変更: Mi Tiempo（name_reading）
+- ✏️ 変更: Monsoon Cafe 代官山（name_reading）
+- ✏️ 変更: Mr.FARMER 表参道店（name_reading）
+- ✏️ 変更: Mt.TAKAO BASE CAMP CAFE&BAR（name_reading）
+- ✏️ 変更: NATURE&MEAT GROVE PARK VIEW（name_reading）
+- ✏️ 変更: NICE minamiaoyama（name_reading）
+- ✏️ 変更: Nim's Pizza（name_reading）
+- ✏️ 変更: O.GARDEN CAFE（name_reading）
+- ✏️ 変更: OVERWHELM HAMBURGER & BAR STAND（name_reading）
+- ✏️ 変更: Osteria IL VIAGGIO（name_reading）
+- ✏️ 変更: P.S. COFFEE（name_reading）
+- ✏️ 変更: PACE ITALIAN LOUNGE（name_reading）
+- ✏️ 変更: PARKSTAND Coffee & Bakery（name_reading）
+- ✏️ 変更: PASTA＆PIZZA WINE BAR YOLO（name_reading）
+- ✏️ 変更: PIZZA SALVATORE CUOMO 四谷（name_reading）
+- ✏️ 変更: PIZZERIA & BAR NOHGA（NOHGA HOTEL AKIHABARA TOKYO内）（name_reading）
+- ✏️ 変更: Paradise Poke蔵前（name_reading）
+- ✏️ 変更: Park Side Cafe BASEL（name_reading）
+- ✏️ 変更: Pizzer Citraba（name_reading）
+- ✏️ 変更: Pizzeria CERVO（name_reading）
+- ✏️ 変更: Porky's kitchen 新小岩（name_reading）
+- ✏️ 変更: RAINBOW CAFE＆WINE DINING 三軒茶屋（name_reading）
+- ✏️ 変更: RELAX Healthy Ice Cream（name_reading）
+- ✏️ 変更: RESTAURANT 1899 OCHANOMIZU（name_reading）
+- ✏️ 変更: RIGOLETTO spice market（name_reading）
+- ✏️ 変更: ROSSO CAFE（name_reading）
+- ✏️ 変更: Ralph's Coffee Omotesando（name_reading）
+- ✏️ 変更: Rojiura Curry SAMURAI. 立川店（name_reading）
+- ✏️ 変更: Ron Herman Cafe 二子玉川店（name_reading）
+- ✏️ 変更: SAUCE UP BURGER（name_reading）
+- ✏️ 変更: SCALES 中目黒（name_reading）
+- ✏️ 変更: SHARK COFFEE（name_reading）
+- ✏️ 変更: SMPL CAFE（name_reading）
+- ✏️ 変更: Seaside Café SOLARIS（name_reading）
+- ✏️ 変更: SmB CAFE（name_reading）
+- ✏️ 変更: Sèvres Café（name_reading）
+- ✏️ 変更: S・E・C GREEN SPRINGS（name_reading）
+- ✏️ 変更: T.Y.HARBOR（name_reading）
+- ✏️ 変更: TAIZUSHI(寿司・創作料理)（name_reading）
+- ✏️ 変更: THE BARBA TOKYO MEAT MEET（name_reading）
+- ✏️ 変更: THE LINKING（name_reading）
+- ✏️ 変更: THE OPEN BAKERY（name_reading）
+- ✏️ 変更: THE_B 中目黒店（name_reading）
+- ✏️ 変更: TIGRATO Gelateria&Cafe Bar（name_reading）
+- ✏️ 変更: TIME, TIME, TIME.（name_reading）
+- ✏️ 変更: TOMBOY 十条本店（name_reading）
+- ✏️ 変更: TRATTORIA Mocco（name_reading）
+- ✏️ 変更: TREE by NAKED meiji park（name_reading）
+- ✏️ 変更: Tavernetta Salvatore 仙川（name_reading）
+- ✏️ 変更: The Jones Café | Bar（name_reading）
+- ✏️ 変更: Tiki's Tokyo（name_reading）
+- ✏️ 変更: Trattoria Santa Teresa（name_reading）
+- ✏️ 変更: Tweedles（name_reading）
+- ✏️ 変更: VERVE COFFEE ROASTERS 六本木店（name_reading）
+- ✏️ 変更: Vegeater（name_reading）
+- ✏️ 変更: WELLNESSCAFE SAPRO（name_reading）
+- ✏️ 変更: WHAT CAFE（name_reading）
+- ✏️ 変更: WINESTAND TEO（name_reading）
+- ✏️ 変更: WOODBERRY COFFEE 荻窪店（name_reading）
+- ✏️ 変更: Wande Shiba（name_reading）
+- ✏️ 変更: Whip&Jiminy's Cafe（name_reading）
+- ✏️ 変更: Whitely Cafe（name_reading）
+- ✏️ 変更: YELLOW KOMAZAWA KOEN（name_reading）
+- ✏️ 変更: YOUR BIG FAMILY（name_reading）
+- ✏️ 変更: a-bridge 三軒茶屋店（name_reading）
+- ✏️ 変更: anea cafe 中野新橋店（name_reading）
+- ✏️ 変更: as is to be{ART and CAFE}（name_reading）
+- ✏️ 変更: atelier BASEL（name_reading）
+- ✏️ 変更: bills 二子玉川（name_reading）
+- ✏️ 変更: biotable.（name_reading）
+- ✏️ 変更: cafe Crumpets（name_reading）
+- ✏️ 変更: cafe STUDIO（name_reading）
+- ✏️ 変更: cafe milkygreek 新宿御苑店（name_reading）
+- ✏️ 変更: cookee NARIMASU（name_reading）
+- ✏️ 変更: crisscross（name_reading）
+- ✏️ 変更: essence dining（name_reading）
+- ✏️ 変更: good fellas（name_reading）
+- ✏️ 変更: goodcoffee 東陽町（name_reading）
+- ✏️ 変更: i2 cafe（name_reading）
+- ✏️ 変更: iki Roastery & Eatery（name_reading）
+- ✏️ 変更: miki's cafe（name_reading）
+- ✏️ 変更: mum coffee（name_reading）
+- ✏️ 変更: nico 赤羽店（name_reading）
+- ✏️ 変更: rice cafe（name_reading）
+- ✏️ 変更: sibafu（name_reading）
+- ✏️ 変更: the GARDEN（name_reading）
+- ✏️ 変更: tonkatsu.jp表参道（name_reading）
+- ✏️ 変更: vegewest Cafe & WineBar(代官山vegewest)（name_reading）
+- ✏️ 変更: 焼肉本家Ponga（name_reading）
+- ✏️ 変更: 駒沢食堂george（name_reading）
+- ✏️ 変更: 麦酒堂 KASUGAI（name_reading）
