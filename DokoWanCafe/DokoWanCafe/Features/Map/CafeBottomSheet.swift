@@ -125,6 +125,9 @@ struct CafeBottomSheet: View {
     /// 「未確認の店も見る（N件）」の N（今の条件のまま未確認の店を足した件数）
     let unverifiedCandidateCount: Int
     @Binding var includeUnverified: Bool
+    /// 0件のとき、外すと件数がいちばん増える条件（なければ nil）。「「大型犬OK」を外すと12件」のボタンに使う
+    let relaxation: FilterDraft.Relaxation?
+    let onRelax: (FilterDraft.Condition) -> Void
     let onResetFilters: () -> Void
 
     /// ドラッグ中の追従用オフセット（離すと `withAnimation` でスプリングスナップしつつ0に戻す）
@@ -319,6 +322,18 @@ struct CafeBottomSheet: View {
             Text("条件に合うお店がありません")
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
+            if let relaxation {
+                Button {
+                    onRelax(relaxation.condition)
+                } label: {
+                    // 大きな文字でも件数が切れないよう、行数は制限しない
+                    Text(relaxation.title(isTargetTime: isTargetTime))
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .buttonStyle(BrandSecondaryButtonStyle())
+                .frame(maxWidth: 320)
+            }
             Button {
                 onResetFilters()
             } label: {

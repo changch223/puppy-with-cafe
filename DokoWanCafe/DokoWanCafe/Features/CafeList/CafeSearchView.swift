@@ -342,6 +342,13 @@ struct CafeSearchView: View {
             }
         }
 
+        // 見つからないとき: どれにも当たらなければ、先頭に案内を出す（押せない行。下の「ほかの場所」へ進める）
+        if SearchSuggestion.hasNoMatch(query: query, hasCombo: combo != nil, conditions: conditions, areas: areas, shops: shops) {
+            Section {
+                NoShopNoticeRow(query: trimmedQuery)
+            }
+        }
+
         // (d) ほかの場所
         Section {
             SuggestionRow(
@@ -478,6 +485,32 @@ private struct CafeSearchRow: View {
         var parts = [cafe.name] + spokenParts
         parts.append(contentsOf: CafePresentation.tags(for: cafe, dog: dog).map(\.label))
         return parts.joined(separator: "、")
+    }
+}
+
+/// 入力がお店・エリア・条件のどれにも当たらないときの案内（押せない行）。大きな文字では折り返して全文を出す。
+private struct NoShopNoticeRow: View {
+    let query: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "info.circle")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .frame(width: 28, height: 28)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("「\(query)」という名前の掲載店はありません")
+                    .font(.subheadline.bold())
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("駅名やエリア名でも探せます")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+        }
+        .frame(minHeight: 44, alignment: .leading)
+        .accessibilityElement(children: .combine)
     }
 }
 

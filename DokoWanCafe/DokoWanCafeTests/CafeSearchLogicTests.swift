@@ -50,13 +50,80 @@ final class CafeSearchLogicTests: XCTestCase {
         XCTAssertEqual(CafeNameSearch.normalize(" ブルー　ボトル "), "ブルーボトル")
     }
 
+    // MARK: - 表記の違い（&・カフェ・珈琲）
+
+    func test_アンパサンドはandとして同一視する() {
+        XCTAssertEqual(CafeNameSearch.normalize("&"), "and")
+        XCTAssertEqual(CafeNameSearch.normalize("＆"), "and")
+        XCTAssertEqual(CafeNameSearch.normalize("Cafe & Bar"), CafeNameSearch.normalize("cafe and bar"))
+        XCTAssertEqual(CafeNameSearch.normalize("カフェ＆バー"), CafeNameSearch.normalize("cafe and バー"))
+    }
+
+    func test_カフェはcafeとして同一視しひらがな半角も同じ() {
+        XCTAssertEqual(CafeNameSearch.normalize("カフェ"), "cafe")
+        XCTAssertEqual(CafeNameSearch.normalize("かふぇ"), "cafe")
+        XCTAssertEqual(CafeNameSearch.normalize("ｶﾌｪ"), "cafe")
+        XCTAssertEqual(CafeNameSearch.normalize("ドッグカフェ"), "ドッグcafe")
+        XCTAssertEqual(CafeNameSearch.normalize("Café"), "cafe")
+    }
+
+    func test_珈琲とコーヒーとcoffeeは同一視する() {
+        XCTAssertEqual(CafeNameSearch.normalize("珈琲"), "coffee")
+        XCTAssertEqual(CafeNameSearch.normalize("コーヒー"), "coffee")
+        XCTAssertEqual(CafeNameSearch.normalize("こーひー"), "coffee")
+        XCTAssertEqual(CafeNameSearch.normalize("Coffee"), "coffee")
+        XCTAssertEqual(CafeNameSearch.normalize("ブルーボトルコーヒー"), CafeNameSearch.normalize("ブルーボトル珈琲"))
+    }
+
+    func test_表記の違いを入力にも店名にもかけて一致する() {
+        let cafes = [
+            makeCafe(name: "カフェ&ダイニング"), makeCafe(name: "珈琲 ハチ"),
+            makeCafe(name: "コーヒースタンド"), makeCafe(name: "Coffee Roast"), makeCafe(name: "公園前"),
+        ]
+        XCTAssertEqual(CafeNameSearch.results(query: "cafe and", in: cafes).map(\.name), ["カフェ&ダイニング"])
+        XCTAssertEqual(CafeNameSearch.results(query: "カフェ＆", in: cafes).map(\.name), ["カフェ&ダイニング"])
+        XCTAssertEqual(
+            CafeNameSearch.results(query: "珈琲", in: cafes).map(\.name),
+            ["珈琲 ハチ", "コーヒースタンド", "Coffee Roast"]
+        )
+        XCTAssertEqual(
+            CafeNameSearch.results(query: "coffee", in: cafes).map(\.name),
+            ["珈琲 ハチ", "コーヒースタンド", "Coffee Roast"]
+        )
+    }
+
+    func test_打ちかけの入力は置き換え前の表記でも当たる() {
+        // 「カフ」「コーヒ」は置き換え後の「cafe」「coffee」には前方一致しないが、置き換え前の表記で当たる
+        let cafes = [makeCafe(name: "カフェ ハチ"), makeCafe(name: "コーヒー屋"), makeCafe(name: "公園前")]
+        XCTAssertEqual(CafeNameSearch.results(query: "カフ", in: cafes).map(\.name), ["カフェ ハチ"])
+        XCTAssertEqual(CafeNameSearch.results(query: "かふ", in: cafes).map(\.name), ["カフェ ハチ"])
+        XCTAssertEqual(CafeNameSearch.results(query: "コーヒ", in: cafes).map(\.name), ["コーヒー屋"])
+    }
+
+    func test_置き換えはエリア名の中点と条件の言葉に影響しない() {
+        // エリア名の「・」は残る（部分に分ける処理は元の名前で行う）
+        XCTAssertEqual(CafeNameSearch.normalize("表参道・青山"), "表参道・青山")
+        XCTAssertEqual(SearchArea.defaultKeys(for: "表参道・青山"), ["表参道・青山", "表参道", "青山"])
+        // 条件の言葉は置き換えの対象を含まないので、正規化の結果が変わらない
+        for condition in SearchCondition.allCases {
+            for word in condition.words {
+                XCTAssertEqual(CafeNameSearch.normalize(word), CafeNameSearch.normalizeBase(word), word)
+            }
+        }
+        // 「カフェ」と打っても条件は出ない
+        XCTAssertTrue(SearchSuggestion.conditions(for: "カフェ", hasMyDog: true).isEmpty)
+        XCTAssertEqual(SearchSuggestion.conditions(for: "テラス", hasMyDog: false), [.terrace])
+        XCTAssertEqual(SearchSuggestion.conditions(for: "大型犬", hasMyDog: false), [.largeDog])
+    }
+
     // MARK: - 一致
 
     func test_店名の部分一致で見つかる() {
         let cafes = [makeCafe(name: "ブルーボトルコーヒー 渋谷"), makeCafe(name: "ドッグカフェ ハチ"), makeCafe(name: "Cafe Blue")]
         XCTAssertEqual(CafeNameSearch.results(query: "ぶるー", in: cafes).map(\.name), ["ブルーボトルコーヒー 渋谷"])
         XCTAssertEqual(CafeNameSearch.results(query: "ＢＬＵＥ", in: cafes).map(\.name), ["Cafe Blue"])
-        XCTAssertEqual(CafeNameSearch.results(query: "ＣＡＦＥ", in: cafes).map(\.name), ["Cafe Blue"])
+        // 「カフェ」と「cafe」を同じに扱うようになったので、「ドッグカフェ ハチ」にも当たる（前方一致の Cafe Blue が先）
+        XCTAssertEqual(CafeNameSearch.results(query: "ＣＡＦＥ", in: cafes).map(\.name), ["Cafe Blue", "ドッグカフェ ハチ"])
     }
 
     func test_前方一致を先に並べる() {

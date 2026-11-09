@@ -129,7 +129,9 @@ struct SearchingIndicator: View {
     }
 }
 
-/// 条件チップ（横スクロール）: いつ行く？・うちの子OK・営業中・店内OK・テラス・大型犬OK・犬メニュー。オンはブランド色で塗る。
+/// 条件チップ（横スクロール）: 絞り込み・いつ行く？・うちの子OK・営業中・店内OK。オンはブランド色で塗る。
+/// 「絞り込み」はシートを開き、オンの条件の数をバッジで出す（1つ以上オンなら塗る）。
+/// テラス・大型犬OK・犬メニューはシートから選び、オンのときだけ、画面の外でオンのままにならないようチップとして出す（押すとオフ）。
 /// 1つ以上オンなら末尾に「クリア」。
 /// 「いつ行く？」は対象時刻を決めると「土 12:00」の表示に変わり、「営業中」は「その時間に営業」に変わる。
 struct FilterChipsView: View {
@@ -142,6 +144,9 @@ struct FilterChipsView: View {
     /// うちの子が設定済みか。未設定でチップを押したときは、オンにせず設定（初回の2問）を開く
     let hasMyDog: Bool
     let hasActiveChips: Bool
+    /// 「絞り込み」のバッジに出す、オンの条件の数（「いつ行く？」は数えない）
+    let activeFilterCount: Int
+    let onTapFilter: () -> Void
     let onTapPlan: () -> Void
     let onNeedMyDog: () -> Void
     let onClear: () -> Void
@@ -149,6 +154,15 @@ struct FilterChipsView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
+                FilterChip(
+                    title: String(localized: "絞り込み"),
+                    systemImage: "line.3.horizontal.decrease",
+                    isOn: .constant(activeFilterCount > 0),
+                    action: onTapFilter,
+                    badgeCount: activeFilterCount,
+                    accessibilityTitle: FilterDraft.chipAccessibilityLabel(activeCount: activeFilterCount),
+                    accessibilityHint: String(localized: "条件を選ぶシートを開きます")
+                )
                 FilterChip(
                     title: targetLabel ?? String(localized: "いつ行く？"),
                     systemImage: "clock",
@@ -173,9 +187,16 @@ struct FilterChipsView: View {
                     isOn: $openNowOnly
                 )
                 FilterChip(title: String(localized: "店内OK"), isOn: $amenityFilter.indoorOnly)
-                FilterChip(title: String(localized: "テラス"), isOn: $amenityFilter.terraceOnly)
-                FilterChip(title: String(localized: "大型犬OK"), isOn: $amenityFilter.largeDogOnly)
-                FilterChip(title: String(localized: "犬メニュー"), isOn: $amenityFilter.dogMenuOnly)
+                // シートで選んだ条件。オフのときは出さない（押すとオフになる）
+                if amenityFilter.terraceOnly {
+                    FilterChip(title: String(localized: "テラス"), isOn: $amenityFilter.terraceOnly)
+                }
+                if amenityFilter.largeDogOnly {
+                    FilterChip(title: String(localized: "大型犬OK"), isOn: $amenityFilter.largeDogOnly)
+                }
+                if amenityFilter.dogMenuOnly {
+                    FilterChip(title: String(localized: "犬メニュー"), isOn: $amenityFilter.dogMenuOnly)
+                }
                 if hasActiveChips {
                     Button(action: onClear) {
                         Text("クリア")
@@ -196,8 +217,10 @@ private struct FilterChip: View {
     let title: String
     var systemImage: String?
     @Binding var isOn: Bool
-    /// 指定すると、タップで ON/OFF を切り替えずにこの処理を呼ぶ（「いつ行く？」はシートを開く）
+    /// 指定すると、タップで ON/OFF を切り替えずにこの処理を呼ぶ（「いつ行く？」「絞り込み」はシートを開く）
     var action: (() -> Void)?
+    /// 1以上のとき、タイトルの右に数のバッジを出す（「絞り込み」のオンの条件の数）
+    var badgeCount = 0
     var accessibilityTitle: String?
     var accessibilityHint: String?
 
@@ -213,6 +236,14 @@ private struct FilterChip: View {
                 Text(title)
                     .font(.subheadline.bold())
                     .lineLimit(1)
+                if badgeCount > 0 {
+                    Text(verbatim: "\(badgeCount)")
+                        .font(.caption.bold())
+                        .foregroundStyle(Color.brand)
+                        .frame(minWidth: 20, minHeight: 20)
+                        .background(Circle().fill(Color.onBrand))
+                        .accessibilityHidden(true)
+                }
             }
             .foregroundStyle(isOn ? Color.onBrand : Color.primary)
             .padding(.horizontal, 14)

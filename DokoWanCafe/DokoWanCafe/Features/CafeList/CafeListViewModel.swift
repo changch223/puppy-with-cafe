@@ -225,6 +225,55 @@ final class CafeListViewModel: ObservableObject {
         openNowOnly || targetTime != nil || !amenityFilter.isEmpty || myDogOnly
     }
 
+    // MARK: - 絞り込みシート・0件の道筋（さがす体験 第3弾）
+
+    /// 今の条件を「絞り込み」シートの下書きの形にしたもの（「うちの子OK」は設定済みのときだけオン）
+    var filterDraft: FilterDraft {
+        FilterDraft(
+            amenities: amenityFilter,
+            openNowOnly: openNowOnly,
+            myDogOnly: myDogOnly && dogProfile != nil,
+            includeUnverified: includeUnverified
+        )
+    }
+
+    /// 下書きの条件で今の `allResults` を数えた件数。`recomputeDisplayed` と同じ絞り込み
+    /// （対象時刻・うちの子・未確認の表示を含む）で、反映する前に「◯件を表示」へ出す。
+    func displayCount(for draft: FilterDraft) -> Int {
+        CafeFilter.apply(
+            amenities: draft.amenities,
+            includeUnverified: draft.includeUnverified,
+            openNowAt: draft.openNowOnly ? (targetTime ?? now()) : nil,
+            dog: draft.myDogOnly ? dogProfile : nil,
+            to: allResults
+        ).count
+    }
+
+    /// 条件をすべて外し、未確認も含めたときに1件でもあるか。false なら0件の理由は条件ではない
+    /// （対象エリア外・読み込み前など）ので、絞り込みのボタンは「この条件では0件」と言わずに押せるようにする。
+    var hasAnyResultIgnoringConditions: Bool {
+        displayCount(for: FilterDraft(includeUnverified: true)) > 0
+    }
+
+    /// 下書きを条件に反映する（「◯件を表示」）。変わった項目だけ書き換える
+    /// （営業中を触っていないのに、「いつ行く？」のリセットで戻す記録を消さないため）。
+    func apply(_ draft: FilterDraft) {
+        if amenityFilter != draft.amenities { amenityFilter = draft.amenities }
+        if includeUnverified != draft.includeUnverified { includeUnverified = draft.includeUnverified }
+        if myDogOnly != draft.myDogOnly { myDogOnly = draft.myDogOnly }
+        if openNowOnly != draft.openNowOnly { openNowOnly = draft.openNowOnly }
+    }
+
+    /// 今の条件のうち、外すと件数がいちばん増えるもの（0件のときの案内に使う）。増えるものがなければ nil
+    func bestRelaxation() -> FilterDraft.Relaxation? {
+        filterDraft.bestRelaxation(count: displayCount(for:))
+    }
+
+    /// 条件を1つ外す（0件のときの「「大型犬OK」を外すと12件」）
+    func relax(_ condition: FilterDraft.Condition) {
+        apply(filterDraft.removing(condition))
+    }
+
     /// 「行きたい」のお店（追加が新しい順）。
     var wantToGoCafes: [CafeWithDistance] {
         SavedPlaces.resolve(savedStore.places.wantToGo, in: loadedCafesWithDistance())

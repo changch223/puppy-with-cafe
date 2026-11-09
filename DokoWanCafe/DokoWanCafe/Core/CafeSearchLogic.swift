@@ -6,9 +6,17 @@ enum CafeNameSearch {
     static let maxResults = 20
 
     /// 検索用の正規化。全角半角・大文字小文字・ひらがなカタカナ・ラテン文字のアクセント記号を同一視し、空白は取り除く。
-    /// 例: 「ｃａｆｅ」「Cafe」「Café」→「cafe」、「bébé」→「bebe」、「かふぇ」→「カフェ」。
+    /// 例: 「ｃａｆｅ」「Cafe」「Café」→「cafe」、「bébé」→「bebe」、「かふぇ」→「cafe」。
     /// 濁点・半濁点（が/か、ぱ/は など）は別の文字なので落とさない。
+    /// さらに表記の違いをそろえる（入力側にも店名側にも同じようにかかる）: 「&」「＆」→「and」、「カフェ」→「cafe」、
+    /// 「珈琲」「コーヒー」→「coffee」。「cafe and」と「カフェ&」、「珈琲」と「コーヒー」と「coffee」が同じに扱われる。
     static func normalize(_ text: String) -> String {
+        replacingVariants(in: normalizeBase(text))
+    }
+
+    /// 表記の置き換え（「&」→「and」など）をかける前の正規化。打ちかけの入力（「カフ」「コーヒ」）が、
+    /// 置き換え後の「cafe」「coffee」に前方一致しなくなるのを補うため、店名の一致ではこちらでも照合する。
+    static func normalizeBase(_ text: String) -> String {
         let folded = text.folding(options: [.caseInsensitive, .widthInsensitive], locale: nil)
         // アクセント記号の除去はラテン文字だけに限る（かなの濁点まで落ちてしまうため）
         let unaccented = folded.map { character -> String in
@@ -21,6 +29,15 @@ enum CafeNameSearch {
         return katakana.filter { !$0.isWhitespace }
     }
 
+    /// 表記の置き換え。ひらがなはカタカナに直したあとなので、「カフェ」だけを見ればよい（全角の「＆」は幅をそろえた時点で「&」）
+    private static let variantReplacements: [(from: String, to: String)] = [
+        ("&", "and"), ("＆", "and"), ("カフェ", "cafe"), ("珈琲", "coffee"), ("コーヒー", "coffee"),
+    ]
+
+    private static func replacingVariants(in text: String) -> String {
+        variantReplacements.reduce(text) { $0.replacingOccurrences(of: $1.from, with: $1.to) }
+    }
+
     /// 店名の部分一致。閉店の店は除く。前方一致を先に、続いて途中一致（それぞれ元の並びを保つ）。最大 `limit` 件。
     static func results(query: String, in cafes: [Cafe], limit: Int = maxResults) -> [Cafe] {
         let grouped = groupedResults(query: query, in: cafes)
@@ -31,13 +48,16 @@ enum CafeNameSearch {
     static func groupedResults(query: String, in cafes: [Cafe]) -> (prefix: [Cafe], other: [Cafe]) {
         let needle = normalize(query)
         guard !needle.isEmpty else { return ([], []) }
+        let baseNeedle = normalizeBase(query)
         var prefixMatches: [Cafe] = []
         var otherMatches: [Cafe] = []
         for cafe in cafes where !cafe.isClosed {
             let name = normalize(cafe.name)
-            if name.hasPrefix(needle) {
+            // 打ちかけの入力（「カフ」）は、置き換え前の表記でも照合する（置き換えで当たらなくならないように）
+            let baseName = normalizeBase(cafe.name)
+            if name.hasPrefix(needle) || baseName.hasPrefix(baseNeedle) {
                 prefixMatches.append(cafe)
-            } else if name.contains(needle) {
+            } else if name.contains(needle) || baseName.contains(baseNeedle) {
                 otherMatches.append(cafe)
             }
         }

@@ -34,12 +34,21 @@ struct SearchTabView: View {
     @State private var showSearch = false
     /// 「いつ行く？」シート
     @State private var showPlanSheet = false
+    /// 「絞り込み」シート
+    @State private var showFilterSheet = false
+    /// 「絞り込み」シートを閉じたあとに開くもの（シートは重ねて出せないので、閉じ終わってから開く）
+    @State private var afterFilterSheet: AfterFilterSheet?
     @State private var topOverlayHeight: CGFloat = 0
     /// ユーザーが地図を動かして止まったときの地図の中心と見えている幅（メートル）。「このあたりで探す」の判定に使う。
     /// プログラムで地図が動いたとき・ボタンを押したときは nil に戻る。端末の中だけで使い、保存も送信もしない。
     @State private var userMovedRegion: MovedRegion?
     /// 「このあたりで探す」を押した回数（触覚フィードバックのきっかけ）
     @State private var searchHereCount = 0
+
+    private enum AfterFilterSheet {
+        case plan
+        case myDog
+    }
 
     private struct MovedRegion {
         let center: CLLocationCoordinate2D
@@ -102,7 +111,7 @@ struct SearchTabView: View {
         }
         .toolbar(.hidden, for: .navigationBar)
         .sensoryFeedback(.impact(weight: .light), trigger: searchHereCount)
-        .onChange(of: showSearch || showPlanSheet) { _, isOpen in isModalOpen = isOpen }
+        .onChange(of: showSearch || showPlanSheet || showFilterSheet || afterFilterSheet != nil) { _, isOpen in isModalOpen = isOpen }
         .fullScreenCover(isPresented: $showSearch) {
             CafeSearchView(
                 allCafes: viewModel.allLoadedCafes,
@@ -129,6 +138,13 @@ struct SearchTabView: View {
         }
         .sheet(isPresented: $showPlanSheet) {
             PlanTimeSheet(viewModel: viewModel)
+        }
+        .sheet(isPresented: $showFilterSheet, onDismiss: openSheetAfterFilter) {
+            FilterSheet(
+                viewModel: viewModel,
+                onOpenPlan: { afterFilterSheet = .plan },
+                onNeedMyDog: { afterFilterSheet = .myDog }
+            )
         }
         .confirmationDialog(
             String(localized: "経路を開くアプリを選択"),
@@ -172,6 +188,16 @@ struct SearchTabView: View {
             return true
         case .loaded, .offline:
             return false
+        }
+    }
+
+    /// 「絞り込み」シートが閉じ終わったあとに、「いつ行く？」またはうちの子の設定を開く
+    private func openSheetAfterFilter() {
+        guard let next = afterFilterSheet else { return }
+        afterFilterSheet = nil
+        switch next {
+        case .plan: showPlanSheet = true
+        case .myDog: onNeedMyDog()
         }
     }
 
@@ -261,6 +287,8 @@ struct SearchTabView: View {
                 myDogOnly: $viewModel.myDogOnly,
                 hasMyDog: viewModel.dogProfile != nil,
                 hasActiveChips: viewModel.hasActiveChips,
+                activeFilterCount: viewModel.filterDraft.activeCount,
+                onTapFilter: { showFilterSheet = true },
                 onTapPlan: { showPlanSheet = true },
                 onNeedMyDog: onNeedMyDog,
                 onClear: { viewModel.resetFilters() }
@@ -367,6 +395,8 @@ struct SearchTabView: View {
                     isEmptyDueToFilter: viewModel.isEmptyDueToFilter,
                     unverifiedCandidateCount: viewModel.unverifiedCandidateCount,
                     includeUnverified: $viewModel.includeUnverified,
+                    relaxation: viewModel.isEmptyDueToFilter ? viewModel.bestRelaxation() : nil,
+                    onRelax: { viewModel.relax($0) },
                     onResetFilters: { viewModel.resetFilters() }
                 )
                 .transition(.move(edge: .bottom))
