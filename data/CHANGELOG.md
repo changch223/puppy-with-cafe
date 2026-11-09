@@ -2772,3 +2772,9 @@
 - ✏️ 変更: 焼肉本家Ponga（name_reading）
 - ✏️ 変更: 駒沢食堂george（name_reading）
 - ✏️ 変更: 麦酒堂 KASUGAI（name_reading）
+
+## 2026-11-09 22:40 — 追加 0 / 変更 4 / 削除 0
+- ✏️ 変更: Embassy Cafe & Dining（is_closed, dog_amenities, sources）
+- ✏️ 変更: MIO（is_closed, dog_amenities, sources）
+- ✏️ 変更: Nagi（is_closed, dog_amenities, sources）
+- ✏️ 変更: SALONE VENDREDI（is_closed, sources）
