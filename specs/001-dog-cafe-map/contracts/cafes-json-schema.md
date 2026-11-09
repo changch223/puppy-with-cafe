@@ -83,5 +83,6 @@ cafe 要素に以下の**任意**フィールドが追加される（キー欠�
 | dog_note | string? | 犬向け条件の自由記述 |
 | info_verified | date? | 基本情報（営業時間等）の確認日 |
 | operator_note | object? | `{"text","source","verified_at"}`。運営が公式SNS等で確認した転記メモ。**verified_at 必須**（FR-103。無ければ配信拒否） |
+| name_reading | string? | 店名の読み（カタカナ・長音・中黒・半角空白のみ）。英字だけの店名をかな・カタカナで検索するための任意項目で、**出典に明記された読みだけ**（`data/master/name_readings.csv`）。キー欠落＝読みなし。アプリは検索の照合にだけ使い表示しない（後方互換・format_version 1 のまま） |
 
 追加の検証（エクスポートが拒否）: `size_max_*` が small/medium/large 以外／`indoor_style` が floor/carrier/hold 以外・重複／`indoor_style`・`size_max_indoor` があるのに `indoor` が true でない店／`size_max_terrace` があるのに `terrace` が true でない店／閉店店に3キー相当の列がある行／時刻形式不正（0-23時・0-59分の範囲外、close は 24:00 のみ例外）／URL形式不正／三値以外の値／確認日なしの転記メモ。開店≧閉店（例 `18:00-2:00`）は**日跨ぎ営業として許可**する（2026-08-08改訂。従来はエラーとし hours_text で表現させていた, S4）。

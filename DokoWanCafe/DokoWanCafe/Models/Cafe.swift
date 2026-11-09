@@ -36,6 +36,9 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
     // 写真・雰囲気機能: IG投稿埋め込み用の代表投稿URL（任意・後方互換）
     var instagramPostURL: String?
 
+    /// 店名の読み（カタカナ。英字だけの店名をかな・カタカナで探せるようにする検索専用の項目。表示はしない・任意・後方互換）
+    var nameReading: String?
+
     enum CodingKeys: String, CodingKey {
         case id
         case placeID = "place_id"
@@ -65,6 +68,7 @@ struct Cafe: Identifiable, Codable, Equatable, Hashable, Sendable {
         case infoVerified = "info_verified"
         case operatorNote = "operator_note"
         case instagramPostURL = "instagram_post_url"
+        case nameReading = "name_reading"
     }
 
     func hash(into hasher: inout Hasher) {

@@ -3,8 +3,8 @@ import XCTest
 
 /// 検索画面の純ロジック（店名検索の正規化と一致・よく探されるエリアの並べ替え・最近の検索と見たお店）のユニットテスト
 final class CafeSearchLogicTests: XCTestCase {
-    private func makeCafe(name: String, latitude: Double = 35.68, longitude: Double = 139.76, isClosed: Bool = false) -> Cafe {
-        Cafe(
+    private func makeCafe(name: String, latitude: Double = 35.68, longitude: Double = 139.76, isClosed: Bool = false, reading: String? = nil) -> Cafe {
+        var cafe = Cafe(
             id: UUID(), placeID: nil, name: name,
             latitude: latitude, longitude: longitude,
             address: nil, contact: nil,
@@ -12,6 +12,8 @@ final class CafeSearchLogicTests: XCTestCase {
             lastVerified: nil, representativeSourceID: nil,
             hasConflict: false, isClosed: isClosed, area: "tokyo"
         )
+        cafe.nameReading = reading
+        return cafe
     }
 
     // MARK: - 正規化
@@ -141,6 +143,67 @@ final class CafeSearchLogicTests: XCTestCase {
         let cafes = (0..<50).map { makeCafe(name: "カフェ\($0)") }
         XCTAssertEqual(CafeNameSearch.results(query: "カフェ", in: cafes).count, 20)
         XCTAssertEqual(CafeNameSearch.results(query: "カフェ", in: cafes, limit: 3).count, 3)
+    }
+
+    // MARK: - 店名の読み（nameReading）
+
+    func test_読みで前方一致する() {
+        let cafes = [makeCafe(name: "GOLIATH", reading: "ゴリアテ"), makeCafe(name: "IVY PLACE", reading: "アイビー プレイス")]
+        XCTAssertEqual(CafeNameSearch.groupedResults(query: "ゴリ", in: cafes).prefix.map(\.name), ["GOLIATH"])
+        XCTAssertEqual(CafeNameSearch.groupedResults(query: "アイビープレイス", in: cafes).prefix.map(\.name), ["IVY PLACE"])
+    }
+
+    func test_読みで途中一致する() {
+        let cafes = [makeCafe(name: "FUGLEN ASAKUSA", reading: "フグレン アサクサ")]
+        let grouped = CafeNameSearch.groupedResults(query: "アサクサ", in: cafes)
+        XCTAssertTrue(grouped.prefix.isEmpty)
+        XCTAssertEqual(grouped.other.map(\.name), ["FUGLEN ASAKUSA"])
+    }
+
+    func test_ひらがなの入力でも読みに当たる() {
+        let cafes = [makeCafe(name: "GOLIATH", reading: "ゴリアテ")]
+        XCTAssertEqual(CafeNameSearch.results(query: "ごりあて", in: cafes).map(\.name), ["GOLIATH"])
+        XCTAssertEqual(CafeNameSearch.results(query: "りあ", in: cafes).map(\.name), ["GOLIATH"])
+    }
+
+    func test_読みが無い店は従来どおり店名だけで照合する() {
+        let cafes = [makeCafe(name: "GOLIATH"), makeCafe(name: "ゴリラ珈琲")]
+        // 読みの無い英字の店は、かなの入力では当たらない（推測で読みを当てない）
+        XCTAssertEqual(CafeNameSearch.results(query: "ゴリ", in: cafes).map(\.name), ["ゴリラ珈琲"])
+        XCTAssertEqual(CafeNameSearch.results(query: "goli", in: cafes).map(\.name), ["GOLIATH"])
+    }
+
+    func test_店名と読みの両方に当たっても重複しない() {
+        let cafes = [makeCafe(name: "ゴリアテ GOLIATH", reading: "ゴリアテ")]
+        let grouped = CafeNameSearch.groupedResults(query: "ゴリ", in: cafes)
+        XCTAssertEqual(grouped.prefix.count, 1)
+        XCTAssertTrue(grouped.other.isEmpty)
+        XCTAssertEqual(CafeNameSearch.results(query: "ア", in: cafes).count, 1)
+    }
+
+    func test_店名で途中一致でも読みで前方一致なら前方一致のグループになる() {
+        let cafes = [makeCafe(name: "Cafe GOLIATH", reading: "ゴリアテ"), makeCafe(name: "ゴリ ゴリ")]
+        let grouped = CafeNameSearch.groupedResults(query: "ごりあ", in: cafes)
+        XCTAssertEqual(grouped.prefix.map(\.name), ["Cafe GOLIATH"])
+    }
+
+    func test_閉店の店は読みで当たっても出さない() {
+        let cafes = [makeCafe(name: "GOLIATH", isClosed: true, reading: "ゴリアテ")]
+        XCTAssertTrue(CafeNameSearch.results(query: "ゴリアテ", in: cafes).isEmpty)
+    }
+
+    func test_JSONの読みはキーがあれば読み込みキーが無い_nullなら_nil() throws {
+        let base = """
+        {"id":"%@","name":"GOLIATH","latitude":35.68,"longitude":139.76,"is_closed":false,"area":"tokyo",
+         "dog_policy_status":"allowed","has_conflict":false%@}
+        """
+        func decode(_ extra: String) throws -> Cafe {
+            let json = String(format: base, UUID().uuidString, extra)
+            return try JSONDecoder().decode(Cafe.self, from: Data(json.utf8))
+        }
+        XCTAssertEqual(try decode(#","name_reading":"ゴリアテ""#).nameReading, "ゴリアテ")
+        XCTAssertNil(try decode("").nameReading)
+        XCTAssertNil(try decode(#","name_reading":null"#).nameReading)
     }
 
     // MARK: - よく探されるエリア
