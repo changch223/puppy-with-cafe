@@ -45,6 +45,7 @@ enum CafeNameSearch {
     }
 
     /// 店名の一致を前方一致と途中一致に分けて返す（閉店は除く・件数の上限なし・それぞれ元の並びを保つ）。
+    /// 店名に加えて読み（`nameReading`）も照合する。店名・読みのどちらかで前方一致すれば前方一致、どちらかで途中一致すれば途中一致（1店は1回だけ数える）。
     static func groupedResults(query: String, in cafes: [Cafe]) -> (prefix: [Cafe], other: [Cafe]) {
         let needle = normalize(query)
         guard !needle.isEmpty else { return ([], []) }
@@ -52,12 +53,12 @@ enum CafeNameSearch {
         var prefixMatches: [Cafe] = []
         var otherMatches: [Cafe] = []
         for cafe in cafes where !cafe.isClosed {
-            let name = normalize(cafe.name)
             // 打ちかけの入力（「カフ」）は、置き換え前の表記でも照合する（置き換えで当たらなくならないように）
-            let baseName = normalizeBase(cafe.name)
-            if name.hasPrefix(needle) || baseName.hasPrefix(baseNeedle) {
+            let targets = [cafe.name] + (cafe.nameReading.map { [$0] } ?? [])
+            let forms = targets.map { (normalize($0), normalizeBase($0)) }
+            if forms.contains(where: { $0.0.hasPrefix(needle) || $0.1.hasPrefix(baseNeedle) }) {
                 prefixMatches.append(cafe)
-            } else if name.contains(needle) || baseName.contains(baseNeedle) {
+            } else if forms.contains(where: { $0.0.contains(needle) || $0.1.contains(baseNeedle) }) {
                 otherMatches.append(cafe)
             }
         }

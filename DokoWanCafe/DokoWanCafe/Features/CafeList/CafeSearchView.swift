@@ -50,7 +50,10 @@ struct CafeSearchView: View {
 
     private func rebuildIndex() {
         areaIndex = SearchSuggestion.buildIndex(cafes: allCafes, presets: ManualArea.tokyoPresets)
-        shopNames = Set(allCafes.filter { !$0.isClosed }.map { CafeNameSearch.normalize($0.name) })
+        // 読みも含める（「◯◯ テラス」のように読みを全部打ったときも、店を探しているとみなして条件を出さない）
+        shopNames = Set(allCafes.filter { !$0.isClosed }.flatMap { cafe in
+            [cafe.name, cafe.nameReading].compactMap { $0 }.filter { !$0.isEmpty }.map(CafeNameSearch.normalize)
+        })
     }
 
     private var conditionMatches: [SearchCondition] {

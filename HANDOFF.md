@@ -317,6 +317,7 @@ git add -A && git commit -m "data: <エリア> N件追加" && git push
 | `DokoWanCafe/` | Xcode プロジェクト（アプリ本体・テスト）。画面と主要ファイルは §2.5 |
 | `docs/appstore/` | App Store 提出資料（ストア文面・スクショガイド・審査メモ・チェックリスト・App Privacy） |
 | `data/master/*.csv` | **データの正本**（ここを編集） |
+| `data/master/name_readings.csv` | 店名の読み（カタカナ）の台帳。出典に明記された読みだけを記録し、検索専用（画面には出さない）。`cafes.json` の `name_reading` になる |
 | `data/cafes.json` / `CHANGELOG.md` | 生成物・変更履歴 |
 | `tools/export_cafes.py` / `README.md` | 変換スクリプト・列仕様 |
 | `research-agent/` | データ収集ブリーフ・進捗表・ギャップ補完ハンドオーバー（`gap-handover-2026-08.md`） |

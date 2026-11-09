@@ -34,6 +34,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CAFES_CSV = ROOT / "data" / "master" / "cafes.csv"
 DEFAULT_SOURCES_CSV = ROOT / "data" / "master" / "sources.csv"
 DEFAULT_COORD_SOURCES_CSV = ROOT / "data" / "master" / "coord_sources.csv"
+DEFAULT_NAME_READINGS_CSV = ROOT / "data" / "master" / "name_readings.csv"
 DEFAULT_OUT = ROOT / "data" / "cafes.json"
 DEFAULT_CHANGELOG = ROOT / "data" / "CHANGELOG.md"
 DEFAULT_APP_COPY = ROOT / "DokoWanCafe" / "DokoWanCafe" / "Resources" / "cafes.json"
@@ -423,6 +424,67 @@ def load_sources(path, cafes, errors):
     return sources_by_cafe
 
 
+# 店名の読み: カタカナ（ヴ・ヵ・ヶ を含む）・長音・中黒・半角空白だけで、カタカナを1文字以上含む
+_READING_RE = _re.compile(r"^[\u30A1-\u30FA\u30FB\u30FC ]+$")
+_READING_KANA_RE = _re.compile(r"[\u30A1-\u30FA]")
+_DATE_RE = _re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def load_name_readings(path, cafes, errors):
+    """店名の読み台帳 name_readings.csv → {cafe_id: 読み}。
+    読みは出典（source_url）に明記されたものだけを入れる（憲章 原則I）。違反はすべてエラー（配信中止）。
+    台帳が見つからないときもエラーにする（入れ忘れ・パスの誤りで、配信中の読みが黙って消えないように）。"""
+    readings = {}
+    if not path or not Path(path).exists():
+        errors.append(f"店名の読み台帳が見つかりません: {path}（読みが1件も無い場合も、見出し行だけのファイルを置いてください）")
+        return readings
+    with open(path, newline="", encoding="utf-8-sig") as f:
+        for i, row in enumerate(csv.DictReader(f), start=2):
+            raw_id = (row.get("cafe_id") or "").strip()
+            label = f"name_readings.csv 行{i}（{(row.get('name') or '').strip()}）"
+            try:
+                cid = str(uuid.UUID(raw_id))
+            except ValueError:
+                cid = raw_id
+            cafe = cafes.get(cid)
+            if cafe is None:
+                errors.append(f"{label}: cafe_id {raw_id!r} が cafes.csv に存在しません")
+                continue
+            if cid in readings:
+                errors.append(f"{label}: cafe_id {raw_id!r} が重複しています（1店につき読みは1行）")
+                continue
+            ok = True
+            if cafe.get("is_closed"):
+                errors.append(f"{label}: 閉店の店（is_closed=true）には読みを付けません。行を削除してください")
+                ok = False
+            name = (row.get("name") or "").strip()
+            if name != cafe["name"]:
+                errors.append(f"{label}: name が cafes.csv の店名「{cafe['name']}」と一致しません（cafe_id の取り違えの疑い）")
+                ok = False
+            reading = (row.get("reading") or "").strip()
+            if not reading or not _READING_RE.match(reading) or not _READING_KANA_RE.search(reading):
+                errors.append(f"{label}: reading はカタカナ・長音（ー）・中黒（・）・半角空白だけで、カタカナを1文字以上含めてください（入力値: {reading!r}）")
+                ok = False
+            source_url = (row.get("source_url") or "").strip()
+            if not _re.match(r"^https?://[^\s/]+\.[^\s/]+(/\S*)?$", source_url):
+                errors.append(f"{label}: source_url は必須で、http(s):// で始まりホスト名があり空白を含まないURLにしてください（入力値: {source_url!r}）")
+                ok = False
+            checked_at = (row.get("checked_at") or "").strip()
+            if not checked_at or not _DATE_RE.match(checked_at):
+                errors.append(f"{label}: checked_at は YYYY-MM-DD の形で必須です（入力値: {checked_at!r}）")
+                ok = False
+            else:
+                checked = parse_date(checked_at, f"{label}: checked_at", errors)
+                if checked is None:
+                    ok = False
+                elif checked > date.today():
+                    errors.append(f"{label}: checked_at {checked_at} が今日より後になっています")
+                    ok = False
+            if ok:
+                readings[cid] = reading
+    return readings
+
+
 def resolve_policy(cafe, sources, errors):
     """FR-013 と同一規則（アプリ ConflictResolver と一致させること）"""
     meaningful = [s for s in sources if s["claimed_status"] != "unverified"]
@@ -534,6 +596,8 @@ def main():
     ap.add_argument("--changelog", type=Path, default=DEFAULT_CHANGELOG)
     ap.add_argument("--coord-sources", type=Path, default=DEFAULT_COORD_SOURCES_CSV,
                     help="座標の出典台帳（警告チェック専用。cafes.json には影響しない）")
+    ap.add_argument("--name-readings", type=Path, default=DEFAULT_NAME_READINGS_CSV,
+                    help="店名の読みの台帳（任意。無ければ読みなし。検索専用で表示はしない）")
     ap.add_argument("--sample", action="store_true", help="架空サンプルデータとしてマーク（アプリにバナー表示）")
     ap.add_argument("--check", action="store_true", help="検証と差分表示のみ（ファイルを書き込まない）")
     args = ap.parse_args()
@@ -541,6 +605,8 @@ def main():
     errors = []
     cafes = load_cafes(args.cafes, errors)
     sources_by_cafe = load_sources(args.sources, cafes, errors)
+    for cid, reading in load_name_readings(args.name_readings, cafes, errors).items():
+        cafes[cid]["name_reading"] = reading
     if errors:
         fail(errors)
 

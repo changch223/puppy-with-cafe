@@ -2595,3 +2595,14 @@
 
 ## 2026-11-09 21:26 — 追加 0 / 変更 1 / 削除 0
 - ✏️ 変更: Embassy Cafe & Dining（sub_area）
+
+## 2026-11-09 21:55 — 追加 0 / 変更 9 / 削除 0
+- ✏️ 変更: BODEGA（name_reading）
+- ✏️ 変更: BONDI CAFE Nakameguro（name_reading）
+- ✏️ 変更: ENRICH（name_reading）
+- ✏️ 変更: EZO DELI（name_reading）
+- ✏️ 変更: KUMA CANTINA（name_reading）
+- ✏️ 変更: Mary Jane（name_reading）
+- ✏️ 変更: Pcm's Cafe（name_reading）
+- ✏️ 変更: marble（name_reading）
+- ✏️ 変更: passage coffee（name_reading）

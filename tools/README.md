@@ -194,3 +194,13 @@ python3 tools/export_cafes.py --check
 - 2026-11-01、バッチZ で新規掲載した20店（蒲田・大井町・品川区南部、十条・赤羽・王子・北千住。id …1513〜…1532）を台帳に追加（食べログ JSON-LD。distance_m は単一出典の店は空）。19店は method=shop_pin_single（ゲートG通過〔国土地理院の町丁目が住所と一致〕）。スターバックス コーヒー 大井町トラックスパーク店〔…1519〕だけ食べログ JSON-LD と公式店舗ページの JSON-LD が1.9mで一致するため method=shop_pin（distance_m は空、2点目の URL と1.9mを note に記載）。例外の店はない → fix 計522 / keep 274 / manual 0。
 - 2026-11-01、バッチAA で新規掲載した20店（練馬・江古田・桜台、石神井公園・上石神井、立川、国分寺、府中。id …1533〜…1552）を台帳に追加（食べログ JSON-LD の単一出典・distance_m は空）。20店すべて method=shop_pin_single（ゲートG通過〔国土地理院の町丁目が住所と一致〕）で、例外の店はない。結果の座標は食べログ JSON-LD の値と小数6桁まで一致しており変更なし → fix 計542 / keep 274 / manual 0。
 - 2026-11-02、バッチAB で新規掲載した24店（調布・深大寺・府中、千歳烏山・桜上水、町田、八王子・高尾、日野・豊田。id …1553〜…1576）を台帳に追加（食べログ JSON-LD の単一出典・distance_m は空）。24店すべて method=shop_pin_single（ゲートG通過〔国土地理院の町丁目が住所と一致〕）で、例外の店はない。府中けやきテラスは結果の座標の小数6桁目が食べログ JSON-LD の値と0.09mずれていたため、JSON-LD の値に揃えた → fix 計566 / keep 274 / manual 0。
+
+## 店名の読み（name_readings.csv）
+
+英字だけの店名の店を、かな・カタカナで検索できるようにするための台帳（`data/master/name_readings.csv`）。cafes.csv には列を足さず、`coord_sources.csv` と同じく別 CSV を cafe_id で引く。ファイルは必須（無いとエラー。入れ忘れで配信中の読みが黙って消えないように。読みが無い場合も見出し行だけを置く）。`cafes.json` では該当店だけに任意キー `name_reading`（文字列）が出る（キー欠落＝読みなし）。アプリは検索の照合にだけ使い、画面には出さない。
+
+`cafe_id,name,reading,source_url,checked_at,note`
+- `reading`: カタカナ・長音（ー）・中黒（・）・半角空白だけで、カタカナを1文字以上含む。**出典に明記された読みだけ**（推測で作らない・原則I）。
+- `source_url`: 必須・http(s)。読みが書かれている食べログ・公式サイト・公式 SNS など。
+- `checked_at`: 確認日 YYYY-MM-DD（今日より後は不可）。`note`: 任意（出典の読みが店名の一部のみ、など）。
+- 検証（エクスポートがエラーで拒否・`--check` も同じ）: cafe_id が cafes.csv に無い／同じ cafe_id が重複／`name` が cafes.csv の店名と不一致／閉店の店に読み／`reading` の文字種違反・空・記号だけ／`source_url` が http(s) でない・ホスト名なし・空白入り／`checked_at` の形式不正・未来日／台帳のファイルが無い。
