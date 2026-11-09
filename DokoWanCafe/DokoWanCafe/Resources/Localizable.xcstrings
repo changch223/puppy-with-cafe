@@ -431,6 +431,16 @@
         }
       }
     },
+    "%lld件を表示" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld件を表示"
+          }
+        }
+      }
+    },
     "1. 大きさは？" : {
       "localizations" : {
         "ja" : {
@@ -581,12 +591,32 @@
         }
       }
     },
+    "「%@」という名前の掲載店はありません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「%@」という名前の掲載店はありません"
+          }
+        }
+      }
+    },
     "「%@」の情報の誤りを報告" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "「%@」の情報の誤りを報告"
+          }
+        }
+      }
+    },
+    "「%@」を外すと%lld件" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「%1$@」を外すと%2$lld件"
           }
         }
       }
@@ -887,6 +917,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "この時間に開いているお店はありません"
+          }
+        }
+      }
+    },
+    "この条件では0件" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この条件では0件"
           }
         }
       }
@@ -2371,6 +2411,16 @@
         }
       }
     },
+    "席" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "席"
+          }
+        }
+      }
+    },
     "席の種類の記載がないため、来店前に確認を" : {
       "localizations" : {
         "ja" : {
@@ -2671,6 +2721,16 @@
         }
       }
     },
+    "時間" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間"
+          }
+        }
+      }
+    },
     "時間の情報なし" : {
       "localizations" : {
         "ja" : {
@@ -2761,6 +2821,16 @@
         }
       }
     },
+    "未確認の店も表示" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未確認の店も表示"
+          }
+        }
+      }
+    },
     "未確認の店も見る（%lld件）" : {
       "localizations" : {
         "ja" : {
@@ -2777,6 +2847,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "未確認の店を隠す"
+          }
+        }
+      }
+    },
+    "未確認も表示" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未確認も表示"
           }
         }
       }
@@ -2851,6 +2931,16 @@
         }
       }
     },
+    "条件をすべてクリア" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "条件をすべてクリア"
+          }
+        }
+      }
+    },
     "条件をクリア" : {
       "localizations" : {
         "ja" : {
@@ -2871,12 +2961,32 @@
         }
       }
     },
+    "条件を反映" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "条件を反映"
+          }
+        }
+      }
+    },
     "条件を確認" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "条件を確認"
+          }
+        }
+      }
+    },
+    "条件を選ぶシートを開きます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "条件を選ぶシートを開きます"
           }
         }
       }
@@ -2957,6 +3067,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "火"
+          }
+        }
+      }
+    },
+    "犬" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬"
           }
         }
       }
@@ -3207,6 +3327,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "経路案内を開く"
+          }
+        }
+      }
+    },
+    "絞り込み" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "絞り込み"
+          }
+        }
+      }
+    },
+    "絞り込み、%lld件オン" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "絞り込み、%lld件オン"
           }
         }
       }
@@ -3667,6 +3807,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "食べログ"
+          }
+        }
+      }
+    },
+    "駅名やエリア名でも探せます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "駅名やエリア名でも探せます"
           }
         }
       }

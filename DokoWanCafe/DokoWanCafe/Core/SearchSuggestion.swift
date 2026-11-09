@@ -189,6 +189,39 @@ enum SearchSuggestion {
         }
     }
 
+    /// 入力が、条件・エリア・組み合わせ・お店のどれにも当たらないか（このとき検索画面の先頭に
+    /// 「「○○」という名前の掲載店はありません」の案内を出す）。エリアや条件がある場合（お店だけ0件）は false。
+    /// 入力がひらがな（と長音・空白）だけのときは、まだ漢字に変換している途中とみなして案内を出さない。
+    /// エリアの索引は漢字なので、「しぶや」を打っている途中はどれにも当たらず、駅名を打っている人に
+    /// 「駅名やエリア名でも探せます」と言ってしまうため（SwiftUI の TextField は変換前の文字もそのまま渡す）。
+    static func hasNoMatch(query: String, hasCombo: Bool, conditions: [SearchCondition], areas: [SearchArea], shops: [Cafe]) -> Bool {
+        guard !isLikelyComposingKana(query) else { return false }
+        return !hasCombo && conditions.isEmpty && areas.isEmpty && shops.isEmpty
+    }
+
+    /// 変換前の入力らしいか。ひらがな・長音・空白だけ（フリック入力の途中）か、
+    /// その後ろに英字が数文字付いた形（ローマ字入力の途中。「しb」「だいかn」）なら true。
+    static func isLikelyComposingKana(_ query: String) -> Bool {
+        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        // ローマ字入力の途中の英字（半角・全角）を末尾から外す。1音の綴りは長くても数文字（「ltsu」など）
+        var scalars = Array(trimmed.unicodeScalars)
+        var strippedLatin = 0
+        while let last = scalars.last, strippedLatin < 4, isLatinLetter(last) {
+            scalars.removeLast()
+            strippedLatin += 1
+        }
+        guard !scalars.isEmpty else { return false }
+        return scalars.allSatisfy { scalar in
+            (0x3041...0x309F).contains(scalar.value) || scalar.value == 0x30FC || scalar.properties.isWhitespace
+        }
+    }
+
+    /// 半角・全角の英字か
+    private static func isLatinLetter(_ scalar: Unicode.Scalar) -> Bool {
+        (0x41...0x5A).contains(scalar.value) || (0x61...0x7A).contains(scalar.value)
+            || (0xFF21...0xFF3A).contains(scalar.value) || (0xFF41...0xFF5A).contains(scalar.value)
+    }
+
     /// 入力を空白（全角・半角）で区切った語
     static func terms(of query: String) -> [String] {
         query.split(whereSeparator: { $0.isWhitespace }).map(String.init)

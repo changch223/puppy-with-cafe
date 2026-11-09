@@ -304,10 +304,28 @@ final class SearchSuggestionTests: XCTestCase {
         XCTAssertEqual(SearchSuggestion.areas(matching: "表参道", in: index).map(\.name), ["表参道・青山"])
     }
 
+    // MARK: - 見つからないときの案内
+
+    func test_どれにも当たらないときだけ案内を出す() {
+        let cafe = makeCafe(latitude: 35.68, longitude: 139.76)
+        let someArea = area("渋谷", count: 3)
+        XCTAssertTrue(SearchSuggestion.hasNoMatch(query: "zzz", hasCombo: false, conditions: [], areas: [], shops: []))
+        // お店だけ0件（エリアや条件がある）なら案内を出さない
+        XCTAssertFalse(SearchSuggestion.hasNoMatch(query: "zzz", hasCombo: false, conditions: [], areas: [someArea], shops: []))
+        XCTAssertFalse(SearchSuggestion.hasNoMatch(query: "zzz", hasCombo: false, conditions: [.terrace], areas: [], shops: []))
+        XCTAssertFalse(SearchSuggestion.hasNoMatch(query: "zzz", hasCombo: true, conditions: [], areas: [], shops: []))
+        XCTAssertFalse(SearchSuggestion.hasNoMatch(query: "zzz", hasCombo: false, conditions: [], areas: [], shops: [cafe]))
+    }
+
     func test_エリアの照合は正規化する() {
         let index = [area("Cafe街", count: 3), area("カフェ通り", count: 2)]
-        XCTAssertEqual(SearchSuggestion.areas(matching: "ｃａｆｅ", in: index).map(\.name), ["Cafe街"])
-        XCTAssertEqual(SearchSuggestion.areas(matching: "かふぇ", in: index).map(\.name), ["カフェ通り"])
+        // 「カフェ」と「cafe」を同じに扱うようになったので、全角の cafe もひらがなの「かふぇ」も両方に当たる（件数の多い順）
+        XCTAssertEqual(SearchSuggestion.areas(matching: "ｃａｆｅ", in: index).map(\.name), ["Cafe街", "カフェ通り"])
+        XCTAssertEqual(SearchSuggestion.areas(matching: "かふぇ", in: index).map(\.name), ["Cafe街", "カフェ通り"])
+        // カフェ以外の名前は、全角半角・ひらがなカタカナの違いだけで当たる
+        let others = [area("ＡＢＣ街", count: 3), area("ブルー通り", count: 2)]
+        XCTAssertEqual(SearchSuggestion.areas(matching: "abc", in: others).map(\.name), ["ＡＢＣ街"])
+        XCTAssertEqual(SearchSuggestion.areas(matching: "ぶるー", in: others).map(\.name), ["ブルー通り"])
     }
 
     func test_エリアの候補は最大5件で空の入力は何も返さない() {
@@ -481,5 +499,22 @@ final class SearchSuggestionTests: XCTestCase {
             "現在地の周り · 地図の「その時間に営業」チップをオンにします"
         )
         XCTAssertEqual(SearchCondition.openNow.title(), "営業中のお店に絞る")
+    }
+
+    func test_ひらがなだけの入力は変換中とみなして見つからない案内を出さない() {
+        XCTAssertFalse(SearchSuggestion.hasNoMatch(query: "しぶや", hasCombo: false, conditions: [], areas: [], shops: []))
+        XCTAssertFalse(SearchSuggestion.hasNoMatch(query: "らーめん ぼーい", hasCombo: false, conditions: [], areas: [], shops: []))
+        XCTAssertTrue(SearchSuggestion.hasNoMatch(query: "渋谷ぴ", hasCombo: false, conditions: [], areas: [], shops: []))
+        XCTAssertTrue(SearchSuggestion.hasNoMatch(query: "シブヤ", hasCombo: false, conditions: [], areas: [], shops: []))
+        XCTAssertTrue(SearchSuggestion.hasNoMatch(query: "xyz", hasCombo: false, conditions: [], areas: [], shops: []))
+        XCTAssertFalse(SearchSuggestion.isLikelyComposingKana("   "))
+        // ローマ字入力の途中（ひらがなの後ろに英字が数文字）も変換中とみなす
+        for typing in ["しb", "しぶy", "だいk", "だいかn", "なかm", "しｂ", "ちltsu"] {
+            XCTAssertTrue(SearchSuggestion.isLikelyComposingKana(typing), typing)
+        }
+        // 英字だけ・英字が長く続く・カタカナや漢字が混ざるものは変換中ではない
+        for typed in ["s", "cafe", "しcafes", "渋谷k", "シブヤ"] {
+            XCTAssertFalse(SearchSuggestion.isLikelyComposingKana(typed), typed)
+        }
     }
 }

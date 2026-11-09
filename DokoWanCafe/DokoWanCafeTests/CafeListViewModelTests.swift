@@ -82,6 +82,29 @@ final class CafeListViewModelTests: XCTestCase {
         )
     }
 
+    func test_条件をすべて外しても0件なら_条件のせいの0件とは言わない() async {
+        let origin = ManualArea(id: "test-shinjuku", name: "テスト:新宿", latitude: 35.6896, longitude: 139.7006)
+        // 読み込み前（結果なし）は false
+        let empty = makeViewModel(cafes: [])
+        XCTAssertFalse(empty.hasAnyResultIgnoringConditions)
+
+        // 未確認の店しかなくても、未確認を含めて数えるので true（条件を変えれば出せる）
+        let unverifiedOnly = makeViewModel(cafes: [
+            makeCafe(name: "未確認", latitude: 35.6900, longitude: 139.7010, dogPolicyStatus: .unverified)
+        ])
+        unverifiedOnly.origin = .manual(origin)
+        await unverifiedOnly.refresh()
+        XCTAssertTrue(unverifiedOnly.hasAnyResultIgnoringConditions)
+
+        // 条件で0件になっても、条件を外せば出る店があるなら true
+        let viewModel = makeViewModel(cafes: [makeCafe(name: "犬OK", latitude: 35.6900, longitude: 139.7010)])
+        viewModel.origin = .manual(origin)
+        await viewModel.refresh()
+        viewModel.amenityFilter.largeDogOnly = true
+        XCTAssertTrue(viewModel.displayedResults.isEmpty)
+        XCTAssertTrue(viewModel.hasAnyResultIgnoringConditions)
+    }
+
     func test_旧半径10kmを超える遠方カフェも取得される() async {
         // 新宿(基準点)から東西南北のどちら向きでも旧上限10kmを超える、約14.5km西の地点に1件配置
         let origin = ManualArea(id: "test-shinjuku", name: "テスト:新宿", latitude: 35.6896, longitude: 139.7006)
@@ -1071,6 +1094,180 @@ final class CafeListViewModelTests: XCTestCase {
         func cafeDetail(id: UUID) async throws -> CafeDetail { throw SupabaseError.emptyResponse }
         func allCafes() async throws -> [Cafe] { cafes }
         func refreshRemote(force: Bool) async -> Bool { true }
+    }
+
+    // MARK: - 絞り込みシート・0件の道筋（さがす体験 第3弾）
+
+    /// 店内・大型犬・犬メニューあり / 店内のみ / テラスのみ / 未確認で店内あり、を読み込んだ VM
+    private func makeDraftViewModel(currentTime: Date? = nil) async -> CafeListViewModel {
+        let all = makeCafe(
+            name: "全部あり", latitude: 35.6897, longitude: 139.7007,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: true)
+        )
+        let indoorOnly = makeCafe(
+            name: "店内のみ", latitude: 35.6898, longitude: 139.7008,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        let terraceOnly = makeCafe(
+            name: "テラスのみ", latitude: 35.6899, longitude: 139.7009,
+            dogAmenities: DogAmenities(indoor: nil, terrace: true, largeDogs: nil, dogMenu: nil)
+        )
+        let unverified = makeCafe(
+            name: "未確認の店内", latitude: 35.6900, longitude: 139.7010,
+            dogPolicyStatus: .unverified,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        let time = currentTime ?? mondayTokyo(hour: 12)
+        let viewModel = CafeListViewModel(
+            repository: DistanceFilteringMockRepository(cafes: [all, indoorOnly, terraceOnly, unverified]),
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            savedStore: makeSavedStore(),
+            now: { time }
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+        return viewModel
+    }
+
+    func test_下書きの件数は反映後の表示件数と一致する() async {
+        let viewModel = await makeDraftViewModel()
+        let drafts = [
+            FilterDraft(),
+            FilterDraft(amenities: AmenityFilter(indoorOnly: true)),
+            FilterDraft(amenities: AmenityFilter(indoorOnly: true), includeUnverified: true),
+            FilterDraft(amenities: AmenityFilter(terraceOnly: true, largeDogOnly: true)),
+            FilterDraft(amenities: AmenityFilter(largeDogOnly: true, dogMenuOnly: true), includeUnverified: true),
+            FilterDraft(includeUnverified: true),
+        ]
+        for draft in drafts {
+            let predicted = viewModel.displayCount(for: draft)
+            viewModel.apply(draft)
+            XCTAssertEqual(predicted, viewModel.displayedResults.count, "\(draft)")
+        }
+    }
+
+    func test_下書きの件数は未確認も含めて数え条件には触れない() async {
+        let viewModel = await makeDraftViewModel()
+        XCTAssertEqual(viewModel.displayedResults.count, 3)
+
+        XCTAssertEqual(viewModel.displayCount(for: FilterDraft(includeUnverified: true)), 4)
+        XCTAssertEqual(viewModel.displayCount(for: FilterDraft(amenities: AmenityFilter(indoorOnly: true))), 2)
+        XCTAssertEqual(
+            viewModel.displayCount(for: FilterDraft(amenities: AmenityFilter(indoorOnly: true), includeUnverified: true)),
+            3
+        )
+        // 数えただけでは今の条件・表示は変わらない
+        XCTAssertEqual(viewModel.filterDraft, FilterDraft())
+        XCTAssertEqual(viewModel.displayedResults.count, 3)
+    }
+
+    func test_下書きの件数は対象時刻とうちの子を含めて数える() async {
+        var open = makeCafe(name: "昼の店", latitude: 35.6897, longitude: 139.7007)
+        open.hours = hours(mon: [TimeRange(open: "09:00", close: "18:00")])
+        var evening = makeCafe(name: "夜の店", latitude: 35.6898, longitude: 139.7008)
+        evening.hours = hours(mon: [TimeRange(open: "19:00", close: "23:00")])
+        let noon = mondayTokyo(hour: 12)
+        let viewModel = CafeListViewModel(
+            repository: DistanceFilteringMockRepository(cafes: [open, evening]),
+            locationService: LocationService(),
+            cacheStore: CacheStore(filename: "test-cache-\(UUID().uuidString).json"),
+            savedStore: makeSavedStore(),
+            now: { noon }
+        )
+        viewModel.origin = .manual(makeOrigin())
+        await viewModel.refresh()
+
+        let openDraft = FilterDraft(openNowOnly: true)
+        XCTAssertEqual(viewModel.displayCount(for: openDraft), 1, "今（12時）は昼の店だけ")
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+        XCTAssertEqual(viewModel.displayCount(for: openDraft), 1, "対象時刻（20時）は夜の店だけ")
+        XCTAssertEqual(viewModel.displayCount(for: FilterDraft()), 2, "営業中がオフなら時刻では絞らない")
+        XCTAssertEqual(viewModel.displayCount(for: openDraft), viewModel.displayedResults.count)
+
+        // うちの子が未設定なら、うちの子OKの下書きは数えるときも絞らない（設定がないものを推測で絞らない）
+        XCTAssertNil(viewModel.dogProfile)
+        XCTAssertEqual(viewModel.displayCount(for: FilterDraft(myDogOnly: true)), 2)
+    }
+
+    func test_filterDraftは今の条件を写しうちの子が未設定ならオンにしない() async {
+        let viewModel = await makeDraftViewModel()
+        viewModel.amenityFilter.terraceOnly = true
+        viewModel.includeUnverified = true
+        viewModel.openNowOnly = true
+        XCTAssertEqual(
+            viewModel.filterDraft,
+            FilterDraft(amenities: AmenityFilter(terraceOnly: true), openNowOnly: true, myDogOnly: false, includeUnverified: true)
+        )
+        XCTAssertEqual(viewModel.filterDraft.activeCount, 3)
+
+        viewModel.dogProfile = DogProfile(size: .small)
+        viewModel.myDogOnly = true
+        XCTAssertTrue(viewModel.filterDraft.myDogOnly)
+        XCTAssertEqual(viewModel.filterDraft.activeCount, 4)
+    }
+
+    func test_下書きを反映するとすべての条件が写る() async {
+        let viewModel = await makeDraftViewModel()
+        viewModel.dogProfile = DogProfile(size: .small)
+        let draft = FilterDraft(
+            amenities: AmenityFilter(indoorOnly: true, terraceOnly: false, largeDogOnly: true, dogMenuOnly: true),
+            openNowOnly: true, myDogOnly: true, includeUnverified: true
+        )
+
+        viewModel.apply(draft)
+
+        XCTAssertEqual(viewModel.amenityFilter, draft.amenities)
+        XCTAssertTrue(viewModel.openNowOnly)
+        XCTAssertTrue(viewModel.myDogOnly)
+        XCTAssertTrue(viewModel.includeUnverified)
+        XCTAssertEqual(viewModel.filterDraft, draft)
+
+        // 下書きを空にして反映すれば、全部オフに戻る（シートの「クリア」→「◯件を表示」）
+        viewModel.apply(FilterDraft())
+        XCTAssertEqual(viewModel.filterDraft, FilterDraft())
+        XCTAssertEqual(viewModel.displayedResults.count, 3)
+    }
+
+    func test_営業中を触らない反映では対象時刻のリセットで戻す記録を消さない() async {
+        let viewModel = await makeDraftViewModel()
+        viewModel.applyTargetTime(mondayTokyo(hour: 20))
+        XCTAssertTrue(viewModel.openNowOnly)
+
+        // 営業中はそのままで、ほかの条件だけを変えて反映する
+        var draft = viewModel.filterDraft
+        draft.amenities.indoorOnly = true
+        viewModel.apply(draft)
+        viewModel.clearTargetTime()
+
+        XCTAssertFalse(viewModel.openNowOnly, "「いつ行く？」でオンにした営業中は、リセットで元（オフ）に戻る")
+        XCTAssertTrue(viewModel.amenityFilter.indoorOnly)
+    }
+
+    func test_0件のとき外すと増える条件を案内し押すとその条件が外れる() async {
+        let viewModel = await makeDraftViewModel()
+        // テラス＋大型犬OKに該当する店はない（0件）
+        viewModel.amenityFilter.terraceOnly = true
+        viewModel.amenityFilter.largeDogOnly = true
+        XCTAssertTrue(viewModel.displayedResults.isEmpty)
+
+        // 大型犬OKを外すと「テラスのみ」の1件、テラスを外すと「全部あり」の1件。同じ件数なら大型犬OKを先に外す
+        let best = viewModel.bestRelaxation()
+        XCTAssertEqual(best, FilterDraft.Relaxation(condition: .largeDog, count: 1))
+
+        viewModel.relax(best!.condition)
+        XCTAssertFalse(viewModel.amenityFilter.largeDogOnly)
+        XCTAssertTrue(viewModel.amenityFilter.terraceOnly)
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["テラスのみ"])
+    }
+
+    func test_外しても増えないときは案内しない() async {
+        let viewModel = await makeDraftViewModel()
+        // 条件がなければ外すものがない
+        XCTAssertNil(viewModel.bestRelaxation())
+        // 未確認も表示だけがオンで0件にはならない（そもそも件数が減るだけ）。表示があるので増える候補もない
+        viewModel.includeUnverified = true
+        XCTAssertNil(viewModel.bestRelaxation())
     }
 
     func test_error状態は裏の取得でloadedに上書きされない() async {
