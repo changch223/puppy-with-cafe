@@ -226,6 +226,26 @@ extension DogFit.Result {
     }
 
     private var unknownBody: String {
+        // どちらかの席が入れないと明記されているときは、その理由を先に言い、残りの席の分からない理由を続ける
+        // （一覧の行の「店内は小型犬まで」と食い違わないように）。例:「店内は小型犬まで。テラスは記載がないため、来店前に確認を」
+        if let blocked = notAllowedSeatsText {
+            let unknownSeat: (DogFit.Seat, DogFit.UnknownReason)? = {
+                if case .unknown(let reason) = indoor { return (.indoor, reason) }
+                if case .unknown(let reason) = terrace { return (.terrace, reason) }
+                return nil
+            }()
+            if let (seat, reason) = unknownSeat {
+                let label = seat.label
+                switch reason {
+                case .unverified, .seatNotStated:
+                    return String(localized: "\(blocked)。\(label)は記載がないため、来店前に確認を")
+                case .sizeNotStated:
+                    return String(localized: "\(blocked)。\(label)はサイズの記載がないため、来店前に確認を")
+                case .sizeConditionText:
+                    return String(localized: "\(blocked)。\(label)はサイズの条件があるため、来店前に確認を")
+                }
+            }
+        }
         let reasons = [indoor, terrace].compactMap { verdict -> DogFit.UnknownReason? in
             if case .unknown(let reason) = verdict { return reason }
             return nil

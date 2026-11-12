@@ -360,6 +360,40 @@ final class DogFitTests: XCTestCase {
         XCTAssertEqual(result.detailLine, "うちの子（小型犬）は：席の種類の記載がないため、来店前に確認を")
     }
 
+    func test_詳細の1行_入れない席があるときはその理由を先に言う() {
+        // CHUM APARTMENT・AMAZON POLPAS 自由が丘の形: 店内は小型犬まで、テラスの記載なし（中型犬）
+        let medium = fit(makeCafe(indoor: true, sizeIndoor: .small), .medium)
+        XCTAssertEqual(medium.overall, .unknown)
+        XCTAssertEqual(medium.detailLine, "うちの子（中型犬）は：店内は小型犬まで。テラスは記載がないため、来店前に確認を")
+        // SHARK COFFEE・i2 cafe の形: 店内は中型犬まで、テラスはサイズの記載なし（大型犬）
+        let large = fit(makeCafe(indoor: true, terrace: true, sizeIndoor: .medium), .large)
+        XCTAssertEqual(large.overall, .unknown)
+        XCTAssertEqual(large.detailLine, "うちの子（大型犬）は：店内は中型犬まで。テラスはサイズの記載がないため、来店前に確認を")
+        // 席が不可の店: 「店内は不可」を先に言う
+        let blocked = fit(makeCafe(indoor: false, terrace: true), .medium)
+        XCTAssertEqual(blocked.detailLine, "うちの子（中型犬）は：店内は不可。テラスはサイズの記載がないため、来店前に確認を")
+        // テラス側が入れない店は、店内の分からない理由が続く
+        let terraceBlocked = fit(makeCafe(indoor: true, terrace: true, sizeTerrace: .small), .medium)
+        XCTAssertEqual(terraceBlocked.detailLine, "うちの子（中型犬）は：テラスは小型犬まで。店内はサイズの記載がないため、来店前に確認を")
+        // サイズの条件の文がある店
+        let condition = fit(makeCafe(indoor: true, sizeIndoor: .small, sizeLimitText: "小型犬のみ"), .medium)
+        XCTAssertEqual(condition.indoor, .doesNotFit(.sizeLimit(.small)))
+        XCTAssertEqual(condition.detailLine, "うちの子（中型犬）は：店内は小型犬まで。テラスは記載がないため、来店前に確認を")
+        // 行の注記（一覧）と同じ席の理由を使う
+        XCTAssertEqual(medium.notAllowedSeatsText, "店内は小型犬まで")
+    }
+
+    func test_詳細の1行_入れない席がなければ従来の文言のまま() {
+        XCTAssertEqual(
+            fit(makeCafe(indoor: true, terrace: true), .medium).detailLine,
+            "うちの子（中型犬）は：サイズの記載がないため、来店前に確認を"
+        )
+        XCTAssertEqual(
+            fit(makeCafe(), .medium).detailLine,
+            "うちの子（中型犬）は：席の種類の記載がないため、来店前に確認を"
+        )
+    }
+
     func test_詳細の1行_未確認() {
         let result = fit(makeCafe(status: .unverified, indoor: true), .small)
         XCTAssertEqual(result.detailLine, "うちの子（小型犬）は：まだ確認できていないため、来店前に確認を")

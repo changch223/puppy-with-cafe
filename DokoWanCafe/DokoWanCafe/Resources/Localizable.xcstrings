@@ -201,6 +201,36 @@
         }
       }
     },
+    "%@。%@はサイズの条件があるため、来店前に確認を" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@。%2$@はサイズの条件があるため、来店前に確認を"
+          }
+        }
+      }
+    },
+    "%@。%@はサイズの記載がないため、来店前に確認を" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@。%2$@はサイズの記載がないため、来店前に確認を"
+          }
+        }
+      }
+    },
+    "%@。%@は記載がないため、来店前に確認を" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@。%2$@は記載がないため、来店前に確認を"
+          }
+        }
+      }
+    },
     "%@。地図のチップをオンにします" : {
       "localizations" : {
         "ja" : {
@@ -397,6 +427,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@は不可"
+          }
+        }
+      }
+    },
+    "%@は可" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@は可"
           }
         }
       }

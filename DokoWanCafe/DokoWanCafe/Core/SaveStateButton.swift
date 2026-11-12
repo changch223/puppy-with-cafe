@@ -47,6 +47,11 @@ struct SaveStateButton: Equatable, Sendable {
     let menuActions: [SaveAction]
     let status: SavedStatus?
 
+    /// 幅が足りないときの短い文言。「行った ✓ 12/28」から日付を落とした「行った ✓」。ほかの状態は `title` のまま
+    var compactTitle: String {
+        status == .visited ? String(localized: "行った ✓") : title
+    }
+
     static func make(status: SavedStatus?, visitedDate: Date?) -> SaveStateButton {
         switch status {
         case nil:
