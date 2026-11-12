@@ -456,6 +456,7 @@ struct CafeDetailView: View {
         case .no: return "xmark.circle.fill"
         case .unknown, .unconfirmed: return "questionmark.circle"
         case .conditional: return "checkmark.circle"
+        case .limited: return "minus.circle"
         }
     }
 
@@ -465,6 +466,7 @@ struct CafeDetailView: View {
         case .no: return .cafeDetailRed
         case .unknown, .unconfirmed: return .secondary
         case .conditional: return .primary
+        case .limited: return .secondary
         }
     }
 

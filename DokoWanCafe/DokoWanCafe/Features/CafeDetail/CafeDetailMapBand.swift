@@ -71,6 +71,8 @@ struct CafeDetailMapBand: View {
             traits.displayScale = displayScale
         }
         options.showsBuildings = false
+        // 近くの別の店の名前・アイコン（Apple マップの POI）を消す（店のピンと並んで紛らわしい）。道路名・地名は残る
+        options.pointOfInterestFilter = .excludingAll
         guard let result = try? await MKMapSnapshotter(options: options).start() else { return }
         guard !Task.isCancelled else { return }
         CafeDetailMapSnapshotCache.store(result.image, for: key)

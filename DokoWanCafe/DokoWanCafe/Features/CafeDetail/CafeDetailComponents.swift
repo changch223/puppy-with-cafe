@@ -447,6 +447,18 @@ struct CafeDetailBottomBar: View {
     let onRoute: () -> Void
     let onCall: () -> Void
     let onSaveAction: (SaveAction) -> Void
+    /// 保存ラベルに選ばれた大きさの通知（レイアウトのテスト用。通常は使わない）
+    var onSaveLabelVariant: ((SaveLabelVariant) -> Void)?
+
+    /// 保存ラベルの大きさ。幅が足りないほど下の候補になる
+    enum SaveLabelVariant: Equatable {
+        /// 通常の文言（「行った ✓ 12/28」）
+        case full
+        /// 日付を落とした文言（「行った ✓」）
+        case compact
+        /// 文字も縮めた文言
+        case shrunk
+    }
 
     static let buttonHeight: CGFloat = 48
     /// 主ボタン「経路」が必ず確保する幅（アイコン＋「経路」が読める幅）
@@ -475,7 +487,10 @@ struct CafeDetailBottomBar: View {
                 .accessibilityLabel(Text("電話をかける"))
             }
 
+            // 経路の最小幅（routeMinWidth）を残した上で、保存ラベルに先に幅を配る
+            // （優先度がないと、経路が余った幅を先に取り、日付が入るのに落ちる）
             saveButton
+                .layoutPriority(1)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
@@ -488,7 +503,7 @@ struct CafeDetailBottomBar: View {
     /// `flexible`: 経路ボタンは余った幅を取る。電話・保存は文字の幅に合わせて、ラベルが隠れないようにする。
     /// 大きな文字では、どのボタンも縮めて1行に収める（縦に積まない）。
     private func barLabel(
-        _ title: String, systemImage: String, flexible: Bool = false, showsTitle: Bool = true
+        _ title: String, systemImage: String, flexible: Bool = false, showsTitle: Bool = true, shrinkable: Bool = false
     ) -> some View {
         let large = isCompact
         return HStack(spacing: 6) {
@@ -497,12 +512,12 @@ struct CafeDetailBottomBar: View {
             if showsTitle {
                 Text(title)
                     .lineLimit(1)
-                    .minimumScaleFactor(large ? 0.5 : 1)
-                    .fixedSize(horizontal: !flexible && !large, vertical: false)
+                    .minimumScaleFactor(large || shrinkable ? 0.5 : 1)
+                    .fixedSize(horizontal: !flexible && !large && !shrinkable, vertical: false)
             }
         }
         .font(.subheadline.bold())
-        .padding(.horizontal, large ? 10 : 14)
+        .padding(.horizontal, large || shrinkable ? 10 : 14)
         .frame(minWidth: flexible ? Self.routeMinWidth : nil, maxWidth: flexible ? .infinity : nil, minHeight: Self.buttonHeight)
         .contentShape(RoundedRectangle(cornerRadius: 12))
     }
@@ -510,10 +525,22 @@ struct CafeDetailBottomBar: View {
     /// 文字が大きいとき（xLarge 以上）は、電話をアイコンだけにし、保存のラベルを縮めて、主ボタン「経路」の文字を守る
     private var isCompact: Bool { dynamicTypeSize >= .xLarge }
 
+    /// 保存ボタンのラベル。幅が足りないときは「行った ✓ 12/28」→「行った ✓」（日付を落とす）→ 文字を縮める、の順に
+    /// 小さくして、どの幅・文字サイズでもバーが画面幅に収まるようにする（375pt の電話あり・行った店など）。
+    /// 最後の候補は幅いっぱいまで縮められる（fixedSize なし）ので、必ずどれかが収まる。
     private var savedLabel: some View {
-        barLabel(saved.title, systemImage: saved.systemImage)
-            .foregroundStyle(saved.status == nil ? Color.accentColor : Color.cafeDetailOrange)
-            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+        ViewThatFits(in: .horizontal) {
+            barLabel(saved.title, systemImage: saved.systemImage)
+                .onAppear { onSaveLabelVariant?(.full) }
+            if saved.compactTitle != saved.title {
+                barLabel(saved.compactTitle, systemImage: saved.systemImage)
+                    .onAppear { onSaveLabelVariant?(.compact) }
+            }
+            barLabel(saved.compactTitle, systemImage: saved.systemImage, shrinkable: true)
+                .onAppear { onSaveLabelVariant?(.shrunk) }
+        }
+        .foregroundStyle(saved.status == nil ? Color.accentColor : Color.cafeDetailOrange)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
     }
 
     /// タップ1回の動きがある状態は primaryAction、行ったのときはタップでメニューを開く（誤って記録を消さない）
