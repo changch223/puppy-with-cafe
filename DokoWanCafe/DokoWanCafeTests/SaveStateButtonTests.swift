@@ -40,6 +40,17 @@ final class SaveStateButtonTests: XCTestCase {
         XCTAssertEqual(SaveStateButton.make(status: .visited, visitedDate: nil).title, "行った ✓")
     }
 
+    func test_幅が足りないときの短い文言は行ったの日付だけ落とす() {
+        let visited = SaveStateButton.make(status: .visited, visitedDate: t0)
+        XCTAssertEqual(visited.compactTitle, "行った ✓")
+        XCTAssertNotEqual(visited.title, visited.compactTitle)
+        XCTAssertEqual(SaveStateButton.make(status: .visited, visitedDate: nil).compactTitle, "行った ✓")
+        XCTAssertEqual(SaveStateButton.make(status: nil, visitedDate: nil).compactTitle, "行きたい")
+        XCTAssertEqual(SaveStateButton.make(status: .wantToGo, visitedDate: nil).compactTitle, "行きたい ✓")
+        // VoiceOver のラベルは短くしない（日付を読む）
+        XCTAssertTrue(visited.accessibilityLabel.contains(TargetTime.monthDayText(t0)))
+    }
+
     func test_VoiceOverのラベルは状態と動きが分かる() {
         XCTAssertTrue(SaveStateButton.make(status: nil, visitedDate: nil).accessibilityLabel.contains("行きたいに入れる"))
         let want = SaveStateButton.make(status: .wantToGo, visitedDate: nil).accessibilityLabel

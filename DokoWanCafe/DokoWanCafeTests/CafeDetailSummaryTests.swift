@@ -276,6 +276,109 @@ final class CafeDetailSummaryTests: XCTestCase {
         XCTAssertEqual(limited.map(\.valueText).prefix(2), ["可", "可"])
     }
 
+    func test_わんちゃん向け情報_大型犬は席ごとの上限が大型犬の席だけを言う() {
+        // PERFECT BEER KITCHEN 四ツ谷: size_max_indoor=large, large_dogs=nil
+        let indoor = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .large, sizeMaxTerrace: nil, indoorStyle: nil)
+        )
+        XCTAssertEqual(indoor[2].valueText, "店内は可")
+        XCTAssertEqual(indoor[2].state, .conditional)
+        // AKIGAWA BASE: size_max_terrace=large
+        let terrace = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .small, sizeMaxTerrace: .large, indoorStyle: nil)
+        )
+        XCTAssertEqual(terrace[2].valueText, "テラスは可")
+        // 両方が大型犬
+        let both = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .large, sizeMaxTerrace: .large, indoorStyle: nil)
+        )
+        XCTAssertEqual(both[2].valueText, "店内・テラスは可")
+        // 上限が小型犬・中型犬の席しかなく、もう片方の席が分からない（nil）ときは文だけ言い、可に見せない
+        let limited = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .small, sizeMaxTerrace: nil, indoorStyle: nil)
+        )
+        XCTAssertEqual(limited[2].valueText, "店内は小型犬まで")
+        XCTAssertEqual(limited[2].state, .limited)
+        // 可と明記された席がすべて大型犬未満、もう片方は不可（Italian Kitchen VANSAN 大泉学園店の形）→ 不可
+        let blocked = CafeDetailAmenities.rows(
+            DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: .medium, indoorStyle: nil)
+        )
+        XCTAssertEqual(blocked[2].valueText, "不可")
+        XCTAssertEqual(blocked[2].state, .no)
+        // 両方の席が大型犬未満の上限でも、大型犬の入れる席は残っていない → 不可
+        let bothSmall = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .small, sizeMaxTerrace: .medium, indoorStyle: nil)
+        )
+        XCTAssertEqual(bothSmall[2].state, .no)
+        // 上限のない席が可なら、大型犬の入れる席が残る可能性があるので不可とは言わない
+        let open = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .small, sizeMaxTerrace: nil, indoorStyle: nil)
+        )
+        XCTAssertEqual(open[2].state, .limited)
+        // 席が可と明記されていない上限は言わない（推測しない）
+        let notStated = CafeDetailAmenities.rows(
+            DogAmenities(indoor: nil, terrace: nil, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .large, sizeMaxTerrace: nil, indoorStyle: nil)
+        )
+        XCTAssertEqual(notStated[2].valueText, "分かりません")
+        // 未確認は記載ありの中立表示
+        let unconfirmed = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .large, sizeMaxTerrace: nil, indoorStyle: nil),
+            confirmed: false
+        )
+        XCTAssertEqual(unconfirmed[2].state, .unconfirmed)
+        // large_dogs == true でも席ごとの上限があれば席ごとの文（タイルの「条件つきで可」と食い違わない。
+        // Le Maghreb・a-bridge 三軒茶屋店の形: 店内は上限なし・テラスは大型犬まで）
+        let leMaghreb = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: true, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: .large, indoorStyle: nil)
+        )
+        XCTAssertEqual(leMaghreb[2].valueText, "テラスは可")
+        XCTAssertEqual(leMaghreb[2].state, .conditional)
+        let yes = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: true, dogMenu: nil, sizeMaxIndoor: .small, sizeMaxTerrace: nil, indoorStyle: nil)
+        )
+        XCTAssertEqual(yes[2].valueText, "店内は小型犬まで")
+        XCTAssertEqual(yes[2].state, .limited)
+        // 席ごとの上限がなければ large_dogs のとおり（true は「可」）
+        let noLimit = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: true, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: nil, indoorStyle: nil)
+        )
+        XCTAssertEqual(noLimit[2].valueText, "可")
+        // large_dogs == false は席ごとの上限があっても「不可」
+        let no = CafeDetailAmenities.rows(
+            DogAmenities(indoor: true, terrace: true, largeDogs: false, dogMenu: nil, sizeMaxIndoor: .large, sizeMaxTerrace: nil, indoorStyle: nil)
+        )
+        XCTAssertEqual(no[2].valueText, "不可")
+    }
+
+    func test_大型犬タイル_見出しの席が大型犬で入れると言えないときは条件つきで可() {
+        let tokyoNoon = tokyoDate(hour: 12, minute: 0)
+        func tile(_ amenities: DogAmenities, status: DogPolicyStatus = .allowed) -> CafeDetailHighlight? {
+            var cafe = makeCafe()
+            cafe.dogPolicyStatus = status
+            cafe.lastVerified = Date(timeIntervalSince1970: 1_780_000_000)
+            cafe.dogAmenities = amenities
+            return CafeDetailHighlights.all(cafe: cafe, at: tokyoNoon, timeZone: tokyo).first { $0.title == "大型犬" }
+        }
+        // Le Maghreb・a-bridge 三軒茶屋店: 店内の見出しだが、大型犬の明記はテラスだけ
+        let mismatch = tile(DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: .large, indoorStyle: nil))
+        XCTAssertEqual(mismatch?.value, "条件つきで可")
+        XCTAssertEqual(mismatch?.tone, .neutral)
+        // 見出しの席が大型犬で fits なら「可」
+        let fits = tile(DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: nil, indoorStyle: nil))
+        XCTAssertEqual(fits?.value, "可")
+        XCTAssertEqual(fits?.tone, .good)
+        // 見出しが席を言わない店（席の記載なし）は今のまま
+        let seatUnknown = tile(DogAmenities(indoor: nil, terrace: nil, largeDogs: true, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: nil, indoorStyle: nil))
+        XCTAssertEqual(seatUnknown?.value, "可")
+        // 答えのカードの「大型犬もOK」と食い違わない
+        var cafe = makeCafe()
+        cafe.dogPolicyStatus = .allowed
+        cafe.lastVerified = Date(timeIntervalSince1970: 1_780_000_000)
+        cafe.dogAmenities = DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: .large, indoorStyle: nil)
+        XCTAssertFalse(CafeDetailAnswer.make(cafe: cafe).notes.contains("大型犬もOK"))
+        XCTAssertTrue(CafeDetailHighlights.headlineSeatIsNotLargeOK(cafe))
+    }
+
     func test_わんちゃん向け情報_犬メニューはありなし() {
         let rows = CafeDetailAmenities.rows(
             DogAmenities(indoor: nil, terrace: nil, largeDogs: nil, dogMenu: true)

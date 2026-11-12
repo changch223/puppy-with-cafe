@@ -25,6 +25,7 @@ struct PlaceCardView: View {
 
     @Environment(\.openURL) private var openURL
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.dogProfile) private var dog
 
     private var cafe: Cafe { item.cafe }
     private var walking: WalkingTime.Summary { WalkingTime.summary(meters: item.distanceMeters) }
@@ -181,7 +182,9 @@ struct PlaceCardView: View {
                     VisitedCheckIcon()
                 }
             }
+            // 幅が足りないと見た目では補足が省略される。VoiceOver は補足込みで読む
             AnswerLineView(cafe: cafe)
+                .accessibilityLabel(Text(verbatim: CafePresentation.answerLine(for: cafe, dog: dog).spoken))
             if let condition = CafePresentation.conditionSummary(for: cafe) {
                 Text(condition)
                     .font(.caption)
