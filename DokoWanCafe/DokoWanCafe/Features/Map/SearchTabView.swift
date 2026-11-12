@@ -366,7 +366,8 @@ struct SearchTabView: View {
                     onOpenRoute: { routeTarget = selected.cafe },
                     onToggleWantToGo: { savedStore.toggleWantToGo(selected.cafe.id) },
                     onClose: { selectedMapItem = nil },
-                    onSelectSameSpot: { selectedMapItem = $0 }
+                    onSelectSameSpot: { selectedMapItem = $0 },
+                    onSaveAction: { savedStore.apply($0, to: selected.cafe.id) }
                 )
                 .transition(.move(edge: .bottom))
             } else {

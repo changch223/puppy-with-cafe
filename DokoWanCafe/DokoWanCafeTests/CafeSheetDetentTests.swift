@@ -167,6 +167,22 @@ final class CafeSheetDetentTests: XCTestCase {
         XCTAssertEqual(medium, 324 + CafeSheetDetent.mediumListAllowance)
     }
 
+    func test_先頭の行が高くても見出しだけの段は半分の段より低い() {
+        // 大きな文字: 見出し 200、先頭の行 300。足すと半分の段（見出しだけの peek 224 + 140 = 364）を超える
+        let headerOnly = CafeSheetDetent.peekHeight(headerBlockHeight: 200)
+        let withRow = CafeSheetDetent.peekHeight(headerBlockHeight: 200, firstRowHeight: 300)
+        XCTAssertGreaterThan(withRow, headerOnly + CafeSheetDetent.mediumListAllowance)
+        for container in [550.0, 700.0, 800.0, 900.0] as [CGFloat] {
+            let peek = CafeSheetDetent.peek.height(containerHeight: container, topReserved: 120, peekHeight: withRow, headerPeekHeight: headerOnly)
+            let medium = CafeSheetDetent.medium.height(containerHeight: container, topReserved: 120, peekHeight: withRow, headerPeekHeight: headerOnly)
+            let large = CafeSheetDetent.large.height(containerHeight: container, topReserved: 120, peekHeight: withRow, headerPeekHeight: headerOnly)
+            XCTAssertLessThanOrEqual(peek, medium - CafeSheetDetent.peekMediumGap, "container \(container)")
+            XCTAssertLessThanOrEqual(medium, large, "container \(container)")
+            // 見出しは必ず読める
+            XCTAssertGreaterThanOrEqual(peek, min(headerOnly, container * CafeSheetDetent.peekMaxRatio), "container \(container)")
+        }
+    }
+
     func test_標準の文字の行の高さは店名1行ぶんで写真より低くならない() {
         XCTAssertEqual(CafeSheetDetent.standardRowHeight(nameLine: 22, answerLine: 20, openLine: 16), 22 + 20 + 16 + 8 + 8)
         // 3行が写真(64)より低いときは写真の高さ

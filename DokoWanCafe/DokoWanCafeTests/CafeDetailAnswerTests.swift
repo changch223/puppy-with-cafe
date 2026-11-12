@@ -157,6 +157,16 @@ final class CafeDetailAnswerTests: XCTestCase {
         XCTAssertNil(answer.sizeLimitLine)
     }
 
+    func test_大型犬の明記がテラスだけなら店内の見出しに大型犬もOKを添えない() {
+        // 店内可・店内の上限は記載なし・テラスは大型犬まで・large_dogs=true（実データの Le Maghreb と同じ形）
+        let cafe = makeCafe(amenities: DogAmenities(
+            indoor: true, terrace: true, largeDogs: true, dogMenu: nil, sizeMaxIndoor: nil, sizeMaxTerrace: .large, indoorStyle: nil
+        ))
+        let answer = CafeDetailAnswer.make(cafe: cafe)
+        XCTAssertEqual(answer.kind, .indoor)
+        XCTAssertFalse(answer.notes.contains("大型犬もOK"))
+    }
+
     func test_サイズ制限の記載がある店は大型犬もOKを添えない() {
         // The House of Hounds 相当: 大型犬はテラス・屋上席のみ（largeDogs は true だが席の制限つき）
         let answer = CafeDetailAnswer.make(

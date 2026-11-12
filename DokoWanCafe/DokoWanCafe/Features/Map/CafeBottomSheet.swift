@@ -30,6 +30,8 @@ enum CafeSheetDetent: CaseIterable, Equatable {
     static let peekMaxRatio: CGFloat = 0.6
     /// 半分の段で、見出しの下に最低限見せる一覧の高さ（見出しが大きくて半分では一覧が見えなくなるのを防ぐ）
     static let mediumListAllowance: CGFloat = 140
+    /// 「見出しだけ」と「半分」の段の間に必ず残す高さの差（先頭の行を足しても2つの段が同じ高さにならないように）
+    static let peekMediumGap: CGFloat = 64
 
     /// 「見出しだけ」の段の高さ。グラバー＋見出し（Dynamic Type で伸びる）の実測の高さ＋先頭の行1つ分
     /// （行の実測の高さ `firstRowHeight` があるとき。ないとき・0件のときは1行目の覗き分 `peekRowHint`）。
@@ -71,7 +73,7 @@ enum CafeSheetDetent: CaseIterable, Equatable {
         peekHeight: CGFloat = CafeSheetDetent.peekHeight,
         headerPeekHeight: CGFloat? = nil
     ) -> CGFloat {
-        let peek = min(peekHeight, containerHeight * Self.peekMaxRatio)
+        let rawPeek = min(peekHeight, containerHeight * Self.peekMaxRatio)
         // 見出しが大きい（大きな文字）ときは、半分の段でも見出しの下に一覧が少し見えるようにする
         // （基本の高さのままなら従来どおり地図領域の45%）
         let headerPeek = headerPeekHeight ?? peekHeight
@@ -79,6 +81,10 @@ enum CafeSheetDetent: CaseIterable, Equatable {
         let medium = headerPeek > Self.peekHeight
             ? max(mediumBase, min(headerPeek, containerHeight * Self.peekMaxRatio) + Self.mediumListAllowance)
             : mediumBase
+        // 先頭の行を足した peek が半分の段に迫らないようにする（大きな文字では行が高く、足すと半分を超えてしまう）。
+        // 見出しだけの peek までは縮めない（見出しは必ず読める）。
+        let headerOnlyPeek = min(headerPeek, containerHeight * Self.peekMaxRatio)
+        let peek = min(rawPeek, max(headerOnlyPeek, medium - Self.peekMediumGap))
         switch self {
         case .peek:
             return peek

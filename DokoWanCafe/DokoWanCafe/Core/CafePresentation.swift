@@ -75,8 +75,15 @@ enum CafePresentation {
                     seat = amenities?.indoor == false ? String(localized: "テラスのみの店") : String(localized: "テラスOKの店")
                 case .checkDetail, .unverified: seat = nil
                 }
+                // 補足が「OK」と言う席に、うちの子は入れないと明記されているときは、その理由を補足にする
+                // （「店内OKの店」と言うと入れるように読めるため。例: 店内は小型犬まで・テラスは記載なしの店に中型犬）
+                let claimedSeat: DogFit.Verdict? = category == .indoorOK ? fit.indoor : (category == .terraceOnly ? fit.terrace : nil)
+                var supplement = seat
+                if let claimedSeat, case .doesNotFit = claimedSeat {
+                    supplement = fit.notAllowedSeatsText ?? seat
+                }
                 return AnswerLine(
-                    main: String(localized: "うちの子は分かりません"), supplement: seat,
+                    main: String(localized: "うちの子は分かりません"), supplement: supplement,
                     tone: category == .unverified ? .unverified : .attention
                 )
             }

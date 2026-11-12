@@ -507,8 +507,8 @@ struct CafeDetailBottomBar: View {
         .contentShape(RoundedRectangle(cornerRadius: 12))
     }
 
-    /// 文字が大きいとき（xxLarge 以上）は、電話をアイコンだけにし、保存のラベルを縮めて、主ボタン「経路」の文字を守る
-    private var isCompact: Bool { dynamicTypeSize >= .xxLarge }
+    /// 文字が大きいとき（xLarge 以上）は、電話をアイコンだけにし、保存のラベルを縮めて、主ボタン「経路」の文字を守る
+    private var isCompact: Bool { dynamicTypeSize >= .xLarge }
 
     private var savedLabel: some View {
         barLabel(saved.title, systemImage: saved.systemImage)

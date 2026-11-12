@@ -308,6 +308,12 @@ final class CafePresentationTests: XCTestCase {
         XCTAssertEqual(CafePresentation.answerLine(for: terraceUnknown, dog: big).supplement, "テラスOKの店")
         let terraceOnlyUnknown = confirmed(amenities: DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil))
         XCTAssertEqual(CafePresentation.answerLine(for: terraceOnlyUnknown, dog: big).supplement, "テラスのみの店")
+        // 入れないと明記された席がある店は「店内OKの店」と言わず、その理由を補足にする
+        // （店内は小型犬まで・テラスは記載なし → 大型犬は総合では分からないが、店内には入れない）
+        let indoorSmallOnly = confirmed(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil, sizeMaxIndoor: .small))
+        let partial = CafePresentation.answerLine(for: indoorSmallOnly, dog: big)
+        XCTAssertEqual(partial.main, "うちの子は分かりません")
+        XCTAssertEqual(partial.supplement, "店内は小型犬まで")
         let checkLine = CafePresentation.answerLine(for: confirmed(amenities: nil), dog: small)
         XCTAssertEqual(checkLine.main, "うちの子は分かりません")
         XCTAssertNil(checkLine.supplement)
