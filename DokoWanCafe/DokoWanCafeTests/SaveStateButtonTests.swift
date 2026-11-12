@@ -33,7 +33,7 @@ final class SaveStateButtonTests: XCTestCase {
         XCTAssertEqual(button.systemImage, "checkmark.circle.fill")
         XCTAssertNil(button.tapAction, "行った記録を誤って消さないため、タップはメニューを開くだけ")
         XCTAssertEqual(button.menuActions, [.backToWantToGo, .removeFromSaved])
-        XCTAssertEqual(button.menuActions.map { $0.menuTitle(from: .visited) }, ["行きたいに戻す", "保存から外す"])
+        XCTAssertEqual(button.menuActions.map { $0.menuTitle(from: .visited) }, ["行きたいに戻す（行った記録は消えます）", "保存から外す"])
     }
 
     func test_行ったで日付が不明でもラベルは作れる() {
@@ -152,5 +152,7 @@ final class SaveStateButtonTests: XCTestCase {
         XCTAssertNotEqual(base, MapSnapshotKey(cafeID: id, isDark: true, width: 390.0))
         XCTAssertNotEqual(base, MapSnapshotKey(cafeID: id, isDark: false, width: 430.0))
         XCTAssertNotEqual(base, MapSnapshotKey(cafeID: UUID(), isDark: false, width: 390.0))
+        // 座標が変わったら別のキー（データ更新で古い地図を出し続けない）
+        XCTAssertNotEqual(base, MapSnapshotKey(cafeID: id, isDark: false, width: 390.0, latitude: 35.66, longitude: 139.70))
     }
 }

@@ -36,11 +36,11 @@ final class CafeDetailUnknownsTests: XCTestCase {
         cafe.dogAmenities = DogAmenities(indoor: true, terrace: nil, largeDogs: false, dogMenu: true)
         XCTAssertFalse(CafeDetailUnknowns.make(cafe: cafe).contains("大型犬が入れるか"))
 
-        // 自由記述のサイズ上限
+        // 自由記述の dogSizeLimit は判定に使わない（「大型犬の記載なし」「テラス4席限定」のような文も入るため）
         var limited = makeCafe()
         limited.dogAmenities = DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: true)
-        limited.dogSizeLimit = "小型・中型犬のみ"
-        XCTAssertFalse(CafeDetailUnknowns.make(cafe: limited).contains("大型犬が入れるか"))
+        limited.dogSizeLimit = "大型犬の記載なし"
+        XCTAssertTrue(CafeDetailUnknowns.make(cafe: limited).contains("大型犬が入れるか"))
 
         // 席ごとのサイズ上限
         var seat = makeCafe()

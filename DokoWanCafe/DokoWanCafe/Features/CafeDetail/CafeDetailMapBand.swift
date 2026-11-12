@@ -18,7 +18,10 @@ struct CafeDetailMapBand: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let key = MapSnapshotKey(cafeID: cafe.id, isDark: colorScheme == .dark, width: geometry.size.width)
+            let key = MapSnapshotKey(
+                cafeID: cafe.id, isDark: colorScheme == .dark, width: geometry.size.width,
+                latitude: cafe.latitude, longitude: cafe.longitude
+            )
             ZStack {
                 Color(.secondarySystemBackground)
                 if let snapshot {

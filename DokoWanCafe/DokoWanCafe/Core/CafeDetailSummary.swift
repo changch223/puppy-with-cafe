@@ -50,7 +50,7 @@ enum CafeDetailHighlights {
     }
 
     /// 今日: 「営業中・19:00まで」／「営業時間外」／「本日定休」／「営業時間は下記」（曜日別の時間は無く
-    /// hours_text だけがある店）／「時間の情報なし」。
+    /// hours_text だけがある店）／「営業時間は分かりません」。
     /// 「いつ行く？」で対象時刻を決めているとき（`isTargetTime`）は、行の「土 12:00 は営業中」と食い違って見えないよう、
     /// タイルの見出しを「土 12:00」にして、その時刻の営業を示す（定休は「定休」。「本日」とは言わない）。
     static func today(
@@ -63,6 +63,12 @@ enum CafeDetailHighlights {
         let title = isTargetTime ? TargetTime.shortLabel(date) : String(localized: "今日")
         switch OpeningHoursEvaluator.state(hours: hours, at: date, timeZone: timeZone) {
         case .open:
+            // 一覧の行と同じく、今の時刻で閉店まで60分以内なら「あと◯分で閉店」（未来の時刻には出さない）
+            if !isTargetTime,
+               let remaining = OpeningHoursEvaluator.minutesUntilClosingIfOpen(hours: hours, at: date, timeZone: timeZone),
+               (1...OpenLine.closingSoonMinutes).contains(remaining) {
+                return CafeDetailHighlight(title: title, value: String(localized: "あと\(remaining)分で閉店"), tone: .caution)
+            }
             let value: String
             if let closing = OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: date, timeZone: timeZone) {
                 value = String(localized: "営業中・\(closing)まで")
@@ -79,7 +85,7 @@ enum CafeDetailHighlights {
             if hasText(hoursText) {
                 return CafeDetailHighlight(title: title, value: String(localized: "営業時間は下記"), tone: .neutral)
             }
-            return CafeDetailHighlight(title: title, value: String(localized: "時間の情報なし"), tone: .unknown)
+            return CafeDetailHighlight(title: title, value: String(localized: "営業時間は分かりません"), tone: .unknown)
         }
     }
 
@@ -143,9 +149,9 @@ enum CafeDetailUnknowns {
         if amenities?.indoor == nil {
             items.append(String(localized: "店内に入れるか"))
         }
-        // サイズ上限の明記（自由記述・席ごとの上限）があれば、大型犬の可否は「分からない」とは言えない
-        let hasSizeLimit = CafeDetailHighlights.hasText(cafe.dogSizeLimit)
-            || amenities?.sizeMaxIndoor != nil || amenities?.sizeMaxTerrace != nil
+        // 席ごとの上限（構造化された列）があれば、大型犬の可否は「分からない」とは言えない。
+        // 自由記述の dogSizeLimit は「大型犬は記載なし」「テラス4席限定」のような文も入るので、判定に使わない。
+        let hasSizeLimit = amenities?.sizeMaxIndoor != nil || amenities?.sizeMaxTerrace != nil
         if amenities?.largeDogs == nil, !hasSizeLimit {
             items.append(String(localized: "大型犬が入れるか"))
         }

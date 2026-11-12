@@ -13,8 +13,8 @@ extension Color {
 
     static let cafeDetailGreen = cafeDetailAdaptive(
         light: UIColor(red: 0.05, green: 0.48, blue: 0.22, alpha: 1), dark: .systemGreen)
-    static let cafeDetailTeal = cafeDetailAdaptive(
-        light: UIColor(red: 0.00, green: 0.45, blue: 0.50, alpha: 1), dark: .systemTeal)
+    /// テラスの色。一覧・ピンと同じ青にそろえる
+    static let cafeDetailTeal = Color.terraceText
     static let cafeDetailOrange = cafeDetailAdaptive(
         light: UIColor(red: 0.74, green: 0.36, blue: 0.00, alpha: 1), dark: .systemOrange)
     static let cafeDetailBlue = cafeDetailAdaptive(
@@ -427,10 +427,11 @@ struct CafeDetailUnknownsLine: View {
                     .font(.caption)
                     .opacity(0.85)
             }
-            .foregroundStyle(Color.cafeDetailOrange)
+            // ほとんどの店で出る行なので、注意の色（橙）にはしない
+            .foregroundStyle(Color(.secondaryLabel))
             .padding(12)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.cafeDetailOrange.opacity(0.10), in: RoundedRectangle(cornerRadius: 12))
+            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
             .accessibilityElement(children: .combine)
         }
     }
@@ -448,6 +449,8 @@ struct CafeDetailBottomBar: View {
     let onSaveAction: (SaveAction) -> Void
 
     static let buttonHeight: CGFloat = 48
+    /// 主ボタン「経路」が必ず確保する幅（アイコン＋「経路」が読める幅）
+    static let routeMinWidth: CGFloat = 104
     /// 外側（バーの打ち止め前）の文字サイズ。大きいときは電話をアイコンだけにして幅を空ける
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
@@ -464,7 +467,7 @@ struct CafeDetailBottomBar: View {
             // 電話がある店のみ。無い店は他のボタンが広がる。
             if hasPhone {
                 Button(action: onCall) {
-                    barLabel(String(localized: "電話"), systemImage: "phone.fill", showsTitle: !dynamicTypeSize.isAccessibilitySize)
+                    barLabel(String(localized: "電話"), systemImage: "phone.fill", showsTitle: !isCompact)
                         .foregroundStyle(Color.accentColor)
                         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
                 }
@@ -487,7 +490,7 @@ struct CafeDetailBottomBar: View {
     private func barLabel(
         _ title: String, systemImage: String, flexible: Bool = false, showsTitle: Bool = true
     ) -> some View {
-        let large = dynamicTypeSize.isAccessibilitySize
+        let large = isCompact
         return HStack(spacing: 6) {
             Image(systemName: systemImage)
                 .accessibilityHidden(true)
@@ -500,9 +503,12 @@ struct CafeDetailBottomBar: View {
         }
         .font(.subheadline.bold())
         .padding(.horizontal, large ? 10 : 14)
-        .frame(maxWidth: flexible ? .infinity : nil, minHeight: Self.buttonHeight)
+        .frame(minWidth: flexible ? Self.routeMinWidth : nil, maxWidth: flexible ? .infinity : nil, minHeight: Self.buttonHeight)
         .contentShape(RoundedRectangle(cornerRadius: 12))
     }
+
+    /// 文字が大きいとき（xxLarge 以上）は、電話をアイコンだけにし、保存のラベルを縮めて、主ボタン「経路」の文字を守る
+    private var isCompact: Bool { dynamicTypeSize >= .xxLarge }
 
     private var savedLabel: some View {
         barLabel(saved.title, systemImage: saved.systemImage)
@@ -521,6 +527,7 @@ struct CafeDetailBottomBar: View {
             } primaryAction: {
                 onSaveAction(tap)
             }
+            .menuOrder(.fixed)
             .accessibilityLabel(Text(saved.accessibilityLabel))
         } else {
             Menu {
@@ -528,6 +535,7 @@ struct CafeDetailBottomBar: View {
             } label: {
                 savedLabel
             }
+            .menuOrder(.fixed)
             .accessibilityLabel(Text(saved.accessibilityLabel))
         }
     }

@@ -17,7 +17,7 @@ enum SaveAction: Equatable, Sendable {
         switch self {
         case .addWantToGo: return String(localized: "行きたいに入れる")
         case .markVisited: return String(localized: "行ったに記録する")
-        case .backToWantToGo: return String(localized: "行きたいに戻す")
+        case .backToWantToGo: return String(localized: "行きたいに戻す（行った記録は消えます）")
         case .removeFromSaved:
             return status == .wantToGo ? String(localized: "行きたいから外す") : String(localized: "保存から外す")
         }

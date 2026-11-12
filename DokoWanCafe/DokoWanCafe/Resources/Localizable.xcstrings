@@ -2991,16 +2991,6 @@
         }
       }
     },
-    "時間の情報なし" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "時間の情報なし"
-          }
-        }
-      }
-    },
     "時間外" : {
       "localizations" : {
         "ja" : {
@@ -3741,12 +3731,12 @@
         }
       }
     },
-    "行きたいに戻す" : {
+    "行きたいに戻す（行った記録は消えます）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "行きたいに戻す"
+            "value" : "行きたいに戻す（行った記録は消えます）"
           }
         }
       }
