@@ -1,7 +1,7 @@
 import UIKit
 
 /// 地図ピンの画像を描いてキャッシュする（毎回描かない）。
-/// 形（丸／角丸四角／しずく）と色の両方で区別し、中に白い肉球を置く。保存済みは白い縁を太く、選択中は大きくする。
+/// 形（丸／角丸四角／しずく／菱形）と色の両方で区別し、中に席の種類の白い絵柄（`MapPinCategory.symbolName`。店内OK＝家、テラス＝傘、条件を確認＝？、未確認＝肉球）を置く。保存済みは白い縁を太く、選択中は大きくする。
 /// 同じ場所に複数の店があるとき（`count` が2以上）は、右上に数のバッジ（白地の丸に濃い文字。10以上は「9+」）を付ける。
 /// 描画とキャッシュはメインスレッドから呼ぶ前提。薄く見せる（営業時間外）処理は画像ではなく表示側の alpha で行うので、画像は可否の分類×保存×選択×バッジの数だけでキャッシュできる。
 enum MapPinRenderer {
@@ -38,7 +38,7 @@ enum MapPinRenderer {
     static func fillColor(for category: MapPinCategory) -> UIColor {
         switch category {
         case .indoorOK: return UIColor(red: 0x23 / 255, green: 0x73 / 255, blue: 0x5A / 255, alpha: 1)
-        case .terraceOnly: return UIColor(red: 0x1B / 255, green: 0x8F / 255, blue: 0x9C / 255, alpha: 1)
+        case .terraceOnly: return UIColor(red: 0x1F / 255, green: 0x7F / 255, blue: 0xB5 / 255, alpha: 1)
         case .checkDetail: return UIColor(red: 0xE0 / 255, green: 0x7B / 255, blue: 0x1F / 255, alpha: 1)
         case .unverified: return UIColor(red: 0x7A / 255, green: 0x7F / 255, blue: 0x85 / 255, alpha: 1)
         }
@@ -85,14 +85,14 @@ enum MapPinRenderer {
             fillColor(for: category).setFill()
             path(for: shape, in: inner).fill()
 
-            // 白い肉球（丸い部分の中央）
+            // 白い絵柄（丸い部分の中央）
             let glyphSide = (shape == .teardrop ? inner.width : min(inner.width, inner.height)) * (shape == .diamond ? 0.5 : 0.52)
             let center = CGPoint(x: inner.midX, y: shape == .teardrop ? inner.minY + inner.width / 2 : inner.midY)
             let configuration = UIImage.SymbolConfiguration(pointSize: glyphSide, weight: .bold)
-            if let paw = UIImage(systemName: "pawprint.fill", withConfiguration: configuration)?
+            if let glyph = UIImage(systemName: category.symbolName, withConfiguration: configuration)?
                 .withTintColor(.white, renderingMode: .alwaysOriginal) {
-                let fitted = aspectFit(paw.size, in: CGSize(width: glyphSide, height: glyphSide))
-                paw.draw(in: CGRect(
+                let fitted = aspectFit(glyph.size, in: CGSize(width: glyphSide, height: glyphSide))
+                glyph.draw(in: CGRect(
                     x: center.x - fitted.width / 2, y: center.y - fitted.height / 2,
                     width: fitted.width, height: fitted.height
                 ))

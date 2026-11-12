@@ -86,8 +86,19 @@ struct CafeDetailAnswer: Equatable, Sendable {
         }
 
         // サイズ制限の記載がある店では「大型犬もOK」と言い切らない（例: 大型犬はテラス席のみ）
+        // 見出しが席を言っているときは、その席に大型犬が入れると DogFit で言える店だけ
+        // （例: 店内OKの見出しなのに、大型犬の明記はテラスだけ、という店では出さない）。
         if amenities?.largeDogs == true, sizeLimit == nil {
-            notes.append(String(localized: "大型犬もOK"))
+            let largeFit = DogFit.evaluate(cafe: cafe, dog: DogProfile(size: .large))
+            let seatAllowsLarge: Bool
+            switch kind {
+            case .indoor: seatAllowsLarge = largeFit.indoor == .fits
+            case .terrace: seatAllowsLarge = largeFit.terrace == .fits
+            default: seatAllowsLarge = true
+            }
+            if seatAllowsLarge {
+                notes.append(String(localized: "大型犬もOK"))
+            }
         }
         return CafeDetailAnswer(
             kind: kind,

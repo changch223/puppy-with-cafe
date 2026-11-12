@@ -63,6 +63,46 @@ enum MapViewModel {
         return heightMeters < pinNameMaxSpanMeters && widthMeters < pinNameMaxSpanMeters
     }
 
+    /// 店名を出す範囲の目安（表示範囲の緯度幅・度）。これ以下に寄せているとき、起点に近い店と選んだ店の名前を出す（約2.2km）。
+    static let nearbyNameMaxLatitudeDelta = 0.02
+    /// 寄せているときに店名を出す、起点から近い店の数
+    static let nearbyNameCount = 3
+
+    /// 地図の寄せ具合による店名の出し方
+    enum PinNameMode: Equatable {
+        /// 大きく寄せている（`showsPinNames`）: 全部のピンに出す（重なりは MapKit の衝突回避に任せる）
+        case all
+        /// 少し寄せている（緯度幅が `nearbyNameMaxLatitudeDelta` 以下）: 起点に近い先頭3店と、選んでいる店だけ
+        case nearby
+        /// 広い縮尺: 出さない
+        case none
+    }
+
+    static func pinNameMode(span: MKCoordinateSpan, centerLatitude: Double) -> PinNameMode {
+        if showsPinNames(span: span, centerLatitude: centerLatitude) { return .all }
+        return span.latitudeDelta <= nearbyNameMaxLatitudeDelta ? .nearby : .none
+    }
+
+    /// 起点から近い順の先頭 `count` 店の id（距離が同じなら元の並びの先）。
+    /// `visibleIDs` を渡すと、いま地図に見えている店の中だけで数える（起点から遠い場所へ動かしても出るように）。nil は全件
+    static func nearestIDs(of items: [CafeWithDistance], visibleIDs: Set<UUID>? = nil, count: Int = nearbyNameCount) -> Set<UUID> {
+        let candidates = visibleIDs.map { ids in items.filter { ids.contains($0.cafe.id) } } ?? items
+        let sorted = candidates.enumerated().sorted {
+            $0.element.distanceMeters != $1.element.distanceMeters
+                ? $0.element.distanceMeters < $1.element.distanceMeters : $0.offset < $1.offset
+        }
+        return Set(sorted.prefix(count).map(\.element.cafe.id))
+    }
+
+    /// そのピンに店名を出すか。選んでいるピンは、広い縮尺でなければ出す。
+    static func showsName(mode: PinNameMode, isNearest: Bool, isSelected: Bool) -> Bool {
+        switch mode {
+        case .all: return true
+        case .nearby: return isNearest || isSelected
+        case .none: return false
+        }
+    }
+
     /// 数字クラスタ廃止の代替: 距離順の上位何件目までを
     /// 各段（必ず表示=required／中距離=defaultHigh）とするかの境界ランク。
     /// これ以降（遠い店）は defaultLow とし、MapKit標準の衝突間引きに委ねることで、

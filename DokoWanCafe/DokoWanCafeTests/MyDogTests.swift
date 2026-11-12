@@ -283,23 +283,11 @@ final class MyDogTests: XCTestCase {
         XCTAssertEqual(text.title, "犬OKのお店 10件")
     }
 
-    func test_タグはうちの子OKが先頭に付く() {
-        let items = sampleItems
-        let fitting = CafePresentation.tags(for: items[0].cafe, dog: DogProfile(size: .small))
-        XCTAssertEqual(fitting.map(\.label), ["うちの子OK", "店内OK"])
-        XCTAssertEqual(fitting.first?.kind, .myDog)
-        // 分からない店・入れない店には付けない
-        XCTAssertEqual(CafePresentation.tags(for: items[0].cafe, dog: DogProfile(size: .medium)).map(\.label), ["店内OK"])
-        XCTAssertEqual(CafePresentation.tags(for: items[1].cafe, dog: DogProfile(size: .large)).map(\.label), ["店内OK"])
-        // 未設定なら従来どおり
-        XCTAssertEqual(CafePresentation.tags(for: items[0].cafe).map(\.label), ["店内OK"])
-    }
-
     func test_読み上げにうちの子の判定が入る() {
         let items = sampleItems
         let now = Date(timeIntervalSince1970: 1_780_000_000)
         let ok = CafePresentation.accessibilityLabel(for: items[0], at: now, dog: DogProfile(size: .small))
-        XCTAssertTrue(ok.contains("うちの子OK"))
+        XCTAssertTrue(ok.contains("うちの子は店内OK"))
         let ng = CafePresentation.accessibilityLabel(for: items[1], at: now, dog: DogProfile(size: .large))
         XCTAssertTrue(ng.contains("うちの子は不可（店内は中型犬まで・テラスは不可）"))
         let none = CafePresentation.accessibilityLabel(for: items[0], at: now)
@@ -313,7 +301,8 @@ final class MyDogTests: XCTestCase {
             for: items, savedPlaces: SavedPlaces(), at: now, isTargetTime: false, clock: now,
             dog: DogProfile(size: .large)
         )
-        XCTAssertTrue(labels[items[2].cafe.id]?.contains("うちの子OK") == true)
+        XCTAssertTrue(labels[items[2].cafe.id]?.contains("うちの子は") == true)
+        XCTAssertFalse(labels[items[2].cafe.id]?.contains("うちの子は不可") == true)
         XCTAssertTrue(labels[items[1].cafe.id]?.contains("うちの子は不可") == true)
         let without = MapViewModel.spokenLabels(
             for: items, savedPlaces: SavedPlaces(), at: now, isTargetTime: false, clock: now

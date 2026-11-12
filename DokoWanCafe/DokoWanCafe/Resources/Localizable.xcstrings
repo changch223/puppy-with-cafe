@@ -131,6 +131,16 @@
         }
       }
     },
+    "%@、%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@、%2$@"
+          }
+        }
+      }
+    },
     "%@、%@、%@のお店" : {
       "localizations" : {
         "ja" : {
@@ -217,6 +227,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@お店"
+          }
+        }
+      }
+    },
+    "%@から・%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@から・%2$@"
           }
         }
       }
@@ -411,12 +431,32 @@
         }
       }
     },
+    "%@・%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@・%2$@"
+          }
+        }
+      }
+    },
     "%@曜は定休" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@曜は定休"
+          }
+        }
+      }
+    },
+    "%@（条件あり）" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@（条件あり）"
           }
         }
       }
@@ -631,6 +671,16 @@
         }
       }
     },
+    "あと%lld分で閉店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あと%lld分で閉店"
+          }
+        }
+      }
+    },
     "あとで設定する" : {
       "localizations" : {
         "ja" : {
@@ -657,6 +707,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "いたずらやスパムを防ぎ、信頼できる情報を保つため、誤り報告の送信時のみサインインをお願いしています。閲覧・検索にサインインは不要です。"
+          }
+        }
+      }
+    },
+    "いちばん近い営業中の店は%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "いちばん近い営業中の店は%@"
           }
         }
       }
@@ -721,12 +781,52 @@
         }
       }
     },
+    "うちの子はテラスならOK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子はテラスならOK"
+          }
+        }
+      }
+    },
+    "うちの子は不可" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子は不可"
+          }
+        }
+      }
+    },
     "うちの子は不可（%@）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "うちの子は不可（%@）"
+          }
+        }
+      }
+    },
+    "うちの子は分かりません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子は分かりません"
+          }
+        }
+      }
+    },
+    "うちの子は店内OK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子は店内OK"
           }
         }
       }
@@ -1011,6 +1111,26 @@
         }
       }
     },
+    "その時間に営業している、いちばん近い店は%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "その時間に営業している、いちばん近い店は%@"
+          }
+        }
+      }
+    },
+    "その時間に営業していると分かっているお店はありません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "その時間に営業していると分かっているお店はありません"
+          }
+        }
+      }
+    },
     "その時間に営業のお店に絞る" : {
       "localizations" : {
         "ja" : {
@@ -1067,6 +1187,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ほぼ全画面"
+          }
+        }
+      }
+    },
+    "まだ分かっていないこと" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "まだ分かっていないこと"
           }
         }
       }
@@ -1291,12 +1421,42 @@
         }
       }
     },
-    "テラスのみ" : {
+    "テラスOKの店" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テラスのみ"
+            "value" : "テラスOKの店"
+          }
+        }
+      }
+    },
+    "テラスならOK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスならOK"
+          }
+        }
+      }
+    },
+    "テラスのみOK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスのみOK"
+          }
+        }
+      }
+    },
+    "テラスのみの店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスのみの店"
           }
         }
       }
@@ -1341,12 +1501,12 @@
         }
       }
     },
-    "テラス席は可。店内は不可または不明です（青緑の角丸四角）" : {
+    "テラス席は可。店内は不可または不明です（青い角丸四角・傘の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テラス席は可。店内は不可または不明です（青緑の角丸四角）"
+            "value" : "テラス席は可。店内は不可または不明です（青い角丸四角・傘の絵柄）"
           }
         }
       }
@@ -1561,6 +1721,16 @@
         }
       }
     },
+    "予約が要るか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "予約が要るか"
+          }
+        }
+      }
+    },
     "人手確認" : {
       "localizations" : {
         "ja" : {
@@ -1577,6 +1747,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "今"
+          }
+        }
+      }
+    },
+    "今、営業中と分かっているお店はありません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今、営業中と分かっているお店はありません"
           }
         }
       }
@@ -1687,6 +1867,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "保存"
+          }
+        }
+      }
+    },
+    "保存から外す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存から外す"
           }
         }
       }
@@ -1881,6 +2071,16 @@
         }
       }
     },
+    "分かりません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分かりません"
+          }
+        }
+      }
+    },
     "利用者提案(検証済み)" : {
       "localizations" : {
         "ja" : {
@@ -2071,6 +2271,16 @@
         }
       }
     },
+    "営業中、%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "営業中、%@"
+          }
+        }
+      }
+    },
     "営業中・%@まで" : {
       "localizations" : {
         "ja" : {
@@ -2107,6 +2317,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "営業時間は下記"
+          }
+        }
+      }
+    },
+    "営業時間は分かりません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "営業時間は分かりません"
           }
         }
       }
@@ -2351,6 +2571,16 @@
         }
       }
     },
+    "大型犬が入れるか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大型犬が入れるか"
+          }
+        }
+      }
+    },
     "大型犬もOK" : {
       "localizations" : {
         "ja" : {
@@ -2441,12 +2671,12 @@
         }
       }
     },
-    "席の種類や条件を詳細で確認（橙のしずく形）" : {
+    "席の種類や条件を詳細で確認（橙のしずく形・？の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "席の種類や条件を詳細で確認（橙のしずく形）"
+            "value" : "席の種類や条件を詳細で確認（橙のしずく形・？の絵柄）"
           }
         }
       }
@@ -2501,6 +2731,26 @@
         }
       }
     },
+    "店内OKの店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内OKの店"
+          }
+        }
+      }
+    },
+    "店内OK（条件あり）" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内OK（条件あり）"
+          }
+        }
+      }
+    },
     "店内で一緒に過ごせます" : {
       "localizations" : {
         "ja" : {
@@ -2517,6 +2767,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "店内で過ごせます"
+          }
+        }
+      }
+    },
+    "店内に入れるか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内に入れるか"
           }
         }
       }
@@ -2601,12 +2861,12 @@
         }
       }
     },
-    "愛犬と店内に入れます（緑の丸）" : {
+    "愛犬と店内に入れます（緑の丸・家の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "愛犬と店内に入れます（緑の丸）"
+            "value" : "愛犬と店内に入れます（緑の丸・家の絵柄）"
           }
         }
       }
@@ -2727,16 +2987,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "時間"
-          }
-        }
-      }
-    },
-    "時間の情報なし" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "時間の情報なし"
           }
         }
       }
@@ -3001,6 +3251,16 @@
         }
       }
     },
+    "来店前にお店へご確認ください" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "来店前にお店へご確認ください"
+          }
+        }
+      }
+    },
     "来店時の条件・マナー" : {
       "localizations" : {
         "ja" : {
@@ -3161,12 +3421,12 @@
         }
       }
     },
-    "犬同伴の可否を確認できていません（グレーの菱形）" : {
+    "犬同伴の可否を確認できていません（グレーの菱形・肉球の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "犬同伴の可否を確認できていません（グレーの菱形）"
+            "value" : "犬同伴の可否を確認できていません（グレーの菱形・肉球の絵柄）"
           }
         }
       }
@@ -3177,6 +3437,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "犬同伴の情報を確認中です"
+          }
+        }
+      }
+    },
+    "犬用メニューがあるか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬用メニューがあるか"
           }
         }
       }
@@ -3431,12 +3701,42 @@
         }
       }
     },
+    "行きたいに入っています。タップで外します。長押しで行ったに記録できます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行きたいに入っています。タップで外します。長押しで行ったに記録できます"
+          }
+        }
+      }
+    },
     "行きたいに入れる" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "行きたいに入れる"
+          }
+        }
+      }
+    },
+    "行きたいに入れる。長押しで行ったに記録できます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行きたいに入れる。長押しで行ったに記録できます"
+          }
+        }
+      }
+    },
+    "行きたいに戻す（行った記録は消えます）" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行きたいに戻す（行った記録は消えます）"
           }
         }
       }
@@ -3481,22 +3781,22 @@
         }
       }
     },
+    "行った ✓" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行った ✓"
+          }
+        }
+      }
+    },
     "行った ✓ %@" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "行った ✓ %@"
-          }
-        }
-      }
-    },
-    "行った、%@。タップで外す" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "行った、%@。タップで外す"
           }
         }
       }
@@ -3517,6 +3817,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "行ったに記録する"
+          }
+        }
+      }
+    },
+    "行った記録があります、%@。タップで操作を選びます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行った記録があります、%@。タップで操作を選びます"
+          }
+        }
+      }
+    },
+    "行った記録があります。タップで操作を選びます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行った記録があります。タップで操作を選びます"
           }
         }
       }

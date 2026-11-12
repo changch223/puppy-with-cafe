@@ -23,6 +23,19 @@ extension MapPinCategory {
     }
 }
 
+extension MapPinCategory {
+    /// ピン・写真のない店のタイルの中に置く SF Symbol（席の種類が絵柄で分かる）。
+    /// 店内OK＝家、テラス＝傘、条件を確認＝？。未確認はまだ席が分からないので従来の肉球のまま。
+    var symbolName: String {
+        switch self {
+        case .indoorOK: return "house.fill"
+        case .terraceOnly: return "umbrella.fill"
+        case .checkDetail: return "questionmark"
+        case .unverified: return "pawprint.fill"
+        }
+    }
+}
+
 /// 1つのピンの見た目を決める要素（純ロジック・描画しない）。
 /// 営業時間が分かっていて今は営業していない店のピンは薄くする（時間が不明の店は薄くしない）。
 struct MapPinStyle: Hashable, Sendable {

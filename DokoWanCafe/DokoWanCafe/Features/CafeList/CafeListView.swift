@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// 一覧の1行（再設計 段階1a）: 写真（なければ頭文字タイル）／店名・タグ・条件の要点・営業の行／徒歩の目安。
-/// 詳細を開かなくても「入れるか・今開いているか・どれくらいで着くか」が分かる。
+/// 一覧の1行（再設計 第1弾）: 写真（なければカテゴリの絵柄のタイル）と、3行（店名／答え1行／営業・距離）。
+/// 詳細を開かなくても「入れるか・今開いているか・どれくらいで着くか」が分かる。条件文は詳細とカードで読む。
 struct CafeRowView: View {
     let item: CafeWithDistance
     /// 保存の状態（行きたい＝肉球、行った＝チェック）。未保存は nil
@@ -22,8 +22,7 @@ struct CafeRowView: View {
     private var walking: WalkingTime.Summary { WalkingTime.summary(meters: item.distanceMeters) }
 
     var body: some View {
-        // 大きな文字では横に並べると店名・タグ・徒歩の表示が画面からはみ出すため、縦に積む
-        // （写真＋店名の1行 → タグ・条件・営業 → 徒歩の目安）
+        // 大きな文字では写真と店名の1行の下に、答え・営業と距離を全幅で並べる
         Group {
             if dynamicTypeSize.isAccessibilitySize {
                 VStack(alignment: .leading, spacing: 8) {
@@ -33,7 +32,6 @@ struct CafeRowView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     details
-                    walkingView(alignment: .leading)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             } else {
@@ -44,11 +42,7 @@ struct CafeRowView: View {
                         nameLine
                         details
                     }
-
-                    Spacer(minLength: 4)
-
-                    walkingView(alignment: .trailing)
-                        .fixedSize(horizontal: true, vertical: false)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
@@ -84,32 +78,14 @@ struct CafeRowView: View {
         }
     }
 
-    /// タグ・条件の要点・うちの子の注記・営業の行
+    /// 答えの1行と、営業・距離の1行
     private var details: some View {
         VStack(alignment: .leading, spacing: 4) {
-            CafeTagsView(cafe: cafe)
-            if let condition = CafePresentation.conditionSummary(for: cafe) {
-                Text(condition)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4 : 2)
-            }
-            MyDogNoteView(cafe: cafe)
-            OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
-        }
-    }
-
-    /// 徒歩の目安（標準は右端に右寄せ、大きな文字では下に左寄せ）
-    private func walkingView(alignment: HorizontalAlignment) -> some View {
-        VStack(alignment: alignment, spacing: 2) {
-            Text(walking.headline)
-                .font(.subheadline.bold())
-                .multilineTextAlignment(alignment == .leading ? .leading : .trailing)
-            if let detail = walking.detail {
-                Text(detail)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
+            AnswerLineView(cafe: cafe)
+            OpenAndDistanceLineView(
+                line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime),
+                walking: walking
+            )
         }
     }
 }

@@ -123,8 +123,10 @@ struct CafeMapView: UIViewRepresentable {
             let dog: DogProfile?
         }
         private var annotationsByID: [UUID: CafeAnnotation] = [:]
-        /// 今の縮尺で店名をピンの下に出すか（大きな縮尺のときだけ）
-        private var showsNames = false
+        /// 今の縮尺での店名の出し方（大きく寄せたら全部、少し寄せたら起点に近い3店と選んだ店だけ）
+        private var nameMode: MapViewModel.PinNameMode = .none
+        /// いま見えている範囲の中で起点から近い先頭3店の id（表示結果が変わったら・地図が動き終わったら作り直す）
+        private var nearestNameIDs: Set<UUID> = []
         private static let nameLabelTag = 7_001
         /// `syncAnnotations` が注釈を付け外ししている間は true。MKMapView は選択中の注釈を外すと同期で didDeselect を呼ぶので、
         /// その間はカードの選択（`parent.selectedItem`）を消さない（代表が変わっただけでカードが閉じないように）。
@@ -148,6 +150,9 @@ struct CafeMapView: UIViewRepresentable {
             guard key != lastSyncKey else { return }
             lastSyncKey = key
             let items = parent.items
+            let nearest = nameMode == .nearby ? computeNearestNameIDs(on: mapView) : []
+            let nearestChanged = nearest != nearestNameIDs
+            nearestNameIDs = nearest
             let favoriteIDs = parent.savedPlaces.wantToGoIDs
             let styles = MapViewModel.styles(for: items, favoriteIDs: favoriteIDs, at: parent.now)
             let spokenLabels = MapViewModel.spokenLabels(
@@ -204,7 +209,26 @@ struct CafeMapView: UIViewRepresentable {
                 }
             }
             if !added.isEmpty { mapView.addAnnotations(added) }
+            // 起点に近い3店が入れ替わったら、表示中のピンの店名を付け直す
+            if nearestChanged, nameMode == .nearby { refreshVisibleAnnotationViews(on: mapView) }
             reconcileSelection(on: mapView)
+        }
+
+        /// いま地図に見えている範囲の中で、起点から近い順の先頭3店の id
+        private func computeNearestNameIDs(on mapView: MKMapView) -> Set<UUID> {
+            let visibleRect = mapView.visibleMapRect
+            let visible = Set(parent.items.filter {
+                visibleRect.contains(MKMapPoint(CLLocationCoordinate2D(latitude: $0.cafe.latitude, longitude: $0.cafe.longitude)))
+            }.map(\.cafe.id))
+            return MapViewModel.nearestIDs(of: parent.items, visibleIDs: visible)
+        }
+
+        /// 表示中のピンの見た目を作り直す（店名の出し方が変わったとき）
+        private func refreshVisibleAnnotationViews(on mapView: MKMapView) {
+            for case let annotation as CafeAnnotation in mapView.annotations(in: mapView.visibleMapRect) {
+                guard let view = mapView.view(for: annotation) else { continue }
+                configure(view, for: annotation, isSelected: isSelected(annotation))
+            }
         }
 
         /// 地図の外でカードの店が変わったとき（`syncAnnotations` が早く戻る場合も含む）に、地図の選択を合わせる。
@@ -246,13 +270,17 @@ struct CafeMapView: UIViewRepresentable {
             view.canShowCallout = false
             view.clusteringIdentifier = nil
             view.accessibilityLabel = annotation.spokenLabel
-            configureNameLabel(on: view, name: MapViewModel.nameLabel(for: annotation.members))
+            let isNearest = annotation.members.contains { nearestNameIDs.contains($0.cafe.id) }
+            configureNameLabel(
+                on: view, name: MapViewModel.nameLabel(for: annotation.members),
+                shows: MapViewModel.showsName(mode: nameMode, isNearest: isNearest, isSelected: isSelected)
+            )
         }
 
-        /// ピンの下の店名（大きな縮尺のときだけ）。読み上げはピン本体が担うので、ラベルは VoiceOver から隠す。
-        private func configureNameLabel(on view: MKAnnotationView, name: String) {
+        /// ピンの下の店名（寄せているときだけ。`MapViewModel.showsName`）。読み上げはピン本体が担うので、ラベルは VoiceOver から隠す。
+        private func configureNameLabel(on view: MKAnnotationView, name: String, shows: Bool) {
             let existing = view.viewWithTag(Self.nameLabelTag) as? UILabel
-            guard showsNames else {
+            guard shows else {
                 existing?.isHidden = true
                 return
             }
@@ -297,6 +325,14 @@ struct CafeMapView: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
             let byUser = regionChangeIsByUser
             regionChangeIsByUser = false
+            // 動き終わったら、見えている範囲の中の「起点に近い3店」を取り直す（ピンの付け外しはしないので選択は外れない）
+            if nameMode == .nearby {
+                let nearest = computeNearestNameIDs(on: mapView)
+                if nearest != nearestNameIDs {
+                    nearestNameIDs = nearest
+                    refreshVisibleAnnotationViews(on: mapView)
+                }
+            }
             guard let onRegionSettled = parent.onRegionSettled else { return }
             let region = mapView.region
             guard CLLocationCoordinate2DIsValid(region.center) else { return }
@@ -307,16 +343,14 @@ struct CafeMapView: UIViewRepresentable {
             DispatchQueue.main.async { onRegionSettled(region.center, width, byUser) }
         }
 
-        /// 縮尺が変わったとき、店名を出す／隠すが切り替わるなら表示中のピンを更新する
+        /// 縮尺が変わったとき、店名の出し方が切り替わるなら表示中のピンを更新する
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
             let region = mapView.region
-            let shows = MapViewModel.showsPinNames(span: region.span, centerLatitude: region.center.latitude)
-            guard shows != showsNames else { return }
-            showsNames = shows
-            for case let annotation as CafeAnnotation in mapView.annotations(in: mapView.visibleMapRect) {
-                guard let view = mapView.view(for: annotation) else { continue }
-                configure(view, for: annotation, isSelected: isSelected(annotation))
-            }
+            let mode = MapViewModel.pinNameMode(span: region.span, centerLatitude: region.center.latitude)
+            guard mode != nameMode else { return }
+            nameMode = mode
+            nearestNameIDs = mode == .nearby ? computeNearestNameIDs(on: mapView) : []
+            refreshVisibleAnnotationViews(on: mapView)
         }
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

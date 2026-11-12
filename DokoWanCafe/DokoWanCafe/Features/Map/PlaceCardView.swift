@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// ピンを選んだときに一覧シートの中身が変わる「店のカード」（再設計 段階1a）。
-/// 写真 or 頭文字タイル・店名・タグ・条件の要点・営業の行・徒歩の目安と、経路／電話／行きたい／共有、「詳しく見る」。
+/// 写真 or カテゴリの絵柄のタイル・店名・答え1行・条件の要点・営業の行・徒歩の目安と、経路／電話／行きたい／共有、「詳しく見る」。
 /// 一覧に戻す（✕）と、シートは元の段に戻る。
 struct PlaceCardView: View {
     let item: CafeWithDistance
@@ -20,6 +20,8 @@ struct PlaceCardView: View {
     let onClose: () -> Void
     /// 同じ場所の列で別の店を選んだとき（カードをその店に切り替える。地図の選択は変えない）
     var onSelectSameSpot: (CafeWithDistance) -> Void = { _ in }
+    /// 行った店の保存メニューで選んだ操作
+    var onSaveAction: (SaveAction) -> Void = { _ in }
 
     @Environment(\.openURL) private var openURL
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -165,7 +167,7 @@ struct PlaceCardView: View {
         .accessibilityLabel(Text("閉じて一覧に戻る"))
     }
 
-    /// 店名・タグ・条件の要点・営業と徒歩の目安
+    /// 店名・答え1行・条件の要点・営業と徒歩の目安
     private var cardInfo: some View {
         let isLarge = dynamicTypeSize.isAccessibilitySize
         return VStack(alignment: .leading, spacing: 6) {
@@ -179,14 +181,13 @@ struct PlaceCardView: View {
                     VisitedCheckIcon()
                 }
             }
-            CafeTagsView(cafe: cafe)
+            AnswerLineView(cafe: cafe)
             if let condition = CafePresentation.conditionSummary(for: cafe) {
                 Text(condition)
                     .font(.caption)
                     .foregroundStyle(Color(.secondaryLabel))
                     .lineLimit(isLarge ? nil : 2)
             }
-            MyDogNoteView(cafe: cafe)
             let line = HStack(spacing: 8) {
                 OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
                 Text(walkingText)
@@ -207,19 +208,37 @@ struct PlaceCardView: View {
     }
 
     /// 「行きたい」ボタン（トグル）。詳細と同じ表示で、行きたいのときだけ塗った肉球にする。
-    /// 行った店は未保存と同じ表示（塗っていない肉球）で、押すと「行きたい」に戻す
-    /// （保存から黙って消さない。行った記録を外すのは詳細の「行った ✓」と保存タブのスワイプだけ）。
-    /// 行った状態は名前の横のチェックで示す。
+    /// 行った店は「行った」の表示にし、押すとメニュー（行きたいに戻す／保存から外す）を出す
+    /// （タップ1回で行った記録を消さない。詳細の保存ボタンと同じ選択肢）。
+    @ViewBuilder
     private var savedButton: some View {
-        let isWantToGo = savedStatus == .wantToGo
-        return Button(action: onToggleWantToGo) {
-            CafeDetailActionLabel(
-                title: String(localized: "行きたい"),
-                systemImage: isWantToGo ? "pawprint.fill" : "pawprint"
-            )
+        if savedStatus == .visited {
+            // 行った店: タップ1回で行った記録が消えないよう、詳細と同じ選択肢をメニューで出す
+            let state = SaveStateButton.make(status: .visited, visitedDate: nil)
+            Menu {
+                ForEach(state.menuActions, id: \.self) { action in
+                    Button(role: action.isDestructive ? .destructive : nil) {
+                        onSaveAction(action)
+                    } label: {
+                        Label(action.menuTitle(from: .visited), systemImage: action.systemImage)
+                    }
+                }
+            } label: {
+                CafeDetailActionLabel(title: String(localized: "行った"), systemImage: "checkmark.circle.fill")
+            }
+            .menuOrder(.fixed)
+            .accessibilityLabel(Text(state.accessibilityLabel))
+        } else {
+            let isWantToGo = savedStatus == .wantToGo
+            Button(action: onToggleWantToGo) {
+                CafeDetailActionLabel(
+                    title: String(localized: "行きたい"),
+                    systemImage: isWantToGo ? "pawprint.fill" : "pawprint"
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(isWantToGo ? "行きたいから外す" : "行きたいに入れる"))
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text(isWantToGo ? "行きたいから外す" : "行きたいに入れる"))
     }
 
     private var walkingText: String {

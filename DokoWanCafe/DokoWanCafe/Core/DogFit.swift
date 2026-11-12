@@ -159,6 +159,16 @@ extension DogFit.Result {
     }
 
     /// 入れない理由。席ごとに「店内は中型犬まで」「テラスは不可」を「・」でつなぐ。入れない店でなければ nil
+    /// 入れないと明記された席だけの理由（総合の判定が「分からない」のときにも使う。例: 店内は小型犬まで・テラスは記載なし
+    /// → 「店内は小型犬まで」）。入れないと明記された席がなければ nil
+    var notAllowedSeatsText: String? {
+        let parts = [
+            Self.reason(of: indoor, seat: .indoor),
+            Self.reason(of: terrace, seat: .terrace),
+        ].compactMap { $0 }
+        return parts.isEmpty ? nil : parts.joined(separator: "・")
+    }
+
     var reasonText: String? {
         guard overall == .doesNotFit else { return nil }
         if case .doesNotFit(.policyNotAllowed) = indoor {

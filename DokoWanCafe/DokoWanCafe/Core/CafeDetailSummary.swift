@@ -33,7 +33,8 @@ enum CafeDetailHighlights {
         isTargetTime: Bool = false,
         timeZone: TimeZone = OpeningHoursEvaluator.tokyoTimeZone
     ) -> [CafeDetailHighlight] {
-        [
+        // 分かっていることだけを出す（「情報なし」のタイルは出さず、分からない項目は CafeDetailUnknowns が1か所にまとめる）
+        let tiles = [
             today(
                 hours: cafe.hours, hoursText: cafe.hoursText, at: date,
                 isTargetTime: isTargetTime, timeZone: timeZone
@@ -45,10 +46,11 @@ enum CafeDetailHighlights {
                 hasSizeLimit: hasText(cafe.dogSizeLimit)
             ),
         ]
+        return tiles.filter { $0.tone != .unknown }
     }
 
     /// 今日: 「営業中・19:00まで」／「営業時間外」／「本日定休」／「営業時間は下記」（曜日別の時間は無く
-    /// hours_text だけがある店）／「時間の情報なし」。
+    /// hours_text だけがある店）／「営業時間は分かりません」。
     /// 「いつ行く？」で対象時刻を決めているとき（`isTargetTime`）は、行の「土 12:00 は営業中」と食い違って見えないよう、
     /// タイルの見出しを「土 12:00」にして、その時刻の営業を示す（定休は「定休」。「本日」とは言わない）。
     static func today(
@@ -61,6 +63,12 @@ enum CafeDetailHighlights {
         let title = isTargetTime ? TargetTime.shortLabel(date) : String(localized: "今日")
         switch OpeningHoursEvaluator.state(hours: hours, at: date, timeZone: timeZone) {
         case .open:
+            // 一覧の行と同じく、今の時刻で閉店まで60分以内なら「あと◯分で閉店」（未来の時刻には出さない）
+            if !isTargetTime,
+               let remaining = OpeningHoursEvaluator.minutesUntilClosingIfOpen(hours: hours, at: date, timeZone: timeZone),
+               (1...OpenLine.closingSoonMinutes).contains(remaining) {
+                return CafeDetailHighlight(title: title, value: String(localized: "あと\(remaining)分で閉店"), tone: .caution)
+            }
             let value: String
             if let closing = OpeningHoursEvaluator.closingTimeIfOpen(hours: hours, at: date, timeZone: timeZone) {
                 value = String(localized: "営業中・\(closing)まで")
@@ -77,24 +85,30 @@ enum CafeDetailHighlights {
             if hasText(hoursText) {
                 return CafeDetailHighlight(title: title, value: String(localized: "営業時間は下記"), tone: .neutral)
             }
-            return CafeDetailHighlight(title: title, value: String(localized: "時間の情報なし"), tone: .unknown)
+            return CafeDetailHighlight(title: title, value: String(localized: "営業時間は分かりません"), tone: .unknown)
         }
     }
 
     /// 予約: reservation の要約（最初の1行・長ければ省略）。なければ「情報なし」
     static func reservation(_ text: String?) -> CafeDetailHighlight {
         let title = String(localized: "予約")
-        guard let firstLine = text?
-            .split(whereSeparator: \.isNewline).first
-            .map({ $0.trimmingCharacters(in: .whitespaces) }),
-            !firstLine.isEmpty
-        else {
+        guard let firstLine = reservationFirstLine(text) else {
             return CafeDetailHighlight(title: title, value: String(localized: "情報なし"), tone: .unknown)
         }
         let value = firstLine.count > reservationMaxLength
             ? String(firstLine.prefix(reservationMaxLength - 1)) + "…"
             : firstLine
         return CafeDetailHighlight(title: title, value: value, tone: .neutral)
+    }
+
+    /// 予約の記載の最初の1行（空白だけ・未記載は nil。タイルと「まだ分かっていないこと」で同じ判定を使う）
+    static func reservationFirstLine(_ text: String?) -> String? {
+        guard let firstLine = text?
+            .split(whereSeparator: \.isNewline).first
+            .map({ $0.trimmingCharacters(in: .whitespaces) }),
+            !firstLine.isEmpty
+        else { return nil }
+        return firstLine
     }
 
     /// 大型犬: 可／不可／情報なし。確認済みでない店（未確認・確認日なし）は「可」と言い切らず中立の
@@ -116,8 +130,41 @@ enum CafeDetailHighlights {
         }
     }
 
-    private static func hasText(_ value: String?) -> Bool {
+    static func hasText(_ value: String?) -> Bool {
         value?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+    }
+}
+
+// MARK: - まだ分かっていないこと
+
+/// 「まだ分かっていないこと」の1行に並べる項目（純ロジック。データが空の項目だけを、決まった順に返す）。
+/// 憲章 原則I: 分からないことを「なし」や「不可」と言わず、分からないと言う。
+/// 答えのカードが「確認中」（未確認・確認日なし）または「同伴不可」と言っている店・閉店の店では、
+/// 席や大型犬などを「分かっていない」と並べると答えのカードと矛盾するので出さない（空を返す）。
+enum CafeDetailUnknowns {
+    static func make(cafe: Cafe) -> [String] {
+        guard !cafe.isClosed, CafeDetailAnswer.isConfirmed(cafe), cafe.dogPolicyStatus != .notAllowed else { return [] }
+        var items: [String] = []
+        let amenities = cafe.dogAmenities
+        if amenities?.indoor == nil {
+            items.append(String(localized: "店内に入れるか"))
+        }
+        // 席ごとの上限（構造化された列）があれば、大型犬の可否は「分からない」とは言えない。
+        // 自由記述の dogSizeLimit は「大型犬は記載なし」「テラス4席限定」のような文も入るので、判定に使わない。
+        let hasSizeLimit = amenities?.sizeMaxIndoor != nil || amenities?.sizeMaxTerrace != nil
+        if amenities?.largeDogs == nil, !hasSizeLimit {
+            items.append(String(localized: "大型犬が入れるか"))
+        }
+        if CafeDetailHighlights.reservationFirstLine(cafe.reservation) == nil {
+            items.append(String(localized: "予約が要るか"))
+        }
+        if cafe.hours?.hasAnyDay != true, !CafeDetailHighlights.hasText(cafe.hoursText) {
+            items.append(String(localized: "営業時間"))
+        }
+        if amenities?.dogMenu == nil {
+            items.append(String(localized: "犬用メニューがあるか"))
+        }
+        return items
     }
 }
 
@@ -170,12 +217,12 @@ struct CafeDetailAmenityRow: Equatable, Sendable {
 
     let label: String
     let state: State
-    /// 状態の言葉（「可」「不可」「あり」「なし」「情報なし」）
+    /// 状態の言葉（「可」「不可」「あり」「なし」「分かりません」）
     let valueText: String
 }
 
 enum CafeDetailAmenities {
-    /// 店内・テラス・大型犬・犬メニューの4行。不明は「情報なし」（「不可」と混同しない, FR-104）。
+    /// 店内・テラス・大型犬・犬メニューの4行。不明は「分かりません」（「不可」と混同しない, FR-104）。
     /// `confirmed == false`（未確認・確認日なしの店）では記載があっても「記載あり（未確認）」の中立表示にする。
     /// `hasSizeLimit`（サイズ・席の条件の記載がある店）の大型犬「可」は、タイルと同じ「条件つきで可」の中立表示にする
     /// （条件の中身は答えのカードと「席・サイズの条件」にあるので、この行は状態の言葉だけ）。
@@ -197,7 +244,7 @@ enum CafeDetailAmenities {
         _ label: String, _ value: Bool?, _ confirmed: Bool, yes: String, no: String, yesIsConditional: Bool = false
     ) -> CafeDetailAmenityRow {
         guard let value else {
-            return CafeDetailAmenityRow(label: label, state: .unknown, valueText: String(localized: "情報なし"))
+            return CafeDetailAmenityRow(label: label, state: .unknown, valueText: String(localized: "分かりません"))
         }
         if !confirmed {
             return CafeDetailAmenityRow(label: label, state: .unconfirmed, valueText: String(localized: "記載あり（未確認）"))
