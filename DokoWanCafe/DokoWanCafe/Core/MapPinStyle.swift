@@ -25,13 +25,25 @@ extension MapPinCategory {
 
 extension MapPinCategory {
     /// ピン・写真のない店のタイルの中に置く SF Symbol（席の種類が絵柄で分かる）。
-    /// 店内OK＝家、テラス＝傘、条件を確認＝？。未確認はまだ席が分からないので従来の肉球のまま。
+    /// 店内OK＝フォークとナイフ（お店の中で過ごせる）、テラス＝太陽（外の席）、条件を確認＝？。
+    /// 未確認はまだ席が分からないので従来の肉球のまま。
+    /// （家の絵柄は「家」に、傘の絵柄は「雨」に見えるため、2026-11-13 に差し替えた）
     var symbolName: String {
         switch self {
-        case .indoorOK: return "house.fill"
-        case .terraceOnly: return "umbrella.fill"
+        case .indoorOK: return "fork.knife"
+        case .terraceOnly: return "sun.max.fill"
         case .checkDetail: return "questionmark"
         case .unverified: return "pawprint.fill"
+        }
+    }
+
+    /// 絵柄の下に添える短い文字（絵柄だけでは意味が伝わりにくい2種類に付ける）。
+    /// 店内OK＝「OK」、テラス＝「テラス」。条件を確認・未確認は絵柄だけ。
+    var pinCaption: String? {
+        switch self {
+        case .indoorOK: return "OK"
+        case .terraceOnly: return String(localized: "テラス")
+        case .checkDetail, .unverified: return nil
         }
     }
 }

@@ -1,7 +1,7 @@
 import UIKit
 
 /// 地図ピンの画像を描いてキャッシュする（毎回描かない）。
-/// 形（丸／角丸四角／しずく／菱形）と色の両方で区別し、中に席の種類の白い絵柄（`MapPinCategory.symbolName`。店内OK＝家、テラス＝傘、条件を確認＝？、未確認＝肉球）を置く。保存済みは白い縁を太く、選択中は大きくする。
+/// 形（丸／角丸四角／しずく／菱形）と色の両方で区別し、中に席の種類の白い絵柄（`MapPinCategory.symbolName`。店内OK＝フォークとナイフ＋「OK」、テラス＝太陽＋「テラス」、条件を確認＝？、未確認＝肉球）を置く。保存済みは白い縁を太く、選択中は大きくする。
 /// 同じ場所に複数の店があるとき（`count` が2以上）は、右上に数のバッジ（白地の丸に濃い文字。10以上は「9+」）を付ける。
 /// 描画とキャッシュはメインスレッドから呼ぶ前提。薄く見せる（営業時間外）処理は画像ではなく表示側の alpha で行うので、画像は可否の分類×保存×選択×バッジの数だけでキャッシュできる。
 enum MapPinRenderer {
@@ -15,7 +15,7 @@ enum MapPinRenderer {
 
     private static var cache: [Key: UIImage] = [:]
 
-    static let baseSize: CGFloat = 30
+    static let baseSize: CGFloat = 36
     static let selectedScale: CGFloat = 1.35
     /// 影のための余白
     private static let padding: CGFloat = 4
@@ -88,18 +88,53 @@ enum MapPinRenderer {
             // 白い絵柄（丸い部分の中央）
             let glyphSide = (shape == .teardrop ? inner.width : min(inner.width, inner.height)) * (shape == .diamond ? 0.5 : 0.52)
             let center = CGPoint(x: inner.midX, y: shape == .teardrop ? inner.minY + inner.width / 2 : inner.midY)
-            let configuration = UIImage.SymbolConfiguration(pointSize: glyphSide, weight: .bold)
-            if let glyph = UIImage(systemName: category.symbolName, withConfiguration: configuration)?
-                .withTintColor(.white, renderingMode: .alwaysOriginal) {
-                let fitted = aspectFit(glyph.size, in: CGSize(width: glyphSide, height: glyphSide))
-                glyph.draw(in: CGRect(
-                    x: center.x - fitted.width / 2, y: center.y - fitted.height / 2,
-                    width: fitted.width, height: fitted.height
-                ))
+            if let caption = category.pinCaption {
+                // 絵柄（上）＋短い文字（下）。文字は内側の幅に収まるまで小さくする
+                let side = min(inner.width, inner.height)
+                let captionText = fittedCaption(caption, maxWidth: side * 0.84, preferredSize: side * (caption.count > 2 ? 0.27 : 0.34))
+                let captionSize = captionText.size()
+                let iconSide = side * 0.38
+                let gap = side * 0.01
+                let total = iconSide + gap + captionSize.height
+                let top = center.y - total / 2 + side * 0.02
+                let configuration = UIImage.SymbolConfiguration(pointSize: iconSide, weight: .bold)
+                if let glyph = UIImage(systemName: category.symbolName, withConfiguration: configuration)?
+                    .withTintColor(.white, renderingMode: .alwaysOriginal) {
+                    let fitted = aspectFit(glyph.size, in: CGSize(width: iconSide, height: iconSide))
+                    glyph.draw(in: CGRect(
+                        x: center.x - fitted.width / 2, y: top + (iconSide - fitted.height) / 2,
+                        width: fitted.width, height: fitted.height
+                    ))
+                }
+                captionText.draw(at: CGPoint(x: center.x - captionSize.width / 2, y: top + iconSide + gap))
+            } else {
+                let configuration = UIImage.SymbolConfiguration(pointSize: glyphSide, weight: .bold)
+                if let glyph = UIImage(systemName: category.symbolName, withConfiguration: configuration)?
+                    .withTintColor(.white, renderingMode: .alwaysOriginal) {
+                    let fitted = aspectFit(glyph.size, in: CGSize(width: glyphSide, height: glyphSide))
+                    glyph.draw(in: CGRect(
+                        x: center.x - fitted.width / 2, y: center.y - fitted.height / 2,
+                        width: fitted.width, height: fitted.height
+                    ))
+                }
             }
 
             if count > 1 { drawBadge(count: count, pinRect: outer, in: cg) }
         }
+    }
+
+    /// ピンの中の短い文字（白・太字）。`maxWidth` に収まるまで文字を小さくする
+    private static func fittedCaption(_ text: String, maxWidth: CGFloat, preferredSize: CGFloat) -> NSAttributedString {
+        var size = preferredSize
+        var result = NSAttributedString()
+        repeat {
+            result = NSAttributedString(string: text, attributes: [
+                .font: UIFont.systemFont(ofSize: size, weight: .heavy),
+                .foregroundColor: UIColor.white,
+            ])
+            size -= 0.5
+        } while result.size().width > maxWidth && size > 5
+        return result
     }
 
     /// 右上の数のバッジ（白地の丸＋濃い文字）。ピンの右上の角から少しはみ出させる

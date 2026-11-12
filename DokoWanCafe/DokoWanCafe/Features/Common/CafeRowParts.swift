@@ -11,9 +11,18 @@ struct CategoryTileView: View {
         let color = Color(MapPinRenderer.fillColor(for: category))
         color.opacity(0.18)
             .overlay {
-                Image(systemName: category.symbolName)
-                    .font(.system(size: size * 0.42, weight: .bold))
-                    .foregroundStyle(color)
+                VStack(spacing: size * 0.02) {
+                    Image(systemName: category.symbolName)
+                        .font(.system(size: size * (category.pinCaption == nil ? 0.42 : 0.32), weight: .bold))
+                    if let caption = category.pinCaption {
+                        // ピンと同じ文字（「OK」「テラス」）。タイルの大きさに合わせた固定の大きさ
+                        Text(verbatim: caption)
+                            .font(.system(size: size * (caption.count > 2 ? 0.2 : 0.24), weight: .heavy))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+                    }
+                }
+                .foregroundStyle(color)
             }
             .frame(width: size, height: size)
             .clipShape(RoundedRectangle(cornerRadius: size * 0.16, style: .continuous))
