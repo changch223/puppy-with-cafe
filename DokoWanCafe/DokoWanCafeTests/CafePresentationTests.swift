@@ -42,66 +42,23 @@ final class CafePresentationTests: XCTestCase {
 
     // MARK: - タグ・条件の要点
 
-    func test_タグは可否を1つ出し大型犬OKなら足す() {
-        let indoor = makeCafe(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil))
-        XCTAssertEqual(CafePresentation.tags(for: indoor).map(\.label), ["店内OK", "大型犬OK"])
-
-        let terrace = makeCafe(amenities: DogAmenities(indoor: false, terrace: true, largeDogs: false, dogMenu: nil))
-        XCTAssertEqual(CafePresentation.tags(for: terrace).map(\.label), ["テラスのみ"])
-
-        let unknown = makeCafe(amenities: nil)
-        XCTAssertEqual(CafePresentation.tags(for: unknown).map(\.label), ["条件を確認"])
-
-        let unverified = makeCafe(status: .unverified)
-        XCTAssertEqual(CafePresentation.tags(for: unverified).map(\.label), ["未確認"])
-    }
-
-    func test_テラスのみは店内が不可と分かる店だけで不明なら断定しない() {
+    func test_ピンの分類は店内が不可かどうかに関わらずテラスは同じ() {
         let indoorNo = makeCafe(amenities: DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil))
-        XCTAssertEqual(CafePresentation.categoryLabel(for: indoorNo), "テラスのみ")
-        // 店内が不明（nil）でテラスが可 → 「店内は不可」と断定しない
         let indoorUnknown = makeCafe(amenities: DogAmenities(indoor: nil, terrace: true, largeDogs: nil, dogMenu: nil))
-        XCTAssertEqual(CafePresentation.categoryLabel(for: indoorUnknown), "テラスOK")
-        XCTAssertEqual(CafePresentation.tags(for: indoorUnknown).map(\.label), ["テラスOK"])
-        // ピンの分類（形・色）はどちらも同じ「テラス」
         XCTAssertEqual(MapPinCategory.category(for: indoorNo), .terraceOnly)
         XCTAssertEqual(MapPinCategory.category(for: indoorUnknown), .terraceOnly)
     }
 
-    func test_大型犬OKはサイズの条件が書かれた店には付けない() {
+    func test_大型犬OKの前提はサイズの条件が書かれていない店() {
         let plain = makeCafe(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil))
         XCTAssertTrue(CafePresentation.showsLargeDogTag(for: plain))
-
         let limited = makeCafe(sizeLimit: "体重10kgまで", amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil))
         XCTAssertFalse(CafePresentation.showsLargeDogTag(for: limited))
-        XCTAssertEqual(CafePresentation.tags(for: limited).map(\.label), ["店内OK"])
-
         // サイズ制限が空白だけなら条件なしとして扱う
         let blank = makeCafe(sizeLimit: "  ", amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil))
         XCTAssertTrue(CafePresentation.showsLargeDogTag(for: blank))
-
-        // 大型犬が不可・不明ならもちろん出さない
         let no = makeCafe(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: false, dogMenu: nil))
         XCTAssertFalse(CafePresentation.showsLargeDogTag(for: no))
-    }
-
-    func test_タグは最大2つでうちの子OKを優先する() {
-        let cafe = makeCafe(
-            lastVerified: Date(),
-            amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil)
-        )
-        // うちの子が入れる店: うちの子OK＋可否（大型犬OKは詳細にだけ出る）
-        XCTAssertEqual(CafePresentation.tags(for: cafe, dog: DogProfile(size: .small)).map(\.label), ["うちの子OK", "店内OK"])
-        // うちの子が未設定: 可否＋大型犬OK
-        XCTAssertEqual(CafePresentation.tags(for: cafe).map(\.label), ["店内OK", "大型犬OK"])
-        for dog in [nil, DogProfile(size: .small), DogProfile(size: .large)] {
-            XCTAssertLessThanOrEqual(CafePresentation.tags(for: cafe, dog: dog).count, CafePresentation.maxTagCount)
-        }
-    }
-
-    func test_大型犬の可否が不明ならタグを出さない() {
-        let cafe = makeCafe(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil))
-        XCTAssertEqual(CafePresentation.tags(for: cafe).map(\.label), ["店内OK"])
     }
 
     func test_条件の要点は条件を優先しなければサイズ制限() {
@@ -161,15 +118,24 @@ final class CafePresentationTests: XCTestCase {
         let cafe = makeCafe(
             name: "テストカフェ",
             condition: "テラス席のみ",
-            lastVerified: nil,
-            amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil),
+            lastVerified: monday(hour: 9),
+            amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil, indoorStyle: [.floor]),
             hours: mondayHours
         )
         let item = CafeWithDistance(cafe: cafe, distanceMeters: 520)
-        // 条件文は行から外した（カードと詳細に残る）ので読まない
+        // 条件文は行から外した（カードと詳細に残る）ので読まない。補足は落とさず読む
         XCTAssertEqual(
             CafePresentation.accessibilityLabel(for: item, at: monday(hour: 12)),
-            "テストカフェ、店内OK、大型犬OK、営業中19時まで、徒歩約7分、情報が古い可能性があります"
+            "テストカフェ、店内OK、床で待てる、営業中19時まで、徒歩約7分"
+        )
+        // 確認日がない店は「情報が古い可能性」も読む
+        let stale = makeCafe(
+            name: "テストカフェ", lastVerified: nil,
+            amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil), hours: mondayHours
+        )
+        XCTAssertEqual(
+            CafePresentation.accessibilityLabel(for: CafeWithDistance(cafe: stale, distanceMeters: 520), at: monday(hour: 12)),
+            "テストカフェ、店内OK、営業中19時まで、徒歩約7分、情報が古い可能性があります"
         )
     }
 
@@ -277,6 +243,29 @@ final class CafePresentationTests: XCTestCase {
             for: confirmed(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil))).supplement)
     }
 
+    func test_答え_大型犬OKは主文の席を大型犬でDogFit評価して入れる店だけ() {
+        // Le Maghreb 型: 店内の大きさ上限は明記なし・テラスは大型犬まで・large_dogs=true → 店内は DogFit で unknown なので出さない
+        let twoSeats = confirmed(amenities: DogAmenities(
+            indoor: true, terrace: true, largeDogs: true, dogMenu: nil, sizeMaxTerrace: .large
+        ))
+        let twoSeatsLine = CafePresentation.answerLine(for: twoSeats)
+        XCTAssertEqual(twoSeatsLine.main, "店内OK")
+        XCTAssertNil(twoSeatsLine.supplement)
+        XCTAssertEqual(DogFit.evaluate(cafe: twoSeats, dog: DogProfile(size: .large)).indoor, .unknown(.sizeNotStated))
+
+        // 席が1つだけでサイズ上限なし → 大型犬が入れると判定できるので出す
+        let indoorOnly = confirmed(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil))
+        XCTAssertEqual(CafePresentation.answerLine(for: indoorOnly).supplement, "大型犬OK")
+        // テラスの答えにはテラス席で評価する
+        let terrace = confirmed(amenities: DogAmenities(indoor: nil, terrace: true, largeDogs: true, dogMenu: nil))
+        XCTAssertEqual(CafePresentation.answerLine(for: terrace).text, "テラスならOK・大型犬OK")
+        // 席を言わない答え（条件を確認）には出さない
+        XCTAssertNil(CafePresentation.answerLine(for: confirmed(amenities: DogAmenities(indoor: nil, terrace: nil, largeDogs: true, dogMenu: nil))).supplement)
+        // うちの子が設定済みのときは、大型犬OKの補足を一切出さない
+        XCTAssertNil(CafePresentation.answerLine(for: indoorOnly, dog: DogProfile(size: .large)).supplement)
+        XCTAssertNil(CafePresentation.answerLine(for: indoorOnly, dog: DogProfile(size: .small)).supplement)
+    }
+
     func test_答え_店内が不可と分かる店には過ごし方を添えない() {
         let terrace = confirmed(amenities: DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil, indoorStyle: [.floor]))
         XCTAssertNil(CafePresentation.answerLine(for: terrace).supplement)
@@ -309,10 +298,24 @@ final class CafePresentationTests: XCTestCase {
         // 判定できない → 分かりません（推測で OK と言わない）
         let unknownSize = confirmed(amenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil))
         let unknown = CafePresentation.answerLine(for: unknownSize, dog: big)
-        XCTAssertEqual(unknown.main, "うちの子が入れるかは分かりません")
+        XCTAssertEqual(unknown.main, "うちの子は分かりません")
+        XCTAssertEqual(unknown.supplement, "店内OKの店")
+        XCTAssertEqual(unknown.text, "うちの子は分かりません・店内OKの店")
+        XCTAssertEqual(unknown.spoken, "うちの子は分かりません、店内OKの店")
         XCTAssertEqual(unknown.tone, .attention)
-        // 未確認の店はグレー
-        XCTAssertEqual(CafePresentation.answerLine(for: makeCafe(status: .unverified), dog: small).tone, .unverified)
+        // 席の種類は補足で残す（テラス・テラスのみ）。条件を確認・未確認は補足なし
+        let terraceUnknown = confirmed(amenities: DogAmenities(indoor: nil, terrace: true, largeDogs: nil, dogMenu: nil))
+        XCTAssertEqual(CafePresentation.answerLine(for: terraceUnknown, dog: big).supplement, "テラスOKの店")
+        let terraceOnlyUnknown = confirmed(amenities: DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil))
+        XCTAssertEqual(CafePresentation.answerLine(for: terraceOnlyUnknown, dog: big).supplement, "テラスのみの店")
+        let checkLine = CafePresentation.answerLine(for: confirmed(amenities: nil), dog: small)
+        XCTAssertEqual(checkLine.main, "うちの子は分かりません")
+        XCTAssertNil(checkLine.supplement)
+        XCTAssertEqual(checkLine.tone, .attention)
+        // 未確認の店はグレー・補足なし
+        let unverifiedLine = CafePresentation.answerLine(for: makeCafe(status: .unverified), dog: small)
+        XCTAssertEqual(unverifiedLine.tone, .unverified)
+        XCTAssertNil(unverifiedLine.supplement)
     }
 
     // MARK: - あと◯分で閉店

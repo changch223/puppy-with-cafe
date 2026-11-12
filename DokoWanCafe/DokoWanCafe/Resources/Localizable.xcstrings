@@ -761,16 +761,6 @@
         }
       }
     },
-    "うちの子が入れるかは分かりません" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "うちの子が入れるかは分かりません"
-          }
-        }
-      }
-    },
     "うちの子のことを教えてください" : {
       "localizations" : {
         "ja" : {
@@ -817,6 +807,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "うちの子は不可（%@）"
+          }
+        }
+      }
+    },
+    "うちの子は分かりません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子は分かりません"
           }
         }
       }
@@ -1411,6 +1411,16 @@
         }
       }
     },
+    "テラスOKの店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスOKの店"
+          }
+        }
+      }
+    },
     "テラスならOK" : {
       "localizations" : {
         "ja" : {
@@ -1421,22 +1431,22 @@
         }
       }
     },
-    "テラスのみ" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "テラスのみ"
-          }
-        }
-      }
-    },
     "テラスのみOK" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "テラスのみOK"
+          }
+        }
+      }
+    },
+    "テラスのみの店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスのみの店"
           }
         }
       }
@@ -2667,6 +2677,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "店内OK"
+          }
+        }
+      }
+    },
+    "店内OKの店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内OKの店"
           }
         }
       }

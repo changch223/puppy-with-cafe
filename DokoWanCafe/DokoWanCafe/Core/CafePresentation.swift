@@ -1,68 +1,13 @@
 import Foundation
 
-/// 一覧の行・ピンカードのタグ（最大2つ: うちの子OK ＋ 店内OK／テラスのみ／条件を確認／未確認、または 可否 ＋ 大型犬OK）
-struct CafeTag: Equatable {
-    enum Kind: Equatable {
-        case category(MapPinCategory)
-        case largeDog
-        /// うちの子が入れると明記された店（再設計 段階3）
-        case myDog
-    }
-
-    let kind: Kind
-    let label: String
-}
-
-extension MapPinCategory {
-    /// 行・カード用の短いタグ文言
-    var tagLabel: String {
-        switch self {
-        case .indoorOK: return String(localized: "店内OK")
-        // 店内が不可と分かっているときだけ「テラスのみ」。不明なら断定しない（`CafePresentation.categoryLabel`）
-        case .terraceOnly: return String(localized: "テラスOK")
-        case .checkDetail: return String(localized: "条件を確認")
-        case .unverified: return String(localized: "未確認")
-        }
-    }
-}
-
 /// 行・カードの表示用に店から取り出す要点（純ロジック）
 enum CafePresentation {
-    /// 可否のタグ文言。テラス席のみ可のうち、店内が不可（`indoor == false`）と分かる店だけ「テラスのみ」、
-    /// 店内が不明（nil）の店は「テラスOK」（憶測で「店内は不可」と言わない, 憲章 原則I）。
-    static func categoryLabel(for cafe: Cafe) -> String {
-        let category = MapPinCategory.category(for: cafe)
-        if category == .terraceOnly, cafe.dogAmenities?.indoor == false {
-            return String(localized: "テラスのみ")
-        }
-        return category.tagLabel
-    }
-
-    /// 「大型犬OK」タグを出すか。`largeDogs == true` でも `dogSizeLimit`（サイズの条件）が書かれている店は
+    /// 「大型犬OK」を出す前提条件。`largeDogs == true` でも `dogSizeLimit`（サイズの条件）が書かれている店は
     /// 条件つきなので出さない（詳細画面と同じ規則）。
     static func showsLargeDogTag(for cafe: Cafe) -> Bool {
         guard cafe.dogAmenities?.largeDogs == true else { return false }
         let limit = cafe.dogSizeLimit?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         return limit.isEmpty
-    }
-
-    /// 行・カードのタグ（最大2つ。標準の文字サイズで1行に収める）。
-    /// うちの子が入れると明記された店は「うちの子OK」＋可否のタグ。そうでなければ可否のタグ＋大型犬OK
-    /// （無条件で大型犬が可と分かる店だけ。不明・条件つきは出さない）。「大型犬OK」は詳細にも出る。
-    /// 「うちの子OK」は `dog` が設定済みで、その子が入れると明記された店だけ（再設計 段階3）。
-    static let maxTagCount = 2
-
-    static func tags(for cafe: Cafe, dog: DogProfile? = nil) -> [CafeTag] {
-        let category = MapPinCategory.category(for: cafe)
-        let categoryTag = CafeTag(kind: .category(category), label: categoryLabel(for: cafe))
-        if let dog, let label = DogFit.evaluate(cafe: cafe, dog: dog).tagLabel {
-            return [CafeTag(kind: .myDog, label: label), categoryTag]
-        }
-        var result = [categoryTag]
-        if showsLargeDogTag(for: cafe) {
-            result.append(CafeTag(kind: .largeDog, label: String(localized: "大型犬OK")))
-        }
-        return Array(result.prefix(maxTagCount))
     }
 
     // MARK: - 答えの1行（一覧の行・ピンのカード）
@@ -104,56 +49,66 @@ enum CafePresentation {
     static func answerLine(for cafe: Cafe, dog: DogProfile? = nil) -> AnswerLine {
         let category = MapPinCategory.category(for: cafe)
         let amenities = cafe.dogAmenities
+        let conditional = cafe.dogPolicyStatus == .conditional
         // 過ごし方（indoor_style）は店内の話。店内が不可と分かる店・未確認の店には添えない
         let indoorStyleAllowed = category != .unverified && amenities?.indoor != false
 
         if let dog {
+            // うちの子が設定済みのときは、主文がその子への答え。「大型犬OK」の補足は出さない
             let fit = DogFit.evaluate(cafe: cafe, dog: dog)
             switch fit.overall {
             case .fits:
                 let isIndoor = fit.indoor == .fits
                 let base = isIndoor ? String(localized: "うちの子は店内OK") : String(localized: "うちの子はテラスならOK")
-                let main = cafe.dogPolicyStatus == .conditional ? String(localized: "\(base)（条件あり）") : base
-                // うちの子が使うと明記された過ごし方を優先。なければ大型犬OK
+                let main = conditional ? String(localized: "\(base)（条件あり）") : base
+                // うちの子が使うと明記された過ごし方
                 let style = isIndoor ? fit.matchedStyles.first : nil
-                return AnswerLine(
-                    main: main, supplement: supplement(style: style, for: cafe), tone: isIndoor ? .indoor : .terrace
-                )
+                return AnswerLine(main: main, supplement: style?.displayName, tone: isIndoor ? .indoor : .terrace)
             case .doesNotFit:
                 return AnswerLine(main: fit.rowNote ?? String(localized: "うちの子は不可"), supplement: nil, tone: .notAllowed)
             case .unknown:
+                // 判定できない店は、席の種類だけを補足で伝える（推測で入れるとは言わない）
+                let seat: String?
+                switch category {
+                case .indoorOK: seat = String(localized: "店内OKの店")
+                case .terraceOnly:
+                    seat = amenities?.indoor == false ? String(localized: "テラスのみの店") : String(localized: "テラスOKの店")
+                case .checkDetail, .unverified: seat = nil
+                }
                 return AnswerLine(
-                    main: String(localized: "うちの子が入れるかは分かりません"), supplement: nil,
+                    main: String(localized: "うちの子は分かりません"), supplement: seat,
                     tone: category == .unverified ? .unverified : .attention
                 )
             }
         }
 
-        // 過ごし方は並びを固定（床→カート・キャリー→抱っこ）して先頭の1つ
-        let style = indoorStyleAllowed && category == .indoorOK
-            ? DogStyle.allCases.first { amenities?.indoorStyle?.contains($0) == true } : nil
-        let conditional = cafe.dogPolicyStatus == .conditional
         switch category {
         case .indoorOK:
             let main = conditional ? String(localized: "店内OK（条件あり）") : String(localized: "店内OK")
-            return AnswerLine(main: main, supplement: supplement(style: style, for: cafe), tone: .indoor)
+            // 過ごし方は並びを固定（床→カート・キャリー→抱っこ）して先頭の1つ。なければ大型犬OK
+            let style = indoorStyleAllowed
+                ? DogStyle.allCases.first { amenities?.indoorStyle?.contains($0) == true } : nil
+            return AnswerLine(main: main, supplement: style?.displayName ?? largeDogSupplement(for: cafe, seat: .indoor), tone: .indoor)
         case .terraceOnly:
             // 「のみ」は店内が不可と分かる店だけ（不明なら断定しない）
             let base = amenities?.indoor == false ? String(localized: "テラスのみOK") : String(localized: "テラスならOK")
             let main = conditional ? String(localized: "\(base)（条件あり）") : base
-            return AnswerLine(main: main, supplement: supplement(style: nil, for: cafe), tone: .terrace)
+            return AnswerLine(main: main, supplement: largeDogSupplement(for: cafe, seat: .terrace), tone: .terrace)
         case .checkDetail:
-            return AnswerLine(main: String(localized: "条件を確認"), supplement: supplement(style: nil, for: cafe), tone: .attention)
+            // 席を言わない答えには「大型犬OK」を添えない
+            return AnswerLine(main: String(localized: "条件を確認"), supplement: nil, tone: .attention)
         case .unverified:
             return AnswerLine(main: String(localized: "未確認"), supplement: nil, tone: .unverified)
         }
     }
 
-    /// 補足（1つまで）。過ごし方の明記 ＞ 大型犬OK（`showsLargeDogTag` の条件）
-    private static func supplement(style: DogStyle?, for cafe: Cafe) -> String? {
-        if let style { return style.displayName }
-        if showsLargeDogTag(for: cafe) { return String(localized: "大型犬OK") }
-        return nil
+    /// 「大型犬OK」の補足（うちの子が未設定のときだけ）。主文が指す席を大型犬で `DogFit` 評価して入れると明記される店に限る
+    /// （`large_dogs` だけでは席のサイズ上限と食い違うことがあるため。`DogFit` と同じ判定にそろえる）。
+    private static func largeDogSupplement(for cafe: Cafe, seat: DogFit.Seat) -> String? {
+        guard showsLargeDogTag(for: cafe) else { return nil }
+        let fit = DogFit.evaluate(cafe: cafe, dog: DogProfile(size: .large))
+        let verdict = seat == .indoor ? fit.indoor : fit.terrace
+        return verdict == .fits ? String(localized: "大型犬OK") : nil
     }
 
     /// 条件の要点。`dogPolicyCondition`、なければ `dogSizeLimit`。空文字は無いものとして扱う。

@@ -39,6 +39,17 @@ enum CafeSheetDetent: CaseIterable, Equatable {
         return max(peekHeight, headerBlockHeight + rowPart)
     }
 
+    /// 標準の文字サイズの一覧の行の高さ（店名1行・答え1行・営業と距離1行の3行。写真64ptより低くならない）。
+    /// 先頭の店の店名が2行でも peek と現在地ボタンが動かないよう、標準の文字サイズではこれを使う
+    /// （店名が2行の店が先頭に来たときは3行目が少し切れてもよい）。
+    /// - Parameters:
+    ///   - nameLine / answerLine / openLine: 各行の1行ぶんの高さ（フォントの行高）
+    static func standardRowHeight(nameLine: CGFloat, answerLine: CGFloat, openLine: CGFloat) -> CGFloat {
+        let textHeight = nameLine + answerLine + openLine + 4 * 2
+        // 行の上下の余白 4 + 4（`CafeRowView` の padding）
+        return max(64, textHeight) + 8
+    }
+
     /// VoiceOver で読む今の段の名前
     var accessibilityName: String {
         switch self {
@@ -51,17 +62,23 @@ enum CafeSheetDetent: CaseIterable, Equatable {
     /// 地図表示領域（コンテナ）の高さに対する各段の実際の高さ。
     /// - Parameters:
     ///   - topReserved: 上に残す高さ（検索バー＋条件チップ＋バナーなど）。large はここまでを空ける。
-    ///   - peekHeight: 「見出しだけ」の段の高さ（既定は基本の高さ。半分より高くはならない）
+    ///   - peekHeight: 「見出しだけ」の段の高さ（既定は基本の高さ。先頭の行1つ分を含む。半分より高くはならない）
+    ///   - headerPeekHeight: 見出しブロックだけから求めた peek の高さ（先頭の行を含まない。既定は `peekHeight`）。
+    ///     半分の段の高さはこちらで決める（標準の文字サイズで先頭の行を足したぶん、半分の段が跳ねないように）。
     func height(
         containerHeight: CGFloat,
         topReserved: CGFloat = 0,
-        peekHeight: CGFloat = CafeSheetDetent.peekHeight
+        peekHeight: CGFloat = CafeSheetDetent.peekHeight,
+        headerPeekHeight: CGFloat? = nil
     ) -> CGFloat {
         let peek = min(peekHeight, containerHeight * Self.peekMaxRatio)
         // 見出しが大きい（大きな文字）ときは、半分の段でも見出しの下に一覧が少し見えるようにする
         // （基本の高さのままなら従来どおり地図領域の45%）
+        let headerPeek = headerPeekHeight ?? peekHeight
         let mediumBase = containerHeight * Self.mediumRatio
-        let medium = peekHeight > Self.peekHeight ? max(mediumBase, peek + Self.mediumListAllowance) : mediumBase
+        let medium = headerPeek > Self.peekHeight
+            ? max(mediumBase, min(headerPeek, containerHeight * Self.peekMaxRatio) + Self.mediumListAllowance)
+            : mediumBase
         switch self {
         case .peek:
             return peek
@@ -86,11 +103,12 @@ enum CafeSheetDetent: CaseIterable, Equatable {
         toHeight height: CGFloat,
         containerHeight: CGFloat,
         topReserved: CGFloat = 0,
-        peekHeight: CGFloat = CafeSheetDetent.peekHeight
+        peekHeight: CGFloat = CafeSheetDetent.peekHeight,
+        headerPeekHeight: CGFloat? = nil
     ) -> CafeSheetDetent {
         allCases.min { lhs, rhs in
-            abs(lhs.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight) - height)
-                < abs(rhs.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight) - height)
+            abs(lhs.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight, headerPeekHeight: headerPeekHeight) - height)
+                < abs(rhs.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight, headerPeekHeight: headerPeekHeight) - height)
         } ?? .peek
     }
 
@@ -138,14 +156,27 @@ struct CafeBottomSheet: View {
     @State private var dragTranslation: CGFloat = 0
     /// グラバー＋見出しの実測の高さ（文字が大きいときも見出しが切れないよう「見出しだけ」の段を伸ばす）
     @State private var headerBlockHeight: CGFloat = 0
-    /// 先頭の行の実測の高さ（「見出しだけ」の段で先頭の1店が切れずに読めるように。行がなければ 0）
-    @State private var firstRowHeight: CGFloat = 0
+    /// 先頭の行の実測の高さ（大きな文字で先頭の1店が切れずに読めるように）。最後に測った正の値を残し、0件になったときだけ 0 に戻す
+    @State private var measuredFirstRowHeight: CGFloat = 0
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
+    /// peek に足す先頭の行の高さ。標準の文字サイズでは店名1行ぶんの固定値（先頭の店が入れ替わっても動かない）。
+    /// 大きな文字では実測値。行がない（0件）ときは 0（従来の高さ）
+    private var firstRowHeight: CGFloat {
+        guard measuredFirstRowHeight > 0 else { return 0 }
+        guard !dynamicTypeSize.isAccessibilitySize else { return measuredFirstRowHeight }
+        func line(_ style: UIFont.TextStyle) -> CGFloat { ceil(UIFont.preferredFont(forTextStyle: style).lineHeight) }
+        return CafeSheetDetent.standardRowHeight(
+            nameLine: line(.headline), answerLine: line(.subheadline), openLine: line(.caption1)
+        )
+    }
+
     private var peekHeight: CGFloat { CafeSheetDetent.peekHeight(headerBlockHeight: headerBlockHeight, firstRowHeight: firstRowHeight) }
+    /// 見出しブロックだけから求めた peek の高さ（半分の段の高さの判定用）
+    private var headerPeekHeight: CGFloat { CafeSheetDetent.peekHeight(headerBlockHeight: headerBlockHeight) }
 
     private func height(of detent: CafeSheetDetent) -> CGFloat {
-        detent.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight)
+        detent.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight, headerPeekHeight: headerPeekHeight)
     }
 
     private var baseHeight: CGFloat { height(of: detent) }
@@ -170,7 +201,9 @@ struct CafeBottomSheet: View {
             Divider()
             content
         }
-        .onPreferenceChange(SheetFirstRowHeightKey.self) { firstRowHeight = $0 }
+        // 先頭の行が再利用されて 0 が来ても捨てる（peek が縮まないように）
+        .onPreferenceChange(SheetFirstRowHeightKey.self) { if $0 > 0 { measuredFirstRowHeight = $0 } }
+        .onChange(of: items.isEmpty) { _, isEmpty in if isEmpty { measuredFirstRowHeight = 0 } }
         .frame(maxWidth: .infinity)
         .frame(height: currentHeight, alignment: .top)
         .sheetChrome()
@@ -260,7 +293,7 @@ struct CafeBottomSheet: View {
                 let proposedHeight = baseHeight - value.translation.height
                 let nextDetent = CafeSheetDetent.nearest(
                     toHeight: proposedHeight, containerHeight: containerHeight,
-                    topReserved: topReserved, peekHeight: peekHeight
+                    topReserved: topReserved, peekHeight: peekHeight, headerPeekHeight: headerPeekHeight
                 )
                 withAnimation(.interactiveSpring(response: 0.35, dampingFraction: 0.86)) {
                     detent = nextDetent

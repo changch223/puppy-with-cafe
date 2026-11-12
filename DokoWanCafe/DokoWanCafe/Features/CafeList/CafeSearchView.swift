@@ -448,7 +448,7 @@ struct CafeSearchView: View {
     }
 }
 
-/// 検索候補のお店の行: 名前・2行目（エリア · 距離 · 営業など）・タグ・写真（キャッシュのみ）
+/// 検索候補のお店の行: 名前・2行目（エリア · 距離 · 営業など）・答え1行・写真（キャッシュのみ）
 private struct CafeSearchRow: View {
     let cafe: Cafe
     /// 2行目の文字（無ければ出さない）
@@ -470,7 +470,7 @@ private struct CafeSearchRow: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
-                CafeTagsView(cafe: cafe)
+                AnswerLineView(cafe: cafe)
             }
             Spacer(minLength: 0)
             Image(systemName: "chevron.right")
@@ -486,7 +486,7 @@ private struct CafeSearchRow: View {
 
     private var accessibilityText: String {
         var parts = [cafe.name] + spokenParts
-        parts.append(contentsOf: CafePresentation.tags(for: cafe, dog: dog).map(\.label))
+        parts.append(CafePresentation.answerLine(for: cafe, dog: dog).spoken)
         return parts.joined(separator: "、")
     }
 }

@@ -125,7 +125,7 @@ struct CafeMapView: UIViewRepresentable {
         private var annotationsByID: [UUID: CafeAnnotation] = [:]
         /// 今の縮尺での店名の出し方（大きく寄せたら全部、少し寄せたら起点に近い3店と選んだ店だけ）
         private var nameMode: MapViewModel.PinNameMode = .none
-        /// 起点から近い先頭3店の id（表示結果が変わったら作り直す）
+        /// いま見えている範囲の中で起点から近い先頭3店の id（表示結果が変わったら・地図が動き終わったら作り直す）
         private var nearestNameIDs: Set<UUID> = []
         private static let nameLabelTag = 7_001
         /// `syncAnnotations` が注釈を付け外ししている間は true。MKMapView は選択中の注釈を外すと同期で didDeselect を呼ぶので、
@@ -150,7 +150,7 @@ struct CafeMapView: UIViewRepresentable {
             guard key != lastSyncKey else { return }
             lastSyncKey = key
             let items = parent.items
-            let nearest = MapViewModel.nearestIDs(of: items)
+            let nearest = nameMode == .nearby ? computeNearestNameIDs(on: mapView) : []
             let nearestChanged = nearest != nearestNameIDs
             nearestNameIDs = nearest
             let favoriteIDs = parent.savedPlaces.wantToGoIDs
@@ -212,6 +212,15 @@ struct CafeMapView: UIViewRepresentable {
             // 起点に近い3店が入れ替わったら、表示中のピンの店名を付け直す
             if nearestChanged, nameMode == .nearby { refreshVisibleAnnotationViews(on: mapView) }
             reconcileSelection(on: mapView)
+        }
+
+        /// いま地図に見えている範囲の中で、起点から近い順の先頭3店の id
+        private func computeNearestNameIDs(on mapView: MKMapView) -> Set<UUID> {
+            let visibleRect = mapView.visibleMapRect
+            let visible = Set(parent.items.filter {
+                visibleRect.contains(MKMapPoint(CLLocationCoordinate2D(latitude: $0.cafe.latitude, longitude: $0.cafe.longitude)))
+            }.map(\.cafe.id))
+            return MapViewModel.nearestIDs(of: parent.items, visibleIDs: visible)
         }
 
         /// 表示中のピンの見た目を作り直す（店名の出し方が変わったとき）
@@ -316,6 +325,14 @@ struct CafeMapView: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
             let byUser = regionChangeIsByUser
             regionChangeIsByUser = false
+            // 動き終わったら、見えている範囲の中の「起点に近い3店」を取り直す（ピンの付け外しはしないので選択は外れない）
+            if nameMode == .nearby {
+                let nearest = computeNearestNameIDs(on: mapView)
+                if nearest != nearestNameIDs {
+                    nearestNameIDs = nearest
+                    refreshVisibleAnnotationViews(on: mapView)
+                }
+            }
             guard let onRegionSettled = parent.onRegionSettled else { return }
             let region = mapView.region
             guard CLLocationCoordinate2DIsValid(region.center) else { return }
@@ -332,6 +349,7 @@ struct CafeMapView: UIViewRepresentable {
             let mode = MapViewModel.pinNameMode(span: region.span, centerLatitude: region.center.latitude)
             guard mode != nameMode else { return }
             nameMode = mode
+            nearestNameIDs = mode == .nearby ? computeNearestNameIDs(on: mapView) : []
             refreshVisibleAnnotationViews(on: mapView)
         }
 

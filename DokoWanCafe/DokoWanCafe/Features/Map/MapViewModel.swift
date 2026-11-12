@@ -83,9 +83,11 @@ enum MapViewModel {
         return span.latitudeDelta <= nearbyNameMaxLatitudeDelta ? .nearby : .none
     }
 
-    /// 起点から近い順の先頭 `count` 店の id（距離が同じなら元の並びの先）
-    static func nearestIDs(of items: [CafeWithDistance], count: Int = nearbyNameCount) -> Set<UUID> {
-        let sorted = items.enumerated().sorted {
+    /// 起点から近い順の先頭 `count` 店の id（距離が同じなら元の並びの先）。
+    /// `visibleIDs` を渡すと、いま地図に見えている店の中だけで数える（起点から遠い場所へ動かしても出るように）。nil は全件
+    static func nearestIDs(of items: [CafeWithDistance], visibleIDs: Set<UUID>? = nil, count: Int = nearbyNameCount) -> Set<UUID> {
+        let candidates = visibleIDs.map { ids in items.filter { ids.contains($0.cafe.id) } } ?? items
+        let sorted = candidates.enumerated().sorted {
             $0.element.distanceMeters != $1.element.distanceMeters
                 ? $0.element.distanceMeters < $1.element.distanceMeters : $0.offset < $1.offset
         }

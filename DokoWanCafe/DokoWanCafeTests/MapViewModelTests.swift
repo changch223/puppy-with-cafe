@@ -271,4 +271,27 @@ final class MapViewModelTests: XCTestCase {
         // 広い縮尺は出さない
         XCTAssertFalse(MapViewModel.showsName(mode: .none, isNearest: true, isSelected: true))
     }
+
+
+    func test_店名の近い3店は見えている範囲の中で数える() {
+        let items = [100.0, 200, 300, 400, 5_000, 6_000].map { meters -> CafeWithDistance in
+            let cafe = Cafe(
+                id: UUID(), placeID: nil, name: "\(Int(meters))", latitude: 35.68, longitude: 139.76,
+                address: nil, contact: nil, dogPolicyStatus: .allowed, dogPolicyCondition: nil,
+                lastVerified: nil, representativeSourceID: nil, hasConflict: false, isClosed: false, area: "tokyo"
+            )
+            return CafeWithDistance(cafe: cafe, distanceMeters: meters)
+        }
+        // 起点から遠い場所（5km・6km の店）だけが見えているときも、その中の近い順で出る
+        let farVisible = Set(items.suffix(2).map(\.cafe.id))
+        XCTAssertEqual(MapViewModel.nearestIDs(of: items, visibleIDs: farVisible), farVisible)
+        // 見えている店が多いときは、その中の起点に近い3店
+        let visible = Set(items.map(\.cafe.id)).subtracting([items[0].cafe.id])
+        XCTAssertEqual(
+            MapViewModel.nearestIDs(of: items, visibleIDs: visible),
+            Set(items[1...3].map(\.cafe.id))
+        )
+        // 何も見えていなければ空
+        XCTAssertTrue(MapViewModel.nearestIDs(of: items, visibleIDs: []).isEmpty)
+    }
 }

@@ -38,18 +38,6 @@ extension Color {
     })
 }
 
-extension MapPinCategory {
-    /// タグ・凡例に使う色（ピンの色と揃える）
-    var tint: Color {
-        switch self {
-        case .indoorOK: return Color.brand
-        case .terraceOnly: return Color.terraceText
-        case .checkDetail: return Color(UIColor.systemOrange)
-        case .unverified: return Color(UIColor.systemGray)
-        }
-    }
-}
-
 /// 主ボタン（経路など）: ブランド色の塗り
 struct BrandProminentButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {

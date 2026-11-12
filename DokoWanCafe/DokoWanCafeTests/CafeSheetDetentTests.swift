@@ -140,4 +140,36 @@ final class CafeSheetDetentTests: XCTestCase {
             800 * CafeSheetDetent.peekMaxRatio
         )
     }
+
+
+    // MARK: - 半分の段は見出しだけで決める（先頭の行を足した peek で跳ねない）
+
+    func test_標準の文字では先頭の行を足してもmediumは45パーセントのまま() {
+        // iPhone SE 相当: 容器 550・上部 120。見出しブロック60 → 見出しだけの peek は 96、先頭の行を足すと 165
+        let withRow = CafeSheetDetent.peekHeight(headerBlockHeight: 60, firstRowHeight: 88)
+        let headerOnly = CafeSheetDetent.peekHeight(headerBlockHeight: 60)
+        XCTAssertEqual(withRow, 165)
+        XCTAssertEqual(
+            CafeSheetDetent.medium.height(containerHeight: 550, topReserved: 120, peekHeight: withRow, headerPeekHeight: headerOnly),
+            550 * CafeSheetDetent.mediumRatio
+        )
+        XCTAssertEqual(
+            CafeSheetDetent.peek.height(containerHeight: 550, topReserved: 120, peekHeight: withRow, headerPeekHeight: headerOnly),
+            165
+        )
+    }
+
+    func test_大きな文字で見出しが伸びたときだけmediumが広がる() {
+        let headerOnly = CafeSheetDetent.peekHeight(headerBlockHeight: 300)
+        let withRow = CafeSheetDetent.peekHeight(headerBlockHeight: 300, firstRowHeight: 200)
+        let medium = CafeSheetDetent.medium.height(containerHeight: 800, topReserved: 120, peekHeight: withRow, headerPeekHeight: headerOnly)
+        // 見出しだけの peek(324) + 一覧の見える分(140) = 464（先頭の行は足さない）
+        XCTAssertEqual(medium, 324 + CafeSheetDetent.mediumListAllowance)
+    }
+
+    func test_標準の文字の行の高さは店名1行ぶんで写真より低くならない() {
+        XCTAssertEqual(CafeSheetDetent.standardRowHeight(nameLine: 22, answerLine: 20, openLine: 16), 22 + 20 + 16 + 8 + 8)
+        // 3行が写真(64)より低いときは写真の高さ
+        XCTAssertEqual(CafeSheetDetent.standardRowHeight(nameLine: 10, answerLine: 10, openLine: 10), 64 + 8)
+    }
 }

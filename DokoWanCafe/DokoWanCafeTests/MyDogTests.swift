@@ -283,18 +283,6 @@ final class MyDogTests: XCTestCase {
         XCTAssertEqual(text.title, "犬OKのお店 10件")
     }
 
-    func test_タグはうちの子OKが先頭に付く() {
-        let items = sampleItems
-        let fitting = CafePresentation.tags(for: items[0].cafe, dog: DogProfile(size: .small))
-        XCTAssertEqual(fitting.map(\.label), ["うちの子OK", "店内OK"])
-        XCTAssertEqual(fitting.first?.kind, .myDog)
-        // 分からない店・入れない店には付けない
-        XCTAssertEqual(CafePresentation.tags(for: items[0].cafe, dog: DogProfile(size: .medium)).map(\.label), ["店内OK"])
-        XCTAssertEqual(CafePresentation.tags(for: items[1].cafe, dog: DogProfile(size: .large)).map(\.label), ["店内OK"])
-        // 未設定なら従来どおり
-        XCTAssertEqual(CafePresentation.tags(for: items[0].cafe).map(\.label), ["店内OK"])
-    }
-
     func test_読み上げにうちの子の判定が入る() {
         let items = sampleItems
         let now = Date(timeIntervalSince1970: 1_780_000_000)

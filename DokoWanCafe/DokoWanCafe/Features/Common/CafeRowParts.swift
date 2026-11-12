@@ -55,48 +55,6 @@ struct CafeThumbnailView: View {
     }
 }
 
-/// タグ1つ（うちの子OK／店内OK／テラスのみ／条件を確認／未確認／大型犬OK）
-struct CafeTagChip: View {
-    let tag: CafeTag
-
-    var body: some View {
-        Text(tag.label)
-            .font(.caption2.bold())
-            .padding(.horizontal, 8)
-            .padding(.vertical, 3)
-            .background(Capsule().fill(tint.opacity(0.15)))
-            .foregroundStyle(tint)
-            .lineLimit(1)
-            .fixedSize()
-    }
-
-    private var tint: Color {
-        switch tag.kind {
-        case .category(let category): return category.tint
-        case .largeDog: return Color(UIColor.systemIndigo)
-        case .myDog: return Color.brand
-        }
-    }
-}
-
-/// タグの並び。幅が足りない（大きな文字サイズなど）ときは縦に積む。
-struct CafeTagsView: View {
-    let cafe: Cafe
-    @Environment(\.dogProfile) private var dog
-
-    var body: some View {
-        let tags = CafePresentation.tags(for: cafe, dog: dog)
-        ViewThatFits(in: .horizontal) {
-            HStack(spacing: 6) {
-                ForEach(Array(tags.enumerated()), id: \.offset) { CafeTagChip(tag: $0.element) }
-            }
-            VStack(alignment: .leading, spacing: 4) {
-                ForEach(Array(tags.enumerated()), id: \.offset) { CafeTagChip(tag: $0.element) }
-            }
-        }
-    }
-}
-
 extension OpenLine.State {
     /// 営業の行の文字色。営業中だけブランド色、閉店が近いときは橙、それ以外はグレー（時間が不明な店で嘘をつかない）
     var lineColor: Color {
@@ -140,24 +98,40 @@ struct OpenLineView: View {
 }
 
 /// 答えの1行（「うちの子は店内OK・床で待てる」）。主文は色つき・太め、補足は薄い色。色だけに頼らず文言で区別できる。
-/// 大きな文字では折り返す。
+/// 標準〜xxxLarge の文字サイズでは必ず1行: 「主文＋補足」が入らなければ「主文だけ」、それも入らなければ末尾を省略する
+/// （VoiceOver は補足を落とさず読む＝行全体の読み上げラベルが `CafePresentation.answerLine(...).spoken`）。
+/// アクセシビリティサイズでは折り返して全文を出す。
 struct AnswerLineView: View {
     let cafe: Cafe
     @Environment(\.dogProfile) private var dog
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
         let answer = CafePresentation.answerLine(for: cafe, dog: dog)
         Group {
-            if let supplement = answer.supplement {
-                Text(verbatim: answer.main).foregroundStyle(answer.tone.color).fontWeight(.semibold)
-                    + Text(verbatim: "・").foregroundStyle(Color(.secondaryLabel))
-                    + Text(verbatim: supplement).foregroundStyle(Color(.secondaryLabel))
+            if dynamicTypeSize.isAccessibilitySize {
+                full(answer).fixedSize(horizontal: false, vertical: true)
             } else {
-                Text(verbatim: answer.main).foregroundStyle(answer.tone.color).fontWeight(.semibold)
+                ViewThatFits(in: .horizontal) {
+                    if answer.supplement != nil {
+                        full(answer).lineLimit(1).fixedSize(horizontal: true, vertical: false)
+                    }
+                    main(answer).lineLimit(1).minimumScaleFactor(0.9)
+                }
             }
         }
         .font(.subheadline)
-        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private func main(_ answer: CafePresentation.AnswerLine) -> Text {
+        Text(verbatim: answer.main).foregroundStyle(answer.tone.color).fontWeight(.semibold)
+    }
+
+    private func full(_ answer: CafePresentation.AnswerLine) -> Text {
+        guard let supplement = answer.supplement else { return main(answer) }
+        return main(answer)
+            + Text(verbatim: "・").foregroundStyle(Color(.secondaryLabel))
+            + Text(verbatim: supplement).foregroundStyle(Color(.secondaryLabel))
     }
 }
 
