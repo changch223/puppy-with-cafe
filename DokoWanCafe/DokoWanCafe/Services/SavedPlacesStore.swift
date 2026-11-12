@@ -70,6 +70,11 @@ final class SavedPlacesStore: ObservableObject {
         update { $0.toggleVisited(id, at: now()) }
     }
 
+    /// 詳細画面の保存ボタンの操作（結果が決まった操作。`SaveAction` 参照）
+    func apply(_ action: SaveAction, to id: UUID) {
+        update { $0.apply(action, to: id, at: now()) }
+    }
+
     /// どちらのリストからも外す
     func remove(_ id: UUID) {
         update { $0.remove(id) }

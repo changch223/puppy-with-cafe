@@ -84,10 +84,41 @@ final class CafeDetailSummaryTests: XCTestCase {
             hours: hours, at: tokyoDate(hour: 10, minute: 0), isTargetTime: false, timeZone: tokyo
         )
         XCTAssertEqual(tile.title, "今日")
+        var cafe = makeCafe()
+        cafe.hours = hours
         let all = CafeDetailHighlights.all(
-            cafe: makeCafe(), at: tokyoDate(hour: 10, minute: 0), isTargetTime: true, timeZone: tokyo
+            cafe: cafe, at: tokyoDate(hour: 10, minute: 0), isTargetTime: true, timeZone: tokyo
         )
         XCTAssertEqual(all[0].title, "月 10:00")
+    }
+
+    // MARK: - 要点タイルは分かっていることだけ
+
+    func test_all_何も分からない店はタイルが1つも出ない() {
+        let cafe = makeCafe()  // 営業時間・予約・大型犬いずれも未記載
+        XCTAssertTrue(CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo).isEmpty)
+    }
+
+    func test_all_分かっているタイルだけ残る() {
+        var cafe = makeCafe()
+        cafe.lastVerified = Date()
+        cafe.reservation = "予約可（電話）"
+        // 営業時間なし・大型犬なし → 予約だけ
+        let onlyReservation = CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo)
+        XCTAssertEqual(onlyReservation.map(\.title), ["予約"])
+        // 営業時間と大型犬が分かれば3枚（今日・予約・大型犬の順）
+        cafe.hours = hours
+        cafe.dogAmenities = DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil)
+        let all = CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo)
+        XCTAssertEqual(all.map(\.title), ["今日", "予約", "大型犬"])
+        XCTAssertFalse(all.contains { $0.tone == .unknown })
+    }
+
+    func test_all_今日は営業時間が文だけの店では営業時間は下記を残す() {
+        var cafe = makeCafe()
+        cafe.hoursText = "11:00〜20:00"
+        let all = CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo)
+        XCTAssertEqual(all.map(\.value), ["営業時間は下記"])
     }
 
     func test_今日_不明は時間の情報なし() {
@@ -170,12 +201,12 @@ final class CafeDetailSummaryTests: XCTestCase {
         var cafe = makeCafe()
         cafe.dogAmenities = DogAmenities(indoor: true, terrace: nil, largeDogs: true, dogMenu: nil)
         cafe.lastVerified = nil
-        let tile = CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo)[2]
+        let tile = CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo).first { $0.title == "大型犬" }!
         XCTAssertEqual(tile.value, "記載あり（未確認）")
         XCTAssertNotEqual(tile.tone, .good)
 
         cafe.lastVerified = Date(timeIntervalSince1970: 1_780_000_000)
-        let confirmed = CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo)[2]
+        let confirmed = CafeDetailHighlights.all(cafe: cafe, at: tokyoDate(hour: 10, minute: 0), timeZone: tokyo).first { $0.title == "大型犬" }!
         XCTAssertEqual(confirmed.value, "可")
         XCTAssertEqual(confirmed.tone, .good)
     }
@@ -185,7 +216,7 @@ final class CafeDetailSummaryTests: XCTestCase {
             DogAmenities(indoor: true, terrace: false, largeDogs: nil, dogMenu: true), confirmed: false
         )
         XCTAssertEqual(rows.map(\.state), [.unconfirmed, .unconfirmed, .unknown, .unconfirmed])
-        XCTAssertEqual(rows.map(\.valueText), ["記載あり（未確認）", "記載あり（未確認）", "情報なし", "記載あり（未確認）"])
+        XCTAssertEqual(rows.map(\.valueText), ["記載あり（未確認）", "記載あり（未確認）", "分かりません", "記載あり（未確認）"])
     }
 
     // MARK: - 曜日別の表
@@ -207,7 +238,7 @@ final class CafeDetailSummaryTests: XCTestCase {
             DogAmenities(indoor: false, terrace: true, largeDogs: nil, dogMenu: nil)
         )
         XCTAssertEqual(rows.map(\.label), ["店内", "テラス", "大型犬", "犬メニュー"])
-        XCTAssertEqual(rows.map(\.valueText), ["不可", "可", "情報なし", "情報なし"])
+        XCTAssertEqual(rows.map(\.valueText), ["不可", "可", "分かりません", "分かりません"])
         XCTAssertEqual(rows.map(\.state), [.no, .yes, .unknown, .unknown])
     }
 

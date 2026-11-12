@@ -132,89 +132,92 @@ struct CafeDetailStatusChip: View {
 
 // MARK: - 写真の帯
 
-/// 画面最上部の帯。画像が取れる店は写真（高さ200）、ない店は店IDから決まる色の帯（高さ120）に頭文字。
+/// 画面最上部の帯。画像が取れる店は写真（高さ200）、ない店は店の場所の小さな地図（高さ120。`CafeDetailMapBand`）。
+/// 写真の取得中は無地の帯にして、頭文字や地図が一瞬出てから切り替わる点滅をなくす。
 struct CafeDetailHeroBand: View {
     let cafe: Cafe
     /// 取得の結果（帯に出した写真の取得元URL。出さなかったら nil）。「写真・雰囲気」で同じ画像を繰り返さないために使う。
     let onResolve: (URL?) -> Void
 
-    @State private var photo: UIImage?
-    @State private var photoSourceLabel: String?
+    private enum Phase {
+        /// 写真の候補があり、取得中
+        case pending
+        case photo(UIImage, sourceLabel: String?)
+        /// 写真なし（候補がない・取得できない・小さすぎる）→ 地図
+        case none
+    }
+
+    @State private var phase: Phase
 
     static let photoHeight: CGFloat = 200
     static let bandHeight: CGFloat = 120
 
-    var body: some View {
-        Color.clear
-            .frame(height: photo != nil ? Self.photoHeight : Self.bandHeight)
-            .frame(maxWidth: .infinity)
-            .overlay {
-                if let photo {
-                    Image(uiImage: photo)
-                        .resizable()
-                        .scaledToFill()
-                } else {
-                    placeholderBand
-                }
-            }
-            .clipped()
-            // 取得元の表示は切り抜きの外側に重ねる（画像の大きさに引きずられて下端で切れないように）
-            .overlay(alignment: .bottomLeading) {
-                if photo != nil, let photoSourceLabel {
-                    Text("取得元: \(photoSourceLabel)")
-                        .font(.caption2.bold())
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(.black.opacity(0.45), in: Capsule())
-                        .foregroundStyle(.white)
-                        .padding(10)
-                }
-            }
-            .animation(.easeInOut(duration: 0.25), value: photo != nil)
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel(Text("\(cafe.name)の写真"))
-            // 写真がない帯（色と頭文字だけ）は装飾なので VoiceOver から隠す
-            .accessibilityHidden(photo == nil)
-            .task(id: cafe.id) { await loadPhoto() }
+    init(cafe: Cafe, onResolve: @escaping (URL?) -> Void) {
+        self.cafe = cafe
+        self.onResolve = onResolve
+        _phase = State(initialValue: PhotoSourceResolver.previewSourceURL(for: cafe) != nil ? .pending : .none)
     }
 
-    private var placeholderBand: some View {
-        let hue = CafeDetailBand.hue(for: cafe.id)
-        let initial = CafeDetailBand.initial(of: cafe.name)
-        return ZStack {
-            LinearGradient(
-                colors: [
-                    Color(hue: hue, saturation: 0.38, brightness: 0.58),
-                    Color(hue: hue, saturation: 0.30, brightness: 0.48),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            if initial.isEmpty {
-                Image(systemName: "pawprint.fill")
-                    .font(.system(size: 44))
-                    .foregroundStyle(.white.opacity(0.85))
-            } else {
-                Text(initial)
-                    .font(.system(size: 56, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.9))
+    private var hasPhoto: Bool {
+        if case .photo = phase { return true }
+        return false
+    }
+
+    var body: some View {
+        Group {
+            switch phase {
+            case .pending:
+                Color(.secondarySystemBackground)
+                    .frame(height: Self.bandHeight)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityHidden(true)
+            case .none:
+                CafeDetailMapBand(cafe: cafe)
+            case .photo(let image, let sourceLabel):
+                Color.clear
+                    .frame(height: Self.photoHeight)
+                    .frame(maxWidth: .infinity)
+                    .overlay {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .clipped()
+                    // 取得元の表示は切り抜きの外側に重ねる（画像の大きさに引きずられて下端で切れないように）
+                    .overlay(alignment: .bottomLeading) {
+                        if let sourceLabel {
+                            Text("取得元: \(sourceLabel)")
+                                .font(.caption2.bold())
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(.black.opacity(0.45), in: Capsule())
+                                .foregroundStyle(.white)
+                                .padding(10)
+                        }
+                    }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Text("\(cafe.name)の写真"))
             }
         }
+        .animation(.easeInOut(duration: 0.25), value: hasPhoto)
+        .task(id: cafe.id) { await loadPhoto() }
     }
 
     /// 既存の写真プレビュー（PhotoSourceResolver + LinkPreviewService）で画像が取れたときだけ写真にする。
     private func loadPhoto() async {
         guard let url = PhotoSourceResolver.previewSourceURL(for: cafe) else {
+            phase = .none
             onResolve(nil)
             return
         }
         let preview = await LinkPreviewService.shared.preview(for: url)
         guard let image = preview?.image, CafeDetailBand.isUsablePhoto(size: image.size) else {
+            phase = .none
             onResolve(nil)
             return
         }
-        photoSourceLabel = cafe.links?.first(where: { $0.resolvedURL == url })?.type.displayName
-        photo = image
+        let label = cafe.links?.first(where: { $0.resolvedURL == url })?.type.displayName
+        phase = .photo(image, sourceLabel: label)
         onResolve(url)
     }
 }
@@ -346,38 +349,53 @@ struct CafeDetailAnswerCard: View {
     }
 }
 
-// MARK: - 3つの要点
+// MARK: - 要点（分かっていることだけ）
 
 struct CafeDetailHighlightTiles: View {
     let highlights: [CafeDetailHighlight]
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
+    /// 横に並べる最大の列数（タイルが1〜2個でも1枚の幅は3列のときと同じ＝間延びしない）
+    private static let columns = 3
+
     /// 大きな文字では横3列だと時刻などが途中で折れて意味が欠けるため、縦に積む
-    private var layout: AnyLayout {
-        dynamicTypeSize >= .xxxLarge
-            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
-            : AnyLayout(HStackLayout(alignment: .top, spacing: 8))
-    }
+    private var isStacked: Bool { dynamicTypeSize >= .xxxLarge }
 
     var body: some View {
-        layout {
-            ForEach(highlights, id: \.title) { highlight in
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(highlight.title)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text(highlight.value)
-                        .font(.subheadline.bold())
-                        .foregroundStyle(color(for: highlight.tone))
-                        .fixedSize(horizontal: false, vertical: true)
+        if !highlights.isEmpty {
+            if isStacked {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(highlights, id: \.title) { tile($0) }
                 }
-                .padding(10)
-                .frame(maxWidth: .infinity, minHeight: 64, alignment: .topLeading)
-                .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel(Text("\(highlight.title): \(highlight.value)"))
+            } else {
+                // 等幅で左から並べる。空いた列は透明の枠で埋めて、残りのタイルの幅を揃える
+                HStack(alignment: .top, spacing: 8) {
+                    ForEach(highlights.prefix(Self.columns), id: \.title) { tile($0) }
+                    ForEach(0..<max(0, Self.columns - highlights.count), id: \.self) { _ in
+                        Color.clear
+                            .frame(maxWidth: .infinity, minHeight: 1)
+                            .accessibilityHidden(true)
+                    }
+                }
             }
         }
+    }
+
+    private func tile(_ highlight: CafeDetailHighlight) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(highlight.title)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Text(highlight.value)
+                .font(.subheadline.bold())
+                .foregroundStyle(color(for: highlight.tone))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, minHeight: 64, alignment: .topLeading)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text("\(highlight.title): \(highlight.value)"))
     }
 
     private func color(for tone: CafeDetailHighlight.Tone) -> Color {
@@ -386,6 +404,142 @@ struct CafeDetailHighlightTiles: View {
         case .caution: return .cafeDetailOrange
         case .neutral: return .primary
         case .unknown: return .secondary
+        }
+    }
+}
+
+// MARK: - まだ分かっていないこと
+
+/// タイルの下の1か所のまとめ。橙系の文字だが警告アイコンは付けない（欠けている情報を「注意」とまでは言わない）。
+struct CafeDetailUnknownsLine: View {
+    let items: [String]
+
+    var body: some View {
+        if !items.isEmpty {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("まだ分かっていないこと")
+                    .font(.footnote.bold())
+                    .accessibilityAddTraits(.isHeader)
+                Text(items.joined(separator: "・"))
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("来店前にお店へご確認ください")
+                    .font(.caption)
+                    .opacity(0.85)
+            }
+            .foregroundStyle(Color.cafeDetailOrange)
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.cafeDetailOrange.opacity(0.10), in: RoundedRectangle(cornerRadius: 12))
+            .accessibilityElement(children: .combine)
+        }
+    }
+}
+
+// MARK: - 画面下の固定バー
+
+/// 画面下に固定する操作のバー: 経路（主）・電話（あれば）・保存の状態ボタン。
+/// 最大の文字サイズでも縦積みにせず（画面を占めてしまうため）、アイコン＋短いラベルの横並びを保つ。
+struct CafeDetailBottomBar: View {
+    let hasPhone: Bool
+    let saved: SaveStateButton
+    let onRoute: () -> Void
+    let onCall: () -> Void
+    let onSaveAction: (SaveAction) -> Void
+
+    static let buttonHeight: CGFloat = 48
+    /// 外側（バーの打ち止め前）の文字サイズ。大きいときは電話をアイコンだけにして幅を空ける
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Button(action: onRoute) {
+                barLabel(String(localized: "経路"), systemImage: "arrow.triangle.turn.up.right.diamond.fill", flexible: true)
+                    .foregroundStyle(Color.onBrand)
+                    .background(Color.brand, in: RoundedRectangle(cornerRadius: 12))
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text("経路案内を開く"))
+
+            // 電話がある店のみ。無い店は他のボタンが広がる。
+            if hasPhone {
+                Button(action: onCall) {
+                    barLabel(String(localized: "電話"), systemImage: "phone.fill", showsTitle: !dynamicTypeSize.isAccessibilitySize)
+                        .foregroundStyle(Color.accentColor)
+                        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text("電話をかける"))
+            }
+
+            saveButton
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+        // 最大の文字サイズでは横並びを保ったまま、これ以上大きくしない
+        .dynamicTypeSize(...DynamicTypeSize.accessibility1)
+        .background(.regularMaterial)
+        .overlay(alignment: .top) { Divider() }
+    }
+
+    /// `flexible`: 経路ボタンは余った幅を取る。電話・保存は文字の幅に合わせて、ラベルが隠れないようにする。
+    /// 大きな文字では、どのボタンも縮めて1行に収める（縦に積まない）。
+    private func barLabel(
+        _ title: String, systemImage: String, flexible: Bool = false, showsTitle: Bool = true
+    ) -> some View {
+        let large = dynamicTypeSize.isAccessibilitySize
+        return HStack(spacing: 6) {
+            Image(systemName: systemImage)
+                .accessibilityHidden(true)
+            if showsTitle {
+                Text(title)
+                    .lineLimit(1)
+                    .minimumScaleFactor(large ? 0.5 : 1)
+                    .fixedSize(horizontal: !flexible && !large, vertical: false)
+            }
+        }
+        .font(.subheadline.bold())
+        .padding(.horizontal, large ? 10 : 14)
+        .frame(maxWidth: flexible ? .infinity : nil, minHeight: Self.buttonHeight)
+        .contentShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    private var savedLabel: some View {
+        barLabel(saved.title, systemImage: saved.systemImage)
+            .foregroundStyle(saved.status == nil ? Color.accentColor : Color.cafeDetailOrange)
+            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    /// タップ1回の動きがある状態は primaryAction、行ったのときはタップでメニューを開く（誤って記録を消さない）
+    @ViewBuilder
+    private var saveButton: some View {
+        if let tap = saved.tapAction {
+            Menu {
+                menuItems
+            } label: {
+                savedLabel
+            } primaryAction: {
+                onSaveAction(tap)
+            }
+            .accessibilityLabel(Text(saved.accessibilityLabel))
+        } else {
+            Menu {
+                menuItems
+            } label: {
+                savedLabel
+            }
+            .accessibilityLabel(Text(saved.accessibilityLabel))
+        }
+    }
+
+    @ViewBuilder
+    private var menuItems: some View {
+        ForEach(saved.menuActions, id: \.self) { action in
+            Button(role: action.isDestructive ? .destructive : nil) {
+                onSaveAction(action)
+            } label: {
+                Label(action.menuTitle(from: saved.status), systemImage: action.systemImage)
+            }
         }
     }
 }
