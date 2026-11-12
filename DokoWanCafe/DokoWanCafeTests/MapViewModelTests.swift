@@ -211,8 +211,13 @@ final class MapViewModelTests: XCTestCase {
     // MARK: - ピンの絵柄・店名の出し方
 
     func test_ピンの絵柄は席の種類で変わる() {
-        XCTAssertEqual(MapPinCategory.indoorOK.symbolName, "house.fill")
-        XCTAssertEqual(MapPinCategory.terraceOnly.symbolName, "umbrella.fill")
+        XCTAssertEqual(MapPinCategory.indoorOK.symbolName, "fork.knife")
+        XCTAssertEqual(MapPinCategory.terraceOnly.symbolName, "sun.max.fill")
+        // 絵柄だけでは伝わりにくい2種類には短い文字を添える
+        XCTAssertEqual(MapPinCategory.indoorOK.pinCaption, "OK")
+        XCTAssertEqual(MapPinCategory.terraceOnly.pinCaption, "テラス")
+        XCTAssertNil(MapPinCategory.checkDetail.pinCaption)
+        XCTAssertNil(MapPinCategory.unverified.pinCaption)
         XCTAssertEqual(MapPinCategory.checkDetail.symbolName, "questionmark")
         // 未確認は席がまだ分からないので従来の肉球
         XCTAssertEqual(MapPinCategory.unverified.symbolName, "pawprint.fill")
