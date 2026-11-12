@@ -25,7 +25,8 @@
 - ✅ データ基盤（サーバーレス構成B）: `data/master/*.csv` → `tools/export_cafes.py`（検証・矛盾解決・差分CHANGELOG）→ `data/cafes.json`
 - ✅ **データ配信 本稼働**: GitHub Pages で `cafes.json` を配信。アプリが起動時に取得（アプリ審査なしで更新反映）
 - ✅ **体験見直し 第1弾（2026-11-13）**: 一覧シートの見出し2行目を答えに（「いちばん近い営業中の店は徒歩約◯分」）、見出しだけの段で先頭の1店が読める高さに、一覧の行を3行に（店名／答え1行 `CafePresentation.answerLine`／営業＋距離）、「あと◯分で閉店」、写真のない店は絵柄のタイル、ピンの絵柄を席の種類で変更（店内OK＝家・テラス＝傘・条件を確認＝？・未確認＝肉球。テラスは青）、地図を寄せると近い3店に店名。店の詳細は、写真がなければ小さな地図の帯（`CafeDetailMapBand`）、分かっている要点だけのタイル、「まだ分かっていないこと」（`CafeDetailUnknowns`）、下のタブを隠して経路・電話・保存の状態ボタン（`Core/SaveStateButton.swift`。行きたい／行ったを1つに統合）を画面下に固定、共有は右上。提案の全体と第2弾以降は https://claude.ai/artifact/APb92e3YgjMThgy1Gt98tX 。
-- ✅ テスト: 2026-11-13（体験見直し 第1弾）に XCTest 691件 全緑（Xcode 26、iPhone 17 シミュレータ）、ビルド警告の増加なし。最小 iOS は 17。`.xcodeproj` は `DokoWanCafe/` 配下。
+- ✅ **第1弾の仕上げ（2026-11-13・PR #62）**: 詳細の「うちの子」の1行は入れない席の理由を先に言う／大型犬で `large_dogs=false` の店は上限の明記がない可の席も「大型犬不可」と判定（`DogFit.NoReason.largeDogsNotAllowed`）／「わんちゃん向け情報」の大型犬の行は席ごとの上限があれば席ごとに言う（`largeDogsRow`）／固定バーは狭い幅で保存ボタンの日付を落とす／詳細の地図の帯から他の施設の表示を消す。ストア用の画面写真5枚は `docs/appstore/screenshots/` に撮り直し済み（撮影の記録は `docs/appstore/screenshots.md`）。**v1.0 の提出で残っているのは本人の作業だけ**（`docs/appstore/submission-checklist.md` 冒頭の「残っている作業」）。
+- ✅ テスト: 2026-11-13（体験見直し 第1弾＋仕上げ）に XCTest 703件 全緑（Xcode 26、iPhone 17 シミュレータ）、ビルド警告の増加なし。最小 iOS は 17。`.xcodeproj` は `DokoWanCafe/` 配下。
 - ✅ 公開物: リポジトリ(public)・README・プライバシーポリシー
 
 ### 2.5 画面構成と主要ファイル（再設計 段階1〜4 完了時点）

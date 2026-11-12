@@ -2,6 +2,18 @@
 
 凡例: 【本人】= 本人にしかできない作業 / 【AI】= Claude に頼める作業
 
+## 残っている作業（2026-11-13 時点）
+
+アプリ側の準備は終わっている（体験見直し 第1弾まで main に反映・XCTest 703件 成功・Release 構成の実機向けビルド成功・ストア用の画面写真5枚を `docs/appstore/screenshots/` に用意・公開ページ3つが開ける・`cafes.json` の検証 OK）。残りは本人の作業だけ:
+
+1. **チーム ID を決める**（§1・§2）。この Mac の署名用証明書のチームは `5R2C45VRV4`、プロジェクトの設定は `MY8WU4892D` で食い違っている。提出に使う Apple Developer Program のチーム ID を確かめ、違っていれば `DEVELOPMENT_TEAM` を直す（Claude に頼める）。
+2. App Store Connect にアプリを登録する（§3）。
+3. 文面と画面写真を入力する（§7。画面写真は `docs/appstore/screenshots/01_now.png`〜`05_saved.png` をそのままドラッグ）。
+4. App Privacy と年齢区分に答える（§8）。
+5. Xcode で Archive してアップロードする（§9）。
+6. TestFlight で実機確認する（§10）。
+7. 審査に提出する（§11）。
+
 現状（2026-10-26 時点・コードから確認。画面の再設計 段階1〜4 完了後）: Bundle ID `com.dokowancafe.app` / 表示名 Puppy With Cafe / 版数 1.0.0 (build 1) / `DEVELOPMENT_TEAM = MY8WU4892D`（要確認・変更）/ iPhone 専用・縦向き・**iOS 17+** / 誤り報告フォーム URL は `nil`（未設定。未設定の間は店詳細の報告ボタンが自動で非表示）。**v1.0 はフォームなしで提出する**（問い合わせ・誤り報告の窓口は GitHub Issues。docs/privacy.html・docs/support.html に記載済み）。
 
 ## 1. Apple Developer Program に加入
