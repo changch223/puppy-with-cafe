@@ -1071,6 +1071,16 @@
         }
       }
     },
+    "まだ分かっていないこと" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "まだ分かっていないこと"
+          }
+        }
+      }
+    },
     "まだ確認できていないため、来店前に確認を" : {
       "localizations" : {
         "ja" : {
@@ -1561,6 +1571,16 @@
         }
       }
     },
+    "予約が要るか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "予約が要るか"
+          }
+        }
+      }
+    },
     "人手確認" : {
       "localizations" : {
         "ja" : {
@@ -1687,6 +1707,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "保存"
+          }
+        }
+      }
+    },
+    "保存から外す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存から外す"
           }
         }
       }
@@ -1877,6 +1907,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "出典の記載が食い違っています"
+          }
+        }
+      }
+    },
+    "分かりません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分かりません"
           }
         }
       }
@@ -2351,6 +2391,16 @@
         }
       }
     },
+    "大型犬が入れるか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大型犬が入れるか"
+          }
+        }
+      }
+    },
     "大型犬もOK" : {
       "localizations" : {
         "ja" : {
@@ -2517,6 +2567,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "店内で過ごせます"
+          }
+        }
+      }
+    },
+    "店内に入れるか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内に入れるか"
           }
         }
       }
@@ -3001,6 +3061,16 @@
         }
       }
     },
+    "来店前にお店へご確認ください" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "来店前にお店へご確認ください"
+          }
+        }
+      }
+    },
     "来店時の条件・マナー" : {
       "localizations" : {
         "ja" : {
@@ -3177,6 +3247,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "犬同伴の情報を確認中です"
+          }
+        }
+      }
+    },
+    "犬用メニューがあるか" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬用メニューがあるか"
           }
         }
       }
@@ -3431,12 +3511,42 @@
         }
       }
     },
+    "行きたいに入っています。タップで外します。長押しで行ったに記録できます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行きたいに入っています。タップで外します。長押しで行ったに記録できます"
+          }
+        }
+      }
+    },
     "行きたいに入れる" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "行きたいに入れる"
+          }
+        }
+      }
+    },
+    "行きたいに入れる。長押しで行ったに記録できます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行きたいに入れる。長押しで行ったに記録できます"
+          }
+        }
+      }
+    },
+    "行きたいに戻す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行きたいに戻す"
           }
         }
       }
@@ -3481,22 +3591,22 @@
         }
       }
     },
+    "行った ✓" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行った ✓"
+          }
+        }
+      }
+    },
     "行った ✓ %@" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "行った ✓ %@"
-          }
-        }
-      }
-    },
-    "行った、%@。タップで外す" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "行った、%@。タップで外す"
           }
         }
       }
@@ -3517,6 +3627,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "行ったに記録する"
+          }
+        }
+      }
+    },
+    "行った記録があります、%@。タップで操作を選びます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行った記録があります、%@。タップで操作を選びます"
+          }
+        }
+      }
+    },
+    "行った記録があります。タップで操作を選びます" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "行った記録があります。タップで操作を選びます"
           }
         }
       }

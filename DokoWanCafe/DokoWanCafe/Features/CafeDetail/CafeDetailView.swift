@@ -2,8 +2,9 @@ import SwiftUI
 import UIKit
 
 /// カフェ詳細画面（再設計 段階1b: 答えを先に）。
-/// 上から 写真の帯 → 店名 → 答えのカード → 3つの要点 → 操作 → 条件・マナー → 営業時間 → 写真・雰囲気
-/// → わんちゃん向け情報 → 公式情報・SNS → 店舗情報 → 誤り報告。
+/// 上から 写真の帯（写真がない店は小さな地図） → 店名 → うちの子 → 答えのカード → 分かっている要点 → まだ分かっていないこと
+/// → 営業時間 → 条件・マナー → 写真・雰囲気 → わんちゃん向け情報 → 公式情報・SNS → 店舗情報 → 誤り報告。
+/// 操作（経路・電話・保存）は画面の下に固定、共有はナビゲーションバー右上。
 /// 可否・条件・出典・最終確認日を提示し（US2）、矛盾と AI 推測を明示区別する（US4）。
 struct CafeDetailView: View {
     @StateObject private var viewModel: CafeDetailViewModel
@@ -80,16 +81,14 @@ struct CafeDetailView: View {
 
                     CafeDetailHighlightTiles(highlights: CafeDetailHighlights.all(cafe: cafe, at: targetTime ?? now, isTargetTime: targetTime != nil))
 
-                    actionRow
-
-                    visitedButton
-
-                    if hasConditionInfo {
-                        conditionCard
-                    }
+                    CafeDetailUnknownsLine(items: CafeDetailUnknowns.make(cafe: cafe))
 
                     if hasHoursInfo {
                         hoursCard(now: now)
+                    }
+
+                    if hasConditionInfo {
+                        conditionCard
                     }
 
                     photoCard
@@ -130,9 +129,34 @@ struct CafeDetailView: View {
             showsNavigationTitle = titleBottom < outer.safeAreaInsets.top
         }
         }
+        // 操作（経路・電話・保存）は画面の下に固定する。スクロールの最下部はこのバーの上で止まる
+        .safeAreaInset(edge: .bottom, spacing: 0) { bottomBar }
         .background(Color(.systemGroupedBackground))
         .navigationTitle(showsNavigationTitle ? cafe.name : "")
         .navigationBarTitleDisplayMode(.inline)
+        // 固定バーとタブバーが重ならないよう、詳細ではタブバーを隠す（戻ると元に戻る）
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ShareLink(item: CafeDetailShare.message(for: cafe)) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .accessibilityLabel(Text("この店を共有"))
+            }
+        }
+        .confirmationDialog(
+            String(localized: "経路を開くアプリを選択"),
+            isPresented: $showRouteChooser,
+            titleVisibility: .visible
+        ) {
+            Button(String(localized: "Apple マップ")) {
+                RouteLauncher.open(cafe: cafe, using: .apple)
+            }
+            Button(String(localized: "Google マップ")) {
+                RouteLauncher.open(cafe: cafe, using: .google)
+            }
+            Button(String(localized: "キャンセル"), role: .cancel) {}
+        }
         .task { await viewModel.load() }
         .sheet(isPresented: $showReport) {
             ReportView(cafe: cafe)
@@ -168,7 +192,7 @@ struct CafeDetailView: View {
         return URL(string: "tel://" + phone.filter { $0.isNumber || $0 == "+" })
     }
 
-    // MARK: - 店名・エリア・保存
+    // MARK: - 店名・エリア
 
     private var titleRow: some View {
         HStack(alignment: .top, spacing: 8) {
@@ -183,8 +207,6 @@ struct CafeDetailView: View {
                         .foregroundStyle(.secondary)
                 }
             }
-            Spacer(minLength: 0)
-            favoriteToggleButton
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
@@ -197,106 +219,20 @@ struct CafeDetailView: View {
         )
     }
 
-    /// 「行きたい」トグル。ON=塗り肉球。
-    private var favoriteToggleButton: some View {
-        let isWantToGo = savedStore.isWantToGo(cafe.id)
-        return Button {
-            savedStore.toggleWantToGo(cafe.id)
-        } label: {
-            Image(systemName: isWantToGo ? "pawprint.fill" : "pawprint")
-                .font(.title2)
-                .foregroundStyle(isWantToGo ? Color.cafeDetailOrange : Color.secondary)
-                .frame(width: 44, height: 44)
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text(isWantToGo ? "行きたいから外す" : "行きたいに入れる"))
-    }
+    // MARK: - 画面下の固定バー（経路・電話・保存）
 
-    // MARK: - 操作（経路・電話・行きたい・共有）
-
-    private var actionRow: some View {
-        let isWantToGo = savedStore.isWantToGo(cafe.id)
-        // 大きな文字ではボタンを縦に積み、ラベルが途中で切れないようにする
-        let layout = dynamicTypeSize.isAccessibilitySize
-            ? AnyLayout(VStackLayout(spacing: 8))
-            : AnyLayout(HStackLayout(spacing: 8))
-        return layout {
-            Button {
-                showRouteChooser = true
-            } label: {
-                CafeDetailActionLabel(
-                    title: String(localized: "経路"),
-                    systemImage: "arrow.triangle.turn.up.right.diamond.fill",
-                    prominent: true
-                )
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text("経路案内を開く"))
-            .confirmationDialog(
-                String(localized: "経路を開くアプリを選択"),
-                isPresented: $showRouteChooser,
-                titleVisibility: .visible
-            ) {
-                Button(String(localized: "Apple マップ")) {
-                    RouteLauncher.open(cafe: cafe, using: .apple)
-                }
-                Button(String(localized: "Google マップ")) {
-                    RouteLauncher.open(cafe: cafe, using: .google)
-                }
-                Button(String(localized: "キャンセル"), role: .cancel) {}
-            }
-
-            // 電話がある店のみ。無い店は他のボタンが広がる。
-            if let telURL {
-                Button {
-                    openURL(telURL)
-                } label: {
-                    CafeDetailActionLabel(title: String(localized: "電話"), systemImage: "phone.fill")
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(Text("電話をかける"))
-            }
-
-            Button {
-                savedStore.toggleWantToGo(cafe.id)
-            } label: {
-                CafeDetailActionLabel(
-                    title: isWantToGo ? String(localized: "行きたい ✓") : String(localized: "行きたい"),
-                    systemImage: isWantToGo ? "pawprint.fill" : "pawprint"
-                )
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text(isWantToGo ? "行きたいから外す" : "行きたいに入れる"))
-
-            ShareLink(item: CafeDetailShare.message(for: cafe)) {
-                CafeDetailActionLabel(title: String(localized: "共有"), systemImage: "square.and.arrow.up")
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text("この店を共有"))
-        }
-    }
-
-    /// 「行った」ボタン（操作の下の小さなボタン）。押すと行きたいから外して行ったに入れ、「行った ✓ 10/25」と表示する。
-    /// もう一度押すと外せる。
-    private var visitedButton: some View {
-        let visitedDate = savedStore.visitedDate(of: cafe.id)
-        let isVisited = visitedDate != nil
-        let title = visitedDate.map { String(localized: "行った ✓ \(TargetTime.monthDayText($0))") }
-            ?? String(localized: "行った")
-        return Button {
-            savedStore.toggleVisited(cafe.id)
-        } label: {
-            Label(title, systemImage: isVisited ? "checkmark.circle.fill" : "checkmark.circle")
-                .font(.subheadline.bold())
-                .foregroundStyle(isVisited ? Color.onBrand : Color.brand)
-                .padding(.horizontal, 16)
-                .frame(minHeight: 44)
-                .background(Capsule().fill(isVisited ? Color.brand : Color.brand.opacity(0.12)))
-        }
-        .buttonStyle(.plain)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityLabel(Text(visitedDate.map { "行った、\(TargetTime.monthDayText($0))。タップで外す" } ?? "行ったに記録する"))
+    private var bottomBar: some View {
+        let saved = SaveStateButton.make(
+            status: savedStore.status(of: cafe.id),
+            visitedDate: savedStore.visitedDate(of: cafe.id)
+        )
+        return CafeDetailBottomBar(
+            hasPhone: telURL != nil,
+            saved: saved,
+            onRoute: { showRouteChooser = true },
+            onCall: { if let telURL { openURL(telURL) } },
+            onSaveAction: { savedStore.apply($0, to: cafe.id) }
+        )
     }
 
     // MARK: - 来店時の条件・マナー
