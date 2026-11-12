@@ -126,12 +126,45 @@ final class DogFitTests: XCTestCase {
         XCTAssertEqual(fit(cafe, .large).indoor, .unknown(.sizeConditionText))
     }
 
-    func test_上限なしで大型犬可が空かfalseなら中型犬と大型犬は分からない() {
-        for largeDogs in [nil, false] as [Bool?] {
-            let cafe = makeCafe(indoor: true, largeDogs: largeDogs)
-            XCTAssertEqual(fit(cafe, .medium).indoor, .unknown(.sizeNotStated))
-            XCTAssertEqual(fit(cafe, .large).indoor, .unknown(.sizeNotStated))
-        }
+    func test_上限なしで大型犬可が空なら中型犬と大型犬は分からない() {
+        let cafe = makeCafe(indoor: true, largeDogs: nil)
+        XCTAssertEqual(fit(cafe, .medium).indoor, .unknown(.sizeNotStated))
+        XCTAssertEqual(fit(cafe, .large).indoor, .unknown(.sizeNotStated))
+    }
+
+    func test_大型犬可がfalseなら中型犬は分からないまま大型犬は入れない() {
+        // false は店全体の「大型犬は不可」。大型犬には上限の明記がない席にも言える（中型犬・小型犬の判定は変えない）
+        let cafe = makeCafe(indoor: true, largeDogs: false)
+        XCTAssertEqual(fit(cafe, .medium).indoor, .unknown(.sizeNotStated))
+        XCTAssertEqual(fit(cafe, .small).indoor, .fits)
+        let large = fit(cafe, .large)
+        XCTAssertEqual(large.indoor, .doesNotFit(.largeDogsNotAllowed))
+        XCTAssertEqual(large.terrace, .unknown(.seatNotStated), "席の可否の記載がない席は分からないまま")
+        XCTAssertEqual(large.overall, .unknown)
+        XCTAssertEqual(large.detailLine, "うちの子（大型犬）は：店内は大型犬不可。テラスは記載がないため、来店前に確認を")
+    }
+
+    func test_大型犬可がfalseで席に上限がない店は大型犬が入れません() {
+        // 両方の席が可で上限なし: 席を分けず「大型犬は不可」
+        let both = fit(makeCafe(indoor: true, terrace: true, largeDogs: false), .large)
+        XCTAssertEqual(both.overall, .doesNotFit)
+        XCTAssertEqual(both.detailLine, "うちの子（大型犬）は：入れません（大型犬は不可）")
+        XCTAssertEqual(both.rowNote, "うちの子は不可（大型犬は不可）")
+        // 店内は中型犬までの上限、テラスは上限なし（SHARK COFFEE・BURG HOLIC・ENRICH の形）
+        let mixed = fit(makeCafe(indoor: true, terrace: true, largeDogs: false, sizeIndoor: .medium), .large)
+        XCTAssertEqual(mixed.indoor, .doesNotFit(.sizeLimit(.medium)))
+        XCTAssertEqual(mixed.terrace, .doesNotFit(.largeDogsNotAllowed))
+        XCTAssertEqual(mixed.overall, .doesNotFit)
+        XCTAssertEqual(mixed.detailLine, "うちの子（大型犬）は：入れません（店内は中型犬まで・テラスは大型犬不可）")
+        XCTAssertEqual(mixed.rowNote, "うちの子は不可（店内は中型犬まで・テラスは大型犬不可）")
+        // 中型犬は上限内の席で入れる（判定は変えない）
+        XCTAssertEqual(fit(makeCafe(indoor: true, terrace: true, largeDogs: false, sizeIndoor: .medium), .medium).overall, .fits)
+    }
+
+    func test_大型犬可がtrueの別の席への流用は変えない() {
+        // true は上限のない席の「可」に流用しない（unknown のまま）
+        let cafe = makeCafe(indoor: true, terrace: true, largeDogs: true, sizeIndoor: .medium)
+        XCTAssertEqual(fit(cafe, .large).terrace, .unknown(.sizeNotStated))
     }
 
     func test_片方の席に上限があれば大型犬可でもう片方の席をfitsにしない() {
@@ -365,7 +398,7 @@ final class DogFitTests: XCTestCase {
         let medium = fit(makeCafe(indoor: true, sizeIndoor: .small), .medium)
         XCTAssertEqual(medium.overall, .unknown)
         XCTAssertEqual(medium.detailLine, "うちの子（中型犬）は：店内は小型犬まで。テラスは記載がないため、来店前に確認を")
-        // SHARK COFFEE・i2 cafe の形: 店内は中型犬まで、テラスはサイズの記載なし（大型犬）
+        // 席の上限だけがある形（large_dogs の記載なし）: 店内は中型犬まで、テラスはサイズの記載なし（大型犬）
         let large = fit(makeCafe(indoor: true, terrace: true, sizeIndoor: .medium), .large)
         XCTAssertEqual(large.overall, .unknown)
         XCTAssertEqual(large.detailLine, "うちの子（大型犬）は：店内は中型犬まで。テラスはサイズの記載がないため、来店前に確認を")

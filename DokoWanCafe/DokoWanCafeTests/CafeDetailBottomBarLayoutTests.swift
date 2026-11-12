@@ -14,21 +14,44 @@ final class CafeDetailBottomBarLayoutTests: XCTestCase {
         return Calendar(identifier: .gregorian).date(from: components)!
     }()
 
-    /// バーが要求する横幅（提案幅を超えて要求すればはみ出す）
-    private func requiredWidth(
+    /// バーが要求する横幅（提案幅を超えて要求すればはみ出す）と、保存ラベルに選ばれた大きさ
+    private func layout(
         proposed: CGFloat, hasPhone: Bool, status: SavedStatus?, size: DynamicTypeSize
-    ) -> CGFloat {
-        let bar = CafeDetailBottomBar(
+    ) -> (width: CGFloat, variant: CafeDetailBottomBar.SaveLabelVariant?) {
+        var variant: CafeDetailBottomBar.SaveLabelVariant?
+        var bar = CafeDetailBottomBar(
             hasPhone: hasPhone,
             saved: SaveStateButton.make(status: status, visitedDate: status == .visited ? visitedDate : nil),
             onRoute: {}, onCall: {}, onSaveAction: { _ in }
         )
-        .environment(\.dynamicTypeSize, size)
-        let host = UIHostingController(rootView: bar)
+        bar.onSaveLabelVariant = { variant = $0 }
+        let host = UIHostingController(rootView: bar.environment(\.dynamicTypeSize, size))
         let window = UIWindow(frame: CGRect(x: 0, y: 0, width: proposed, height: 200))
         window.rootViewController = host
         window.makeKeyAndVisible()
-        return host.sizeThatFits(in: CGSize(width: proposed, height: 200)).width
+        let width = host.sizeThatFits(in: CGSize(width: proposed, height: 200)).width
+        host.view.layoutIfNeeded()
+        RunLoop.current.run(until: Date().addingTimeInterval(0.2))
+        return (width, variant)
+    }
+
+    private func requiredWidth(
+        proposed: CGFloat, hasPhone: Bool, status: SavedStatus?, size: DynamicTypeSize
+    ) -> CGFloat {
+        layout(proposed: proposed, hasPhone: hasPhone, status: status, size: size).width
+    }
+
+    func test_402ptの標準の文字で電話あり_行ったは日付つきの文言が選ばれる() {
+        let result = layout(proposed: 402, hasPhone: true, status: .visited, size: .large)
+        XCTAssertEqual(result.variant, .full, "経路の最小幅を残した上で、保存ラベルに先に幅を配る")
+        XCTAssertLessThanOrEqual(result.width, 402)
+    }
+
+    func test_375ptの標準の文字で電話あり_行ったは日付を落として幅に収まる() {
+        let result = layout(proposed: 375, hasPhone: true, status: .visited, size: .large)
+        XCTAssertNotNil(result.variant)
+        XCTAssertNotEqual(result.variant, .full)
+        XCTAssertLessThanOrEqual(result.width, 375)
     }
 
     func test_375ptで電話あり_行った日付つきでも幅に収まる() {

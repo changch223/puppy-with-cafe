@@ -27,6 +27,8 @@ enum DogFit {
         case sizeLimit(DogSize)
         /// 店そのものが犬同伴不可
         case policyNotAllowed
+        /// 大型犬は不可（`large_dogs == false`。上限の明記がない席にも言える店全体の記載）
+        case largeDogsNotAllowed
     }
 
     /// 分からない理由
@@ -131,7 +133,9 @@ enum DogFit {
         if let sizeMax {
             return dog.size <= sizeMax ? .fits : .doesNotFit(.sizeLimit(sizeMax))
         }
-        // 上限の明記がない
+        // 上限の明記がない。large_dogs == false（大型犬は不可）は店全体の記載なので、
+        // 上限の明記がない席にも言える（不可と言う方向は原則Iに反しない。true の流用は下の anySeatHasLimit で制限）
+        if dog.size == .large, largeDogs == false { return .doesNotFit(.largeDogsNotAllowed) }
         switch dog.size {
         case .small:
             // 犬同伴可の席で小型犬を断る明記がないため入れる。ただしサイズの条件の文がある店は読んでもらう
@@ -162,11 +166,8 @@ extension DogFit.Result {
     /// 入れないと明記された席だけの理由（総合の判定が「分からない」のときにも使う。例: 店内は小型犬まで・テラスは記載なし
     /// → 「店内は小型犬まで」）。入れないと明記された席がなければ nil
     var notAllowedSeatsText: String? {
-        let parts = [
-            Self.reason(of: indoor, seat: .indoor),
-            Self.reason(of: terrace, seat: .terrace),
-        ].compactMap { $0 }
-        return parts.isEmpty ? nil : parts.joined(separator: "・")
+        let text = seatReasonsText
+        return text.isEmpty ? nil : text
     }
 
     var reasonText: String? {
@@ -174,11 +175,18 @@ extension DogFit.Result {
         if case .doesNotFit(.policyNotAllowed) = indoor {
             return String(localized: "犬の同伴は不可")
         }
-        let parts = [
+        return seatReasonsText
+    }
+
+    /// 席ごとの理由を「・」でつなぐ。両方の席が「大型犬は不可」のときは席を分けず「大型犬は不可」の1つにする
+    private var seatReasonsText: String {
+        if indoor == .doesNotFit(.largeDogsNotAllowed), terrace == .doesNotFit(.largeDogsNotAllowed) {
+            return String(localized: "大型犬は不可")
+        }
+        return [
             Self.reason(of: indoor, seat: .indoor),
             Self.reason(of: terrace, seat: .terrace),
-        ].compactMap { $0 }
-        return parts.joined(separator: "・")
+        ].compactMap { $0 }.joined(separator: "・")
     }
 
     /// 行・カードに灰色で出す注記（「うちの子は不可（店内は中型犬まで）」）。入れない店でなければ nil
@@ -272,6 +280,7 @@ extension DogFit.Result {
             let size = max.displayName
             return String(localized: "\(label)は\(size)まで")
         case .policyNotAllowed: return String(localized: "犬の同伴は不可")
+        case .largeDogsNotAllowed: return String(localized: "\(label)は大型犬不可")
         }
     }
 }

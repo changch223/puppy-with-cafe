@@ -231,6 +231,8 @@ struct CafeDetailAmenityRow: Equatable, Sendable {
         case unconfirmed
         /// 可だがサイズ・席の条件がある（緑の ✓ にせず中立に示す。タイルの「条件つきで可」と同じ）
         case conditional
+        /// 一部の席に大型犬未満の上限があるだけで、可とは言えない（「店内は小型犬まで」。✓ にせず中立に示す）
+        case limited
     }
 
     let label: String
@@ -255,43 +257,49 @@ enum CafeDetailAmenities {
         ]
     }
 
-    /// 大型犬の行。`large_dogs` が true/false ならそれを優先（従来どおり）。
-    /// `large_dogs` が空のときは、席ごとのサイズ上限（可と明記された席の上限）から、明記された席だけを言う:
-    /// 上限が大型犬の席があれば「店内は可」「テラスは可」、小型犬・中型犬の上限だけなら「店内は小型犬まで」（DogFit と同じ言い方）。
-    /// 席が絞られた言い方なので中立表示（`.conditional`）。何も明記がなければ「分かりません」。
+    /// 大型犬の行。席ごとのサイズ上限（可と明記された席の上限）があるときは、`large_dogs` が true でも nil でも、
+    /// 明記された席だけを言う（タイルと同じく席が絞られた言い方。`large_dogs` の true を上限のない別の席に流用しない）:
+    /// - 上限が大型犬の席があれば「店内は可」「テラスは可」（`.conditional`＝中立のチェック。可の緑ではない）
+    /// - 大型犬が入れる席が残っていない（すべての席が不可か大型犬未満の上限）なら「不可」（`.no`）
+    /// - 上限が小型犬・中型犬の席があり、もう片方が分からないときは「店内は小型犬まで」（`.limited`＝可に見せない）
+    /// 席ごとの上限がなければ `large_dogs` のとおり（true/false/nil。従来どおり）。
     private static func largeDogsRow(
         _ amenities: DogAmenities, confirmed: Bool, hasSizeLimit: Bool
     ) -> CafeDetailAmenityRow {
         let label = String(localized: "大型犬")
-        if amenities.largeDogs != nil {
+        let limits: [(seat: DogFit.Seat, max: DogSize)] = [
+            (.indoor, amenities.indoor == true ? amenities.sizeMaxIndoor : nil),
+            (.terrace, amenities.terrace == true ? amenities.sizeMaxTerrace : nil),
+        ].compactMap { seat, max in max.map { (seat, $0) } }
+        // large_dogs == false は店全体の「大型犬は不可」。席ごとの文より優先する
+        guard !limits.isEmpty, amenities.largeDogs != false else {
             return row(
                 label, amenities.largeDogs, confirmed, yes: String(localized: "可"), no: String(localized: "不可"),
                 yesIsConditional: hasSizeLimit
             )
         }
-        let limits: [(seat: DogFit.Seat, max: DogSize)] = [
-            (.indoor, amenities.indoor == true ? amenities.sizeMaxIndoor : nil),
-            (.terrace, amenities.terrace == true ? amenities.sizeMaxTerrace : nil),
-        ].compactMap { seat, max in max.map { (seat, $0) } }
-        guard !limits.isEmpty else {
-            return CafeDetailAmenityRow(label: label, state: .unknown, valueText: String(localized: "分かりません"))
-        }
         if !confirmed {
             return CafeDetailAmenityRow(label: label, state: .unconfirmed, valueText: String(localized: "記載あり（未確認）"))
         }
         let largeSeats = limits.filter { $0.max == .large }.map(\.seat.label)
-        let text: String
         if !largeSeats.isEmpty {
             let seats = largeSeats.joined(separator: "・")
-            text = String(localized: "\(seats)は可")
-        } else {
-            text = limits.map { limit -> String in
-                let seat = limit.seat.label
-                let size = limit.max.displayName
-                return String(localized: "\(seat)は\(size)まで")
-            }.joined(separator: "・")
+            return CafeDetailAmenityRow(label: label, state: .conditional, valueText: String(localized: "\(seats)は可"))
         }
-        return CafeDetailAmenityRow(label: label, state: .conditional, valueText: text)
+        // 大型犬未満の上限の席しかない。もう片方の席が不可・上限つきなら、大型犬の入れる席は残っていない
+        let noLargeSeatLeft = [amenities.indoor, amenities.terrace].enumerated().allSatisfy { index, allowed in
+            let max = index == 0 ? amenities.sizeMaxIndoor : amenities.sizeMaxTerrace
+            return allowed == false || (allowed == true && max != nil)
+        }
+        if noLargeSeatLeft {
+            return CafeDetailAmenityRow(label: label, state: .no, valueText: String(localized: "不可"))
+        }
+        let text = limits.map { limit -> String in
+            let seat = limit.seat.label
+            let size = limit.max.displayName
+            return String(localized: "\(seat)は\(size)まで")
+        }.joined(separator: "・")
+        return CafeDetailAmenityRow(label: label, state: .limited, valueText: text)
     }
 
     private static func row(
