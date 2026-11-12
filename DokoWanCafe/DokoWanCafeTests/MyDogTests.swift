@@ -299,7 +299,7 @@ final class MyDogTests: XCTestCase {
         let items = sampleItems
         let now = Date(timeIntervalSince1970: 1_780_000_000)
         let ok = CafePresentation.accessibilityLabel(for: items[0], at: now, dog: DogProfile(size: .small))
-        XCTAssertTrue(ok.contains("うちの子OK"))
+        XCTAssertTrue(ok.contains("うちの子は店内OK"))
         let ng = CafePresentation.accessibilityLabel(for: items[1], at: now, dog: DogProfile(size: .large))
         XCTAssertTrue(ng.contains("うちの子は不可（店内は中型犬まで・テラスは不可）"))
         let none = CafePresentation.accessibilityLabel(for: items[0], at: now)
@@ -313,7 +313,8 @@ final class MyDogTests: XCTestCase {
             for: items, savedPlaces: SavedPlaces(), at: now, isTargetTime: false, clock: now,
             dog: DogProfile(size: .large)
         )
-        XCTAssertTrue(labels[items[2].cafe.id]?.contains("うちの子OK") == true)
+        XCTAssertTrue(labels[items[2].cafe.id]?.contains("うちの子は") == true)
+        XCTAssertFalse(labels[items[2].cafe.id]?.contains("うちの子は不可") == true)
         XCTAssertTrue(labels[items[1].cafe.id]?.contains("うちの子は不可") == true)
         let without = MapViewModel.spokenLabels(
             for: items, savedPlaces: SavedPlaces(), at: now, isTargetTime: false, clock: now

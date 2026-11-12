@@ -5,7 +5,8 @@ enum SheetHeadline {
     struct Text: Equatable {
         /// 例: 「犬OKのお店 547件」
         let title: String
-        /// 並び順と起点（例: 「現在地から近い順」「渋谷駅から近い順」「確認日が新しい順」）
+        /// 2行目。近い順のときは「答え」（例: 「いちばん近い営業中の店は徒歩約3分」）、
+        /// 結果が0件・確認日順のときは並び順と起点（「現在地から近い順」「確認日が新しい順」）
         let subtitle: String
     }
 
@@ -18,6 +19,8 @@ enum SheetHeadline {
     ///   - includeUnverified: 未確認の店も表示中か（含むときは「犬OK」と言い切らない）
     ///   - sortOrder: 並び順
     ///   - originName: 起点名。現在地のとき（`isCurrentLocation`）は「現在地」と言う
+    ///   - items: 表示中の店（距離つき）。渡すと、近い順のとき2行目を「いちばん近い営業中の店は…」の答えにする。nil は従来の2行目
+    ///   - referenceTime: 営業中かの判定時刻（今、または「いつ行く？」の対象時刻）
     static func make(
         count: Int,
         amenities: AmenityFilter,
@@ -27,7 +30,9 @@ enum SheetHeadline {
         includeUnverified: Bool = false,
         sortOrder: CafeSortOrder = .distance,
         originName: String,
-        isCurrentLocation: Bool
+        isCurrentLocation: Bool,
+        items: [CafeWithDistance]? = nil,
+        referenceTime: Date = Date()
     ) -> Text {
         let labels = amenityLabels(amenities)
         // 未確認を含むときは「犬OK」ではなく「犬同伴」（未確認は可と言えない, 憲章 原則I）
@@ -64,8 +69,45 @@ enum SheetHeadline {
         let suffix = includeUnverified ? String(localized: "（未確認を含む）") : ""
         return Text(
             title: String(localized: "\(body) \(count)件\(suffix)"),
-            subtitle: subtitle(sortOrder: sortOrder, originName: originName, isCurrentLocation: isCurrentLocation)
+            subtitle: items.map {
+                answerSubtitle(
+                    items: $0, at: referenceTime, isTargetTime: targetLabel != nil, sortOrder: sortOrder,
+                    originName: originName, isCurrentLocation: isCurrentLocation
+                )
+            } ?? subtitle(sortOrder: sortOrder, originName: originName, isCurrentLocation: isCurrentLocation)
         )
+    }
+
+    /// 2行目。近い順のときは「いちばん近い営業中の店は徒歩約3分」を答えにする。
+    /// 営業中と分かっている店（`OpeningHoursEvaluator.state == .open`）だけを数える。営業時間が分からない店は営業中に数えない（憲章 原則I）。
+    /// 起点が現在地でないときは先頭に「渋谷駅から・」を付ける。結果0件・確認日順は従来の `subtitle`。
+    static func answerSubtitle(
+        items: [CafeWithDistance],
+        at date: Date,
+        isTargetTime: Bool,
+        sortOrder: CafeSortOrder,
+        originName: String,
+        isCurrentLocation: Bool
+    ) -> String {
+        guard sortOrder == .distance, !items.isEmpty else {
+            return subtitle(sortOrder: sortOrder, originName: originName, isCurrentLocation: isCurrentLocation)
+        }
+        let nearestOpen = items
+            .filter { OpeningHoursEvaluator.state(hours: $0.cafe.hours, at: date) == .open }
+            .min { $0.distanceMeters < $1.distanceMeters }
+        let answer: String
+        if let nearestOpen {
+            let distance = WalkingTime.summary(meters: nearestOpen.distanceMeters).headline
+            answer = isTargetTime
+                ? String(localized: "その時間に営業している、いちばん近い店は\(distance)")
+                : String(localized: "いちばん近い営業中の店は\(distance)")
+        } else {
+            answer = isTargetTime
+                ? String(localized: "その時間に営業していると分かっているお店はありません")
+                : String(localized: "今、営業中と分かっているお店はありません")
+        }
+        guard !isCurrentLocation else { return answer }
+        return String(localized: "\(originName)から・\(answer)")
     }
 
     static func subtitle(sortOrder: CafeSortOrder, originName: String, isCurrentLocation: Bool) -> String {

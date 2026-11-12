@@ -206,4 +206,69 @@ final class MapViewModelTests: XCTestCase {
         let wide = MKCoordinateSpan(latitudeDelta: 300 / 111_320, longitudeDelta: 0.02)
         XCTAssertFalse(MapViewModel.showsPinNames(span: wide, centerLatitude: lat))
     }
+
+
+    // MARK: - ピンの絵柄・店名の出し方
+
+    func test_ピンの絵柄は席の種類で変わる() {
+        XCTAssertEqual(MapPinCategory.indoorOK.symbolName, "house.fill")
+        XCTAssertEqual(MapPinCategory.terraceOnly.symbolName, "umbrella.fill")
+        XCTAssertEqual(MapPinCategory.checkDetail.symbolName, "questionmark")
+        // 未確認は席がまだ分からないので従来の肉球
+        XCTAssertEqual(MapPinCategory.unverified.symbolName, "pawprint.fill")
+        // iOS 17 で使える SF Symbol か（描けないと絵柄が消える）
+        for category in [MapPinCategory.indoorOK, .terraceOnly, .checkDetail, .unverified] {
+            XCTAssertNotNil(UIImage(systemName: category.symbolName), category.symbolName)
+        }
+    }
+
+    func test_テラスのピンの色は青で白い絵柄と3対1以上() {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        XCTAssertTrue(MapPinRenderer.fillColor(for: .terraceOnly).getRed(&red, green: &green, blue: &blue, alpha: &alpha))
+        XCTAssertEqual(Int((red * 255).rounded()), 0x1F)
+        XCTAssertEqual(Int((green * 255).rounded()), 0x7F)
+        XCTAssertEqual(Int((blue * 255).rounded()), 0xB5)
+        func linear(_ value: CGFloat) -> CGFloat { value <= 0.03928 ? value / 12.92 : pow((value + 0.055) / 1.055, 2.4) }
+        let luminance = 0.2126 * linear(red) + 0.7152 * linear(green) + 0.0722 * linear(blue)
+        XCTAssertGreaterThanOrEqual(1.05 / (luminance + 0.05), 3)
+    }
+
+    func test_寄せ具合で店名の出し方が変わる() {
+        let tokyo = 35.68
+        // 大きく寄せている（600m 未満）: 全部
+        XCTAssertEqual(MapViewModel.pinNameMode(span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004), centerLatitude: tokyo), .all)
+        // 緯度幅 0.02 度以下: 起点に近い3店と選んだ店だけ
+        XCTAssertEqual(MapViewModel.pinNameMode(span: MKCoordinateSpan(latitudeDelta: 0.0144, longitudeDelta: 0.0144), centerLatitude: tokyo), .nearby)
+        XCTAssertEqual(MapViewModel.pinNameMode(span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02), centerLatitude: tokyo), .nearby)
+        // 広い縮尺: 出さない
+        XCTAssertEqual(MapViewModel.pinNameMode(span: MKCoordinateSpan(latitudeDelta: 0.0201, longitudeDelta: 0.02), centerLatitude: tokyo), .none)
+        XCTAssertEqual(MapViewModel.pinNameMode(span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1), centerLatitude: tokyo), .none)
+    }
+
+    func test_起点に近い先頭3店のidを返す() {
+        let items = [900.0, 100, 500, 300, 700].map { meters -> CafeWithDistance in
+            let cafe = Cafe(
+                id: UUID(), placeID: nil, name: "\(Int(meters))", latitude: 35.68, longitude: 139.76,
+                address: nil, contact: nil, dogPolicyStatus: .allowed, dogPolicyCondition: nil,
+                lastVerified: nil, representativeSourceID: nil, hasConflict: false, isClosed: false, area: "tokyo"
+            )
+            return CafeWithDistance(cafe: cafe, distanceMeters: meters)
+        }
+        let ids = MapViewModel.nearestIDs(of: items)
+        XCTAssertEqual(ids.count, 3)
+        XCTAssertEqual(Set(items.filter { [100, 300, 500].contains($0.distanceMeters) }.map(\.cafe.id)), ids)
+        XCTAssertEqual(MapViewModel.nearestIDs(of: Array(items.prefix(2))).count, 2)
+        XCTAssertTrue(MapViewModel.nearestIDs(of: []).isEmpty)
+    }
+
+    func test_店名を出すピンの判定() {
+        // 全部
+        XCTAssertTrue(MapViewModel.showsName(mode: .all, isNearest: false, isSelected: false))
+        // 少し寄せている: 近い3店と選んだ店だけ
+        XCTAssertTrue(MapViewModel.showsName(mode: .nearby, isNearest: true, isSelected: false))
+        XCTAssertTrue(MapViewModel.showsName(mode: .nearby, isNearest: false, isSelected: true))
+        XCTAssertFalse(MapViewModel.showsName(mode: .nearby, isNearest: false, isSelected: false))
+        // 広い縮尺は出さない
+        XCTAssertFalse(MapViewModel.showsName(mode: .none, isNearest: true, isSelected: true))
+    }
 }

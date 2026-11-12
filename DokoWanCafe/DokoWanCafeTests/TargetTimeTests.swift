@@ -147,7 +147,7 @@ final class TargetTimeTests: XCTestCase {
         XCTAssertEqual(closed.state, .closedToday)
 
         let unknown = OpenLine.make(hours: nil, at: saturdayNoon, isTargetTime: true)
-        XCTAssertEqual(unknown.text, "時間の情報なし")
+        XCTAssertEqual(unknown.text, "営業時間は分かりません")
         XCTAssertEqual(unknown.state, .unknown)
     }
 

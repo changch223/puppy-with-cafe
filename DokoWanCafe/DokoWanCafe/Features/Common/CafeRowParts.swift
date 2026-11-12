@@ -1,29 +1,19 @@
 import SwiftUI
 import UIKit
 
-/// 頭文字タイル（写真がない店の代替表示）。店名の1文字＋店IDから決まる落ち着いた色。
-struct InitialTileView: View {
+/// 写真がない店のタイル。ピンと同じ絵柄（席の種類）を、カテゴリの色を薄くした背景の上に置く。
+struct CategoryTileView: View {
     let cafe: Cafe
     let size: CGFloat
 
-    /// 落ち着いた色のパレット（白文字が読める濃さ）。番号は `InitialTile.colorIndex` が決める。
-    private static let palette: [Color] = [
-        Color(red: 0.36, green: 0.55, blue: 0.47),
-        Color(red: 0.55, green: 0.48, blue: 0.38),
-        Color(red: 0.42, green: 0.52, blue: 0.62),
-        Color(red: 0.62, green: 0.45, blue: 0.40),
-        Color(red: 0.50, green: 0.45, blue: 0.60),
-        Color(red: 0.55, green: 0.55, blue: 0.36),
-        Color(red: 0.38, green: 0.55, blue: 0.58),
-        Color(red: 0.60, green: 0.42, blue: 0.50),
-    ]
-
     var body: some View {
-        Self.palette[InitialTile.colorIndex(for: cafe.id) % Self.palette.count]
+        let category = MapPinCategory.category(for: cafe)
+        let color = Color(MapPinRenderer.fillColor(for: category))
+        color.opacity(0.18)
             .overlay {
-                Text(InitialTile.character(for: cafe.name))
-                    .font(.system(size: size * 0.46, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
+                Image(systemName: category.symbolName)
+                    .font(.system(size: size * 0.42, weight: .bold))
+                    .foregroundStyle(color)
             }
             .frame(width: size, height: size)
             .clipShape(RoundedRectangle(cornerRadius: size * 0.16, style: .continuous))
@@ -31,7 +21,7 @@ struct InitialTileView: View {
     }
 }
 
-/// 店の写真（`LinkPreviewService` のキャッシュ経由の画像のみ）。写真がない・取得できない店は頭文字タイル。
+/// 店の写真（`LinkPreviewService` のキャッシュ経由の画像のみ）。写真がない・取得できない店はカテゴリの絵柄のタイル。
 /// スクロールで行が入れ替わっても `.task(id:)` が自動キャンセルする。
 struct CafeThumbnailView: View {
     let cafe: Cafe
@@ -51,7 +41,7 @@ struct CafeThumbnailView: View {
                     .frame(width: size, height: size)
                     .clipShape(RoundedRectangle(cornerRadius: size * 0.16, style: .continuous))
             } else {
-                InitialTileView(cafe: cafe, size: size)
+                CategoryTileView(cafe: cafe, size: size)
             }
         }
         .accessibilityHidden(true)
@@ -107,21 +97,81 @@ struct CafeTagsView: View {
     }
 }
 
-/// 営業の行。営業中だけブランド色、それ以外はグレー（時間が不明な店で嘘をつかない）。
+extension OpenLine.State {
+    /// 営業の行の文字色。営業中だけブランド色、閉店が近いときは橙、それ以外はグレー（時間が不明な店で嘘をつかない）
+    var lineColor: Color {
+        switch self {
+        case .open: return Color.brand
+        case .closingSoon: return Color.cautionText
+        case .outsideHours, .closedToday, .unknown: return Color(.secondaryLabel)
+        }
+    }
+}
+
+extension CafePresentation.AnswerLine.Tone {
+    /// 答えの主文の色。店内OK＝ブランド色、テラス＝青、分からない・条件を確認＝橙、未確認・入れない＝グレー
+    var color: Color {
+        switch self {
+        case .indoor: return Color.brand
+        case .terrace: return Color.terraceText
+        case .attention: return Color.cautionText
+        case .unverified, .notAllowed: return Color(.secondaryLabel)
+        }
+    }
+}
+
+/// 営業の行。営業中だけブランド色、閉店が近いときは橙、それ以外はグレー（時間が不明な店で嘘をつかない）。
 struct OpenLineView: View {
     let line: OpenLine
 
     var body: some View {
         HStack(spacing: 4) {
             Circle()
-                .fill(line.state == .open ? Color.brand : Color(.secondaryLabel).opacity(0.5))
+                .fill(line.state.isOpen ? line.state.lineColor : Color(.secondaryLabel).opacity(0.5))
                 .frame(width: 7, height: 7)
             Text(line.text)
                 .font(.caption)
-                .foregroundStyle(line.state == .open ? Color.brand : Color(.secondaryLabel))
+                .foregroundStyle(line.state.lineColor)
                 .lineLimit(2)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityHidden(true)
+    }
+}
+
+/// 答えの1行（「うちの子は店内OK・床で待てる」）。主文は色つき・太め、補足は薄い色。色だけに頼らず文言で区別できる。
+/// 大きな文字では折り返す。
+struct AnswerLineView: View {
+    let cafe: Cafe
+    @Environment(\.dogProfile) private var dog
+
+    var body: some View {
+        let answer = CafePresentation.answerLine(for: cafe, dog: dog)
+        Group {
+            if let supplement = answer.supplement {
+                Text(verbatim: answer.main).foregroundStyle(answer.tone.color).fontWeight(.semibold)
+                    + Text(verbatim: "・").foregroundStyle(Color(.secondaryLabel))
+                    + Text(verbatim: supplement).foregroundStyle(Color(.secondaryLabel))
+            } else {
+                Text(verbatim: answer.main).foregroundStyle(answer.tone.color).fontWeight(.semibold)
+            }
+        }
+        .font(.subheadline)
+        .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+/// 一覧の行の3行目「営業中・18:00まで・徒歩約4分」。営業の部分だけ色を付け、距離は薄い色。大きな文字では折り返す。
+struct OpenAndDistanceLineView: View {
+    let line: OpenLine
+    let walking: WalkingTime.Summary
+
+    var body: some View {
+        (Text(verbatim: line.text).foregroundStyle(line.state.lineColor)
+            + Text(verbatim: "・").foregroundStyle(Color(.secondaryLabel))
+            + Text(verbatim: walking.headline).foregroundStyle(Color(.secondaryLabel)))
+            .font(.caption)
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityHidden(true)
     }
 }

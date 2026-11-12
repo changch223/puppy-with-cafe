@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// ピンを選んだときに一覧シートの中身が変わる「店のカード」（再設計 段階1a）。
-/// 写真 or 頭文字タイル・店名・タグ・条件の要点・営業の行・徒歩の目安と、経路／電話／行きたい／共有、「詳しく見る」。
+/// 写真 or カテゴリの絵柄のタイル・店名・答え1行・条件の要点・営業の行・徒歩の目安と、経路／電話／行きたい／共有、「詳しく見る」。
 /// 一覧に戻す（✕）と、シートは元の段に戻る。
 struct PlaceCardView: View {
     let item: CafeWithDistance
@@ -165,7 +165,7 @@ struct PlaceCardView: View {
         .accessibilityLabel(Text("閉じて一覧に戻る"))
     }
 
-    /// 店名・タグ・条件の要点・営業と徒歩の目安
+    /// 店名・答え1行・条件の要点・営業と徒歩の目安
     private var cardInfo: some View {
         let isLarge = dynamicTypeSize.isAccessibilitySize
         return VStack(alignment: .leading, spacing: 6) {
@@ -179,14 +179,13 @@ struct PlaceCardView: View {
                     VisitedCheckIcon()
                 }
             }
-            CafeTagsView(cafe: cafe)
+            AnswerLineView(cafe: cafe)
             if let condition = CafePresentation.conditionSummary(for: cafe) {
                 Text(condition)
                     .font(.caption)
                     .foregroundStyle(Color(.secondaryLabel))
                     .lineLimit(isLarge ? nil : 2)
             }
-            MyDogNoteView(cafe: cafe)
             let line = HStack(spacing: 8) {
                 OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
                 Text(walkingText)

@@ -115,4 +115,29 @@ final class CafeSheetDetentTests: XCTestCase {
         // 大きな文字では割合を大きくする（800 の 62% = 496）
         XCTAssertEqual(CafeSheetDetent.cardHeight(containerHeight: 800, isAccessibilitySize: true), 496)
     }
+
+
+    // MARK: - 見出しだけの段で先頭の1店が読める高さ
+
+    func test_peekは見出しと先頭の行1つ分の高さ() {
+        // 見出しブロック60 + 先頭の行88 + 区切り線・余白(17) = 165（基本の96より大きい）
+        XCTAssertEqual(CafeSheetDetent.peekHeight(headerBlockHeight: 60, firstRowHeight: 88), 60 + 88 + CafeSheetDetent.peekRowChrome)
+        XCTAssertEqual(CafeSheetDetent.peekHeight(headerBlockHeight: 60, firstRowHeight: 88), 165)
+    }
+
+    func test_行がない_0件のときは今までの高さ() {
+        XCTAssertEqual(CafeSheetDetent.peekHeight(headerBlockHeight: 60, firstRowHeight: 0), 96)
+        XCTAssertEqual(CafeSheetDetent.peekHeight(headerBlockHeight: 180, firstRowHeight: 0), 204)
+        XCTAssertEqual(CafeSheetDetent.peekHeight(headerBlockHeight: 180), 204)
+    }
+
+    func test_大きな文字で行が高くてもpeekは上限を守る() {
+        let peekHeight = CafeSheetDetent.peekHeight(headerBlockHeight: 300, firstRowHeight: 400)
+        XCTAssertEqual(peekHeight, 717)
+        // 地図領域800の60%（480）まで。行は切れてよい
+        XCTAssertEqual(
+            CafeSheetDetent.peek.height(containerHeight: 800, topReserved: 120, peekHeight: peekHeight),
+            800 * CafeSheetDetent.peekMaxRatio
+        )
+    }
 }

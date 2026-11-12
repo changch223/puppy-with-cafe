@@ -131,6 +131,16 @@
         }
       }
     },
+    "%@、%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@、%2$@"
+          }
+        }
+      }
+    },
     "%@、%@、%@のお店" : {
       "localizations" : {
         "ja" : {
@@ -217,6 +227,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@お店"
+          }
+        }
+      }
+    },
+    "%@から・%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@から・%2$@"
           }
         }
       }
@@ -411,12 +431,32 @@
         }
       }
     },
+    "%@・%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@・%2$@"
+          }
+        }
+      }
+    },
     "%@曜は定休" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@曜は定休"
+          }
+        }
+      }
+    },
+    "%@（条件あり）" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@（条件あり）"
           }
         }
       }
@@ -631,6 +671,16 @@
         }
       }
     },
+    "あと%lld分で閉店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あと%lld分で閉店"
+          }
+        }
+      }
+    },
     "あとで設定する" : {
       "localizations" : {
         "ja" : {
@@ -657,6 +707,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "いたずらやスパムを防ぎ、信頼できる情報を保つため、誤り報告の送信時のみサインインをお願いしています。閲覧・検索にサインインは不要です。"
+          }
+        }
+      }
+    },
+    "いちばん近い営業中の店は%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "いちばん近い営業中の店は%@"
           }
         }
       }
@@ -701,6 +761,16 @@
         }
       }
     },
+    "うちの子が入れるかは分かりません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子が入れるかは分かりません"
+          }
+        }
+      }
+    },
     "うちの子のことを教えてください" : {
       "localizations" : {
         "ja" : {
@@ -721,12 +791,42 @@
         }
       }
     },
+    "うちの子はテラスならOK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子はテラスならOK"
+          }
+        }
+      }
+    },
+    "うちの子は不可" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子は不可"
+          }
+        }
+      }
+    },
     "うちの子は不可（%@）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "うちの子は不可（%@）"
+          }
+        }
+      }
+    },
+    "うちの子は店内OK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "うちの子は店内OK"
           }
         }
       }
@@ -1011,6 +1111,26 @@
         }
       }
     },
+    "その時間に営業している、いちばん近い店は%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "その時間に営業している、いちばん近い店は%@"
+          }
+        }
+      }
+    },
+    "その時間に営業していると分かっているお店はありません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "その時間に営業していると分かっているお店はありません"
+          }
+        }
+      }
+    },
     "その時間に営業のお店に絞る" : {
       "localizations" : {
         "ja" : {
@@ -1291,12 +1411,32 @@
         }
       }
     },
+    "テラスならOK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスならOK"
+          }
+        }
+      }
+    },
     "テラスのみ" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "テラスのみ"
+          }
+        }
+      }
+    },
+    "テラスのみOK" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスのみOK"
           }
         }
       }
@@ -1341,12 +1481,12 @@
         }
       }
     },
-    "テラス席は可。店内は不可または不明です（青緑の角丸四角）" : {
+    "テラス席は可。店内は不可または不明です（青い角丸四角・傘の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テラス席は可。店内は不可または不明です（青緑の角丸四角）"
+            "value" : "テラス席は可。店内は不可または不明です（青い角丸四角・傘の絵柄）"
           }
         }
       }
@@ -1577,6 +1717,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "今"
+          }
+        }
+      }
+    },
+    "今、営業中と分かっているお店はありません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今、営業中と分かっているお店はありません"
           }
         }
       }
@@ -2071,6 +2221,16 @@
         }
       }
     },
+    "営業中、%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "営業中、%@"
+          }
+        }
+      }
+    },
     "営業中・%@まで" : {
       "localizations" : {
         "ja" : {
@@ -2107,6 +2267,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "営業時間は下記"
+          }
+        }
+      }
+    },
+    "営業時間は分かりません" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "営業時間は分かりません"
           }
         }
       }
@@ -2441,12 +2611,12 @@
         }
       }
     },
-    "席の種類や条件を詳細で確認（橙のしずく形）" : {
+    "席の種類や条件を詳細で確認（橙のしずく形・？の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "席の種類や条件を詳細で確認（橙のしずく形）"
+            "value" : "席の種類や条件を詳細で確認（橙のしずく形・？の絵柄）"
           }
         }
       }
@@ -2497,6 +2667,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "店内OK"
+          }
+        }
+      }
+    },
+    "店内OK（条件あり）" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内OK（条件あり）"
           }
         }
       }
@@ -2601,12 +2781,12 @@
         }
       }
     },
-    "愛犬と店内に入れます（緑の丸）" : {
+    "愛犬と店内に入れます（緑の丸・家の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "愛犬と店内に入れます（緑の丸）"
+            "value" : "愛犬と店内に入れます（緑の丸・家の絵柄）"
           }
         }
       }
@@ -3161,12 +3341,12 @@
         }
       }
     },
-    "犬同伴の可否を確認できていません（グレーの菱形）" : {
+    "犬同伴の可否を確認できていません（グレーの菱形・肉球の絵柄）" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "犬同伴の可否を確認できていません（グレーの菱形）"
+            "value" : "犬同伴の可否を確認できていません（グレーの菱形・肉球の絵柄）"
           }
         }
       }

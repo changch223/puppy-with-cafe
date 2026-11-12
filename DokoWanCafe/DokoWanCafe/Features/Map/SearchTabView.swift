@@ -384,7 +384,9 @@ struct SearchTabView: View {
                         sortOrder: viewModel.sortOrder,
                         // 結果が確定した起点で出す（探し直している間は前の結果のままなので、食い違わせない）
                         originName: viewModel.loadedOrigin.displayName,
-                        isCurrentLocation: viewModel.loadedOrigin == .currentLocation
+                        isCurrentLocation: viewModel.loadedOrigin == .currentLocation,
+                        items: viewModel.displayedResults,
+                        referenceTime: viewModel.referenceTime
                     ),
                     sortOrder: $viewModel.sortOrder,
                     items: viewModel.displayedResults,

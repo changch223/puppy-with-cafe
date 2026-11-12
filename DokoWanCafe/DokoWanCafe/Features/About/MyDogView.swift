@@ -123,10 +123,10 @@ struct MyDogView: View {
 
     private var legendSection: some View {
         Section {
-            legendRow(category: .indoorOK, title: MapPinCategory.indoorOK.legendTitle, detail: String(localized: "愛犬と店内に入れます（緑の丸）"))
-            legendRow(category: .terraceOnly, title: MapPinCategory.terraceOnly.legendTitle, detail: String(localized: "テラス席は可。店内は不可または不明です（青緑の角丸四角）"))
-            legendRow(category: .checkDetail, title: MapPinCategory.checkDetail.legendTitle, detail: String(localized: "席の種類や条件を詳細で確認（橙のしずく形）"))
-            legendRow(category: .unverified, title: MapPinCategory.unverified.legendTitle, detail: String(localized: "犬同伴の可否を確認できていません（グレーの菱形）"))
+            legendRow(category: .indoorOK, title: MapPinCategory.indoorOK.legendTitle, detail: String(localized: "愛犬と店内に入れます（緑の丸・家の絵柄）"))
+            legendRow(category: .terraceOnly, title: MapPinCategory.terraceOnly.legendTitle, detail: String(localized: "テラス席は可。店内は不可または不明です（青い角丸四角・傘の絵柄）"))
+            legendRow(category: .checkDetail, title: MapPinCategory.checkDetail.legendTitle, detail: String(localized: "席の種類や条件を詳細で確認（橙のしずく形・？の絵柄）"))
+            legendRow(category: .unverified, title: MapPinCategory.unverified.legendTitle, detail: String(localized: "犬同伴の可否を確認できていません（グレーの菱形・肉球の絵柄）"))
             legendRow(
                 category: .indoorOK,
                 title: String(localized: "薄いピン"),

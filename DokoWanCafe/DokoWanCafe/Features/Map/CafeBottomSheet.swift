@@ -12,8 +12,10 @@ enum CafeSheetDetent: CaseIterable, Equatable {
 
     /// peekの基本の高さ（文字が大きいときは見出しに合わせて伸びる。`peekHeight(headerBlockHeight:)`）
     static let peekHeight: CGFloat = 96
-    /// peekで1行目が少し見える分の高さ
+    /// 先頭の行の高さが分からない（行がない・0件）ときに、1行目が少し見える分の高さ
     static let peekRowHint: CGFloat = 24
+    /// 先頭の行1つ分を見せるときの、見出しと行の間の区切り線・行の上下の余白（リストの行の余白）の合計
+    static let peekRowChrome: CGFloat = 1 + 16
     /// medium の地図領域に対する割合
     static let mediumRatio: CGFloat = 0.45
     /// 店のカード表示中の高さの割合・下限（medium より少し低い固定の高さ）
@@ -29,10 +31,12 @@ enum CafeSheetDetent: CaseIterable, Equatable {
     /// 半分の段で、見出しの下に最低限見せる一覧の高さ（見出しが大きくて半分では一覧が見えなくなるのを防ぐ）
     static let mediumListAllowance: CGFloat = 140
 
-    /// 「見出しだけ」の段の高さ。グラバー＋見出し（Dynamic Type で伸びる）の実測の高さ＋1行目の覗き分。
-    /// 基本の高さより小さくならない。
-    static func peekHeight(headerBlockHeight: CGFloat) -> CGFloat {
-        max(peekHeight, headerBlockHeight + peekRowHint)
+    /// 「見出しだけ」の段の高さ。グラバー＋見出し（Dynamic Type で伸びる）の実測の高さ＋先頭の行1つ分
+    /// （行の実測の高さ `firstRowHeight` があるとき。ないとき・0件のときは1行目の覗き分 `peekRowHint`）。
+    /// 基本の高さより小さくならない。大きな文字で伸びすぎる分は `height(containerHeight:…)` の `peekMaxRatio` が抑える。
+    static func peekHeight(headerBlockHeight: CGFloat, firstRowHeight: CGFloat = 0) -> CGFloat {
+        let rowPart = firstRowHeight > 0 ? firstRowHeight + peekRowChrome : peekRowHint
+        return max(peekHeight, headerBlockHeight + rowPart)
     }
 
     /// VoiceOver で読む今の段の名前
@@ -134,9 +138,11 @@ struct CafeBottomSheet: View {
     @State private var dragTranslation: CGFloat = 0
     /// グラバー＋見出しの実測の高さ（文字が大きいときも見出しが切れないよう「見出しだけ」の段を伸ばす）
     @State private var headerBlockHeight: CGFloat = 0
+    /// 先頭の行の実測の高さ（「見出しだけ」の段で先頭の1店が切れずに読めるように。行がなければ 0）
+    @State private var firstRowHeight: CGFloat = 0
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    private var peekHeight: CGFloat { CafeSheetDetent.peekHeight(headerBlockHeight: headerBlockHeight) }
+    private var peekHeight: CGFloat { CafeSheetDetent.peekHeight(headerBlockHeight: headerBlockHeight, firstRowHeight: firstRowHeight) }
 
     private func height(of detent: CafeSheetDetent) -> CGFloat {
         detent.height(containerHeight: containerHeight, topReserved: topReserved, peekHeight: peekHeight)
@@ -164,6 +170,7 @@ struct CafeBottomSheet: View {
             Divider()
             content
         }
+        .onPreferenceChange(SheetFirstRowHeightKey.self) { firstRowHeight = $0 }
         .frame(maxWidth: .infinity)
         .frame(height: currentHeight, alignment: .top)
         .sheetChrome()
@@ -279,6 +286,14 @@ struct CafeBottomSheet: View {
                             isTargetTime: isTargetTime,
                             clock: clock
                         )
+                        // 先頭の行だけ高さを測る（「見出しだけ」の段の高さに使う）
+                        .background {
+                            if item.id == items.first?.id {
+                                GeometryReader { inner in
+                                    Color.clear.preference(key: SheetFirstRowHeightKey.self, value: inner.size.height)
+                                }
+                            }
+                        }
                     }
                 }
                 if showsUnverifiedRow {
@@ -347,6 +362,14 @@ struct CafeBottomSheet: View {
         }
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+/// 先頭の行の高さを親へ伝える（行がなければ既定の 0 のまま）
+private struct SheetFirstRowHeightKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
     }
 }
 
