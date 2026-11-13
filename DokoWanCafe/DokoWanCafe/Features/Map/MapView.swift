@@ -53,7 +53,7 @@ struct CafeMapView: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
-        // アプリ全体のブランド色（緑）ではなく標準の青にする。現在地の点が店内OKの緑のピンと紛らわしくなるため。
+        // アプリ全体のブランド色（緑）ではなく標準の青にする。現在地の点がブランド色のチップやボタンと紛らわしくなるため。
         mapView.tintColor = .systemBlue
         mapView.pointOfInterestFilter = .excludingAll
         mapView.register(

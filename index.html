@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puppy With Cafe | 犬と行けるカフェを地図で探す</title>
+<meta name="description" content="愛犬と一緒に入れる東京都内のカフェを、地図でさっと探せる iPhone アプリ。犬OKの根拠は出典と確認日つき。ログイン不要・広告なし。">
+<style>
+  body { font-family: -apple-system, "Hiragino Sans", sans-serif; max-width: 720px;
+         margin: 0 auto; padding: 24px; line-height: 1.8; color: #333; }
+  h1 { font-size: 1.5em; border-bottom: 3px solid #E8792B; padding-bottom: 8px; }
+  h2 { font-size: 1.15em; color: #E8792B; margin-top: 2em; }
+  .lead { font-size: 1.1em; }
+  .shots { display: flex; gap: 12px; margin: 1.5em 0; }
+  .shots img { width: 100%; min-width: 0; flex: 1; border-radius: 18px; border: 1px solid #ddd; }
+  .pins { list-style: none; padding: 0; }
+  .pins li { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+  .pin { flex: none; width: 44px; height: 44px; display: grid; place-items: center; color: #fff;
+         font-weight: 800; font-size: 11px; line-height: 1.15; text-align: center;
+         border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+  .pin.in { background: #F4A3BD; color: #7A1840; border-radius: 50%; }
+  .pin.te { background: #1F7FB5; border-radius: 13px; }
+  .pin.ck { background: #E07B1F; border-radius: 50% 50% 0 50%; transform: rotate(45deg); font-size: 20px; }
+  .pin.un { background: #7A7F85; border-radius: 8px; transform: rotate(45deg) scale(.8); font-size: 20px; }
+  .pin.ck b, .pin.un b { transform: rotate(-45deg); }
+  footer { margin-top: 3em; font-size: .85em; color: #888; }
+  @media (prefers-color-scheme: dark) { body { background:#1c1c1e; color:#eee; } .shots img { border-color:#444; } }
+</style>
+</head>
+<body>
+<h1>🐶☕ Puppy With Cafe</h1>
+<p class="lead"><strong>犬と行けるカフェを地図で探す</strong> iPhone アプリです。東京都内のカフェを掲載しています。</p>
+<p>行ってみたら犬は入れなかった、という残念な思いをしないために。犬の同伴可否を「出典」と「確認日」つきで掲載し、確認できていないことは推測せずに「未確認」と表示します。</p>
+
+<div class="shots">
+  <img src="docs/screenshots/home.png" alt="地図と一覧でカフェを探す画面">
+  <img src="docs/screenshots/detail.png" alt="お店の詳細。答えのカードと根拠">
+</div>
+
+<h2>できること</h2>
+<ul>
+  <li>検索バーで、店名・駅名・エリアから探す（現在地の周りも選べます）</li>
+  <li>「いつ行く？」で日時を選ぶと、その時間に開いているお店だけを表示</li>
+  <li>「うちの子」の大きさと過ごし方を設定すると、入れると明記されたお店に「うちの子OK」を表示</li>
+  <li>お店の詳細は「店内で一緒に過ごせます」などの答えを最初に表示。根拠（出典の種類と確認月）もすぐ分かります</li>
+  <li>気になるお店は「行きたい」、行ったお店は「行った」に保存</li>
+  <li>電話、公式サイト、Apple マップ／Google マップへの経路案内、共有</li>
+</ul>
+
+<h2>地図のピンの見かた</h2>
+<ul class="pins">
+  <li><span class="pin in">店内<br>OK</span><span>店内OK: 愛犬と店内に入れます</span></li>
+  <li><span class="pin te">テラス<br>OK</span><span>テラス: テラス席は可。店内は不可または不明です</span></li>
+  <li><span class="pin ck"><b>?</b></span><span>条件を確認: 席の種類や条件を、お店の詳細で確認してください</span></li>
+  <li><span class="pin un"><b>🐾</b></span><span>未確認: 犬同伴の可否を確認できていません</span></li>
+</ul>
+
+<h2>プライバシー</h2>
+<ul>
+  <li>ログイン・アカウント登録は不要です。広告・解析・トラッキングはありません。</li>
+  <li>現在地は「使用中のみ」の許可で、周辺のお店と距離の表示にだけ使い、端末内で処理します。送信も保存もしません。</li>
+  <li>「行きたい」「行った」「うちの子」の設定は端末内にだけ保存します。</li>
+  <li>詳しくは<a href="docs/privacy.html">プライバシーポリシー</a>をご覧ください。</li>
+</ul>
+
+<h2>ご注意</h2>
+<ul>
+  <li>掲載情報は目安です。同伴条件や営業時間は変わることがあるため、来店前に店舗へご確認ください。</li>
+  <li>動作環境: iOS 17 以降の iPhone。無料（広告・アプリ内課金なし）。</li>
+</ul>
+
+<h2>関連ページ</h2>
+<ul>
+  <li><a href="docs/support.html">サポート・お問い合わせ</a></li>
+  <li><a href="docs/privacy.html">プライバシーポリシー</a></li>
+</ul>
+
+<footer>© 2026 Puppy With Cafe</footer>
+</body>
+</html>
