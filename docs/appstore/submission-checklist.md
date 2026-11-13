@@ -4,11 +4,11 @@
 
 ## 残っている作業（2026-11-13 時点）
 
-アプリ側の準備は終わっている（体験見直し 第1弾まで main に反映・XCTest 703件 成功・Release 構成の実機向けビルド成功・ストア用の画面写真5枚を `docs/appstore/screenshots/` に用意・公開ページ3つが開ける・`cafes.json` の検証 OK）。残りは本人の作業だけ:
+アプリ側の準備は終わっている（体験見直し 第1弾まで main に反映・XCTest 704件 成功・Release 構成の実機向けビルド成功・ストア用の画面写真5枚を `docs/appstore/screenshots/` に用意・公開ページ（紹介・サポート・プライバシーポリシー）が開ける・`cafes.json` の検証 OK）。残りは本人の作業だけ:
 
 1. **チーム ID を決める**（§1・§2）。この Mac の署名用証明書のチームは `5R2C45VRV4`、プロジェクトの設定は `MY8WU4892D` で食い違っている。提出に使う Apple Developer Program のチーム ID を確かめ、違っていれば `DEVELOPMENT_TEAM` を直す（Claude に頼める）。
 2. App Store Connect にアプリを登録する（§3）。
-3. 文面と画面写真を入力する（§7。画面写真は `docs/appstore/screenshots/01_now.png`〜`05_saved.png` をそのままドラッグ）。
+3. 文面と画面写真を入力する（§7。App Store Connect が最初に見せる「Dynamic Island搭載iPhone（中型ディスプレイ）」の枠には `docs/appstore/screenshots/6.3/` の5枚（1206 × 2622）、6.9インチの枠（メディアマネージャー）には `docs/appstore/screenshots/01_now.png`〜`05_saved.png`（1320 × 2868）をドラッグ。名前は「DokoWanCafe」から「Puppy With Cafe」に書き換える。マーケティングURL は https://changch223.github.io/puppy-with-cafe/）。
 4. App Privacy と年齢区分に答える（§8）。
 5. Xcode で Archive してアップロードする（§9）。
 6. TestFlight で実機確認する（§10）。
