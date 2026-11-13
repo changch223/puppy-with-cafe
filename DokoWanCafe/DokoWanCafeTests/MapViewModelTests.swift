@@ -211,20 +211,41 @@ final class MapViewModelTests: XCTestCase {
     // MARK: - ピンの絵柄・店名の出し方
 
     func test_ピンの絵柄は席の種類で変わる() {
-        XCTAssertEqual(MapPinCategory.indoorOK.symbolName, "fork.knife")
-        XCTAssertEqual(MapPinCategory.terraceOnly.symbolName, "sun.max.fill")
-        // 絵柄だけでは伝わりにくい2種類には短い文字を添える
-        XCTAssertEqual(MapPinCategory.indoorOK.pinCaption, "OK")
-        XCTAssertEqual(MapPinCategory.terraceOnly.pinCaption, "テラス")
-        XCTAssertNil(MapPinCategory.checkDetail.pinCaption)
-        XCTAssertNil(MapPinCategory.unverified.pinCaption)
+        // 店内OK・テラスは絵柄を使わず2行の文字で言い切る
+        XCTAssertEqual(MapPinCategory.indoorOK.pinLines, ["店内", "OK"])
+        XCTAssertEqual(MapPinCategory.terraceOnly.pinLines, ["テラス", "OK"])
+        XCTAssertNil(MapPinCategory.indoorOK.symbolName)
+        XCTAssertNil(MapPinCategory.terraceOnly.symbolName)
+        // 条件を確認・未確認は絵柄だけ（未確認は席がまだ分からないので肉球）
+        XCTAssertNil(MapPinCategory.checkDetail.pinLines)
+        XCTAssertNil(MapPinCategory.unverified.pinLines)
         XCTAssertEqual(MapPinCategory.checkDetail.symbolName, "questionmark")
-        // 未確認は席がまだ分からないので従来の肉球
         XCTAssertEqual(MapPinCategory.unverified.symbolName, "pawprint.fill")
-        // iOS 17 で使える SF Symbol か（描けないと絵柄が消える）
         for category in [MapPinCategory.indoorOK, .terraceOnly, .checkDetail, .unverified] {
-            XCTAssertNotNil(UIImage(systemName: category.symbolName), category.symbolName)
+            // 文字か絵柄のどちらかは必ずある（どちらもないと中が空のピンになる）
+            XCTAssertTrue(category.pinLines != nil || category.symbolName != nil)
+            // iOS 17 で使える SF Symbol か（描けないと絵柄が消える）
+            if let name = category.symbolName { XCTAssertNotNil(UIImage(systemName: name), name) }
         }
+    }
+
+    func test_ピンの中の文字は地の色と3対1以上() {
+        func luminance(_ color: UIColor) -> CGFloat {
+            var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+            XCTAssertTrue(color.getRed(&r, green: &g, blue: &b, alpha: &a))
+            let linear = [r, g, b].map { $0 <= 0.03928 ? $0 / 12.92 : pow(($0 + 0.055) / 1.055, 2.4) }
+            return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+        }
+        for category in [MapPinCategory.indoorOK, .terraceOnly, .checkDetail, .unverified] {
+            let a = luminance(MapPinRenderer.fillColor(for: category)), b = luminance(MapPinRenderer.glyphColor(for: category))
+            let ratio = (max(a, b) + 0.05) / (min(a, b) + 0.05)
+            // 橙（条件を確認）は白い「？」で従来から 3:1 弱。文字を載せる店内OK・テラスは 3:1 以上を守る
+            if category == .indoorOK || category == .terraceOnly {
+                XCTAssertGreaterThanOrEqual(ratio, 3, "\(category)")
+            }
+        }
+        // 店内OKは薄いピンクの地に濃い文字（白ではない）
+        XCTAssertNotEqual(MapPinRenderer.glyphColor(for: .indoorOK), .white)
     }
 
     func test_テラスのピンの色は青で白い絵柄と3対1以上() {

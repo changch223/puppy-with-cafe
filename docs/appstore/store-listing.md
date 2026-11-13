@@ -16,7 +16,8 @@
 | 著作権 | © 2026 Puppy With Cafe | - |
 | サポートURL | https://changch223.github.io/puppy-with-cafe/docs/support.html（ページ内にメール irairappo@gmail.com と GitHub Issues の問い合わせ窓口を記載。v1.0 はフォームなし） | - |
 | プライバシーポリシーURL | https://changch223.github.io/puppy-with-cafe/docs/privacy.html | - |
-| マーケティングURL | （任意・なし） | - |
+| マーケティングURL | https://changch223.github.io/puppy-with-cafe/（アプリの紹介ページ。リポジトリ直下の `index.html`） | - |
+| ユーザプライバシー選択URL | （任意・空欄のまま。データを収集しないため不要） | - |
 | 年齢区分 | 4+ | - |
 | 価格 | 無料（広告・アプリ内課金なし） | - |
 

@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-/// 写真がない店のタイル。ピンと同じ絵柄（席の種類）を、カテゴリの色を薄くした背景の上に置く。
+/// 写真がない店のタイル。ピンと同じ文字・絵柄（席の種類）を、カテゴリの色を薄くした背景の上に置く。
 struct CategoryTileView: View {
     let cafe: Cafe
     let size: CGFloat
@@ -9,20 +9,25 @@ struct CategoryTileView: View {
     var body: some View {
         let category = MapPinCategory.category(for: cafe)
         let color = Color(MapPinRenderer.fillColor(for: category))
-        color.opacity(0.18)
+        color.opacity(category == .indoorOK ? 0.3 : 0.18)
             .overlay {
-                VStack(spacing: size * 0.02) {
-                    Image(systemName: category.symbolName)
-                        .font(.system(size: size * (category.pinCaption == nil ? 0.42 : 0.32), weight: .bold))
-                    if let caption = category.pinCaption {
-                        // ピンと同じ文字（「OK」「テラス」）。タイルの大きさに合わせた固定の大きさ
-                        Text(verbatim: caption)
-                            .font(.system(size: size * (caption.count > 2 ? 0.2 : 0.24), weight: .heavy))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
+                Group {
+                    if let lines = category.pinLines {
+                        // ピンと同じ2行の文字（「店内／OK」「テラス／OK」）。タイルの大きさに合わせた固定の大きさ
+                        VStack(spacing: -size * 0.03) {
+                            ForEach(lines, id: \.self) { line in
+                                Text(verbatim: line)
+                                    .font(.system(size: size * (line.count > 2 ? 0.25 : 0.29), weight: .heavy))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
+                            }
+                        }
+                    } else if let symbolName = category.symbolName {
+                        Image(systemName: symbolName)
+                            .font(.system(size: size * 0.42, weight: .bold))
                     }
                 }
-                .foregroundStyle(color)
+                .foregroundStyle(Color(MapPinRenderer.tileGlyphColor(for: category)))
             }
             .frame(width: size, height: size)
             .clipShape(RoundedRectangle(cornerRadius: size * 0.16, style: .continuous))
