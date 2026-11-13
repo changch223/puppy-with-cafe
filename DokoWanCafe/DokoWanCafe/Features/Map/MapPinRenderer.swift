@@ -34,7 +34,7 @@ enum MapPinRenderer {
         count > 1 ? padding + badgeExtraPadding : padding
     }
 
-    /// 可否の分類ごとのピン色（固定色。ライト・ダークどちらの地図でも見分けられる濃さ）
+    /// 可否の分類ごとのピン色（固定色）。店内OKの薄いピンクは明るい地図の地と近いので、白い縁と影・丸い形・中の濃い文字で見分ける
     static func fillColor(for category: MapPinCategory) -> UIColor {
         switch category {
         // 店内OK＝薄いピンク（2026-11-13 運営の指定。緑から変更）。薄い地なので中の文字は濃いローズ（`glyphColor`）
@@ -105,19 +105,23 @@ enum MapPinRenderer {
             fillColor(for: category).setFill()
             path(for: shape, in: inner).fill()
 
-            // 白い絵柄（丸い部分の中央）
+            // 文字か絵柄（丸い部分の中央。色は `glyphColor`）
             let glyphSide = (shape == .teardrop ? inner.width : min(inner.width, inner.height)) * (shape == .diamond ? 0.5 : 0.52)
             let center = CGPoint(x: inner.midX, y: shape == .teardrop ? inner.minY + inner.width / 2 : inner.midY)
             if let lines = category.pinLines {
                 // 2行の文字（絵柄なし）。各行は内側の幅に収まるまで小さくする
                 let side = min(inner.width, inner.height)
-                let texts = lines.map { fittedCaption($0, color: glyphColor(for: category), maxWidth: side * 0.86, preferredSize: side * ($0.count > 2 ? 0.28 : 0.32)) }
+                // 数のバッジ（右上）が付くときは、1行目がバッジに隠れないよう文字を少し小さくして左下へ寄せる
+                let hasBadge = count > 1
+                let scale: CGFloat = hasBadge ? 0.86 : 1
+                let texts = lines.map { fittedCaption($0, color: glyphColor(for: category), maxWidth: side * 0.86 * scale, preferredSize: side * ($0.count > 2 ? 0.28 : 0.32) * scale) }
                 let lineGap = -side * 0.04
                 let total = texts.reduce(0) { $0 + $1.size().height } + lineGap * CGFloat(texts.count - 1)
-                var y = center.y - total / 2
+                let centerX = center.x - (hasBadge ? side * 0.05 : 0)
+                var y = center.y - total / 2 + (hasBadge ? side * 0.1 : 0)
                 for text in texts {
                     let textSize = text.size()
-                    text.draw(at: CGPoint(x: center.x - textSize.width / 2, y: y))
+                    text.draw(at: CGPoint(x: centerX - textSize.width / 2, y: y))
                     y += textSize.height + lineGap
                 }
             } else if let symbolName = category.symbolName {

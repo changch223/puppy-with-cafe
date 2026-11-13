@@ -55,7 +55,7 @@ extension CafeFilter {
             // 犬不可(not_allowed)は常時除外する（トグルでも表示しない）。
             // 本アプリは犬同伴OK店のみを扱うデータ方針であり（実データは不可0件）、
             // 将来 not_allowed が入っても既定フィルタを素通りして
-            // MapPinCategory が犬OK系（緑/青/橙）に誤分類されることを防ぐガード。
+            // MapPinCategory が犬OK系（ピンク/青/橙）に誤分類されることを防ぐガード。
             if item.cafe.dogPolicyStatus == .notAllowed {
                 return false
             }
