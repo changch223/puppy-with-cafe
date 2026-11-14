@@ -1,6 +1,6 @@
 import Foundation
 
-/// エリア（`Cafe.subArea` の区分）ごとの集計。地図を東京全体が見えるほど引いたとき、ピンの代わりに出す「エリア名＋件数」の元になる。
+/// エリアごとの集計。エリアは細かい区分（`Cafe.subArea`）を `BroadArea` で広い区分（「渋谷・原宿」など）にまとめたもの。地図を東京全体が見えるほど引いたとき、ピンの代わりに出す「エリア名＋件数」の元になる。
 /// 純ロジック・UI非依存（憲章 原則IV）。件数は今効いている条件（`displayedResults`）で数える。
 struct AreaSummary: Equatable, Identifiable, Sendable {
     let name: String
@@ -29,14 +29,14 @@ enum AreaOverview {
         return wasOverview ? latitudeDelta >= exitLatitudeDelta : latitudeDelta >= enterLatitudeDelta
     }
 
-    /// 表示中の店をエリアごとに数える。エリア名が空の店は数えない。件数の多い順（同数は名前順）
+    /// 表示中の店を広いエリアごとに数える。エリア名が空の店は数えない。件数の多い順（同数は名前順）
     static func summaries(for items: [CafeWithDistance]) -> [AreaSummary] {
         var grouped: [String: [Cafe]] = [:]
         for item in items {
             let cafe = item.cafe
             guard cafe.latitude.isFinite, cafe.longitude.isFinite,
                   let name = cafe.subArea?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty else { continue }
-            grouped[name, default: []].append(cafe)
+            grouped[BroadArea.name(forSubArea: name), default: []].append(cafe)
         }
         let summaries = grouped.map { name, cafes -> AreaSummary in
             let latitudes = cafes.map(\.latitude), longitudes = cafes.map(\.longitude)

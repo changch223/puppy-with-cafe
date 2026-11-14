@@ -41,16 +41,16 @@ final class AreaOverviewTests: XCTestCase {
     func test_エリアごとに件数を数える() {
         let items = [
             makeItem(area: "渋谷", lat: 35.66, lng: 139.70), makeItem(area: "渋谷", lat: 35.67, lng: 139.71),
-            makeItem(area: "新宿", lat: 35.69, lng: 139.70),
+            makeItem(area: "原宿", lat: 35.69, lng: 139.70),
         ]
         let summaries = AreaOverview.summaries(for: items)
-        XCTAssertEqual(summaries.map(\.name), ["渋谷", "新宿"])
+        XCTAssertEqual(summaries.map(\.name), ["渋谷", "原宿"])
         XCTAssertEqual(summaries.map(\.count), [2, 1])
     }
 
     func test_件数が同じなら名前順() {
-        let items = [makeItem(area: "新宿", lat: 35.69, lng: 139.70), makeItem(area: "渋谷", lat: 35.66, lng: 139.70)]
-        XCTAssertEqual(AreaOverview.summaries(for: items).map(\.name), ["新宿", "渋谷"].sorted())
+        let items = [makeItem(area: "原宿", lat: 35.69, lng: 139.70), makeItem(area: "渋谷", lat: 35.66, lng: 139.70)]
+        XCTAssertEqual(AreaOverview.summaries(for: items).map(\.name), ["原宿", "渋谷"].sorted())
     }
 
     func test_エリア名がない店と座標が不正な店は数えない() {
