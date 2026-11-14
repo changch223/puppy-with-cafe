@@ -412,6 +412,8 @@ struct SearchTabView: View {
                     onClose: { selectedMapItem = nil },
                     onSaveAction: { savedStore.apply($0, to: $1) }
                 )
+                // 横スクロールは縦に広がろうとするので、カードの高さに固定する（上の「2 / 12」と現在地ボタンを画面の外へ押し出さない）
+                .frame(height: cardCoveredHeight(containerHeight: containerHeight), alignment: .bottom)
                 .transition(.move(edge: .bottom))
             } else {
                 CafeBottomSheet(
@@ -458,10 +460,11 @@ private struct CardPositionLabel: View {
     var body: some View {
         Text(position.text)
             .font(.caption.monospacedDigit().bold())
-            .foregroundStyle(Color(.secondaryLabel))
+            .foregroundStyle(Color(.label))
             .padding(.horizontal, 10)
             .frame(minHeight: 28)
-            .background(.regularMaterial, in: Capsule())
+            .background(Color(.systemBackground).opacity(0.92), in: Capsule())
+            .shadow(color: .black.opacity(0.12), radius: 2, y: 1)
             .accessibilityLabel(Text("\(position.number)店目、全\(position.total)店"))
     }
 }

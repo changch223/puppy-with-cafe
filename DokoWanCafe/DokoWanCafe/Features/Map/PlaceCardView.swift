@@ -211,15 +211,20 @@ struct PlaceCardView: View {
                     .font(.caption.bold())
                     .foregroundStyle(Color(.secondaryLabel))
             }
+            let stacked = VStack(alignment: .leading, spacing: 4) {
+                OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
+                Text(walkingText)
+                    .font(.caption.bold())
+                    .foregroundStyle(Color(.secondaryLabel))
+            }
             if isLarge {
-                VStack(alignment: .leading, spacing: 4) {
-                    OpenLineView(line: OpenLine.make(hours: cafe.hours, at: now, isTargetTime: isTargetTime))
-                    Text(walkingText)
-                        .font(.caption.bold())
-                        .foregroundStyle(Color(.secondaryLabel))
-                }
+                stacked
             } else {
-                line
+                // 1行に入らないとき（横にめくるカードは幅が狭い）は、折り返しや省略をせず2行に分ける
+                ViewThatFits(in: .horizontal) {
+                    line.lineLimit(1).fixedSize(horizontal: true, vertical: false)
+                    stacked
+                }
             }
         }
     }
