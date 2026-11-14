@@ -129,6 +129,11 @@ struct SearchTabView: View {
                     showSearch = false
                     applyConditions(conditions)
                 },
+                onSelectScene: { scene in
+                    showSearch = false
+                    selectedMapItem = nil
+                    viewModel.applyScene(scene)
+                },
                 onSelectCafe: { cafe in
                     showSearch = false
                     openCafeFromSearch(cafe)
@@ -283,7 +288,6 @@ struct SearchTabView: View {
             FilterChipsView(
                 targetLabel: viewModel.targetTime.map(TargetTime.shortLabel),
                 openNowOnly: $viewModel.openNowOnly,
-                amenityFilter: $viewModel.amenityFilter,
                 myDogOnly: $viewModel.myDogOnly,
                 hasMyDog: viewModel.dogProfile != nil,
                 hasActiveChips: viewModel.hasActiveChips,

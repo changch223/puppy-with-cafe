@@ -232,22 +232,22 @@
         }
       }
     },
-    "%@。地図のチップをオンにします" : {
+    "%@。地図の条件をオンにします" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@。地図のチップをオンにします"
+            "value" : "%1$@。地図の条件をオンにします"
           }
         }
       }
     },
-    "%@。起点を変えて、地図のチップをオンにします" : {
+    "%@。起点を変えて、地図の条件をオンにします" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@。起点を変えて、地図のチップをオンにします"
+            "value" : "%1$@。起点を変えて、地図の条件をオンにします"
           }
         }
       }
@@ -368,6 +368,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@の周り"
+          }
+        }
+      }
+    },
+    "%@の周り · 「絞り込み」の「%@」をオンにします" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@の周り · 「絞り込み」の「%2$@」をオンにします"
           }
         }
       }
@@ -1482,6 +1492,16 @@
         }
       }
     },
+    "テラスでのんびり" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスでのんびり"
+          }
+        }
+      }
+    },
     "テラスならOK" : {
       "localizations" : {
         "ja" : {
@@ -1518,6 +1538,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "テラス席OK"
+          }
+        }
+      }
+    },
+    "テラス席OKの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラス席OKの店に絞ります"
           }
         }
       }
@@ -2522,6 +2552,16 @@
         }
       }
     },
+    "場面から探す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場面から探す"
+          }
+        }
+      }
+    },
     "変更する" : {
       "localizations" : {
         "ja" : {
@@ -2558,6 +2598,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "夜"
+          }
+        }
+      }
+    },
+    "夜8時に開いている店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "夜8時に開いている店に絞ります"
+          }
+        }
+      }
+    },
+    "夜も開いている" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "夜も開いている"
           }
         }
       }
@@ -2622,12 +2682,32 @@
         }
       }
     },
+    "大型犬OKの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大型犬OKの店に絞ります"
+          }
+        }
+      }
+    },
     "大型犬が入れるか" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "大型犬が入れるか"
+          }
+        }
+      }
+    },
+    "大型犬と一緒に" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大型犬と一緒に"
           }
         }
       }
@@ -2798,6 +2878,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "店内OKの店"
+          }
+        }
+      }
+    },
+    "店内OKの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内OKの店に絞ります"
           }
         }
       }
@@ -3452,6 +3542,26 @@
         }
       }
     },
+    "犬メニューありの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬メニューありの店に絞ります"
+          }
+        }
+      }
+    },
+    "犬メニューがある" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬メニューがある"
+          }
+        }
+      }
+    },
     "犬不可" : {
       "localizations" : {
         "ja" : {
@@ -4012,12 +4122,12 @@
         }
       }
     },
-    "起点を%@に変えて、地図の条件チップもオンにします" : {
+    "起点を%@に変えて、地図の条件もオンにします" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "起点を%@に変えて、地図の条件チップもオンにします"
+            "value" : "起点を%@に変えて、地図の条件もオンにします"
           }
         }
       }
@@ -4148,6 +4258,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "閉じる"
+          }
+        }
+      }
+    },
+    "雨の日でも" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "雨の日でも"
           }
         }
       }

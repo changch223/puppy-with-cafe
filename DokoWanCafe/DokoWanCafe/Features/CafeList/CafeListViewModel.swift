@@ -312,6 +312,15 @@ final class CafeListViewModel: ObservableObject {
         }
     }
 
+    /// 「場面から探す」の場面を入れる。それまでの絞り込み条件はすべて外して、場面の条件に置き換える（足し算にしない）。
+    /// 検索の場所（エリア・現在地）は変えない。「夜も開いている」は「いつ行く？」と同じ仕組みで、今日の20:00（過ぎていれば今）に営業している店にする。
+    func applyScene(_ scene: SearchScene) {
+        let conditions = scene.conditions(now: now())
+        resetFilters()
+        amenityFilter = conditions.amenities
+        if conditions.openNowOnly { applyTargetTime(conditions.targetTime) }
+    }
+
     /// 営業中・「いつ行く？」・犬向け条件・未確認の絞り込みを初期状態に戻す（「クリア」チップ・空状態の「条件をクリア」から使用）
     func resetFilters() {
         amenityFilter = AmenityFilter()

@@ -20,6 +20,8 @@ struct CafeSearchView: View {
     let onSelectOrigin: (SearchOrigin) -> Void
     /// 条件の提案を押した（フィルタをオンにして画面を閉じる。起点は変えない）
     let onApplyConditions: ([SearchCondition]) -> Void
+    /// 「場面から探す」のボタンを押した（それまでの条件を場面の条件に置き換えて画面を閉じる。起点は変えない）
+    let onSelectScene: (SearchScene) -> Void
     let onSelectCafe: (Cafe) -> Void
     let onCancel: () -> Void
 
@@ -162,6 +164,30 @@ struct CafeSearchView: View {
             }
         }
 
+        Section {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 8, alignment: .leading)], alignment: .leading, spacing: 8) {
+                ForEach(SearchScene.allCases) { scene in
+                    Button {
+                        onSelectScene(scene)
+                    } label: {
+                        Label(scene.title, systemImage: scene.systemImage)
+                            .font(.subheadline.bold())
+                            .foregroundStyle(Color.primary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+                            .padding(.horizontal, 12)
+                            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                            .background(Capsule().fill(Color(.secondarySystemBackground)))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityHint(Text(scene.spokenHint))
+                }
+            }
+            .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
+        } header: {
+            Text("場面から探す")
+        }
+
         let nearbyAreas = SearchSuggestion.nearbyAreas(in: areaIndex, origin: originCoordinate)
         if !nearbyAreas.isEmpty {
             Section {
@@ -295,8 +321,8 @@ struct CafeSearchView: View {
                     SuggestionRow(
                         systemImage: "line.3.horizontal.decrease.circle.fill",
                         title: combo.title(isTargetTime: isTargetTime),
-                        subtitle: String(localized: "起点を\(combo.area.name)に変えて、地図の条件チップもオンにします"),
-                        spokenText: String(localized: "\(combo.title(isTargetTime: isTargetTime))。起点を変えて、地図のチップをオンにします")
+                        subtitle: String(localized: "起点を\(combo.area.name)に変えて、地図の条件もオンにします"),
+                        spokenText: String(localized: "\(combo.title(isTargetTime: isTargetTime))。起点を変えて、地図の条件をオンにします")
                     ) {
                         selectCombo(combo)
                     }
