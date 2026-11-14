@@ -5,9 +5,11 @@ import UIKit
 struct CategoryTileView: View {
     let cafe: Cafe
     let size: CGFloat
+    @Environment(\.dogProfile) private var dog
 
     var body: some View {
-        let category = MapPinCategory.category(for: cafe)
+        // うちの子が入れない席をタイルが言わないよう、同じ行の答えと同じ判定にそろえる
+        let category = CafePresentation.tileCategory(for: cafe, dog: dog)
         let color = Color(MapPinRenderer.fillColor(for: category))
         color.opacity(MapPinRenderer.tileBackgroundOpacity(for: category))
             .overlay {

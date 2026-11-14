@@ -10,6 +10,23 @@ enum CafePresentation {
         return limit.isEmpty
     }
 
+    // MARK: - 写真のない店のタイル
+
+    /// 一覧・カードのタイル（写真がない店）に使う分類。うちの子が設定済みで、タイルが言う席（店内OK・テラス）に
+    /// その子は入れないと明記されているときは、同じ行の答え（「店内は小型犬まで」）と食い違わないよう、
+    /// もう一方の席に入れると明記されていればその席、そうでなければ「条件を確認」にする。
+    /// 例: 店内は小型犬までの店（ピンは店内OK）に中型犬 → 「条件を確認」。地図のピン（`MapPinCategory.category(for:)`）は変えない。
+    static func tileCategory(for cafe: Cafe, dog: DogProfile?) -> MapPinCategory {
+        let base = MapPinCategory.category(for: cafe)
+        guard let dog, base == .indoorOK || base == .terraceOnly else { return base }
+        let fit = DogFit.evaluate(cafe: cafe, dog: dog)
+        let claimed = base == .indoorOK ? fit.indoor : fit.terrace
+        let other = base == .indoorOK ? fit.terrace : fit.indoor
+        guard case .doesNotFit = claimed else { return base }
+        if other == .fits { return base == .indoorOK ? .terraceOnly : .indoorOK }
+        return .checkDetail
+    }
+
     // MARK: - 答えの1行（一覧の行・ピンのカード）
 
     /// 行・カードの「答え」1行。主文（色つき）と補足（薄い色・1つまで）、色の種類を返す（再設計 第1弾）。
