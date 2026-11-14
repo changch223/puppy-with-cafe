@@ -26,17 +26,18 @@ final class AreaAnnotation: NSObject, MKAnnotation {
 }
 
 /// エリアのラベルの見た目: 面の色（ダークでは暗い面）の丸みのある札に、エリア名（太字）と、ブランドの緑の件数。
-/// 高さは 44pt 以上（タップ領域）。文字色は面に対して 4.5:1 以上（名前は `label`、件数はブランド色の上の `onBrand`）。
+/// 札は小さめ（高さ 34pt）にして、重なりで間引かれるエリアを減らす。タップ領域だけ上下に広げて 44pt 以上にする。文字色は面に対して 4.5:1 以上（名前は `label`、件数はブランド色の上の `onBrand`）。
 final class AreaAnnotationView: MKAnnotationView {
     private let nameLabel = UILabel()
     private let countBadge = UIView()
     private let countLabel = UILabel()
 
-    private static let minHeight: CGFloat = 44
+    private static let minHeight: CGFloat = 34
+    private static let minTapHeight: CGFloat = 44
     private static let maxNameWidth: CGFloat = 150
-    private static let horizontalPadding: CGFloat = 14
-    private static let gap: CGFloat = 8
-    private static let badgeHeight: CGFloat = 26
+    private static let horizontalPadding: CGFloat = 10
+    private static let gap: CGFloat = 6
+    private static let badgeHeight: CGFloat = 22
 
     /// ブランドの緑の上に載せる文字色（ライトは白、ダークは濃い色）
     private static let onBrand = UIColor { traits in
@@ -58,7 +59,7 @@ final class AreaAnnotationView: MKAnnotationView {
         collisionMode = .rectangle
         clusteringIdentifier = nil
         backgroundColor = .systemBackground
-        layer.borderWidth = 2
+        layer.borderWidth = 1.5
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 4
@@ -88,22 +89,28 @@ final class AreaAnnotationView: MKAnnotationView {
         }
     }
 
+    /// 見た目は 34pt でも、タップは上下に広げて 44pt 以上で受ける
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let extra = max(0, (Self.minTapHeight - bounds.height) / 2)
+        return bounds.insetBy(dx: 0, dy: -extra).contains(point)
+    }
+
     private func updateBorderColor() {
         layer.borderColor = UIColor.brand.resolvedColor(with: traitCollection).cgColor
     }
 
     func configure(with annotation: AreaAnnotation) {
         let summary = annotation.summary
-        nameLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: .systemFont(ofSize: 13, weight: .bold))
+        nameLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: .systemFont(ofSize: 12, weight: .bold))
         nameLabel.text = summary.name
-        countLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: .systemFont(ofSize: 13, weight: .bold))
+        countLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: .systemFont(ofSize: 12, weight: .bold))
         countLabel.text = "\(summary.count)"
 
         let nameSize = nameLabel.sizeThatFits(CGSize(width: Self.maxNameWidth, height: CGFloat.greatestFiniteMagnitude))
         let nameWidth = min(nameSize.width, Self.maxNameWidth).rounded(.up)
         let countSize = countLabel.sizeThatFits(CGSize(width: 80, height: CGFloat.greatestFiniteMagnitude))
         let badgeHeight = max(Self.badgeHeight, countSize.height.rounded(.up) + 6)
-        let badgeWidth = max(badgeHeight, countSize.width.rounded(.up) + 14)
+        let badgeWidth = max(badgeHeight, countSize.width.rounded(.up) + 10)
         let height = max(Self.minHeight, badgeHeight + 10, nameSize.height.rounded(.up) + 10)
         let width = Self.horizontalPadding + nameWidth + Self.gap + badgeWidth + Self.horizontalPadding - 4
 

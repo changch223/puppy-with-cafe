@@ -5393,6 +5393,7 @@
       ],
       "longitude": 139.75217,
       "name": "Bistrot a la Demande",
+      "name_reading": "ビストロ ア ラ ドゥマンド",
       "place_id": null,
       "representative_source_id": "e4a3e4d1-07d7-598c-b965-44fb9085031d",
       "sources": [
@@ -6175,6 +6176,7 @@
       ],
       "longitude": 139.74948,
       "name": "CAFE 33",
+      "name_reading": "カフェサーティスリー",
       "phone": "03-3214-3730",
       "place_id": null,
       "representative_source_id": "90055b96-1951-557c-a3d9-d7757e54be7e",
@@ -10788,6 +10790,7 @@
       ],
       "longitude": 139.85719,
       "name": "Cheese'n Tokyo",
+      "name_reading": "チーズン トーキョー",
       "phone": "03-6764-9376",
       "place_id": null,
       "representative_source_id": "129c9351-2b21-51e3-979b-735d7b14ee88",
@@ -36020,85 +36023,6 @@
       "sub_area": "中野"
     },
     {
-      "address": "東京都武蔵野市御殿山1-3-3 A＊G INOKASHIRA-KOEN West棟2F",
-      "area": "tokyo",
-      "contact": null,
-      "description": "井の頭公園沿いにある、ベビー・キッズブランドfäfä発の犬同伴カフェ&ブティック。ドッグメニューあり。",
-      "dog_amenities": {
-        "dog_menu": true,
-        "indoor": true,
-        "indoor_style": [
-          "floor",
-          "hold"
-        ],
-        "large_dogs": true,
-        "size_max_terrace": "large",
-        "terrace": true
-      },
-      "dog_note": "ワクチン接種済みの犬のみ・ヒート中の犬は同伴不可(専門サイト記載)",
-      "dog_policy_condition": "店内・テラス共に犬同伴可。ワクチン接種済み・無駄吠えなし・リード着用（抱っこ/テラスは不要）等の条件あり",
-      "dog_policy_status": "conditional",
-      "dog_size_limit": "大型犬はテラス・屋上席のみ(専門サイト記載)",
-      "has_conflict": true,
-      "hours_text": "9:00〜18:00",
-      "id": "beef0000-0000-4000-8000-000000000041",
-      "info_verified": "2026-07-17",
-      "instagram_post_url": "https://www.instagram.com/p/DaXiMc2KTKm/",
-      "is_closed": false,
-      "last_verified": "2026-08-07",
-      "latitude": 35.7014,
-      "links": [
-        {
-          "type": "instagram",
-          "url": "https://www.instagram.com/thehohbyfafa/"
-        }
-      ],
-      "longitude": 139.5776,
-      "name": "The House of Hounds by fäfä",
-      "phone": "070-6489-2020",
-      "place_id": null,
-      "representative_source_id": "c3886dc6-64c2-551f-8012-0fff75620acf",
-      "sources": [
-        {
-          "cafe_id": "beef0000-0000-4000-8000-000000000041",
-          "claimed_status": "conditional",
-          "id": "accbf3b4-ea0e-5f87-8fc1-bfff6441baf6",
-          "provenance": "aggregated",
-          "reference": "https://wankonowa.com/column/dogcafe/1581/",
-          "type": "blog",
-          "verified_at": "2026-07-17"
-        },
-        {
-          "cafe_id": "beef0000-0000-4000-8000-000000000041",
-          "claimed_status": "allowed",
-          "id": "05448802-e358-5ca2-a4e0-6f874e44da4e",
-          "provenance": "aggregated",
-          "reference": "https://kichijoji-gourmet.com/thehohbyfafa/",
-          "type": "blog",
-          "verified_at": "2026-07-17"
-        },
-        {
-          "cafe_id": "beef0000-0000-4000-8000-000000000041",
-          "claimed_status": "conditional",
-          "id": "9db9e852-05e0-5465-86bc-ca634ec03c8e",
-          "provenance": "aggregated",
-          "reference": "https://pet-restaurant.com/report-thehouseofhoundsbyfafa/",
-          "type": "blog",
-          "verified_at": "2026-07-17"
-        },
-        {
-          "cafe_id": "beef0000-0000-4000-8000-000000000041",
-          "claimed_status": "conditional",
-          "id": "c3886dc6-64c2-551f-8012-0fff75620acf",
-          "provenance": "aggregated",
-          "reference": "https://pet-restaurant.com/report-thehouseofhoundsbyfafa/",
-          "type": "blog",
-          "verified_at": "2026-08-07"
-        }
-      ],
-      "sub_area": "吉祥寺"
-    },
-    {
       "address": "東京都新宿区西新宿3-4-7 キンプトン新宿東京 1F",
       "area": "tokyo",
       "contact": null,
@@ -40644,6 +40568,7 @@
       ],
       "longitude": 139.68686,
       "name": "cafe arica",
+      "name_reading": "カフェ アリカ",
       "phone": "03-5948-3885",
       "place_id": null,
       "representative_source_id": "b671def8-08a5-58b7-b8af-ec68a8fc20bd",
@@ -42293,6 +42218,120 @@
         }
       ],
       "sub_area": "葛西・西葛西・葛西臨海"
+    },
+    {
+      "address": "東京都武蔵野市御殿山1-3-3 A＊G INOKASHIRA-KOEN West棟2F",
+      "area": "tokyo",
+      "contact": null,
+      "description": "井の頭公園沿いにある、ベビー・キッズブランドfäfä発の犬同伴カフェ&ブティック。ドッグメニューあり。",
+      "dog_amenities": {
+        "dog_menu": true,
+        "indoor": true,
+        "indoor_style": [
+          "floor",
+          "hold"
+        ],
+        "large_dogs": true,
+        "size_max_terrace": "large",
+        "terrace": true
+      },
+      "dog_note": "ワクチン接種済みの犬のみ・ヒート中の犬は同伴不可(専門サイト記載)",
+      "dog_policy_condition": "店内・テラス共に犬同伴可。ワクチン接種済み・無駄吠えなし・リード着用（抱っこ/テラスは不要）等の条件あり",
+      "dog_policy_status": "conditional",
+      "dog_size_limit": "大型犬はテラス・屋上席のみ(専門サイト記載)",
+      "has_conflict": true,
+      "holiday_note": "月・木曜休（祝日の場合は翌日休）",
+      "hours": {
+        "fri": [
+          {
+            "close": "17:00",
+            "open": "11:00"
+          }
+        ],
+        "mon": [],
+        "sat": [
+          {
+            "close": "17:30",
+            "open": "11:00"
+          }
+        ],
+        "sun": [
+          {
+            "close": "17:30",
+            "open": "11:00"
+          }
+        ],
+        "thu": [],
+        "tue": [
+          {
+            "close": "17:00",
+            "open": "11:00"
+          }
+        ],
+        "wed": [
+          {
+            "close": "17:00",
+            "open": "11:00"
+          }
+        ]
+      },
+      "hours_text": "平日(火・水・金) 11:00〜17:00／土・日・祝 11:00〜17:30",
+      "id": "beef0000-0000-4000-8000-000000000041",
+      "info_verified": "2026-11-14",
+      "instagram_post_url": "https://www.instagram.com/p/DaXiMc2KTKm/",
+      "is_closed": false,
+      "last_verified": "2026-08-07",
+      "latitude": 35.7014,
+      "links": [
+        {
+          "type": "instagram",
+          "url": "https://www.instagram.com/thehohbyfafa/"
+        }
+      ],
+      "longitude": 139.5776,
+      "name": "fäfä BOUTIQUE & CAFE 吉祥寺店（旧 The House of Hounds by fäfä）",
+      "phone": "070-6489-2020",
+      "place_id": null,
+      "representative_source_id": "c3886dc6-64c2-551f-8012-0fff75620acf",
+      "sources": [
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000041",
+          "claimed_status": "conditional",
+          "id": "accbf3b4-ea0e-5f87-8fc1-bfff6441baf6",
+          "provenance": "aggregated",
+          "reference": "https://wankonowa.com/column/dogcafe/1581/",
+          "type": "blog",
+          "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000041",
+          "claimed_status": "allowed",
+          "id": "05448802-e358-5ca2-a4e0-6f874e44da4e",
+          "provenance": "aggregated",
+          "reference": "https://kichijoji-gourmet.com/thehohbyfafa/",
+          "type": "blog",
+          "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000041",
+          "claimed_status": "conditional",
+          "id": "9db9e852-05e0-5465-86bc-ca634ec03c8e",
+          "provenance": "aggregated",
+          "reference": "https://pet-restaurant.com/report-thehouseofhoundsbyfafa/",
+          "type": "blog",
+          "verified_at": "2026-07-17"
+        },
+        {
+          "cafe_id": "beef0000-0000-4000-8000-000000000041",
+          "claimed_status": "conditional",
+          "id": "c3886dc6-64c2-551f-8012-0fff75620acf",
+          "provenance": "aggregated",
+          "reference": "https://pet-restaurant.com/report-thehouseofhoundsbyfafa/",
+          "type": "blog",
+          "verified_at": "2026-08-07"
+        }
+      ],
+      "sub_area": "吉祥寺"
     },
     {
       "address": "東京都品川区南大井6-17-18",
@@ -79137,6 +79176,6 @@
     }
   ],
   "format_version": 1,
-  "generated_at": "2026-11-09T13:40:27Z",
+  "generated_at": "2026-11-14T14:35:04Z",
   "is_sample_data": false
 }

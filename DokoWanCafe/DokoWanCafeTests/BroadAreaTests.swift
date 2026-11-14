@@ -14,9 +14,9 @@ final class BroadAreaTests: XCTestCase {
     }
 
     func test_細かいエリアは広いエリアにまとまる() {
-        XCTAssertEqual(BroadArea.name(forSubArea: "渋谷駅周辺"), "渋谷・原宿")
-        XCTAssertEqual(BroadArea.name(forSubArea: "表参道・青山"), "渋谷・原宿")
-        XCTAssertEqual(BroadArea.name(forSubArea: "代官山"), "恵比寿・中目黒")
+        XCTAssertEqual(BroadArea.name(forSubArea: "渋谷駅周辺"), "渋谷・恵比寿")
+        XCTAssertEqual(BroadArea.name(forSubArea: "表参道・青山"), "渋谷・恵比寿")
+        XCTAssertEqual(BroadArea.name(forSubArea: "代官山"), "渋谷・恵比寿")
         XCTAssertEqual(BroadArea.name(forSubArea: "高尾山"), "八王子・高尾")
     }
 
@@ -55,10 +55,10 @@ final class BroadAreaTests: XCTestCase {
             makeItem(area: "渋谷駅周辺", lat: 35.660, lng: 139.700),
             makeItem(area: "表参道・青山", lat: 35.667, lng: 139.713),
             makeItem(area: "千駄ヶ谷", lat: 35.679, lng: 139.708),
-            makeItem(area: "代官山", lat: 35.649, lng: 139.702),
+            makeItem(area: "吉祥寺", lat: 35.702, lng: 139.578),
         ]
         let summaries = AreaOverview.summaries(for: items)
-        XCTAssertEqual(summaries.map(\.name), ["渋谷・原宿", "恵比寿・中目黒"])
+        XCTAssertEqual(summaries.map(\.name), ["渋谷・恵比寿", "吉祥寺・三鷹"])
         XCTAssertEqual(summaries.map(\.count), [3, 1])
     }
 }
