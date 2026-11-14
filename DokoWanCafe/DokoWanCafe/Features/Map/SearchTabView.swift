@@ -39,6 +39,9 @@ struct SearchTabView: View {
     /// 「絞り込み」シートを閉じたあとに開くもの（シートは重ねて出せないので、閉じ終わってから開く）
     @State private var afterFilterSheet: AfterFilterSheet?
     @State private var topOverlayHeight: CGFloat = 0
+    /// カードを横にめくったときの「ピンを見える範囲へ出す」要求（地図だけを動かす）
+    @State private var revealRequest: MapRevealRequest?
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     /// ユーザーが地図を動かして止まったときの地図の中心と見えている幅（メートル）。「このあたりで探す」の判定に使う。
     /// プログラムで地図が動いたとき・ボタンを押したときは nil に戻る。端末の中だけで使い、保存も送信もしない。
     @State private var userMovedRegion: MovedRegion?
@@ -71,6 +74,9 @@ struct SearchTabView: View {
                     recenterRequestID: recenterRequestID,
                     focusRequest: focusRequest,
                     // 「このあたりで探す」で起点が地図の中心になったときは、地図を動かさない
+                    revealRequest: revealRequest,
+                    coveredTop: proxy.safeAreaInsets.top + topOverlayHeight,
+                    coveredBottom: selectedMapItem == nil ? 0 : cardCoveredHeight(containerHeight: proxy.size.height),
                     movesToCenterOnChange: !isMapCenterOrigin,
                     onRegionSettled: { center, widthMeters, byUser in
                         userMovedRegion = byUser ? MovedRegion(center: center, widthMeters: widthMeters) : nil
@@ -86,7 +92,7 @@ struct SearchTabView: View {
                     .padding(.top, topOverlayHeight)
                     .background(.regularMaterial)
                 } else {
-                    bottomArea(containerHeight: proxy.size.height)
+                    bottomArea(containerWidth: proxy.size.width, containerHeight: proxy.size.height)
                 }
 
                 // 探し直している間（前の結果を残している間）は「探しています…」、それ以外で条件を満たせば「このあたりで探す」
@@ -107,6 +113,9 @@ struct SearchTabView: View {
             .animation(.easeInOut(duration: 0.2), value: showsSearchHereButton)
             .animation(.easeInOut(duration: 0.2), value: isSearchingWithResults)
             .animation(.easeInOut(duration: 0.2), value: selectedMapItem)
+            .onChange(of: selectedMapItem?.cafe.id) { _, newID in
+                if newID != nil { revealSelectedPin() }
+            }
             .onPreferenceChange(TopOverlayHeightKey.self) { topOverlayHeight = $0 }
         }
         .toolbar(.hidden, for: .navigationBar)
@@ -128,6 +137,11 @@ struct SearchTabView: View {
                 onApplyConditions: { conditions in
                     showSearch = false
                     applyConditions(conditions)
+                },
+                onSelectScene: { scene in
+                    showSearch = false
+                    selectedMapItem = nil
+                    viewModel.applyScene(scene)
                 },
                 onSelectCafe: { cafe in
                     showSearch = false
@@ -283,7 +297,6 @@ struct SearchTabView: View {
             FilterChipsView(
                 targetLabel: viewModel.targetTime.map(TargetTime.shortLabel),
                 openNowOnly: $viewModel.openNowOnly,
-                amenityFilter: $viewModel.amenityFilter,
                 myDogOnly: $viewModel.myDogOnly,
                 hasMyDog: viewModel.dogProfile != nil,
                 hasActiveChips: viewModel.hasActiveChips,
@@ -338,37 +351,78 @@ struct SearchTabView: View {
         ) ?? []
     }
 
-    private func bottomArea(containerHeight: CGFloat) -> some View {
-        VStack(alignment: .trailing, spacing: 8) {
-            if sheetDetent != .large || selectedMapItem != nil {
-                CurrentLocationButton {
-                    // 「現在地に戻る」: 起点が現在地でなければ現在地に戻して探し直す（地図も現在地へ動く）。
-                    // 起点がすでに現在地なら、地図だけを現在地へ戻す（現在地を探している間は何もしない。
-                    // 前の検索地点へ動いてしまうため。確定すれば地図は現在地へ動く）
-                    if viewModel.origin == .currentLocation {
-                        if viewModel.phase != .loading { recenterRequestID += 1 }
-                    } else {
-                        changeOrigin(to: .currentLocation)
+    /// 店のカードが地図の下からふさぐ高さ（カードの高さ。地図の見える範囲の判定に使う）
+    private func cardCoveredHeight(containerHeight: CGFloat) -> CGFloat {
+        let hasSameSpotRow = selectedMapItem.map { sameSpotItems(of: $0).count > 1 } ?? false
+        return CafeSheetDetent.cardHeight(
+            containerHeight: containerHeight, isAccessibilitySize: dynamicTypeSize.isAccessibilitySize,
+            hasSameSpotRow: hasSameSpotRow
+        )
+    }
+
+    /// カードをめくった・同じ場所の列で替えたとき、その店のピンが見える範囲の外なら地図を寄せる（見えているなら動かさない）
+    private func selectFromCard(_ item: CafeWithDistance) {
+        guard item.cafe.id != selectedMapItem?.cafe.id else { return }
+        selectedMapItem = item
+    }
+
+    /// 選んだ店のピンがカードや上の検索バーに隠れるなら、見える所まで地図を寄せる（見えているなら動かさない）。
+    /// ピンを押したとき・カードをめくったとき・同じ場所の列で替えたときに共通
+    private func revealSelectedPin() {
+        guard let cafe = selectedMapItem?.cafe else { return }
+        revealRequest = MapRevealRequest(
+            id: (revealRequest?.id ?? 0) + 1,
+            coordinate: CLLocationCoordinate2D(latitude: cafe.latitude, longitude: cafe.longitude)
+        )
+    }
+
+    private func bottomArea(containerWidth: CGFloat, containerHeight: CGFloat) -> some View {
+        let place = selectedMapItem.flatMap { CardPaging.position(of: $0.cafe.id, in: viewModel.displayedResults) }
+        let showsPosition = (place?.total ?? 0) > 1
+        let showsLocationButton = sheetDetent != .large || selectedMapItem != nil
+        return VStack(alignment: .trailing, spacing: 8) {
+            if showsPosition || showsLocationButton {
+                HStack(alignment: .bottom) {
+                    // 何店目かの控えめな手がかり（横にめくれるカードのとき）
+                    if showsPosition, let place {
+                        CardPositionLabel(position: place)
+                    }
+                    Spacer(minLength: 0)
+                    if showsLocationButton {
+                        CurrentLocationButton {
+                            // 「現在地に戻る」: 起点が現在地でなければ現在地に戻して探し直す（地図も現在地へ動く）。
+                            // 起点がすでに現在地なら、地図だけを現在地へ戻す（現在地を探している間は何もしない。
+                            // 前の検索地点へ動いてしまうため。確定すれば地図は現在地へ動く）
+                            if viewModel.origin == .currentLocation {
+                                if viewModel.phase != .loading { recenterRequestID += 1 }
+                            } else {
+                                changeOrigin(to: .currentLocation)
+                            }
+                        }
                     }
                 }
-                .padding(.trailing, 12)
+                .padding(.horizontal, 12)
             }
 
             if let selected = selectedMapItem {
-                PlaceCardView(
-                    item: selected,
-                    savedStatus: savedStore.status(of: selected.cafe.id),
+                PlaceCardPager(
+                    items: viewModel.displayedResults,
+                    selected: selected,
+                    savedPlaces: savedStore.places,
                     now: viewModel.referenceTime,
                     isTargetTime: viewModel.isTargetTime,
-                    sameSpot: sameSpotItems(of: selected),
+                    containerWidth: containerWidth,
                     containerHeight: containerHeight,
-                    onShowDetail: { onShowDetail(selected.cafe) },
-                    onOpenRoute: { routeTarget = selected.cafe },
-                    onToggleWantToGo: { savedStore.toggleWantToGo(selected.cafe.id) },
+                    sameSpot: { sameSpotItems(of: $0) },
+                    onSelect: selectFromCard,
+                    onShowDetail: onShowDetail,
+                    onOpenRoute: { routeTarget = $0 },
+                    onToggleWantToGo: { savedStore.toggleWantToGo($0) },
                     onClose: { selectedMapItem = nil },
-                    onSelectSameSpot: { selectedMapItem = $0 },
-                    onSaveAction: { savedStore.apply($0, to: selected.cafe.id) }
+                    onSaveAction: { savedStore.apply($0, to: $1) }
                 )
+                // 横スクロールは縦に広がろうとするので、カードの高さに固定する（上の「2 / 12」と現在地ボタンを画面の外へ押し出さない）
+                .frame(height: cardCoveredHeight(containerHeight: containerHeight), alignment: .bottom)
                 .transition(.move(edge: .bottom))
             } else {
                 CafeBottomSheet(
@@ -405,5 +459,21 @@ struct SearchTabView: View {
                 .transition(.move(edge: .bottom))
             }
         }
+    }
+}
+
+/// 横にめくれるカードの「2 / 12」（何店目か）。控えめな札
+private struct CardPositionLabel: View {
+    let position: CardPaging.Position
+
+    var body: some View {
+        Text(position.text)
+            .font(.caption.monospacedDigit().bold())
+            .foregroundStyle(Color(.label))
+            .padding(.horizontal, 10)
+            .frame(minHeight: 28)
+            .background(Color(.systemBackground).opacity(0.92), in: Capsule())
+            .shadow(color: .black.opacity(0.12), radius: 2, y: 1)
+            .accessibilityLabel(Text("\(position.number)店目、全\(position.total)店"))
     }
 }

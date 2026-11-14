@@ -40,7 +40,7 @@ enum SearchCondition: CaseIterable, Hashable, Sendable {
         }
     }
 
-    /// 地図の条件チップの名前（`FilterChipsView` のチップ名と同じ）
+    /// 条件の名前（「絞り込み」シートの行・営業中／うちの子OK のチップ名と同じ）
     var chipName: String {
         switch self {
         case .terrace: return String(localized: "テラス")
@@ -52,6 +52,9 @@ enum SearchCondition: CaseIterable, Hashable, Sendable {
         }
     }
 
+    /// 地図に条件チップがあるか。営業中・うちの子OK だけがチップ。ほかは「絞り込み」シートの中
+    var hasChip: Bool { self == .openNow || self == .myDog }
+
     /// 行の文言: 「テラス席OKのお店に絞る」。「いつ行く？」で時刻を決めているときの営業中は「その時間に営業のお店に絞る」
     /// （実際の絞り込みは対象時刻に開いている店なので、チップ名と同じ言い方にする）
     func title(isTargetTime: Bool = false) -> String {
@@ -59,15 +62,17 @@ enum SearchCondition: CaseIterable, Hashable, Sendable {
         return String(localized: "\(phrase)のお店に絞る")
     }
 
-    /// サブ行: 「渋谷駅の周り · 地図の「テラス」チップをオンにします」。`originName` は今の起点の名前（現在地なら「現在地」）
+    /// サブ行: 「渋谷駅の周り · 地図の「営業中」チップをオンにします」「渋谷駅の周り · 「絞り込み」の「テラス」をオンにします」。
+    /// `originName` は今の起点の名前（現在地なら「現在地」）
     func subtitle(originName: String, isTargetTime: Bool = false) -> String {
         let chip = self == .openNow && isTargetTime ? String(localized: "その時間に営業") : chipName
-        return String(localized: "\(originName)の周り · 地図の「\(chip)」チップをオンにします")
+        if hasChip { return String(localized: "\(originName)の周り · 地図の「\(chip)」チップをオンにします") }
+        return String(localized: "\(originName)の周り · 「絞り込み」の「\(chip)」をオンにします")
     }
 
-    /// VoiceOver: 「テラス席OKのお店に絞る。地図のチップをオンにします」
+    /// VoiceOver: 「テラス席OKのお店に絞る。地図の条件をオンにします」
     func spokenText(isTargetTime: Bool = false) -> String {
-        String(localized: "\(title(isTargetTime: isTargetTime))。地図のチップをオンにします")
+        String(localized: "\(title(isTargetTime: isTargetTime))。地図の条件をオンにします")
     }
 
     /// 正規化した入力がこの条件の言葉に当たるか。店名への誤爆を減らすため、次の決まりで照合する。

@@ -129,16 +129,16 @@ struct SearchingIndicator: View {
     }
 }
 
-/// 条件チップ（横スクロール）: 絞り込み・いつ行く？・うちの子OK・営業中・店内OK。オンはブランド色で塗る。
-/// 「絞り込み」はシートを開き、オンの条件の数をバッジで出す（1つ以上オンなら塗る）。
-/// テラス・大型犬OK・犬メニューはシートから選び、オンのときだけ、画面の外でオンのままにならないようチップとして出す（押すとオフ）。
+/// 条件チップ（4つだけ）: 絞り込み・いつ行く？・うちの子OK・営業中。オンはブランド色で塗る。
+/// 「絞り込み」はシートを開き、シートの中で効いている条件（店内OK・テラス・大型犬OK・犬メニューなど）の数をバッジで出す（1つ以上オンなら塗る）。
 /// 1つ以上オンなら末尾に「クリア」。
 /// 「いつ行く？」は対象時刻を決めると「土 12:00」の表示に変わり、「営業中」は「その時間に営業」に変わる。
+/// 並べ方: 広い画面は絵柄つき、幅375ptの機種などは絵柄と余白を詰めて横スクロールなしの1行に収める。
+/// 文字を大きくして詰めても入らないときだけ、横スクロールにする。
 struct FilterChipsView: View {
     /// 対象時刻の短い表記（例: 「土 12:00」）。nil は「今」
     let targetLabel: String?
     @Binding var openNowOnly: Bool
-    @Binding var amenityFilter: AmenityFilter
     /// 「うちの子OK」チップ（入れると明記された店だけ）
     @Binding var myDogOnly: Bool
     /// うちの子が設定済みか。未設定でチップを押したときは、オンにせず設定（初回の2問）を開く
@@ -152,64 +152,108 @@ struct FilterChipsView: View {
     let onClear: () -> Void
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                FilterChip(
-                    title: String(localized: "絞り込み"),
-                    systemImage: "line.3.horizontal.decrease",
-                    isOn: .constant(activeFilterCount > 0),
-                    action: onTapFilter,
-                    badgeCount: activeFilterCount,
-                    accessibilityTitle: FilterDraft.chipAccessibilityLabel(activeCount: activeFilterCount),
-                    accessibilityHint: String(localized: "条件を選ぶシートを開きます")
-                )
-                FilterChip(
-                    title: targetLabel ?? String(localized: "いつ行く？"),
-                    systemImage: "clock",
-                    isOn: .constant(targetLabel != nil),
-                    action: onTapPlan,
-                    accessibilityTitle: targetLabel.map { String(localized: "いつ行く？ \($0)") },
-                    accessibilityHint: String(localized: "日時を選ぶシートを開きます")
-                )
-                FilterChip(
-                    title: String(localized: "うちの子OK"),
-                    systemImage: "dog.fill",
-                    isOn: Binding(
-                        get: { myDogOnly && hasMyDog },
-                        set: { newValue in
-                            if hasMyDog { myDogOnly = newValue } else { onNeedMyDog() }
-                        }
-                    ),
-                    accessibilityHint: hasMyDog ? nil : String(localized: "うちの子の設定を開きます")
-                )
-                FilterChip(
-                    title: targetLabel == nil ? String(localized: "営業中") : String(localized: "その時間に営業"),
-                    isOn: $openNowOnly
-                )
-                FilterChip(title: String(localized: "店内OK"), isOn: $amenityFilter.indoorOnly)
-                // シートで選んだ条件。オフのときは出さない（押すとオフになる）
-                if amenityFilter.terraceOnly {
-                    FilterChip(title: String(localized: "テラス"), isOn: $amenityFilter.terraceOnly)
-                }
-                if amenityFilter.largeDogOnly {
-                    FilterChip(title: String(localized: "大型犬OK"), isOn: $amenityFilter.largeDogOnly)
-                }
-                if amenityFilter.dogMenuOnly {
-                    FilterChip(title: String(localized: "犬メニュー"), isOn: $amenityFilter.dogMenuOnly)
-                }
-                if hasActiveChips {
-                    Button(action: onClear) {
+        ViewThatFits(in: .horizontal) {
+            row(compact: false)
+            row(compact: true)
+            ScrollView(.horizontal, showsIndicators: false) {
+                row(compact: true)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func row(compact: Bool) -> FilterChipsRow {
+        FilterChipsRow(
+            compact: compact,
+            targetLabel: targetLabel,
+            openNowOnly: $openNowOnly,
+            myDogOnly: $myDogOnly,
+            hasMyDog: hasMyDog,
+            hasActiveChips: hasActiveChips,
+            activeFilterCount: activeFilterCount,
+            onTapFilter: onTapFilter,
+            onTapPlan: onTapPlan,
+            onNeedMyDog: onNeedMyDog,
+            onClear: onClear
+        )
+    }
+}
+
+/// チップを横に並べた1行（`FilterChipsView` が幅に合わせて `compact` を選ぶ）。
+struct FilterChipsRow: View {
+    /// 絵柄をやめて余白を詰める（幅が足りないとき）
+    let compact: Bool
+    let targetLabel: String?
+    @Binding var openNowOnly: Bool
+    @Binding var myDogOnly: Bool
+    let hasMyDog: Bool
+    let hasActiveChips: Bool
+    let activeFilterCount: Int
+    let onTapFilter: () -> Void
+    let onTapPlan: () -> Void
+    let onNeedMyDog: () -> Void
+    let onClear: () -> Void
+
+    var body: some View {
+        HStack(spacing: compact ? 4 : 8) {
+            FilterChip(
+                title: String(localized: "絞り込み"),
+                systemImage: "line.3.horizontal.decrease",
+                isOn: .constant(activeFilterCount > 0),
+                action: onTapFilter,
+                badgeCount: activeFilterCount,
+                accessibilityTitle: FilterDraft.chipAccessibilityLabel(activeCount: activeFilterCount),
+                accessibilityHint: String(localized: "条件を選ぶシートを開きます"),
+                compact: compact
+            )
+            FilterChip(
+                title: targetLabel ?? String(localized: "いつ行く？"),
+                systemImage: "clock",
+                isOn: .constant(targetLabel != nil),
+                action: onTapPlan,
+                accessibilityTitle: targetLabel.map { String(localized: "いつ行く？ \($0)") },
+                accessibilityHint: String(localized: "日時を選ぶシートを開きます"),
+                compact: compact
+            )
+            FilterChip(
+                title: String(localized: "うちの子OK"),
+                systemImage: "dog.fill",
+                isOn: Binding(
+                    get: { myDogOnly && hasMyDog },
+                    set: { newValue in
+                        if hasMyDog { myDogOnly = newValue } else { onNeedMyDog() }
+                    }
+                ),
+                accessibilityHint: hasMyDog ? nil : String(localized: "うちの子の設定を開きます"),
+                compact: compact
+            )
+            FilterChip(
+                title: targetLabel == nil ? String(localized: "営業中") : String(localized: "その時間に営業"),
+                isOn: $openNowOnly,
+                compact: compact
+            )
+            if hasActiveChips {
+                Button(action: onClear) {
+                    if compact {
+                        // 幅が足りないときは「クリア」を✕の絵柄だけにする（読み上げは「条件をクリア」）
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.body)
+                            .foregroundStyle(.secondary)
+                            .frame(width: 34, height: 44)
+                    } else {
                         Text("クリア")
                             .font(.subheadline.bold())
                             .foregroundStyle(.secondary)
+                            .lineLimit(1)
                             .padding(.horizontal, 12)
                             .frame(minHeight: 44)
                     }
-                    .accessibilityLabel(Text("条件をクリア"))
                 }
+                .accessibilityLabel(Text("条件をクリア"))
             }
-            .padding(.horizontal, 12)
         }
+        .fixedSize(horizontal: true, vertical: false)
+        .padding(.horizontal, compact ? 8 : 12)
     }
 }
 
@@ -223,18 +267,20 @@ private struct FilterChip: View {
     var badgeCount = 0
     var accessibilityTitle: String?
     var accessibilityHint: String?
+    /// 幅が足りないとき: 絵柄を出さず、文字と余白を詰める
+    var compact = false
 
     var body: some View {
         Button {
             if let action { action() } else { isOn.toggle() }
         } label: {
             HStack(spacing: 4) {
-                if let systemImage {
+                if let systemImage, !compact {
                     Image(systemName: systemImage)
                         .font(.caption.bold())
                 }
                 Text(title)
-                    .font(.subheadline.bold())
+                    .font((compact ? Font.footnote : Font.subheadline).bold())
                     .lineLimit(1)
                 if badgeCount > 0 {
                     Text(verbatim: "\(badgeCount)")
@@ -246,7 +292,7 @@ private struct FilterChip: View {
                 }
             }
             .foregroundStyle(isOn ? Color.onBrand : Color.primary)
-            .padding(.horizontal, 14)
+            .padding(.horizontal, compact ? 8 : 14)
             .frame(minHeight: 44)
             .background {
                 if isOn {

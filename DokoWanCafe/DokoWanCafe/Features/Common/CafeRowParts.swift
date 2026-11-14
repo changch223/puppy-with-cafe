@@ -5,11 +5,13 @@ import UIKit
 struct CategoryTileView: View {
     let cafe: Cafe
     let size: CGFloat
+    @Environment(\.dogProfile) private var dog
 
     var body: some View {
-        let category = MapPinCategory.category(for: cafe)
+        // うちの子が入れない席をタイルが言わないよう、同じ行の答えと同じ判定にそろえる
+        let category = CafePresentation.tileCategory(for: cafe, dog: dog)
         let color = Color(MapPinRenderer.fillColor(for: category))
-        color.opacity(category == .indoorOK ? 0.3 : 0.18)
+        color.opacity(MapPinRenderer.tileBackgroundOpacity(for: category))
             .overlay {
                 Group {
                     if let lines = category.pinLines {
@@ -45,6 +47,8 @@ struct CafeThumbnailView: View {
     var allowsNetwork = false
 
     @State private var image: UIImage?
+    /// いま `image` に入っている写真の店（店が替わったときだけ写真を消す）
+    @State private var imageCafeID: UUID?
 
     var body: some View {
         Group {
@@ -59,12 +63,17 @@ struct CafeThumbnailView: View {
             }
         }
         .accessibilityHidden(true)
-        .task(id: cafe.id) {
-            image = nil
+        // 通信してよいかが変わったとき（横にめくった先のカードが選ばれたとき）も取り直す
+        .task(id: "\(cafe.id.uuidString)-\(allowsNetwork)") {
+            // 店が替わったときだけ写真を消す（通信の可否が変わっただけなら、出ている写真はそのまま。めくる間にちらつかせない）
+            if imageCafeID != cafe.id {
+                image = nil
+                imageCafeID = cafe.id
+            }
             guard let url = PhotoSourceResolver.previewSourceURL(for: cafe) else { return }
             let preview = await LinkPreviewService.shared.preview(for: url, allowNetwork: allowsNetwork)
             guard !Task.isCancelled else { return }
-            image = preview?.image
+            if let loaded = preview?.image { image = loaded }
         }
     }
 }
@@ -112,8 +121,8 @@ struct OpenLineView: View {
 }
 
 /// 答えの1行（「うちの子は店内OK・床で待てる」）。主文は色つき・太め、補足は薄い色。色だけに頼らず文言で区別できる。
-/// 標準〜xxxLarge の文字サイズでは必ず1行: 「主文＋補足」が入らなければ「主文だけ」、それも入らなければ末尾を省略する
-/// （VoiceOver は補足を落とさず読む＝行全体の読み上げラベルが `CafePresentation.answerLine(...).spoken`）。
+/// 標準〜xxxLarge の文字サイズでは、「主文＋補足」が1行に入ればそのまま、入らなければ補足を2行目に送る（幅375ptの機種など。補足を落とさない）。
+/// 主文だけで入りきらなければ末尾を省略する（VoiceOver は行全体の読み上げラベルが `CafePresentation.answerLine(...).spoken`）。
 /// アクセシビリティサイズでは折り返して全文を出す。
 struct AnswerLineView: View {
     let cafe: Cafe
@@ -130,7 +139,15 @@ struct AnswerLineView: View {
                     if answer.supplement != nil {
                         full(answer).lineLimit(1).fixedSize(horizontal: true, vertical: false)
                     }
-                    main(answer).lineLimit(1).minimumScaleFactor(0.9)
+                    // 補足は2行目へ（主文は1行目）。補足がなければ主文だけ
+                    VStack(alignment: .leading, spacing: 0) {
+                        main(answer).lineLimit(1).minimumScaleFactor(0.9)
+                        if let supplement = answer.supplement {
+                            Text(verbatim: supplement)
+                                .foregroundStyle(Color(.secondaryLabel))
+                                .lineLimit(1)
+                        }
+                    }
                 }
             }
         }

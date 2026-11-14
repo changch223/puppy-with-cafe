@@ -1291,4 +1291,63 @@ final class CafeListViewModelTests: XCTestCase {
         }
         XCTAssertEqual(viewModel.allLoadedCafes.map(\.name), ["店"], "全件の更新だけは行う")
     }
+
+    // MARK: - 場面から探す
+
+    func test_場面を押すとそれまでの条件を置き換え_起点は変えない() async {
+        let indoor = makeCafe(
+            name: "店内OK", latitude: 35.6900, longitude: 139.7010,
+            dogAmenities: DogAmenities(indoor: true, terrace: nil, largeDogs: nil, dogMenu: nil)
+        )
+        let terrace = makeCafe(
+            name: "テラスのみ", latitude: 35.6901, longitude: 139.7011,
+            dogAmenities: DogAmenities(indoor: nil, terrace: true, largeDogs: true, dogMenu: nil)
+        )
+        let viewModel = await makeTargetTimeViewModel(extra: [indoor, terrace])
+        let origin = viewModel.origin
+        // 先に別の条件を入れておく（場面を押すと足し算ではなく置き換わる）
+        viewModel.amenityFilter.largeDogOnly = true
+        viewModel.myDogOnly = true
+        viewModel.includeUnverified = true
+
+        viewModel.applyScene(.rainy)
+
+        XCTAssertEqual(viewModel.amenityFilter, AmenityFilter(indoorOnly: true))
+        XCTAssertFalse(viewModel.myDogOnly)
+        XCTAssertFalse(viewModel.includeUnverified)
+        XCTAssertFalse(viewModel.openNowOnly)
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["店内OK"])
+        XCTAssertEqual(viewModel.origin, origin, "検索の場所は変えない")
+
+        viewModel.applyScene(.terrace)
+        XCTAssertEqual(viewModel.amenityFilter, AmenityFilter(terraceOnly: true), "前の場面の条件は残らない")
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["テラスのみ"])
+    }
+
+    func test_夜も開いているは今日の20時に営業している店だけで_決めた時刻は保存しない() async {
+        let viewModel = await makeTargetTimeViewModel()
+        // 先に「いつ行く？」を決めていても、場面で置き換わる
+        viewModel.applyTargetTime(mondayTokyo(hour: 10))
+
+        viewModel.applyScene(.night)
+
+        XCTAssertEqual(viewModel.targetTime, mondayTokyo(hour: 20))
+        XCTAssertTrue(viewModel.openNowOnly)
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["夜の店"], "時間不明の店は通さない")
+
+        // 場面のあとの条件のクリアで時刻も戻る（保存しない）
+        viewModel.resetFilters()
+        XCTAssertNil(viewModel.targetTime)
+        XCTAssertFalse(viewModel.openNowOnly)
+    }
+
+    func test_夜も開いているは20時を過ぎていたら今の時刻で見る() async {
+        let viewModel = await makeTargetTimeViewModel(currentTime: mondayTokyo(hour: 21))
+
+        viewModel.applyScene(.night)
+
+        XCTAssertNil(viewModel.targetTime, "20時を過ぎていたら「今」")
+        XCTAssertTrue(viewModel.openNowOnly)
+        XCTAssertEqual(viewModel.displayedResults.map(\.cafe.name), ["夜の店"])
+    }
 }

@@ -525,6 +525,15 @@ struct CafeDetailBottomBar: View {
     /// 文字が大きいとき（xLarge 以上）は、電話をアイコンだけにし、保存のラベルを縮めて、主ボタン「経路」の文字を守る
     private var isCompact: Bool { dynamicTypeSize >= .xLarge }
 
+    /// 保存ボタンの色。行きたい＝ブランドの緑（店内OKのピンクと紛らわしくしない）、行った＝橙（行きたいと区別する）、未保存＝標準色
+    private var savedTint: Color {
+        switch saved.status {
+        case nil: return Color.accentColor
+        case .wantToGo?: return Color.brand
+        case .visited?: return Color.cafeDetailOrange
+        }
+    }
+
     /// 保存ボタンのラベル。幅が足りないときは「行った ✓ 12/28」→「行った ✓」（日付を落とす）→ 文字を縮める、の順に
     /// 小さくして、どの幅・文字サイズでもバーが画面幅に収まるようにする（375pt の電話あり・行った店など）。
     /// 最後の候補は幅いっぱいまで縮められる（fixedSize なし）ので、必ずどれかが収まる。
@@ -539,7 +548,7 @@ struct CafeDetailBottomBar: View {
             barLabel(saved.compactTitle, systemImage: saved.systemImage, shrinkable: true)
                 .onAppear { onSaveLabelVariant?(.shrunk) }
         }
-        .foregroundStyle(saved.status == nil ? Color.accentColor : Color.cafeDetailOrange)
+        .foregroundStyle(savedTint)
         .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12))
     }
 
@@ -586,6 +595,8 @@ struct CafeDetailActionLabel: View {
     let title: String
     let systemImage: String
     var prominent = false
+    /// 文字・絵柄の色（指定しなければ標準色。「行きたい」の肉球はブランドの緑）
+    var tint: Color?
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
@@ -604,7 +615,7 @@ struct CafeDetailActionLabel: View {
         .padding(.horizontal, 8)
         .padding(.vertical, dynamicTypeSize.isAccessibilitySize ? 10 : 0)
         .frame(maxWidth: .infinity, minHeight: 56)
-        .foregroundStyle(prominent ? Color.white : Color.accentColor)
+        .foregroundStyle(prominent ? Color.white : (tint ?? Color.accentColor))
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(prominent ? Color.accentColor : Color(.secondarySystemGroupedBackground))

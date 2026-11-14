@@ -182,12 +182,21 @@
       }
     },
     "%@、%lld件" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@、%2$lld件"
+          }
+        }
+      }
+    },
+    "%@、%lld店目" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@、%2$lld店目"
           }
         }
       }
@@ -232,22 +241,22 @@
         }
       }
     },
-    "%@。地図のチップをオンにします" : {
+    "%@。地図の条件をオンにします" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@。地図のチップをオンにします"
+            "value" : "%1$@。地図の条件をオンにします"
           }
         }
       }
     },
-    "%@。起点を変えて、地図のチップをオンにします" : {
+    "%@。起点を変えて、地図の条件をオンにします" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@。起点を変えて、地図のチップをオンにします"
+            "value" : "%1$@。起点を変えて、地図の条件をオンにします"
           }
         }
       }
@@ -368,6 +377,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@の周り"
+          }
+        }
+      }
+    },
+    "%@の周り · 「絞り込み」の「%@」をオンにします" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@の周り · 「絞り込み」の「%2$@」をオンにします"
           }
         }
       }
@@ -528,6 +547,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld件を表示"
+          }
+        }
+      }
+    },
+    "%lld店目、全%lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld店目、全%2$lld店"
           }
         }
       }
@@ -1442,6 +1471,16 @@
         }
       }
     },
+    "タップでこのエリアへ寄ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タップでこのエリアへ寄ります"
+          }
+        }
+      }
+    },
     "タップまたはドラッグして一覧の高さを切り替えられます" : {
       "localizations" : {
         "ja" : {
@@ -1482,6 +1521,16 @@
         }
       }
     },
+    "テラスでのんびり" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラスでのんびり"
+          }
+        }
+      }
+    },
     "テラスならOK" : {
       "localizations" : {
         "ja" : {
@@ -1518,6 +1567,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "テラス席OK"
+          }
+        }
+      }
+    },
+    "テラス席OKの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "テラス席OKの店に絞ります"
           }
         }
       }
@@ -2152,6 +2211,16 @@
         }
       }
     },
+    "前の店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前の店"
+          }
+        }
+      }
+    },
     "午後" : {
       "localizations" : {
         "ja" : {
@@ -2522,6 +2591,16 @@
         }
       }
     },
+    "場面から探す" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "場面から探す"
+          }
+        }
+      }
+    },
     "変更する" : {
       "localizations" : {
         "ja" : {
@@ -2558,6 +2637,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "夜"
+          }
+        }
+      }
+    },
+    "夜8時に開いている店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "夜8時に開いている店に絞ります"
+          }
+        }
+      }
+    },
+    "夜も開いている" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "夜も開いている"
           }
         }
       }
@@ -2622,12 +2721,32 @@
         }
       }
     },
+    "大型犬OKの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大型犬OKの店に絞ります"
+          }
+        }
+      }
+    },
     "大型犬が入れるか" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "大型犬が入れるか"
+          }
+        }
+      }
+    },
+    "大型犬と一緒に" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "大型犬と一緒に"
           }
         }
       }
@@ -2798,6 +2917,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "店内OKの店"
+          }
+        }
+      }
+    },
+    "店内OKの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "店内OKの店に絞ります"
           }
         }
       }
@@ -3362,6 +3491,16 @@
         }
       }
     },
+    "次の店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "次の店"
+          }
+        }
+      }
+    },
     "気になるお店の「行きたい」を押すと、ここに並びます" : {
       "localizations" : {
         "ja" : {
@@ -3448,6 +3587,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "犬メニューあり"
+          }
+        }
+      }
+    },
+    "犬メニューありの店に絞ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬メニューありの店に絞ります"
+          }
+        }
+      }
+    },
+    "犬メニューがある" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "犬メニューがある"
           }
         }
       }
@@ -4012,12 +4171,12 @@
         }
       }
     },
-    "起点を%@に変えて、地図の条件チップもオンにします" : {
+    "起点を%@に変えて、地図の条件もオンにします" : {
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "起点を%@に変えて、地図の条件チップもオンにします"
+            "value" : "起点を%@に変えて、地図の条件もオンにします"
           }
         }
       }
@@ -4148,6 +4307,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "閉じる"
+          }
+        }
+      }
+    },
+    "雨の日でも" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "雨の日でも"
           }
         }
       }
