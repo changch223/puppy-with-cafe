@@ -29,6 +29,8 @@ struct PlaceCardPager: View {
     private static let sideMargin: CGFloat = 12
     private static let cardSpacing: CGFloat = 8
     private static let peekWidth: CGFloat = 20
+    /// めくって止まったとみなすまでの待ち時間（0.18秒）
+    private static let settleDelay: UInt64 = 180_000_000
 
     init(
         items: [CafeWithDistance], selected: CafeWithDistance, savedPlaces: SavedPlaces, now: Date, isTargetTime: Bool,
@@ -72,11 +74,14 @@ struct PlaceCardPager: View {
         }
         .contentMargins(.horizontal, Self.sideMargin, for: .scrollContent)
         .scrollTargetBehavior(.viewAligned)
-        .scrollPosition(id: $position)
+        .scrollPosition(id: $position, anchor: .leading)
         .scrollClipDisabled()
         // めくって止まった先の店を選ぶ（地図のピンが選ばれ、見える範囲の外なら地図が動く）
-        .onChange(of: position) { _, newID in
-            guard let newID, newID != selected.id,
+        // 止まるのを少し待ってから選ぶ。めくっている途中や、遠い店へ自動で動く途中に通り過ぎる店を選ばない（地図も動かさない）
+        .task(id: position) {
+            guard let newID = position, newID != selected.id else { return }
+            try? await Task.sleep(nanoseconds: Self.settleDelay)
+            guard !Task.isCancelled, position == newID,
                   let item = items.first(where: { $0.cafe.id == newID }) else { return }
             onSelect(item)
         }
@@ -94,7 +99,8 @@ struct PlaceCardPager: View {
             savedStatus: savedPlaces.status(of: item.cafe.id),
             now: now,
             isTargetTime: isTargetTime,
-            sameSpot: sameSpot(item),
+            // 「同じ場所」の列は選んでいるカードだけに出す（隣のカードだけ背が高くなって、上の現在地ボタンに重ならないように）
+            sameSpot: isCurrent ? sameSpot(item) : [],
             containerHeight: containerHeight,
             onShowDetail: { onShowDetail(item.cafe) },
             onOpenRoute: { onOpenRoute(item.cafe) },

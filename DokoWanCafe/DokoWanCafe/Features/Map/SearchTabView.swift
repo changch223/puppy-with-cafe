@@ -113,6 +113,9 @@ struct SearchTabView: View {
             .animation(.easeInOut(duration: 0.2), value: showsSearchHereButton)
             .animation(.easeInOut(duration: 0.2), value: isSearchingWithResults)
             .animation(.easeInOut(duration: 0.2), value: selectedMapItem)
+            .onChange(of: selectedMapItem?.cafe.id) { _, newID in
+                if newID != nil { revealSelectedPin() }
+            }
             .onPreferenceChange(TopOverlayHeightKey.self) { topOverlayHeight = $0 }
         }
         .toolbar(.hidden, for: .navigationBar)
@@ -361,9 +364,15 @@ struct SearchTabView: View {
     private func selectFromCard(_ item: CafeWithDistance) {
         guard item.cafe.id != selectedMapItem?.cafe.id else { return }
         selectedMapItem = item
+    }
+
+    /// 選んだ店のピンがカードや上の検索バーに隠れるなら、見える所まで地図を寄せる（見えているなら動かさない）。
+    /// ピンを押したとき・カードをめくったとき・同じ場所の列で替えたときに共通
+    private func revealSelectedPin() {
+        guard let cafe = selectedMapItem?.cafe else { return }
         revealRequest = MapRevealRequest(
             id: (revealRequest?.id ?? 0) + 1,
-            coordinate: CLLocationCoordinate2D(latitude: item.cafe.latitude, longitude: item.cafe.longitude)
+            coordinate: CLLocationCoordinate2D(latitude: cafe.latitude, longitude: cafe.longitude)
         )
     }
 

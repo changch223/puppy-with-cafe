@@ -191,6 +191,16 @@
         }
       }
     },
+    "%@、%lld店目" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@、%2$lld店目"
+          }
+        }
+      }
+    },
     "%@、掲載%lld店" : {
       "localizations" : {
         "ja" : {
@@ -537,6 +547,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld件を表示"
+          }
+        }
+      }
+    },
+    "%lld店目、全%lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld店目、全%2$lld店"
           }
         }
       }
@@ -1451,6 +1471,16 @@
         }
       }
     },
+    "タップでこのエリアへ寄ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タップでこのエリアへ寄ります"
+          }
+        }
+      }
+    },
     "タップまたはドラッグして一覧の高さを切り替えられます" : {
       "localizations" : {
         "ja" : {
@@ -2177,6 +2207,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "削除"
+          }
+        }
+      }
+    },
+    "前の店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前の店"
           }
         }
       }
@@ -3451,6 +3491,16 @@
         }
       }
     },
+    "次の店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "次の店"
+          }
+        }
+      }
+    },
     "気になるお店の「行きたい」を押すと、ここに並びます" : {
       "localizations" : {
         "ja" : {
@@ -4347,56 +4397,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "（条件あり）"
-          }
-        }
-      }
-    },
-    "次の店" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "次の店"
-          }
-        }
-      }
-    },
-    "前の店" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "前の店"
-          }
-        }
-      }
-    },
-    "%@、%lld店目" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@、%2$lld店目"
-          }
-        }
-      }
-    },
-    "%lld店目、全%lld店" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$lld店目、全%2$lld店"
-          }
-        }
-      }
-    },
-    "タップでこのエリアへ寄ります" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "タップでこのエリアへ寄ります"
           }
         }
       }

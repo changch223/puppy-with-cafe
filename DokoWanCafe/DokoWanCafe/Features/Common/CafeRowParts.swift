@@ -47,6 +47,8 @@ struct CafeThumbnailView: View {
     var allowsNetwork = false
 
     @State private var image: UIImage?
+    /// いま `image` に入っている写真の店（店が替わったときだけ写真を消す）
+    @State private var imageCafeID: UUID?
 
     var body: some View {
         Group {
@@ -63,11 +65,15 @@ struct CafeThumbnailView: View {
         .accessibilityHidden(true)
         // 通信してよいかが変わったとき（横にめくった先のカードが選ばれたとき）も取り直す
         .task(id: "\(cafe.id.uuidString)-\(allowsNetwork)") {
-            image = nil
+            // 店が替わったときだけ写真を消す（通信の可否が変わっただけなら、出ている写真はそのまま。めくる間にちらつかせない）
+            if imageCafeID != cafe.id {
+                image = nil
+                imageCafeID = cafe.id
+            }
             guard let url = PhotoSourceResolver.previewSourceURL(for: cafe) else { return }
             let preview = await LinkPreviewService.shared.preview(for: url, allowNetwork: allowsNetwork)
             guard !Task.isCancelled else { return }
-            image = preview?.image
+            if let loaded = preview?.image { image = loaded }
         }
     }
 }

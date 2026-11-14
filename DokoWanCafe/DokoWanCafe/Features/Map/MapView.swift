@@ -112,9 +112,9 @@ struct CafeMapView: UIViewRepresentable {
         if let focusRequest, focusRequest.id != coordinator.lastFocusRequestID {
             coordinator.lastFocusRequestID = focusRequest.id
             mapView.setRegion(MapViewModel.walkingRegion(center: focusRequest.coordinate), animated: true)
-        }
-
-        if let revealRequest, revealRequest.id != coordinator.lastRevealRequestID {
+            // 同じ回に「見える所へ寄せる」要求も来ていたら、こちら（店を中心に寄せる）を優先して流す
+            coordinator.lastRevealRequestID = revealRequest?.id ?? coordinator.lastRevealRequestID
+        } else if let revealRequest, revealRequest.id != coordinator.lastRevealRequestID {
             coordinator.lastRevealRequestID = revealRequest.id
             coordinator.reveal(revealRequest.coordinate, on: mapView)
         }
