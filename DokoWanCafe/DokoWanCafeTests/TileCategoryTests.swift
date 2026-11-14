@@ -38,7 +38,7 @@ final class TileCategoryTests: XCTestCase {
     }
 
     func test_店内に入れなくてもテラスに入れると明記されていればテラス() {
-        let cafe = makeCafe(indoor: true, terrace: true, sizeIndoor: .small)
+        let cafe = makeCafe(indoor: true, terrace: true, sizeIndoor: .small, sizeTerrace: .large)
         XCTAssertEqual(CafePresentation.tileCategory(for: cafe, dog: DogProfile(size: .large)), .terraceOnly)
     }
 

@@ -106,13 +106,13 @@ final class SearchSuggestionTests: XCTestCase {
         XCTAssertEqual(SearchCondition.terrace.title(), "テラス席OKのお店に絞る")
         XCTAssertEqual(
             SearchCondition.terrace.subtitle(originName: "渋谷駅"),
-            "渋谷駅の周り · 地図の「テラス」チップをオンにします"
+            "渋谷駅の周り · 「絞り込み」の「テラス」をオンにします"
         )
         XCTAssertEqual(
             SearchCondition.indoor.subtitle(originName: "現在地"),
-            "現在地の周り · 地図の「店内OK」チップをオンにします"
+            "現在地の周り · 「絞り込み」の「店内OK」をオンにします"
         )
-        XCTAssertEqual(SearchCondition.terrace.spokenText(), "テラス席OKのお店に絞る。地図のチップをオンにします")
+        XCTAssertEqual(SearchCondition.terrace.spokenText(), "テラス席OKのお店に絞る。地図の条件をオンにします")
     }
 
     func test_条件をフィルタへ反映する() {
