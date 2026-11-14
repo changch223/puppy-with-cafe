@@ -236,7 +236,8 @@ struct PlaceCardView: View {
             Button(action: onToggleWantToGo) {
                 CafeDetailActionLabel(
                     title: String(localized: "行きたい"),
-                    systemImage: isWantToGo ? "pawprint.fill" : "pawprint"
+                    systemImage: isWantToGo ? "pawprint.fill" : "pawprint",
+                    tint: isWantToGo ? Color.brand : nil
                 )
             }
             .buttonStyle(.plain)

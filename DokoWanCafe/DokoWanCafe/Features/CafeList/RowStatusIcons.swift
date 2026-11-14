@@ -12,12 +12,12 @@ struct FreshnessWarningIcon: View {
     }
 }
 
-/// 「行きたい」を示す小さな肉球アイコン（一覧行で使用, UI/UXブラッシュアップ設計書4）
+/// 「行きたい」を示す小さな肉球アイコン（ブランドの緑。店内OKのピンクと紛らわしくしない。一覧行で使用, UI/UXブラッシュアップ設計書4）
 struct FavoritePawIcon: View {
     var body: some View {
         Image(systemName: "pawprint.fill")
             .font(.caption2)
-            .foregroundStyle(.pink)
+            .foregroundStyle(Color.brand)
             .accessibilityLabel(Text("行きたい"))
     }
 }
