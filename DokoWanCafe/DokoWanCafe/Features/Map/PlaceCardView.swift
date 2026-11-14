@@ -22,6 +22,12 @@ struct PlaceCardView: View {
     var onSelectSameSpot: (CafeWithDistance) -> Void = { _ in }
     /// 行った店の保存メニューで選んだ操作
     var onSaveAction: (SaveAction) -> Void = { _ in }
+    /// 一覧の中での位置（横にめくるとき）。VoiceOver の「次の店」「前の店」を、進める側があるときだけ出す。単独表示は nil
+    var position: CardPaging.Position?
+    /// VoiceOver の「次の店」「前の店」で隣の店へ進む
+    var onPage: (CardPaging.Direction) -> Void = { _ in }
+    /// 写真を取りに行くか。横にめくる列では、いま選んでいるカードだけ true（めくる途中の先の店まで通信しない）
+    var allowsNetwork = true
 
     @Environment(\.openURL) private var openURL
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -38,14 +44,14 @@ struct PlaceCardView: View {
                 if dynamicTypeSize.isAccessibilitySize {
                     // 大きな文字では写真と閉じるボタンの行の下に、店名・タグ・条件を全幅で並べる（店名を省略しない）
                     HStack(alignment: .top) {
-                        CafeThumbnailView(cafe: cafe, size: 56, allowsNetwork: true)
+                        CafeThumbnailView(cafe: cafe, size: 56, allowsNetwork: allowsNetwork)
                         Spacer(minLength: 0)
                         closeButton
                     }
                     cardInfo
                 } else {
                     HStack(alignment: .top, spacing: 12) {
-                        CafeThumbnailView(cafe: cafe, size: 72, allowsNetwork: true)
+                        CafeThumbnailView(cafe: cafe, size: 72, allowsNetwork: allowsNetwork)
                         cardInfo
                             .frame(maxWidth: .infinity, alignment: .leading)
                         closeButton
@@ -177,6 +183,14 @@ struct PlaceCardView: View {
                     .font(.headline)
                     .lineLimit(isLarge ? nil : 2)
                     .fixedSize(horizontal: false, vertical: isLarge)
+                    .accessibilityActions {
+                        if let position, position.hasNext {
+                            Button(String(localized: "次の店")) { onPage(.next) }
+                        }
+                        if let position, position.hasPrevious {
+                            Button(String(localized: "前の店")) { onPage(.previous) }
+                        }
+                    }
                 // 行った店は名前の横の小さなチェックで示す（押せない表示）
                 if savedStatus == .visited {
                     VisitedCheckIcon()

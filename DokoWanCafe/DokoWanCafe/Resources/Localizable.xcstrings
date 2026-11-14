@@ -182,7 +182,6 @@
       }
     },
     "%@、%lld件" : {
-      "extractionState" : "stale",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
@@ -4348,6 +4347,56 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "（条件あり）"
+          }
+        }
+      }
+    },
+    "次の店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "次の店"
+          }
+        }
+      }
+    },
+    "前の店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前の店"
+          }
+        }
+      }
+    },
+    "%@、%lld店目" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@、%2$lld店目"
+          }
+        }
+      }
+    },
+    "%lld店目、全%lld店" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld店目、全%2$lld店"
+          }
+        }
+      }
+    },
+    "タップでこのエリアへ寄ります" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タップでこのエリアへ寄ります"
           }
         }
       }

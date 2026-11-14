@@ -61,7 +61,8 @@ struct CafeThumbnailView: View {
             }
         }
         .accessibilityHidden(true)
-        .task(id: cafe.id) {
+        // 通信してよいかが変わったとき（横にめくった先のカードが選ばれたとき）も取り直す
+        .task(id: "\(cafe.id.uuidString)-\(allowsNetwork)") {
             image = nil
             guard let url = PhotoSourceResolver.previewSourceURL(for: cafe) else { return }
             let preview = await LinkPreviewService.shared.preview(for: url, allowNetwork: allowsNetwork)

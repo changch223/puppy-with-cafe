@@ -9,6 +9,13 @@ struct MapFocusRequest {
     let coordinate: CLLocationCoordinate2D
 }
 
+/// 「この店のピンが隠れないように地図を寄せる」要求。`id` が変わったときだけ、ピンが見える範囲の外にあれば中心を動かす（ズームは変えない）。
+/// カードを横にめくったときに使う。見えているなら動かさない。
+struct MapRevealRequest {
+    let id: Int
+    let coordinate: CLLocationCoordinate2D
+}
+
 /// 地図画面（T026/T028・再設計 段階1a: 形と色で分かるピン・徒歩圏の縮尺）。
 ///
 /// UIKit 使用理由（憲章 原則V に基づく明記）:
@@ -36,6 +43,11 @@ struct CafeMapView: UIViewRepresentable {
     let recenterRequestID: Int
     /// この座標へ寄せる要求（`id` が変わったときだけ動かす。起点は変えない）。なければ nil
     var focusRequest: MapFocusRequest?
+    /// めくった先の店のピンを見える範囲へ出す要求（`id` が変わったときだけ）。なければ nil
+    var revealRequest: MapRevealRequest?
+    /// 地図の上端・下端から、検索バー・チップとカードにふさがれている高さ（pt）。`revealRequest` の「見える範囲」の判定に使う
+    var coveredTop: CGFloat = 0
+    var coveredBottom: CGFloat = 0
     /// `center` が変わったときに地図をそこへ動かすか。「このあたりで探す」で起点が地図の中心になったときは false
     /// （検索地点を今見ている場所に合わせるだけで、地図は動かさない・ズームも変えない）
     var movesToCenterOnChange = true
@@ -44,6 +56,7 @@ struct CafeMapView: UIViewRepresentable {
     var onRegionSettled: ((_ center: CLLocationCoordinate2D, _ widthMeters: Double, _ byUser: Bool) -> Void)?
 
     private static let cafeReuseID = "cafe"
+    fileprivate static let areaReuseID = "area"
 
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
@@ -59,6 +72,10 @@ struct CafeMapView: UIViewRepresentable {
         mapView.register(
             MKAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: Self.cafeReuseID
+        )
+        mapView.register(
+            AreaAnnotationView.self,
+            forAnnotationViewWithReuseIdentifier: Self.areaReuseID
         )
         mapView.accessibilityLabel = String(localized: "周辺の犬同伴OKカフェの地図")
         return mapView
@@ -97,6 +114,11 @@ struct CafeMapView: UIViewRepresentable {
             mapView.setRegion(MapViewModel.walkingRegion(center: focusRequest.coordinate), animated: true)
         }
 
+        if let revealRequest, revealRequest.id != coordinator.lastRevealRequestID {
+            coordinator.lastRevealRequestID = revealRequest.id
+            coordinator.reveal(revealRequest.coordinate, on: mapView)
+        }
+
         coordinator.syncAnnotations(on: mapView)
         // 地図の外（検索画面など）でカードの店が変わったときも、地図の選択をその店のピンに合わせる
         coordinator.reconcileSelectionFromOutside(on: mapView)
@@ -112,6 +134,10 @@ struct CafeMapView: UIViewRepresentable {
         var lastRegionKey: String?
         var lastRecenterRequestID = 0
         var lastFocusRequestID = 0
+        var lastRevealRequestID = 0
+        /// 東京全体が見えるほど引いていて、ピンの代わりにエリアのラベルを出しているか（`AreaOverview`）
+        private var isOverview = false
+        private var areaAnnotations: [AreaAnnotation] = []
         /// 直近に反映した（データの版, 保存の状態, 対象時刻）。変わらなければ注釈の見た目と読み上げを計算し直さない。
         /// 見た目が同じピンでも、対象時刻や保存の状態が変わったら読み上げ文は作り直す。
         private var lastSyncKey: SyncKey?
@@ -149,6 +175,10 @@ struct CafeMapView: UIViewRepresentable {
             )
             guard key != lastSyncKey else { return }
             lastSyncKey = key
+            if isOverview {
+                syncAreaAnnotations(on: mapView)
+                return
+            }
             let items = parent.items
             let nearest = nameMode == .nearby ? computeNearestNameIDs(on: mapView) : []
             let nearestChanged = nearest != nearestNameIDs
@@ -214,6 +244,70 @@ struct CafeMapView: UIViewRepresentable {
             reconcileSelection(on: mapView)
         }
 
+        // MARK: - エリア表示（東京全体が見えるほど引いたとき）
+
+        /// ピン表示とエリア表示を切り替える。エリア表示のあいだはカードを閉じ、ピンは外す（戻るとき付け直す）。
+        private func setOverview(_ overview: Bool, on mapView: MKMapView) {
+            guard overview != isOverview else { return }
+            isOverview = overview
+            // 付け直しのため、前回の反映を忘れる（`syncAnnotations` が表示結果を最初から反映する）
+            lastSyncKey = nil
+            if overview {
+                // カードの店のピンを外しても選択を消さないよう、先にカードを閉じる（状態の更新は描画の外へ回す）
+                DispatchQueue.main.async { [weak self] in self?.parent.selectedItem = nil }
+            } else {
+                clearAreaAnnotations(on: mapView)
+            }
+            syncAnnotations(on: mapView)
+        }
+
+        /// エリアのラベルを今の表示結果で作り直す（ピンは外す）。ラベルは最大でも百ほどなので差分は取らない
+        private func syncAreaAnnotations(on mapView: MKMapView) {
+            isSyncingAnnotations = true
+            defer { isSyncingAnnotations = false }
+            if !annotationsByID.isEmpty {
+                mapView.removeAnnotations(Array(annotationsByID.values))
+                annotationsByID = [:]
+            }
+            clearAreaAnnotations(on: mapView)
+            let summaries = AreaOverview.summaries(for: parent.items)
+            let maxCount = summaries.map(\.count).max() ?? 0
+            areaAnnotations = summaries.map { AreaAnnotation(summary: $0, priority: AreaOverview.priority(count: $0.count, maxCount: maxCount)) }
+            mapView.addAnnotations(areaAnnotations)
+        }
+
+        private func clearAreaAnnotations(on mapView: MKMapView) {
+            guard !areaAnnotations.isEmpty else { return }
+            mapView.removeAnnotations(areaAnnotations)
+            areaAnnotations = []
+        }
+
+        /// エリアのラベルを押したとき: そのエリアの店が収まる範囲へ寄せる（検索の起点や絞り込みは変えない。地図が動くだけ）
+        private func zoom(to area: AreaSummary, on mapView: MKMapView) {
+            let fit = AreaOverview.fitRegion(for: area)
+            let region = MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: fit.centerLatitude, longitude: fit.centerLongitude),
+                span: MKCoordinateSpan(latitudeDelta: fit.latitudeDelta, longitudeDelta: fit.longitudeDelta)
+            )
+            mapView.setRegion(region, animated: !UIAccessibility.isReduceMotionEnabled)
+        }
+
+        // MARK: - カードをめくったときの地図
+
+        /// めくった先のピンが、検索バー・チップとカードに隠れない範囲の外なら、地図の中心を動かす（ズームは変えない）。
+        /// 見えているなら動かさない。視差効果を減らす設定ではアニメーションしない。
+        func reveal(_ coordinate: CLLocationCoordinate2D, on mapView: MKMapView) {
+            guard !isOverview, CLLocationCoordinate2DIsValid(coordinate), mapView.bounds.width > 0 else { return }
+            let pin = mapView.convert(coordinate, toPointTo: mapView)
+            guard let point = MapReveal.centerPoint(
+                pin: pin, mapSize: mapView.bounds.size,
+                coveredTop: parent.coveredTop, coveredBottom: parent.coveredBottom
+            ) else { return }
+            let newCenter = mapView.convert(point, toCoordinateFrom: mapView)
+            guard CLLocationCoordinate2DIsValid(newCenter) else { return }
+            mapView.setCenter(newCenter, animated: !UIAccessibility.isReduceMotionEnabled)
+        }
+
         /// いま地図に見えている範囲の中で、起点から近い順の先頭3店の id
         private func computeNearestNameIDs(on mapView: MKMapView) -> Set<UUID> {
             let visibleRect = mapView.visibleMapRect
@@ -266,7 +360,8 @@ struct CafeMapView: UIViewRepresentable {
             // 営業時間が分かっていて今は時間外の店は薄く（選択中は見失わないよう通常の濃さ）
             view.alpha = isSelected ? 1 : style.alpha
             view.zPriority = isSelected ? .max : .defaultUnselected
-            view.displayPriority = annotation.displayPriority
+            // 選んだ店のピンは、重なりの間引きで消えないようにする（カードをめくった先が隠れないように）
+            view.displayPriority = isSelected ? .required : annotation.displayPriority
             view.canShowCallout = false
             view.clusteringIdentifier = nil
             view.accessibilityLabel = annotation.spokenLabel
@@ -346,6 +441,10 @@ struct CafeMapView: UIViewRepresentable {
         /// 縮尺が変わったとき、店名の出し方が切り替わるなら表示中のピンを更新する
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
             let region = mapView.region
+            setOverview(
+                AreaOverview.isOverview(latitudeDelta: region.span.latitudeDelta, wasOverview: isOverview),
+                on: mapView
+            )
             let mode = MapViewModel.pinNameMode(span: region.span, centerLatitude: region.center.latitude)
             guard mode != nameMode else { return }
             nameMode = mode
@@ -355,6 +454,13 @@ struct CafeMapView: UIViewRepresentable {
 
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             if annotation is MKUserLocation { return nil }
+            if let areaAnnotation = annotation as? AreaAnnotation {
+                let view = mapView.dequeueReusableAnnotationView(
+                    withIdentifier: CafeMapView.areaReuseID, for: areaAnnotation
+                ) as? AreaAnnotationView
+                view?.configure(with: areaAnnotation)
+                return view
+            }
             guard let cafeAnnotation = annotation as? CafeAnnotation else { return nil }
             let view = mapView.dequeueReusableAnnotationView(
                 withIdentifier: CafeMapView.cafeReuseID,
@@ -365,6 +471,12 @@ struct CafeMapView: UIViewRepresentable {
         }
 
         func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
+            if let areaAnnotation = annotation as? AreaAnnotation {
+                // ラベルは選択状態を持たない。すぐ外して、寄せる
+                mapView.deselectAnnotation(areaAnnotation, animated: false)
+                zoom(to: areaAnnotation.summary, on: mapView)
+                return
+            }
             guard let cafeAnnotation = annotation as? CafeAnnotation else { return }
             // 代表が変わって作り直した直後など、選択中の店がすでにこの組にいるときは、カードの店を変えない
             if !isSelected(cafeAnnotation) {
@@ -376,6 +488,7 @@ struct CafeMapView: UIViewRepresentable {
         }
 
         func mapView(_ mapView: MKMapView, didDeselect annotation: MKAnnotation) {
+            if annotation is AreaAnnotation { return }
             guard let cafeAnnotation = annotation as? CafeAnnotation else { return }
             if let view = mapView.view(for: annotation) {
                 configure(view, for: cafeAnnotation, isSelected: false)
