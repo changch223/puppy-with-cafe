@@ -53,15 +53,35 @@ enum MapPinRenderer {
         }
     }
 
+    /// ピンの縁の外側に引く細い縁の色。店内OK（薄いピンク）だけ濃いローズ（文字と同じ #7A1840）、ほかは nil（見た目を変えない）
+    static func rimColor(for category: MapPinCategory) -> UIColor? {
+        category == .indoorOK ? glyphColor(for: .indoorOK) : nil
+    }
+
+    /// 縁（`rimColor`）の太さ。白い縁（1.5pt・保存済みは4pt）の外側いっぱいに重ねる
+    static let rimWidth: CGFloat = 1.25
+
     /// 写真のない店のタイル（地はピンの色を薄くしたもの）に載せる文字・絵柄の色。
     /// 店内OKはピンの色（薄いピンク）のままだと読めないので、ライトは濃いローズ、ダークは薄いピンクにする。
+    /// 青・橙・グレーも、ライト・ダークで地と 3:1 以上になる色にする。
     static func tileGlyphColor(for category: MapPinCategory) -> UIColor {
+        // ライト・ダークとも地（ピンの色×`tileBackgroundOpacity`）と 3:1 以上（`CategoryTileColorTests` が確かめる）
         switch category {
         case .indoorOK:
             let dark = fillColor(for: category), light = glyphColor(for: category)
             return UIColor { $0.userInterfaceStyle == .dark ? dark : light }
-        case .terraceOnly, .checkDetail, .unverified: return fillColor(for: category)
+        // 青・橙は文字色（`terraceText`・`cautionText`）。ピンの色のままだとライトの橙は薄い地に対して 2.5:1、ダークの青は 3.2:1 で足りない・ぎりぎり
+        case .terraceOnly: return .terraceText
+        case .checkDetail: return .cautionText
+        case .unverified:
+            let dark = fillColor(for: category), light = UIColor(red: 0x5C / 255, green: 0x61 / 255, blue: 0x67 / 255, alpha: 1)
+            return UIColor { $0.userInterfaceStyle == .dark ? dark : light }
         }
+    }
+
+    /// 写真のない店のタイルの地の不透明度（地＝ピンの色×この値を、背景の上に重ねる）
+    static func tileBackgroundOpacity(for category: MapPinCategory) -> Double {
+        category == .indoorOK ? 0.3 : 0.18
     }
 
     static func image(for style: MapPinStyle, isSelected: Bool = false, count: Int = 1) -> UIImage {
@@ -100,6 +120,14 @@ enum MapPinRenderer {
             UIColor.white.setFill()
             path(for: shape, in: outer).fill()
             cg.restoreGState()
+
+            // 店内OKだけ、いちばん外側に濃いローズの細い縁（薄いピンクは明るい地図や薄い表示で地に溶けるため。地の色は変えない）
+            if let rim = rimColor(for: category) {
+                rim.setStroke()
+                let rimPath = path(for: shape, in: outer.insetBy(dx: rimWidth / 2, dy: rimWidth / 2))
+                rimPath.lineWidth = rimWidth
+                rimPath.stroke()
+            }
 
             // 本体の色
             fillColor(for: category).setFill()
