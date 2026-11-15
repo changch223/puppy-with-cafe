@@ -23,7 +23,7 @@
 - フィーチャー: `specs/001-dog-cafe-map/`（中核: 発見・信頼・報告。contracts/ にデータ契約）、`specs/002-cafe-rich-info/`（詳細充実: 営業時間+営業中バッジ・電話/予約・公式リンク・犬向け設備4項目・運営転記メモ）
 
 ## 画面構成（再設計 段階1〜4 完了・2026-10-26）
-- 下に3タブ: **さがす**（地図＋検索バー＋条件チップ＋3段の一覧シート＋ピンのカード。`Features/Map/SearchTabView.swift`）／**保存**（行きたい・行った。`Features/Saved/SavedView.swift`）／**うちの子**（犬の設定・データ更新日・ピンの見かた・このアプリについて。`Features/About/MyDogView.swift`）。
+- 下に3タブ: **さがす**（地図＋検索バー＋条件チップ4つ〔絞り込み・いつ行く？・うちの子OK・営業中〕＋3段の一覧シート＋横にめくれるピンのカード＋引いたときのエリア表示。`Features/Map/SearchTabView.swift`）／**保存**（行きたい・行った。`Features/Saved/SavedView.swift`）／**うちの子**（犬の設定・データ更新日・ピンの見かた・このアプリについて。`Features/About/MyDogView.swift`）。
 - 店の詳細（`Features/CafeDetail/`）は先頭に**答えのカード**（`Core/CafeDetailAnswer.swift`）と根拠の1行。根拠をタップすると参考記事の**根拠のシート**。
 - 「いつ行く？」（`Features/Map/PlanTimeSheet.swift`・`Core/TargetTime.swift`）で日時を選ぶと、その時刻に営業中の店だけを表示。決めた時刻は保存しない。
 - 「うちの子」（`Core/DogProfile.swift`・`Core/DogFit.swift`・`Services/DogProfileStore.swift`）: 大きさ・過ごし方を端末内（UserDefaults）にだけ保存し、席（店内・テラス）ごとに入れるかを判定する。**データに明記された事実だけで判定し、推測で「うちの子OK」と言わない（原則I）。**

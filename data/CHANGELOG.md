@@ -2778,3 +2778,10 @@
 - ✏️ 変更: MIO（is_closed, dog_amenities, sources）
 - ✏️ 変更: Nagi（is_closed, dog_amenities, sources）
 - ✏️ 変更: SALONE VENDREDI（is_closed, sources）
+
+## 2026-11-14 23:35 — 追加 0 / 変更 5 / 削除 0
+- ✏️ 変更: Bistrot a la Demande（name_reading）
+- ✏️ 変更: CAFE 33（name_reading）
+- ✏️ 変更: Cheese'n Tokyo（name_reading）
+- ✏️ 変更: cafe arica（name_reading）
+- ✏️ 変更: fäfä BOUTIQUE & CAFE 吉祥寺店（旧 The House of Hounds by fäfä）（name, hours, hours_text, info_verified, holiday_note）
