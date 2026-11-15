@@ -13,10 +13,10 @@ Thank you for reviewing Puppy With Cafe (version 1.1).
 - When the map is zoomed out to show all of Tokyo, pins are replaced by area labels with the number of cafes; tapping a label zooms into that area.
 - The search screen has "場面から探す" (find by situation), five shortcuts that set filters, e.g. "雨の日でも" (rainy day = indoor seating allowed). They keep the current search location, so outside Tokyo choose an area first.
 - The chips above the map were reduced to four; the other filters are inside "絞り込み".
-- Updated cafe data. No new permissions, no new data collection, no accounts, no purchases.
+- Updated cafe data. No new permissions, data collection, accounts or purchases.
 
 [Purpose and audience]
-Puppy With Cafe helps dog owners in Tokyo, Japan find cafes they can visit with their dog. Problem: whether a cafe accepts dogs is scattered across shop websites, social media and blogs, and is often unclear. Value: the app shows about 800 Tokyo cafes on a map and states, for each one, whether dogs are allowed inside or on the terrace, with the source type and the date it was verified. Anything that could not be confirmed is shown as "未確認" (unconfirmed) rather than guessed. Audience: dog owners living in or visiting Tokyo. The UI is in Japanese.
+Puppy With Cafe helps dog owners in Tokyo, Japan find cafes they can visit with their dog. Problem: whether a cafe accepts dogs is scattered across websites, social media and blogs, and is often unclear. Value: the app shows about 800 Tokyo cafes on a map and states, for each one, whether dogs are allowed inside or on the terrace, with the source type and the date it was verified. Unconfirmed items are shown as "未確認" (unconfirmed), never guessed. Audience: dog owners living in or visiting Tokyo. The UI is in Japanese.
 
 [How to use: no login, no setup, no sample files]
 All features are available right after launch.
@@ -39,7 +39,6 @@ The app works the same way in all regions. The only limitation is content: the c
 [Regulated industry / third-party material]
 The app is not in a regulated industry. Cafe information is factual data (name, address, hours, dog policy) compiled by us from public sources, each shown with its source and a link to it. We do not copy third-party photos or articles: images appear only through Instagram's official embed or as link previews loaded from the cafe's own page. The open address data we used (Japan Digital Agency, Address Base Registry) is credited in the app.
 
-Contact: irairappo@gmail.com
 Support: https://changch223.github.io/puppy-with-cafe/docs/support.html
 Privacy Policy: https://changch223.github.io/puppy-with-cafe/docs/privacy.html
 ```
