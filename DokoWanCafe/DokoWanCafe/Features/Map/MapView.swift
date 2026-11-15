@@ -137,7 +137,10 @@ struct CafeMapView: UIViewRepresentable {
         var lastRevealRequestID = 0
         /// 東京全体が見えるほど引いていて、ピンの代わりにエリアのラベルを出しているか（`AreaOverview`）
         private var isOverview = false
+        /// いま地図に付けているエリアのラベル（重ならずに出せるものだけ）
         private var areaAnnotations: [AreaAnnotation] = []
+        /// 今の表示結果から作ったエリアのラベルの全部（出す・出さないは地図の縮尺で変わる）
+        private var allAreaAnnotations: [AreaAnnotation] = []
         /// 直近に反映した（データの版, 保存の状態, 対象時刻）。変わらなければ注釈の見た目と読み上げを計算し直さない。
         /// 見た目が同じピンでも、対象時刻や保存の状態が変わったら読み上げ文は作り直す。
         private var lastSyncKey: SyncKey?
@@ -272,11 +275,37 @@ struct CafeMapView: UIViewRepresentable {
             clearAreaAnnotations(on: mapView)
             let summaries = AreaOverview.summaries(for: parent.items)
             let maxCount = summaries.map(\.count).max() ?? 0
-            areaAnnotations = summaries.map { AreaAnnotation(summary: $0, priority: AreaOverview.priority(count: $0.count, maxCount: maxCount)) }
-            mapView.addAnnotations(areaAnnotations)
+            allAreaAnnotations = summaries.map { AreaAnnotation(summary: $0, priority: AreaOverview.priority(count: $0.count, maxCount: maxCount)) }
+            layoutAreaAnnotations(on: mapView)
+        }
+
+        /// 今の縮尺で重ならずに出せるラベルだけを地図に付ける（件数の多い方を優先）。地図が動くたびに呼ぶ
+        private func layoutAreaAnnotations(on mapView: MKMapView) {
+            guard isOverview, mapView.bounds.width > 0 else { return }
+            let boxes = allAreaAnnotations.map { annotation -> AreaOverview.LabelBox in
+                let point = mapView.convert(annotation.coordinate, toPointTo: mapView)
+                let size = AreaAnnotationView.pillSize(for: annotation.summary)
+                return AreaOverview.LabelBox(
+                    id: annotation.summary.id, count: annotation.summary.count,
+                    centerX: point.x, centerY: point.y, width: size.width, height: size.height
+                )
+            }
+            let visibleIDs = AreaOverview.nonOverlappingLabelIDs(boxes)
+            let wanted = allAreaAnnotations.filter { visibleIDs.contains($0.summary.id) }
+            let shownIDs = Set(areaAnnotations.map(\.summary.id))
+            guard shownIDs != visibleIDs || areaAnnotations.contains(where: { shown in !wanted.contains { $0 === shown } }) else { return }
+            let toRemove = areaAnnotations.filter { shown in !wanted.contains { $0 === shown } }
+            let toAdd = wanted.filter { item in !areaAnnotations.contains { $0 === item } }
+            let wasSyncing = isSyncingAnnotations
+            isSyncingAnnotations = true
+            if !toRemove.isEmpty { mapView.removeAnnotations(toRemove) }
+            if !toAdd.isEmpty { mapView.addAnnotations(toAdd) }
+            isSyncingAnnotations = wasSyncing
+            areaAnnotations = wanted
         }
 
         private func clearAreaAnnotations(on mapView: MKMapView) {
+            allAreaAnnotations = []
             guard !areaAnnotations.isEmpty else { return }
             mapView.removeAnnotations(areaAnnotations)
             areaAnnotations = []
@@ -445,6 +474,8 @@ struct CafeMapView: UIViewRepresentable {
                 AreaOverview.isOverview(latitudeDelta: region.span.latitudeDelta, wasOverview: isOverview),
                 on: mapView
             )
+            // 縮尺が変わると札どうしの重なりが変わるので、出す札を選び直す
+            if isOverview { layoutAreaAnnotations(on: mapView) }
             let mode = MapViewModel.pinNameMode(span: region.span, centerLatitude: region.center.latitude)
             guard mode != nameMode else { return }
             nameMode = mode

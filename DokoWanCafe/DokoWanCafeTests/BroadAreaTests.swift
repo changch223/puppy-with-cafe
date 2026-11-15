@@ -14,14 +14,24 @@ final class BroadAreaTests: XCTestCase {
     }
 
     func test_細かいエリアは広いエリアにまとまる() {
-        XCTAssertEqual(BroadArea.name(forSubArea: "渋谷駅周辺"), "渋谷・恵比寿")
-        XCTAssertEqual(BroadArea.name(forSubArea: "表参道・青山"), "渋谷・恵比寿")
-        XCTAssertEqual(BroadArea.name(forSubArea: "代官山"), "渋谷・恵比寿")
-        XCTAssertEqual(BroadArea.name(forSubArea: "高尾山"), "八王子・高尾")
+        XCTAssertEqual(BroadArea.name(forSubArea: "渋谷駅周辺"), "渋谷・恵比寿・六本木")
+        XCTAssertEqual(BroadArea.name(forSubArea: "表参道・青山"), "渋谷・恵比寿・六本木")
+        XCTAssertEqual(BroadArea.name(forSubArea: "代官山"), "渋谷・恵比寿・六本木")
+        XCTAssertEqual(BroadArea.name(forSubArea: "高尾山"), "高尾")
     }
 
     func test_表にないエリアはその名前のまま() {
         XCTAssertEqual(BroadArea.name(forSubArea: "新しいエリア"), "新しいエリア")
+        XCTAssertEqual(BroadArea.shortName(forArea: "新しいエリア"), "新しいエリア")
+    }
+
+    func test_札には短い名前を出す() {
+        XCTAssertEqual(BroadArea.shortName(forArea: "渋谷・恵比寿・六本木"), "渋谷")
+        XCTAssertEqual(BroadArea.shortName(forArea: "自由が丘・学芸大学"), "自由が丘")
+        // 短い名前は重ならず、長い札にならない（5文字まで）
+        let shorts = BroadArea.groups.map(\.shortName)
+        XCTAssertEqual(shorts.count, Set(shorts).count)
+        XCTAssertTrue(shorts.allSatisfy { !$0.isEmpty && $0.count <= 5 })
     }
 
     func test_同じ細かいエリアが2つの広いエリアに入っていない() {
@@ -58,7 +68,7 @@ final class BroadAreaTests: XCTestCase {
             makeItem(area: "吉祥寺", lat: 35.702, lng: 139.578),
         ]
         let summaries = AreaOverview.summaries(for: items)
-        XCTAssertEqual(summaries.map(\.name), ["渋谷・恵比寿", "吉祥寺・三鷹"])
+        XCTAssertEqual(summaries.map(\.name), ["渋谷・恵比寿・六本木", "吉祥寺・三鷹"])
         XCTAssertEqual(summaries.map(\.count), [3, 1])
     }
 }

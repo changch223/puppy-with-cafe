@@ -1,6 +1,6 @@
 import Foundation
 
-/// エリアごとの集計。エリアは細かい区分（`Cafe.subArea`）を `BroadArea` で広い区分（「渋谷・原宿」など）にまとめたもの。地図を東京全体が見えるほど引いたとき、ピンの代わりに出す「エリア名＋件数」の元になる。
+/// エリアごとの集計。エリアは細かい区分（`Cafe.subArea`）を `BroadArea` で広い区分（「渋谷・恵比寿」など）にまとめたもの。地図を東京全体が見えるほど引いたとき、ピンの代わりに出す「エリア名＋件数」の元になる。
 /// 純ロジック・UI非依存（憲章 原則IV）。件数は今効いている条件（`displayedResults`）で数える。
 struct AreaSummary: Equatable, Identifiable, Sendable {
     let name: String
@@ -78,6 +78,36 @@ enum AreaOverview {
             centerLongitude: (area.minLongitude + area.maxLongitude) / 2,
             latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta
         )
+    }
+
+    /// 画面上の札1枚（中心と大きさは画面の座標・pt）
+    struct LabelBox: Equatable, Sendable {
+        let id: String
+        let count: Int
+        let centerX: Double
+        let centerY: Double
+        let width: Double
+        let height: Double
+    }
+
+    /// 札どうしのあいだに空ける最小のすき間（pt）
+    static let labelGap = 4.0
+
+    /// 重ならずに出せる札を選ぶ。件数の多い札から順に置き、すでに置いた札と重なる札は出さない（同数は名前順）。
+    /// 地図の標準の間引きは件数の順を守らないので、自前で決める
+    static func nonOverlappingLabelIDs(_ boxes: [LabelBox]) -> Set<String> {
+        let ordered = boxes.sorted { lhs, rhs in
+            lhs.count != rhs.count ? lhs.count > rhs.count : lhs.id < rhs.id
+        }
+        var placed: [LabelBox] = []
+        for box in ordered where box.centerX.isFinite && box.centerY.isFinite {
+            let overlaps = placed.contains { other in
+                abs(box.centerX - other.centerX) < (box.width + other.width) / 2 + labelGap
+                    && abs(box.centerY - other.centerY) < (box.height + other.height) / 2 + labelGap
+            }
+            if !overlaps { placed.append(box) }
+        }
+        return Set(placed.map(\.id))
     }
 
     /// 衝突で間引くときの優先度（0〜1。件数が多いほど高い）。ラベル同士が重なったら件数の多い方が残る

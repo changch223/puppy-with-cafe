@@ -121,4 +121,47 @@ final class AreaOverviewTests: XCTestCase {
         XCTAssertGreaterThan(AreaOverview.priority(count: 30, maxCount: 42), AreaOverview.priority(count: 5, maxCount: 42))
         XCTAssertEqual(AreaOverview.priority(count: 5, maxCount: 0), 0)
     }
+
+    // MARK: - 札の重なり
+
+    private func box(_ id: String, count: Int, x: Double, y: Double, width: Double = 80, height: Double = 34) -> AreaOverview.LabelBox {
+        AreaOverview.LabelBox(id: id, count: count, centerX: x, centerY: y, width: width, height: height)
+    }
+
+    func test_重なる札は件数の多い方だけ出す() {
+        let ids = AreaOverview.nonOverlappingLabelIDs([
+            box("少ない", count: 10, x: 100, y: 100), box("多い", count: 50, x: 120, y: 110),
+        ])
+        XCTAssertEqual(ids, ["多い"])
+    }
+
+    func test_離れた札は両方出す() {
+        let ids = AreaOverview.nonOverlappingLabelIDs([
+            box("左", count: 10, x: 100, y: 100), box("右", count: 50, x: 100 + 80 + AreaOverview.labelGap, y: 100),
+            box("下", count: 5, x: 100, y: 100 + 34 + AreaOverview.labelGap),
+        ])
+        XCTAssertEqual(ids, ["左", "右", "下"])
+    }
+
+    func test_すき間より近い札は重なり扱い() {
+        let ids = AreaOverview.nonOverlappingLabelIDs([
+            box("左", count: 10, x: 100, y: 100), box("右", count: 50, x: 100 + 80 + AreaOverview.labelGap - 1, y: 100),
+        ])
+        XCTAssertEqual(ids, ["右"])
+    }
+
+    func test_隠れた札には邪魔されない() {
+        // 中は大に隠れる。小は中とだけ重なるので、出せる
+        let ids = AreaOverview.nonOverlappingLabelIDs([
+            box("大", count: 100, x: 100, y: 100), box("中", count: 50, x: 170, y: 100), box("小", count: 10, x: 240, y: 100),
+        ])
+        XCTAssertEqual(ids, ["大", "小"])
+    }
+
+    func test_件数が同じなら名前順で決める_位置が不正な札は出さない() {
+        let ids = AreaOverview.nonOverlappingLabelIDs([
+            box("い", count: 10, x: 100, y: 100), box("あ", count: 10, x: 110, y: 100), box("不正", count: 99, x: .nan, y: 0),
+        ])
+        XCTAssertEqual(ids, ["あ"])
+    }
 }
